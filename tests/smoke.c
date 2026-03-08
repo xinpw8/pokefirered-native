@@ -28,6 +28,7 @@
 #include "quest_log.h"
 #include "random.h"
 #include "scanline_effect.h"
+#include "save.h"
 #include "sprite.h"
 #include "strings.h"
 #include "task.h"
@@ -984,6 +985,15 @@ static int TestTitleScreenMainMenuHandoff(void)
     int rc = 0;
     int i;
 
+    gHostIntroStubLoadGameSaveResult = SAVE_STATUS_OK;
+    gSaveBlock2.playerGender = MALE;
+    memcpy(gSaveBlock2.playerName, "ASH", 4);
+    gSaveBlock2.playTimeHours = 12;
+    gSaveBlock2.playTimeMinutes = 34;
+    gSaveBlock2.optionsWindowFrameType = 0;
+    gHostTitleStubKantoPokedexCount = 12;
+    gHostTitleStubFlagGetBadgeMask = 0x03;
+
     rc |= AdvanceToTitleRunState();
 
     SetKeys(A_BUTTON, A_BUTTON);
@@ -1004,32 +1014,34 @@ static int TestTitleScreenMainMenuHandoff(void)
     rc |= Expect(gHostIntroStubSaveResetSaveCountersCalls == 1,
                  "title cry path did not reset save counters");
     rc |= Expect(gHostIntroStubLoadGameSaveCalls == 1, "title cry path did not load save data");
-    rc |= Expect(gHostIntroStubSav2ClearSetDefaultCalls == 1,
-                 "title cry path did not clear save defaults for empty save data");
+    rc |= Expect(gHostIntroStubSav2ClearSetDefaultCalls == 0,
+                 "title cry path should not clear save defaults when a save is present");
     rc |= Expect(gHostIntroStubSetPokemonCryStereoCalls == 1,
                  "title cry path did not restore cry stereo setting");
-
-    RunMainCallbackFrame();
 
     for (i = 0; i < 128 && gHostTitleStubAddTextPrinterParameterized3Calls == 0; i++)
         RunMainCallbackFrame();
 
     rc |= Expect(gMain.callback2 != CB2_InitMainMenu, "main menu init did not switch to its run callback");
-    rc |= Expect(gHostTitleStubAddTextPrinterParameterized3Calls >= 1,
-                 "main menu did not print any menu text");
-    rc |= Expect(gHostTitleStubLastPrintedText3 == gText_NewGame,
-                 "main menu did not print the New Game option");
-    rc |= Expect(gHostIntroStubFillWindowPixelBufferCalls >= 1,
-                 "main menu did not fill its window pixel buffers");
-    rc |= Expect(gHostIntroStubPutWindowTilemapCalls >= 1,
-                 "main menu did not put window tilemaps");
-    rc |= Expect(gHostIntroStubCopyWindowToVramCalls >= 1,
-                 "main menu did not copy window content to VRAM");
+    rc |= Expect(gHostTitleStubAddTextPrinterParameterized3Calls >= 6,
+                 "main menu did not print its continue/new-game stats and options");
+    rc |= Expect(gHostTitleStubLastPrintedText3 == gText_Badges,
+                 "main menu did not print through the continue-stats block");
+    rc |= Expect(gHostIntroStubFillWindowPixelBufferCalls >= 2,
+                 "main menu did not fill the expected continue/new-game windows");
+    rc |= Expect(gHostIntroStubPutWindowTilemapCalls >= 2,
+                 "main menu did not put the expected window tilemaps");
+    rc |= Expect(gHostIntroStubCopyWindowToVramCalls >= 2,
+                 "main menu did not copy the expected window content to VRAM");
     rc |= Expect(gMain.vblankCallback != NULL,
                  "main menu did not install its VBlank callback");
     rc |= Expect((GetGpuReg(REG_OFFSET_DISPCNT) & (DISPCNT_OBJ_ON | DISPCNT_WIN0_ON))
                     == (DISPCNT_OBJ_ON | DISPCNT_WIN0_ON),
                  "main menu DISPCNT mismatch");
+
+    SetKeys(DPAD_DOWN, DPAD_DOWN);
+    RunMainCallbackFrame();
+    ClearKeys();
 
     SetKeys(A_BUTTON, A_BUTTON);
     RunMainCallbackFrame();
