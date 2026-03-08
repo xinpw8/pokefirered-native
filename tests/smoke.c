@@ -935,10 +935,10 @@ static int AdvanceToFirstIntroFrame(void)
     introCallback = gMain.callback2;
     RunMainCallbackFrame();
     rc |= Expect(gMain.callback2 == introCallback, "CB2_Intro changed unexpectedly");
-    rc |= Expect(WindowMatches(0, 0, 6, 4, 18, 9),
+    rc |= Expect(WindowMatches(0, 2, 6, 4, 18, 9),
                  "CB2_Intro did not allocate the Game Freak logo window");
-    rc |= Expect(gWindowBgTilemapBuffers[0] != NULL,
-                 "CB2_Intro did not allocate a BG0 tilemap buffer for windows");
+    rc |= Expect(gWindowBgTilemapBuffers[2] != NULL,
+                 "CB2_Intro did not attach to the Game Freak BG tilemap buffer");
     rc |= Expect(WindowTileDataHasNonZero(0),
                  "CB2_Intro did not draw Game Freak logo pixels into the window buffer");
     rc |= Expect(WindowTilemapHasNonZero(0),
