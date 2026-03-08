@@ -16,6 +16,7 @@
 #include "gba/macro.h"
 #include "gpu_regs.h"
 #include "clear_save_data_screen.h"
+#include "event_data.h"
 #include "help_system.h"
 #include "host_agbmain.h"
 #include "host_crt0.h"
