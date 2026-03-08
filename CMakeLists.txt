@@ -1,0 +1,180 @@
+cmake_minimum_required(VERSION 3.20)
+
+project(pokefirered_native_bootstrap C)
+
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_C_EXTENSIONS ON)
+
+find_package(Threads REQUIRED)
+
+set(POKEFIRERED_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../pokefirered" CACHE PATH "Path to the upstream pret/pokefirered checkout")
+
+if(NOT EXISTS "${POKEFIRERED_SOURCE_DIR}/README.md")
+    message(FATAL_ERROR "POKEFIRERED_SOURCE_DIR must point at a pret/pokefirered checkout")
+endif()
+
+set(PFR_COMMON_DEFINES
+    MODERN=1
+    REVISION=0
+    FIRERED
+    ENGLISH
+)
+
+add_library(pfr_upstream_core STATIC
+    src/host_crt0.c
+    src/host_memory.c
+    src/host_dma.c
+    src/host_bios.c
+    src/host_debug.c
+    src/host_intro_stubs.c
+    src/host_title_screen_stubs.c
+    src/upstream_stubs.c
+    "${POKEFIRERED_SOURCE_DIR}/src/random.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/malloc.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/decompress.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/gpu_regs.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/dma3_manager.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/task.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/trig.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/scanline_effect.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/palette.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/blend_palette.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/bg.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/sprite.c"
+)
+
+target_compile_definitions(pfr_upstream_core PRIVATE ${PFR_COMMON_DEFINES})
+# Upstream headers must be quote-only to avoid colliding with the system's <strings.h>.
+target_compile_options(pfr_upstream_core PRIVATE
+    -fno-pie
+    -ffunction-sections
+    -fdata-sections
+    -Wno-int-to-pointer-cast
+    -Wno-pointer-to-int-cast
+    "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
+    "-iquote${POKEFIRERED_SOURCE_DIR}/include"
+)
+target_include_directories(pfr_upstream_core PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+
+target_link_libraries(pfr_upstream_core PRIVATE m)
+
+add_library(pfr_upstream_runtime OBJECT
+    "${POKEFIRERED_SOURCE_DIR}/src/main.c"
+)
+target_compile_definitions(pfr_upstream_runtime PRIVATE
+    MODERN=0
+    REVISION=0
+    FIRERED
+    ENGLISH
+)
+target_compile_options(pfr_upstream_runtime PRIVATE
+    -fno-pie
+    -ffunction-sections
+    -fdata-sections
+    -Wno-int-conversion
+    -Wno-int-to-pointer-cast
+    -Wno-pointer-to-int-cast
+    "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
+    "-iquote${POKEFIRERED_SOURCE_DIR}/include"
+)
+target_include_directories(pfr_upstream_runtime PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+
+add_library(pfr_upstream_intro OBJECT
+    "${POKEFIRERED_SOURCE_DIR}/src/intro.c"
+)
+target_compile_definitions(pfr_upstream_intro PRIVATE ${PFR_COMMON_DEFINES})
+target_compile_options(pfr_upstream_intro PRIVATE
+    -fno-pie
+    -ffunction-sections
+    -fdata-sections
+    -Wno-int-conversion
+    -Wno-int-to-pointer-cast
+    -Wno-pointer-to-int-cast
+    "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
+    "-iquote${POKEFIRERED_SOURCE_DIR}/include"
+)
+target_include_directories(pfr_upstream_intro PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+
+add_library(pfr_upstream_title OBJECT
+    "${POKEFIRERED_SOURCE_DIR}/src/title_screen.c"
+)
+target_compile_definitions(pfr_upstream_title PRIVATE ${PFR_COMMON_DEFINES})
+target_compile_options(pfr_upstream_title PRIVATE
+    -fno-pie
+    -ffunction-sections
+    -fdata-sections
+    -Wno-int-conversion
+    -Wno-int-to-pointer-cast
+    -Wno-pointer-to-int-cast
+    "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
+    "-iquote${POKEFIRERED_SOURCE_DIR}/include"
+)
+target_include_directories(pfr_upstream_title PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+
+add_library(pfr_upstream_clear_save OBJECT
+    "${POKEFIRERED_SOURCE_DIR}/src/clear_save_data_screen.c"
+)
+target_compile_definitions(pfr_upstream_clear_save PRIVATE ${PFR_COMMON_DEFINES})
+target_compile_options(pfr_upstream_clear_save PRIVATE
+    -fno-pie
+    -ffunction-sections
+    -fdata-sections
+    -Wno-int-conversion
+    -Wno-int-to-pointer-cast
+    -Wno-pointer-to-int-cast
+    "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
+    "-iquote${POKEFIRERED_SOURCE_DIR}/include"
+)
+target_include_directories(pfr_upstream_clear_save PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+
+add_executable(pfr_smoke tests/smoke.c)
+target_sources(pfr_smoke PRIVATE
+    src/host_agbmain.c
+    $<TARGET_OBJECTS:pfr_upstream_intro>
+    $<TARGET_OBJECTS:pfr_upstream_title>
+    $<TARGET_OBJECTS:pfr_upstream_clear_save>
+    $<TARGET_OBJECTS:pfr_upstream_runtime>
+)
+target_compile_definitions(pfr_smoke PRIVATE ${PFR_COMMON_DEFINES})
+target_compile_options(pfr_smoke PRIVATE
+    -fno-pie
+    "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
+    "-iquote${POKEFIRERED_SOURCE_DIR}/include"
+)
+target_compile_options(pfr_smoke PRIVATE
+    -Wno-int-to-pointer-cast
+    -Wno-pointer-to-int-cast
+)
+target_link_options(pfr_smoke PRIVATE
+    -no-pie
+    -Wl,--gc-sections
+)
+target_link_libraries(pfr_smoke PRIVATE pfr_upstream_core Threads::Threads m)
+
+add_executable(pfr_lz77 tools/pfr_lz77.c)
+target_compile_definitions(pfr_lz77 PRIVATE ${PFR_COMMON_DEFINES})
+target_compile_options(pfr_lz77 PRIVATE
+    -fno-pie
+    "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
+    "-iquote${POKEFIRERED_SOURCE_DIR}/include"
+)
+target_compile_options(pfr_lz77 PRIVATE
+    -Wno-int-to-pointer-cast
+    -Wno-pointer-to-int-cast
+)
+target_link_options(pfr_lz77 PRIVATE
+    -no-pie
+    -Wl,--gc-sections
+)
+target_link_libraries(pfr_lz77 PRIVATE pfr_upstream_core m)

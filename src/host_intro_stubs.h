@@ -1,0 +1,37 @@
+#ifndef POKEFIRERED_NATIVE_HOST_INTRO_STUBS_H
+#define POKEFIRERED_NATIVE_HOST_INTRO_STUBS_H
+
+#include "global.h"
+
+extern u32 gHostIntroStubGameCubeMultiBootInitCalls;
+extern u32 gHostIntroStubGameCubeMultiBootMainCalls;
+extern u32 gHostIntroStubGameCubeMultiBootHandleSerialCalls;
+extern u32 gHostIntroStubGameCubeMultiBootQuitCalls;
+extern u32 gHostIntroStubGameCubeMultiBootExecuteProgramCalls;
+extern u32 gHostIntroStubResetMenuAndMonGlobalsCalls;
+extern u32 gHostIntroStubSaveResetSaveCountersCalls;
+extern u32 gHostIntroStubLoadGameSaveCalls;
+extern u32 gHostIntroStubSav2ClearSetDefaultCalls;
+extern u32 gHostIntroStubSetPokemonCryStereoCalls;
+extern u32 gHostIntroStubSerialCBCalls;
+extern u32 gHostIntroStubResetSerialCalls;
+extern u32 gHostIntroStubResetTempTileDataBuffersCalls;
+extern u32 gHostIntroStubFreeTempTileDataBuffersCalls;
+extern u32 gHostIntroStubDecompressAndCopyTileDataToVramCalls;
+extern u32 gHostIntroStubInitWindowsCalls;
+extern u32 gHostIntroStubFillWindowPixelBufferCalls;
+extern u32 gHostIntroStubBlitBitmapToWindowCalls;
+extern u32 gHostIntroStubPutWindowTilemapCalls;
+extern u32 gHostIntroStubCopyWindowToVramCalls;
+extern u32 gHostIntroStubResetBgPositionsCalls;
+extern u32 gHostIntroStubStartBlendTaskCalls;
+extern u32 gHostIntroStubIsBlendTaskActiveCalls;
+extern u32 gHostIntroStubM4aSongNumStartCalls;
+extern u32 gHostIntroStubPlaySECalls;
+extern u32 gHostIntroStubPlayCryByModeCalls;
+extern u32 gHostIntroStubLastPokemonCryStereoValue;
+extern u8 gHostIntroStubLoadGameSaveResult;
+
+void HostIntroStubReset(void);
+
+#endif

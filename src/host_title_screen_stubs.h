@@ -1,0 +1,37 @@
+#ifndef POKEFIRERED_NATIVE_HOST_TITLE_SCREEN_STUBS_H
+#define POKEFIRERED_NATIVE_HOST_TITLE_SCREEN_STUBS_H
+
+#include "global.h"
+
+extern u32 gHostTitleStubSetHelpContextCalls;
+extern u32 gHostTitleStubHelpSystemEnableCalls;
+extern u32 gHostTitleStubHelpSystemDisableCalls;
+extern u32 gHostTitleStubFadeOutMapMusicCalls;
+extern u32 gHostTitleStubFadeOutBGMCalls;
+extern u32 gHostTitleStubIsNotWaitingForBGMStopCalls;
+extern u32 gHostTitleStubPlayCryNormalCalls;
+extern u32 gHostTitleStubM4aMPlayAllStopCalls;
+extern u32 gHostTitleStubSetSaveBlocksPointersCalls;
+extern u32 gHostTitleStubCB2InitMainMenuCalls;
+extern u32 gHostTitleStubCB2InitBerryFixProgramCalls;
+extern u32 gHostTitleStubLoadStdWindowGfxCalls;
+extern u32 gHostTitleStubDrawStdFrameCalls;
+extern u32 gHostTitleStubAddTextPrinterParameterized4Calls;
+extern u32 gHostTitleStubCreateYesNoMenuCalls;
+extern u32 gHostTitleStubMenuProcessInputCalls;
+extern u32 gHostTitleStubDestroyYesNoMenuCalls;
+extern u32 gHostTitleStubFreeAllWindowBuffersCalls;
+extern u32 gHostTitleStubDeactivateAllTextPrintersCalls;
+extern u32 gHostTitleStubClearSaveDataCalls;
+extern u8 gHostTitleStubLastHelpContext;
+extern u8 gHostTitleStubLastFadeOutMapMusicSpeed;
+extern u8 gHostTitleStubLastFadeOutBGMSpeed;
+extern u16 gHostTitleStubLastPlayCrySpecies;
+extern s8 gHostTitleStubLastPlayCryPan;
+extern const u8 *gHostTitleStubLastPrintedText;
+extern s8 gHostTitleStubMenuProcessInputResult;
+
+void HostTitleScreenStubReset(void);
+void HostTitleScreenStubSetMenuProcessInputResult(s8 result);
+
+#endif
