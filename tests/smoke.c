@@ -1067,7 +1067,7 @@ static int AdvanceToOakSpeechControlsGuide(void)
     rc |= Expect(gHostTitleStubFreeAllWindowBuffersCalls >= 1,
                  "main menu New Game selection did not free window buffers");
 
-    for (i = 0; i < 96 && gHostOakSpeechPlayBGMCalls == 0; i++)
+    for (i = 0; i < 96 && (gHostOakSpeechPlayBGMCalls == 0 || gPaletteFade.active); i++)
         RunMainCallbackFrame();
 
     rc |= Expect(gMain.callback2 != mainMenuRunCallback,
@@ -1080,6 +1080,8 @@ static int AdvanceToOakSpeechControlsGuide(void)
                  "Oak Speech setup did not reach the controls-guide top bar window stage");
     rc |= Expect(gHostOakSpeechPlayBGMCalls == 1,
                  "Oak Speech setup did not reach the controls-guide input-ready state");
+    rc |= Expect(!gPaletteFade.active,
+                 "Oak Speech controls guide was still mid-fade when input-ready state was expected");
 
     return rc;
 }
