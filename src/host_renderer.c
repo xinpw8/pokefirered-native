@@ -29,21 +29,27 @@
 #include "host_renderer.h"
 #include "gba/gba.h"
 
-/* ---------- GBA hardware constants ---------- */
+/*
+ * GBA hardware access.
+ *
+ * Use local names prefixed with PPU_ to avoid colliding with the
+ * upstream defines in gba/defines.h and gba/io_reg.h (those are
+ * for *setting* register fields; ours are for *reading/extracting*).
+ */
 
-#define VRAM_BASE       ((const u8 *)0x06000000)
-#define OAM_BASE        ((const u8 *)0x07000000)
-#define PLTT_BASE       ((const u16 *)0x05000000)
-#define IO_BASE         ((volatile u16 *)0x04000000)
+#define PPU_VRAM_BASE       ((const u8 *)VRAM)
+#define PPU_OAM_BASE        ((const u8 *)OAM)
+#define PPU_PLTT_BASE       ((const u16 *)PLTT)
+#define PPU_IO_BASE         ((volatile u16 *)REG_BASE)
 
-#define BG_PLTT         (PLTT_BASE)
-#define OBJ_PLTT        (PLTT_BASE + 256)
+#define PPU_BG_PLTT         (PPU_PLTT_BASE)
+#define PPU_OBJ_PLTT        (PPU_PLTT_BASE + 256)
 
-#define BG_VRAM         (VRAM_BASE)
-#define OBJ_VRAM        (VRAM_BASE + 0x10000)
+#define PPU_BG_VRAM         (PPU_VRAM_BASE)
+#define PPU_OBJ_VRAM        (PPU_VRAM_BASE + 0x10000)
 
-/* I/O register offsets (in u16 units) */
-#define IOREG(off)      (IO_BASE[(off) >> 1])
+/* I/O register read helper (offset in bytes) */
+#define IOREG(off)      (PPU_IO_BASE[(off) >> 1])
 #define IO_DISPCNT      0x00
 #define IO_BG0CNT       0x08
 #define IO_BG0HOFS      0x10
@@ -52,7 +58,7 @@
 #define IO_BLDALPHA     0x52
 #define IO_BLDY         0x54
 
-/* DISPCNT bits */
+/* DISPCNT bits (local names to avoid upstream collision) */
 #define DCNT_MODE_MASK  0x0007
 #define DCNT_OBJ_1D     0x0040
 #define DCNT_FORCED_BLK 0x0080
@@ -69,18 +75,17 @@
 #define BLD_MODE_LIGHT  0x0080
 #define BLD_MODE_DARK   0x00C0
 
-/* BGCNT field extraction */
-#define BGCNT_PRIORITY(v)       ((v) & 3)
-#define BGCNT_CHARBASE(v)       (((v) >> 2) & 3)
-#define BGCNT_MOSAIC(v)         (((v) >> 6) & 1)
-#define BGCNT_PALMODE(v)        (((v) >> 7) & 1)   /* 0=4bpp, 1=8bpp */
-#define BGCNT_SCREENBASE(v)     (((v) >> 8) & 0x1F)
-#define BGCNT_SCREENSIZE(v)     (((v) >> 14) & 3)
+/* BGCNT field extraction (read direction — upstream macros are write direction) */
+#define PPU_BGCNT_PRIORITY(v)       ((v) & 3)
+#define PPU_BGCNT_CHARBASE(v)       (((v) >> 2) & 3)
+#define PPU_BGCNT_PALMODE(v)        (((v) >> 7) & 1)   /* 0=4bpp, 1=8bpp */
+#define PPU_BGCNT_SCREENBASE(v)     (((v) >> 8) & 0x1F)
+#define PPU_BGCNT_SCREENSIZE(v)     (((v) >> 14) & 3)
 
-/* OAM attribute field extraction */
-#define OAM_ATTR0(entry)  (((const u16 *)(OAM_BASE))[(entry) * 4 + 0])
-#define OAM_ATTR1(entry)  (((const u16 *)(OAM_BASE))[(entry) * 4 + 1])
-#define OAM_ATTR2(entry)  (((const u16 *)(OAM_BASE))[(entry) * 4 + 2])
+/* OAM attribute access */
+#define OAM_ATTR0(entry)  (((const u16 *)(PPU_OAM_BASE))[(entry) * 4 + 0])
+#define OAM_ATTR1(entry)  (((const u16 *)(PPU_OAM_BASE))[(entry) * 4 + 1])
+#define OAM_ATTR2(entry)  (((const u16 *)(PPU_OAM_BASE))[(entry) * 4 + 2])
 
 #define ATTR0_Y(a0)         ((a0) & 0xFF)
 #define ATTR0_AFFINE(a0)    (((a0) >> 8) & 3)
@@ -141,10 +146,10 @@ static void RenderTextBg(int bgNum, u16 dispcnt)
     u16 bgcnt = IOREG(IO_BG0CNT + bgNum * 2);
     u16 hofs = IOREG(IO_BG0HOFS + bgNum * 4);
     u16 vofs = IOREG(IO_BG0VOFS + bgNum * 4);
-    u8 priority = BGCNT_PRIORITY(bgcnt);
-    int charBase = BGCNT_CHARBASE(bgcnt) * 0x4000;
-    int screenBase = BGCNT_SCREENBASE(bgcnt) * 0x800;
-    int is8bpp = BGCNT_PALMODE(bgcnt);
+    u8 priority = PPU_BGCNT_PRIORITY(bgcnt);
+    int charBase = PPU_BGCNT_CHARBASE(bgcnt) * 0x4000;
+    int screenBase = PPU_BGCNT_SCREENBASE(bgcnt) * 0x800;
+    int is8bpp = PPU_BGCNT_PALMODE(bgcnt);
     int screenSize = BGCNT_SCREENSIZE(bgcnt);
 
     /* Text BG map dimensions in tiles */
@@ -443,7 +448,7 @@ void HostRendererRenderFrame(void)
                 continue;
 
             u16 bgcnt = IOREG(IO_BG0CNT + bg * 2);
-            if (BGCNT_PRIORITY(bgcnt) != (u8)prio)
+            if (PPU_BGCNT_PRIORITY(bgcnt) != (u8)prio)
                 continue;
 
             RenderTextBg(bg, dispcnt);
