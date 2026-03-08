@@ -35,9 +35,6 @@
 #include "host_intro_stubs.h"
 #include "host_title_screen_stubs.h"
 
-/* Stub for oak_speech's renamed entry point */
-void UpstreamStartNewGameScene(void) { }
-
 /* ── Interrupt handlers ────────────────────────────────────── */
 
 static void PlayVBlankHandler(void)
@@ -57,6 +54,9 @@ static void PlayHBlankHandler(void)
 static void IntrDummy(void) { }
 
 /* ── Key reading (mirrors main.c's static ReadKeys) ────────── */
+
+/* Not exported in main.h but defined in main.c, set by InitKeys() */
+extern u16 gKeyRepeatContinueDelay;
 
 static void PlayReadKeys(void)
 {
