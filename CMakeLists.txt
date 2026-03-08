@@ -61,6 +61,21 @@ target_include_directories(pfr_upstream_core PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
 )
 
+# SDL2 display backend (optional — falls back to PPM frame dump if unavailable)
+find_package(PkgConfig QUIET)
+if(PkgConfig_FOUND)
+    pkg_check_modules(SDL2 QUIET sdl2)
+endif()
+
+if(SDL2_FOUND)
+    message(STATUS "SDL2 found — building with live display backend")
+    target_compile_definitions(pfr_upstream_core PRIVATE HOST_DISPLAY_SDL2)
+    target_compile_options(pfr_upstream_core PRIVATE ${SDL2_CFLAGS})
+    target_link_libraries(pfr_upstream_core PRIVATE ${SDL2_LIBRARIES})
+else()
+    message(STATUS "SDL2 not found — using headless PPM frame-dump backend")
+endif()
+
 target_link_libraries(pfr_upstream_core PRIVATE m)
 
 add_library(pfr_upstream_runtime OBJECT
@@ -205,6 +220,7 @@ target_sources(pfr_smoke PRIVATE
     $<TARGET_OBJECTS:pfr_upstream_clear_save>
     $<TARGET_OBJECTS:pfr_upstream_berry_fix>
     $<TARGET_OBJECTS:pfr_upstream_main_menu>
+    $<TARGET_OBJECTS:pfr_upstream_oak_speech>
     $<TARGET_OBJECTS:pfr_upstream_runtime>
 )
 target_compile_definitions(pfr_smoke PRIVATE ${PFR_COMMON_DEFINES})
@@ -239,3 +255,29 @@ target_link_options(pfr_lz77 PRIVATE
     -Wl,--gc-sections
 )
 target_link_libraries(pfr_lz77 PRIVATE pfr_upstream_core m)
+
+# Render test: runs the boot chain and dumps frames for visual verification
+add_executable(pfr_render_test tests/render_test.c)
+target_sources(pfr_render_test PRIVATE
+    src/host_agbmain.c
+    $<TARGET_OBJECTS:pfr_upstream_intro>
+    $<TARGET_OBJECTS:pfr_upstream_title>
+    $<TARGET_OBJECTS:pfr_upstream_clear_save>
+    $<TARGET_OBJECTS:pfr_upstream_berry_fix>
+    $<TARGET_OBJECTS:pfr_upstream_main_menu>
+    $<TARGET_OBJECTS:pfr_upstream_oak_speech>
+    $<TARGET_OBJECTS:pfr_upstream_runtime>
+)
+target_compile_definitions(pfr_render_test PRIVATE ${PFR_COMMON_DEFINES})
+target_compile_options(pfr_render_test PRIVATE
+    -fno-pie
+    "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
+    "-iquote${POKEFIRERED_SOURCE_DIR}/include"
+    -Wno-int-to-pointer-cast
+    -Wno-pointer-to-int-cast
+)
+target_link_options(pfr_render_test PRIVATE
+    -no-pie
+    -Wl,--gc-sections
+)
+target_link_libraries(pfr_render_test PRIVATE pfr_upstream_core Threads::Threads m)

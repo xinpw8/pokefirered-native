@@ -21,6 +21,8 @@
 
 #include "host_title_screen_stubs.h"
 
+void UpstreamStartNewGameScene(void);
+
 u32 gHostTitleStubSetHelpContextCalls = 0;
 u32 gHostTitleStubHelpSystemEnableCalls = 0;
 u32 gHostTitleStubHelpSystemDisableCalls = 0;
@@ -451,6 +453,7 @@ u8 *StringAppend(u8 *dest, const u8 *src)
 void StartNewGameScene(void)
 {
     gHostTitleStubStartNewGameSceneCalls++;
+    UpstreamStartNewGameScene();
 }
 
 void TryStartQuestLogPlayback(u8 taskId)
