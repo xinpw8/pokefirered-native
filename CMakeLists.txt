@@ -282,3 +282,8 @@ target_link_options(pfr_render_test PRIVATE
     -Wl,--gc-sections
 )
 target_link_libraries(pfr_render_test PRIVATE pfr_upstream_core Threads::Threads m)
+
+# Asset compiler: converts upstream PNG/PAL/BIN to GBA intermediate formats
+add_executable(pfr_assets tools/pfr_assets.c)
+target_compile_options(pfr_assets PRIVATE -O2)
+target_link_libraries(pfr_assets PRIVATE m)
