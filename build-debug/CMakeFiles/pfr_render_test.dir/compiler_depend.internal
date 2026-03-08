@@ -121,6 +121,7 @@ CMakeFiles/pfr_render_test.dir/src/host_agbmain.c.o
 
 CMakeFiles/pfr_render_test.dir/tests/render_test.c.o
  /home/spark-advantage/pokefirered-native/tests/render_test.c
+ /home/spark-advantage/pokefirered/include/bg.h
  /home/spark-advantage/pokefirered/include/config.h
  /home/spark-advantage/pokefirered/include/constants/easy_chat.h
  /home/spark-advantage/pokefirered/include/constants/fame_checker.h
@@ -140,7 +141,9 @@ CMakeFiles/pfr_render_test.dir/tests/render_test.c.o
  /home/spark-advantage/pokefirered/include/global.fieldmap.h
  /home/spark-advantage/pokefirered/include/global.h
  /home/spark-advantage/pokefirered/include/gpu_regs.h
+ /home/spark-advantage/pokefirered/include/load_save.h
  /home/spark-advantage/pokefirered/include/main.h
+ /home/spark-advantage/pokefirered/include/malloc.h
  /home/spark-advantage/pokefirered/include/palette.h
  /home/spark-advantage/pokefirered/include/pokemon.h
  /home/spark-advantage/pokefirered/include/sprite.h
@@ -149,6 +152,7 @@ CMakeFiles/pfr_render_test.dir/tests/render_test.c.o
  /home/spark-advantage/pokefirered-native/src/host_crt0.h
  /home/spark-advantage/pokefirered-native/src/host_display.h
  /home/spark-advantage/pokefirered-native/src/host_dma.h
+ /home/spark-advantage/pokefirered-native/src/host_include/dma3.h
  /home/spark-advantage/pokefirered/include/gba/defines.h
  /home/spark-advantage/pokefirered/include/gba/io_reg.h
  /home/spark-advantage/pokefirered/include/gba/isagbprint.h
