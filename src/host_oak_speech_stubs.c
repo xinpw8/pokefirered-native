@@ -7,8 +7,10 @@
 #include "malloc.h"
 #include "menu.h"
 #include "naming_screen.h"
+#include "new_game.h"
 #include "new_menu_helpers.h"
 #include "palette.h"
+#include "play_time.h"
 #include "pokeball.h"
 #include "pokemon.h"
 #include "data.h"
@@ -24,6 +26,7 @@
 #include "window.h"
 
 #include "host_oak_speech_stubs.h"
+#include "host_new_game_stubs.h"
 #include "host_title_screen_stubs.h"
 
 TextFlags gTextFlags = {0};
@@ -52,6 +55,7 @@ const u8 *gHostOakSpeechLastTopBarLeftText = NULL;
 const u8 *gHostOakSpeechLastTopBarRightText = NULL;
 
 static u8 sOakSpeechMonSpriteBuffer[0x8000] = {0};
+static bool8 sHostOakSpeechNewGameInitialized = FALSE;
 static const u16 sOakSpeechTextWindowPalette[16] = {
     RGB_WHITE, RGB_WHITE, RGB_WHITE, RGB_WHITE,
     RGB_WHITE, RGB_WHITE, RGB_WHITE, RGB_WHITE,
@@ -205,6 +209,7 @@ void HostOakSpeechStubReset(void)
     gHostOakSpeechLastPlayedBGM = 0;
     gHostOakSpeechLastTopBarLeftText = NULL;
     gHostOakSpeechLastTopBarRightText = NULL;
+    sHostOakSpeechNewGameInitialized = FALSE;
     memset(gStringVar1, 0, sizeof(gStringVar1));
     memset(gStringVar2, 0, sizeof(gStringVar2));
     memset(gStringVar3, 0, sizeof(gStringVar3));
@@ -548,4 +553,10 @@ s16 Q_8_8_inv(s16 y)
 void CB2_NewGame(void)
 {
     gHostOakSpeechCB2NewGameCalls++;
+    if (!sHostOakSpeechNewGameInitialized)
+    {
+        sHostOakSpeechNewGameInitialized = TRUE;
+        NewGameInitData();
+        PlayTimeCounter_Start();
+    }
 }

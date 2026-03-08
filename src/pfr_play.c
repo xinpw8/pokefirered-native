@@ -35,6 +35,7 @@
 #include "host_display.h"
 #include "host_crt0.h"
 #include "host_intro_stubs.h"
+#include "host_new_game_stubs.h"
 #include "host_title_screen_stubs.h"
 
 /* ── Interrupt handlers ────────────────────────────────────── */
@@ -188,9 +189,7 @@ int main(int argc, char *argv[])
     InitHeap(gHeap, HEAP_SIZE);
 
     /* Save block pointers (required by copyright screen) */
-    gSaveBlock2Ptr = &gSaveBlock2;
-    gSaveBlock1Ptr = &gSaveBlock1;
-    gSaveBlock2.encryptionKey = 0;
+    HostNewGameStubReset();
 
     gMain.callback1 = NULL;
     gMain.callback2 = NULL;
