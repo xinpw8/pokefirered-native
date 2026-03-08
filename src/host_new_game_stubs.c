@@ -3,6 +3,7 @@
 #include "global.h"
 
 #include "constants/flags.h"
+#include "constants/fame_checker.h"
 #include "constants/game_stat.h"
 #include "constants/global.h"
 #include "constants/items.h"
@@ -22,6 +23,7 @@
 #include "quest_log.h"
 #include "script.h"
 #include "trainer_tower.h"
+#include "wonder_news.h"
 
 #include "host_new_game_stubs.h"
 
@@ -74,6 +76,10 @@ static u16 sWildEncounterSeed = 0;
 #define SPECIAL_FLAGS_SIZE (NUM_SPECIAL_FLAGS / 8)
 
 static u8 sHostSpecialFlags[SPECIAL_FLAGS_SIZE] = {0};
+static u16 sHostTMCaseSelectedRow = 0;
+static u16 sHostTMCaseScrollOffset = 0;
+static u16 sHostBerryPouchSelectedRow = 0;
+static u16 sHostBerryPouchScrollOffset = 0;
 
 u16 *const gSpecialVars[] = {
     &gSpecialVar_0x8000,
@@ -321,6 +327,31 @@ void ZeroEnemyPartyMons(void)
     memset(gEnemyParty, 0, sizeof(gEnemyParty));
 }
 
+void ResetBagCursorPositions(void)
+{
+    u8 i;
+
+    gBagMenuState.pocket = POCKET_ITEMS - 1;
+    gBagMenuState.bagOpen = FALSE;
+    for (i = 0; i < NUM_BAG_POCKETS_NO_CASES; i++)
+    {
+        gBagMenuState.itemsAbove[i] = 0;
+        gBagMenuState.cursorPos[i] = 0;
+    }
+}
+
+void ResetTMCaseCursorPos(void)
+{
+    sHostTMCaseSelectedRow = 0;
+    sHostTMCaseScrollOffset = 0;
+}
+
+void BerryPouch_CursorResetToTop(void)
+{
+    sHostBerryPouchSelectedRow = 0;
+    sHostBerryPouchScrollOffset = 0;
+}
+
 void ResetEncounterRateModifiers(void)
 {
 }
@@ -412,6 +443,27 @@ void ClearPlayerLinkBattleRecords(void)
     gSaveBlock1Ptr->gameStats[GAME_STAT_LINK_BATTLE_DRAWS] = 0;
 }
 
+void ResetFameChecker(void)
+{
+    u8 i;
+
+    for (i = 0; i < NUM_FAMECHECKER_PERSONS; i++)
+    {
+        gSaveBlock1Ptr->fameChecker[i].pickState = FCPICKSTATE_NO_DRAW;
+        gSaveBlock1Ptr->fameChecker[i].flavorTextFlags = 0;
+        gSaveBlock1Ptr->fameChecker[i].unk_0_E = 0;
+    }
+    gSaveBlock1Ptr->fameChecker[FAMECHECKER_OAK].pickState = FCPICKSTATE_COLORED;
+}
+
+void ResetGameStats(void)
+{
+    int i;
+
+    for (i = 0; i < NUM_GAME_STATS; i++)
+        gSaveBlock1Ptr->gameStats[i] = 0;
+}
+
 void ResetPokemonStorageSystem(void)
 {
     CpuFill16(0, &gPokemonStorage, sizeof(gPokemonStorage));
@@ -450,4 +502,15 @@ void ResetTrainerTowerResults(void)
 
     for (i = 0; i < NUM_TOWER_CHALLENGE_TYPES; i++)
         gSaveBlock1Ptr->trainerTower[i].bestTime = TRAINER_TOWER_MAX_TIME ^ gSaveBlock2Ptr->encryptionKey;
+}
+
+void WonderNews_Reset(void)
+{
+    struct WonderNewsMetadata *data = &gSaveBlock1Ptr->mysteryGift.newsMetadata;
+
+    data->newsType = WONDER_NEWS_NONE;
+    data->sentRewardCounter = 0;
+    data->rewardCounter = 0;
+    data->berry = 0;
+    VarSet(VAR_WONDER_NEWS_STEP_COUNTER, 0);
 }
