@@ -4,6 +4,17 @@
 
 #include "global.h"
 
+/* Undo isagbprint.h empty macros so we can define real implementations */
+#ifdef MgbaOpen
+#undef MgbaOpen
+#endif
+#ifdef MgbaClose
+#undef MgbaClose
+#endif
+#ifdef AGBPrintInit
+#undef AGBPrintInit
+#endif
+
 static void HostVPrint(const char *prefix, const char *fmt, va_list args)
 {
     fprintf(stderr, "%s", prefix);
