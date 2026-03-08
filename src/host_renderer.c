@@ -319,11 +319,13 @@ static void RenderSprites(u16 dispcnt)
                 u8 colorIdx;
                 if (is8bpp)
                 {
+                    /* 8bpp tiles are 64 bytes each (8x8 pixels × 1 byte) */
                     int addr = tile * 32 + subY * 8 + subX;
                     colorIdx = PPU_OBJ_VRAM[addr];
                 }
                 else
                 {
+                    /* 4bpp tiles are 32 bytes each (8x8 pixels × 0.5 byte) */
                     int addr = tile * 32 + subY * 4 + (subX >> 1);
                     u8 byte = PPU_OBJ_VRAM[addr];
                     colorIdx = (subX & 1) ? (byte >> 4) : (byte & 0xF);
