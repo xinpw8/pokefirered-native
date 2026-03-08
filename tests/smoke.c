@@ -6,6 +6,7 @@
 #include "decompress.h"
 #include "dma3.h"
 #include "berry_fix_program.h"
+#include "constants/songs.h"
 #include "gba/macro.h"
 #include "gpu_regs.h"
 #include "clear_save_data_screen.h"
@@ -43,6 +44,9 @@ extern u32 IntrMain_Buffer[0x200];
 extern u8 gPcmDmaCounter;
 extern u8 gWirelessCommType;
 extern u16 gKeyRepeatContinueDelay;
+extern const u8 gText_Controls[];
+extern const u8 gText_ABUTTONNext[];
+extern const u8 gText_ABUTTONNext_BBUTTONBack[];
 
 void EnableVCountIntrAtLine150(void);
 void InitIntrHandlers(void);
@@ -683,6 +687,29 @@ static void ClearKeys(void)
     SetKeys(0, 0);
 }
 
+static void RunFrames(int count)
+{
+    while (count-- > 0)
+        RunMainCallbackFrame();
+}
+
+static int PulseButtonUntilCounterIncrements(u16 button, const u32 *counter, u32 initialCount, int maxFrames, const char *message)
+{
+    int i;
+
+    for (i = 0; i < maxFrames && *counter == initialCount; i++)
+    {
+        if (i % 6 == 0)
+            SetKeys(button, button);
+        else
+            ClearKeys();
+        RunMainCallbackFrame();
+    }
+
+    ClearKeys();
+    return Expect(*counter > initialCount, message);
+}
+
 static void ResetBootCallbackHarness(void)
 {
     HostMemoryReset();
@@ -1091,6 +1118,55 @@ static int TestTitleScreenMainMenuHandoff(void)
     return AdvanceToOakSpeechControlsGuide();
 }
 
+static int TestOakSpeechControlsGuideToPikachuIntro(void)
+{
+    int rc = 0;
+    u32 page2Loads;
+    u32 page3Loads;
+    u32 pikachuPage1Loads;
+
+    rc |= AdvanceToOakSpeechControlsGuide();
+
+    rc |= Expect(gHostOakSpeechControlsGuidePage1Loads == 1,
+                 "Oak Speech controls guide did not load page 1 exactly once");
+    rc |= Expect(gHostOakSpeechLastPlayedBGM == MUS_NEW_GAME_INSTRUCT,
+                 "Oak Speech controls guide did not start the instructions BGM");
+    rc |= Expect(gHostOakSpeechLastTopBarLeftText == gText_Controls,
+                 "Oak Speech controls guide did not print the Controls top bar label");
+    rc |= Expect(gHostOakSpeechLastTopBarRightText == gText_ABUTTONNext,
+                 "Oak Speech controls guide did not print the initial A Next prompt");
+
+    page2Loads = gHostOakSpeechControlsGuidePage2Loads;
+    rc |= PulseButtonUntilCounterIncrements(A_BUTTON, &gHostOakSpeechControlsGuidePage2Loads, page2Loads, 128,
+                                            "Oak Speech did not advance from controls-guide page 1 to page 2");
+    rc |= Expect(gHostOakSpeechLastTopBarRightText == gText_ABUTTONNext_BBUTTONBack,
+                 "Oak Speech controls-guide page 2 did not print the A Next / B Back prompt");
+
+    page3Loads = gHostOakSpeechControlsGuidePage3Loads;
+    rc |= PulseButtonUntilCounterIncrements(A_BUTTON, &gHostOakSpeechControlsGuidePage3Loads, page3Loads, 128,
+                                            "Oak Speech did not advance from controls-guide page 2 to page 3");
+    rc |= Expect(gHostOakSpeechControlsGuidePage3Loads == page3Loads + 1,
+                 "Oak Speech controls-guide page 3 did not load exactly once");
+
+    pikachuPage1Loads = gHostOakSpeechPikachuIntroPage1Loads;
+    rc |= PulseButtonUntilCounterIncrements(A_BUTTON, &gHostOakSpeechPikachuIntroPage1Loads, pikachuPage1Loads, 256,
+                                            "Oak Speech did not hand off from the controls guide into Pikachu intro page 1");
+    RunFrames(8);
+
+    rc |= Expect(gHostOakSpeechPlayBGMCalls == 2,
+                 "Oak Speech did not play the Pikachu intro BGM after the controls guide");
+    rc |= Expect(gHostOakSpeechLastPlayedBGM == MUS_NEW_GAME_INTRO,
+                 "Oak Speech did not switch to the Pikachu intro BGM");
+    rc |= Expect(gHostOakSpeechLastTopBarLeftText == NULL,
+                 "Pikachu intro did not clear the controls top bar label");
+    rc |= Expect(gHostOakSpeechLastTopBarRightText == gText_ABUTTONNext,
+                 "Pikachu intro page 1 did not print the A Next prompt");
+    rc |= Expect(gHostOakSpeechPikachuIntroPage2Loads == 0,
+                 "Pikachu intro advanced past page 1 before smoke observed the handoff");
+
+    return rc;
+}
+
 static int TestTitleScreenSaveClearHandoff(void)
 {
     int rc = 0;
@@ -1233,6 +1309,7 @@ int main(void)
     rc |= TestTitleScreenRunSlice();
     rc |= TestTitleScreenRestartHandoff();
     rc |= TestTitleScreenMainMenuHandoff();
+    rc |= TestOakSpeechControlsGuideToPikachuIntro();
     rc |= TestTitleScreenSaveClearHandoff();
     rc |= TestTitleScreenBerryFixHandoff();
 
