@@ -9,6 +9,7 @@
 #include "constants/maps.h"
 #include "constants/trainer_tower.h"
 #include "constants/vars.h"
+#include "characters.h"
 #include "event_data.h"
 #include "item.h"
 #include "item_menu.h"
@@ -98,7 +99,7 @@ u16 *const gSpecialVars[] = {
     &gSpecialVar_0x8014,
 };
 
-static void ClearMailStruct(struct Mail *mail)
+void ClearMailStruct(struct Mail *mail)
 {
     s32 i;
 
@@ -112,7 +113,7 @@ static void ClearMailStruct(struct Mail *mail)
     mail->itemId = ITEM_NONE;
 }
 
-static void ClearItemSlots(struct ItemSlot *slots, u8 capacity)
+void ClearItemSlots(struct ItemSlot *slots, u8 capacity)
 {
     u16 i;
 
@@ -123,7 +124,7 @@ static void ClearItemSlots(struct ItemSlot *slots, u8 capacity)
     }
 }
 
-static void ClearPCItemSlots(void)
+void ClearPCItemSlots(void)
 {
     u16 i;
 

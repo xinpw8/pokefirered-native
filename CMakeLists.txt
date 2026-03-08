@@ -70,15 +70,15 @@ add_custom_command(
         ${PFR_MAP_JSONS}
         "${PFR_GEN_HEADERS_DIR}/constants/map_event_ids.h"
     COMMAND "${POKEFIRERED_SOURCE_DIR}/tools/jsonproc/jsonproc"
-        "${POKEFIRERED_SOURCE_DIR}/data/region_map/region_map_sections.json"
-        "${POKEFIRERED_SOURCE_DIR}/data/region_map/region_map_sections.constants.json.txt"
+        "${POKEFIRERED_SOURCE_DIR}/src/data/region_map/region_map_sections.json"
+        "${POKEFIRERED_SOURCE_DIR}/src/data/region_map/region_map_sections.constants.json.txt"
         "${PFR_GEN_HEADERS_DIR}/constants/region_map_sections.h"
     DEPENDS
         "${POKEFIRERED_SOURCE_DIR}/tools/mapjson/mapjson"
         "${POKEFIRERED_SOURCE_DIR}/tools/jsonproc/jsonproc"
         "${POKEFIRERED_SOURCE_DIR}/data/maps/map_groups.json"
-        "${POKEFIRERED_SOURCE_DIR}/data/region_map/region_map_sections.json"
-        "${POKEFIRERED_SOURCE_DIR}/data/region_map/region_map_sections.constants.json.txt"
+        "${POKEFIRERED_SOURCE_DIR}/src/data/region_map/region_map_sections.json"
+        "${POKEFIRERED_SOURCE_DIR}/src/data/region_map/region_map_sections.constants.json.txt"
         ${PFR_MAP_JSONS}
     COMMENT "Generating upstream constant headers needed by new_game/roamer"
 )
