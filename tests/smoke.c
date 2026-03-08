@@ -1010,7 +1010,38 @@ static int TestTitleScreenMainMenuHandoff(void)
                  "title cry path did not restore cry stereo setting");
 
     RunMainCallbackFrame();
-    rc |= Expect(gHostTitleStubCB2InitMainMenuCalls == 1, "main menu callback stub did not execute");
+
+    for (i = 0; i < 128 && gHostTitleStubAddTextPrinterParameterized3Calls == 0; i++)
+        RunMainCallbackFrame();
+
+    rc |= Expect(gMain.callback2 != CB2_InitMainMenu, "main menu init did not switch to its run callback");
+    rc |= Expect(gHostTitleStubFreeAllSpritePalettesCalls == 1,
+                 "main menu init did not free sprite palettes");
+    rc |= Expect(gHostTitleStubLoadBgTilesCalls >= 1,
+                 "main menu init did not load user window tiles");
+    rc |= Expect(gHostTitleStubAddTextPrinterParameterized3Calls >= 1,
+                 "main menu did not print any menu text");
+    rc |= Expect(gHostTitleStubLastPrintedText3 == gText_NewGame,
+                 "main menu did not print the New Game option");
+    rc |= Expect(gHostTitleStubWaitDma3RequestCalls >= 1,
+                 "main menu did not wait for DMA before fading in");
+    rc |= Expect(gMain.vblankCallback != NULL,
+                 "main menu did not install its VBlank callback");
+    rc |= Expect((GetGpuReg(REG_OFFSET_DISPCNT) & (DISPCNT_OBJ_ON | DISPCNT_WIN0_ON))
+                    == (DISPCNT_OBJ_ON | DISPCNT_WIN0_ON),
+                 "main menu DISPCNT mismatch");
+
+    SetKeys(A_BUTTON, A_BUTTON);
+    RunMainCallbackFrame();
+    ClearKeys();
+
+    for (i = 0; i < 8 && gHostTitleStubStartNewGameSceneCalls == 0; i++)
+        RunMainCallbackFrame();
+
+    rc |= Expect(gHostTitleStubStartNewGameSceneCalls == 1,
+                 "main menu New Game selection did not hand off to StartNewGameScene");
+    rc |= Expect(gHostTitleStubFreeAllWindowBuffersCalls >= 1,
+                 "main menu New Game selection did not free window buffers");
 
     return rc;
 }
