@@ -14,6 +14,7 @@ extern u32 gHostOakSpeechControlsGuidePage3Loads;
 extern u32 gHostOakSpeechPikachuIntroPage1Loads;
 extern u32 gHostOakSpeechPikachuIntroPage2Loads;
 extern u32 gHostOakSpeechPikachuIntroPage3Loads;
+extern u32 gHostOakSpeechWelcomeToTheWorldPrints;
 extern u16 gHostOakSpeechLastPlayedBGM;
 extern const u8 *gHostOakSpeechLastTopBarLeftText;
 extern const u8 *gHostOakSpeechLastTopBarRightText;
