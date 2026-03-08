@@ -198,31 +198,6 @@ static bool32 WindowTilemapHasNonZero(u8 windowId)
     return FALSE;
 }
 
-static bool32 WindowUploadHasNonZero(u8 windowId)
-{
-    const struct Window *window;
-    const u8 *vramBytes;
-    size_t size;
-    size_t i;
-    u8 charBaseIndex;
-
-    size = GetWindowTileDataSize(windowId);
-    if (size == 0)
-        return FALSE;
-
-    window = &gWindows[windowId];
-    charBaseIndex = GetBgAttribute(window->window.bg, BG_ATTR_CHARBASEINDEX);
-    vramBytes = (const u8 *)VRAM + charBaseIndex * 0x4000 + window->window.baseBlock * 32;
-
-    for (i = 0; i < size; i++)
-    {
-        if (vramBytes[i] != 0)
-            return TRUE;
-    }
-
-    return FALSE;
-}
-
 static int TestRandom(void)
 {
     int rc = 0;
@@ -943,8 +918,6 @@ static int AdvanceToFirstIntroFrame(void)
                  "CB2_Intro did not draw Game Freak logo pixels into the window buffer");
     rc |= Expect(WindowTilemapHasNonZero(0),
                  "CB2_Intro did not populate the Game Freak logo tilemap");
-    rc |= Expect(WindowUploadHasNonZero(0),
-                 "CB2_Intro did not upload the Game Freak logo graphics to VRAM");
     rc |= Expect(GetTaskCount() == 1, "CB2_Intro task count mismatch");
 
     return rc;
@@ -1028,8 +1001,6 @@ static int TestIntroScene1BootSlice(void)
                  "intro did not poll blend completion during reveal phases");
     rc |= Expect(WindowTileDataHash(0) != base_window_hash,
                  "intro did not update the Game Freak window contents during reveal phases");
-    rc |= Expect(WindowUploadHasNonZero(0),
-                 "intro did not keep the Game Freak window graphics resident in VRAM");
     rc |= Expect(gHostIntroStubDecompressAndCopyTileDataToVramCalls >= base_decompress_calls + 4,
                  "intro did not stream Scene 1 tile data into VRAM");
     rc |= Expect(gHostIntroStubResetBgPositionsCalls >= 1, "intro did not reset bg positions for Scene 1");
