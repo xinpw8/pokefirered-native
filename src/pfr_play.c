@@ -26,8 +26,10 @@
 #include "sprite.h"
 #include "bg.h"
 #include "dma3.h"
+#include "play_time.h"
 #include "malloc.h"
 #include "load_save.h"
+#include "sound.h"
 #include "host_memory.h"
 #include "host_renderer.h"
 #include "host_display.h"
@@ -41,6 +43,9 @@ static void PlayVBlankHandler(void)
 {
     if (gMain.vblankCallback)
         gMain.vblankCallback();
+    gMain.vblankCounter2++;
+    CopyBufferedValuesToGpuRegs();
+    ProcessDma3Requests();
     gMain.intrCheck |= INTR_FLAG_VBLANK;
 }
 
@@ -101,10 +106,20 @@ static void StepFrame(void)
 {
     int scanline;
 
-    /* 1. Read key state from REG_KEYINPUT (set by SDL PollInput last frame) */
+    /* 1. Read key state from REG_KEYINPUT (set by SDL PollInput last present) */
     PlayReadKeys();
 
-    /* 2. Simulate 228 scanlines with interrupt dispatch */
+    /* 2. Run the same high-level loop order as AgbMain before WaitForVBlank. */
+    if (gMain.callback1)
+        gMain.callback1();
+    if (gMain.callback2)
+        gMain.callback2();
+
+    PlayTimeCounter_Update();
+    MapMusicMain();
+
+    /* 3. Simulate the wait for the next VBlank by advancing one frame. */
+    gMain.intrCheck &= ~INTR_FLAG_VBLANK;
     for (scanline = 0; scanline < 228; scanline++)
     {
         u16 dispstat, flags, vcountCompare;
@@ -129,18 +144,6 @@ static void StepFrame(void)
             HostInterruptDispatchAll();
         }
     }
-
-    /* 3. Game logic (mirrors AgbMain's main loop) */
-    if (gMain.callback1)
-        gMain.callback1();
-    if (gMain.callback2)
-        gMain.callback2();
-
-    RunTasks();
-    AnimateSprites();
-    BuildOamBuffer();
-    UpdatePaletteFade();
-    CopyBufferedValuesToGpuRegs();
 }
 
 /* ── Main ──────────────────────────────────────────────────── */

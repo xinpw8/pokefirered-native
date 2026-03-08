@@ -23,6 +23,7 @@
 #include "palette.h"
 #include "task.h"
 #include "sprite.h"
+#include "play_time.h"
 #include "host_agbmain.h"
 #include "host_memory.h"
 #include "host_renderer.h"
@@ -32,6 +33,7 @@
 #include "dma3.h"
 #include "malloc.h"
 #include "load_save.h"
+#include "sound.h"
 #include "host_intro_stubs.h"
 #include "host_title_screen_stubs.h"
 
@@ -89,6 +91,9 @@ static void RenderTestVBlankHandler(void)
 {
     if (gMain.vblankCallback)
         gMain.vblankCallback();
+    gMain.vblankCounter2++;
+    CopyBufferedValuesToGpuRegs();
+    ProcessDma3Requests();
     gMain.intrCheck |= INTR_FLAG_VBLANK;
 }
 
@@ -181,7 +186,18 @@ int main(int argc, char *argv[])
     {
         int scanline;
 
-        /* Simulate one full frame of scanlines */
+        /* Run the same high-level loop order as AgbMain before WaitForVBlank. */
+        if (gMain.callback1)
+            gMain.callback1();
+        if (gMain.callback2)
+            gMain.callback2();
+
+        PlayTimeCounter_Update();
+        MapMusicMain();
+
+        gMain.intrCheck &= ~INTR_FLAG_VBLANK;
+
+        /* Simulate one full frame of scanlines / wait-for-vblank. */
         for (scanline = 0; scanline < 228; scanline++)
         {
             REG_VCOUNT = scanline;
@@ -205,18 +221,6 @@ int main(int argc, char *argv[])
                 HostInterruptDispatchAll();
             }
         }
-
-        /* Run the main callbacks and engine subsystems (mirrors AgbMain loop) */
-        if (gMain.callback1)
-            gMain.callback1();
-        if (gMain.callback2)
-            gMain.callback2();
-
-        RunTasks();
-        AnimateSprites();
-        BuildOamBuffer();
-        UpdatePaletteFade();
-        CopyBufferedValuesToGpuRegs();
 
         /* Render at end of frame */
         if (i % 30 == 0) /* dump every 30th frame to avoid flooding */
