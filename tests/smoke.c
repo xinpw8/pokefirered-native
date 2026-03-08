@@ -664,6 +664,7 @@ static int TestAgbMainBootSlice(void)
 static void RunMainCallbackFrame(void)
 {
     gMain.callback2();
+    ProcessDma3Requests();
     if (gMain.vblankCallback != NULL)
         gMain.vblankCallback();
 }
@@ -1022,11 +1023,16 @@ static int TestTitleScreenMainMenuHandoff(void)
     for (i = 0; i < 128 && gHostTitleStubAddTextPrinterParameterized3Calls == 0; i++)
         RunMainCallbackFrame();
 
+    for (i = 0; i < 64 && (gMain.vblankCallback == NULL || gPaletteFade.active); i++)
+        RunMainCallbackFrame();
+
     rc |= Expect(gMain.callback2 != CB2_InitMainMenu, "main menu init did not switch to its run callback");
     rc |= Expect(gHostTitleStubAddTextPrinterParameterized3Calls >= 6,
                  "main menu did not print its continue/new-game stats and options");
-    rc |= Expect(gHostTitleStubLastPrintedText3 == gText_Badges,
-                 "main menu did not print through the continue-stats block");
+    rc |= Expect(gHostTitleStubGetKantoPokedexCountCalls == 1,
+                 "main menu did not execute the continue-stats Pokedex path");
+    rc |= Expect(gHostTitleStubFlagGetCalls >= 3,
+                 "main menu did not execute the expected badge or Pokedex flag checks");
     rc |= Expect(gHostIntroStubFillWindowPixelBufferCalls >= 2,
                  "main menu did not fill the expected continue/new-game windows");
     rc |= Expect(gHostIntroStubPutWindowTilemapCalls >= 2,
@@ -1042,6 +1048,7 @@ static int TestTitleScreenMainMenuHandoff(void)
     SetKeys(DPAD_DOWN, DPAD_DOWN);
     RunMainCallbackFrame();
     ClearKeys();
+    RunMainCallbackFrame();
 
     SetKeys(A_BUTTON, A_BUTTON);
     RunMainCallbackFrame();
