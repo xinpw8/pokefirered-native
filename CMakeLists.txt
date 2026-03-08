@@ -287,3 +287,25 @@ target_link_libraries(pfr_render_test PRIVATE pfr_upstream_core Threads::Threads
 add_executable(pfr_assets tools/pfr_assets.c)
 target_compile_options(pfr_assets PRIVATE -O2)
 target_link_libraries(pfr_assets PRIVATE m)
+
+# Asset pipeline: compile assets, generate .inc files, preprocess upstream sources
+set(PFR_ASSETS_DIR "${CMAKE_BINARY_DIR}/assets")
+set(PFR_INC_DIR    "${CMAKE_BINARY_DIR}/inc")
+set(PFR_GEN_DIR    "${CMAKE_BINARY_DIR}/gen")
+
+add_custom_command(
+    OUTPUT "${PFR_GEN_DIR}/intro.c" "${PFR_GEN_DIR}/title_screen.c"
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${PFR_ASSETS_DIR}"
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${PFR_INC_DIR}"
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${PFR_GEN_DIR}"
+    COMMAND $<TARGET_FILE:pfr_assets> batch "${POKEFIRERED_SOURCE_DIR}" "${PFR_ASSETS_DIR}"
+    COMMAND $<TARGET_FILE:pfr_assets> geninc "${PFR_ASSETS_DIR}" "${PFR_INC_DIR}"
+    COMMAND $<TARGET_FILE:pfr_assets> preproc
+        "${POKEFIRERED_SOURCE_DIR}/src/intro.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/intro.c"
+    COMMAND $<TARGET_FILE:pfr_assets> preproc
+        "${POKEFIRERED_SOURCE_DIR}/src/title_screen.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/title_screen.c"
+    DEPENDS pfr_assets
+        "${POKEFIRERED_SOURCE_DIR}/src/intro.c"
+        "${POKEFIRERED_SOURCE_DIR}/src/title_screen.c"
+    COMMENT "Asset pipeline: PNG/PAL → GBA → .inc → preprocessed sources"
+)
