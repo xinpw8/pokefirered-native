@@ -5,3 +5,13 @@
 [000164] callback2 -> (unknown) (0x404aa0)
 [000165] callback2 -> (unknown) (0x402320)
 [000168] callback2 -> (unknown) (0x402300)
+[001260] callback2 -> CB2_InitTitleScreen (0x407160)
+[001263] callback2 -> (unknown) (0x405be0)
+[001798] input newKeys=0x0001 heldKeys=0x0001 callback2=(unknown)
+[001913] callback2 -> CB2_InitMainMenu (0x4090d0)
+[001914] callback2 -> (unknown) (0x408870)
+[001917] callback2 -> (unknown) (0x4093c0)
+[001917] StartNewGameScene calls=1
+[001925] Oak controls guide page 1 reached
+[002047] framebuffer nearly uniform for 120 frames, color=0xFF000000 callback2=(unknown)
+[002258] input newKeys=0x0080 heldKeys=0x0080 callback2=(unknown)
