@@ -66,7 +66,6 @@ u32 gHostNewGameWarpIntoMapCalls = 0;
 u32 gHostNewGameRunScriptImmediatelyCalls = 0;
 const u8 *gHostNewGameLastRunScript = NULL;
 struct WarpData gHostNewGameWarpDestination = {0};
-struct WarpData gLastUsedWarp = {0};
 
 const u8 EventScript_ResetAllMapFlags[] = {0};
 

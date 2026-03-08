@@ -55,7 +55,6 @@ const u8 *gHostOakSpeechLastTopBarLeftText = NULL;
 const u8 *gHostOakSpeechLastTopBarRightText = NULL;
 
 static u8 sOakSpeechMonSpriteBuffer[0x8000] = {0};
-static bool8 sHostOakSpeechNewGameInitialized = FALSE;
 static const u16 sOakSpeechTextWindowPalette[16] = {
     RGB_WHITE, RGB_WHITE, RGB_WHITE, RGB_WHITE,
     RGB_WHITE, RGB_WHITE, RGB_WHITE, RGB_WHITE,
@@ -209,7 +208,6 @@ void HostOakSpeechStubReset(void)
     gHostOakSpeechLastPlayedBGM = 0;
     gHostOakSpeechLastTopBarLeftText = NULL;
     gHostOakSpeechLastTopBarRightText = NULL;
-    sHostOakSpeechNewGameInitialized = FALSE;
     memset(gStringVar1, 0, sizeof(gStringVar1));
     memset(gStringVar2, 0, sizeof(gStringVar2));
     memset(gStringVar3, 0, sizeof(gStringVar3));
@@ -550,13 +548,10 @@ s16 Q_8_8_inv(s16 y)
     return (s16)((256 * 256) / y);
 }
 
+void UpstreamCB2_NewGame(void);
+
 void CB2_NewGame(void)
 {
     gHostOakSpeechCB2NewGameCalls++;
-    if (!sHostOakSpeechNewGameInitialized)
-    {
-        sHostOakSpeechNewGameInitialized = TRUE;
-        NewGameInitData();
-        PlayTimeCounter_Start();
-    }
+    UpstreamCB2_NewGame();
 }

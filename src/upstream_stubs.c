@@ -39,7 +39,6 @@ struct STWIStatus *gSTWIStatus = NULL;
 bool8 gHelpSystemEnabled = FALSE;
 u8 gQuestLogPlaybackState = 0;
 u8 gWirelessCommType = 0;
-bool8 gExitStairsMovementDisabled = FALSE;
 struct PokemonCrySong gPokemonCrySongs[MAX_POKEMON_CRIES] = {0};
 struct SoundInfo gSoundInfo = {0};
 u32 intr_main[0x200] = {
