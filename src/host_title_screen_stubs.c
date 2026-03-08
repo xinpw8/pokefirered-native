@@ -334,11 +334,6 @@ void DestroyYesNoMenu(void)
     gHostTitleStubDestroyYesNoMenuCalls++;
 }
 
-void FreeAllWindowBuffers(void)
-{
-    gHostTitleStubFreeAllWindowBuffersCalls++;
-}
-
 void DeactivateAllTextPrinters(void)
 {
     gHostTitleStubDeactivateAllTextPrintersCalls++;
@@ -356,12 +351,6 @@ bool16 IsTextPrinterActive(u8 windowId)
     gHostTitleStubIsTextPrinterActiveCalls++;
     (void)windowId;
     return gHostTitleStubTextPrinterActive;
-}
-
-void ClearWindowTilemap(u8 windowId)
-{
-    gHostTitleStubClearWindowTilemapCalls++;
-    (void)windowId;
 }
 
 bool32 IsMysteryGiftEnabled(void)

@@ -49,13 +49,24 @@ u16 gHostOakSpeechLastPlayedBGM = 0;
 const u8 *gHostOakSpeechLastTopBarLeftText = NULL;
 const u8 *gHostOakSpeechLastTopBarRightText = NULL;
 
-static u16 sOakSpeechWindowId = 0;
 static u8 sOakSpeechMonSpriteBuffer[0x8000] = {0};
 static const u16 sOakSpeechTextWindowPalette[16] = {
     RGB_WHITE, RGB_WHITE, RGB_WHITE, RGB_WHITE,
     RGB_WHITE, RGB_WHITE, RGB_WHITE, RGB_WHITE,
     RGB_WHITE, RGB_WHITE, RGB_WHITE, RGB_WHITE,
     RGB_WHITE, RGB_WHITE, RGB_WHITE, RGB_BLACK,
+};
+static const struct WindowTemplate sHostStandardTextBoxWindowTemplates[] = {
+    {
+        .bg = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 15,
+        .width = 26,
+        .height = 4,
+        .paletteNum = DLG_WINDOW_PALETTE_NUM,
+        .baseBlock = 0x198,
+    },
+    DUMMY_WIN_TEMPLATE
 };
 static const u32 sHostBlankMonPaletteLz77[] = {0x00002000};
 
@@ -191,7 +202,6 @@ void HostOakSpeechStubReset(void)
     gHostOakSpeechLastPlayedBGM = 0;
     gHostOakSpeechLastTopBarLeftText = NULL;
     gHostOakSpeechLastTopBarRightText = NULL;
-    sOakSpeechWindowId = 0;
     memset(gStringVar1, 0, sizeof(gStringVar1));
     memset(gStringVar2, 0, sizeof(gStringVar2));
     memset(gStringVar3, 0, sizeof(gStringVar3));
@@ -221,6 +231,10 @@ u8 *MonSpritesGfxManager_GetSpritePtr(u8 bufferId)
 void InitStandardTextBoxWindows(void)
 {
     gHostOakSpeechInitStandardTextBoxWindowsCalls++;
+    InitWindows(sHostStandardTextBoxWindowTemplates);
+    FillWindowPixelBuffer(0, PIXEL_FILL(0));
+    PutWindowTilemap(0);
+    CopyWindowToVram(0, COPYWIN_FULL);
 }
 
 void InitTextBoxGfxAndPrinters(void)
@@ -245,9 +259,14 @@ u8 GetTextSpeedSetting(void)
 
 void ClearDialogWindowAndFrame(u8 windowId, bool8 copyToVram)
 {
-    (void)windowId;
-    (void)copyToVram;
     gHostTitleStubTextPrinterActive = FALSE;
+    if (windowId < WINDOWS_MAX && gWindows[windowId].tileData != NULL)
+    {
+        FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
+        PutWindowTilemap(windowId);
+        if (copyToVram)
+            CopyWindowToVram(windowId, COPYWIN_FULL);
+    }
 }
 
 u8 CreateTopBarWindowLoadPalette(u8 bg, u8 width, u8 yPos, u8 palette, u16 baseTile)
@@ -279,17 +298,6 @@ void TopBarWindowPrintString(const u8 *string, u8 unUsed, bool8 copyToVram)
     gHostTitleStubLastPrintedText3 = string;
     (void)unUsed;
     (void)copyToVram;
-}
-
-u16 AddWindow(const struct WindowTemplate *template)
-{
-    (void)template;
-    return sOakSpeechWindowId++;
-}
-
-void RemoveWindow(u8 windowId)
-{
-    (void)windowId;
 }
 
 u8 CreateTextCursorSprite(u8 sheetId, u16 x, u16 y, u8 priority, u8 subpriority)
@@ -329,17 +337,19 @@ void DestroyTopBarWindow(void)
 
 void *MallocAndDecompress(const void *src, u32 *size)
 {
-    u32 allocSize = 0;
-    void *buffer;
+    void *ptr;
+    u8 *sizeAsBytes = (u8 *)size;
+    const u8 *srcAsBytes = src;
 
-    if (src != NULL)
-        allocSize = GetDecompressedDataSize(src);
-    if (allocSize == 0)
-        allocSize = 1;
-    if (size != NULL)
-        *size = allocSize;
-    buffer = AllocZeroed(allocSize);
-    return buffer;
+    sizeAsBytes[0] = srcAsBytes[1];
+    sizeAsBytes[1] = srcAsBytes[2];
+    sizeAsBytes[2] = srcAsBytes[3];
+    sizeAsBytes[3] = 0;
+
+    ptr = Alloc(*size);
+    if (ptr)
+        LZ77UnCompWram(src, ptr);
+    return ptr;
 }
 
 void DrawDialogueFrame(u8 windowId, bool8 transfer)
