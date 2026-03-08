@@ -13,6 +13,9 @@
 #include "util.h"
 #include "window.h"
 
+void UpstreamResetMenuAndMonGlobals(void);
+void UpstreamSav2_ClearSetDefault(void);
+
 u32 gHostIntroStubGameCubeMultiBootInitCalls = 0;
 u32 gHostIntroStubGameCubeMultiBootMainCalls = 0;
 u32 gHostIntroStubGameCubeMultiBootHandleSerialCalls = 0;
@@ -102,6 +105,7 @@ void GameCubeMultiBoot_Quit(void)
 void ResetMenuAndMonGlobals(void)
 {
     gHostIntroStubResetMenuAndMonGlobalsCalls++;
+    UpstreamResetMenuAndMonGlobals();
 }
 
 void Save_ResetSaveCounters(void)
@@ -120,6 +124,7 @@ u8 LoadGameSave(u8 saveType)
 void Sav2_ClearSetDefault(void)
 {
     gHostIntroStubSav2ClearSetDefaultCalls++;
+    UpstreamSav2_ClearSetDefault();
 }
 
 void SetPokemonCryStereo(u32 val)

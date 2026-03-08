@@ -25,6 +25,70 @@ set(PFR_COMMON_DEFINES
 set(PFR_ASSETS_DIR "${CMAKE_BINARY_DIR}/assets")
 set(PFR_INC_DIR    "${CMAKE_BINARY_DIR}/inc")
 set(PFR_GEN_DIR    "${CMAKE_BINARY_DIR}/gen")
+set(PFR_GEN_HEADERS_DIR "${CMAKE_BINARY_DIR}/generated_include")
+set(PFR_MAPJSON_OUT_DIR "${CMAKE_BINARY_DIR}/mapjson")
+
+file(GLOB_RECURSE PFR_MAP_JSONS "${POKEFIRERED_SOURCE_DIR}/data/maps/*/map.json")
+list(SORT PFR_MAP_JSONS)
+
+add_custom_command(
+    OUTPUT "${POKEFIRERED_SOURCE_DIR}/tools/mapjson/mapjson"
+    COMMAND make -C "${POKEFIRERED_SOURCE_DIR}/tools/mapjson"
+    DEPENDS
+        "${POKEFIRERED_SOURCE_DIR}/tools/mapjson/Makefile"
+        "${POKEFIRERED_SOURCE_DIR}/tools/mapjson/mapjson.cpp"
+        "${POKEFIRERED_SOURCE_DIR}/tools/mapjson/mapjson.h"
+        "${POKEFIRERED_SOURCE_DIR}/tools/mapjson/json11.cpp"
+        "${POKEFIRERED_SOURCE_DIR}/tools/mapjson/json11.h"
+    COMMENT "Building upstream mapjson tool"
+)
+
+add_custom_command(
+    OUTPUT "${POKEFIRERED_SOURCE_DIR}/tools/jsonproc/jsonproc"
+    COMMAND make -C "${POKEFIRERED_SOURCE_DIR}/tools/jsonproc"
+    DEPENDS
+        "${POKEFIRERED_SOURCE_DIR}/tools/jsonproc/Makefile"
+        "${POKEFIRERED_SOURCE_DIR}/tools/jsonproc/jsonproc.cpp"
+        "${POKEFIRERED_SOURCE_DIR}/tools/jsonproc/jsonproc.h"
+        "${POKEFIRERED_SOURCE_DIR}/tools/jsonproc/inja.hpp"
+        "${POKEFIRERED_SOURCE_DIR}/tools/jsonproc/nlohmann/json.hpp"
+    COMMENT "Building upstream jsonproc tool"
+)
+
+add_custom_command(
+    OUTPUT
+        "${PFR_GEN_HEADERS_DIR}/constants/map_groups.h"
+        "${PFR_GEN_HEADERS_DIR}/constants/map_event_ids.h"
+        "${PFR_GEN_HEADERS_DIR}/constants/region_map_sections.h"
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${PFR_GEN_HEADERS_DIR}/constants"
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${PFR_MAPJSON_OUT_DIR}"
+    COMMAND "${POKEFIRERED_SOURCE_DIR}/tools/mapjson/mapjson" groups firered
+        "${POKEFIRERED_SOURCE_DIR}/data/maps/map_groups.json"
+        "${PFR_MAPJSON_OUT_DIR}"
+        "${PFR_GEN_HEADERS_DIR}/constants"
+    COMMAND "${POKEFIRERED_SOURCE_DIR}/tools/mapjson/mapjson" event_constants firered
+        ${PFR_MAP_JSONS}
+        "${PFR_GEN_HEADERS_DIR}/constants/map_event_ids.h"
+    COMMAND "${POKEFIRERED_SOURCE_DIR}/tools/jsonproc/jsonproc"
+        "${POKEFIRERED_SOURCE_DIR}/data/region_map/region_map_sections.json"
+        "${POKEFIRERED_SOURCE_DIR}/data/region_map/region_map_sections.constants.json.txt"
+        "${PFR_GEN_HEADERS_DIR}/constants/region_map_sections.h"
+    DEPENDS
+        "${POKEFIRERED_SOURCE_DIR}/tools/mapjson/mapjson"
+        "${POKEFIRERED_SOURCE_DIR}/tools/jsonproc/jsonproc"
+        "${POKEFIRERED_SOURCE_DIR}/data/maps/map_groups.json"
+        "${POKEFIRERED_SOURCE_DIR}/data/region_map/region_map_sections.json"
+        "${POKEFIRERED_SOURCE_DIR}/data/region_map/region_map_sections.constants.json.txt"
+        ${PFR_MAP_JSONS}
+    COMMENT "Generating upstream constant headers needed by new_game/roamer"
+)
+
+add_custom_target(pfr_generated_headers
+    DEPENDS
+        "${PFR_GEN_HEADERS_DIR}/constants/map_groups.h"
+        "${PFR_GEN_HEADERS_DIR}/constants/map_event_ids.h"
+        "${PFR_GEN_HEADERS_DIR}/constants/region_map_sections.h"
+)
 
 add_library(pfr_upstream_core STATIC
     src/host_crt0.c
@@ -35,7 +99,8 @@ add_library(pfr_upstream_core STATIC
     src/host_renderer.c
     src/host_display.c
     src/host_intro_stubs.c
-        src/host_oak_speech_stubs.c
+    src/host_new_game_stubs.c
+    src/host_oak_speech_stubs.c
     src/host_title_screen_stubs.c
     src/upstream_stubs.c
     "${POKEFIRERED_SOURCE_DIR}/src/random.c"
@@ -52,6 +117,14 @@ add_library(pfr_upstream_core STATIC
     "${POKEFIRERED_SOURCE_DIR}/src/sprite.c"
     "${POKEFIRERED_SOURCE_DIR}/src/window.c"
     "${POKEFIRERED_SOURCE_DIR}/src/blit.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/easy_chat.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/trainer_fan_club.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/pokemon_size_record.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/money.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/berry_powder.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/mystery_gift.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/renewable_hidden_items.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/roamer.c"
 )
 
 target_compile_definitions(pfr_upstream_core PRIVATE ${PFR_COMMON_DEFINES})
@@ -63,11 +136,13 @@ target_compile_options(pfr_upstream_core PRIVATE
     -Wno-int-to-pointer-cast
     -Wno-pointer-to-int-cast
     "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
+    "-iquote${PFR_GEN_HEADERS_DIR}"
     "-iquote${POKEFIRERED_SOURCE_DIR}/include"
 )
 target_include_directories(pfr_upstream_core PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
 )
+add_dependencies(pfr_upstream_core pfr_generated_headers)
 
 # SDL2 display backend (optional — falls back to PPM frame dump if unavailable)
 find_package(PkgConfig QUIET)
@@ -103,6 +178,7 @@ target_compile_options(pfr_upstream_runtime PRIVATE
     -Wno-int-to-pointer-cast
     -Wno-pointer-to-int-cast
     "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
+    "-iquote${PFR_GEN_HEADERS_DIR}"
     "-iquote${POKEFIRERED_SOURCE_DIR}/include"
 )
 target_include_directories(pfr_upstream_runtime PUBLIC
@@ -121,6 +197,7 @@ target_compile_options(pfr_upstream_intro PRIVATE
     -Wno-int-to-pointer-cast
     -Wno-pointer-to-int-cast
     "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
+    "-iquote${PFR_GEN_HEADERS_DIR}"
     "-iquote${POKEFIRERED_SOURCE_DIR}/include"
 )
 target_include_directories(pfr_upstream_intro PUBLIC
@@ -139,6 +216,7 @@ target_compile_options(pfr_upstream_title PRIVATE
     -Wno-int-to-pointer-cast
     -Wno-pointer-to-int-cast
     "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
+    "-iquote${PFR_GEN_HEADERS_DIR}"
     "-iquote${POKEFIRERED_SOURCE_DIR}/include"
 )
 target_include_directories(pfr_upstream_title PUBLIC
@@ -157,6 +235,7 @@ target_compile_options(pfr_upstream_clear_save PRIVATE
     -Wno-int-to-pointer-cast
     -Wno-pointer-to-int-cast
     "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
+    "-iquote${PFR_GEN_HEADERS_DIR}"
     "-iquote${POKEFIRERED_SOURCE_DIR}/include"
 )
 target_include_directories(pfr_upstream_clear_save PUBLIC
@@ -175,6 +254,7 @@ target_compile_options(pfr_upstream_berry_fix PRIVATE
     -Wno-int-to-pointer-cast
     -Wno-pointer-to-int-cast
     "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
+    "-iquote${PFR_GEN_HEADERS_DIR}"
     "-iquote${POKEFIRERED_SOURCE_DIR}/include"
 )
 target_include_directories(pfr_upstream_berry_fix PUBLIC
@@ -193,6 +273,7 @@ target_compile_options(pfr_upstream_main_menu PRIVATE
     -Wno-int-to-pointer-cast
     -Wno-pointer-to-int-cast
     "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
+    "-iquote${PFR_GEN_HEADERS_DIR}"
     "-iquote${POKEFIRERED_SOURCE_DIR}/include"
 )
 target_include_directories(pfr_upstream_main_menu PUBLIC
@@ -214,9 +295,56 @@ target_compile_options(pfr_upstream_oak_speech PRIVATE
     -Wno-int-to-pointer-cast
     -Wno-pointer-to-int-cast
     "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
+    "-iquote${PFR_GEN_HEADERS_DIR}"
     "-iquote${POKEFIRERED_SOURCE_DIR}/include"
 )
 target_include_directories(pfr_upstream_oak_speech PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+
+add_library(pfr_upstream_new_game OBJECT
+    "${POKEFIRERED_SOURCE_DIR}/src/new_game.c"
+)
+target_compile_definitions(pfr_upstream_new_game PRIVATE
+    ${PFR_COMMON_DEFINES}
+    ResetMenuAndMonGlobals=UpstreamResetMenuAndMonGlobals
+    Sav2_ClearSetDefault=UpstreamSav2_ClearSetDefault
+)
+target_compile_options(pfr_upstream_new_game PRIVATE
+    -fno-pie
+    -ffunction-sections
+    -fdata-sections
+    -Wno-int-conversion
+    -Wno-int-to-pointer-cast
+    -Wno-pointer-to-int-cast
+    "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
+    "-iquote${PFR_GEN_HEADERS_DIR}"
+    "-iquote${POKEFIRERED_SOURCE_DIR}/include"
+)
+target_include_directories(pfr_upstream_new_game PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+add_dependencies(pfr_upstream_new_game pfr_generated_headers)
+
+add_library(pfr_upstream_play_time OBJECT
+    "${POKEFIRERED_SOURCE_DIR}/src/play_time.c"
+)
+target_compile_definitions(pfr_upstream_play_time PRIVATE
+    ${PFR_COMMON_DEFINES}
+    PlayTimeCounter_Update=UpstreamPlayTimeCounter_Update
+)
+target_compile_options(pfr_upstream_play_time PRIVATE
+    -fno-pie
+    -ffunction-sections
+    -fdata-sections
+    -Wno-int-conversion
+    -Wno-int-to-pointer-cast
+    -Wno-pointer-to-int-cast
+    "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
+    "-iquote${PFR_GEN_HEADERS_DIR}"
+    "-iquote${POKEFIRERED_SOURCE_DIR}/include"
+)
+target_include_directories(pfr_upstream_play_time PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
 )
 
@@ -229,12 +357,15 @@ target_sources(pfr_smoke PRIVATE
     $<TARGET_OBJECTS:pfr_upstream_berry_fix>
     $<TARGET_OBJECTS:pfr_upstream_main_menu>
     $<TARGET_OBJECTS:pfr_upstream_oak_speech>
+    $<TARGET_OBJECTS:pfr_upstream_new_game>
+    $<TARGET_OBJECTS:pfr_upstream_play_time>
     $<TARGET_OBJECTS:pfr_upstream_runtime>
 )
 target_compile_definitions(pfr_smoke PRIVATE ${PFR_COMMON_DEFINES})
 target_compile_options(pfr_smoke PRIVATE
     -fno-pie
     "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
+    "-iquote${PFR_GEN_HEADERS_DIR}"
     "-iquote${POKEFIRERED_SOURCE_DIR}/include"
 )
 target_compile_options(pfr_smoke PRIVATE
@@ -273,6 +404,8 @@ target_sources(pfr_render_test PRIVATE
     $<TARGET_OBJECTS:pfr_upstream_clear_save>
     $<TARGET_OBJECTS:pfr_upstream_berry_fix>
     $<TARGET_OBJECTS:pfr_upstream_main_menu>
+    $<TARGET_OBJECTS:pfr_upstream_new_game>
+    $<TARGET_OBJECTS:pfr_upstream_play_time>
     $<TARGET_OBJECTS:pfr_upstream_runtime>
 )
 # NOTE: oak_speech excluded from render_test until its stubs are wired
@@ -280,6 +413,7 @@ target_compile_definitions(pfr_render_test PRIVATE ${PFR_COMMON_DEFINES})
 target_compile_options(pfr_render_test PRIVATE
     -fno-pie
     "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
+    "-iquote${PFR_GEN_HEADERS_DIR}"
     "-iquote${POKEFIRERED_SOURCE_DIR}/include"
     -Wno-int-to-pointer-cast
     -Wno-pointer-to-int-cast
@@ -300,12 +434,15 @@ target_sources(pfr_play PRIVATE
     $<TARGET_OBJECTS:pfr_upstream_berry_fix>
     $<TARGET_OBJECTS:pfr_upstream_main_menu>
     $<TARGET_OBJECTS:pfr_upstream_oak_speech>
+    $<TARGET_OBJECTS:pfr_upstream_new_game>
+    $<TARGET_OBJECTS:pfr_upstream_play_time>
     $<TARGET_OBJECTS:pfr_upstream_runtime>
 )
 target_compile_definitions(pfr_play PRIVATE ${PFR_COMMON_DEFINES})
 target_compile_options(pfr_play PRIVATE
     -fno-pie
     "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
+    "-iquote${PFR_GEN_HEADERS_DIR}"
     "-iquote${POKEFIRERED_SOURCE_DIR}/include"
     -Wno-int-to-pointer-cast
     -Wno-pointer-to-int-cast

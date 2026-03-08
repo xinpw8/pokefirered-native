@@ -4,9 +4,12 @@
 
 #include "berry_fix_program.h"
 #include "clear_save_data_screen.h"
+#include "constants/flags.h"
+#include "constants/vars.h"
 #include "event_data.h"
 #include "graphics.h"
 #include "help_system.h"
+#include "item.h"
 #include "load_save.h"
 #include "main.h"
 #include "main_menu.h"
@@ -413,6 +416,8 @@ void SetSaveBlocksPointers(void)
     gHostTitleStubSetSaveBlocksPointersCalls++;
     gSaveBlock1Ptr = &gSaveBlock1;
     gSaveBlock2Ptr = &gSaveBlock2;
+    gPokemonStoragePtr = &gPokemonStorage;
+    SetBagPocketsPointers();
 }
 
 void LoadStdWindowGfx(u8 windowId, u16 destOffset, u8 palOffset)
@@ -539,9 +544,17 @@ bool8 IsWirelessAdapterConnected(void)
 
 bool8 FlagGet(u16 idx)
 {
+    u8 *ptr;
+
     gHostTitleStubFlagGetCalls++;
     if (idx >= FLAG_BADGE01_GET && idx < FLAG_BADGE01_GET + 8)
-        return (gHostTitleStubFlagGetBadgeMask & (1u << (idx - FLAG_BADGE01_GET))) != 0;
+    {
+        if ((gHostTitleStubFlagGetBadgeMask & (1u << (idx - FLAG_BADGE01_GET))) != 0)
+            return TRUE;
+    }
+    ptr = GetFlagPointer(idx);
+    if (ptr != NULL && (*ptr & (1 << (idx & 7))) != 0)
+        return TRUE;
     if (idx == FLAG_SYS_POKEDEX_GET)
         return gHostTitleStubNationalPokedexEnabled || gHostTitleStubKantoPokedexCount != 0 || gHostTitleStubNationalPokedexCount != 0;
     return FALSE;
@@ -549,7 +562,12 @@ bool8 FlagGet(u16 idx)
 
 bool32 IsNationalPokedexEnabled(void)
 {
-    return gHostTitleStubNationalPokedexEnabled;
+    if (gHostTitleStubNationalPokedexEnabled)
+        return TRUE;
+    return gSaveBlock2Ptr != NULL
+        && gSaveBlock2Ptr->pokedex.unused == 0xDA
+        && VarGet(VAR_0x403C) == 0x0302
+        && FlagGet(FLAG_0x838);
 }
 
 u16 GetNationalPokedexCount(u8 caseId)
