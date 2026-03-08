@@ -6,6 +6,7 @@
 #include "decompress.h"
 #include "dma3.h"
 #include "berry_fix_program.h"
+#include "characters.h"
 #include "constants/songs.h"
 #include "gba/macro.h"
 #include "gpu_regs.h"
@@ -26,6 +27,7 @@
 #include "main_menu.h"
 #include "malloc.h"
 #include "m4a.h"
+#include "overworld.h"
 #include "palette.h"
 #include "quest_log.h"
 #include "random.h"
@@ -48,12 +50,17 @@ extern u16 gKeyRepeatContinueDelay;
 extern const u8 gText_Controls[];
 extern const u8 gText_ABUTTONNext[];
 extern const u8 gText_ABUTTONNext_BBUTTONBack[];
+extern const u8 gOakSpeech_Text_AskPlayerGender[];
 extern const u8 gOakSpeech_Text_IsInhabitedFarAndWide[];
+extern const u8 gOakSpeech_Text_IStudyPokemon[];
+extern const u8 gOakSpeech_Text_TellMeALittleAboutYourself[];
 extern const u8 gOakSpeech_Text_WelcomeToTheWorld[];
 extern const u8 gOakSpeech_Text_ThisWorld[];
+extern const u8 gOakSpeech_Text_YourNameWhatIsIt[];
 
 void EnableVCountIntrAtLine150(void);
 void InitIntrHandlers(void);
+static bool32 WindowMatches(u8 windowId, u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height);
 
 static int sHBlankCallbackCalls;
 static int sSerialCallbackCalls;
