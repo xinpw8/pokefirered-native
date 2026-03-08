@@ -55,6 +55,7 @@ static const u16 sOakSpeechTextWindowPalette[16] = {
     RGB_WHITE, RGB_WHITE, RGB_WHITE, RGB_WHITE,
     RGB_WHITE, RGB_WHITE, RGB_WHITE, RGB_BLACK,
 };
+static const u8 sHostBlankMonPaletteLz77[] = {0x00, 0x20, 0x00, 0x00};
 
 #define DEFINE_TEXT(name, value) const u8 name[] = value
 
@@ -137,7 +138,12 @@ const struct OamData gOamData_AffineOff_ObjBlend_32x32 = {0};
 const struct OamData gOamData_AffineOff_ObjNormal_32x32 = {0};
 const struct OamData gOamData_AffineOff_ObjNormal_32x16 = {0};
 const struct OamData gOamData_AffineOff_ObjNormal_16x8 = {0};
-const struct CompressedSpritePalette gMonPaletteTable[NUM_SPECIES] = {0};
+const struct CompressedSpritePalette gMonPaletteTable[NUM_SPECIES] = {
+    [0 ... NUM_SPECIES - 1] = {
+        .data = sHostBlankMonPaletteLz77,
+        .tag = 0,
+    },
+};
 struct SpriteTemplate gMultiuseSpriteTemplate = {0};
 
 static u8 *CopyHostString(u8 *dest, const u8 *src)
