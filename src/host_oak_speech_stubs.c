@@ -4,12 +4,16 @@
 
 #include "decompress.h"
 #include "main.h"
+#include "malloc.h"
 #include "menu.h"
 #include "naming_screen.h"
 #include "new_menu_helpers.h"
 #include "palette.h"
 #include "pokeball.h"
 #include "pokemon.h"
+#include "data.h"
+#include "math_util.h"
+#include "overworld.h"
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
@@ -68,6 +72,7 @@ DEFINE_TEXT(gOakSpeech_Text_WhatWasHisName, "Erm, what was his name?");
 DEFINE_TEXT(gOakSpeech_Text_ConfirmRivalName, "Was it {RIVAL}? ");
 DEFINE_TEXT(gOakSpeech_Text_RememberRivalsName, "That's right! I remember now! His name is {RIVAL}! ");
 DEFINE_TEXT(gOakSpeech_Text_LetsGo, "Your very own Pokemon legend is about to unfold!");
+DEFINE_TEXT(gOtherText_NewName, "NEW NAME");
 
 DEFINE_TEXT(gNameChoice_Red, "RED");
 DEFINE_TEXT(gNameChoice_Fire, "FIRE");
@@ -115,6 +120,8 @@ const struct OamData gOamData_AffineOff_ObjBlend_32x32 = {0};
 const struct OamData gOamData_AffineOff_ObjNormal_32x32 = {0};
 const struct OamData gOamData_AffineOff_ObjNormal_32x16 = {0};
 const struct OamData gOamData_AffineOff_ObjNormal_16x8 = {0};
+const struct CompressedSpritePalette gMonPaletteTable[NUM_SPECIES] = {0};
+struct SpriteTemplate gMultiuseSpriteTemplate = {0};
 
 static u8 *CopyHostString(u8 *dest, const u8 *src)
 {
@@ -259,6 +266,25 @@ void DrawDialogueFrame(u8 windowId, bool8 transfer)
     (void)transfer;
 }
 
+void ClearStdWindowAndFrameToTransparent(u8 windowId, bool8 copyToVram)
+{
+    (void)windowId;
+    (void)copyToVram;
+}
+
+u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16))
+{
+    gHostTitleStubLastPrintedText = str;
+    gHostTitleStubTextPrinterActive = FALSE;
+    (void)windowId;
+    (void)fontId;
+    (void)x;
+    (void)y;
+    (void)speed;
+    (void)callback;
+    return 0;
+}
+
 u16 AddTextPrinterParameterized2(u8 windowId, u8 fontId, const u8 *str, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16), u8 fgColor, u8 bgColor, u8 shadowColor)
 {
     gHostTitleStubLastPrintedText = str;
@@ -401,10 +427,19 @@ void FreeMonSpritesGfx(void)
 {
 }
 
-void DecompressPicFromTable(const struct CompressedSpriteSheet *src, void *buffer, s32 species)
+void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition)
 {
-    (void)src;
-    (void)species;
-    if (buffer != NULL)
-        memset(buffer, 0, 0x800);
+    (void)speciesTag;
+    (void)battlerPosition;
+}
+
+s16 Q_8_8_inv(s16 y)
+{
+    if (y == 0)
+        return 0;
+    return (s16)((256 * 256) / y);
+}
+
+void CB2_NewGame(void)
+{
 }
