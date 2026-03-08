@@ -36,6 +36,7 @@
 #include "host_crt0.h"
 #include "host_intro_stubs.h"
 #include "host_new_game_stubs.h"
+#include "host_oak_speech_stubs.h"
 #include "host_title_screen_stubs.h"
 
 /* ── Interrupt handlers ────────────────────────────────────── */
@@ -190,6 +191,7 @@ int main(int argc, char *argv[])
 
     /* Save block pointers (required by copyright screen) */
     HostNewGameStubReset();
+    HostOakSpeechStubReset();
 
     gMain.callback1 = NULL;
     gMain.callback2 = NULL;

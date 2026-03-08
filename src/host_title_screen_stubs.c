@@ -114,16 +114,36 @@ static void HostTitleScreenStubResetMenuState(void);
 static void HostTitleScreenStubRedrawMenuCursor(void);
 static void HostTitleScreenStubMoveMenuCursor(s8 delta, bool8 wrapAround);
 
-const u16 gGraphics_TitleScreen_GameTitleLogoPals[13 * 16] = {0};
-const u8 gGraphics_TitleScreen_GameTitleLogoTiles[1] = {0};
-const u8 gGraphics_TitleScreen_GameTitleLogoMap[1] = {0};
-const u16 gGraphics_TitleScreen_BoxArtMonPals[16] = {0};
-const u8 gGraphics_TitleScreen_BoxArtMonTiles[1] = {0};
-const u8 gGraphics_TitleScreen_BoxArtMonMap[1] = {0};
-u16 gGraphics_TitleScreen_BackgroundPals[16] = {0};
-const u8 gGraphics_TitleScreen_CopyrightPressStartTiles[1] = {0};
-const u8 gGraphics_TitleScreen_CopyrightPressStartMap[1] = {0};
-const u16 gTitleScreen_Slash_Pal[16] = {0};
+const u16 gGraphics_TitleScreen_GameTitleLogoPals[] = {
+#include "title_screen/firered/game_title_logo.gbapal.u16.inc"
+};
+const u8 gGraphics_TitleScreen_GameTitleLogoTiles[] = {
+#include "title_screen/firered/game_title_logo.8bpp.lz.u8.inc"
+};
+const u8 gGraphics_TitleScreen_GameTitleLogoMap[] = {
+#include "title_screen/firered/game_title_logo.bin.lz.u8.inc"
+};
+const u16 gGraphics_TitleScreen_BoxArtMonPals[] = {
+#include "title_screen/firered/box_art_mon.gbapal.u16.inc"
+};
+const u8 gGraphics_TitleScreen_BoxArtMonTiles[] = {
+#include "title_screen/firered/box_art_mon.4bpp.lz.u8.inc"
+};
+const u8 gGraphics_TitleScreen_BoxArtMonMap[] = {
+#include "title_screen/firered/box_art_mon.bin.lz.u8.inc"
+};
+u16 gGraphics_TitleScreen_BackgroundPals[] = {
+#include "title_screen/firered/background.gbapal.u16.inc"
+};
+const u8 gGraphics_TitleScreen_CopyrightPressStartTiles[] = {
+#include "title_screen/copyright_press_start.4bpp.lz.u8.inc"
+};
+const u8 gGraphics_TitleScreen_CopyrightPressStartMap[] = {
+#include "title_screen/copyright_press_start.bin.lz.u8.inc"
+};
+const u16 gTitleScreen_Slash_Pal[] = {
+#include "title_screen/firered/slash.gbapal.u16.inc"
+};
 const u32 gTitleScreen_BlankSprite_Tiles[1] = {0};
 const u8 gBerryFixGameboy_Gfx[] = {0x10, 0x04, 0x00, 0x00, 0x00, 'G', 'B', '0', '0'};
 const u8 gBerryFixGameboy_Tilemap[] = {0x10, 0x04, 0x00, 0x00, 0x00, 'T', 'M', '0', '0'};

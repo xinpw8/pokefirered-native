@@ -136,6 +136,7 @@ target_compile_options(pfr_upstream_core PRIVATE
     -Wno-int-to-pointer-cast
     -Wno-pointer-to-int-cast
     "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
+    "-iquote${PFR_INC_DIR}"
     "-iquote${PFR_GEN_HEADERS_DIR}"
     "-iquote${POKEFIRERED_SOURCE_DIR}/include"
 )
