@@ -78,8 +78,6 @@ static void DumpFramePPM(const u32 *fb)
 
 #ifdef HOST_DISPLAY_SDL2
 
-#include <SDL2/SDL.h>
-
 static SDL_Window *sWindow = NULL;
 static SDL_Renderer *sSDLRenderer = NULL;
 static SDL_Texture *sTexture = NULL;
