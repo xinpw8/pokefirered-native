@@ -15,3 +15,13 @@
 [001925] Oak controls guide page 1 reached
 [002047] framebuffer nearly uniform for 120 frames, color=0xFF000000 callback2=(unknown)
 [002258] input newKeys=0x0080 heldKeys=0x0080 callback2=(unknown)
+[002313] input newKeys=0x0040 heldKeys=0x0040 callback2=(unknown)
+[002334] input newKeys=0x0040 heldKeys=0x0040 callback2=(unknown)
+[002437] input newKeys=0x0200 heldKeys=0x0200 callback2=(unknown)
+[002471] input newKeys=0x0001 heldKeys=0x0001 callback2=(unknown)
+[002491] Oak controls guide page 2 reached
+[002496] input newKeys=0x0002 heldKeys=0x0002 callback2=(unknown)
+[002573] input newKeys=0x0040 heldKeys=0x0040 callback2=(unknown)
+[002581] input newKeys=0x0080 heldKeys=0x0080 callback2=(unknown)
+[002605] input newKeys=0x0100 heldKeys=0x0100 callback2=(unknown)
+[002618] input newKeys=0x0008 heldKeys=0x0008 callback2=(unknown)
