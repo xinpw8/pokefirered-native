@@ -679,7 +679,7 @@ static const struct AssetRule sIntroAssets[] = {
     { "intro/game_freak/presents.png", "intro/game_freak/presents.4bpp", PNG4, 0 },
     /* Scene 1 */
     { "intro/scene_1/bg.png",         "intro/scene_1/bg.4bpp", PNG4, 0 },
-    { "intro/scene_1/bg.pal",         "intro/scene_1/bg.gbapal", PAL, 0 },
+    { "intro/scene_1/bg.png",         "intro/scene_1/bg.gbapal", PAL_FROM_PNG, 0 },
     { "intro/scene_1/bg.bin",         "intro/scene_1/bg.bin", BIN_COPY, 0 },
     { "intro/scene_1/grass.png",      "intro/scene_1/grass.4bpp", PNG4, 0 },
     { "intro/scene_1/grass.pal",      "intro/scene_1/grass.gbapal", PAL, 0 },
