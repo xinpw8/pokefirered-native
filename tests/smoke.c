@@ -47,6 +47,7 @@ extern u16 gKeyRepeatContinueDelay;
 extern const u8 gText_Controls[];
 extern const u8 gText_ABUTTONNext[];
 extern const u8 gText_ABUTTONNext_BBUTTONBack[];
+extern const u8 gOakSpeech_Text_IsInhabitedFarAndWide[];
 extern const u8 gOakSpeech_Text_WelcomeToTheWorld[];
 extern const u8 gOakSpeech_Text_ThisWorld[];
 
@@ -722,6 +723,16 @@ static int RunUntilCounterIncrements(const u32 *counter, u32 initialCount, int m
     return Expect(*counter > initialCount, message);
 }
 
+static int RunUntilPlaceholderSourceEquals(const u8 *expected, int maxFrames, const char *message)
+{
+    int i;
+
+    for (i = 0; i < maxFrames && gHostOakSpeechLastExpandedPlaceholderSource != expected; i++)
+        RunMainCallbackFrame();
+
+    return Expect(gHostOakSpeechLastExpandedPlaceholderSource == expected, message);
+}
+
 static void ResetBootCallbackHarness(void)
 {
     HostMemoryReset();
@@ -1268,6 +1279,26 @@ static int TestOakSpeechWelcomeMessages(void)
     return rc;
 }
 
+static int TestOakSpeechNidoranReleaseLine(void)
+{
+    int rc = 0;
+    u32 cryCalls;
+
+    rc |= TestOakSpeechWelcomeMessages();
+
+    cryCalls = gHostTitleStubPlayCryNormalCalls;
+    rc |= RunUntilPlaceholderSourceEquals(gOakSpeech_Text_IsInhabitedFarAndWide, 160,
+                                          "Oak Speech did not reach the Nidoran release line");
+    rc |= Expect(gHostTitleStubPlayCryNormalCalls == cryCalls + 1,
+                 "Oak Speech did not play exactly one Nidoran cry when the release line appeared");
+    rc |= Expect(gHostTitleStubLastPlayCrySpecies == SPECIES_NIDORAN_F,
+                 "Oak Speech played the wrong cry for the Nidoran release line");
+    rc |= Expect(gHostOakSpeechDoNamingScreenCalls == 0,
+                 "Oak Speech advanced too far before smoke observed the Nidoran release line");
+
+    return rc;
+}
+
 static int TestTitleScreenSaveClearHandoff(void)
 {
     int rc = 0;
@@ -1414,6 +1445,7 @@ int main(void)
     rc |= TestOakSpeechPikachuIntroPages();
     rc |= TestOakSpeechPikachuIntroExitToOakSpeechInit();
     rc |= TestOakSpeechWelcomeMessages();
+    rc |= TestOakSpeechNidoranReleaseLine();
     rc |= TestTitleScreenSaveClearHandoff();
     rc |= TestTitleScreenBerryFixHandoff();
 
