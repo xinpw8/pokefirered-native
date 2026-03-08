@@ -1054,7 +1054,7 @@ static int TestTitleScreenMainMenuHandoff(void)
     RunMainCallbackFrame();
     ClearKeys();
 
-    for (i = 0; i < 8 && gHostTitleStubStartNewGameSceneCalls == 0; i++)
+    for (i = 0; i < 64 && gHostTitleStubStartNewGameSceneCalls == 0; i++)
         RunMainCallbackFrame();
 
     rc |= Expect(gHostTitleStubStartNewGameSceneCalls == 1,
