@@ -985,6 +985,8 @@ static int TestTitleScreenMainMenuHandoff(void)
     int rc = 0;
     int i;
 
+    rc |= AdvanceToTitleRunState();
+
     gHostIntroStubLoadGameSaveResult = SAVE_STATUS_OK;
     gSaveBlock2.playerGender = MALE;
     memcpy(gSaveBlock2.playerName, "ASH", 4);
@@ -993,8 +995,6 @@ static int TestTitleScreenMainMenuHandoff(void)
     gSaveBlock2.optionsWindowFrameType = 0;
     gHostTitleStubKantoPokedexCount = 12;
     gHostTitleStubFlagGetBadgeMask = 0x03;
-
-    rc |= AdvanceToTitleRunState();
 
     SetKeys(A_BUTTON, A_BUTTON);
     RunMainCallbackFrame();
