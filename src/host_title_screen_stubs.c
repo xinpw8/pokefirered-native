@@ -440,9 +440,9 @@ u8 *ConvertIntToDecimalStringN(u8 *str, s32 value, enum StringConvertMode mode, 
 
 u8 *StringAppend(u8 *dest, const u8 *src)
 {
-    while (*dest != EOS)
+    while (*dest != EOS && *dest != 0)
         dest++;
-    while (*src != EOS)
+    while (*src != EOS && *src != 0)
         *dest++ = *src++;
     *dest = EOS;
     return dest;
