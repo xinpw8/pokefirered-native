@@ -102,6 +102,30 @@ static int CountWindowsWithTileData(void)
     return count;
 }
 
+static int FindWindowIdMatching(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height)
+{
+    int i;
+
+    for (i = 0; i < WINDOWS_MAX; i++)
+    {
+        if (WindowMatches(i, bg, tilemapLeft, tilemapTop, width, height))
+            return i;
+    }
+
+    return -1;
+}
+
+static bool32 NameBufferEquals(const u8 *name, const char *expected)
+{
+    while (*expected != '\0')
+    {
+        if (*name++ != (u8)*expected++)
+            return FALSE;
+    }
+
+    return *name == EOS || *name == 0;
+}
+
 static size_t GetWindowTileDataSize(u8 windowId)
 {
     if (windowId >= WINDOWS_MAX || gWindows[windowId].tileData == NULL)
@@ -844,6 +868,16 @@ static int RunUntilPlaceholderSourceEquals(const u8 *expected, int maxFrames, co
     return Expect(gHostOakSpeechLastExpandedPlaceholderSource == expected, message);
 }
 
+static int RunUntilCallback2(MainCallback expected, int maxFrames, const char *message)
+{
+    int i;
+
+    for (i = 0; i < maxFrames && gMain.callback2 != expected; i++)
+        RunMainCallbackFrame();
+
+    return Expect(gMain.callback2 == expected, message);
+}
+
 static void ResetBootCallbackHarness(void)
 {
     HostMemoryReset();
@@ -1410,6 +1444,147 @@ static int TestOakSpeechNidoranReleaseLine(void)
     return rc;
 }
 
+static int TestOakSpeechTellMeALittleAboutYourself(void)
+{
+    int rc = 0;
+
+    rc |= TestOakSpeechNidoranReleaseLine();
+
+    rc |= RunUntilPlaceholderSourceEquals(gOakSpeech_Text_IStudyPokemon, 160,
+                                          "Oak Speech did not reach the I study Pokemon line");
+    rc |= RunUntilPlaceholderSourceEquals(gOakSpeech_Text_TellMeALittleAboutYourself, 256,
+                                          "Oak Speech did not reach the tell-me-about-yourself prompt");
+    rc |= Expect(gHostOakSpeechDoNamingScreenCalls == 0,
+                 "Oak Speech reached naming before smoke observed the tell-me-about-yourself prompt");
+
+    return rc;
+}
+
+static int TestOakSpeechGenderSelectionFlow(void)
+{
+    int rc = 0;
+    int i;
+
+    rc |= TestOakSpeechTellMeALittleAboutYourself();
+
+    memset(gSaveBlock2.playerName, 0, sizeof(gSaveBlock2.playerName));
+    memset(gSaveBlock1.rivalName, 0, sizeof(gSaveBlock1.rivalName));
+
+    rc |= RunUntilPlaceholderSourceEquals(gOakSpeech_Text_AskPlayerGender, 256,
+                                          "Oak Speech did not reach the player gender question");
+
+    for (i = 0; i < 128 && FindWindowIdMatching(0, 18, 9, 9, 4) < 0; i++)
+        RunMainCallbackFrame();
+
+    rc |= Expect(FindWindowIdMatching(0, 18, 9, 9, 4) >= 0,
+                 "Oak Speech did not create the boy/girl menu window");
+    rc |= Expect(WindowTileDataHasNonZero((u8)FindWindowIdMatching(0, 18, 9, 9, 4)),
+                 "Oak Speech boy/girl menu did not draw visible menu pixels");
+
+    SetKeys(DPAD_DOWN, DPAD_DOWN);
+    RunMainCallbackFrame();
+    ClearKeys();
+    RunMainCallbackFrame();
+
+    SetKeys(A_BUTTON, A_BUTTON);
+    RunMainCallbackFrame();
+    ClearKeys();
+
+    for (i = 0; i < 128 && FindWindowIdMatching(0, 18, 9, 9, 4) >= 0; i++)
+        RunMainCallbackFrame();
+
+    rc |= Expect(gSaveBlock2.playerGender == FEMALE,
+                 "Oak Speech gender menu did not apply the girl selection");
+    rc |= Expect(FindWindowIdMatching(0, 18, 9, 9, 4) < 0,
+                 "Oak Speech gender menu window was not cleared after selection");
+
+    return rc;
+}
+
+static int TestOakSpeechPlayerNamingStub(void)
+{
+    int rc = 0;
+    u32 namingCalls;
+    u32 yesNoCalls;
+
+    rc |= TestOakSpeechGenderSelectionFlow();
+
+    rc |= RunUntilPlaceholderSourceEquals(gOakSpeech_Text_YourNameWhatIsIt, 256,
+                                          "Oak Speech did not reach the player name question");
+
+    namingCalls = gHostOakSpeechDoNamingScreenCalls;
+    rc |= RunUntilCounterIncrements(&gHostOakSpeechDoNamingScreenCalls, namingCalls, 256,
+                                    "Oak Speech did not trigger the player naming screen stub");
+    rc |= Expect(gHostOakSpeechDoNamingScreenCalls == namingCalls + 1,
+                 "Oak Speech player naming screen stub count mismatch");
+    rc |= Expect(NameBufferEquals(gSaveBlock2.playerName, "ASH"),
+                 "Oak Speech player naming stub did not populate ASH");
+
+    yesNoCalls = gHostTitleStubCreateYesNoMenuCalls;
+    rc |= RunUntilCounterIncrements(&gHostTitleStubCreateYesNoMenuCalls, yesNoCalls, 512,
+                                    "Oak Speech did not return from player naming into confirmation");
+    rc |= Expect(FindWindowIdMatching(0, 2, 2, 6, 4) >= 0,
+                 "Oak Speech player confirmation did not create a yes/no window");
+
+    SetKeys(A_BUTTON, A_BUTTON);
+    RunMainCallbackFrame();
+    ClearKeys();
+    RunMainCallbackFrame();
+
+    rc |= Expect(gHostTitleStubDestroyYesNoMenuCalls >= 1,
+                 "Oak Speech player confirmation did not accept the default YES choice");
+
+    return rc;
+}
+
+static int TestOakSpeechToCB2NewGameHandoff(void)
+{
+    int rc = 0;
+    int i;
+    u32 namingCalls;
+    u32 yesNoCalls;
+
+    rc |= TestOakSpeechPlayerNamingStub();
+
+    for (i = 0; i < 512 && FindWindowIdMatching(0, 2, 2, 12, 10) < 0; i++)
+        RunMainCallbackFrame();
+
+    rc |= Expect(FindWindowIdMatching(0, 2, 2, 12, 10) >= 0,
+                 "Oak Speech did not create the rival naming options window");
+
+    SetKeys(A_BUTTON, A_BUTTON);
+    RunMainCallbackFrame();
+    ClearKeys();
+
+    namingCalls = gHostOakSpeechDoNamingScreenCalls;
+    rc |= RunUntilCounterIncrements(&gHostOakSpeechDoNamingScreenCalls, namingCalls, 256,
+                                    "Oak Speech did not trigger the rival naming screen stub");
+    rc |= Expect(NameBufferEquals(gSaveBlock1.rivalName, "GARY"),
+                 "Oak Speech rival naming stub did not populate GARY");
+
+    yesNoCalls = gHostTitleStubCreateYesNoMenuCalls;
+    rc |= RunUntilCounterIncrements(&gHostTitleStubCreateYesNoMenuCalls, yesNoCalls, 512,
+                                    "Oak Speech did not return from rival naming into confirmation");
+    rc |= Expect(FindWindowIdMatching(0, 2, 2, 6, 4) >= 0,
+                 "Oak Speech rival confirmation did not create a yes/no window");
+
+    SetKeys(A_BUTTON, A_BUTTON);
+    RunMainCallbackFrame();
+    ClearKeys();
+    RunMainCallbackFrame();
+
+    rc |= RunUntilCallback2(CB2_NewGame, 2048,
+                            "Oak Speech did not hand off to CB2_NewGame after the rival flow");
+    rc |= Expect(CountWindowsWithTileData() == 0,
+                 "Oak Speech did not free all window buffers before the CB2_NewGame handoff");
+
+    RunMainCallbackFrame();
+    rc |= Expect(gHostOakSpeechCB2NewGameCalls == 1,
+                 "CB2_NewGame was not called after the Oak Speech handoff");
+
+    return rc;
+}
+
 static int TestTitleScreenSaveClearHandoff(void)
 {
     int rc = 0;
@@ -1557,6 +1732,10 @@ int main(void)
     rc |= TestOakSpeechPikachuIntroExitToOakSpeechInit();
     rc |= TestOakSpeechWelcomeMessages();
     rc |= TestOakSpeechNidoranReleaseLine();
+    rc |= TestOakSpeechTellMeALittleAboutYourself();
+    rc |= TestOakSpeechGenderSelectionFlow();
+    rc |= TestOakSpeechPlayerNamingStub();
+    rc |= TestOakSpeechToCB2NewGameHandoff();
     rc |= TestTitleScreenSaveClearHandoff();
     rc |= TestTitleScreenBerryFixHandoff();
 

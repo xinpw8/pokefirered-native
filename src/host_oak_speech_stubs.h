@@ -8,6 +8,7 @@ extern u32 gHostOakSpeechInitStandardTextBoxWindowsCalls;
 extern u32 gHostOakSpeechCreateTopBarWindowLoadPaletteCalls;
 extern u32 gHostOakSpeechPlayBGMCalls;
 extern u32 gHostOakSpeechDoNamingScreenCalls;
+extern u32 gHostOakSpeechCB2NewGameCalls;
 extern u32 gHostOakSpeechControlsGuidePage1Loads;
 extern u32 gHostOakSpeechControlsGuidePage2Loads;
 extern u32 gHostOakSpeechControlsGuidePage3Loads;

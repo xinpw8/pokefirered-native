@@ -8,6 +8,7 @@
 #include "graphics.h"
 #include "help_system.h"
 #include "load_save.h"
+#include "main.h"
 #include "main_menu.h"
 #include "menu.h"
 #include "multiboot.h"
@@ -18,6 +19,7 @@
 #include "sound.h"
 #include "string_util.h"
 #include "text_window_graphics.h"
+#include "window.h"
 
 #include "host_oak_speech_stubs.h"
 #include "host_title_screen_stubs.h"
@@ -86,6 +88,28 @@ static const struct TextWindowGraphics sHostTitleStubUserWindowGraphics = {
     .tiles = sHostTitleStubUserFrameTiles,
     .palette = sHostTitleStubUserFramePalette,
 };
+struct HostTitleStubMenuState
+{
+    bool8 active;
+    u8 windowId;
+    u8 left;
+    u8 top;
+    u8 cursorHeight;
+    u8 numChoices;
+    u8 cursorPos;
+};
+
+#define HOST_TITLE_NO_MENU_WINDOW 0xFF
+
+static struct HostTitleStubMenuState sHostTitleStubMenu = {
+    .active = FALSE,
+    .windowId = HOST_TITLE_NO_MENU_WINDOW,
+};
+static u8 sHostTitleStubYesNoWindowId = HOST_TITLE_NO_MENU_WINDOW;
+
+static void HostTitleScreenStubResetMenuState(void);
+static void HostTitleScreenStubRedrawMenuCursor(void);
+static void HostTitleScreenStubMoveMenuCursor(s8 delta, bool8 wrapAround);
 
 const u16 gGraphics_TitleScreen_GameTitleLogoPals[13 * 16] = {0};
 const u8 gGraphics_TitleScreen_GameTitleLogoTiles[1] = {0};
@@ -201,11 +225,141 @@ void HostTitleScreenStubReset(void)
     gHostTitleStubFlagGetBadgeMask = 0;
     gHostTitleStubTextPrinterActive = FALSE;
     sHostTitleStubMultiBootComplete = FALSE;
+    HostTitleScreenStubResetMenuState();
 }
 
 void HostTitleScreenStubSetMenuProcessInputResult(s8 result)
 {
     gHostTitleStubMenuProcessInputResult = result;
+}
+
+static void HostTitleScreenStubResetMenuState(void)
+{
+    sHostTitleStubMenu.active = FALSE;
+    sHostTitleStubMenu.windowId = HOST_TITLE_NO_MENU_WINDOW;
+    sHostTitleStubMenu.left = 0;
+    sHostTitleStubMenu.top = 0;
+    sHostTitleStubMenu.cursorHeight = 0;
+    sHostTitleStubMenu.numChoices = 0;
+    sHostTitleStubMenu.cursorPos = 0;
+    sHostTitleStubYesNoWindowId = HOST_TITLE_NO_MENU_WINDOW;
+}
+
+static void HostTitleScreenStubRedrawMenuCursor(void)
+{
+    u8 i;
+    u8 windowId = sHostTitleStubMenu.windowId;
+    u16 windowWidthPixels;
+    u16 windowHeightPixels;
+
+    if (!sHostTitleStubMenu.active || windowId >= WINDOWS_MAX || gWindows[windowId].tileData == NULL)
+        return;
+
+    windowWidthPixels = gWindows[windowId].window.width * 8;
+    windowHeightPixels = gWindows[windowId].window.height * 8;
+
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
+    for (i = 0; i < sHostTitleStubMenu.numChoices; i++)
+    {
+        u16 y = sHostTitleStubMenu.top + (u16)i * sHostTitleStubMenu.cursorHeight;
+        u16 height = sHostTitleStubMenu.cursorHeight;
+        u8 fillValue = (i == sHostTitleStubMenu.cursorPos) ? PIXEL_FILL(3) : PIXEL_FILL(1);
+
+        if (y >= windowHeightPixels)
+            break;
+        if (y + height > windowHeightPixels)
+            height = windowHeightPixels - y;
+        FillWindowPixelRect(windowId, fillValue, 0, y, windowWidthPixels, height);
+    }
+
+    PutWindowTilemap(windowId);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
+}
+
+u8 HostTitleScreenStubInitMenuCursor(u8 windowId, u8 left, u8 top, u8 cursorHeight, u8 numChoices, u8 initialCursorPos)
+{
+    if (cursorHeight < 8)
+        cursorHeight = 8;
+
+    sHostTitleStubMenu.active = TRUE;
+    sHostTitleStubMenu.windowId = windowId;
+    sHostTitleStubMenu.left = left;
+    sHostTitleStubMenu.top = top;
+    sHostTitleStubMenu.cursorHeight = cursorHeight;
+    sHostTitleStubMenu.numChoices = numChoices;
+    sHostTitleStubMenu.cursorPos = (numChoices != 0 && initialCursorPos < numChoices) ? initialCursorPos : 0;
+    HostTitleScreenStubRedrawMenuCursor();
+    return sHostTitleStubMenu.cursorPos;
+}
+
+static void HostTitleScreenStubMoveMenuCursor(s8 delta, bool8 wrapAround)
+{
+    s16 newPos;
+
+    if (!sHostTitleStubMenu.active || sHostTitleStubMenu.numChoices == 0)
+        return;
+
+    newPos = (s16)sHostTitleStubMenu.cursorPos + delta;
+    if (wrapAround)
+    {
+        if (newPos < 0)
+            newPos = sHostTitleStubMenu.numChoices - 1;
+        else if (newPos >= sHostTitleStubMenu.numChoices)
+            newPos = 0;
+    }
+    else
+    {
+        if (newPos < 0)
+            newPos = 0;
+        else if (newPos >= sHostTitleStubMenu.numChoices)
+            newPos = sHostTitleStubMenu.numChoices - 1;
+    }
+
+    if (newPos != sHostTitleStubMenu.cursorPos)
+    {
+        sHostTitleStubMenu.cursorPos = (u8)newPos;
+        HostTitleScreenStubRedrawMenuCursor();
+    }
+}
+
+s8 HostTitleScreenStubProcessMenuInput(bool8 wrapAround)
+{
+    s8 result = gHostTitleStubMenuProcessInputResult;
+
+    if (result != MENU_NOTHING_CHOSEN)
+    {
+        gHostTitleStubMenuProcessInputResult = MENU_NOTHING_CHOSEN;
+        return result;
+    }
+    if (!sHostTitleStubMenu.active)
+        return MENU_NOTHING_CHOSEN;
+    if (gMain.newKeys & A_BUTTON)
+        return sHostTitleStubMenu.cursorPos;
+    if (gMain.newKeys & B_BUTTON)
+        return MENU_B_PRESSED;
+    if (gMain.newKeys & DPAD_UP)
+    {
+        HostTitleScreenStubMoveMenuCursor(-1, wrapAround);
+        return MENU_NOTHING_CHOSEN;
+    }
+    if (gMain.newKeys & DPAD_DOWN)
+    {
+        HostTitleScreenStubMoveMenuCursor(1, wrapAround);
+        return MENU_NOTHING_CHOSEN;
+    }
+
+    return MENU_NOTHING_CHOSEN;
+}
+
+void HostTitleScreenStubForgetMenuWindow(u8 windowId)
+{
+    if (sHostTitleStubMenu.windowId == windowId)
+    {
+        sHostTitleStubMenu.active = FALSE;
+        sHostTitleStubMenu.windowId = HOST_TITLE_NO_MENU_WINDOW;
+    }
+    if (sHostTitleStubYesNoWindowId == windowId)
+        sHostTitleStubYesNoWindowId = HOST_TITLE_NO_MENU_WINDOW;
 }
 
 void SetHelpContext(u8 contextId)
@@ -272,8 +426,13 @@ void LoadStdWindowGfx(u8 windowId, u16 destOffset, u8 palOffset)
 void DrawStdFrameWithCustomTileAndPalette(u8 windowId, bool8 copyToVram, u16 baseTileNum, u8 paletteNum)
 {
     gHostTitleStubDrawStdFrameCalls++;
-    (void)windowId;
-    (void)copyToVram;
+    if (windowId < WINDOWS_MAX && gWindows[windowId].tileData != NULL)
+    {
+        FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
+        PutWindowTilemap(windowId);
+        if (copyToVram)
+            CopyWindowToVram(windowId, COPYWIN_FULL);
+    }
     (void)baseTileNum;
     (void)paletteNum;
 }
@@ -310,28 +469,41 @@ void AddTextPrinterParameterized3(u8 windowId, u8 fontId, u8 x, u8 y, const u8 *
 
 void CreateYesNoMenu(const struct WindowTemplate *window, u8 fontId, u8 left, u8 top, u16 baseTileNum, u8 paletteNum, u8 initialCursorPos)
 {
+    u8 windowId;
+
     gHostTitleStubCreateYesNoMenuCalls++;
-    (void)window;
+    windowId = AddWindow(window);
+    sHostTitleStubYesNoWindowId = windowId;
+    if (windowId == HOST_TITLE_NO_MENU_WINDOW)
+        return;
+
+    DrawStdFrameWithCustomTileAndPalette(windowId, TRUE, baseTileNum, paletteNum);
+    HostTitleScreenStubInitMenuCursor(windowId, left, top, 16, 2, initialCursorPos);
     (void)fontId;
-    (void)left;
-    (void)top;
-    (void)baseTileNum;
-    (void)paletteNum;
-    (void)initialCursorPos;
 }
 
 s8 Menu_ProcessInputNoWrapClearOnChoose(void)
 {
-    s8 result = gHostTitleStubMenuProcessInputResult;
+    s8 result;
 
     gHostTitleStubMenuProcessInputCalls++;
-    gHostTitleStubMenuProcessInputResult = MENU_NOTHING_CHOSEN;
+    result = HostTitleScreenStubProcessMenuInput(FALSE);
+    if (result != MENU_NOTHING_CHOSEN)
+        DestroyYesNoMenu();
     return result;
 }
 
 void DestroyYesNoMenu(void)
 {
     gHostTitleStubDestroyYesNoMenuCalls++;
+    if (sHostTitleStubYesNoWindowId == HOST_TITLE_NO_MENU_WINDOW)
+        return;
+    if (sHostTitleStubYesNoWindowId < WINDOWS_MAX && gWindows[sHostTitleStubYesNoWindowId].tileData != NULL)
+    {
+        ClearStdWindowAndFrameToTransparent(sHostTitleStubYesNoWindowId, TRUE);
+        RemoveWindow(sHostTitleStubYesNoWindowId);
+    }
+    HostTitleScreenStubForgetMenuWindow(sHostTitleStubYesNoWindowId);
 }
 
 void DeactivateAllTextPrinters(void)

@@ -59,5 +59,8 @@ extern s8 gHostTitleStubMenuProcessInputResult;
 
 void HostTitleScreenStubReset(void);
 void HostTitleScreenStubSetMenuProcessInputResult(s8 result);
+u8 HostTitleScreenStubInitMenuCursor(u8 windowId, u8 left, u8 top, u8 cursorHeight, u8 numChoices, u8 initialCursorPos);
+s8 HostTitleScreenStubProcessMenuInput(bool8 wrapAround);
+void HostTitleScreenStubForgetMenuWindow(u8 windowId);
 
 #endif

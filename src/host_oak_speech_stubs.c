@@ -36,6 +36,7 @@ u32 gHostOakSpeechInitStandardTextBoxWindowsCalls = 0;
 u32 gHostOakSpeechCreateTopBarWindowLoadPaletteCalls = 0;
 u32 gHostOakSpeechPlayBGMCalls = 0;
 u32 gHostOakSpeechDoNamingScreenCalls = 0;
+u32 gHostOakSpeechCB2NewGameCalls = 0;
 u32 gHostOakSpeechControlsGuidePage1Loads = 0;
 u32 gHostOakSpeechControlsGuidePage2Loads = 0;
 u32 gHostOakSpeechControlsGuidePage3Loads = 0;
@@ -190,6 +191,7 @@ void HostOakSpeechStubReset(void)
     gHostOakSpeechCreateTopBarWindowLoadPaletteCalls = 0;
     gHostOakSpeechPlayBGMCalls = 0;
     gHostOakSpeechDoNamingScreenCalls = 0;
+    gHostOakSpeechCB2NewGameCalls = 0;
     gHostOakSpeechControlsGuidePage1Loads = 0;
     gHostOakSpeechControlsGuidePage2Loads = 0;
     gHostOakSpeechControlsGuidePage3Loads = 0;
@@ -354,14 +356,25 @@ void *MallocAndDecompress(const void *src, u32 *size)
 
 void DrawDialogueFrame(u8 windowId, bool8 transfer)
 {
-    (void)windowId;
-    (void)transfer;
+    if (windowId < WINDOWS_MAX && gWindows[windowId].tileData != NULL)
+    {
+        FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
+        PutWindowTilemap(windowId);
+        if (transfer)
+            CopyWindowToVram(windowId, COPYWIN_FULL);
+    }
 }
 
 void ClearStdWindowAndFrameToTransparent(u8 windowId, bool8 copyToVram)
 {
-    (void)windowId;
-    (void)copyToVram;
+    HostTitleScreenStubForgetMenuWindow(windowId);
+    if (windowId < WINDOWS_MAX && gWindows[windowId].tileData != NULL)
+    {
+        FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
+        ClearWindowTilemap(windowId);
+        if (copyToVram)
+            CopyWindowToVram(windowId, COPYWIN_FULL);
+    }
 }
 
 u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16))
@@ -447,29 +460,18 @@ u8 GetFontAttribute(u8 fontId, u8 attributeId)
 
 u8 Menu_InitCursor(u8 windowId, u8 fontId, u8 left, u8 top, u8 cursorHeight, u8 numChoices, u8 initialCursorPos)
 {
-    (void)windowId;
     (void)fontId;
-    (void)left;
-    (void)top;
-    (void)cursorHeight;
-    (void)numChoices;
-    return initialCursorPos;
+    return HostTitleScreenStubInitMenuCursor(windowId, left, top, cursorHeight, numChoices, initialCursorPos);
 }
 
 s8 Menu_ProcessInputNoWrapAround(void)
 {
-    s8 result = gHostTitleStubMenuProcessInputResult;
-    if (result != MENU_NOTHING_CHOSEN)
-        gHostTitleStubMenuProcessInputResult = MENU_NOTHING_CHOSEN;
-    return result;
+    return HostTitleScreenStubProcessMenuInput(FALSE);
 }
 
 s8 Menu_ProcessInput(void)
 {
-    s8 result = gHostTitleStubMenuProcessInputResult;
-    if (result != MENU_NOTHING_CHOSEN)
-        gHostTitleStubMenuProcessInputResult = MENU_NOTHING_CHOSEN;
-    return result;
+    return HostTitleScreenStubProcessMenuInput(TRUE);
 }
 
 void DoNamingScreen(u8 templateNum, u8 *destBuffer, u16 monSpecies, u16 monGender, u32 monPersonality, MainCallback returnCallback)
@@ -543,4 +545,5 @@ s16 Q_8_8_inv(s16 y)
 
 void CB2_NewGame(void)
 {
+    gHostOakSpeechCB2NewGameCalls++;
 }
