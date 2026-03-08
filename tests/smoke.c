@@ -983,7 +983,7 @@ static int TestTitleScreenRestartHandoff(void)
     return rc;
 }
 
-static int TestTitleScreenMainMenuHandoff(void)
+static int AdvanceToOakSpeechControlsGuide(void)
 {
     int rc = 0;
     int i;
@@ -1067,7 +1067,7 @@ static int TestTitleScreenMainMenuHandoff(void)
     rc |= Expect(gHostTitleStubFreeAllWindowBuffersCalls >= 1,
                  "main menu New Game selection did not free window buffers");
 
-    for (i = 0; i < 32 && gHostOakSpeechCreateTopBarWindowLoadPaletteCalls == 0; i++)
+    for (i = 0; i < 96 && gHostOakSpeechPlayBGMCalls == 0; i++)
         RunMainCallbackFrame();
 
     rc |= Expect(gMain.callback2 != mainMenuRunCallback,
@@ -1078,6 +1078,56 @@ static int TestTitleScreenMainMenuHandoff(void)
                  "Oak Speech setup did not initialize standard text box windows");
     rc |= Expect(gHostOakSpeechCreateTopBarWindowLoadPaletteCalls == 1,
                  "Oak Speech setup did not reach the controls-guide top bar window stage");
+    rc |= Expect(gHostOakSpeechPlayBGMCalls == 1,
+                 "Oak Speech setup did not reach the controls-guide input-ready state");
+
+    return rc;
+}
+
+static int TestTitleScreenMainMenuHandoff(void)
+{
+    return AdvanceToOakSpeechControlsGuide();
+}
+
+static int TestOakSpeechPikachuIntroHandoff(void)
+{
+    int rc = 0;
+    int i;
+    u32 base_play_se_calls;
+
+    rc |= AdvanceToOakSpeechControlsGuide();
+
+    base_play_se_calls = gHostIntroStubPlaySECalls;
+
+    SetKeys(A_BUTTON, A_BUTTON);
+    RunMainCallbackFrame();
+    ClearKeys();
+    for (i = 0; i < 64 && (gHostIntroStubPlaySECalls < base_play_se_calls + 1 || gPaletteFade.active); i++)
+        RunMainCallbackFrame();
+
+    SetKeys(A_BUTTON, A_BUTTON);
+    RunMainCallbackFrame();
+    ClearKeys();
+    for (i = 0; i < 64 && (gHostIntroStubPlaySECalls < base_play_se_calls + 2 || gPaletteFade.active); i++)
+        RunMainCallbackFrame();
+
+    SetKeys(A_BUTTON, A_BUTTON);
+    RunMainCallbackFrame();
+    ClearKeys();
+
+    for (i = 0; i < 256 && gHostOakSpeechPlayBGMCalls < 2; i++)
+        RunMainCallbackFrame();
+
+    rc |= Expect(gHostIntroStubPlaySECalls >= base_play_se_calls + 3,
+                 "Oak Speech controls guide did not consume the expected page-advance inputs");
+    rc |= Expect(gHostOakSpeechPlayBGMCalls >= 2,
+                 "Oak Speech did not advance from the controls guide into Pikachu intro");
+    rc |= Expect(gHostOakSpeechCreateTopBarWindowLoadPaletteCalls == 1,
+                 "Oak Speech unexpectedly recreated the top bar window before Pikachu intro");
+    rc |= Expect(gHostOakSpeechDoNamingScreenCalls == 0,
+                 "Oak Speech advanced unexpectedly far into naming during Pikachu intro proof");
+    rc |= Expect((GetGpuReg(REG_OFFSET_DISPCNT) & DISPCNT_WIN0_ON) != 0,
+                 "Pikachu intro did not enable WIN0 during its setup path");
 
     return rc;
 }
@@ -1224,6 +1274,7 @@ int main(void)
     rc |= TestTitleScreenRunSlice();
     rc |= TestTitleScreenRestartHandoff();
     rc |= TestTitleScreenMainMenuHandoff();
+    rc |= TestOakSpeechPikachuIntroHandoff();
     rc |= TestTitleScreenSaveClearHandoff();
     rc |= TestTitleScreenBerryFixHandoff();
 
