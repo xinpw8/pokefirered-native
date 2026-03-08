@@ -19,6 +19,7 @@
 #include "string_util.h"
 #include "text_window_graphics.h"
 
+#include "host_oak_speech_stubs.h"
 #include "host_title_screen_stubs.h"
 
 void UpstreamStartNewGameScene(void);
@@ -273,6 +274,7 @@ void DrawStdFrameWithCustomTileAndPalette(u8 windowId, bool8 copyToVram, u16 bas
 void AddTextPrinterParameterized4(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, const u8 *color, s8 speed, const u8 *str)
 {
     gHostTitleStubAddTextPrinterParameterized4Calls++;
+    HostOakSpeechStubRecordPrintedText(str);
     gHostTitleStubLastPrintedText = str;
     gHostTitleStubTextPrinterActive = FALSE;
     (void)windowId;
@@ -288,6 +290,7 @@ void AddTextPrinterParameterized4(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterS
 void AddTextPrinterParameterized3(u8 windowId, u8 fontId, u8 x, u8 y, const u8 *color, s8 speed, const u8 *str)
 {
     gHostTitleStubAddTextPrinterParameterized3Calls++;
+    HostOakSpeechStubRecordPrintedText(str);
     gHostTitleStubLastPrintedText3 = str;
     gHostTitleStubTextPrinterActive = FALSE;
     (void)windowId;

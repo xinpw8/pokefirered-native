@@ -8,7 +8,17 @@ extern u32 gHostOakSpeechInitStandardTextBoxWindowsCalls;
 extern u32 gHostOakSpeechCreateTopBarWindowLoadPaletteCalls;
 extern u32 gHostOakSpeechPlayBGMCalls;
 extern u32 gHostOakSpeechDoNamingScreenCalls;
+extern u32 gHostOakSpeechControlsGuidePage1Loads;
+extern u32 gHostOakSpeechControlsGuidePage2Loads;
+extern u32 gHostOakSpeechControlsGuidePage3Loads;
+extern u32 gHostOakSpeechPikachuIntroPage1Loads;
+extern u32 gHostOakSpeechPikachuIntroPage2Loads;
+extern u32 gHostOakSpeechPikachuIntroPage3Loads;
+extern u16 gHostOakSpeechLastPlayedBGM;
+extern const u8 *gHostOakSpeechLastTopBarLeftText;
+extern const u8 *gHostOakSpeechLastTopBarRightText;
 
 void HostOakSpeechStubReset(void);
+void HostOakSpeechStubRecordPrintedText(const u8 *text);
 
 #endif

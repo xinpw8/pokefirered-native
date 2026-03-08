@@ -36,6 +36,15 @@ u32 gHostOakSpeechInitStandardTextBoxWindowsCalls = 0;
 u32 gHostOakSpeechCreateTopBarWindowLoadPaletteCalls = 0;
 u32 gHostOakSpeechPlayBGMCalls = 0;
 u32 gHostOakSpeechDoNamingScreenCalls = 0;
+u32 gHostOakSpeechControlsGuidePage1Loads = 0;
+u32 gHostOakSpeechControlsGuidePage2Loads = 0;
+u32 gHostOakSpeechControlsGuidePage3Loads = 0;
+u32 gHostOakSpeechPikachuIntroPage1Loads = 0;
+u32 gHostOakSpeechPikachuIntroPage2Loads = 0;
+u32 gHostOakSpeechPikachuIntroPage3Loads = 0;
+u16 gHostOakSpeechLastPlayedBGM = 0;
+const u8 *gHostOakSpeechLastTopBarLeftText = NULL;
+const u8 *gHostOakSpeechLastTopBarRightText = NULL;
 
 static u16 sOakSpeechWindowId = 0;
 static u8 sOakSpeechMonSpriteBuffer[0x8000] = {0};
@@ -138,6 +147,22 @@ static u8 *CopyHostString(u8 *dest, const u8 *src)
     return dest;
 }
 
+void HostOakSpeechStubRecordPrintedText(const u8 *text)
+{
+    if (text == gControlsGuide_Text_Intro)
+        gHostOakSpeechControlsGuidePage1Loads++;
+    else if (text == gControlsGuide_Text_DPad)
+        gHostOakSpeechControlsGuidePage2Loads++;
+    else if (text == gControlsGuide_Text_StartButton)
+        gHostOakSpeechControlsGuidePage3Loads++;
+    else if (text == gPikachuIntro_Text_Page1)
+        gHostOakSpeechPikachuIntroPage1Loads++;
+    else if (text == gPikachuIntro_Text_Page2)
+        gHostOakSpeechPikachuIntroPage2Loads++;
+    else if (text == gPikachuIntro_Text_Page3)
+        gHostOakSpeechPikachuIntroPage3Loads++;
+}
+
 void HostOakSpeechStubReset(void)
 {
     gHostOakSpeechCreateMonSpritesGfxManagerCalls = 0;
@@ -145,6 +170,15 @@ void HostOakSpeechStubReset(void)
     gHostOakSpeechCreateTopBarWindowLoadPaletteCalls = 0;
     gHostOakSpeechPlayBGMCalls = 0;
     gHostOakSpeechDoNamingScreenCalls = 0;
+    gHostOakSpeechControlsGuidePage1Loads = 0;
+    gHostOakSpeechControlsGuidePage2Loads = 0;
+    gHostOakSpeechControlsGuidePage3Loads = 0;
+    gHostOakSpeechPikachuIntroPage1Loads = 0;
+    gHostOakSpeechPikachuIntroPage2Loads = 0;
+    gHostOakSpeechPikachuIntroPage3Loads = 0;
+    gHostOakSpeechLastPlayedBGM = 0;
+    gHostOakSpeechLastTopBarLeftText = NULL;
+    gHostOakSpeechLastTopBarRightText = NULL;
     sOakSpeechWindowId = 0;
     memset(gStringVar1, 0, sizeof(gStringVar1));
     memset(gStringVar2, 0, sizeof(gStringVar2));
@@ -217,6 +251,8 @@ u8 CreateTopBarWindowLoadPalette(u8 bg, u8 width, u8 yPos, u8 palette, u16 baseT
 
 void TopBarWindowPrintTwoStrings(const u8 *string, const u8 *string2, bool8 fgColorChooser, u8 notUsed, bool8 copyToVram)
 {
+    gHostOakSpeechLastTopBarLeftText = string;
+    gHostOakSpeechLastTopBarRightText = string2;
     gHostTitleStubLastPrintedText = string;
     gHostTitleStubLastPrintedText3 = string2;
     (void)fgColorChooser;
@@ -226,6 +262,8 @@ void TopBarWindowPrintTwoStrings(const u8 *string, const u8 *string2, bool8 fgCo
 
 void TopBarWindowPrintString(const u8 *string, u8 unUsed, bool8 copyToVram)
 {
+    gHostOakSpeechLastTopBarLeftText = NULL;
+    gHostOakSpeechLastTopBarRightText = string;
     gHostTitleStubLastPrintedText3 = string;
     (void)unUsed;
     (void)copyToVram;
@@ -261,15 +299,20 @@ void DestroyTextCursorSprite(u8 spriteId)
 void PlayBGM(u16 songNum)
 {
     gHostOakSpeechPlayBGMCalls++;
+    gHostOakSpeechLastPlayedBGM = songNum;
     (void)songNum;
 }
 
 void ClearTopBarWindow(void)
 {
+    gHostOakSpeechLastTopBarLeftText = NULL;
+    gHostOakSpeechLastTopBarRightText = NULL;
 }
 
 void DestroyTopBarWindow(void)
 {
+    gHostOakSpeechLastTopBarLeftText = NULL;
+    gHostOakSpeechLastTopBarRightText = NULL;
 }
 
 void *MallocAndDecompress(const void *src, u32 *size)
@@ -301,6 +344,7 @@ void ClearStdWindowAndFrameToTransparent(u8 windowId, bool8 copyToVram)
 
 u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16))
 {
+    HostOakSpeechStubRecordPrintedText(str);
     gHostTitleStubLastPrintedText = str;
     gHostTitleStubTextPrinterActive = FALSE;
     (void)windowId;
@@ -314,6 +358,7 @@ u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 
 
 u16 AddTextPrinterParameterized2(u8 windowId, u8 fontId, const u8 *str, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16), u8 fgColor, u8 bgColor, u8 shadowColor)
 {
+    HostOakSpeechStubRecordPrintedText(str);
     gHostTitleStubLastPrintedText = str;
     gHostTitleStubTextPrinterActive = FALSE;
     (void)windowId;
