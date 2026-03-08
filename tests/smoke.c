@@ -7,7 +7,12 @@
 #include "dma3.h"
 #include "berry_fix_program.h"
 #include "characters.h"
+#include "constants/flags.h"
+#include "constants/items.h"
+#include "constants/maps.h"
 #include "constants/songs.h"
+#include "constants/trainer_tower.h"
+#include "constants/vars.h"
 #include "gba/macro.h"
 #include "gpu_regs.h"
 #include "clear_save_data_screen.h"
@@ -18,6 +23,7 @@
 #include "host_intro_stubs.h"
 #include "host_oak_speech_stubs.h"
 #include "host_memory.h"
+#include "host_new_game_stubs.h"
 #include "host_runtime_stubs.h"
 #include "host_title_screen_stubs.h"
 #include "intro.h"
@@ -27,6 +33,7 @@
 #include "main_menu.h"
 #include "malloc.h"
 #include "m4a.h"
+#include "money.h"
 #include "overworld.h"
 #include "palette.h"
 #include "quest_log.h"
@@ -47,6 +54,8 @@ extern u32 IntrMain_Buffer[0x200];
 extern u8 gPcmDmaCounter;
 extern u8 gWirelessCommType;
 extern u16 gKeyRepeatContinueDelay;
+extern bool8 gDifferentSaveFile;
+extern const u8 EventScript_ResetAllMapFlags[];
 extern const u8 gText_Controls[];
 extern const u8 gText_ABUTTONNext[];
 extern const u8 gText_ABUTTONNext_BBUTTONBack[];
@@ -892,6 +901,7 @@ static void ResetBootCallbackHarness(void)
     HostIntroStubReset();
     HostOakSpeechStubReset();
     HostTitleScreenStubReset();
+    HostNewGameStubReset();
     ClearDma3Requests();
     InitGpuRegManager();
     HostCrt0Init();
@@ -1588,6 +1598,46 @@ static int TestOakSpeechToCB2NewGameHandoff(void)
     RunMainCallbackFrame();
     rc |= Expect(gHostOakSpeechCB2NewGameCalls == 1,
                  "CB2_NewGame was not called after the Oak Speech handoff");
+    rc |= Expect(gDifferentSaveFile == TRUE,
+                 "CB2_NewGame did not mark the session as a different save file");
+    rc |= Expect(NameBufferEquals(gSaveBlock2.playerName, "ASH"),
+                 "CB2_NewGame did not preserve the player name through NewGameInitData");
+    rc |= Expect(NameBufferEquals(gSaveBlock1.rivalName, "GARY"),
+                 "CB2_NewGame did not restore the rival name after clearing SaveBlock1");
+    rc |= Expect(GetMoney(&gSaveBlock1.money) == 3000,
+                 "CB2_NewGame did not seed the starting money");
+    rc |= Expect(gPlayerPartyCount == 0,
+                 "CB2_NewGame did not clear the player party count");
+    rc |= Expect(gHostNewGameSetWarpDestinationCalls == 1,
+                 "CB2_NewGame did not set the initial warp destination");
+    rc |= Expect(gHostNewGameWarpIntoMapCalls == 1,
+                 "CB2_NewGame did not apply the initial warp");
+    rc |= Expect(gHostNewGameRunScriptImmediatelyCalls == 1,
+                 "CB2_NewGame did not run the reset-all-map-flags script");
+    rc |= Expect(gHostNewGameLastRunScript == EventScript_ResetAllMapFlags,
+                 "CB2_NewGame ran the wrong immediate script");
+    rc |= Expect(gSaveBlock1.location.mapGroup == MAP_GROUP(MAP_PALLET_TOWN_PLAYERS_HOUSE_2F)
+                 && gSaveBlock1.location.mapNum == MAP_NUM(MAP_PALLET_TOWN_PLAYERS_HOUSE_2F)
+                 && gSaveBlock1.location.warpId == -1
+                 && gSaveBlock1.location.x == 6
+                 && gSaveBlock1.location.y == 6,
+                 "CB2_NewGame did not warp into the player's room");
+    rc |= Expect(gSaveBlock1.pos.x == 6 && gSaveBlock1.pos.y == 6,
+                 "CB2_NewGame did not update the player coordinates from the warp");
+    rc |= Expect(VarGet(VAR_0x403C) == 0x0302,
+                 "CB2_NewGame did not seed the RSE national dex var");
+    rc |= Expect(FlagGet(FLAG_0x838) == TRUE,
+                 "CB2_NewGame did not seed the RSE national dex flag");
+    rc |= Expect(VarGet(VAR_HERACROSS_SIZE_RECORD) == 0,
+                 "CB2_NewGame did not initialize the Heracross size record");
+    rc |= Expect(VarGet(VAR_MAGIKARP_SIZE_RECORD) == 0,
+                 "CB2_NewGame did not initialize the Magikarp size record");
+    rc |= Expect(gSaveBlock1.pcItems[0].itemId == ITEM_POTION && gSaveBlock1.pcItems[0].quantity == 1,
+                 "CB2_NewGame did not seed the starting PC potion");
+    rc |= Expect(gSaveBlock1.registeredItem == 0,
+                 "CB2_NewGame did not clear the registered item");
+    rc |= Expect(gSaveBlock1.trainerTower[0].bestTime == TRAINER_TOWER_MAX_TIME,
+                 "CB2_NewGame did not reset the trainer tower records");
 
     return rc;
 }
