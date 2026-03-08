@@ -20,6 +20,9 @@
 #include "gba/gba.h"
 #include "main.h"
 #include "gpu_regs.h"
+#include "palette.h"
+#include "task.h"
+#include "sprite.h"
 #include "host_agbmain.h"
 #include "host_memory.h"
 #include "host_renderer.h"
@@ -27,9 +30,6 @@
 #include "host_crt0.h"
 #include "host_intro_stubs.h"
 #include "host_title_screen_stubs.h"
-#include "palette.h"
-#include "task.h"
-#include "sprite.h"
 
 /* Stub for oak_speech's renamed entry point (GPT is wiring the real one) */
 void UpstreamStartNewGameScene(void) { }
@@ -75,6 +75,30 @@ static void RenderAndCheck(const char *milestone)
     HostDisplayPresent();
 }
 
+/*
+ * Minimal VBlank handler — mirrors VBlankIntr in main.c.
+ * Calls the game's VBlank callback (which handles TransferPlttBuffer,
+ * scanline effects, etc.) and sets the intrCheck flag so the main loop
+ * knows VBlank occurred.
+ */
+static void RenderTestVBlankHandler(void)
+{
+    if (gMain.vblankCallback)
+        gMain.vblankCallback();
+    gMain.intrCheck |= INTR_FLAG_VBLANK;
+}
+
+/* Minimal HBlank handler */
+static void RenderTestHBlankHandler(void)
+{
+    if (gMain.hblankCallback)
+        gMain.hblankCallback();
+    gMain.intrCheck |= INTR_FLAG_HBLANK;
+}
+
+/* Dummy handler for unused interrupt slots */
+static void IntrDummy(void) { }
+
 int main(int argc, char *argv[])
 {
     const char *outdir = "/tmp/pfr_render_test";
@@ -97,29 +121,40 @@ int main(int argc, char *argv[])
     HostDisplayEnableDump(TRUE);
     HostDisplayInit();
 
-    /* Set up the boot chain the same way smoke does */
+    /* Set up the boot chain */
     HostCrt0Init();
     REG_KEYINPUT = KEYS_MASK; /* all keys released */
 
-    /* Initialize the callback chain to start from copyright screen */
+    /*
+     * Critical initialization that AgbMain normally handles:
+     * Without these, the game's state machine can't progress.
+     */
+
+    /* 1. Initialize the GPU register buffering system */
+    InitGpuRegManager();
+
+    /* 2. Set up the interrupt dispatch table
+     * Index mapping (from sInterruptFlags in host_crt0.c):
+     *   0=VCOUNT, 1=SERIAL, 2=TIMER3, 3=HBLANK, 4=VBLANK,
+     *   5-8=TIMER0-TIMER2/DMA0, 9-13=DMA1-GAMEPAK
+     */
+    for (i = 0; i < 14; i++)
+        gIntrTable[i] = IntrDummy;
+    gIntrTable[3] = RenderTestHBlankHandler;  /* HBLANK */
+    gIntrTable[4] = RenderTestVBlankHandler;  /* VBLANK */
+
+    /* 3. Enable interrupts (VBlank is critical for palette transfer) */
+    REG_IME = 1;
+    REG_IE |= INTR_FLAG_VBLANK;
+
+    /* 4. Initialize subsystems */
     gMain.callback1 = NULL;
     gMain.callback2 = NULL;
+    gMain.vblankCallback = NULL;
     gMain.state = 0;
 
-    /* Call AgbMain initialization path manually to set up callback2 */
-    /* We'll run a bounded set of frames and render at each VBlank */
-
-    printf("[render_test] Initializing AgbMain...\n");
-
-    /* Run the bounded boot the same way smoke does, but with rendering */
     HostIntroStubReset();
     HostTitleScreenStubReset();
-
-    /*
-     * Instead of the full AgbMain loop (which needs pthread IRQ),
-     * we manually step through frames the way smoke.c does:
-     * advance scanlines, trigger interrupts, and render at VBlank.
-     */
 
     /* Set up callback2 to start the copyright screen */
     extern void CB2_InitCopyrightScreenAfterBootup(void);
@@ -189,7 +224,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-        printf("[render_test] INFO: All frames were backdrop-only (expected with zero-INCBIN assets).\n");
-        return 0; /* Not a failure — expected until real assets are loaded */
+        printf("[render_test] INFO: All frames were backdrop-only.\n");
+        return 0;
     }
 }
