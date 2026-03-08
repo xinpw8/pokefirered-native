@@ -150,7 +150,7 @@ static void RenderTextBg(int bgNum, u16 dispcnt)
     int charBase = PPU_BGCNT_CHARBASE(bgcnt) * 0x4000;
     int screenBase = PPU_BGCNT_SCREENBASE(bgcnt) * 0x800;
     int is8bpp = PPU_BGCNT_PALMODE(bgcnt);
-    int screenSize = BGCNT_SCREENSIZE(bgcnt);
+    int screenSize = PPU_BGCNT_SCREENSIZE(bgcnt);
 
     /* Text BG map dimensions in tiles */
     int mapW = (screenSize & 1) ? 64 : 32;
@@ -199,12 +199,12 @@ static void RenderTextBg(int bgNum, u16 dispcnt)
             if (is8bpp)
             {
                 int tileAddr = charBase + tileNum * 64 + tpy * 8 + tpx;
-                colorIdx = BG_VRAM[tileAddr];
+                colorIdx = PPU_BG_VRAM[tileAddr];
             }
             else
             {
                 int tileAddr = charBase + tileNum * 32 + tpy * 4 + (tpx >> 1);
-                u8 byte = BG_VRAM[tileAddr];
+                u8 byte = PPU_BG_VRAM[tileAddr];
                 colorIdx = (tpx & 1) ? (byte >> 4) : (byte & 0xF);
             }
 
@@ -219,9 +219,9 @@ static void RenderTextBg(int bgNum, u16 dispcnt)
             {
                 u16 color;
                 if (is8bpp)
-                    color = BG_PLTT[colorIdx];
+                    color = PPU_BG_PLTT[colorIdx];
                 else
-                    color = BG_PLTT[palNum * 16 + colorIdx];
+                    color = PPU_BG_PLTT[palNum * 16 + colorIdx];
 
                 sFramebuffer[fbIdx] = Bgr555ToArgb8888(color);
                 sPriorityMap[fbIdx] = priority;
@@ -320,12 +320,12 @@ static void RenderSprites(u16 dispcnt)
                 if (is8bpp)
                 {
                     int addr = tile * 32 + subY * 8 + subX;
-                    colorIdx = OBJ_VRAM[addr];
+                    colorIdx = PPU_OBJ_VRAM[addr];
                 }
                 else
                 {
                     int addr = tile * 32 + subY * 4 + (subX >> 1);
-                    u8 byte = OBJ_VRAM[addr];
+                    u8 byte = PPU_OBJ_VRAM[addr];
                     colorIdx = (subX & 1) ? (byte >> 4) : (byte & 0xF);
                 }
 
@@ -338,9 +338,9 @@ static void RenderSprites(u16 dispcnt)
                 {
                     u16 color;
                     if (is8bpp)
-                        color = OBJ_PLTT[colorIdx];
+                        color = PPU_OBJ_PLTT[colorIdx];
                     else
-                        color = OBJ_PLTT[palNum * 16 + colorIdx];
+                        color = PPU_OBJ_PLTT[palNum * 16 + colorIdx];
 
                     sFramebuffer[fbIdx] = Bgr555ToArgb8888(color);
                     sPriorityMap[fbIdx] = priority;
@@ -411,7 +411,7 @@ void HostRendererRenderFrame(void)
     u16 dispcnt = IOREG(IO_DISPCNT);
 
     /* Clear to backdrop color (palette entry 0) */
-    u32 backdrop = Bgr555ToArgb8888(BG_PLTT[0]);
+    u32 backdrop = Bgr555ToArgb8888(PPU_BG_PLTT[0]);
     {
         int i;
         for (i = 0; i < GBA_SCREEN_WIDTH * GBA_SCREEN_HEIGHT; i++)
