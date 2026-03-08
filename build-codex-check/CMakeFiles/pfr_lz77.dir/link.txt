@@ -1,0 +1,1 @@
+/usr/bin/cc -no-pie -Wl,--gc-sections CMakeFiles/pfr_lz77.dir/tools/pfr_lz77.c.o -o pfr_lz77  libpfr_upstream_core.a -lm -lSDL2 -lm 

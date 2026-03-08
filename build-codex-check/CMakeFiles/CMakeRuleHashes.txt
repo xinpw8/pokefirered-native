@@ -1,0 +1,2 @@
+# Hashes of file build rules.
+b99a3577f111df9530cef68ac13eeba3 gen/intro.c

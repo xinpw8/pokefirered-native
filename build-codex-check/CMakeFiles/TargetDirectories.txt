@@ -1,0 +1,15 @@
+/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_core.dir
+/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_runtime.dir
+/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_intro.dir
+/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_title.dir
+/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_clear_save.dir
+/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_berry_fix.dir
+/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_main_menu.dir
+/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_oak_speech.dir
+/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_smoke.dir
+/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_lz77.dir
+/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_render_test.dir
+/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_play.dir
+/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_assets.dir
+/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/edit_cache.dir
+/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/rebuild_cache.dir
