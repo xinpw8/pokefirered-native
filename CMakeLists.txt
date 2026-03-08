@@ -265,9 +265,9 @@ target_sources(pfr_render_test PRIVATE
     $<TARGET_OBJECTS:pfr_upstream_clear_save>
     $<TARGET_OBJECTS:pfr_upstream_berry_fix>
     $<TARGET_OBJECTS:pfr_upstream_main_menu>
-    $<TARGET_OBJECTS:pfr_upstream_oak_speech>
     $<TARGET_OBJECTS:pfr_upstream_runtime>
 )
+# NOTE: oak_speech excluded from render_test until its stubs are wired
 target_compile_definitions(pfr_render_test PRIVATE ${PFR_COMMON_DEFINES})
 target_compile_options(pfr_render_test PRIVATE
     -fno-pie
