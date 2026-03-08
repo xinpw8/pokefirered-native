@@ -514,6 +514,7 @@ void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition)
 {
     (void)speciesTag;
     (void)battlerPosition;
+    gMultiuseSpriteTemplate = gDummySpriteTemplate;
 }
 
 s16 Q_8_8_inv(s16 y)
