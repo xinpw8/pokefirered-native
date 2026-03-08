@@ -64,9 +64,18 @@ u16 *gQuestLogDefeatedWildMonRecord = NULL;
 u32 gHostNewGameSetWarpDestinationCalls = 0;
 u32 gHostNewGameWarpIntoMapCalls = 0;
 u32 gHostNewGameRunScriptImmediatelyCalls = 0;
+u32 gHostNewGameStopMapMusicCalls = 0;
+u32 gHostNewGameResetSafariZoneFlagCalls = 0;
+u32 gHostNewGameResetInitialPlayerAvatarStateCalls = 0;
+u32 gHostNewGameScriptContextInitCalls = 0;
+u32 gHostNewGameUnlockPlayerFieldControlsCalls = 0;
+u32 gHostNewGameDoMapLoadLoopCalls = 0;
+u32 gHostNewGameSetFieldVBlankCallbackCalls = 0;
 const u8 *gHostNewGameLastRunScript = NULL;
 struct WarpData gHostNewGameWarpDestination = {0};
 struct WarpData gLastUsedWarp = {0};
+MainCallback gFieldCallback = NULL;
+bool8 (*gFieldCallback2)(void) = NULL;
 
 const u8 EventScript_ResetAllMapFlags[] = {0};
 
@@ -191,10 +200,73 @@ void HostNewGameStubReset(void)
     gHostNewGameSetWarpDestinationCalls = 0;
     gHostNewGameWarpIntoMapCalls = 0;
     gHostNewGameRunScriptImmediatelyCalls = 0;
+    gHostNewGameStopMapMusicCalls = 0;
+    gHostNewGameResetSafariZoneFlagCalls = 0;
+    gHostNewGameResetInitialPlayerAvatarStateCalls = 0;
+    gHostNewGameScriptContextInitCalls = 0;
+    gHostNewGameUnlockPlayerFieldControlsCalls = 0;
+    gHostNewGameDoMapLoadLoopCalls = 0;
+    gHostNewGameSetFieldVBlankCallbackCalls = 0;
     gHostNewGameLastRunScript = NULL;
+    gFieldCallback = NULL;
+    gFieldCallback2 = NULL;
     sWildEncounterSeed = 0;
     SetBagPocketsPointers();
     ResetSpecialVars();
+}
+
+void StopMapMusic(void)
+{
+    gHostNewGameStopMapMusicCalls++;
+}
+
+void ResetSafariZoneFlag(void)
+{
+    gHostNewGameResetSafariZoneFlagCalls++;
+}
+
+void ResetInitialPlayerAvatarState(void)
+{
+    gHostNewGameResetInitialPlayerAvatarStateCalls++;
+}
+
+void ScriptContext_Init(void)
+{
+    gHostNewGameScriptContextInitCalls++;
+}
+
+void UnlockPlayerFieldControls(void)
+{
+    gHostNewGameUnlockPlayerFieldControlsCalls++;
+}
+
+void SetMainCallback1(MainCallback cb)
+{
+    gMain.callback1 = cb;
+}
+
+void HostFieldCB_WarpExitFadeFromBlack(void)
+{
+}
+
+void HostDoMapLoadLoop(u8 *state)
+{
+    gHostNewGameDoMapLoadLoopCalls++;
+    if (state != NULL)
+        *state = 0;
+}
+
+void HostSetFieldVBlankCallback(void)
+{
+    gHostNewGameSetFieldVBlankCallbackCalls++;
+}
+
+void HostCB1_Overworld(void)
+{
+}
+
+void HostCB2_Overworld(void)
+{
 }
 
 void ClearSav2(void)

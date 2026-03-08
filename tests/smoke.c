@@ -1599,6 +1599,10 @@ static int TestOakSpeechToCB2NewGameHandoff(void)
     RunMainCallbackFrame();
     rc |= Expect(gHostOakSpeechCB2NewGameCalls == 1,
                  "CB2_NewGame was not called after the Oak Speech handoff");
+    rc |= Expect(gHostNewGameStopMapMusicCalls == 1,
+                 "CB2_NewGame did not stop map music before initializing the field state");
+    rc |= Expect(gHostNewGameResetSafariZoneFlagCalls == 1,
+                 "CB2_NewGame did not clear the safari-zone flag state");
     rc |= Expect(gDifferentSaveFile == TRUE,
                  "CB2_NewGame did not mark the session as a different save file");
     rc |= Expect(NameBufferEquals(gSaveBlock2.playerName, "ASH"),
@@ -1639,6 +1643,24 @@ static int TestOakSpeechToCB2NewGameHandoff(void)
                  "CB2_NewGame did not clear the registered item");
     rc |= Expect(gSaveBlock1.trainerTower[0].bestTime == TRAINER_TOWER_MAX_TIME,
                  "CB2_NewGame did not reset the trainer tower records");
+    rc |= Expect(gHostNewGameResetInitialPlayerAvatarStateCalls == 1,
+                 "CB2_NewGame did not reset the initial player avatar state");
+    rc |= Expect(gHostNewGameScriptContextInitCalls == 1,
+                 "CB2_NewGame did not initialize script context state");
+    rc |= Expect(gHostNewGameUnlockPlayerFieldControlsCalls == 1,
+                 "CB2_NewGame did not unlock player field controls");
+    rc |= Expect(gFieldCallback == HostFieldCB_WarpExitFadeFromBlack,
+                 "CB2_NewGame did not install the warp-exit field callback");
+    rc |= Expect(gFieldCallback2 == NULL,
+                 "CB2_NewGame did not clear the secondary field callback");
+    rc |= Expect(gHostNewGameDoMapLoadLoopCalls == 1,
+                 "CB2_NewGame did not enter the hosted map-load loop seam");
+    rc |= Expect(gHostNewGameSetFieldVBlankCallbackCalls == 1,
+                 "CB2_NewGame did not install the hosted field VBlank callback");
+    rc |= Expect(gMain.callback1 == HostCB1_Overworld,
+                 "CB2_NewGame did not install the hosted overworld callback1");
+    rc |= Expect(gMain.callback2 == HostCB2_Overworld,
+                 "CB2_NewGame did not hand off callback2 to the hosted overworld seam");
 
     return rc;
 }

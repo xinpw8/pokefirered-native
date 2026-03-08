@@ -6,8 +6,26 @@
 extern u32 gHostNewGameSetWarpDestinationCalls;
 extern u32 gHostNewGameWarpIntoMapCalls;
 extern u32 gHostNewGameRunScriptImmediatelyCalls;
+extern u32 gHostNewGameStopMapMusicCalls;
+extern u32 gHostNewGameResetSafariZoneFlagCalls;
+extern u32 gHostNewGameResetInitialPlayerAvatarStateCalls;
+extern u32 gHostNewGameScriptContextInitCalls;
+extern u32 gHostNewGameUnlockPlayerFieldControlsCalls;
+extern u32 gHostNewGameDoMapLoadLoopCalls;
+extern u32 gHostNewGameSetFieldVBlankCallbackCalls;
 extern const u8 *gHostNewGameLastRunScript;
 extern struct WarpData gHostNewGameWarpDestination;
+
+void StopMapMusic(void);
+void ResetSafariZoneFlag(void);
+void ResetInitialPlayerAvatarState(void);
+void ScriptContext_Init(void);
+void UnlockPlayerFieldControls(void);
+void HostCB1_Overworld(void);
+void HostCB2_Overworld(void);
+void HostFieldCB_WarpExitFadeFromBlack(void);
+void HostDoMapLoadLoop(u8 *state);
+void HostSetFieldVBlankCallback(void);
 
 void HostNewGameStubReset(void);
 

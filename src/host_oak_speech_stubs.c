@@ -556,7 +556,18 @@ void CB2_NewGame(void)
     if (!sHostOakSpeechNewGameInitialized)
     {
         sHostOakSpeechNewGameInitialized = TRUE;
+        StopMapMusic();
+        ResetSafariZoneFlag();
         NewGameInitData();
+        ResetInitialPlayerAvatarState();
         PlayTimeCounter_Start();
+        ScriptContext_Init();
+        UnlockPlayerFieldControls();
+        gFieldCallback = HostFieldCB_WarpExitFadeFromBlack;
+        gFieldCallback2 = NULL;
+        HostDoMapLoadLoop(&gMain.state);
+        HostSetFieldVBlankCallback();
+        SetMainCallback1(HostCB1_Overworld);
+        SetMainCallback2(HostCB2_Overworld);
     }
 }
