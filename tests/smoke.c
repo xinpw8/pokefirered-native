@@ -1615,8 +1615,8 @@ static int TestTitleScreenSaveClearHandoff(void)
                  "save-clear init did not switch to its run callback");
     rc |= Expect(gHostTitleStubLoadStdWindowGfxCalls == 2,
                  "save-clear screen did not load standard window graphics twice");
-    rc |= Expect(gHostTitleStubDrawStdFrameCalls == 1,
-                 "save-clear screen did not draw its dialogue frame");
+    rc |= Expect(gHostTitleStubDrawStdFrameCalls == 2,
+                 "save-clear screen did not draw both its dialogue and yes-no frames");
     rc |= Expect(gHostTitleStubAddTextPrinterParameterized4Calls == 1,
                  "save-clear screen did not print its confirmation prompt");
     rc |= Expect(gHostTitleStubLastPrintedText == gText_ClearAllSaveData,
