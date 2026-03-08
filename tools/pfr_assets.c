@@ -5,15 +5,21 @@
  * formats that the INCBIN macros reference (.4bpp, .8bpp, .gbapal,
  * .4bpp.lz, .bin.lz, etc.).
  *
+ * Also generates C initializer .inc files and preprocesses upstream
+ * source files to replace INCBIN macros with real data includes.
+ *
  * This replaces the upstream gbagfx tool without requiring libpng-dev
  * by using stb_image.h for PNG decoding.
  *
  * Usage:
  *   pfr_assets png2gba <input.png> <output.4bpp|.8bpp> [--num-tiles N]
  *   pfr_assets pal2gba <input.pal> <output.gbapal>
+ *   pfr_assets png2pal <input.png> <output.gbapal>
  *   pfr_assets lz77    <input>     <output.lz>
+ *   pfr_assets bin2inc <input.bin> <output.inc> [--u8|--u16|--u32]
+ *   pfr_assets preproc <input.c> <inc_dir> <output.c>
  *   pfr_assets batch   <upstream_dir> <output_dir>
- *       Converts all title_screen/ and intro/ assets in one shot.
+ *   pfr_assets geninc  <assets_dir> <inc_dir>
  */
 
 #define STB_IMAGE_IMPLEMENTATION
@@ -25,6 +31,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
+#include <dirent.h>
 #include <sys/stat.h>
 
 /* ---------- GBA palette color ---------- */
@@ -58,6 +65,12 @@ static int write_file(const char *path, const void *data, size_t size)
     fwrite(data, 1, size, f);
     fclose(f);
     return 0;
+}
+
+static int file_exists(const char *path)
+{
+    struct stat st;
+    return stat(path, &st) == 0;
 }
 
 /* ---------- PNG to 4bpp/8bpp tile data ---------- */
@@ -186,9 +199,9 @@ static int cmd_pal2gba(const char *input, const char *output)
 
     char line[256];
     /* JASC-PAL header */
-    fgets(line, sizeof(line), f); /* "JASC-PAL" */
-    fgets(line, sizeof(line), f); /* "0100" */
-    fgets(line, sizeof(line), f); /* color count */
+    if (!fgets(line, sizeof(line), f)) { fclose(f); return 1; }
+    if (!fgets(line, sizeof(line), f)) { fclose(f); return 1; }
+    if (!fgets(line, sizeof(line), f)) { fclose(f); return 1; }
     int count = atoi(line);
     if (count <= 0 || count > 256) { fclose(f); return 1; }
 
@@ -206,6 +219,76 @@ static int cmd_pal2gba(const char *input, const char *output)
         printf("  %s -> %s (%d colors, %d bytes)\n",
                input, output, count, count * 2);
     free(pal);
+    return ret;
+}
+
+/* ---------- PNG palette extraction to GBA palette ---------- */
+
+/*
+ * Extracts the unique color palette from a PNG and writes it as a GBA
+ * BGR555 .gbapal file. This handles the case where the upstream build
+ * generates .gbapal directly from .png (no separate .pal file).
+ */
+
+static int cmd_png2pal(const char *input, const char *output)
+{
+    size_t png_size;
+    uint8_t *png_data = read_file(input, &png_size);
+    if (!png_data) { fprintf(stderr, "Cannot open %s\n", input); return 1; }
+
+    int w, h, channels;
+    uint8_t *pixels = stbi_load_from_memory(png_data, png_size, &w, &h, &channels, 0);
+    free(png_data);
+    if (!pixels) { fprintf(stderr, "PNG decode failed: %s\n", input); return 1; }
+
+    uint16_t palette[256];
+    int pal_count = 0;
+
+    if (channels == 1) {
+        /* Grayscale — build a palette from unique grayscale values */
+        int total_pixels = w * h;
+        for (int i = 0; i < total_pixels && pal_count < 256; i++) {
+            uint8_t v = pixels[i];
+            uint16_t bgr = rgb_to_bgr555(v, v, v);
+            int found = 0;
+            for (int j = 0; j < pal_count; j++) {
+                if (palette[j] == bgr) { found = 1; break; }
+            }
+            if (!found)
+                palette[pal_count++] = bgr;
+        }
+    } else {
+        /* RGB or RGBA — extract unique BGR555 colors in order of first appearance */
+        int total_pixels = w * h;
+        for (int i = 0; i < total_pixels && pal_count < 256; i++) {
+            uint8_t r = pixels[i * channels + 0];
+            uint8_t g = pixels[i * channels + 1];
+            uint8_t b = pixels[i * channels + 2];
+            uint16_t bgr = rgb_to_bgr555(r, g, b);
+
+            int found = 0;
+            for (int j = 0; j < pal_count; j++) {
+                if (palette[j] == bgr) { found = 1; break; }
+            }
+            if (!found)
+                palette[pal_count++] = bgr;
+        }
+    }
+
+    stbi_image_free(pixels);
+
+    /* Pad to 16-color boundary for 4bpp compatibility */
+    int padded = pal_count;
+    if (padded <= 16) padded = 16;
+    else padded = 256;
+    /* Zero-fill padding */
+    for (int i = pal_count; i < padded; i++)
+        palette[i] = 0;
+
+    int ret = write_file(output, palette, padded * 2);
+    if (ret == 0)
+        printf("  %s -> %s (%d colors, %d bytes)\n",
+               input, output, pal_count, padded * 2);
     return ret;
 }
 
@@ -278,12 +361,271 @@ static int cmd_lz77(const char *input, const char *output)
     return ret;
 }
 
+/* ---------- Binary to C initializer (.inc file) ---------- */
+
+/*
+ * Converts a binary file into a C initializer list suitable for
+ * #include inside an array declaration:
+ *
+ *   static const u32 foo[] = {
+ *   #include "foo.u32.inc"
+ *   };
+ *
+ * elem_size: 1 for u8, 2 for u16, 4 for u32
+ * Output: comma-separated hex values, 12 per line.
+ */
+
+static int cmd_bin2inc(const char *input, const char *output, int elem_size)
+{
+    size_t in_size;
+    uint8_t *data = read_file(input, &in_size);
+    if (!data) { fprintf(stderr, "Cannot open %s\n", input); return 1; }
+
+    FILE *f = fopen(output, "w");
+    if (!f) { perror(output); free(data); return 1; }
+
+    /* Pad to element alignment */
+    size_t padded = in_size;
+    if (elem_size > 1 && (padded % elem_size))
+        padded += elem_size - (padded % elem_size);
+
+    size_t num_elems = padded / elem_size;
+    int col = 0;
+
+    for (size_t i = 0; i < num_elems; i++) {
+        size_t off = i * elem_size;
+
+        if (elem_size == 1) {
+            uint8_t v = (off < in_size) ? data[off] : 0;
+            fprintf(f, "0x%02X", v);
+        } else if (elem_size == 2) {
+            uint8_t lo = (off < in_size) ? data[off] : 0;
+            uint8_t hi = (off + 1 < in_size) ? data[off + 1] : 0;
+            fprintf(f, "0x%04X", lo | (hi << 8));
+        } else { /* 4 */
+            uint32_t v = 0;
+            for (int b = 0; b < 4; b++) {
+                if (off + b < in_size)
+                    v |= (uint32_t)data[off + b] << (b * 8);
+            }
+            fprintf(f, "0x%08X", v);
+        }
+
+        if (i + 1 < num_elems)
+            fprintf(f, ",");
+
+        col++;
+        if (col >= 12) {
+            fprintf(f, "\n");
+            col = 0;
+        }
+    }
+
+    if (col > 0)
+        fprintf(f, "\n");
+
+    fclose(f);
+    free(data);
+    return 0;
+}
+
+/* ---------- Generate .inc files for all assets in a directory ---------- */
+
+static void geninc_recursive(const char *assets_dir, const char *inc_dir,
+                              const char *rel_path, int *count)
+{
+    char full_path[512];
+    if (rel_path[0])
+        snprintf(full_path, sizeof(full_path), "%s/%s", assets_dir, rel_path);
+    else
+        snprintf(full_path, sizeof(full_path), "%s", assets_dir);
+
+    DIR *d = opendir(full_path);
+    if (!d) return;
+
+    struct dirent *ent;
+    while ((ent = readdir(d)) != NULL) {
+        if (ent->d_name[0] == '.') continue;
+
+        char child_rel[512];
+        if (rel_path[0])
+            snprintf(child_rel, sizeof(child_rel), "%s/%s", rel_path, ent->d_name);
+        else
+            snprintf(child_rel, sizeof(child_rel), "%s", ent->d_name);
+
+        char child_full[512];
+        snprintf(child_full, sizeof(child_full), "%s/%s", assets_dir, child_rel);
+
+        struct stat st;
+        if (stat(child_full, &st) != 0) continue;
+
+        if (S_ISDIR(st.st_mode)) {
+            geninc_recursive(assets_dir, inc_dir, child_rel, count);
+        } else if (S_ISREG(st.st_mode)) {
+            /* Generate .u8.inc, .u16.inc, .u32.inc for each binary file */
+            static const struct { const char *suffix; int elem; } sizes[] = {
+                { ".u8.inc",  1 },
+                { ".u16.inc", 2 },
+                { ".u32.inc", 4 },
+            };
+
+            for (int s = 0; s < 3; s++) {
+                char inc_path[600];
+                snprintf(inc_path, sizeof(inc_path), "%s/%s%s",
+                         inc_dir, child_rel, sizes[s].suffix);
+
+                /* Ensure output directory exists */
+                char dir_buf[600];
+                snprintf(dir_buf, sizeof(dir_buf), "%s", inc_path);
+                for (char *p = dir_buf + 1; *p; p++) {
+                    if (*p == '/') {
+                        *p = '\0';
+                        mkdir(dir_buf, 0755);
+                        *p = '/';
+                    }
+                }
+
+                if (cmd_bin2inc(child_full, inc_path, sizes[s].elem) == 0)
+                    (*count)++;
+            }
+        }
+    }
+    closedir(d);
+}
+
+static int cmd_geninc(const char *assets_dir, const char *inc_dir)
+{
+    int count = 0;
+    mkdir(inc_dir, 0755);
+    geninc_recursive(assets_dir, inc_dir, "", &count);
+    printf("Generated %d .inc files in %s\n", count, inc_dir);
+    return 0;
+}
+
+/* ---------- INCBIN preprocessor ---------- */
+
+/*
+ * Preprocesses an upstream .c file, replacing INCBIN_XX("path") with
+ * a C array initializer that #include's the corresponding .inc file.
+ *
+ * Input:  static const u32 foo[] = INCBIN_U32("graphics/intro/foo.4bpp.lz");
+ * Output: static const u32 foo[] = {
+ *         #include "/abs/path/inc/intro/foo.4bpp.lz.u32.inc"
+ *         };
+ *
+ * The "graphics/" prefix is stripped from the INCBIN path to match the
+ * asset directory structure.
+ */
+
+static int cmd_preproc(const char *src_path, const char *inc_dir, const char *out_path)
+{
+    size_t src_size;
+    uint8_t *src_data = read_file(src_path, &src_size);
+    if (!src_data) { fprintf(stderr, "Cannot open %s\n", src_path); return 1; }
+
+    FILE *f = fopen(out_path, "w");
+    if (!f) { perror(out_path); free(src_data); return 1; }
+
+    const char *p = (const char *)src_data;
+    const char *end = p + src_size;
+
+    /* INCBIN variant table */
+    static const struct {
+        const char *prefix;
+        size_t prefix_len;
+        const char *inc_suffix;
+    } variants[] = {
+        { "INCBIN_U8(",  10, ".u8.inc"  },
+        { "INCBIN_U16(", 11, ".u16.inc" },
+        { "INCBIN_U32(", 11, ".u32.inc" },
+        { "INCBIN_S8(",  10, ".u8.inc"  },
+        { "INCBIN_S16(", 11, ".u16.inc" },
+        { "INCBIN_S32(", 11, ".u32.inc" },
+    };
+
+    int replacements = 0;
+
+    while (p < end) {
+        /* Try to match any INCBIN variant */
+        int matched = 0;
+
+        for (int v = 0; v < 6; v++) {
+            size_t plen = variants[v].prefix_len;
+            if ((size_t)(end - p) >= plen &&
+                strncmp(p, variants[v].prefix, plen) == 0)
+            {
+                /* Found INCBIN_XX( — extract the path string */
+                const char *q = p + plen;
+
+                /* Skip whitespace */
+                while (q < end && (*q == ' ' || *q == '\t')) q++;
+
+                if (q < end && (*q == '"' || *q == ' ')) {
+                    if (*q == ' ') {
+                        while (q < end && *q == ' ') q++;
+                    }
+                    if (q < end && *q == '"') {
+                        q++; /* skip opening quote */
+                        const char *path_start = q;
+                        while (q < end && *q != '"') q++;
+
+                        if (q < end) {
+                            size_t path_len = q - path_start;
+                            char asset_path[512];
+                            snprintf(asset_path, sizeof(asset_path),
+                                     "%.*s", (int)path_len, path_start);
+
+                            q++; /* skip closing quote */
+                            /* Skip whitespace and closing paren */
+                            while (q < end && (*q == ' ' || *q == '\t')) q++;
+                            if (q < end && *q == ')') q++;
+
+                            /* Strip "graphics/" prefix if present */
+                            const char *rel = asset_path;
+                            if (strncmp(rel, "graphics/", 9) == 0)
+                                rel += 9;
+
+                            /* Build the .inc file path */
+                            char inc_path[700];
+                            snprintf(inc_path, sizeof(inc_path),
+                                     "%s/%s%s", inc_dir, rel, variants[v].inc_suffix);
+
+                            /* Check if the .inc file exists */
+                            if (file_exists(inc_path)) {
+                                fprintf(f, "{\n#include \"%s\"\n}", inc_path);
+                                replacements++;
+                            } else {
+                                /* Fallback: keep as {0} */
+                                fprintf(f, "{0} /* MISSING: %s */", inc_path);
+                            }
+
+                            p = q;
+                            matched = 1;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (!matched) {
+            fputc(*p, f);
+            p++;
+        }
+    }
+
+    fclose(f);
+    free(src_data);
+    printf("  %s -> %s (%d INCBIN replacements)\n", src_path, out_path, replacements);
+    return 0;
+}
+
 /* ---------- Batch mode: convert all title/intro assets ---------- */
 
 struct AssetRule {
     const char *src;     /* relative to upstream graphics/ dir */
     const char *dst;     /* relative to output dir */
-    enum { PNG4, PNG8, PAL, BIN_COPY, LZ77_WRAP } type;
+    enum { PNG4, PNG8, PAL, PAL_FROM_PNG, BIN_COPY, LZ77_WRAP } type;
     int num_tiles;       /* for PNG conversion, 0 = all */
 };
 
@@ -299,6 +641,22 @@ static const struct AssetRule sTitleScreenAssets[] = {
     { "title_screen/firered/slash.pal",           "title_screen/firered/slash.gbapal", PAL, 0 },
     { "title_screen/copyright_press_start.png",   "title_screen/copyright_press_start.4bpp", PNG4, 0 },
     { "title_screen/copyright_press_start.bin",   "title_screen/copyright_press_start.bin", BIN_COPY, 0 },
+    /* Border BG (referenced by title_screen.c) */
+    { "title_screen/border_bg.png",               "title_screen/border_bg.4bpp", PNG4, 0 },
+    { "title_screen/firered/border_bg.bin",        "title_screen/firered/border_bg.bin", BIN_COPY, 0 },
+    /* Slash sprite (palette from .pal, tiles from .png) */
+    { "title_screen/slash.png",                   "title_screen/slash.4bpp", PNG4, 0 },
+    /* Flames (FireRed version) */
+    { "title_screen/firered/flames.png",          "title_screen/firered/flames.4bpp", PNG4, 0 },
+    { "title_screen/firered/flames.png",          "title_screen/firered/flames.gbapal", PAL_FROM_PNG, 0 },
+    { "title_screen/firered/blank_flames.png",    "title_screen/firered/blank_flames.4bpp", PNG4, 0 },
+    /* Unused tilemaps (referenced but unused) */
+    { "title_screen/unused1.bin",                 "title_screen/unused1.bin", BIN_COPY, 0 },
+    { "title_screen/unused2.bin",                 "title_screen/unused2.bin", BIN_COPY, 0 },
+    { "title_screen/unused3.bin",                 "title_screen/unused3.bin", BIN_COPY, 0 },
+    { "title_screen/unused4.bin",                 "title_screen/unused4.bin", BIN_COPY, 0 },
+    { "title_screen/unused5.bin",                 "title_screen/unused5.bin", BIN_COPY, 0 },
+    { "title_screen/unused6.bin",                 "title_screen/unused6.bin", BIN_COPY, 0 },
 };
 
 static const struct AssetRule sIntroAssets[] = {
@@ -311,10 +669,10 @@ static const struct AssetRule sIntroAssets[] = {
     { "intro/game_freak/bg.pal",       "intro/game_freak/bg.gbapal", PAL, 0 },
     { "intro/game_freak/bg.bin",       "intro/game_freak/bg.bin", BIN_COPY, 0 },
     { "intro/game_freak/logo.png",     "intro/game_freak/logo.4bpp", PNG4, 0 },
-    { "intro/game_freak/logo.pal",     "intro/game_freak/logo.gbapal", PAL, 0 },
+    { "intro/game_freak/logo.png",     "intro/game_freak/logo.gbapal", PAL_FROM_PNG, 0 },
     { "intro/game_freak/game_freak.png","intro/game_freak/game_freak.4bpp", PNG4, 0 },
     { "intro/game_freak/star.png",     "intro/game_freak/star.4bpp", PNG4, 0 },
-    { "intro/game_freak/star.pal",     "intro/game_freak/star.gbapal", PAL, 0 },
+    { "intro/game_freak/star.png",     "intro/game_freak/star.gbapal", PAL_FROM_PNG, 0 },
     { "intro/game_freak/sparkles_small.png", "intro/game_freak/sparkles_small.4bpp", PNG4, 0 },
     { "intro/game_freak/sparkles_big.png",   "intro/game_freak/sparkles_big.4bpp", PNG4, 0 },
     { "intro/game_freak/sparkles.pal", "intro/game_freak/sparkles.gbapal", PAL, 0 },
@@ -350,9 +708,12 @@ static const struct AssetRule sIntroAssets[] = {
     { "intro/scene_3/gengar_anim.bin","intro/scene_3/gengar_anim.bin", BIN_COPY, 0 },
     { "intro/scene_3/gengar_static.png","intro/scene_3/gengar_static.4bpp", PNG4, 0 },
     { "intro/scene_3/grass.png",      "intro/scene_3/grass.4bpp", PNG4, 0 },
+    { "intro/scene_3/grass.png",      "intro/scene_3/grass.gbapal", PAL_FROM_PNG, 0 },
     { "intro/scene_3/nidorino.png",   "intro/scene_3/nidorino.4bpp", PNG4, 0 },
     { "intro/scene_3/recoil_dust.png","intro/scene_3/recoil_dust.4bpp", PNG4, 0 },
+    { "intro/scene_3/recoil_dust.png","intro/scene_3/recoil_dust.gbapal", PAL_FROM_PNG, 0 },
     { "intro/scene_3/swipe.png",      "intro/scene_3/swipe.4bpp", PNG4, 0 },
+    { "intro/scene_3/swipe.png",      "intro/scene_3/swipe.gbapal", PAL_FROM_PNG, 0 },
 };
 
 static void mkdirs(const char *path)
@@ -388,6 +749,9 @@ static int process_rule(const struct AssetRule *rule,
         break;
     case PAL:
         ret = cmd_pal2gba(src_path, dst_path);
+        break;
+    case PAL_FROM_PNG:
+        ret = cmd_png2pal(src_path, dst_path);
         break;
     case BIN_COPY: {
         size_t sz;
@@ -438,10 +802,14 @@ static void usage(void)
 {
     fprintf(stderr,
         "Usage:\n"
-        "  pfr_assets png2gba <input.png> <output.4bpp|.8bpp> [--num-tiles N] [--8bpp]\n"
-        "  pfr_assets pal2gba <input.pal> <output.gbapal>\n"
-        "  pfr_assets lz77    <input>     <output.lz>\n"
-        "  pfr_assets batch   <upstream_pokefirered_dir> <output_dir>\n"
+        "  pfr_assets png2gba  <input.png> <output.4bpp|.8bpp> [--num-tiles N] [--8bpp]\n"
+        "  pfr_assets pal2gba  <input.pal> <output.gbapal>\n"
+        "  pfr_assets png2pal  <input.png> <output.gbapal>\n"
+        "  pfr_assets lz77     <input>     <output.lz>\n"
+        "  pfr_assets bin2inc  <input.bin> <output.inc> [--u16|--u32]\n"
+        "  pfr_assets preproc  <input.c>   <inc_dir> <output.c>\n"
+        "  pfr_assets batch    <upstream_pokefirered_dir> <output_dir>\n"
+        "  pfr_assets geninc   <assets_dir> <inc_dir>\n"
     );
 }
 
@@ -464,13 +832,34 @@ int main(int argc, char *argv[])
         if (argc < 4) { usage(); return 1; }
         return cmd_pal2gba(argv[2], argv[3]);
     }
+    else if (strcmp(argv[1], "png2pal") == 0) {
+        if (argc < 4) { usage(); return 1; }
+        return cmd_png2pal(argv[2], argv[3]);
+    }
     else if (strcmp(argv[1], "lz77") == 0) {
         if (argc < 4) { usage(); return 1; }
         return cmd_lz77(argv[2], argv[3]);
     }
+    else if (strcmp(argv[1], "bin2inc") == 0) {
+        if (argc < 4) { usage(); return 1; }
+        int elem = 1;
+        for (int i = 4; i < argc; i++) {
+            if (strcmp(argv[i], "--u16") == 0) elem = 2;
+            else if (strcmp(argv[i], "--u32") == 0) elem = 4;
+        }
+        return cmd_bin2inc(argv[2], argv[3], elem);
+    }
+    else if (strcmp(argv[1], "preproc") == 0) {
+        if (argc < 5) { usage(); return 1; }
+        return cmd_preproc(argv[2], argv[3], argv[4]);
+    }
     else if (strcmp(argv[1], "batch") == 0) {
         if (argc < 4) { usage(); return 1; }
         return cmd_batch(argv[2], argv[3]);
+    }
+    else if (strcmp(argv[1], "geninc") == 0) {
+        if (argc < 4) { usage(); return 1; }
+        return cmd_geninc(argv[2], argv[3]);
     }
     else {
         usage();
