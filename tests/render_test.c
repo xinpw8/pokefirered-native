@@ -27,6 +27,9 @@
 #include "host_crt0.h"
 #include "host_intro_stubs.h"
 #include "host_title_screen_stubs.h"
+#include "palette.h"
+#include "task.h"
+#include "sprite.h"
 
 /* Stub for oak_speech's renamed entry point (GPT is wiring the real one) */
 void UpstreamStartNewGameScene(void) { }
@@ -153,11 +156,17 @@ int main(int argc, char *argv[])
             }
         }
 
-        /* Run the main callbacks (one frame's worth) */
+        /* Run the main callbacks and engine subsystems (mirrors AgbMain loop) */
         if (gMain.callback1)
             gMain.callback1();
         if (gMain.callback2)
             gMain.callback2();
+
+        RunTasks();
+        AnimateSprites();
+        BuildOamBuffer();
+        UpdatePaletteFade();
+        CopyBufferedValuesToGpuRegs();
 
         /* Render at end of frame */
         if (i % 30 == 0) /* dump every 30th frame to avoid flooding */
