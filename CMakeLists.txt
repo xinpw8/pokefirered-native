@@ -30,6 +30,7 @@ add_library(pfr_upstream_core STATIC
     src/host_renderer.c
     src/host_display.c
     src/host_intro_stubs.c
+        src/host_oak_speech_stubs.c
     src/host_title_screen_stubs.c
     src/upstream_stubs.c
     "${POKEFIRERED_SOURCE_DIR}/src/random.c"
