@@ -1,0 +1,106 @@
+CMakeFiles/pfr_render_test.dir/tests/render_test.c.o: \
+ /home/spark-advantage/pokefirered-native/tests/render_test.c \
+ /usr/include/stdc-predef.h /usr/include/stdio.h \
+ /usr/include/aarch64-linux-gnu/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/features-time64.h \
+ /usr/include/aarch64-linux-gnu/bits/wordsize.h \
+ /usr/include/aarch64-linux-gnu/bits/timesize.h \
+ /usr/include/aarch64-linux-gnu/sys/cdefs.h \
+ /usr/include/aarch64-linux-gnu/bits/long-double.h \
+ /usr/include/aarch64-linux-gnu/gnu/stubs.h \
+ /usr/include/aarch64-linux-gnu/gnu/stubs-lp64.h \
+ /usr/lib/gcc/aarch64-linux-gnu/13/include/stddef.h \
+ /usr/lib/gcc/aarch64-linux-gnu/13/include/stdarg.h \
+ /usr/include/aarch64-linux-gnu/bits/types.h \
+ /usr/include/aarch64-linux-gnu/bits/typesizes.h \
+ /usr/include/aarch64-linux-gnu/bits/time64.h \
+ /usr/include/aarch64-linux-gnu/bits/types/__fpos_t.h \
+ /usr/include/aarch64-linux-gnu/bits/types/__mbstate_t.h \
+ /usr/include/aarch64-linux-gnu/bits/types/__fpos64_t.h \
+ /usr/include/aarch64-linux-gnu/bits/types/__FILE.h \
+ /usr/include/aarch64-linux-gnu/bits/types/FILE.h \
+ /usr/include/aarch64-linux-gnu/bits/types/struct_FILE.h \
+ /usr/include/aarch64-linux-gnu/bits/types/cookie_io_functions_t.h \
+ /usr/include/aarch64-linux-gnu/bits/stdio_lim.h \
+ /usr/include/aarch64-linux-gnu/bits/floatn.h \
+ /usr/include/aarch64-linux-gnu/bits/floatn-common.h \
+ /usr/include/stdlib.h /usr/include/aarch64-linux-gnu/bits/waitflags.h \
+ /usr/include/aarch64-linux-gnu/bits/waitstatus.h \
+ /usr/include/aarch64-linux-gnu/sys/types.h \
+ /usr/include/aarch64-linux-gnu/bits/types/clock_t.h \
+ /usr/include/aarch64-linux-gnu/bits/types/clockid_t.h \
+ /usr/include/aarch64-linux-gnu/bits/types/time_t.h \
+ /usr/include/aarch64-linux-gnu/bits/types/timer_t.h \
+ /usr/include/aarch64-linux-gnu/bits/stdint-intn.h /usr/include/endian.h \
+ /usr/include/aarch64-linux-gnu/bits/endian.h \
+ /usr/include/aarch64-linux-gnu/bits/endianness.h \
+ /usr/include/aarch64-linux-gnu/bits/byteswap.h \
+ /usr/include/aarch64-linux-gnu/bits/uintn-identity.h \
+ /usr/include/aarch64-linux-gnu/sys/select.h \
+ /usr/include/aarch64-linux-gnu/bits/select.h \
+ /usr/include/aarch64-linux-gnu/bits/types/sigset_t.h \
+ /usr/include/aarch64-linux-gnu/bits/types/__sigset_t.h \
+ /usr/include/aarch64-linux-gnu/bits/types/struct_timeval.h \
+ /usr/include/aarch64-linux-gnu/bits/types/struct_timespec.h \
+ /usr/include/aarch64-linux-gnu/bits/pthreadtypes.h \
+ /usr/include/aarch64-linux-gnu/bits/thread-shared-types.h \
+ /usr/include/aarch64-linux-gnu/bits/pthreadtypes-arch.h \
+ /usr/include/aarch64-linux-gnu/bits/atomic_wide_counter.h \
+ /usr/include/aarch64-linux-gnu/bits/struct_mutex.h \
+ /usr/include/aarch64-linux-gnu/bits/struct_rwlock.h \
+ /usr/include/alloca.h /usr/include/aarch64-linux-gnu/bits/stdlib-float.h \
+ /usr/include/string.h \
+ /usr/include/aarch64-linux-gnu/bits/types/locale_t.h \
+ /usr/include/aarch64-linux-gnu/bits/types/__locale_t.h \
+ /usr/include/strings.h /usr/include/aarch64-linux-gnu/sys/stat.h \
+ /usr/include/aarch64-linux-gnu/bits/stat.h \
+ /usr/include/aarch64-linux-gnu/bits/struct_stat.h \
+ /home/spark-advantage/pokefirered-native/src/host_include/global.h \
+ /home/spark-advantage/pokefirered-native/../pokefirered/include/config.h \
+ /home/spark-advantage/pokefirered-native/../pokefirered/include/global.h \
+ /home/spark-advantage/pokefirered-native/src/host_include/gba/gba.h \
+ /home/spark-advantage/pokefirered-native/src/host_include/gba/../../../../pokefirered/include/gba/defines.h \
+ /home/spark-advantage/pokefirered-native/src/host_include/gba/../../../../pokefirered/include/gba/io_reg.h \
+ /home/spark-advantage/pokefirered-native/src/host_include/gba/../../../../pokefirered/include/gba/types.h \
+ /usr/lib/gcc/aarch64-linux-gnu/13/include/stdint.h /usr/include/stdint.h \
+ /usr/include/aarch64-linux-gnu/bits/wchar.h \
+ /usr/include/aarch64-linux-gnu/bits/stdint-uintn.h \
+ /usr/include/aarch64-linux-gnu/bits/stdint-least.h \
+ /home/spark-advantage/pokefirered-native/src/host_include/gba/../../../../pokefirered/include/gba/multiboot.h \
+ /home/spark-advantage/pokefirered-native/src/host_include/gba/../../../../pokefirered/include/gba/syscall.h \
+ /home/spark-advantage/pokefirered-native/src/host_include/gba/macro.h \
+ /home/spark-advantage/pokefirered-native/src/host_include/gba/../../../../pokefirered/include/gba/macro.h \
+ /home/spark-advantage/pokefirered-native/src/host_dma.h \
+ /home/spark-advantage/pokefirered-native/src/host_include/gba/../../../../pokefirered/include/gba/isagbprint.h \
+ /home/spark-advantage/pokefirered-native/../pokefirered/include/gba/types.h \
+ /home/spark-advantage/pokefirered-native/../pokefirered/include/constants/global.h \
+ /home/spark-advantage/pokefirered-native/../pokefirered/include/constants/flags.h \
+ /home/spark-advantage/pokefirered-native/../pokefirered/include/constants/trainers.h \
+ /home/spark-advantage/pokefirered-native/../pokefirered/include/constants/opponents.h \
+ /home/spark-advantage/pokefirered-native/../pokefirered/include/constants/vars.h \
+ /home/spark-advantage/pokefirered-native/../pokefirered/include/constants/species.h \
+ /home/spark-advantage/pokefirered-native/../pokefirered/include/constants/pokedex.h \
+ /home/spark-advantage/pokefirered-native/../pokefirered/include/constants/easy_chat.h \
+ /home/spark-advantage/pokefirered-native/../pokefirered/include/constants/rgb.h \
+ /home/spark-advantage/pokefirered-native/../pokefirered/include/constants/game_stat.h \
+ /home/spark-advantage/pokefirered-native/../pokefirered/include/global.fieldmap.h \
+ /home/spark-advantage/pokefirered-native/../pokefirered/include/global.berry.h \
+ /home/spark-advantage/pokefirered-native/../pokefirered/include/pokemon.h \
+ /home/spark-advantage/pokefirered-native/../pokefirered/include/sprite.h \
+ /home/spark-advantage/pokefirered-native/../pokefirered/include/constants/pokemon.h \
+ /home/spark-advantage/pokefirered-native/../pokefirered/include/fame_checker.h \
+ /home/spark-advantage/pokefirered-native/../pokefirered/include/main.h \
+ /home/spark-advantage/pokefirered-native/../pokefirered/include/constants/fame_checker.h \
+ /home/spark-advantage/pokefirered-native/src/host_include/gba/gba.h \
+ /home/spark-advantage/pokefirered-native/../pokefirered/include/main.h \
+ /home/spark-advantage/pokefirered-native/../pokefirered/include/gpu_regs.h \
+ /home/spark-advantage/pokefirered-native/../pokefirered/include/palette.h \
+ /home/spark-advantage/pokefirered-native/../pokefirered/include/task.h \
+ /home/spark-advantage/pokefirered-native/../pokefirered/include/sprite.h \
+ /home/spark-advantage/pokefirered-native/src/host_agbmain.h \
+ /home/spark-advantage/pokefirered-native/src/host_memory.h \
+ /home/spark-advantage/pokefirered-native/src/host_renderer.h \
+ /home/spark-advantage/pokefirered-native/src/host_display.h \
+ /home/spark-advantage/pokefirered-native/src/host_crt0.h \
+ /home/spark-advantage/pokefirered-native/src/host_intro_stubs.h \
+ /home/spark-advantage/pokefirered-native/src/host_title_screen_stubs.h
