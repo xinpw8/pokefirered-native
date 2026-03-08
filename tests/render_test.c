@@ -28,6 +28,10 @@
 #include "host_renderer.h"
 #include "host_display.h"
 #include "host_crt0.h"
+#include "bg.h"
+#include "dma3.h"
+#include "malloc.h"
+#include "load_save.h"
 #include "host_intro_stubs.h"
 #include "host_title_screen_stubs.h"
 
@@ -147,7 +151,18 @@ int main(int argc, char *argv[])
     REG_IME = 1;
     REG_IE |= INTR_FLAG_VBLANK;
 
-    /* 4. Initialize subsystems */
+    /* 4. Initialize subsystems (mirrors AgbMain's init sequence) */
+    InitKeys();
+    ClearDma3Requests();
+    ResetBgs();
+    InitHeap(gHeap, HEAP_SIZE);
+
+    /* 5. Set save block pointers (CB2_InitCopyrightScreenAfterBootup dereferences these) */
+    gSaveBlock2Ptr = &gSaveBlock2;
+    gSaveBlock1Ptr = &gSaveBlock1;
+    gSaveBlock2.encryptionKey = 0;
+
+    /* 6. Initialize main callbacks */
     gMain.callback1 = NULL;
     gMain.callback2 = NULL;
     gMain.vblankCallback = NULL;

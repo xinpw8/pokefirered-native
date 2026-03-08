@@ -102,5 +102,10 @@ CMakeFiles/pfr_render_test.dir/tests/render_test.c.o: \
  /home/spark-advantage/pokefirered-native/src/host_renderer.h \
  /home/spark-advantage/pokefirered-native/src/host_display.h \
  /home/spark-advantage/pokefirered-native/src/host_crt0.h \
+ /home/spark-advantage/pokefirered-native/../pokefirered/include/bg.h \
+ /home/spark-advantage/pokefirered-native/src/host_include/dma3.h \
+ /home/spark-advantage/pokefirered-native/src/host_include/global.h \
+ /home/spark-advantage/pokefirered-native/../pokefirered/include/malloc.h \
+ /home/spark-advantage/pokefirered-native/../pokefirered/include/load_save.h \
  /home/spark-advantage/pokefirered-native/src/host_intro_stubs.h \
  /home/spark-advantage/pokefirered-native/src/host_title_screen_stubs.h
