@@ -288,6 +288,32 @@ target_link_options(pfr_render_test PRIVATE
 )
 target_link_libraries(pfr_render_test PRIVATE pfr_upstream_core Threads::Threads m)
 
+# Interactive player: SDL2 window with live keyboard input
+add_executable(pfr_play src/pfr_play.c)
+target_sources(pfr_play PRIVATE
+    src/host_agbmain.c
+    $<TARGET_OBJECTS:pfr_upstream_intro>
+    $<TARGET_OBJECTS:pfr_upstream_title>
+    $<TARGET_OBJECTS:pfr_upstream_clear_save>
+    $<TARGET_OBJECTS:pfr_upstream_berry_fix>
+    $<TARGET_OBJECTS:pfr_upstream_main_menu>
+    $<TARGET_OBJECTS:pfr_upstream_oak_speech>
+    $<TARGET_OBJECTS:pfr_upstream_runtime>
+)
+target_compile_definitions(pfr_play PRIVATE ${PFR_COMMON_DEFINES})
+target_compile_options(pfr_play PRIVATE
+    -fno-pie
+    "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
+    "-iquote${POKEFIRERED_SOURCE_DIR}/include"
+    -Wno-int-to-pointer-cast
+    -Wno-pointer-to-int-cast
+)
+target_link_options(pfr_play PRIVATE
+    -no-pie
+    -Wl,--gc-sections
+)
+target_link_libraries(pfr_play PRIVATE pfr_upstream_core Threads::Threads m)
+
 # Asset compiler: converts upstream PNG/PAL/BIN to GBA intermediate formats
 add_executable(pfr_assets tools/pfr_assets.c)
 target_compile_options(pfr_assets PRIVATE -O2)
