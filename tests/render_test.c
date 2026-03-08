@@ -28,6 +28,9 @@
 #include "host_intro_stubs.h"
 #include "host_title_screen_stubs.h"
 
+/* Stub for oak_speech's renamed entry point (GPT is wiring the real one) */
+void UpstreamStartNewGameScene(void) { }
+
 /* Track non-empty frames */
 static int sNonEmptyFrames = 0;
 
