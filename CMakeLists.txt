@@ -326,29 +326,6 @@ target_include_directories(pfr_upstream_new_game PUBLIC
 )
 add_dependencies(pfr_upstream_new_game pfr_generated_headers)
 
-add_library(pfr_upstream_overworld OBJECT
-    "${POKEFIRERED_SOURCE_DIR}/src/overworld.c"
-)
-target_compile_definitions(pfr_upstream_overworld PRIVATE
-    ${PFR_COMMON_DEFINES}
-    CB2_NewGame=UpstreamCB2_NewGame
-)
-target_compile_options(pfr_upstream_overworld PRIVATE
-    -fno-pie
-    -ffunction-sections
-    -fdata-sections
-    -Wno-int-conversion
-    -Wno-int-to-pointer-cast
-    -Wno-pointer-to-int-cast
-    "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
-    "-iquote${PFR_GEN_HEADERS_DIR}"
-    "-iquote${POKEFIRERED_SOURCE_DIR}/include"
-)
-target_include_directories(pfr_upstream_overworld PUBLIC
-    "${CMAKE_CURRENT_SOURCE_DIR}/src"
-)
-add_dependencies(pfr_upstream_overworld pfr_generated_headers)
-
 add_library(pfr_upstream_play_time OBJECT
     "${POKEFIRERED_SOURCE_DIR}/src/play_time.c"
 )
@@ -381,7 +358,6 @@ target_sources(pfr_smoke PRIVATE
     $<TARGET_OBJECTS:pfr_upstream_main_menu>
     $<TARGET_OBJECTS:pfr_upstream_oak_speech>
     $<TARGET_OBJECTS:pfr_upstream_new_game>
-    $<TARGET_OBJECTS:pfr_upstream_overworld>
     $<TARGET_OBJECTS:pfr_upstream_play_time>
     $<TARGET_OBJECTS:pfr_upstream_runtime>
 )
@@ -429,7 +405,6 @@ target_sources(pfr_render_test PRIVATE
     $<TARGET_OBJECTS:pfr_upstream_berry_fix>
     $<TARGET_OBJECTS:pfr_upstream_main_menu>
     $<TARGET_OBJECTS:pfr_upstream_new_game>
-    $<TARGET_OBJECTS:pfr_upstream_overworld>
     $<TARGET_OBJECTS:pfr_upstream_play_time>
     $<TARGET_OBJECTS:pfr_upstream_runtime>
 )
@@ -460,7 +435,6 @@ target_sources(pfr_play PRIVATE
     $<TARGET_OBJECTS:pfr_upstream_main_menu>
     $<TARGET_OBJECTS:pfr_upstream_oak_speech>
     $<TARGET_OBJECTS:pfr_upstream_new_game>
-    $<TARGET_OBJECTS:pfr_upstream_overworld>
     $<TARGET_OBJECTS:pfr_upstream_play_time>
     $<TARGET_OBJECTS:pfr_upstream_runtime>
 )
