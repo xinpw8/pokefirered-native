@@ -47,6 +47,8 @@ extern u16 gKeyRepeatContinueDelay;
 extern const u8 gText_Controls[];
 extern const u8 gText_ABUTTONNext[];
 extern const u8 gText_ABUTTONNext_BBUTTONBack[];
+extern const u8 gOakSpeech_Text_WelcomeToTheWorld[];
+extern const u8 gOakSpeech_Text_ThisWorld[];
 
 void EnableVCountIntrAtLine150(void);
 void InitIntrHandlers(void);
@@ -710,6 +712,16 @@ static int PulseButtonUntilCounterIncrements(u16 button, const u32 *counter, u32
     return Expect(*counter > initialCount, message);
 }
 
+static int RunUntilCounterIncrements(const u32 *counter, u32 initialCount, int maxFrames, const char *message)
+{
+    int i;
+
+    for (i = 0; i < maxFrames && *counter == initialCount; i++)
+        RunMainCallbackFrame();
+
+    return Expect(*counter > initialCount, message);
+}
+
 static void ResetBootCallbackHarness(void)
 {
     HostMemoryReset();
@@ -1229,6 +1241,33 @@ static int TestOakSpeechPikachuIntroExitToOakSpeechInit(void)
     return rc;
 }
 
+static int TestOakSpeechWelcomeMessages(void)
+{
+    int rc = 0;
+    u32 welcomePrints;
+    u32 thisWorldPrints;
+
+    rc |= TestOakSpeechPikachuIntroExitToOakSpeechInit();
+
+    welcomePrints = gHostOakSpeechWelcomeToTheWorldPrints;
+    rc |= RunUntilCounterIncrements(&gHostOakSpeechWelcomeToTheWorldPrints, welcomePrints, 192,
+                                    "Oak Speech did not print the welcome message after init");
+    rc |= Expect(gHostOakSpeechLastExpandedPlaceholderSource == gOakSpeech_Text_WelcomeToTheWorld,
+                 "Oak Speech welcome message did not expand the expected source string");
+    rc |= Expect(gHostOakSpeechLastPlayedBGM == MUS_ROUTE24,
+                 "Oak Speech changed away from MUS_ROUTE24 before the welcome message stabilized");
+
+    thisWorldPrints = gHostOakSpeechThisWorldPrints;
+    rc |= RunUntilCounterIncrements(&gHostOakSpeechThisWorldPrints, thisWorldPrints, 64,
+                                    "Oak Speech did not advance from the welcome message to 'This world'");
+    rc |= Expect(gHostOakSpeechLastExpandedPlaceholderSource == gOakSpeech_Text_ThisWorld,
+                 "Oak Speech 'This world' message did not expand the expected source string");
+    rc |= Expect(gHostOakSpeechDoNamingScreenCalls == 0,
+                 "Oak Speech advanced beyond the early welcome messages before smoke observed them");
+
+    return rc;
+}
+
 static int TestTitleScreenSaveClearHandoff(void)
 {
     int rc = 0;
@@ -1374,6 +1413,7 @@ int main(void)
     rc |= TestOakSpeechControlsGuideToPikachuIntro();
     rc |= TestOakSpeechPikachuIntroPages();
     rc |= TestOakSpeechPikachuIntroExitToOakSpeechInit();
+    rc |= TestOakSpeechWelcomeMessages();
     rc |= TestTitleScreenSaveClearHandoff();
     rc |= TestTitleScreenBerryFixHandoff();
 

@@ -42,6 +42,9 @@ u32 gHostOakSpeechControlsGuidePage3Loads = 0;
 u32 gHostOakSpeechPikachuIntroPage1Loads = 0;
 u32 gHostOakSpeechPikachuIntroPage2Loads = 0;
 u32 gHostOakSpeechPikachuIntroPage3Loads = 0;
+u32 gHostOakSpeechWelcomeToTheWorldPrints = 0;
+u32 gHostOakSpeechThisWorldPrints = 0;
+const u8 *gHostOakSpeechLastExpandedPlaceholderSource = NULL;
 u16 gHostOakSpeechLastPlayedBGM = 0;
 const u8 *gHostOakSpeechLastTopBarLeftText = NULL;
 const u8 *gHostOakSpeechLastTopBarRightText = NULL;
@@ -182,6 +185,9 @@ void HostOakSpeechStubReset(void)
     gHostOakSpeechPikachuIntroPage1Loads = 0;
     gHostOakSpeechPikachuIntroPage2Loads = 0;
     gHostOakSpeechPikachuIntroPage3Loads = 0;
+    gHostOakSpeechWelcomeToTheWorldPrints = 0;
+    gHostOakSpeechThisWorldPrints = 0;
+    gHostOakSpeechLastExpandedPlaceholderSource = NULL;
     gHostOakSpeechLastPlayedBGM = 0;
     gHostOakSpeechLastTopBarLeftText = NULL;
     gHostOakSpeechLastTopBarRightText = NULL;
@@ -379,6 +385,11 @@ u16 AddTextPrinterParameterized2(u8 windowId, u8 fontId, const u8 *str, u8 speed
 
 u8 *StringExpandPlaceholders(u8 *dest, const u8 *src)
 {
+    gHostOakSpeechLastExpandedPlaceholderSource = src;
+    if (src == gOakSpeech_Text_WelcomeToTheWorld)
+        gHostOakSpeechWelcomeToTheWorldPrints++;
+    else if (src == gOakSpeech_Text_ThisWorld)
+        gHostOakSpeechThisWorldPrints++;
     return CopyHostString(dest, src);
 }
 
