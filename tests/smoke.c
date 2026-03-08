@@ -1167,6 +1167,31 @@ static int TestOakSpeechControlsGuideToPikachuIntro(void)
     return rc;
 }
 
+static int TestOakSpeechPikachuIntroPages(void)
+{
+    int rc = 0;
+    u32 page2Loads;
+    u32 page3Loads;
+
+    rc |= TestOakSpeechControlsGuideToPikachuIntro();
+
+    page2Loads = gHostOakSpeechPikachuIntroPage2Loads;
+    rc |= PulseButtonUntilCounterIncrements(A_BUTTON, &gHostOakSpeechPikachuIntroPage2Loads, page2Loads, 128,
+                                            "Pikachu intro did not advance from page 1 to page 2");
+    rc |= Expect(gHostOakSpeechLastTopBarLeftText == NULL,
+                 "Pikachu intro page 2 unexpectedly restored a left top-bar label");
+    rc |= Expect(gHostOakSpeechLastTopBarRightText == gText_ABUTTONNext_BBUTTONBack,
+                 "Pikachu intro page 2 did not print the A Next / B Back prompt");
+
+    page3Loads = gHostOakSpeechPikachuIntroPage3Loads;
+    rc |= PulseButtonUntilCounterIncrements(A_BUTTON, &gHostOakSpeechPikachuIntroPage3Loads, page3Loads, 128,
+                                            "Pikachu intro did not advance from page 2 to page 3");
+    rc |= Expect(gHostOakSpeechLastTopBarRightText == gText_ABUTTONNext_BBUTTONBack,
+                 "Pikachu intro page 3 did not keep the A Next / B Back prompt");
+
+    return rc;
+}
+
 static int TestTitleScreenSaveClearHandoff(void)
 {
     int rc = 0;
@@ -1310,6 +1335,7 @@ int main(void)
     rc |= TestTitleScreenRestartHandoff();
     rc |= TestTitleScreenMainMenuHandoff();
     rc |= TestOakSpeechControlsGuideToPikachuIntro();
+    rc |= TestOakSpeechPikachuIntroPages();
     rc |= TestTitleScreenSaveClearHandoff();
     rc |= TestTitleScreenBerryFixHandoff();
 
