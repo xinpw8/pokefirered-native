@@ -235,7 +235,7 @@ Verified commands and outcomes:
 - real upstream `intro.c` callback progression from `CB2_InitCopyrightScreenAfterBootup` through copyright fade-out, intro setup, the first `CB2_Intro` frame, the Game Freak star, reveal-name, reveal-logo, Scene 1, Scene 2, Scene 3, and the natural non-skipped handoff into `CB2_InitTitleScreen`
 - real upstream `title_screen.c` progression from init through the first title-loop frame, run-state setup, timeout restart, cry-to-main-menu handoff, delete-save handoff into `CB2_SaveClearScreen_Init`, and berry-fix handoff into `CB2_InitBerryFixProgram`
 - real upstream `main_menu.c` progression through save-present menu setup, continue-stat printing, fade-in/input-ready state, and New Game selection handoff into `StartNewGameScene`
-- real upstream `oak_speech.c` progression through `StartNewGameScene()`, initial New Game callback/task setup, standard text-box/window initialization, and entry into the controls-guide path
+- real upstream `oak_speech.c` progression through `StartNewGameScene()`, initial New Game callback/task setup, controls-guide page transitions, and handoff into Pikachu intro page 1
 - real upstream `clear_save_data_screen.c` progression through init, GPU/window setup, confirmation prompt, yes-no menu creation, and yes-selection clear-save handling
 - real upstream `berry_fix_program.c` progression through init, begin/connect/power-off scene changes, multiboot init/start, and successful advance into the follow-instructions scene
 
@@ -523,7 +523,7 @@ The current strategy is intentionally conservative:
 ## Recommended Next Step
 
 If continuing from here, the most defensible next step is:
-1. deepen the already linked `oak_speech.c` path beyond the current initial setup/controls-guide boundary toward gender selection, naming, and the eventual `CB2_NewGame` handoff
+1. deepen the already linked `oak_speech.c` path beyond the current controls-guide/Pikachu-intro-page-1 boundary toward Oak Speech proper, gender selection, naming, and the eventual `CB2_NewGame` handoff
 2. tighten `host_crt0.c` and `host_agbmain.c` toward a closer `crt0.s:start_vector` / startup model now that the deeper intro/title/menu flow is proven
 3. keep the now-verified `crt0`/AgbMain/palette/bg/sprite/task/scanline/title/menu path as the runtime base while renderer/input, m4a, save, and link stay explicitly pending
 

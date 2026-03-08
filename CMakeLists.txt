@@ -21,6 +21,11 @@ set(PFR_COMMON_DEFINES
     ENGLISH
 )
 
+# Asset pipeline output directories (used by preprocessed source targets)
+set(PFR_ASSETS_DIR "${CMAKE_BINARY_DIR}/assets")
+set(PFR_INC_DIR    "${CMAKE_BINARY_DIR}/inc")
+set(PFR_GEN_DIR    "${CMAKE_BINARY_DIR}/gen")
+
 add_library(pfr_upstream_core STATIC
     src/host_crt0.c
     src/host_memory.c
@@ -103,7 +108,7 @@ target_include_directories(pfr_upstream_runtime PUBLIC
 )
 
 add_library(pfr_upstream_intro OBJECT
-    "${POKEFIRERED_SOURCE_DIR}/src/intro.c"
+    "${PFR_GEN_DIR}/intro.c"
 )
 target_compile_definitions(pfr_upstream_intro PRIVATE ${PFR_COMMON_DEFINES})
 target_compile_options(pfr_upstream_intro PRIVATE
@@ -121,7 +126,7 @@ target_include_directories(pfr_upstream_intro PUBLIC
 )
 
 add_library(pfr_upstream_title OBJECT
-    "${POKEFIRERED_SOURCE_DIR}/src/title_screen.c"
+    "${PFR_GEN_DIR}/title_screen.c"
 )
 target_compile_definitions(pfr_upstream_title PRIVATE ${PFR_COMMON_DEFINES})
 target_compile_options(pfr_upstream_title PRIVATE
@@ -289,10 +294,6 @@ target_compile_options(pfr_assets PRIVATE -O2)
 target_link_libraries(pfr_assets PRIVATE m)
 
 # Asset pipeline: compile assets, generate .inc files, preprocess upstream sources
-set(PFR_ASSETS_DIR "${CMAKE_BINARY_DIR}/assets")
-set(PFR_INC_DIR    "${CMAKE_BINARY_DIR}/inc")
-set(PFR_GEN_DIR    "${CMAKE_BINARY_DIR}/gen")
-
 add_custom_command(
     OUTPUT "${PFR_GEN_DIR}/intro.c" "${PFR_GEN_DIR}/title_screen.c"
     COMMAND ${CMAKE_COMMAND} -E make_directory "${PFR_ASSETS_DIR}"

@@ -32,7 +32,7 @@ What is wired today:
   - `src/intro.c` for the real copyright-screen through Game Freak reveal-name/reveal-logo, Scene 1, Scene 2, Scene 3, and the natural non-skipped title-screen handoff
   - `src/title_screen.c` for real title-screen init, run-state progression, and downstream handoffs for restart/cry/main-menu/save-clear/berry-fix
   - `src/main_menu.c` for the real main-menu GPU/task/menu-state flow reached from the title-screen cry path
-  - `src/oak_speech.c` for the real New Game provider reached from the main-menu handoff, currently proven through initial Oak Speech setup and entry into the controls-guide path
+  - `src/oak_speech.c` for the real New Game provider reached from the main-menu handoff, currently proven through controls-guide page transitions and handoff into Pikachu intro page 1
   - `src/clear_save_data_screen.c` for the real save-clear confirmation flow reached from the title-screen delete-save chord
   - `src/berry_fix_program.c` for the real berry-fix multiboot state machine reached from the title-screen berry-fix chord
 - Host-backed fixed-address GBA memory regions:
@@ -47,7 +47,7 @@ What is wired today:
 - A host `crt0`-derived interrupt dispatcher and `AgbMain` runner that drive real upstream init/loop code with hosted scanline/VBlank delivery and exit through the original soft-reset path.
 - Narrow host intro/window/save/multiboot shims that let unchanged upstream `intro.c` advance from the copyright screen through the early Game Freak sequence into Scene 1.
 - Narrow host title/help/save/sound/graphics/menu/multiboot shims, isolated under `host_title_screen_stubs.c` / `host_title_screen_stubs.h`, that let unchanged upstream `title_screen.c`, `main_menu.c`, `clear_save_data_screen.c`, and `berry_fix_program.c` progress through their current source-driven paths.
-- Narrow host Oak Speech text/window/menu/naming/mon-sprite shims, isolated under `host_oak_speech_stubs.c` / `host_oak_speech_stubs.h`, that let unchanged upstream `oak_speech.c` link and execute its initial New Game setup path without widening gameplay rewrites into the upstream file.
+- Narrow host Oak Speech text/window/menu/naming/mon-sprite shims, isolated under `host_oak_speech_stubs.c` / `host_oak_speech_stubs.h`, that let unchanged upstream `oak_speech.c` link and execute its controls-guide and Pikachu-intro entry path without widening gameplay rewrites into the upstream file.
 - Host implementations for the BIOS/debug surface those files depend on:
   - `CpuSet`
   - `CpuFastSet`
@@ -78,7 +78,7 @@ cmake --build /home/spark-advantage/pokefirered-native/build -j
 ```
 
 Targets:
-- `pfr_smoke`: verifies the native bootstrap against exact-source RNG, heap, decompression, GPU register buffering, DMA3 request processing, scanline-effect HBlank DMA/task behavior, palette transfer/fade setup, BG control/tilemap/VRAM behavior, sprite sheet/palette/core object behavior, `main.c` helper/interrupt/runtime behavior, a `crt0.s`-derived host interrupt dispatcher, a bounded hosted `AgbMain` init/frame/soft-reset slice, the real upstream `intro.c` path through the full non-skipped Game Freak / Scene 1 / Scene 2 / Scene 3 sequence into natural title-screen handoff, real upstream `title_screen.c` progression from init into run-state plus restart/cry/main-menu/save-clear/berry-fix downstream handoffs, the real upstream `main_menu.c` provider through save-present continue/new-game menu setup and New Game selection handoff, the real upstream `oak_speech.c` provider through `StartNewGameScene()`, initial Oak Speech GPU/window/text setup, and entry into the controls-guide path, the real upstream `clear_save_data_screen.c` provider through confirmation prompt, yes-no menu creation, and clear-save selection handling, and the real upstream `berry_fix_program.c` provider through begin/connect/power-off scenes and successful multiboot progression into the follow-instructions scene.
+- `pfr_smoke`: verifies the native bootstrap against exact-source RNG, heap, decompression, GPU register buffering, DMA3 request processing, scanline-effect HBlank DMA/task behavior, palette transfer/fade setup, BG control/tilemap/VRAM behavior, sprite sheet/palette/core object behavior, `main.c` helper/interrupt/runtime behavior, a `crt0.s`-derived host interrupt dispatcher, a bounded hosted `AgbMain` init/frame/soft-reset slice, the real upstream `intro.c` path through the full non-skipped Game Freak / Scene 1 / Scene 2 / Scene 3 sequence into natural title-screen handoff, real upstream `title_screen.c` progression from init into run-state plus restart/cry/main-menu/save-clear/berry-fix downstream handoffs, the real upstream `main_menu.c` provider through save-present continue/new-game menu setup and New Game selection handoff, the real upstream `oak_speech.c` provider through `StartNewGameScene()`, controls-guide page transitions, and handoff into Pikachu intro page 1, the real upstream `clear_save_data_screen.c` provider through confirmation prompt, yes-no menu creation, and clear-save selection handling, and the real upstream `berry_fix_program.c` provider through begin/connect/power-off scenes and successful multiboot progression into the follow-instructions scene.
 - `pfr_lz77`: uses the original upstream decompression entrypoints to decode an LZ77 blob.
 
 LZ77 tool:
@@ -87,7 +87,7 @@ LZ77 tool:
 ```
 
 Next rehost boundary, based on upstream source:
-1. deepen the newly linked `src/oak_speech.c` path beyond its current initial setup/controls-guide boundary toward gender selection, naming, and the eventual `CB2_NewGame` handoff
+1. deepen the newly linked `src/oak_speech.c` path beyond its current controls-guide/Pikachu-intro-page-1 boundary toward Oak Speech proper, gender selection, naming, and the eventual `CB2_NewGame` handoff
 2. tighten `host_crt0.c` / `host_agbmain.c` toward a closer `crt0.s:start_vector` / startup / interrupt model now that the deeper intro/title/menu flow is proven
 3. add the minimum renderer/input/runtime support needed to make the `main_menu.c` -> `oak_speech.c` -> `CB2_NewGame` path user-visible and interactive
 4. `src/m4a.c`, `src/m4a_1.s`, `src/sound.c`
