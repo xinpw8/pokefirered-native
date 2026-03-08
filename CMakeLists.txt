@@ -200,7 +200,7 @@ target_include_directories(pfr_upstream_main_menu PUBLIC
 )
 
 add_library(pfr_upstream_oak_speech OBJECT
-    "${POKEFIRERED_SOURCE_DIR}/src/oak_speech.c"
+    "${PFR_GEN_DIR}/oak_speech.c"
 )
 target_compile_definitions(pfr_upstream_oak_speech PRIVATE
     ${PFR_COMMON_DEFINES}
@@ -323,7 +323,7 @@ target_link_libraries(pfr_assets PRIVATE m)
 
 # Asset pipeline: compile assets, generate .inc files, preprocess upstream sources
 add_custom_command(
-    OUTPUT "${PFR_GEN_DIR}/intro.c" "${PFR_GEN_DIR}/title_screen.c"
+    OUTPUT "${PFR_GEN_DIR}/intro.c" "${PFR_GEN_DIR}/title_screen.c" "${PFR_GEN_DIR}/oak_speech.c"
     COMMAND ${CMAKE_COMMAND} -E make_directory "${PFR_ASSETS_DIR}"
     COMMAND ${CMAKE_COMMAND} -E make_directory "${PFR_INC_DIR}"
     COMMAND ${CMAKE_COMMAND} -E make_directory "${PFR_GEN_DIR}"
@@ -333,8 +333,11 @@ add_custom_command(
         "${POKEFIRERED_SOURCE_DIR}/src/intro.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/intro.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/title_screen.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/title_screen.c"
+    COMMAND $<TARGET_FILE:pfr_assets> preproc
+        "${POKEFIRERED_SOURCE_DIR}/src/oak_speech.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/oak_speech.c"
     DEPENDS pfr_assets
         "${POKEFIRERED_SOURCE_DIR}/src/intro.c"
         "${POKEFIRERED_SOURCE_DIR}/src/title_screen.c"
+        "${POKEFIRERED_SOURCE_DIR}/src/oak_speech.c"
     COMMENT "Asset pipeline: PNG/PAL → GBA → .inc → preprocessed sources"
 )
