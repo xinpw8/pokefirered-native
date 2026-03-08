@@ -1,0 +1,17 @@
+# start_frame end_frame buttons
+# Open the title screen menu / advance out of title.
+1798 1804 A
+
+# Advance Oak controls guide page 1 -> page 2.
+2471 2477 A
+
+# Advance Oak controls guide page 2 -> page 3.
+2890 2896 A
+
+# Advance Oak controls guide page 3 -> Pikachu intro page 1.
+3310 3316 A
+
+# Advance Pikachu intro pages.
+3730 3736 A
+4150 4156 A
+4570 4576 A

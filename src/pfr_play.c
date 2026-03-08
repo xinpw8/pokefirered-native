@@ -15,6 +15,7 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/stat.h>
 #include <string.h>
 
@@ -72,6 +73,173 @@ static u32 sUniformFrameRunLength;
 static u32 sLastUniformColor;
 static bool8 sSnapshotRequested;
 static char sSnapshotLabel[96];
+
+#define MAX_SCRIPTED_INPUT_RANGES 256
+
+struct ScriptedInputRange
+{
+    u32 startFrame;
+    u32 endFrame;
+    u16 pressedMask;
+};
+
+static struct ScriptedInputRange sScriptedInputRanges[MAX_SCRIPTED_INPUT_RANGES];
+static u32 sScriptedInputRangeCount;
+static bool8 sScriptedInputEnabled;
+
+static u16 ParseInputToken(const char *token)
+{
+    if (strcmp(token, "A") == 0)
+        return A_BUTTON;
+    if (strcmp(token, "B") == 0)
+        return B_BUTTON;
+    if (strcmp(token, "SELECT") == 0)
+        return SELECT_BUTTON;
+    if (strcmp(token, "START") == 0)
+        return START_BUTTON;
+    if (strcmp(token, "RIGHT") == 0)
+        return DPAD_RIGHT;
+    if (strcmp(token, "LEFT") == 0)
+        return DPAD_LEFT;
+    if (strcmp(token, "UP") == 0)
+        return DPAD_UP;
+    if (strcmp(token, "DOWN") == 0)
+        return DPAD_DOWN;
+    if (strcmp(token, "R") == 0)
+        return R_BUTTON;
+    if (strcmp(token, "L") == 0)
+        return L_BUTTON;
+    if (strcmp(token, "NONE") == 0)
+        return 0;
+    return 0xFFFF;
+}
+
+static bool8 ParseInputMask(const char *maskText, u16 *outMask)
+{
+    char buffer[128];
+    char *token;
+    char *savePtr = NULL;
+    u16 mask = 0;
+
+    if (strncmp(maskText, "0x", 2) == 0 || strncmp(maskText, "0X", 2) == 0)
+    {
+        char *endPtr = NULL;
+        unsigned long value = strtoul(maskText, &endPtr, 16);
+
+        if (endPtr == NULL || *endPtr != '\0')
+            return FALSE;
+        *outMask = (u16)value;
+        return TRUE;
+    }
+
+    snprintf(buffer, sizeof(buffer), "%.127s", maskText);
+    token = strtok_r(buffer, "+|,", &savePtr);
+    while (token != NULL)
+    {
+        u16 value = ParseInputToken(token);
+
+        if (value == 0xFFFF)
+            return FALSE;
+        mask |= value;
+        token = strtok_r(NULL, "+|,", &savePtr);
+    }
+
+    *outMask = mask;
+    return TRUE;
+}
+
+static bool8 LoadScriptedInputFile(const char *path)
+{
+    FILE *file = fopen(path, "r");
+    char line[256];
+    u32 lineNumber = 0;
+
+    if (file == NULL)
+    {
+        fprintf(stderr, "pfr_play: could not open input script %s\n", path);
+        return FALSE;
+    }
+
+    sScriptedInputRangeCount = 0;
+    while (fgets(line, sizeof(line), file) != NULL)
+    {
+        char *hash;
+        char *startText;
+        char *endText;
+        char *maskText;
+        char *savePtr = NULL;
+        unsigned long startFrame;
+        unsigned long endFrame;
+        u16 mask;
+
+        lineNumber++;
+        hash = strchr(line, '#');
+        if (hash != NULL)
+            *hash = '\0';
+
+        startText = strtok_r(line, " \t\r\n", &savePtr);
+        if (startText == NULL)
+            continue;
+        endText = strtok_r(NULL, " \t\r\n", &savePtr);
+        maskText = strtok_r(NULL, " \t\r\n", &savePtr);
+
+        if (endText == NULL || maskText == NULL)
+        {
+            fprintf(stderr, "pfr_play: malformed input script line %u\n", lineNumber);
+            fclose(file);
+            return FALSE;
+        }
+
+        startFrame = strtoul(startText, NULL, 10);
+        endFrame = strtoul(endText, NULL, 10);
+        if (endFrame < startFrame)
+        {
+            fprintf(stderr, "pfr_play: invalid frame range on line %u\n", lineNumber);
+            fclose(file);
+            return FALSE;
+        }
+
+        if (!ParseInputMask(maskText, &mask))
+        {
+            fprintf(stderr, "pfr_play: invalid input mask on line %u: %s\n", lineNumber, maskText);
+            fclose(file);
+            return FALSE;
+        }
+
+        if (sScriptedInputRangeCount >= MAX_SCRIPTED_INPUT_RANGES)
+        {
+            fprintf(stderr, "pfr_play: too many scripted input ranges\n");
+            fclose(file);
+            return FALSE;
+        }
+
+        sScriptedInputRanges[sScriptedInputRangeCount].startFrame = (u32)startFrame;
+        sScriptedInputRanges[sScriptedInputRangeCount].endFrame = (u32)endFrame;
+        sScriptedInputRanges[sScriptedInputRangeCount].pressedMask = mask;
+        sScriptedInputRangeCount++;
+    }
+
+    fclose(file);
+    sScriptedInputEnabled = TRUE;
+    return TRUE;
+}
+
+static void ApplyScriptedInput(u32 frame)
+{
+    u16 pressedMask = 0;
+    u32 i;
+
+    if (!sScriptedInputEnabled)
+        return;
+
+    for (i = 0; i < sScriptedInputRangeCount; i++)
+    {
+        if (frame >= sScriptedInputRanges[i].startFrame && frame <= sScriptedInputRanges[i].endFrame)
+            pressedMask |= sScriptedInputRanges[i].pressedMask;
+    }
+
+    REG_KEYINPUT = KEYS_MASK & ~pressedMask;
+}
 
 static void RequestSnapshot(const char *label)
 {
@@ -416,6 +584,7 @@ static void StepFrame(void)
     static u32 frame;
 
     /* 1. Read key state from REG_KEYINPUT (set by SDL PollInput last present) */
+    ApplyScriptedInput(frame);
     PlayReadKeys();
     TraceInput(frame);
     TraceMilestones(frame);
@@ -464,9 +633,10 @@ static void StepFrame(void)
 int main(int argc, char *argv[])
 {
     int i;
+    const char *scriptPath = NULL;
 
-    (void)argc;
-    (void)argv;
+    if (argc > 1)
+        scriptPath = argv[1];
 
     /* Initialize host subsystems */
     HostMemoryInit();
@@ -520,7 +690,22 @@ int main(int argc, char *argv[])
     sLastOakPlaceholderSource = (const u8 *)(uintptr_t)-1;
     sLastUniformColor = 0;
     sUniformFrameRunLength = 0;
+    sScriptedInputEnabled = FALSE;
+    sScriptedInputRangeCount = 0;
     TraceLog(0, "pfr_play trace started");
+
+    if (scriptPath != NULL)
+    {
+        char buffer[160];
+
+        if (!LoadScriptedInputFile(scriptPath))
+            return 1;
+        snprintf(buffer, sizeof(buffer),
+                 "loaded scripted input file %s with %u ranges",
+                 scriptPath,
+                 sScriptedInputRangeCount);
+        TraceLog(0, buffer);
+    }
 
     {
         extern void CB2_InitCopyrightScreenAfterBootup(void);
