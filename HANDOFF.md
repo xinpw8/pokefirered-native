@@ -201,6 +201,8 @@ cmake --build /home/spark-advantage/pokefirered-native/build -j4
 
 Produced targets:
 - `pfr_smoke`
+- `pfr_render_test`
+- `pfr_play`
 - `pfr_lz77`
 
 ## Current Verification
@@ -209,6 +211,10 @@ Verified commands and outcomes:
 - `cmake --build /home/spark-advantage/pokefirered-native/build -j4`
 - `/home/spark-advantage/pokefirered-native/build/pfr_smoke`
   - expected output: `pfr_smoke: ok`
+- `/home/spark-advantage/pokefirered-native/build/pfr_render_test /tmp/pfr_render_codex_20260308`
+  - expected outcome: `PASS: Renderer produced visible output.` with `9 non-empty frames out of 20 sampled`
+- `timeout 8 /home/spark-advantage/pokefirered-native/build/pfr_play`
+  - expected outcome: the interactive SDL loop survives until `timeout` kills it, with no immediate crash during boot
 - `/home/spark-advantage/pokefirered-native/build/pfr_lz77` on a known simple blob
   - expected outcome: successful decode to `ABCD`
 
@@ -235,7 +241,7 @@ Verified commands and outcomes:
 - real upstream `intro.c` callback progression from `CB2_InitCopyrightScreenAfterBootup` through copyright fade-out, intro setup, the first `CB2_Intro` frame, the Game Freak star, reveal-name, reveal-logo, Scene 1, Scene 2, Scene 3, and the natural non-skipped handoff into `CB2_InitTitleScreen`
 - real upstream `title_screen.c` progression from init through the first title-loop frame, run-state setup, timeout restart, cry-to-main-menu handoff, delete-save handoff into `CB2_SaveClearScreen_Init`, and berry-fix handoff into `CB2_InitBerryFixProgram`
 - real upstream `main_menu.c` progression through save-present menu setup, continue-stat printing, fade-in/input-ready state, and New Game selection handoff into `StartNewGameScene`
-- real upstream `oak_speech.c` progression through `StartNewGameScene()`, initial New Game callback/task setup, controls-guide page transitions, and Pikachu intro pages 1 through 3
+- real upstream `oak_speech.c` progression through `StartNewGameScene()`, initial New Game callback/task setup, controls-guide page transitions, Pikachu intro exit, Oak init / `MUS_ROUTE24`, and Oak's first two welcome messages
 - real upstream `clear_save_data_screen.c` progression through init, GPU/window setup, confirmation prompt, yes-no menu creation, and yes-selection clear-save handling
 - real upstream `berry_fix_program.c` progression through init, begin/connect/power-off scene changes, multiboot init/start, and successful advance into the follow-instructions scene
 
@@ -523,13 +529,15 @@ The current strategy is intentionally conservative:
 ## Recommended Next Step
 
 If continuing from here, the most defensible next step is:
-1. deepen the already linked `oak_speech.c` path beyond the current controls-guide/Pikachu-intro-pages-1-through-3 boundary toward Oak Speech proper, gender selection, naming, and the eventual `CB2_NewGame` handoff
-2. tighten `host_crt0.c` and `host_agbmain.c` toward a closer `crt0.s:start_vector` / startup model now that the deeper intro/title/menu flow is proven
-3. keep the now-verified `crt0`/AgbMain/palette/bg/sprite/task/scanline/title/menu path as the runtime base while renderer/input, m4a, save, and link stay explicitly pending
+1. deepen the already linked `oak_speech.c` path beyond the current Oak-init / first-two-messages boundary toward gender selection, naming, and the eventual `CB2_NewGame` handoff
+2. make the existing `pfr_play` path honestly user-visible and user-playable by filling the remaining window/text/masking gaps in the hosted renderer/runtime surface
+3. tighten `host_crt0.c` and `host_agbmain.c` toward a closer `crt0.s:start_vector` / startup model now that the deeper intro/title/menu/Oak flow is proven
+4. keep the now-verified `crt0`/AgbMain/palette/bg/sprite/task/scanline/title/menu/Oak path as the runtime base while m4a, save, and link stay explicitly pending
 
 Current Oak Speech note:
 - the immediate post-Pikachu-intro Nidoran sprite crash was removed by adding blank mon-pic / mon-palette fallbacks plus a dummy multiuse sprite template in the host seam
-- the passing smoke boundary now reaches Pikachu intro page 3; Oak's first welcome message is not yet a verified boundary
+- the passing smoke boundary now reaches Oak init / `MUS_ROUTE24` plus Oak's `Welcome to the world` and `This world` messages via a placeholder-expansion seam in `host_oak_speech_stubs.c`
+- the next honest Oak boundary is the Nidoran release / `IsInhabitedFarAndWide` path or the later gender-selection prompt, not another re-assertion of the already-proven Pikachu intro pages
 
 A likely practical sub-plan for `main.c` from here:
 - keep the bounded `AgbMain` runner for smoke-level control
