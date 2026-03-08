@@ -133,10 +133,15 @@ const u8 gText_MysteryGiftCantUse[] = "Mystery Gift can't be used";
 const u8 gTextJPDummy_Hiki[] = " caught";
 const u8 gTextJPDummy_Ko[] = " badges";
 const u16 gMenuMessageWindow_Gfx[1] = {0};
-const u8 gMultiBootProgram_BerryGlitchFix_Start[0xD0]
-    __attribute__((aligned(1), section(".host_multiboot_payload"), used)) = {0};
-const u8 gMultiBootProgram_BerryGlitchFix_End[1]
-    __attribute__((aligned(1), section(".host_multiboot_payload"), used)) = {0};
+__asm__(
+    ".pushsection .rodata.host_multiboot_payload,\"a\",@progbits\n"
+    ".global gMultiBootProgram_BerryGlitchFix_Start\n"
+    "gMultiBootProgram_BerryGlitchFix_Start:\n"
+    ".zero 0xD0\n"
+    ".global gMultiBootProgram_BerryGlitchFix_End\n"
+    "gMultiBootProgram_BerryGlitchFix_End:\n"
+    ".byte 0\n"
+    ".popsection\n");
 
 void HostTitleScreenStubReset(void)
 {
