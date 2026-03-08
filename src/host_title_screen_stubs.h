@@ -42,7 +42,6 @@ extern u32 gHostTitleStubIsMysteryGiftEnabledCalls;
 extern u32 gHostTitleStubFlagGetCalls;
 extern u32 gHostTitleStubGetNationalPokedexCountCalls;
 extern u32 gHostTitleStubGetKantoPokedexCountCalls;
-extern u32 gHostTitleStubWaitDma3RequestCalls;
 extern int gHostTitleStubLastMultiBootLength;
 extern u8 gHostTitleStubLastHelpContext;
 extern u8 gHostTitleStubLastFadeOutMapMusicSpeed;

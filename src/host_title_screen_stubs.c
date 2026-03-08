@@ -59,7 +59,6 @@ u32 gHostTitleStubIsMysteryGiftEnabledCalls = 0;
 u32 gHostTitleStubFlagGetCalls = 0;
 u32 gHostTitleStubGetNationalPokedexCountCalls = 0;
 u32 gHostTitleStubGetKantoPokedexCountCalls = 0;
-u32 gHostTitleStubWaitDma3RequestCalls = 0;
 int gHostTitleStubLastMultiBootLength = 0;
 u8 gHostTitleStubLastHelpContext = 0;
 u8 gHostTitleStubLastFadeOutMapMusicSpeed = 0;
@@ -172,7 +171,6 @@ void HostTitleScreenStubReset(void)
     gHostTitleStubFlagGetCalls = 0;
     gHostTitleStubGetNationalPokedexCountCalls = 0;
     gHostTitleStubGetKantoPokedexCountCalls = 0;
-    gHostTitleStubWaitDma3RequestCalls = 0;
     gHostTitleStubLastMultiBootLength = 0;
     gHostTitleStubLastHelpContext = 0;
     gHostTitleStubLastFadeOutMapMusicSpeed = 0;
@@ -326,11 +324,6 @@ void FreeAllWindowBuffers(void)
     gHostTitleStubFreeAllWindowBuffersCalls++;
 }
 
-void FreeAllSpritePalettes(void)
-{
-    gHostTitleStubFreeAllSpritePalettesCalls++;
-}
-
 void DeactivateAllTextPrinters(void)
 {
     gHostTitleStubDeactivateAllTextPrintersCalls++;
@@ -354,44 +347,6 @@ void ClearWindowTilemap(u8 windowId)
 {
     gHostTitleStubClearWindowTilemapCalls++;
     (void)windowId;
-}
-
-void FillBgTilemapBufferRect(u8 bg, u16 tileNum, u8 x, u8 y, u8 width, u8 height, u8 palette)
-{
-    gHostTitleStubFillBgTilemapBufferRectCalls++;
-    (void)bg;
-    (void)tileNum;
-    (void)x;
-    (void)y;
-    (void)width;
-    (void)height;
-    (void)palette;
-}
-
-void FillBgTilemapBufferRect_Palette0(u8 bg, u16 tileNum, u8 x, u8 y, u8 width, u8 height)
-{
-    gHostTitleStubFillBgTilemapBufferRectCalls++;
-    (void)bg;
-    (void)tileNum;
-    (void)x;
-    (void)y;
-    (void)width;
-    (void)height;
-}
-
-void LoadBgTiles(u8 bg, const void *src, u32 size, u16 offset)
-{
-    gHostTitleStubLoadBgTilesCalls++;
-    (void)bg;
-    (void)src;
-    (void)size;
-    (void)offset;
-}
-
-s16 WaitDma3Request(s16 index)
-{
-    gHostTitleStubWaitDma3RequestCalls++;
-    return index;
 }
 
 bool32 IsMysteryGiftEnabled(void)
