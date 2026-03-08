@@ -98,7 +98,7 @@ Important qualification:
 - `main.c` currently builds on host through the upstream non-`MODERN` path so the ARM-only entry-clear inline assembly in `AgbMain` is skipped
 - this now verifies real `main.c` helper behavior, a host C translation of `crt0.s:intr_main`, a bounded `AgbMain` init/frame/soft-reset slice, the real `intro.c` path through the non-skipped Game Freak / Scene 1 / Scene 2 / Scene 3 sequence into natural title handoff, real `title_screen.c` progression from init into run-state plus restart/cry/main-menu/save-clear/berry-fix downstream handoffs, the real `main_menu.c` provider through save-present menu setup and New Game selection handoff, the real `clear_save_data_screen.c` provider through its confirmation/menu/clear-selection path, the real `berry_fix_program.c` provider through its multiboot progression path, and the real `new_game.c` data-init path once Oak hands off into `CB2_NewGame`
 - `intro.c` and `title_screen.c` currently run against host zero-INCBIN or placeholder asset fallbacks plus narrow helper stubs; that is enough for source-driven control-flow verification, not a finished asset/runtime rehost
-- `oak_speech.c` now reaches `IStudyPokemon`, the gender-selection menu, player/rival naming stubs, and a host-owned `CB2_NewGame` wrapper that executes the real upstream `NewGameInitData()` plus `PlayTimeCounter_Start()`
+- `oak_speech.c` now reaches `IStudyPokemon`, the gender-selection menu, player/rival naming stubs, and a host-owned `CB2_NewGame` wrapper that executes the real upstream `NewGameInitData()` / `PlayTimeCounter_Start()` path plus the immediate stop-music, safari-reset, script-context, field-callback, and callback-handoff setup that upstream `CB2_NewGame` performs before entering overworld
 - it is still not a full hosted boot through the complete `AgbMain` -> `intro.c` -> `title_screen.c` -> main-menu -> overworld flow because upstream `overworld.c` and the field/map stack are not in the build yet
 
 ## Why The Build Is Structured This Way
@@ -255,7 +255,7 @@ Verified commands and outcomes:
 - real upstream `title_screen.c` progression from init through the first title-loop frame, run-state setup, timeout restart, cry-to-main-menu handoff, delete-save handoff into `CB2_SaveClearScreen_Init`, and berry-fix handoff into `CB2_InitBerryFixProgram`
 - real upstream `main_menu.c` progression through save-present menu setup, continue-stat printing, fade-in/input-ready state, and New Game selection handoff into `StartNewGameScene`
 - real upstream `oak_speech.c` progression through `StartNewGameScene()`, initial New Game callback/task setup, controls-guide page transitions, Pikachu intro exit, Oak init / `MUS_ROUTE24`, Oak's first two welcome messages, `IStudyPokemon`, the player gender question, player/rival naming handoffs, and the callback transition into `CB2_NewGame`
-- real upstream `new_game.c` effects under the hosted `CB2_NewGame` wrapper, including different-save marking, trainer-id/default-data seeding, initial Player's House 2F warp setup, starter money, PC item setup, RSE national-dex flag/var seeding, trainer tower reset, and play-time start
+- real upstream `new_game.c` effects under the hosted `CB2_NewGame` wrapper, including different-save marking, trainer-id/default-data seeding, initial Player's House 2F warp setup, starter money, PC item setup, RSE national-dex flag/var seeding, trainer tower reset, play-time start, and the immediate host-owned stop-music / safari-reset / script-context / field-callback / callback-handoff setup that mirrors the upstream `overworld.c:CB2_NewGame` body before the real map/field stack takes over
 - real upstream `clear_save_data_screen.c` progression through init, GPU/window setup, confirmation prompt, yes-no menu creation, and yes-selection clear-save handling
 - real upstream `berry_fix_program.c` progression through init, begin/connect/power-off scene changes, multiboot init/start, and successful advance into the follow-instructions scene
 
@@ -544,7 +544,7 @@ The current strategy is intentionally conservative:
 ## Recommended Next Step
 
 If continuing from here, the most defensible next step is:
-1. deepen the already linked `oak_speech.c` path beyond the current Nidoran-release boundary toward `IStudyPokemon`, gender selection, naming, and the eventual `CB2_NewGame` handoff
+1. replace the current host-owned `CB2_NewGame` seam with the real upstream `overworld.c` new-game entry or a narrower extracted equivalent; the direct whole-TU attempt currently explodes into the field/map/link stack and is the next real blocker
 2. make the existing `pfr_play` path honestly user-visible and user-playable by filling the remaining window/text/masking gaps in the hosted renderer/runtime surface
 3. tighten `host_crt0.c` and `host_agbmain.c` toward a closer `crt0.s:start_vector` / startup model now that the deeper intro/title/menu/Oak flow is proven
 4. keep the now-verified `crt0`/AgbMain/palette/bg/sprite/task/scanline/title/menu/Oak path as the runtime base while m4a, save, and link stay explicitly pending
