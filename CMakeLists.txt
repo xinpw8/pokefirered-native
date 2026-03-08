@@ -27,6 +27,8 @@ add_library(pfr_upstream_core STATIC
     src/host_dma.c
     src/host_bios.c
     src/host_debug.c
+    src/host_renderer.c
+    src/host_display.c
     src/host_intro_stubs.c
     src/host_title_screen_stubs.c
     src/upstream_stubs.c

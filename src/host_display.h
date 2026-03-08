@@ -4,21 +4,30 @@
 #include "global.h"
 
 /*
- * SDL2 display backend.
+ * Display backend for pokefirered-native.
  *
- * Opens a window, presents the renderer's ARGB8888 framebuffer each
- * frame, and polls host input into REG_KEYINPUT.
+ * When built with HOST_DISPLAY_SDL2, opens a 720x480 (3x) window with
+ * keyboard input mapped to GBA buttons.
+ *
+ * Without SDL2, operates in headless mode dumping PPM frames to disk.
  */
 
-/* Initialize the SDL2 window and renderer.  Returns TRUE on success. */
+/* Initialize the display backend.  Returns TRUE on success. */
 bool8 HostDisplayInit(void);
 
-/* Present the current framebuffer from HostRendererGetFramebuffer().
- * Also polls SDL events and updates REG_KEYINPUT.
- * Returns FALSE if the user closed the window. */
+/* Render the current GBA state and present it.
+ * In SDL2 mode, also polls input into REG_KEYINPUT.
+ * Returns FALSE if the user requested quit. */
 bool8 HostDisplayPresent(void);
 
-/* Clean up SDL resources. */
+/* Clean up display resources. */
 void HostDisplayDestroy(void);
+
+/* Frame dump control (works in both SDL and headless modes). */
+void HostDisplaySetDumpDir(const char *dir);
+void HostDisplayEnableDump(bool8 enable);
+
+/* Frame counter. */
+u32 HostDisplayGetFrameCount(void);
 
 #endif
