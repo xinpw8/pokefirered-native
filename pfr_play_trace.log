@@ -14,3 +14,11 @@
 [001947] StartNewGameScene calls=1
 [001955] Oak controls guide page 1 reached
 [002077] framebuffer nearly uniform for 120 frames, color=0xFF000000 callback2=(unknown)
+[002353] input newKeys=0x0001 heldKeys=0x0001 callback2=(unknown)
+[002373] Oak controls guide page 2 reached
+[002419] input newKeys=0x0080 heldKeys=0x0080 callback2=(unknown)
+[002439] input newKeys=0x0040 heldKeys=0x0040 callback2=(unknown)
+[002468] input newKeys=0x0008 heldKeys=0x0008 callback2=(unknown)
+[002488] input newKeys=0x0040 heldKeys=0x0040 callback2=(unknown)
+[002503] input newKeys=0x0080 heldKeys=0x0080 callback2=(unknown)
+[002512] input newKeys=0x0008 heldKeys=0x0008 callback2=(unknown)
