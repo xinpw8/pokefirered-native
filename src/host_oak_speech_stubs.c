@@ -17,6 +17,7 @@
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
+#include "task.h"
 #include "text.h"
 #include "text_window.h"
 #include "trainer_pokemon_sprites.h"
@@ -484,6 +485,7 @@ void DoNamingScreen(u8 templateNum, u8 *destBuffer, u16 monSpecies, u16 monGende
         CopyHostString(destBuffer, (const u8 *)"ASH");
     else
         CopyHostString(destBuffer, (const u8 *)"GARY");
+    ResetTasks();
     SetMainCallback2(returnCallback);
 }
 
