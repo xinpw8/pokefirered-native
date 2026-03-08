@@ -9,8 +9,22 @@
  * The SDL2 path opens a window and maps keyboard input to REG_KEYINPUT.
  */
 
+/*
+ * Include system headers BEFORE our project headers to avoid the
+ * upstream abs() macro (defined in global.h) colliding with stdlib's
+ * abs() function declaration when SDL2 is active.
+ */
+#ifdef HOST_DISPLAY_SDL2
+#include <SDL2/SDL.h>
+#endif
+
 #include <stdio.h>
 #include <string.h>
+
+/* Undo upstream abs macro before any further system header interaction */
+#ifdef abs
+#undef abs
+#endif
 
 #include "host_display.h"
 #include "host_renderer.h"
