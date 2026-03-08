@@ -46,6 +46,8 @@ Current native-project files:
 - bounded host `AgbMain` API: `/home/spark-advantage/pokefirered-native/src/host_agbmain.h`
 - intro/window/save/multiboot stubs: `/home/spark-advantage/pokefirered-native/src/host_intro_stubs.c`
 - intro/window/save/multiboot stub state: `/home/spark-advantage/pokefirered-native/src/host_intro_stubs.h`
+- host new-game/runtime data stubs: `/home/spark-advantage/pokefirered-native/src/host_new_game_stubs.c`
+- host new-game/runtime state: `/home/spark-advantage/pokefirered-native/src/host_new_game_stubs.h`
 - title/help/save/sound/graphics stubs: `/home/spark-advantage/pokefirered-native/src/host_title_screen_stubs.c`
 - title stub state: `/home/spark-advantage/pokefirered-native/src/host_title_screen_stubs.h`
 - minimal link-time stubs: `/home/spark-advantage/pokefirered-native/src/upstream_stubs.c`
@@ -79,14 +81,25 @@ These original upstream translation units are compiled directly into the native 
 - `src/main_menu.c`
 - `src/clear_save_data_screen.c`
 - `src/berry_fix_program.c`
+- `src/new_game.c`
+- `src/play_time.c`
+- `src/easy_chat.c`
+- `src/trainer_fan_club.c`
+- `src/pokemon_size_record.c`
+- `src/money.c`
+- `src/berry_powder.c`
+- `src/mystery_gift.c`
+- `src/renewable_hidden_items.c`
+- `src/roamer.c`
 
 They are not rewrites. They are built from the upstream checkout.
 
 Important qualification:
 - `main.c` currently builds on host through the upstream non-`MODERN` path so the ARM-only entry-clear inline assembly in `AgbMain` is skipped
-- this now verifies real `main.c` helper behavior, a host C translation of `crt0.s:intr_main`, a bounded `AgbMain` init/frame/soft-reset slice, the real `intro.c` path through the non-skipped Game Freak / Scene 1 / Scene 2 / Scene 3 sequence into natural title handoff, real `title_screen.c` progression from init into run-state plus restart/cry/main-menu/save-clear/berry-fix downstream handoffs, the real `main_menu.c` provider through save-present menu setup and New Game selection handoff, the real `clear_save_data_screen.c` provider through its confirmation/menu/clear-selection path, and the real `berry_fix_program.c` provider through its multiboot progression path
+- this now verifies real `main.c` helper behavior, a host C translation of `crt0.s:intr_main`, a bounded `AgbMain` init/frame/soft-reset slice, the real `intro.c` path through the non-skipped Game Freak / Scene 1 / Scene 2 / Scene 3 sequence into natural title handoff, real `title_screen.c` progression from init into run-state plus restart/cry/main-menu/save-clear/berry-fix downstream handoffs, the real `main_menu.c` provider through save-present menu setup and New Game selection handoff, the real `clear_save_data_screen.c` provider through its confirmation/menu/clear-selection path, the real `berry_fix_program.c` provider through its multiboot progression path, and the real `new_game.c` data-init path once Oak hands off into `CB2_NewGame`
 - `intro.c` and `title_screen.c` currently run against host zero-INCBIN or placeholder asset fallbacks plus narrow helper stubs; that is enough for source-driven control-flow verification, not a finished asset/runtime rehost
-- it is still not a full hosted boot through the complete `AgbMain` -> `intro.c` -> `title_screen.c` -> main-menu flow
+- `oak_speech.c` now reaches `IStudyPokemon`, the gender-selection menu, player/rival naming stubs, and a host-owned `CB2_NewGame` wrapper that executes the real upstream `NewGameInitData()` plus `PlayTimeCounter_Start()`
+- it is still not a full hosted boot through the complete `AgbMain` -> `intro.c` -> `title_screen.c` -> main-menu -> overworld flow because upstream `overworld.c` and the field/map stack are not in the build yet
 
 ## Why The Build Is Structured This Way
 
@@ -212,7 +225,7 @@ Verified commands and outcomes:
 - `/home/spark-advantage/pokefirered-native/build/pfr_smoke`
   - expected output: `pfr_smoke: ok`
 - `/home/spark-advantage/pokefirered-native/build/pfr_render_test /tmp/pfr_render_codex_20260308`
-  - expected outcome: `PASS: Renderer produced visible output.` with `11 non-empty frames out of 20 sampled`
+  - expected outcome: `PASS: Renderer produced visible output.` with `14 non-empty frames out of 20 sampled`
 - `timeout 8 /home/spark-advantage/pokefirered-native/build/pfr_play`
   - expected outcome: the interactive SDL loop survives until `timeout` kills it, with no immediate crash during boot
 - `/home/spark-advantage/pokefirered-native/build/pfr_lz77` on a known simple blob
@@ -241,7 +254,8 @@ Verified commands and outcomes:
 - real upstream `intro.c` callback progression from `CB2_InitCopyrightScreenAfterBootup` through copyright fade-out, intro setup, the first `CB2_Intro` frame, the Game Freak star, reveal-name, reveal-logo, Scene 1, Scene 2, Scene 3, and the natural non-skipped handoff into `CB2_InitTitleScreen`
 - real upstream `title_screen.c` progression from init through the first title-loop frame, run-state setup, timeout restart, cry-to-main-menu handoff, delete-save handoff into `CB2_SaveClearScreen_Init`, and berry-fix handoff into `CB2_InitBerryFixProgram`
 - real upstream `main_menu.c` progression through save-present menu setup, continue-stat printing, fade-in/input-ready state, and New Game selection handoff into `StartNewGameScene`
-- real upstream `oak_speech.c` progression through `StartNewGameScene()`, initial New Game callback/task setup, controls-guide page transitions, Pikachu intro exit, Oak init / `MUS_ROUTE24`, Oak's first two welcome messages, and the Nidoran release line / cry handoff
+- real upstream `oak_speech.c` progression through `StartNewGameScene()`, initial New Game callback/task setup, controls-guide page transitions, Pikachu intro exit, Oak init / `MUS_ROUTE24`, Oak's first two welcome messages, `IStudyPokemon`, the player gender question, player/rival naming handoffs, and the callback transition into `CB2_NewGame`
+- real upstream `new_game.c` effects under the hosted `CB2_NewGame` wrapper, including different-save marking, trainer-id/default-data seeding, initial Player's House 2F warp setup, starter money, PC item setup, RSE national-dex flag/var seeding, trainer tower reset, and play-time start
 - real upstream `clear_save_data_screen.c` progression through init, GPU/window setup, confirmation prompt, yes-no menu creation, and yes-selection clear-save handling
 - real upstream `berry_fix_program.c` progression through init, begin/connect/power-off scene changes, multiboot init/start, and successful advance into the follow-instructions scene
 
@@ -258,6 +272,7 @@ This is still a bootstrap test, not a game boot test.
 - forces non-PIE executables so 32-bit upstream pointer assumptions hold on the host
 - builds `src/main.c` as a separate hosted object with `MODERN=0` so the rest of the translation unit can execute unchanged on aarch64
 - builds `src/intro.c` and `src/title_screen.c` as separate hosted objects so the boot callback chain can advance without rewriting those upstream files
+- now also generates upstream `map_groups.h`, `map_event_ids.h`, and `region_map_sections.h` through upstream `mapjson`/`jsonproc` so additional field/new-game translation units can compile without hand-written headers
 
 `/home/spark-advantage/pokefirered-native/src/host_memory.c`
 - maps fixed host memory at GBA-style addresses
