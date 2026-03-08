@@ -15,6 +15,7 @@
  */
 
 #include <stdio.h>
+#include <sys/stat.h>
 #include <string.h>
 
 #include "global.h"
@@ -69,6 +70,63 @@ static u32 sLastWelcomePrints;
 static u32 sLastThisWorldPrints;
 static u32 sUniformFrameRunLength;
 static u32 sLastUniformColor;
+static bool8 sSnapshotRequested;
+static char sSnapshotLabel[96];
+
+static void RequestSnapshot(const char *label)
+{
+    snprintf(sSnapshotLabel, sizeof(sSnapshotLabel), "%.95s", label);
+    sSnapshotRequested = TRUE;
+}
+
+static void SanitizeSnapshotLabel(char *label)
+{
+    size_t i;
+
+    for (i = 0; label[i] != '\0'; i++)
+    {
+        char c = label[i];
+
+        if (!((c >= 'a' && c <= 'z')
+           || (c >= 'A' && c <= 'Z')
+           || (c >= '0' && c <= '9')
+           || c == '_' || c == '-'))
+        {
+            label[i] = '_';
+        }
+    }
+}
+
+static void DumpCurrentFramebuffer(u32 frame, const char *label)
+{
+    char safeLabel[96];
+    char path[192];
+    const u32 *fb = HostRendererGetFramebuffer();
+    FILE *f;
+    int i;
+
+    snprintf(safeLabel, sizeof(safeLabel), "%s", label);
+    SanitizeSnapshotLabel(safeLabel);
+    snprintf(path, sizeof(path), "pfr_play_frames/%06u_%s.ppm", frame, safeLabel);
+
+    f = fopen(path, "wb");
+    if (f == NULL)
+        return;
+
+    fprintf(f, "P6\n%d %d\n255\n", GBA_SCREEN_WIDTH, GBA_SCREEN_HEIGHT);
+    for (i = 0; i < GBA_SCREEN_WIDTH * GBA_SCREEN_HEIGHT; i++)
+    {
+        u32 pixel = fb[i];
+        u8 rgb[3];
+
+        rgb[0] = (pixel >> 16) & 0xFF;
+        rgb[1] = (pixel >> 8) & 0xFF;
+        rgb[2] = pixel & 0xFF;
+        fwrite(rgb, 1, 3, f);
+    }
+
+    fclose(f);
+}
 
 static void TraceLog(u32 frame, const char *message)
 {
@@ -120,6 +178,7 @@ static void TraceCallbackChange(u32 frame, const char *label, MainCallback callb
 
     snprintf(buffer, sizeof(buffer), "%s -> %s (%p)", label, CallbackName(callback), (void *)callback);
     TraceLog(frame, buffer);
+    RequestSnapshot(buffer);
 }
 
 static void TraceInput(u32 frame)
@@ -158,6 +217,7 @@ static void TraceMilestones(u32 frame)
         sLastMainMenuInitCalls = gHostTitleStubCB2InitMainMenuCalls;
         snprintf(buffer, sizeof(buffer), "main menu init calls=%u", sLastMainMenuInitCalls);
         TraceLog(frame, buffer);
+        RequestSnapshot("main_menu_init");
     }
 
     if (gHostTitleStubStartNewGameSceneCalls != sLastStartNewGameSceneCalls)
@@ -165,47 +225,56 @@ static void TraceMilestones(u32 frame)
         sLastStartNewGameSceneCalls = gHostTitleStubStartNewGameSceneCalls;
         snprintf(buffer, sizeof(buffer), "StartNewGameScene calls=%u", sLastStartNewGameSceneCalls);
         TraceLog(frame, buffer);
+        RequestSnapshot("start_new_game_scene");
     }
 
     if (gHostOakSpeechControlsGuidePage1Loads != sLastControlsGuidePage1Loads)
     {
         sLastControlsGuidePage1Loads = gHostOakSpeechControlsGuidePage1Loads;
         TraceLog(frame, "Oak controls guide page 1 reached");
+        RequestSnapshot("oak_controls_page_1");
     }
     if (gHostOakSpeechControlsGuidePage2Loads != sLastControlsGuidePage2Loads)
     {
         sLastControlsGuidePage2Loads = gHostOakSpeechControlsGuidePage2Loads;
         TraceLog(frame, "Oak controls guide page 2 reached");
+        RequestSnapshot("oak_controls_page_2");
     }
     if (gHostOakSpeechControlsGuidePage3Loads != sLastControlsGuidePage3Loads)
     {
         sLastControlsGuidePage3Loads = gHostOakSpeechControlsGuidePage3Loads;
         TraceLog(frame, "Oak controls guide page 3 reached");
+        RequestSnapshot("oak_controls_page_3");
     }
     if (gHostOakSpeechPikachuIntroPage1Loads != sLastPikachuIntroPage1Loads)
     {
         sLastPikachuIntroPage1Loads = gHostOakSpeechPikachuIntroPage1Loads;
         TraceLog(frame, "Oak Pikachu intro page 1 reached");
+        RequestSnapshot("oak_pikachu_intro_1");
     }
     if (gHostOakSpeechPikachuIntroPage2Loads != sLastPikachuIntroPage2Loads)
     {
         sLastPikachuIntroPage2Loads = gHostOakSpeechPikachuIntroPage2Loads;
         TraceLog(frame, "Oak Pikachu intro page 2 reached");
+        RequestSnapshot("oak_pikachu_intro_2");
     }
     if (gHostOakSpeechPikachuIntroPage3Loads != sLastPikachuIntroPage3Loads)
     {
         sLastPikachuIntroPage3Loads = gHostOakSpeechPikachuIntroPage3Loads;
         TraceLog(frame, "Oak Pikachu intro page 3 reached");
+        RequestSnapshot("oak_pikachu_intro_3");
     }
     if (gHostOakSpeechWelcomeToTheWorldPrints != sLastWelcomePrints)
     {
         sLastWelcomePrints = gHostOakSpeechWelcomeToTheWorldPrints;
         TraceLog(frame, "Oak welcome message printed");
+        RequestSnapshot("oak_welcome_message");
     }
     if (gHostOakSpeechThisWorldPrints != sLastThisWorldPrints)
     {
         sLastThisWorldPrints = gHostOakSpeechThisWorldPrints;
         TraceLog(frame, "Oak 'This world' message printed");
+        RequestSnapshot("oak_this_world_message");
     }
 
     if (gHostOakSpeechLastExpandedPlaceholderSource != sLastOakPlaceholderSource
@@ -215,6 +284,7 @@ static void TraceMilestones(u32 frame)
         snprintf(buffer, sizeof(buffer), "Oak placeholder -> %s",
                  OakPlaceholderName(gHostOakSpeechLastExpandedPlaceholderSource));
         TraceLog(frame, buffer);
+        RequestSnapshot(buffer);
     }
 
     if (gHostOakSpeechDoNamingScreenCalls != sLastNamingCalls)
@@ -222,6 +292,7 @@ static void TraceMilestones(u32 frame)
         sLastNamingCalls = gHostOakSpeechDoNamingScreenCalls;
         snprintf(buffer, sizeof(buffer), "Oak naming screen calls=%u", sLastNamingCalls);
         TraceLog(frame, buffer);
+        RequestSnapshot("oak_naming_screen");
     }
 
     if (gHostOakSpeechCB2NewGameCalls != sLastCB2NewGameCalls)
@@ -229,6 +300,7 @@ static void TraceMilestones(u32 frame)
         sLastCB2NewGameCalls = gHostOakSpeechCB2NewGameCalls;
         snprintf(buffer, sizeof(buffer), "CB2_NewGame calls=%u", sLastCB2NewGameCalls);
         TraceLog(frame, buffer);
+        RequestSnapshot("cb2_new_game");
     }
 }
 
@@ -266,6 +338,7 @@ static void TraceFramebufferUniformity(u32 frame)
                      sLastUniformColor,
                      CallbackName(gMain.callback2));
             TraceLog(frame, buffer);
+            RequestSnapshot("uniform_frame_warning");
         }
     }
     else
@@ -438,6 +511,7 @@ int main(int argc, char *argv[])
 
     HostIntroStubReset();
     HostTitleScreenStubReset();
+    mkdir("pfr_play_frames", 0775);
     sTraceFile = fopen("pfr_play_trace.log", "w");
     if (sTraceFile != NULL)
         setvbuf(sTraceFile, NULL, _IOLBF, 0);
@@ -463,6 +537,12 @@ int main(int argc, char *argv[])
          * Returns FALSE on ESC / window close. */
         if (!HostDisplayPresent())
             break;
+
+        if (sSnapshotRequested)
+        {
+            DumpCurrentFramebuffer(HostDisplayGetFrameCount(), sSnapshotLabel);
+            sSnapshotRequested = FALSE;
+        }
 
         TraceFramebufferUniformity(HostDisplayGetFrameCount());
     }
