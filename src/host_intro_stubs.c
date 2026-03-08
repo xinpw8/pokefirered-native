@@ -1,8 +1,10 @@
 #include "global.h"
 
+#include "bg.h"
 #include "gba/m4a_internal.h"
 #include "libgcnmultiboot.h"
 #include "link.h"
+#include "malloc.h"
 #include "menu.h"
 #include "new_game.h"
 #include "new_menu_helpers.h"
@@ -136,64 +138,75 @@ void ResetSerial(void)
     gHostIntroStubResetSerialCalls++;
 }
 
+static u16 sTempTileDataBufferCursor = 0;
+static void *sTempTileDataBuffers[0x20] = {NULL};
+
+static u16 CopyDecompressedTileDataToVram(u8 bgId, const void *src, u16 size, u16 offset, u8 mode)
+{
+    switch (mode)
+    {
+    case 1:
+        break;
+    case 0:
+    default:
+        return LoadBgTiles(bgId, src, size, offset);
+    }
+    return LoadBgTilemap(bgId, src, size, offset);
+}
+
 void ResetTempTileDataBuffers(void)
 {
+    int i;
+
     gHostIntroStubResetTempTileDataBuffersCalls++;
+    for (i = 0; i < (s32)NELEMS(sTempTileDataBuffers); i++)
+    {
+        sTempTileDataBuffers[i] = NULL;
+    }
+    sTempTileDataBufferCursor = 0;
 }
 
 bool8 FreeTempTileDataBuffersIfPossible(void)
 {
+    int i;
+
     gHostIntroStubFreeTempTileDataBuffersCalls++;
-    return FALSE;
+    if (!IsDma3ManagerBusyWithBgCopy())
+    {
+        if (sTempTileDataBufferCursor)
+        {
+            for (i = 0; i < sTempTileDataBufferCursor; i++)
+            {
+                FREE_AND_SET_NULL(sTempTileDataBuffers[i]);
+            }
+            sTempTileDataBufferCursor = 0;
+        }
+        return FALSE;
+    }
+    else
+    {
+        return TRUE;
+    }
 }
 
 void *DecompressAndCopyTileDataToVram(u8 bgId, const void *src, u32 size, u16 offset, u8 mode)
 {
+    u32 sizeOut;
+
     gHostIntroStubDecompressAndCopyTileDataToVramCalls++;
-    (void)bgId;
-    (void)src;
-    (void)size;
-    (void)offset;
-    (void)mode;
+    if (sTempTileDataBufferCursor < NELEMS(sTempTileDataBuffers))
+    {
+        void *ptr = MallocAndDecompress(src, &sizeOut);
+        if (!size)
+            size = sizeOut;
+        if (ptr)
+        {
+            CopyDecompressedTileDataToVram(bgId, ptr, size, offset, mode);
+            sTempTileDataBuffers[sTempTileDataBufferCursor++] = ptr;
+        }
+        return ptr;
+    }
     return NULL;
-}
-
-bool16 InitWindows(const struct WindowTemplate *templates)
-{
-    gHostIntroStubInitWindowsCalls++;
-    (void)templates;
-    return TRUE;
-}
-
-void FillWindowPixelBuffer(u8 windowId, u8 fillValue)
-{
-    gHostIntroStubFillWindowPixelBufferCalls++;
-    (void)windowId;
-    (void)fillValue;
-}
-
-void BlitBitmapToWindow(u8 windowId, const u8 *pixels, u16 x, u16 y, u16 width, u16 height)
-{
-    gHostIntroStubBlitBitmapToWindowCalls++;
-    (void)windowId;
-    (void)pixels;
-    (void)x;
-    (void)y;
-    (void)width;
-    (void)height;
-}
-
-void PutWindowTilemap(u8 windowId)
-{
-    gHostIntroStubPutWindowTilemapCalls++;
-    (void)windowId;
-}
-
-void CopyWindowToVram(u8 windowId, u8 mode)
-{
-    gHostIntroStubCopyWindowToVramCalls++;
-    (void)windowId;
-    (void)mode;
 }
 
 void ResetBgPositions(void)
