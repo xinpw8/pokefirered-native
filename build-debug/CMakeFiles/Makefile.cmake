@@ -59,5 +59,6 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/pfr_smoke.dir/DependInfo.cmake"
   "CMakeFiles/pfr_lz77.dir/DependInfo.cmake"
   "CMakeFiles/pfr_render_test.dir/DependInfo.cmake"
+  "CMakeFiles/pfr_play.dir/DependInfo.cmake"
   "CMakeFiles/pfr_assets.dir/DependInfo.cmake"
   )

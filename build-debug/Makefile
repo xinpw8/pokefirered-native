@@ -260,6 +260,19 @@ pfr_render_test/fast:
 .PHONY : pfr_render_test/fast
 
 #=============================================================================
+# Target rules for targets named pfr_play
+
+# Build rule for target.
+pfr_play: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_play
+.PHONY : pfr_play
+
+# fast build rule for target.
+pfr_play/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_play.dir/build.make CMakeFiles/pfr_play.dir/build
+.PHONY : pfr_play/fast
+
+#=============================================================================
 # Target rules for targets named pfr_assets
 
 # Build rule for target.
@@ -735,6 +748,7 @@ src/host_agbmain.o: src/host_agbmain.c.o
 src/host_agbmain.c.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_smoke.dir/build.make CMakeFiles/pfr_smoke.dir/src/host_agbmain.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_render_test.dir/build.make CMakeFiles/pfr_render_test.dir/src/host_agbmain.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_play.dir/build.make CMakeFiles/pfr_play.dir/src/host_agbmain.c.o
 .PHONY : src/host_agbmain.c.o
 
 src/host_agbmain.i: src/host_agbmain.c.i
@@ -744,6 +758,7 @@ src/host_agbmain.i: src/host_agbmain.c.i
 src/host_agbmain.c.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_smoke.dir/build.make CMakeFiles/pfr_smoke.dir/src/host_agbmain.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_render_test.dir/build.make CMakeFiles/pfr_render_test.dir/src/host_agbmain.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_play.dir/build.make CMakeFiles/pfr_play.dir/src/host_agbmain.c.i
 .PHONY : src/host_agbmain.c.i
 
 src/host_agbmain.s: src/host_agbmain.c.s
@@ -753,6 +768,7 @@ src/host_agbmain.s: src/host_agbmain.c.s
 src/host_agbmain.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_smoke.dir/build.make CMakeFiles/pfr_smoke.dir/src/host_agbmain.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_render_test.dir/build.make CMakeFiles/pfr_render_test.dir/src/host_agbmain.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_play.dir/build.make CMakeFiles/pfr_play.dir/src/host_agbmain.c.s
 .PHONY : src/host_agbmain.c.s
 
 src/host_bios.o: src/host_bios.c.o
@@ -995,6 +1011,30 @@ src/host_title_screen_stubs.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_title_screen_stubs.c.s
 .PHONY : src/host_title_screen_stubs.c.s
 
+src/pfr_play.o: src/pfr_play.c.o
+.PHONY : src/pfr_play.o
+
+# target to build an object file
+src/pfr_play.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_play.dir/build.make CMakeFiles/pfr_play.dir/src/pfr_play.c.o
+.PHONY : src/pfr_play.c.o
+
+src/pfr_play.i: src/pfr_play.c.i
+.PHONY : src/pfr_play.i
+
+# target to preprocess a source file
+src/pfr_play.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_play.dir/build.make CMakeFiles/pfr_play.dir/src/pfr_play.c.i
+.PHONY : src/pfr_play.c.i
+
+src/pfr_play.s: src/pfr_play.c.s
+.PHONY : src/pfr_play.s
+
+# target to generate assembly for a file
+src/pfr_play.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_play.dir/build.make CMakeFiles/pfr_play.dir/src/pfr_play.c.s
+.PHONY : src/pfr_play.c.s
+
 src/upstream_stubs.o: src/upstream_stubs.c.o
 .PHONY : src/upstream_stubs.o
 
@@ -1125,6 +1165,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... pfr_assets"
 	@echo "... pfr_lz77"
+	@echo "... pfr_play"
 	@echo "... pfr_render_test"
 	@echo "... pfr_smoke"
 	@echo "... pfr_upstream_berry_fix"
@@ -1225,6 +1266,9 @@ help:
 	@echo "... src/host_title_screen_stubs.o"
 	@echo "... src/host_title_screen_stubs.i"
 	@echo "... src/host_title_screen_stubs.s"
+	@echo "... src/pfr_play.o"
+	@echo "... src/pfr_play.i"
+	@echo "... src/pfr_play.s"
 	@echo "... src/upstream_stubs.o"
 	@echo "... src/upstream_stubs.i"
 	@echo "... src/upstream_stubs.s"

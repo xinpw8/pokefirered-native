@@ -1192,6 +1192,43 @@ static int TestOakSpeechPikachuIntroPages(void)
     return rc;
 }
 
+static int TestOakSpeechPikachuIntroExitToOakSpeechInit(void)
+{
+    int rc = 0;
+    int i;
+    u32 bgmCalls;
+
+    rc |= TestOakSpeechPikachuIntroPages();
+
+    rc |= Expect(gHostOakSpeechPlayBGMCalls == 2,
+                 "Pikachu intro reached page 3 with an unexpected BGM count");
+
+    bgmCalls = gHostOakSpeechPlayBGMCalls;
+    rc |= PulseButtonUntilCounterIncrements(A_BUTTON, &gHostOakSpeechPlayBGMCalls, bgmCalls, 128,
+                                            "Pikachu intro page 3 did not trigger the exit BGM");
+    rc |= Expect(gHostOakSpeechPlayBGMCalls == bgmCalls + 1,
+                 "Pikachu intro exit did not increment the BGM counter exactly once");
+    rc |= Expect(gHostOakSpeechLastPlayedBGM == MUS_NEW_GAME_EXIT,
+                 "Pikachu intro page 3 did not switch to the exit BGM");
+
+    bgmCalls = gHostOakSpeechPlayBGMCalls;
+    for (i = 0; i < 256 && gHostOakSpeechPlayBGMCalls == bgmCalls; i++)
+        RunMainCallbackFrame();
+
+    rc |= Expect(gHostOakSpeechPlayBGMCalls == bgmCalls + 1,
+                 "Oak Speech init did not start after the Pikachu intro exit");
+    rc |= Expect(gHostOakSpeechLastPlayedBGM == MUS_ROUTE24,
+                 "Oak Speech init did not switch to MUS_ROUTE24");
+    rc |= Expect(gHostOakSpeechLastTopBarLeftText == NULL,
+                 "Oak Speech init unexpectedly restored a left top-bar label");
+    rc |= Expect(gHostOakSpeechLastTopBarRightText == NULL,
+                 "Oak Speech init did not clear the Pikachu intro top-bar prompt");
+    rc |= Expect(gHostOakSpeechDoNamingScreenCalls == 0,
+                 "Oak Speech advanced beyond init before smoke observed the handoff");
+
+    return rc;
+}
+
 static int TestTitleScreenSaveClearHandoff(void)
 {
     int rc = 0;
@@ -1336,6 +1373,7 @@ int main(void)
     rc |= TestTitleScreenMainMenuHandoff();
     rc |= TestOakSpeechControlsGuideToPikachuIntro();
     rc |= TestOakSpeechPikachuIntroPages();
+    rc |= TestOakSpeechPikachuIntroExitToOakSpeechInit();
     rc |= TestTitleScreenSaveClearHandoff();
     rc |= TestTitleScreenBerryFixHandoff();
 
