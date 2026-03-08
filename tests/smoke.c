@@ -35,6 +35,7 @@
 #include "strings.h"
 #include "task.h"
 #include "title_screen.h"
+#include "window.h"
 
 bool32 CheckHeap(void);
 extern u16 gBattle_BG0_X;
@@ -85,6 +86,141 @@ static int Expect(int condition, const char *message)
         return 1;
     }
     return 0;
+}
+
+static int CountWindowsWithTileData(void)
+{
+    int count = 0;
+    int i;
+
+    for (i = 0; i < WINDOWS_MAX; i++)
+    {
+        if (gWindows[i].tileData != NULL)
+            count++;
+    }
+
+    return count;
+}
+
+static size_t GetWindowTileDataSize(u8 windowId)
+{
+    if (windowId >= WINDOWS_MAX || gWindows[windowId].tileData == NULL)
+        return 0;
+
+    return (size_t)32 * gWindows[windowId].window.width * gWindows[windowId].window.height;
+}
+
+static bool32 WindowMatches(u8 windowId, u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height)
+{
+    return windowId < WINDOWS_MAX
+        && gWindows[windowId].tileData != NULL
+        && gWindows[windowId].window.bg == bg
+        && gWindows[windowId].window.tilemapLeft == tilemapLeft
+        && gWindows[windowId].window.tilemapTop == tilemapTop
+        && gWindows[windowId].window.width == width
+        && gWindows[windowId].window.height == height;
+}
+
+static u32 WindowTileDataHash(u8 windowId)
+{
+    const u8 *bytes;
+    size_t size;
+    size_t i;
+    u32 hash = 2166136261u;
+
+    size = GetWindowTileDataSize(windowId);
+    if (size == 0)
+        return 0;
+
+    bytes = gWindows[windowId].tileData;
+    for (i = 0; i < size; i++)
+        hash = (hash ^ bytes[i]) * 16777619u;
+
+    return hash;
+}
+
+static bool32 WindowTileDataHasNonZero(u8 windowId)
+{
+    const u8 *bytes;
+    size_t size;
+    size_t i;
+
+    size = GetWindowTileDataSize(windowId);
+    if (size == 0)
+        return FALSE;
+
+    bytes = gWindows[windowId].tileData;
+    for (i = 0; i < size; i++)
+    {
+        if (bytes[i] != 0)
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+static bool32 WindowTilemapHasNonZero(u8 windowId)
+{
+    const struct Window *window;
+    u16 *tilemapBuffer;
+    u32 screenSize;
+    u32 screenWidth;
+    u32 screenHeight;
+    u8 x;
+    u8 y;
+
+    if (windowId >= WINDOWS_MAX || gWindows[windowId].tileData == NULL)
+        return FALSE;
+
+    window = &gWindows[windowId];
+    tilemapBuffer = GetBgTilemapBuffer(window->window.bg);
+    if (tilemapBuffer == NULL)
+        return FALSE;
+
+    screenSize = GetBgAttribute(window->window.bg, BG_ATTR_SCREENSIZE);
+    screenWidth = GetBgMetricTextMode(window->window.bg, 1) * 32;
+    screenHeight = GetBgMetricTextMode(window->window.bg, 2) * 32;
+
+    for (y = 0; y < window->window.height; y++)
+    {
+        for (x = 0; x < window->window.width; x++)
+        {
+            u32 index = GetTileMapIndexFromCoords(window->window.tilemapLeft + x,
+                                                  window->window.tilemapTop + y,
+                                                  screenSize,
+                                                  screenWidth,
+                                                  screenHeight);
+            if (tilemapBuffer[index] != 0)
+                return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+static bool32 WindowUploadHasNonZero(u8 windowId)
+{
+    const struct Window *window;
+    const u8 *vramBytes;
+    size_t size;
+    size_t i;
+    u8 charBaseIndex;
+
+    size = GetWindowTileDataSize(windowId);
+    if (size == 0)
+        return FALSE;
+
+    window = &gWindows[windowId];
+    charBaseIndex = GetBgAttribute(window->window.bg, BG_ATTR_CHARBASEINDEX);
+    vramBytes = (const u8 *)VRAM + charBaseIndex * 0x4000 + window->window.baseBlock * 32;
+
+    for (i = 0; i < size; i++)
+    {
+        if (vramBytes[i] != 0)
+            return TRUE;
+    }
+
+    return FALSE;
 }
 
 static int TestRandom(void)
@@ -799,11 +935,16 @@ static int AdvanceToFirstIntroFrame(void)
     introCallback = gMain.callback2;
     RunMainCallbackFrame();
     rc |= Expect(gMain.callback2 == introCallback, "CB2_Intro changed unexpectedly");
-    rc |= Expect(gHostIntroStubInitWindowsCalls == 1, "CB2_Intro did not init windows");
-    rc |= Expect(gHostIntroStubFillWindowPixelBufferCalls == 1, "CB2_Intro window clear count mismatch");
-    rc |= Expect(gHostIntroStubBlitBitmapToWindowCalls == 1, "CB2_Intro bitmap blit count mismatch");
-    rc |= Expect(gHostIntroStubPutWindowTilemapCalls == 1, "CB2_Intro did not put window tilemap");
-    rc |= Expect(gHostIntroStubCopyWindowToVramCalls == 1, "CB2_Intro did not copy window to VRAM");
+    rc |= Expect(WindowMatches(0, 0, 6, 4, 18, 9),
+                 "CB2_Intro did not allocate the Game Freak logo window");
+    rc |= Expect(gWindowBgTilemapBuffers[0] != NULL,
+                 "CB2_Intro did not allocate a BG0 tilemap buffer for windows");
+    rc |= Expect(WindowTileDataHasNonZero(0),
+                 "CB2_Intro did not draw Game Freak logo pixels into the window buffer");
+    rc |= Expect(WindowTilemapHasNonZero(0),
+                 "CB2_Intro did not populate the Game Freak logo tilemap");
+    rc |= Expect(WindowUploadHasNonZero(0),
+                 "CB2_Intro did not upload the Game Freak logo graphics to VRAM");
     rc |= Expect(GetTaskCount() == 1, "CB2_Intro task count mismatch");
 
     return rc;
@@ -855,9 +996,8 @@ static int TestIntroScene1BootSlice(void)
 {
     u32 base_start_blend_calls;
     u32 base_blend_active_calls;
-    u32 base_blit_calls;
-    u32 base_copy_window_calls;
     u32 base_decompress_calls;
+    u32 base_window_hash;
     int rc = 0;
     int i;
 
@@ -865,15 +1005,13 @@ static int TestIntroScene1BootSlice(void)
 
     base_start_blend_calls = gHostIntroStubStartBlendTaskCalls;
     base_blend_active_calls = gHostIntroStubIsBlendTaskActiveCalls;
-    base_blit_calls = gHostIntroStubBlitBitmapToWindowCalls;
-    base_copy_window_calls = gHostIntroStubCopyWindowToVramCalls;
     base_decompress_calls = gHostIntroStubDecompressAndCopyTileDataToVramCalls;
+    base_window_hash = WindowTileDataHash(0);
 
     for (i = 0; i < 512; i++)
     {
         if (gHostIntroStubStartBlendTaskCalls >= base_start_blend_calls + 2
-         && gHostIntroStubBlitBitmapToWindowCalls >= base_blit_calls + 2
-         && gHostIntroStubCopyWindowToVramCalls >= base_copy_window_calls + 1
+         && WindowTileDataHash(0) != base_window_hash
          && gHostIntroStubDecompressAndCopyTileDataToVramCalls >= base_decompress_calls + 4
          && gHostIntroStubResetBgPositionsCalls >= 1
          && gHostIntroStubM4aSongNumStartCalls >= 1
@@ -888,10 +1026,10 @@ static int TestIntroScene1BootSlice(void)
                  "intro did not reach reveal-name and reveal-logo blend setup");
     rc |= Expect(gHostIntroStubIsBlendTaskActiveCalls > base_blend_active_calls,
                  "intro did not poll blend completion during reveal phases");
-    rc |= Expect(gHostIntroStubBlitBitmapToWindowCalls >= base_blit_calls + 2,
-                 "intro did not blit reveal-logo assets into the window");
-    rc |= Expect(gHostIntroStubCopyWindowToVramCalls >= base_copy_window_calls + 1,
-                 "intro did not copy reveal-logo window contents to VRAM");
+    rc |= Expect(WindowTileDataHash(0) != base_window_hash,
+                 "intro did not update the Game Freak window contents during reveal phases");
+    rc |= Expect(WindowUploadHasNonZero(0),
+                 "intro did not keep the Game Freak window graphics resident in VRAM");
     rc |= Expect(gHostIntroStubDecompressAndCopyTileDataToVramCalls >= base_decompress_calls + 4,
                  "intro did not stream Scene 1 tile data into VRAM");
     rc |= Expect(gHostIntroStubResetBgPositionsCalls >= 1, "intro did not reset bg positions for Scene 1");
@@ -1086,12 +1224,10 @@ static int AdvanceToOakSpeechControlsGuide(void)
                  "main menu did not execute the continue-stats Pokedex path");
     rc |= Expect(gHostTitleStubFlagGetCalls >= 3,
                  "main menu did not execute the expected badge or Pokedex flag checks");
-    rc |= Expect(gHostIntroStubFillWindowPixelBufferCalls >= 2,
-                 "main menu did not fill the expected continue/new-game windows");
-    rc |= Expect(gHostIntroStubPutWindowTilemapCalls >= 2,
-                 "main menu did not put the expected window tilemaps");
-    rc |= Expect(gHostIntroStubCopyWindowToVramCalls >= 2,
-                 "main menu did not copy the expected window content to VRAM");
+    rc |= Expect(gWindows[0].tileData != NULL && gWindows[1].tileData != NULL,
+                 "main menu did not allocate the expected first two windows");
+    rc |= Expect(WindowTilemapHasNonZero(0),
+                 "main menu did not populate the continue window tilemap");
     rc |= Expect(gMain.vblankCallback != NULL,
                  "main menu did not install its VBlank callback");
     rc |= Expect((GetGpuReg(REG_OFFSET_DISPCNT) & (DISPCNT_OBJ_ON | DISPCNT_WIN0_ON))
@@ -1114,8 +1250,8 @@ static int AdvanceToOakSpeechControlsGuide(void)
 
     rc |= Expect(gHostTitleStubStartNewGameSceneCalls == 1,
                  "main menu New Game selection did not hand off to StartNewGameScene");
-    rc |= Expect(gHostTitleStubFreeAllWindowBuffersCalls >= 1,
-                 "main menu New Game selection did not free window buffers");
+    rc |= Expect(CountWindowsWithTileData() == 0,
+                 "main menu New Game selection did not free all window tile buffers");
 
     for (i = 0; i < 96 && (gHostOakSpeechPlayBGMCalls == 0 || gPaletteFade.active); i++)
         RunMainCallbackFrame();
@@ -1130,6 +1266,10 @@ static int AdvanceToOakSpeechControlsGuide(void)
                  "Oak Speech setup did not reach the controls-guide top bar window stage");
     rc |= Expect(gHostOakSpeechPlayBGMCalls == 1,
                  "Oak Speech setup did not reach the controls-guide input-ready state");
+    rc |= Expect(CountWindowsWithTileData() >= 2,
+                 "Oak Speech setup did not allocate both the standard textbox and controls-guide windows");
+    rc |= Expect(gWindows[1].tileData != NULL && WindowTilemapHasNonZero(1),
+                 "Oak Speech controls guide did not populate its page window tilemap");
     rc |= Expect(!gPaletteFade.active,
                  "Oak Speech controls guide was still mid-fade when input-ready state was expected");
 
@@ -1346,8 +1486,8 @@ static int TestTitleScreenSaveClearHandoff(void)
                  "save-clear screen did not print its clearing message");
     rc |= Expect(gHostTitleStubLastPrintedText == gText_ClearingData,
                  "save-clear screen printed the wrong clearing message");
-    rc |= Expect(gHostIntroStubFillWindowPixelBufferCalls >= 1,
-                 "save-clear screen did not clear the message window before printing");
+    rc |= Expect(CountWindowsWithTileData() >= 1,
+                 "save-clear screen did not allocate any real window buffers");
 
     return rc;
 }
