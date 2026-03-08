@@ -77,12 +77,13 @@ These original upstream translation units are compiled directly into the native 
 - `src/intro.c`
 - `src/title_screen.c`
 - `src/clear_save_data_screen.c`
+- `src/berry_fix_program.c`
 
 They are not rewrites. They are built from the upstream checkout.
 
 Important qualification:
 - `main.c` currently builds on host through the upstream non-`MODERN` path so the ARM-only entry-clear inline assembly in `AgbMain` is skipped
-- this now verifies real `main.c` helper behavior, a host C translation of `crt0.s:intr_main`, a bounded `AgbMain` init/frame/soft-reset slice, the real `intro.c` path through the non-skipped Game Freak / Scene 1 / Scene 2 / Scene 3 sequence into natural title handoff, real `title_screen.c` progression from init into run-state plus restart/cry/main-menu/berry-fix handoffs, and the real `clear_save_data_screen.c` provider through its confirmation/menu/clear-selection path
+- this now verifies real `main.c` helper behavior, a host C translation of `crt0.s:intr_main`, a bounded `AgbMain` init/frame/soft-reset slice, the real `intro.c` path through the non-skipped Game Freak / Scene 1 / Scene 2 / Scene 3 sequence into natural title handoff, real `title_screen.c` progression from init into run-state plus restart/cry/main-menu/save-clear/berry-fix downstream handoffs, the real `clear_save_data_screen.c` provider through its confirmation/menu/clear-selection path, and the real `berry_fix_program.c` provider through its multiboot progression path
 - `intro.c` and `title_screen.c` currently run against host zero-INCBIN or placeholder asset fallbacks plus narrow helper stubs; that is enough for source-driven control-flow verification, not a finished asset/runtime rehost
 - it is still not a full hosted boot through the complete `AgbMain` -> `intro.c` -> `title_screen.c` -> main-menu flow
 
@@ -231,8 +232,9 @@ Verified commands and outcomes:
 - host BIOS affine setup through `BgAffineSet` and `ObjAffineSet` so unchanged upstream sprite/background affine users can execute on the host
 - bounded upstream `AgbMain` initialization and frame-loop behavior through the real init path, callback setup, loop body, VBlank wait, first copyright callback frame, and soft-reset exit path
 - real upstream `intro.c` callback progression from `CB2_InitCopyrightScreenAfterBootup` through copyright fade-out, intro setup, the first `CB2_Intro` frame, the Game Freak star, reveal-name, reveal-logo, Scene 1, Scene 2, Scene 3, and the natural non-skipped handoff into `CB2_InitTitleScreen`
-- real upstream `title_screen.c` progression from init through the first title-loop frame, run-state setup, timeout restart, cry-to-main-menu handoff, delete-save handoff into `CB2_SaveClearScreen_Init`, and berry-fix callback edge
+- real upstream `title_screen.c` progression from init through the first title-loop frame, run-state setup, timeout restart, cry-to-main-menu handoff, delete-save handoff into `CB2_SaveClearScreen_Init`, and berry-fix handoff into `CB2_InitBerryFixProgram`
 - real upstream `clear_save_data_screen.c` progression through init, GPU/window setup, confirmation prompt, yes-no menu creation, and yes-selection clear-save handling
+- real upstream `berry_fix_program.c` progression through init, begin/connect/power-off scene changes, multiboot init/start, and successful advance into the follow-instructions scene
 
 This is still a bootstrap test, not a game boot test.
 
@@ -518,7 +520,7 @@ The current strategy is intentionally conservative:
 ## Recommended Next Step
 
 If continuing from here, the most defensible next step is:
-1. replace the remaining title callback-edge stubs beneath `title_screen.c` with real downstream providers from `main_menu.c` and `berry_fix_program.c` while keeping `title_screen.c` unchanged where practical
+1. replace the remaining title callback-edge stub beneath `title_screen.c` with the real downstream provider from `main_menu.c` while keeping `title_screen.c` unchanged where practical
 2. tighten `host_crt0.c` and `host_agbmain.c` toward a closer `crt0.s:start_vector` / startup model now that the deeper intro/title flow is proven
 3. keep the now-verified `crt0`/AgbMain/palette/bg/sprite/task/scanline/title path as the runtime base while m4a/save/link stay explicitly pending
 

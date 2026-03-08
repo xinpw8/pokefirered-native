@@ -7,6 +7,7 @@
 #include "load_save.h"
 #include "main_menu.h"
 #include "menu.h"
+#include "multiboot.h"
 #include "save.h"
 #include "sound.h"
 
@@ -32,6 +33,11 @@ u32 gHostTitleStubDestroyYesNoMenuCalls = 0;
 u32 gHostTitleStubFreeAllWindowBuffersCalls = 0;
 u32 gHostTitleStubDeactivateAllTextPrintersCalls = 0;
 u32 gHostTitleStubClearSaveDataCalls = 0;
+u32 gHostTitleStubMultiBootInitCalls = 0;
+u32 gHostTitleStubMultiBootMainCalls = 0;
+u32 gHostTitleStubMultiBootStartMasterCalls = 0;
+u32 gHostTitleStubMultiBootCheckCompleteCalls = 0;
+int gHostTitleStubLastMultiBootLength = 0;
 u8 gHostTitleStubLastHelpContext = 0;
 u8 gHostTitleStubLastFadeOutMapMusicSpeed = 0;
 u8 gHostTitleStubLastFadeOutBGMSpeed = 0;
@@ -39,6 +45,7 @@ u16 gHostTitleStubLastPlayCrySpecies = 0;
 s8 gHostTitleStubLastPlayCryPan = 0;
 const u8 *gHostTitleStubLastPrintedText = NULL;
 s8 gHostTitleStubMenuProcessInputResult = MENU_NOTHING_CHOSEN;
+static bool8 sHostTitleStubMultiBootComplete = FALSE;
 
 const u16 gGraphics_TitleScreen_GameTitleLogoPals[13 * 16] = {0};
 const u8 gGraphics_TitleScreen_GameTitleLogoTiles[1] = {0};
@@ -51,8 +58,28 @@ const u8 gGraphics_TitleScreen_CopyrightPressStartTiles[1] = {0};
 const u8 gGraphics_TitleScreen_CopyrightPressStartMap[1] = {0};
 const u16 gTitleScreen_Slash_Pal[16] = {0};
 const u32 gTitleScreen_BlankSprite_Tiles[1] = {0};
+const u8 gBerryFixGameboy_Gfx[] = {0x10, 0x04, 0x00, 0x00, 0x00, 'G', 'B', '0', '0'};
+const u8 gBerryFixGameboy_Tilemap[] = {0x10, 0x04, 0x00, 0x00, 0x00, 'T', 'M', '0', '0'};
+const u8 gBerryFixGameboy_Pal[0x200] = {0x11, 0x00};
+const u8 gBerryFixGameboyLogo_Gfx[] = {0x10, 0x04, 0x00, 0x00, 0x00, 'G', 'L', '0', '0'};
+const u8 gBerryFixGameboyLogo_Tilemap[] = {0x10, 0x04, 0x00, 0x00, 0x00, 'L', 'M', '0', '0'};
+const u8 gBerryFixGameboyLogo_Pal[0x200] = {0x22, 0x00};
+const u8 gBerryFixGbaTransfer_Gfx[] = {0x10, 0x04, 0x00, 0x00, 0x00, 'T', 'R', '0', '0'};
+const u8 gBerryFixGbaTransfer_Tilemap[] = {0x10, 0x04, 0x00, 0x00, 0x00, 'T', 'M', '1', '0'};
+const u8 gBerryFixGbaTransfer_Pal[0x200] = {0x33, 0x00};
+const u8 gBerryFixGbaTransferHighlight_Gfx[] = {0x10, 0x04, 0x00, 0x00, 0x00, 'H', 'I', '0', '0'};
+const u8 gBerryFixGbaTransferHighlight_Tilemap[] = {0x10, 0x04, 0x00, 0x00, 0x00, 'H', 'M', '0', '0'};
+const u8 gBerryFixGbaTransferHighlight_Pal[0x200] = {0x44, 0x00};
+const u8 gBerryFixGbaTransferError_Gfx[] = {0x10, 0x04, 0x00, 0x00, 0x00, 'E', 'R', '0', '0'};
+const u8 gBerryFixGbaTransferError_Tilemap[] = {0x10, 0x04, 0x00, 0x00, 0x00, 'E', 'M', '0', '0'};
+const u8 gBerryFixGbaTransferError_Pal[0x200] = {0x55, 0x00};
+const u8 gBerryFixWindow_Gfx[] = {0x10, 0x04, 0x00, 0x00, 0x00, 'W', 'N', '0', '0'};
+const u8 gBerryFixWindow_Tilemap[] = {0x10, 0x04, 0x00, 0x00, 0x00, 'W', 'M', '0', '0'};
+const u8 gBerryFixWindow_Pal[0x200] = {0x66, 0x00};
 const u8 gText_ClearAllSaveData[] = "Clear all save data areas?";
 const u8 gText_ClearingData[] = "Clearing data..\nPlease wait.";
+const u8 gMultiBootProgram_BerryGlitchFix_Start[0xD0] = {0};
+const u8 gMultiBootProgram_BerryGlitchFix_End[] = {0};
 
 void HostTitleScreenStubReset(void)
 {
@@ -76,6 +103,11 @@ void HostTitleScreenStubReset(void)
     gHostTitleStubFreeAllWindowBuffersCalls = 0;
     gHostTitleStubDeactivateAllTextPrintersCalls = 0;
     gHostTitleStubClearSaveDataCalls = 0;
+    gHostTitleStubMultiBootInitCalls = 0;
+    gHostTitleStubMultiBootMainCalls = 0;
+    gHostTitleStubMultiBootStartMasterCalls = 0;
+    gHostTitleStubMultiBootCheckCompleteCalls = 0;
+    gHostTitleStubLastMultiBootLength = 0;
     gHostTitleStubLastHelpContext = 0;
     gHostTitleStubLastFadeOutMapMusicSpeed = 0;
     gHostTitleStubLastFadeOutBGMSpeed = 0;
@@ -83,6 +115,7 @@ void HostTitleScreenStubReset(void)
     gHostTitleStubLastPlayCryPan = 0;
     gHostTitleStubLastPrintedText = NULL;
     gHostTitleStubMenuProcessInputResult = MENU_NOTHING_CHOSEN;
+    sHostTitleStubMultiBootComplete = FALSE;
 }
 
 void HostTitleScreenStubSetMenuProcessInputResult(s8 result)
@@ -220,7 +253,39 @@ void ClearSaveData(void)
     gHostTitleStubClearSaveDataCalls++;
 }
 
-void CB2_InitBerryFixProgram(void)
+void MultiBootInit(struct MultiBootParam *mp)
 {
-    gHostTitleStubCB2InitBerryFixProgramCalls++;
+    gHostTitleStubMultiBootInitCalls++;
+    sHostTitleStubMultiBootComplete = FALSE;
+    mp->probe_count = 0;
+    mp->response_bit = 0x2;
+    mp->client_bit = 0x2;
+    mp->check_wait = 0;
+    mp->sendflag = 0;
+}
+
+int MultiBootMain(struct MultiBootParam *mp)
+{
+    gHostTitleStubMultiBootMainCalls++;
+    (void)mp;
+    return 0;
+}
+
+void MultiBootStartMaster(struct MultiBootParam *mp, const u8 *srcp, int length, u8 palette_color, s8 palette_speed)
+{
+    gHostTitleStubMultiBootStartMasterCalls++;
+    gHostTitleStubLastMultiBootLength = length;
+    sHostTitleStubMultiBootComplete = TRUE;
+    mp->boot_srcp = srcp;
+    mp->boot_endp = srcp + length;
+    mp->palette_data = palette_color;
+    mp->probe_count = 0xe9;
+    (void)palette_speed;
+}
+
+bool32 MultiBootCheckComplete(struct MultiBootParam *mp)
+{
+    gHostTitleStubMultiBootCheckCompleteCalls++;
+    (void)mp;
+    return sHostTitleStubMultiBootComplete;
 }

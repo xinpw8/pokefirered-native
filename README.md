@@ -32,6 +32,7 @@ What is wired today:
   - `src/intro.c` for the real copyright-screen through Game Freak reveal-name/reveal-logo, Scene 1, Scene 2, Scene 3, and the natural non-skipped title-screen handoff
   - `src/title_screen.c` for real title-screen init, run-state progression, and downstream handoffs for restart/cry/main-menu/save-clear/berry-fix
   - `src/clear_save_data_screen.c` for the real save-clear confirmation flow reached from the title-screen delete-save chord
+  - `src/berry_fix_program.c` for the real berry-fix multiboot state machine reached from the title-screen berry-fix chord
 - Host-backed fixed-address GBA memory regions:
   - EWRAM
   - IWRAM
@@ -43,7 +44,7 @@ What is wired today:
 - Host `global.h`/`gba.gba.h`/`gba.macro.h` routing so unchanged upstream `DmaSet`/`DmaStop` users execute against the host DMA layer instead of raw hardware writes, and so fixed 32-bit slots like `INTR_VECTOR` stay 32-bit on the host.
 - A host `crt0`-derived interrupt dispatcher and `AgbMain` runner that drive real upstream init/loop code with hosted scanline/VBlank delivery and exit through the original soft-reset path.
 - Narrow host intro/window/save/multiboot shims that let unchanged upstream `intro.c` advance from the copyright screen through the early Game Freak sequence into Scene 1.
-- Narrow host title/help/save/sound/graphics shims, isolated under `host_title_screen_stubs.c` / `host_title_screen_stubs.h`, that let unchanged upstream `title_screen.c` progress from init into run-state and its current callback handoff edges.
+- Narrow host title/help/save/sound/graphics/multiboot shims, isolated under `host_title_screen_stubs.c` / `host_title_screen_stubs.h`, that let unchanged upstream `title_screen.c`, `clear_save_data_screen.c`, and `berry_fix_program.c` progress through their current source-driven paths.
 - Host implementations for the BIOS/debug surface those files depend on:
   - `CpuSet`
   - `CpuFastSet`
@@ -74,7 +75,7 @@ cmake --build /home/spark-advantage/pokefirered-native/build -j
 ```
 
 Targets:
-- `pfr_smoke`: verifies the native bootstrap against exact-source RNG, heap, decompression, GPU register buffering, DMA3 request processing, scanline-effect HBlank DMA/task behavior, palette transfer/fade setup, BG control/tilemap/VRAM behavior, sprite sheet/palette/core object behavior, `main.c` helper/interrupt/runtime behavior, a `crt0.s`-derived host interrupt dispatcher, a bounded hosted `AgbMain` init/frame/soft-reset slice, the real upstream `intro.c` path through the full non-skipped Game Freak / Scene 1 / Scene 2 / Scene 3 sequence into natural title-screen handoff, real upstream `title_screen.c` progression from init into run-state plus restart/cry/main-menu/berry-fix handoffs, and the real upstream `clear_save_data_screen.c` provider through confirmation prompt, yes-no menu creation, and clear-save selection handling.
+- `pfr_smoke`: verifies the native bootstrap against exact-source RNG, heap, decompression, GPU register buffering, DMA3 request processing, scanline-effect HBlank DMA/task behavior, palette transfer/fade setup, BG control/tilemap/VRAM behavior, sprite sheet/palette/core object behavior, `main.c` helper/interrupt/runtime behavior, a `crt0.s`-derived host interrupt dispatcher, a bounded hosted `AgbMain` init/frame/soft-reset slice, the real upstream `intro.c` path through the full non-skipped Game Freak / Scene 1 / Scene 2 / Scene 3 sequence into natural title-screen handoff, real upstream `title_screen.c` progression from init into run-state plus restart/cry/main-menu/save-clear/berry-fix downstream handoffs, the real upstream `clear_save_data_screen.c` provider through confirmation prompt, yes-no menu creation, and clear-save selection handling, and the real upstream `berry_fix_program.c` provider through begin/connect/power-off scenes and successful multiboot progression into the follow-instructions scene.
 - `pfr_lz77`: uses the original upstream decompression entrypoints to decode an LZ77 blob.
 
 LZ77 tool:
@@ -83,7 +84,7 @@ LZ77 tool:
 ```
 
 Next rehost boundary, based on upstream source:
-1. replace the remaining title callback-edge stubs beneath `src/title_screen.c` with real downstream providers for `main_menu.c` and `berry_fix_program.c` while keeping `title_screen.c` itself unchanged
+1. replace the remaining title callback-edge stub beneath `src/title_screen.c` with the real downstream provider for `main_menu.c` while keeping `title_screen.c` itself unchanged
 2. tighten `host_crt0.c` / `host_agbmain.c` toward a closer `crt0.s:start_vector` / startup / interrupt model now that the deeper intro/title flow is proven
 3. `src/m4a.c`, `src/m4a_1.s`, `src/sound.c`
 4. `src/save.c`, `src/load_save.c`, `src/agb_flash*.c`, `src/link.c`

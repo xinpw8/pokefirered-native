@@ -138,12 +138,31 @@ target_include_directories(pfr_upstream_clear_save PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
 )
 
+add_library(pfr_upstream_berry_fix OBJECT
+    "${POKEFIRERED_SOURCE_DIR}/src/berry_fix_program.c"
+)
+target_compile_definitions(pfr_upstream_berry_fix PRIVATE ${PFR_COMMON_DEFINES})
+target_compile_options(pfr_upstream_berry_fix PRIVATE
+    -fno-pie
+    -ffunction-sections
+    -fdata-sections
+    -Wno-int-conversion
+    -Wno-int-to-pointer-cast
+    -Wno-pointer-to-int-cast
+    "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
+    "-iquote${POKEFIRERED_SOURCE_DIR}/include"
+)
+target_include_directories(pfr_upstream_berry_fix PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+
 add_executable(pfr_smoke tests/smoke.c)
 target_sources(pfr_smoke PRIVATE
     src/host_agbmain.c
     $<TARGET_OBJECTS:pfr_upstream_intro>
     $<TARGET_OBJECTS:pfr_upstream_title>
     $<TARGET_OBJECTS:pfr_upstream_clear_save>
+    $<TARGET_OBJECTS:pfr_upstream_berry_fix>
     $<TARGET_OBJECTS:pfr_upstream_runtime>
 )
 target_compile_definitions(pfr_smoke PRIVATE ${PFR_COMMON_DEFINES})

@@ -1071,6 +1071,7 @@ static int TestTitleScreenSaveClearHandoff(void)
 static int TestTitleScreenBerryFixHandoff(void)
 {
     int rc = 0;
+    int i;
 
     rc |= AdvanceToTitleRunState();
 
@@ -1084,8 +1085,49 @@ static int TestTitleScreenBerryFixHandoff(void)
     rc |= Expect(gHostTitleStubM4aMPlayAllStopCalls == 1,
                  "berry-fix transition did not stop all music players");
     RunMainCallbackFrame();
-    rc |= Expect(gHostTitleStubCB2InitBerryFixProgramCalls == 1,
-                 "berry-fix callback stub did not execute");
+
+    rc |= Expect(gMain.callback2 != CB2_InitBerryFixProgram,
+                 "berry-fix init did not switch to its run callback");
+    rc |= Expect(gHostStubM4aSoundVSyncOffCalls == 1,
+                 "berry-fix init did not disable m4a VSync");
+    rc |= Expect(GetTaskCount() == 1, "berry-fix init did not create its task");
+
+    RunMainCallbackFrame();
+
+    rc |= Expect(((u16 *)BG_PLTT)[0] == 0x0066,
+                 "berry-fix init did not load the begin scene palette");
+    rc |= Expect(REG_DISPCNT == DISPCNT_BG0_ON,
+                 "berry-fix init did not enable BG0 display");
+
+    SetKeys(A_BUTTON, A_BUTTON);
+    RunMainCallbackFrame();
+    ClearKeys();
+    rc |= Expect(((u16 *)BG_PLTT)[0] == 0x0011,
+                 "berry-fix did not advance to the ensure-connect scene");
+
+    SetKeys(A_BUTTON, A_BUTTON);
+    RunMainCallbackFrame();
+    ClearKeys();
+    rc |= Expect(((u16 *)BG_PLTT)[0] == 0x0022,
+                 "berry-fix did not advance to the turn-off-power scene");
+
+    for (i = 0; i < 190 && gHostTitleStubMultiBootStartMasterCalls == 0; i++)
+        RunMainCallbackFrame();
+
+    rc |= Expect(gHostTitleStubMultiBootInitCalls == 1,
+                 "berry-fix did not initialize multiboot");
+    rc |= Expect(gHostTitleStubMultiBootStartMasterCalls == 1,
+                 "berry-fix did not begin multiboot transmission");
+    rc |= Expect(gHostTitleStubLastMultiBootLength > 0,
+                 "berry-fix multiboot length was not set");
+
+    for (i = 0; i < 4 && gHostTitleStubMultiBootCheckCompleteCalls == 0; i++)
+        RunMainCallbackFrame();
+
+    rc |= Expect(gHostTitleStubMultiBootCheckCompleteCalls >= 1,
+                 "berry-fix did not check for multiboot completion");
+    rc |= Expect(((u16 *)BG_PLTT)[0] == 0x0044,
+                 "berry-fix did not advance to the follow-instructions scene");
 
     return rc;
 }
