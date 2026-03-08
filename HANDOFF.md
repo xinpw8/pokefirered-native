@@ -527,6 +527,10 @@ If continuing from here, the most defensible next step is:
 2. tighten `host_crt0.c` and `host_agbmain.c` toward a closer `crt0.s:start_vector` / startup model now that the deeper intro/title/menu flow is proven
 3. keep the now-verified `crt0`/AgbMain/palette/bg/sprite/task/scanline/title/menu path as the runtime base while renderer/input, m4a, save, and link stay explicitly pending
 
+Current Oak Speech note:
+- the immediate post-Pikachu-intro Nidoran sprite crash was removed by adding blank mon-pic / mon-palette fallbacks plus a dummy multiuse sprite template in the host seam
+- the passing smoke boundary is still only through Pikachu intro page 1; Oak's first welcome message is not yet a verified boundary
+
 A likely practical sub-plan for `main.c` from here:
 - keep the bounded `AgbMain` runner for smoke-level control
 - push `intro.c` and `title_screen.c` farther by implementing or reusing the smallest remaining gflib/help/menu/save/sound helpers the next callbacks need
