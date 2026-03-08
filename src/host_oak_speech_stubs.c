@@ -63,7 +63,7 @@ static const struct WindowTemplate sHostStandardTextBoxWindowTemplates[] = {
         .tilemapTop = 15,
         .width = 26,
         .height = 4,
-        .paletteNum = DLG_WINDOW_PALETTE_NUM,
+        .paletteNum = 15,
         .baseBlock = 0x198,
     },
     DUMMY_WIN_TEMPLATE
