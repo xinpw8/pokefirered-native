@@ -16,6 +16,7 @@
 #include "quest_log.h"
 #include "save.h"
 #include "sound.h"
+#include "string_util.h"
 #include "text_window_graphics.h"
 
 #include "host_title_screen_stubs.h"
@@ -398,18 +399,43 @@ const struct TextWindowGraphics *GetUserWindowGraphics(u8 idx)
     return &sHostTitleStubUserWindowGraphics;
 }
 
-u8 *ConvertIntToDecimalStringN(u8 *str, u32 value, u8 mode, u8 n)
+u8 *ConvertIntToDecimalStringN(u8 *str, s32 value, enum StringConvertMode mode, u8 n)
 {
-    char format[8];
-    char buffer[32];
-    size_t length;
+    u8 digits[16];
+    u32 magnitude;
+    u8 digit_count = 0;
+    u8 output_len;
+    u8 i;
 
-    (void)mode;
-    snprintf(format, sizeof(format), "%%0%uu", (unsigned)n);
-    snprintf(buffer, sizeof(buffer), format, (unsigned)value);
-    length = strlen(buffer);
-    memcpy(str, buffer, length + 1);
-    return str + length;
+    if (value < 0)
+        magnitude = (u32)(-value);
+    else
+        magnitude = (u32)value;
+
+    do
+    {
+        digits[digit_count++] = (u8)('0' + (magnitude % 10));
+        magnitude /= 10;
+    } while (magnitude != 0 && digit_count < (u8)sizeof(digits));
+
+    output_len = digit_count;
+    if (mode != STR_CONV_MODE_LEFT_ALIGN && output_len < n)
+        output_len = n;
+
+    for (i = 0; i < output_len; i++)
+    {
+        if (i < output_len - digit_count)
+        {
+            str[i] = (mode == STR_CONV_MODE_LEADING_ZEROS) ? '0' : ' ';
+        }
+        else
+        {
+            str[i] = digits[digit_count - 1 - (i - (output_len - digit_count))];
+        }
+    }
+
+    str[output_len] = EOS;
+    return str + output_len;
 }
 
 u8 *StringAppend(u8 *dest, const u8 *src)
