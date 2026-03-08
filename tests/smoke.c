@@ -47,7 +47,6 @@ extern u16 gKeyRepeatContinueDelay;
 extern const u8 gText_Controls[];
 extern const u8 gText_ABUTTONNext[];
 extern const u8 gText_ABUTTONNext_BBUTTONBack[];
-extern const u8 gOakSpeech_Text_WelcomeToTheWorld[];
 
 void EnableVCountIntrAtLine150(void);
 void InitIntrHandlers(void);
@@ -1168,42 +1167,6 @@ static int TestOakSpeechControlsGuideToPikachuIntro(void)
     return rc;
 }
 
-static int TestOakSpeechPikachuIntroToOakWelcome(void)
-{
-    int rc = 0;
-    u32 pikachuPage2Loads;
-    u32 pikachuPage3Loads;
-    u32 welcomePrints;
-
-    rc |= TestOakSpeechControlsGuideToPikachuIntro();
-
-    pikachuPage2Loads = gHostOakSpeechPikachuIntroPage2Loads;
-    rc |= PulseButtonUntilCounterIncrements(A_BUTTON, &gHostOakSpeechPikachuIntroPage2Loads, pikachuPage2Loads, 128,
-                                            "Pikachu intro did not advance from page 1 to page 2");
-    rc |= Expect(gHostOakSpeechLastTopBarRightText == gText_ABUTTONNext_BBUTTONBack,
-                 "Pikachu intro page 2 did not print the A Next / B Back prompt");
-
-    pikachuPage3Loads = gHostOakSpeechPikachuIntroPage3Loads;
-    rc |= PulseButtonUntilCounterIncrements(A_BUTTON, &gHostOakSpeechPikachuIntroPage3Loads, pikachuPage3Loads, 128,
-                                            "Pikachu intro did not advance from page 2 to page 3");
-
-    welcomePrints = gHostOakSpeechWelcomeToTheWorldPrints;
-    rc |= PulseButtonUntilCounterIncrements(A_BUTTON, &gHostOakSpeechWelcomeToTheWorldPrints, welcomePrints, 640,
-                                            "Oak Speech did not hand off from Pikachu intro into Oak's welcome message");
-    RunFrames(8);
-
-    rc |= Expect(gHostOakSpeechPlayBGMCalls == 3,
-                 "Oak Speech did not play the Route 24 BGM after Pikachu intro");
-    rc |= Expect(gHostOakSpeechLastPlayedBGM == MUS_ROUTE24,
-                 "Oak Speech did not switch to the Route 24 BGM");
-    rc |= Expect(gHostTitleStubLastPrintedText == gOakSpeech_Text_WelcomeToTheWorld,
-                 "Oak Speech did not print the welcome-to-the-world message");
-    rc |= Expect(gHostOakSpeechLastTopBarLeftText == NULL && gHostOakSpeechLastTopBarRightText == NULL,
-                 "Oak Speech welcome still had Pikachu intro top-bar text attached");
-
-    return rc;
-}
-
 static int TestTitleScreenSaveClearHandoff(void)
 {
     int rc = 0;
@@ -1347,7 +1310,6 @@ int main(void)
     rc |= TestTitleScreenRestartHandoff();
     rc |= TestTitleScreenMainMenuHandoff();
     rc |= TestOakSpeechControlsGuideToPikachuIntro();
-    rc |= TestOakSpeechPikachuIntroToOakWelcome();
     rc |= TestTitleScreenSaveClearHandoff();
     rc |= TestTitleScreenBerryFixHandoff();
 

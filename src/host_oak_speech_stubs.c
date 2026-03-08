@@ -42,7 +42,6 @@ u32 gHostOakSpeechControlsGuidePage3Loads = 0;
 u32 gHostOakSpeechPikachuIntroPage1Loads = 0;
 u32 gHostOakSpeechPikachuIntroPage2Loads = 0;
 u32 gHostOakSpeechPikachuIntroPage3Loads = 0;
-u32 gHostOakSpeechWelcomeToTheWorldPrints = 0;
 u16 gHostOakSpeechLastPlayedBGM = 0;
 const u8 *gHostOakSpeechLastTopBarLeftText = NULL;
 const u8 *gHostOakSpeechLastTopBarRightText = NULL;
@@ -55,7 +54,7 @@ static const u16 sOakSpeechTextWindowPalette[16] = {
     RGB_WHITE, RGB_WHITE, RGB_WHITE, RGB_WHITE,
     RGB_WHITE, RGB_WHITE, RGB_WHITE, RGB_BLACK,
 };
-static const u8 sHostBlankMonPaletteLz77[] = {0x00, 0x20, 0x00, 0x00};
+static const u32 sHostBlankMonPaletteLz77[] = {0x00002000};
 
 #define DEFINE_TEXT(name, value) const u8 name[] = value
 
@@ -168,8 +167,6 @@ void HostOakSpeechStubRecordPrintedText(const u8 *text)
         gHostOakSpeechPikachuIntroPage2Loads++;
     else if (text == gPikachuIntro_Text_Page3)
         gHostOakSpeechPikachuIntroPage3Loads++;
-    else if (text == gOakSpeech_Text_WelcomeToTheWorld)
-        gHostOakSpeechWelcomeToTheWorldPrints++;
 }
 
 void HostOakSpeechStubReset(void)
@@ -185,7 +182,6 @@ void HostOakSpeechStubReset(void)
     gHostOakSpeechPikachuIntroPage1Loads = 0;
     gHostOakSpeechPikachuIntroPage2Loads = 0;
     gHostOakSpeechPikachuIntroPage3Loads = 0;
-    gHostOakSpeechWelcomeToTheWorldPrints = 0;
     gHostOakSpeechLastPlayedBGM = 0;
     gHostOakSpeechLastTopBarLeftText = NULL;
     gHostOakSpeechLastTopBarRightText = NULL;

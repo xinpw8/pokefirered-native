@@ -69,7 +69,7 @@ u32 gHostStubUpdateWirelessStatusIndicatorSpriteCalls = 0;
 u8 gHostStubLastFlashTimerNum = 0xFF;
 IntrFunc *gHostStubLastFlashTimerIntr = NULL;
 
-static const u8 sHostBlankMonPicLz77[] = {0x00, 0x00, 0x08, 0x00};
+static const u32 sHostBlankMonPicLz77[] = {0x00080000};
 
 const struct CompressedSpriteSheet gMonFrontPicTable[NUM_SPECIES + 1] = {
     [0 ... NUM_SPECIES] = {
