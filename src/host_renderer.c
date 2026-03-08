@@ -182,7 +182,7 @@ static void RenderTextBg(int bgNum, u16 dispcnt)
             }
 
             int mapOffset = screenBase + screenBlock * 0x800 + (tileY * 32 + tileX) * 2;
-            u16 mapEntry = *(const u16 *)(BG_VRAM + mapOffset);
+            u16 mapEntry = *(const u16 *)(PPU_BG_VRAM + mapOffset);
 
             int tileNum = mapEntry & 0x3FF;
             int hFlip = (mapEntry >> 10) & 1;
