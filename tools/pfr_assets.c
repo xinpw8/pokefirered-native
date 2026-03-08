@@ -716,6 +716,36 @@ static const struct AssetRule sIntroAssets[] = {
     { "intro/scene_3/swipe.png",      "intro/scene_3/swipe.gbapal", PAL_FROM_PNG, 0 },
 };
 
+static const struct AssetRule sOakSpeechAssets[] = {
+    /* Background tiles + palette (no separate .pal, extract from PNG) */
+    { "oak_speech/bg_tiles.png",         "oak_speech/bg_tiles.4bpp", PNG4, 0 },
+    { "oak_speech/bg_tiles.png",         "oak_speech/bg_tiles.gbapal", PAL_FROM_PNG, 0 },
+    /* Oak speech background */
+    { "oak_speech/oak_speech_bg.png",    "oak_speech/oak_speech_bg.4bpp", PNG4, 0 },
+    { "oak_speech/oak_speech_bg.bin",    "oak_speech/oak_speech_bg.bin", BIN_COPY, 0 },
+    /* Platform */
+    { "oak_speech/platform.png",         "oak_speech/platform.4bpp", PNG4, 0 },
+    { "oak_speech/platform.pal",         "oak_speech/platform.gbapal", PAL, 0 },
+    /* Pikachu intro sprites */
+    { "oak_speech/pikachu_intro/body.png",   "oak_speech/pikachu_intro/body.4bpp", PNG4, 0 },
+    { "oak_speech/pikachu_intro/ears.png",   "oak_speech/pikachu_intro/ears.4bpp", PNG4, 0 },
+    { "oak_speech/pikachu_intro/eyes.png",   "oak_speech/pikachu_intro/eyes.4bpp", PNG4, 0 },
+    { "oak_speech/pikachu_intro/pikachu.pal","oak_speech/pikachu_intro/pikachu.gbapal", PAL, 0 },
+    { "oak_speech/pikachu_intro/tilemap.bin","oak_speech/pikachu_intro/tilemap.bin", BIN_COPY, 0 },
+    /* Character portraits (8bpp) */
+    { "oak_speech/red/pic.png",          "oak_speech/red/pic.8bpp", PNG8, 0 },
+    { "oak_speech/red/pal.pal",          "oak_speech/red/pal.gbapal", PAL, 0 },
+    { "oak_speech/leaf/pic.png",         "oak_speech/leaf/pic.8bpp", PNG8, 0 },
+    { "oak_speech/leaf/pal.pal",         "oak_speech/leaf/pal.gbapal", PAL, 0 },
+    { "oak_speech/oak/pic.png",          "oak_speech/oak/pic.8bpp", PNG8, 0 },
+    { "oak_speech/oak/pal.pal",          "oak_speech/oak/pal.gbapal", PAL, 0 },
+    { "oak_speech/rival/pic.png",        "oak_speech/rival/pic.8bpp", PNG8, 0 },
+    { "oak_speech/rival/pal.pal",        "oak_speech/rival/pal.gbapal", PAL, 0 },
+    /* Controls guide binary tilemaps */
+    { "oak_speech/controls_guide_page_2.bin", "oak_speech/controls_guide_page_2.bin", BIN_COPY, 0 },
+    { "oak_speech/controls_guide_page_3.bin", "oak_speech/controls_guide_page_3.bin", BIN_COPY, 0 },
+};
+
 static void mkdirs(const char *path)
 {
     char buf[512];
@@ -791,6 +821,10 @@ static int cmd_batch(const char *upstream_dir, const char *out_dir)
     printf("\n=== Intro Assets ===\n");
     for (i = 0; i < sizeof(sIntroAssets) / sizeof(sIntroAssets[0]); i++)
         errors += process_rule(&sIntroAssets[i], gfx_dir, out_dir);
+
+    printf("\n=== Oak Speech Assets ===\n");
+    for (i = 0; i < sizeof(sOakSpeechAssets) / sizeof(sOakSpeechAssets[0]); i++)
+        errors += process_rule(&sOakSpeechAssets[i], gfx_dir, out_dir);
 
     printf("\nDone. %d errors.\n", errors);
     return errors ? 1 : 0;

@@ -50,6 +50,8 @@ add_library(pfr_upstream_core STATIC
     "${POKEFIRERED_SOURCE_DIR}/src/blend_palette.c"
     "${POKEFIRERED_SOURCE_DIR}/src/bg.c"
     "${POKEFIRERED_SOURCE_DIR}/src/sprite.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/window.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/blit.c"
 )
 
 target_compile_definitions(pfr_upstream_core PRIVATE ${PFR_COMMON_DEFINES})
