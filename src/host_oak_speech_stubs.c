@@ -22,6 +22,7 @@
 #include "trainer_pokemon_sprites.h"
 #include "window.h"
 
+#include "host_oak_speech_stubs.h"
 #include "host_title_screen_stubs.h"
 
 TextFlags gTextFlags = {0};
@@ -29,6 +30,12 @@ u8 gStringVar1[256] = {0};
 u8 gStringVar2[256] = {0};
 u8 gStringVar3[256] = {0};
 u8 gStringVar4[1024] = {0};
+
+u32 gHostOakSpeechCreateMonSpritesGfxManagerCalls = 0;
+u32 gHostOakSpeechInitStandardTextBoxWindowsCalls = 0;
+u32 gHostOakSpeechCreateTopBarWindowLoadPaletteCalls = 0;
+u32 gHostOakSpeechPlayBGMCalls = 0;
+u32 gHostOakSpeechDoNamingScreenCalls = 0;
 
 static u16 sOakSpeechWindowId = 0;
 static u8 sOakSpeechMonSpriteBuffer[0x8000] = {0};
@@ -131,8 +138,25 @@ static u8 *CopyHostString(u8 *dest, const u8 *src)
     return dest;
 }
 
+void HostOakSpeechStubReset(void)
+{
+    gHostOakSpeechCreateMonSpritesGfxManagerCalls = 0;
+    gHostOakSpeechInitStandardTextBoxWindowsCalls = 0;
+    gHostOakSpeechCreateTopBarWindowLoadPaletteCalls = 0;
+    gHostOakSpeechPlayBGMCalls = 0;
+    gHostOakSpeechDoNamingScreenCalls = 0;
+    sOakSpeechWindowId = 0;
+    memset(gStringVar1, 0, sizeof(gStringVar1));
+    memset(gStringVar2, 0, sizeof(gStringVar2));
+    memset(gStringVar3, 0, sizeof(gStringVar3));
+    memset(gStringVar4, 0, sizeof(gStringVar4));
+    memset(sOakSpeechMonSpriteBuffer, 0, sizeof(sOakSpeechMonSpriteBuffer));
+    memset(&gTextFlags, 0, sizeof(gTextFlags));
+}
+
 struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 battlePosition, u8 mode)
 {
+    gHostOakSpeechCreateMonSpritesGfxManagerCalls++;
     (void)battlePosition;
     (void)mode;
     return (struct MonSpritesGfxManager *)sOakSpeechMonSpriteBuffer;
@@ -150,6 +174,7 @@ u8 *MonSpritesGfxManager_GetSpritePtr(u8 bufferId)
 
 void InitStandardTextBoxWindows(void)
 {
+    gHostOakSpeechInitStandardTextBoxWindowsCalls++;
 }
 
 void InitTextBoxGfxAndPrinters(void)
@@ -181,6 +206,7 @@ void ClearDialogWindowAndFrame(u8 windowId, bool8 copyToVram)
 
 u8 CreateTopBarWindowLoadPalette(u8 bg, u8 width, u8 yPos, u8 palette, u16 baseTile)
 {
+    gHostOakSpeechCreateTopBarWindowLoadPaletteCalls++;
     (void)bg;
     (void)width;
     (void)yPos;
@@ -234,6 +260,7 @@ void DestroyTextCursorSprite(u8 spriteId)
 
 void PlayBGM(u16 songNum)
 {
+    gHostOakSpeechPlayBGMCalls++;
     (void)songNum;
 }
 
@@ -375,6 +402,7 @@ s8 Menu_ProcessInput(void)
 
 void DoNamingScreen(u8 templateNum, u8 *destBuffer, u16 monSpecies, u16 monGender, u32 monPersonality, MainCallback returnCallback)
 {
+    gHostOakSpeechDoNamingScreenCalls++;
     (void)monSpecies;
     (void)monGender;
     (void)monPersonality;

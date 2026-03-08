@@ -14,6 +14,7 @@
 #include "host_crt0.h"
 #include "host_dma.h"
 #include "host_intro_stubs.h"
+#include "host_oak_speech_stubs.h"
 #include "host_memory.h"
 #include "host_runtime_stubs.h"
 #include "host_title_screen_stubs.h"
@@ -687,6 +688,7 @@ static void ResetBootCallbackHarness(void)
     HostMemoryReset();
     HostStubReset();
     HostIntroStubReset();
+    HostOakSpeechStubReset();
     HostTitleScreenStubReset();
     ClearDma3Requests();
     InitGpuRegManager();
@@ -985,6 +987,7 @@ static int TestTitleScreenMainMenuHandoff(void)
 {
     int rc = 0;
     int i;
+    MainCallback mainMenuRunCallback;
 
     rc |= AdvanceToTitleRunState();
 
@@ -1045,6 +1048,8 @@ static int TestTitleScreenMainMenuHandoff(void)
                     == (DISPCNT_OBJ_ON | DISPCNT_WIN0_ON),
                  "main menu DISPCNT mismatch");
 
+    mainMenuRunCallback = gMain.callback2;
+
     SetKeys(DPAD_DOWN, DPAD_DOWN);
     RunMainCallbackFrame();
     ClearKeys();
@@ -1061,6 +1066,18 @@ static int TestTitleScreenMainMenuHandoff(void)
                  "main menu New Game selection did not hand off to StartNewGameScene");
     rc |= Expect(gHostTitleStubFreeAllWindowBuffersCalls >= 1,
                  "main menu New Game selection did not free window buffers");
+
+    for (i = 0; i < 32 && gHostOakSpeechCreateTopBarWindowLoadPaletteCalls == 0; i++)
+        RunMainCallbackFrame();
+
+    rc |= Expect(gMain.callback2 != mainMenuRunCallback,
+                 "New Game selection did not switch away from the main menu callback");
+    rc |= Expect(gHostOakSpeechCreateMonSpritesGfxManagerCalls == 1,
+                 "Oak Speech setup did not create the mon sprite graphics manager");
+    rc |= Expect(gHostOakSpeechInitStandardTextBoxWindowsCalls == 1,
+                 "Oak Speech setup did not initialize standard text box windows");
+    rc |= Expect(gHostOakSpeechCreateTopBarWindowLoadPaletteCalls == 1,
+                 "Oak Speech setup did not reach the controls-guide top bar window stage");
 
     return rc;
 }

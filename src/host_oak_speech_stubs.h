@@ -1,0 +1,14 @@
+#ifndef POKEFIRERED_NATIVE_HOST_OAK_SPEECH_STUBS_H
+#define POKEFIRERED_NATIVE_HOST_OAK_SPEECH_STUBS_H
+
+#include "global.h"
+
+extern u32 gHostOakSpeechCreateMonSpritesGfxManagerCalls;
+extern u32 gHostOakSpeechInitStandardTextBoxWindowsCalls;
+extern u32 gHostOakSpeechCreateTopBarWindowLoadPaletteCalls;
+extern u32 gHostOakSpeechPlayBGMCalls;
+extern u32 gHostOakSpeechDoNamingScreenCalls;
+
+void HostOakSpeechStubReset(void);
+
+#endif
