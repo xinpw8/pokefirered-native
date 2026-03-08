@@ -76,9 +76,11 @@ u16 gHostTitleStubKantoPokedexCount = 0;
 u8 gHostTitleStubFlagGetBadgeMask = 0;
 bool8 gHostTitleStubTextPrinterActive = FALSE;
 static bool8 sHostTitleStubMultiBootComplete = FALSE;
+static const u16 sHostTitleStubUserFrameTiles[0x120 / sizeof(u16)] = {0};
+static const u16 sHostTitleStubUserFramePalette[16] = {0};
 static const struct TextWindowGraphics sHostTitleStubUserWindowGraphics = {
-    .tiles = NULL,
-    .palette = NULL,
+    .tiles = sHostTitleStubUserFrameTiles,
+    .palette = sHostTitleStubUserFramePalette,
 };
 
 const u16 gGraphics_TitleScreen_GameTitleLogoPals[13 * 16] = {0};

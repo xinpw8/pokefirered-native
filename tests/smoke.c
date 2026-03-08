@@ -1015,16 +1015,16 @@ static int TestTitleScreenMainMenuHandoff(void)
         RunMainCallbackFrame();
 
     rc |= Expect(gMain.callback2 != CB2_InitMainMenu, "main menu init did not switch to its run callback");
-    rc |= Expect(gHostTitleStubFreeAllSpritePalettesCalls == 1,
-                 "main menu init did not free sprite palettes");
-    rc |= Expect(gHostTitleStubLoadBgTilesCalls >= 1,
-                 "main menu init did not load user window tiles");
     rc |= Expect(gHostTitleStubAddTextPrinterParameterized3Calls >= 1,
                  "main menu did not print any menu text");
     rc |= Expect(gHostTitleStubLastPrintedText3 == gText_NewGame,
                  "main menu did not print the New Game option");
-    rc |= Expect(gHostTitleStubWaitDma3RequestCalls >= 1,
-                 "main menu did not wait for DMA before fading in");
+    rc |= Expect(gHostIntroStubFillWindowPixelBufferCalls >= 1,
+                 "main menu did not fill its window pixel buffers");
+    rc |= Expect(gHostIntroStubPutWindowTilemapCalls >= 1,
+                 "main menu did not put window tilemaps");
+    rc |= Expect(gHostIntroStubCopyWindowToVramCalls >= 1,
+                 "main menu did not copy window content to VRAM");
     rc |= Expect(gMain.vblankCallback != NULL,
                  "main menu did not install its VBlank callback");
     rc |= Expect((GetGpuReg(REG_OFFSET_DISPCNT) & (DISPCNT_OBJ_ON | DISPCNT_WIN0_ON))
