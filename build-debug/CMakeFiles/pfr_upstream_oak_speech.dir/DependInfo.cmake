@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/spark-advantage/pokefirered/src/oak_speech.c" "CMakeFiles/pfr_upstream_oak_speech.dir/home/spark-advantage/pokefirered/src/oak_speech.c.o" "gcc" "CMakeFiles/pfr_upstream_oak_speech.dir/home/spark-advantage/pokefirered/src/oak_speech.c.o.d"
+  "/home/spark-advantage/pokefirered-native/build-debug/gen/oak_speech.c" "CMakeFiles/pfr_upstream_oak_speech.dir/gen/oak_speech.c.o" "gcc" "CMakeFiles/pfr_upstream_oak_speech.dir/gen/oak_speech.c.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

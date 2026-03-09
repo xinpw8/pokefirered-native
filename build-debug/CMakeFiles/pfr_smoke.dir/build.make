@@ -108,8 +108,15 @@ pfr_smoke_EXTERNAL_OBJECTS = \
 "/home/spark-advantage/pokefirered-native/build-debug/CMakeFiles/pfr_upstream_title.dir/gen/title_screen.c.o" \
 "/home/spark-advantage/pokefirered-native/build-debug/CMakeFiles/pfr_upstream_clear_save.dir/home/spark-advantage/pokefirered/src/clear_save_data_screen.c.o" \
 "/home/spark-advantage/pokefirered-native/build-debug/CMakeFiles/pfr_upstream_berry_fix.dir/home/spark-advantage/pokefirered/src/berry_fix_program.c.o" \
-"/home/spark-advantage/pokefirered-native/build-debug/CMakeFiles/pfr_upstream_main_menu.dir/home/spark-advantage/pokefirered/src/main_menu.c.o" \
-"/home/spark-advantage/pokefirered-native/build-debug/CMakeFiles/pfr_upstream_oak_speech.dir/home/spark-advantage/pokefirered/src/oak_speech.c.o" \
+"/home/spark-advantage/pokefirered-native/build-debug/CMakeFiles/pfr_upstream_main_menu.dir/gen/main_menu.c.o" \
+"/home/spark-advantage/pokefirered-native/build-debug/CMakeFiles/pfr_upstream_oak_speech.dir/gen/oak_speech.c.o" \
+"/home/spark-advantage/pokefirered-native/build-debug/CMakeFiles/pfr_upstream_new_game.dir/home/spark-advantage/pokefirered/src/new_game.c.o" \
+"/home/spark-advantage/pokefirered-native/build-debug/CMakeFiles/pfr_upstream_play_time.dir/home/spark-advantage/pokefirered/src/play_time.c.o" \
+"/home/spark-advantage/pokefirered-native/build-debug/CMakeFiles/pfr_upstream_text_window_graphics.dir/gen/text_window_graphics.c.o" \
+"/home/spark-advantage/pokefirered-native/build-debug/CMakeFiles/pfr_upstream_text.dir/gen/text.c.o" \
+"/home/spark-advantage/pokefirered-native/build-debug/CMakeFiles/pfr_upstream_text_window.dir/home/spark-advantage/pokefirered/src/text_window.c.o" \
+"/home/spark-advantage/pokefirered-native/build-debug/CMakeFiles/pfr_upstream_new_menu_helpers.dir/gen/new_menu_helpers.c.o" \
+"/home/spark-advantage/pokefirered-native/build-debug/CMakeFiles/pfr_upstream_text_printer.dir/home/spark-advantage/pokefirered/src/text_printer.c.o" \
 "/home/spark-advantage/pokefirered-native/build-debug/CMakeFiles/pfr_upstream_runtime.dir/home/spark-advantage/pokefirered/src/main.c.o"
 
 pfr_smoke: CMakeFiles/pfr_smoke.dir/tests/smoke.c.o
@@ -118,8 +125,15 @@ pfr_smoke: CMakeFiles/pfr_upstream_intro.dir/gen/intro.c.o
 pfr_smoke: CMakeFiles/pfr_upstream_title.dir/gen/title_screen.c.o
 pfr_smoke: CMakeFiles/pfr_upstream_clear_save.dir/home/spark-advantage/pokefirered/src/clear_save_data_screen.c.o
 pfr_smoke: CMakeFiles/pfr_upstream_berry_fix.dir/home/spark-advantage/pokefirered/src/berry_fix_program.c.o
-pfr_smoke: CMakeFiles/pfr_upstream_main_menu.dir/home/spark-advantage/pokefirered/src/main_menu.c.o
-pfr_smoke: CMakeFiles/pfr_upstream_oak_speech.dir/home/spark-advantage/pokefirered/src/oak_speech.c.o
+pfr_smoke: CMakeFiles/pfr_upstream_main_menu.dir/gen/main_menu.c.o
+pfr_smoke: CMakeFiles/pfr_upstream_oak_speech.dir/gen/oak_speech.c.o
+pfr_smoke: CMakeFiles/pfr_upstream_new_game.dir/home/spark-advantage/pokefirered/src/new_game.c.o
+pfr_smoke: CMakeFiles/pfr_upstream_play_time.dir/home/spark-advantage/pokefirered/src/play_time.c.o
+pfr_smoke: CMakeFiles/pfr_upstream_text_window_graphics.dir/gen/text_window_graphics.c.o
+pfr_smoke: CMakeFiles/pfr_upstream_text.dir/gen/text.c.o
+pfr_smoke: CMakeFiles/pfr_upstream_text_window.dir/home/spark-advantage/pokefirered/src/text_window.c.o
+pfr_smoke: CMakeFiles/pfr_upstream_new_menu_helpers.dir/gen/new_menu_helpers.c.o
+pfr_smoke: CMakeFiles/pfr_upstream_text_printer.dir/home/spark-advantage/pokefirered/src/text_printer.c.o
 pfr_smoke: CMakeFiles/pfr_upstream_runtime.dir/home/spark-advantage/pokefirered/src/main.c.o
 pfr_smoke: CMakeFiles/pfr_smoke.dir/build.make
 pfr_smoke: libpfr_upstream_core.a

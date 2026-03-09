@@ -3,12 +3,9 @@
 
 #include "global.h"
 
-extern u32 gHostOakSpeechCreateMonSpritesGfxManagerCalls;
 extern u32 gHostOakSpeechInitStandardTextBoxWindowsCalls;
 extern u32 gHostOakSpeechCreateTopBarWindowLoadPaletteCalls;
-extern u32 gHostOakSpeechPlayBGMCalls;
 extern u32 gHostOakSpeechDoNamingScreenCalls;
-extern u32 gHostOakSpeechCB2NewGameCalls;
 extern u32 gHostOakSpeechControlsGuidePage1Loads;
 extern u32 gHostOakSpeechControlsGuidePage2Loads;
 extern u32 gHostOakSpeechControlsGuidePage3Loads;
@@ -17,8 +14,8 @@ extern u32 gHostOakSpeechPikachuIntroPage2Loads;
 extern u32 gHostOakSpeechPikachuIntroPage3Loads;
 extern u32 gHostOakSpeechWelcomeToTheWorldPrints;
 extern u32 gHostOakSpeechThisWorldPrints;
-extern const u8 *gHostOakSpeechLastExpandedPlaceholderSource;
-extern u16 gHostOakSpeechLastPlayedBGM;
+extern u32 gHostOakSpeechIStudyPokemonPrints;
+extern u32 gHostOakSpeechAskPlayerGenderPrints;
 extern const u8 *gHostOakSpeechLastTopBarLeftText;
 extern const u8 *gHostOakSpeechLastTopBarRightText;
 

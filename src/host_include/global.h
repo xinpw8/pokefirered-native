@@ -51,6 +51,10 @@
 #define _(x) (x)
 #endif
 
+#ifndef __
+#define __(x) (x)
+#endif
+
 #define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
 
 // Alias of ARRAY_COUNT using GameFreak's name from AgbAssert calls.

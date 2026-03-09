@@ -6,5 +6,5 @@ C_DEFINES = -DENGLISH -DFIRERED -DMODERN=1 -DREVISION=0
 
 C_INCLUDES = -I/home/spark-advantage/pokefirered-native/src
 
-C_FLAGS = -g -std=gnu11 -fno-pie -iquote/home/spark-advantage/pokefirered-native/src/host_include -iquote/home/spark-advantage/pokefirered-native/../pokefirered/include -Wno-int-to-pointer-cast -Wno-pointer-to-int-cast
+C_FLAGS = -g -std=gnu11 -fno-pie -iquote/home/spark-advantage/pokefirered-native/src/host_include -iquote/home/spark-advantage/pokefirered-native/build-debug/generated_include -iquote/home/spark-advantage/pokefirered-native/../pokefirered/include -Wno-int-to-pointer-cast -Wno-pointer-to-int-cast
 

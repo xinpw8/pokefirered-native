@@ -1,0 +1,13 @@
+# Target labels
+ pfr_libpng_external
+# Source files and their labels
+/home/spark-advantage/pokefirered-native/build-debug/CMakeFiles/pfr_libpng_external
+/home/spark-advantage/pokefirered-native/build-debug/CMakeFiles/pfr_libpng_external.rule
+/home/spark-advantage/pokefirered-native/build-debug/CMakeFiles/pfr_libpng_external-complete.rule
+/home/spark-advantage/pokefirered-native/build-debug/pfr_libpng_external-prefix/src/pfr_libpng_external-stamp/pfr_libpng_external-build.rule
+/home/spark-advantage/pokefirered-native/build-debug/pfr_libpng_external-prefix/src/pfr_libpng_external-stamp/pfr_libpng_external-configure.rule
+/home/spark-advantage/pokefirered-native/build-debug/pfr_libpng_external-prefix/src/pfr_libpng_external-stamp/pfr_libpng_external-download.rule
+/home/spark-advantage/pokefirered-native/build-debug/pfr_libpng_external-prefix/src/pfr_libpng_external-stamp/pfr_libpng_external-install.rule
+/home/spark-advantage/pokefirered-native/build-debug/pfr_libpng_external-prefix/src/pfr_libpng_external-stamp/pfr_libpng_external-mkdir.rule
+/home/spark-advantage/pokefirered-native/build-debug/pfr_libpng_external-prefix/src/pfr_libpng_external-stamp/pfr_libpng_external-patch.rule
+/home/spark-advantage/pokefirered-native/build-debug/pfr_libpng_external-prefix/src/pfr_libpng_external-stamp/pfr_libpng_external-update.rule

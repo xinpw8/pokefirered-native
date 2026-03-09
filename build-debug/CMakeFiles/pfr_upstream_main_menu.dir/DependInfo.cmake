@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/spark-advantage/pokefirered/src/main_menu.c" "CMakeFiles/pfr_upstream_main_menu.dir/home/spark-advantage/pokefirered/src/main_menu.c.o" "gcc" "CMakeFiles/pfr_upstream_main_menu.dir/home/spark-advantage/pokefirered/src/main_menu.c.o.d"
+  "/home/spark-advantage/pokefirered-native/build-debug/gen/main_menu.c" "CMakeFiles/pfr_upstream_main_menu.dir/gen/main_menu.c.o" "gcc" "CMakeFiles/pfr_upstream_main_menu.dir/gen/main_menu.c.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

@@ -6,5 +6,5 @@ C_DEFINES = -DENGLISH -DFIRERED -DHOST_DISPLAY_SDL2 -DMODERN=1 -DREVISION=0
 
 C_INCLUDES = -I/home/spark-advantage/pokefirered-native/src
 
-C_FLAGS = -g -std=gnu11 -fno-pie -ffunction-sections -fdata-sections -Wno-int-to-pointer-cast -Wno-pointer-to-int-cast -iquote/home/spark-advantage/pokefirered-native/src/host_include -iquote/home/spark-advantage/pokefirered-native/../pokefirered/include -I/usr/include -I/usr/include/SDL2 -D_REENTRANT
+C_FLAGS = -g -std=gnu11 -fno-pie -ffunction-sections -fdata-sections -Wno-int-to-pointer-cast -Wno-pointer-to-int-cast -iquote/home/spark-advantage/pokefirered-native/src/host_include -iquote/home/spark-advantage/pokefirered-native/build-debug/inc -iquote/home/spark-advantage/pokefirered-native/build-debug/generated_include -iquote/home/spark-advantage/pokefirered-native/../pokefirered/include -I/usr/include -I/usr/include/SDL2 -D_REENTRANT
 

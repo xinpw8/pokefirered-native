@@ -1,14 +1,10 @@
 /*
- * render_test.c — Render verification harness for pokefirered-native
+ * render_test.c — Golden-frame render harness for pokefirered-native
  *
- * Runs the boot chain (intro → title → main menu) in bounded mode,
- * rendering and dumping frames at key milestones to verify the PPU
- * is producing non-empty output from real VRAM/OAM/palette state.
- *
- * Usage: pfr_render_test [output_dir]
- *   Dumps PPM frames to output_dir (default: /tmp/pfr_render_test/)
- *
- * Exit code 0 if at least one non-backdrop frame was rendered.
+ * Runs the boot chain headlessly, replays the same scripted input ranges
+ * used by the mGBA golden capture, and dumps named PPMs for each manifest
+ * milestone. This keeps the native capture path aligned with the golden
+ * reference workflow used by pfr_golden_check.
  */
 
 #include <stdio.h>
@@ -24,48 +20,137 @@
 #include "task.h"
 #include "sprite.h"
 #include "play_time.h"
-#include "host_agbmain.h"
 #include "host_memory.h"
 #include "host_renderer.h"
 #include "host_display.h"
 #include "host_crt0.h"
+#include "host_capture_manifest.h"
+#include "host_frame_step.h"
 #include "bg.h"
 #include "dma3.h"
 #include "malloc.h"
 #include "load_save.h"
+#include "save.h"
 #include "sound.h"
 #include "host_intro_stubs.h"
 #include "host_title_screen_stubs.h"
+#include "host_oak_speech_stubs.h"
+#include "host_new_game_stubs.h"
 
-/* Stub for oak_speech's renamed entry point (GPT is wiring the real one) */
-void UpstreamStartNewGameScene(void) { }
+static struct HostCaptureInputScript sInputScript;
+static struct HostCaptureManifest sManifest;
+static const char *sOutputDir = "/tmp/pfr_render_test";
+static int sCapturedFrames;
+static int sNonEmptyFrames;
 
-/* Track non-empty frames */
-static int sNonEmptyFrames = 0;
+/* Not exported in main.h but defined in main.c, set by InitKeys() */
+extern u16 gKeyRepeatContinueDelay;
+
+static void ApplyScriptedInput(u32 frame)
+{
+    u16 pressedMask = HostCaptureButtonsForFrame(&sInputScript, frame);
+    REG_KEYINPUT = (u16)(KEYS_MASK & ~pressedMask);
+}
+
+static void RenderTestReadKeys(void)
+{
+    u16 keyInput = REG_KEYINPUT ^ KEYS_MASK;
+
+    gMain.newKeysRaw = keyInput & ~gMain.heldKeysRaw;
+    gMain.newKeys = gMain.newKeysRaw;
+    gMain.newAndRepeatedKeys = gMain.newKeysRaw;
+
+    if (keyInput != 0 && gMain.heldKeys == keyInput)
+    {
+        gMain.keyRepeatCounter--;
+        if (gMain.keyRepeatCounter == 0)
+        {
+            gMain.newAndRepeatedKeys = keyInput;
+            gMain.keyRepeatCounter = gKeyRepeatContinueDelay;
+        }
+    }
+    else
+    {
+        gMain.keyRepeatCounter = gKeyRepeatStartDelay;
+    }
+
+    gMain.heldKeysRaw = keyInput;
+    gMain.heldKeys = gMain.heldKeysRaw;
+
+    if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
+    {
+        if (JOY_NEW(L_BUTTON))
+            gMain.newKeys |= A_BUTTON;
+        if (JOY_HELD(L_BUTTON))
+            gMain.heldKeys |= A_BUTTON;
+    }
+
+    if (JOY_NEW(gMain.watchedKeysMask))
+        gMain.watchedKeysPressed = TRUE;
+}
+
+static void DumpNamedFramebuffer(const char *label)
+{
+    const u32 *fb = HostRendererGetFramebuffer();
+    char path[512];
+    FILE *f;
+    int i;
+
+    snprintf(path, sizeof(path), "%s/%s.ppm", sOutputDir, label);
+    f = fopen(path, "wb");
+    if (f == NULL)
+        return;
+
+    fprintf(f, "P6\n%d %d\n255\n", GBA_SCREEN_WIDTH, GBA_SCREEN_HEIGHT);
+    for (i = 0; i < GBA_SCREEN_WIDTH * GBA_SCREEN_HEIGHT; i++)
+    {
+        u32 pixel = fb[i];
+        u8 rgb[3];
+        rgb[0] = (pixel >> 16) & 0xFF;
+        rgb[1] = (pixel >> 8) & 0xFF;
+        rgb[2] = pixel & 0xFF;
+        fwrite(rgb, 1, 3, f);
+    }
+
+    fclose(f);
+}
 
 static int CheckFrameNonEmpty(void)
 {
     const u32 *fb = HostRendererGetFramebuffer();
-    u32 backdrop = fb[0]; /* pixel (0,0) is always the backdrop */
+    u32 backdrop = fb[0];
     int i;
     int unique = 0;
 
-    /* Count pixels that differ from backdrop */
     for (i = 1; i < GBA_SCREEN_WIDTH * GBA_SCREEN_HEIGHT; i++)
     {
         if (fb[i] != backdrop)
         {
             unique++;
-            if (unique > 10) /* need more than just noise */
+            if (unique > 10)
                 return 1;
         }
     }
     return 0;
 }
 
-static void RenderAndCheck(const char *milestone)
+static void LogMilestoneGpuState(const char *milestone)
 {
-    HostRendererRenderFrame();
+    printf("[render_test] %s regs DISPCNT=0x%04X BG0=0x%04X BG1=0x%04X BG2=0x%04X BG3=0x%04X BLDCNT=0x%04X\n",
+           milestone,
+           GetGpuReg(REG_OFFSET_DISPCNT),
+           GetGpuReg(REG_OFFSET_BG0CNT),
+           GetGpuReg(REG_OFFSET_BG1CNT),
+           GetGpuReg(REG_OFFSET_BG2CNT),
+           GetGpuReg(REG_OFFSET_BG3CNT),
+           GetGpuReg(REG_OFFSET_BLDCNT));
+}
+
+static void CaptureMilestone(const char *milestone)
+{
+    DumpNamedFramebuffer(milestone);
+    LogMilestoneGpuState(milestone);
+    sCapturedFrames++;
 
     if (CheckFrameNonEmpty())
     {
@@ -74,30 +159,23 @@ static void RenderAndCheck(const char *milestone)
     }
     else
     {
-        printf("[render_test] %s: empty/backdrop-only frame\n", milestone);
+        printf("[render_test] %s: empty frame\n", milestone);
     }
-
-    /* Present will dump PPM if dump is enabled */
-    HostDisplayPresent();
 }
 
-/*
- * Minimal VBlank handler — mirrors VBlankIntr in main.c.
- * Calls the game's VBlank callback (which handles TransferPlttBuffer,
- * scanline effects, etc.) and sets the intrCheck flag so the main loop
- * knows VBlank occurred.
- */
 static void RenderTestVBlankHandler(void)
 {
+    extern u16 Random(void);
+
     if (gMain.vblankCallback)
         gMain.vblankCallback();
     gMain.vblankCounter2++;
     CopyBufferedValuesToGpuRegs();
     ProcessDma3Requests();
+    Random();
     gMain.intrCheck |= INTR_FLAG_VBLANK;
 }
 
-/* Minimal HBlank handler */
 static void RenderTestHBlankHandler(void)
 {
     if (gMain.hblankCallback)
@@ -105,145 +183,128 @@ static void RenderTestHBlankHandler(void)
     gMain.intrCheck |= INTR_FLAG_HBLANK;
 }
 
-/* Dummy handler for unused interrupt slots */
 static void IntrDummy(void) { }
+
+static void RenderTestFrameLogic(void *unused)
+{
+    (void)unused;
+
+    RenderTestReadKeys();
+
+    if (gMain.callback1)
+        gMain.callback1();
+    if (gMain.callback2)
+        gMain.callback2();
+
+    PlayTimeCounter_Update();
+    MapMusicMain();
+}
 
 int main(int argc, char *argv[])
 {
-    const char *outdir = "/tmp/pfr_render_test";
-    int frames_to_run = 600; /* ~10 seconds of GBA frames */
+    const char *manifestPath = "golden_frames/manifest.txt";
     int i;
+    u32 frame;
+    u32 nextMilestone = 0;
+    u32 lastFrame = 0;
+    extern void CB2_InitCopyrightScreenAfterBootup(void);
 
     if (argc > 1)
-        outdir = argv[1];
+        sOutputDir = argv[1];
+    if (argc > 2)
+        manifestPath = argv[2];
 
-    /* Create output directory */
-    mkdir(outdir, 0755);
+    mkdir(sOutputDir, 0755);
 
-    printf("[render_test] Output directory: %s\n", outdir);
-    printf("[render_test] Running %d frames through boot chain...\n", frames_to_run);
+    if (!HostCaptureLoadManifest(manifestPath, &sManifest))
+        return 1;
+    if (!HostCaptureLoadInputScript(sManifest.input_path, &sInputScript))
+        return 1;
 
-    /* Initialize host subsystems */
+    for (i = 0; i < (int)sManifest.milestone_count; i++)
+    {
+        if (sManifest.milestones[i].frame > lastFrame)
+            lastFrame = sManifest.milestones[i].frame;
+    }
+
+    printf("[render_test] Output directory: %s\n", sOutputDir);
+    printf("[render_test] Manifest: %s\n", manifestPath);
+    printf("[render_test] Input script: %s\n", sManifest.input_path);
+    printf("[render_test] Running to frame %u (%u milestones)\n",
+           lastFrame, sManifest.milestone_count);
+
     HostMemoryInit();
     HostRendererInit();
-    HostDisplaySetDumpDir(outdir);
-    HostDisplayEnableDump(TRUE);
+    HostDisplaySetDumpDir(sOutputDir);
+    HostDisplayEnableDump(FALSE);
     HostDisplayInit();
 
-    /* Set up the boot chain */
     HostCrt0Init();
-    REG_KEYINPUT = KEYS_MASK; /* all keys released */
+    REG_KEYINPUT = KEYS_MASK;
 
-    /*
-     * Critical initialization that AgbMain normally handles:
-     * Without these, the game's state machine can't progress.
-     */
-
-    /* 1. Initialize the GPU register buffering system */
     InitGpuRegManager();
 
-    /* 2. Set up the interrupt dispatch table
-     * Index mapping (from sInterruptFlags in host_crt0.c):
-     *   0=VCOUNT, 1=SERIAL, 2=TIMER3, 3=HBLANK, 4=VBLANK,
-     *   5-8=TIMER0-TIMER2/DMA0, 9-13=DMA1-GAMEPAK
-     */
     for (i = 0; i < 14; i++)
         gIntrTable[i] = IntrDummy;
-    gIntrTable[3] = RenderTestHBlankHandler;  /* HBLANK */
-    gIntrTable[4] = RenderTestVBlankHandler;  /* VBLANK */
+    gIntrTable[3] = RenderTestHBlankHandler;
+    gIntrTable[4] = RenderTestVBlankHandler;
 
-    /* 3. Enable interrupts (VBlank is critical for palette transfer) */
     REG_IME = 1;
     REG_IE |= INTR_FLAG_VBLANK;
 
-    /* 4. Initialize subsystems (mirrors AgbMain's init sequence) */
     InitKeys();
     ClearDma3Requests();
     ResetBgs();
     InitHeap(gHeap, HEAP_SIZE);
 
-    /* 5. Set save block pointers (CB2_InitCopyrightScreenAfterBootup dereferences these) */
+    /* Font system initialization (required for text rendering) */
+    {
+        extern void SetDefaultFontsPointer(void);
+        SetDefaultFontsPointer();
+    }
+
     gSaveBlock2Ptr = &gSaveBlock2;
     gSaveBlock1Ptr = &gSaveBlock1;
     gSaveBlock2.encryptionKey = 0;
+    gHostIntroStubLoadGameSaveResult = SAVE_STATUS_EMPTY;
 
-    /* 6. Initialize main callbacks */
+    HostNewGameStubReset();
+    HostIntroStubReset();
+    HostTitleScreenStubReset();
+    HostOakSpeechStubReset();
+
     gMain.callback1 = NULL;
     gMain.callback2 = NULL;
     gMain.vblankCallback = NULL;
     gMain.state = 0;
 
-    HostIntroStubReset();
-    HostTitleScreenStubReset();
-
-    /* Set up callback2 to start the copyright screen */
-    extern void CB2_InitCopyrightScreenAfterBootup(void);
     SetMainCallback2(CB2_InitCopyrightScreenAfterBootup);
 
-    printf("[render_test] Stepping through %d frames...\n", frames_to_run);
-
-    for (i = 0; i < frames_to_run; i++)
+    for (frame = 1; frame <= lastFrame; frame++)
     {
-        int scanline;
+        ApplyScriptedInput(frame);
+        HostFrameStepRun(RenderTestFrameLogic, NULL);
 
-        /* Run the same high-level loop order as AgbMain before WaitForVBlank. */
-        if (gMain.callback1)
-            gMain.callback1();
-        if (gMain.callback2)
-            gMain.callback2();
-
-        PlayTimeCounter_Update();
-        MapMusicMain();
-
-        gMain.intrCheck &= ~INTR_FLAG_VBLANK;
-
-        /* Simulate one full frame of scanlines / wait-for-vblank. */
-        for (scanline = 0; scanline < 228; scanline++)
+        while (nextMilestone < sManifest.milestone_count
+            && sManifest.milestones[nextMilestone].frame == frame)
         {
-            REG_VCOUNT = scanline;
-
-            u16 dispstat = GetGpuReg(REG_OFFSET_DISPSTAT);
-            u16 flags = 0;
-
-            if ((dispstat & DISPSTAT_HBLANK_INTR) && scanline < DISPLAY_HEIGHT)
-                flags |= INTR_FLAG_HBLANK;
-
-            u16 vcountCompare = dispstat >> 8;
-            if ((dispstat & DISPSTAT_VCOUNT_INTR) && scanline == vcountCompare)
-                flags |= INTR_FLAG_VCOUNT;
-
-            if ((dispstat & DISPSTAT_VBLANK_INTR) && scanline == DISPLAY_HEIGHT)
-                flags |= INTR_FLAG_VBLANK;
-
-            if (flags)
-            {
-                HostInterruptRaise(flags);
-                HostInterruptDispatchAll();
-            }
-        }
-
-        /* Render at end of frame */
-        if (i % 30 == 0) /* dump every 30th frame to avoid flooding */
-        {
-            char milestone[64];
-            snprintf(milestone, sizeof(milestone), "frame_%04d", i);
-            RenderAndCheck(milestone);
+            CaptureMilestone(sManifest.milestones[nextMilestone].name);
+            nextMilestone++;
         }
     }
 
     HostDisplayDestroy();
 
-    printf("\n[render_test] Done. %d non-empty frames out of %d sampled.\n",
-           sNonEmptyFrames, frames_to_run / 30);
+    printf("\n[render_test] Done. %d non-empty frames out of %d captured milestones.\n",
+           sNonEmptyFrames, sCapturedFrames);
 
-    if (sNonEmptyFrames > 0)
+    if (nextMilestone != sManifest.milestone_count)
     {
-        printf("[render_test] PASS: Renderer produced visible output.\n");
-        return 0;
+        printf("[render_test] FAIL: captured %u/%u milestones.\n",
+               nextMilestone, sManifest.milestone_count);
+        return 1;
     }
-    else
-    {
-        printf("[render_test] INFO: All frames were backdrop-only.\n");
-        return 0;
-    }
+
+    printf("[render_test] Completed %u milestones.\n", sManifest.milestone_count);
+    return 0;
 }

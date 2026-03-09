@@ -69,21 +69,21 @@ include CMakeFiles/pfr_upstream_main_menu.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/pfr_upstream_main_menu.dir/flags.make
 
-CMakeFiles/pfr_upstream_main_menu.dir/home/spark-advantage/pokefirered/src/main_menu.c.o: CMakeFiles/pfr_upstream_main_menu.dir/flags.make
-CMakeFiles/pfr_upstream_main_menu.dir/home/spark-advantage/pokefirered/src/main_menu.c.o: /home/spark-advantage/pokefirered/src/main_menu.c
-CMakeFiles/pfr_upstream_main_menu.dir/home/spark-advantage/pokefirered/src/main_menu.c.o: CMakeFiles/pfr_upstream_main_menu.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/pfr_upstream_main_menu.dir/home/spark-advantage/pokefirered/src/main_menu.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_main_menu.dir/home/spark-advantage/pokefirered/src/main_menu.c.o -MF CMakeFiles/pfr_upstream_main_menu.dir/home/spark-advantage/pokefirered/src/main_menu.c.o.d -o CMakeFiles/pfr_upstream_main_menu.dir/home/spark-advantage/pokefirered/src/main_menu.c.o -c /home/spark-advantage/pokefirered/src/main_menu.c
+CMakeFiles/pfr_upstream_main_menu.dir/gen/main_menu.c.o: CMakeFiles/pfr_upstream_main_menu.dir/flags.make
+CMakeFiles/pfr_upstream_main_menu.dir/gen/main_menu.c.o: gen/main_menu.c
+CMakeFiles/pfr_upstream_main_menu.dir/gen/main_menu.c.o: CMakeFiles/pfr_upstream_main_menu.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/pfr_upstream_main_menu.dir/gen/main_menu.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_main_menu.dir/gen/main_menu.c.o -MF CMakeFiles/pfr_upstream_main_menu.dir/gen/main_menu.c.o.d -o CMakeFiles/pfr_upstream_main_menu.dir/gen/main_menu.c.o -c /home/spark-advantage/pokefirered-native/build-debug/gen/main_menu.c
 
-CMakeFiles/pfr_upstream_main_menu.dir/home/spark-advantage/pokefirered/src/main_menu.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_main_menu.dir/home/spark-advantage/pokefirered/src/main_menu.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered/src/main_menu.c > CMakeFiles/pfr_upstream_main_menu.dir/home/spark-advantage/pokefirered/src/main_menu.c.i
+CMakeFiles/pfr_upstream_main_menu.dir/gen/main_menu.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_main_menu.dir/gen/main_menu.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-debug/gen/main_menu.c > CMakeFiles/pfr_upstream_main_menu.dir/gen/main_menu.c.i
 
-CMakeFiles/pfr_upstream_main_menu.dir/home/spark-advantage/pokefirered/src/main_menu.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_main_menu.dir/home/spark-advantage/pokefirered/src/main_menu.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered/src/main_menu.c -o CMakeFiles/pfr_upstream_main_menu.dir/home/spark-advantage/pokefirered/src/main_menu.c.s
+CMakeFiles/pfr_upstream_main_menu.dir/gen/main_menu.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_main_menu.dir/gen/main_menu.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-debug/gen/main_menu.c -o CMakeFiles/pfr_upstream_main_menu.dir/gen/main_menu.c.s
 
-pfr_upstream_main_menu: CMakeFiles/pfr_upstream_main_menu.dir/home/spark-advantage/pokefirered/src/main_menu.c.o
+pfr_upstream_main_menu: CMakeFiles/pfr_upstream_main_menu.dir/gen/main_menu.c.o
 pfr_upstream_main_menu: CMakeFiles/pfr_upstream_main_menu.dir/build.make
 .PHONY : pfr_upstream_main_menu
 

@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/pfr_upstream_main_menu.dir/home/spark-advantage/pokefirered/src/main_menu.c.o"
-  "CMakeFiles/pfr_upstream_main_menu.dir/home/spark-advantage/pokefirered/src/main_menu.c.o.d"
+  "CMakeFiles/pfr_upstream_main_menu.dir/gen/main_menu.c.o"
+  "CMakeFiles/pfr_upstream_main_menu.dir/gen/main_menu.c.o.d"
 )
 
 # Per-language clean rules from dependency scanning.

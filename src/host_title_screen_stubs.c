@@ -21,7 +21,6 @@
 #include "save.h"
 #include "sound.h"
 #include "string_util.h"
-#include "text_window_graphics.h"
 #include "window.h"
 
 #include "host_oak_speech_stubs.h"
@@ -29,15 +28,8 @@
 
 void UpstreamStartNewGameScene(void);
 
-u32 gHostTitleStubSetHelpContextCalls = 0;
-u32 gHostTitleStubHelpSystemEnableCalls = 0;
-u32 gHostTitleStubHelpSystemDisableCalls = 0;
-u32 gHostTitleStubFadeOutMapMusicCalls = 0;
-u32 gHostTitleStubFadeOutBGMCalls = 0;
-u32 gHostTitleStubIsNotWaitingForBGMStopCalls = 0;
-u32 gHostTitleStubPlayCryNormalCalls = 0;
 u32 gHostTitleStubM4aMPlayAllStopCalls = 0;
-u32 gHostTitleStubSetSaveBlocksPointersCalls = 0;
+/* SetSaveBlocksPointers now from load_save.c */
 u32 gHostTitleStubCB2InitMainMenuCalls = 0;
 u32 gHostTitleStubCB2InitBerryFixProgramCalls = 0;
 u32 gHostTitleStubLoadStdWindowGfxCalls = 0;
@@ -48,7 +40,7 @@ u32 gHostTitleStubMenuProcessInputCalls = 0;
 u32 gHostTitleStubDestroyYesNoMenuCalls = 0;
 u32 gHostTitleStubFreeAllWindowBuffersCalls = 0;
 u32 gHostTitleStubDeactivateAllTextPrintersCalls = 0;
-u32 gHostTitleStubClearSaveDataCalls = 0;
+/* ClearSaveData now from save.c */
 u32 gHostTitleStubMultiBootInitCalls = 0;
 u32 gHostTitleStubMultiBootMainCalls = 0;
 u32 gHostTitleStubMultiBootStartMasterCalls = 0;
@@ -61,19 +53,10 @@ u32 gHostTitleStubRunTextPrintersCalls = 0;
 u32 gHostTitleStubIsTextPrinterActiveCalls = 0;
 u32 gHostTitleStubFreeAllSpritePalettesCalls = 0;
 u32 gHostTitleStubStartNewGameSceneCalls = 0;
-u32 gHostTitleStubTryStartQuestLogPlaybackCalls = 0;
 u32 gHostTitleStubCB2InitMysteryGiftCalls = 0;
-u32 gHostTitleStubIsWirelessAdapterConnectedCalls = 0;
-u32 gHostTitleStubIsMysteryGiftEnabledCalls = 0;
-u32 gHostTitleStubFlagGetCalls = 0;
 u32 gHostTitleStubGetNationalPokedexCountCalls = 0;
 u32 gHostTitleStubGetKantoPokedexCountCalls = 0;
 int gHostTitleStubLastMultiBootLength = 0;
-u8 gHostTitleStubLastHelpContext = 0;
-u8 gHostTitleStubLastFadeOutMapMusicSpeed = 0;
-u8 gHostTitleStubLastFadeOutBGMSpeed = 0;
-u16 gHostTitleStubLastPlayCrySpecies = 0;
-s8 gHostTitleStubLastPlayCryPan = 0;
 const u8 *gHostTitleStubLastPrintedText = NULL;
 const u8 *gHostTitleStubLastPrintedText3 = NULL;
 s8 gHostTitleStubMenuProcessInputResult = MENU_NOTHING_CHOSEN;
@@ -85,12 +68,6 @@ u16 gHostTitleStubKantoPokedexCount = 0;
 u8 gHostTitleStubFlagGetBadgeMask = 0;
 bool8 gHostTitleStubTextPrinterActive = FALSE;
 static bool8 sHostTitleStubMultiBootComplete = FALSE;
-static const u16 sHostTitleStubUserFrameTiles[0x120 / sizeof(u16)] = {0};
-static const u16 sHostTitleStubUserFramePalette[16] = {0};
-static const struct TextWindowGraphics sHostTitleStubUserWindowGraphics = {
-    .tiles = sHostTitleStubUserFrameTiles,
-    .palette = sHostTitleStubUserFramePalette,
-};
 struct HostTitleStubMenuState
 {
     bool8 active;
@@ -114,72 +91,7 @@ static void HostTitleScreenStubResetMenuState(void);
 static void HostTitleScreenStubRedrawMenuCursor(void);
 static void HostTitleScreenStubMoveMenuCursor(s8 delta, bool8 wrapAround);
 
-const u16 gGraphics_TitleScreen_GameTitleLogoPals[] = {
-#include "title_screen/firered/game_title_logo.gbapal.u16.inc"
-};
-const u8 gGraphics_TitleScreen_GameTitleLogoTiles[] = {
-#include "title_screen/firered/game_title_logo.8bpp.lz.u8.inc"
-};
-const u8 gGraphics_TitleScreen_GameTitleLogoMap[] = {
-#include "title_screen/firered/game_title_logo.bin.lz.u8.inc"
-};
-const u16 gGraphics_TitleScreen_BoxArtMonPals[] = {
-#include "title_screen/firered/box_art_mon.gbapal.u16.inc"
-};
-const u8 gGraphics_TitleScreen_BoxArtMonTiles[] = {
-#include "title_screen/firered/box_art_mon.4bpp.lz.u8.inc"
-};
-const u8 gGraphics_TitleScreen_BoxArtMonMap[] = {
-#include "title_screen/firered/box_art_mon.bin.lz.u8.inc"
-};
-u16 gGraphics_TitleScreen_BackgroundPals[] = {
-#include "title_screen/firered/background.gbapal.u16.inc"
-};
-const u8 gGraphics_TitleScreen_CopyrightPressStartTiles[] = {
-#include "title_screen/copyright_press_start.4bpp.lz.u8.inc"
-};
-const u8 gGraphics_TitleScreen_CopyrightPressStartMap[] = {
-#include "title_screen/copyright_press_start.bin.lz.u8.inc"
-};
-const u16 gTitleScreen_Slash_Pal[] = {
-#include "title_screen/firered/slash.gbapal.u16.inc"
-};
-const u32 gTitleScreen_BlankSprite_Tiles[1] = {0};
-const u8 gBerryFixGameboy_Gfx[] = {0x10, 0x04, 0x00, 0x00, 0x00, 'G', 'B', '0', '0'};
-const u8 gBerryFixGameboy_Tilemap[] = {0x10, 0x04, 0x00, 0x00, 0x00, 'T', 'M', '0', '0'};
-const u8 gBerryFixGameboy_Pal[0x200] = {0x11, 0x00};
-const u8 gBerryFixGameboyLogo_Gfx[] = {0x10, 0x04, 0x00, 0x00, 0x00, 'G', 'L', '0', '0'};
-const u8 gBerryFixGameboyLogo_Tilemap[] = {0x10, 0x04, 0x00, 0x00, 0x00, 'L', 'M', '0', '0'};
-const u8 gBerryFixGameboyLogo_Pal[0x200] = {0x22, 0x00};
-const u8 gBerryFixGbaTransfer_Gfx[] = {0x10, 0x04, 0x00, 0x00, 0x00, 'T', 'R', '0', '0'};
-const u8 gBerryFixGbaTransfer_Tilemap[] = {0x10, 0x04, 0x00, 0x00, 0x00, 'T', 'M', '1', '0'};
-const u8 gBerryFixGbaTransfer_Pal[0x200] = {0x33, 0x00};
-const u8 gBerryFixGbaTransferHighlight_Gfx[] = {0x10, 0x04, 0x00, 0x00, 0x00, 'H', 'I', '0', '0'};
-const u8 gBerryFixGbaTransferHighlight_Tilemap[] = {0x10, 0x04, 0x00, 0x00, 0x00, 'H', 'M', '0', '0'};
-const u8 gBerryFixGbaTransferHighlight_Pal[0x200] = {0x44, 0x00};
-const u8 gBerryFixGbaTransferError_Gfx[] = {0x10, 0x04, 0x00, 0x00, 0x00, 'E', 'R', '0', '0'};
-const u8 gBerryFixGbaTransferError_Tilemap[] = {0x10, 0x04, 0x00, 0x00, 0x00, 'E', 'M', '0', '0'};
-const u8 gBerryFixGbaTransferError_Pal[0x200] = {0x55, 0x00};
-const u8 gBerryFixWindow_Gfx[] = {0x10, 0x04, 0x00, 0x00, 0x00, 'W', 'N', '0', '0'};
-const u8 gBerryFixWindow_Tilemap[] = {0x10, 0x04, 0x00, 0x00, 0x00, 'W', 'M', '0', '0'};
-const u8 gBerryFixWindow_Pal[0x200] = {0x66, 0x00};
-const u8 gText_ClearAllSaveData[] = "Clear all save data areas?";
-const u8 gText_ClearingData[] = "Clearing data..\nPlease wait.";
-const u8 gText_NewGame[] = "New Game";
-const u8 gText_Continue[] = "Continue";
-const u8 gText_Player[] = "Player";
-const u8 gText_Time[] = "Time";
-const u8 gText_Pokedex[] = "Pokedex";
-const u8 gText_Badges[] = "Badges";
-const u8 gText_MysteryGift[] = "Mystery Gift";
-const u8 gText_SaveFileHasBeenDeleted[] = "Save file deleted";
-const u8 gText_SaveFileCorrupted[] = "Save file corrupted";
-const u8 gText_1MSubCircuitBoardNotInstalled[] = "1M sub-circuit board not installed";
-const u8 gText_WirelessNotConnected[] = "Wireless adapter not connected";
-const u8 gText_MysteryGiftCantUse[] = "Mystery Gift can't be used";
-const u8 gTextJPDummy_Hiki[] = " caught";
-const u8 gTextJPDummy_Ko[] = " badges";
-const u16 gMenuMessageWindow_Gfx[1] = {0};
+/* Title screen graphics and berry fix data now from graphics.c */
 __asm__(
     ".pushsection .rodata.host_multiboot_payload,\"a\",@progbits\n"
     ".global gMultiBootProgram_BerryGlitchFix_Start\n"
@@ -192,15 +104,7 @@ __asm__(
 
 void HostTitleScreenStubReset(void)
 {
-    gHostTitleStubSetHelpContextCalls = 0;
-    gHostTitleStubHelpSystemEnableCalls = 0;
-    gHostTitleStubHelpSystemDisableCalls = 0;
-    gHostTitleStubFadeOutMapMusicCalls = 0;
-    gHostTitleStubFadeOutBGMCalls = 0;
-    gHostTitleStubIsNotWaitingForBGMStopCalls = 0;
-    gHostTitleStubPlayCryNormalCalls = 0;
     gHostTitleStubM4aMPlayAllStopCalls = 0;
-    gHostTitleStubSetSaveBlocksPointersCalls = 0;
     gHostTitleStubCB2InitMainMenuCalls = 0;
     gHostTitleStubCB2InitBerryFixProgramCalls = 0;
     gHostTitleStubLoadStdWindowGfxCalls = 0;
@@ -211,7 +115,6 @@ void HostTitleScreenStubReset(void)
     gHostTitleStubDestroyYesNoMenuCalls = 0;
     gHostTitleStubFreeAllWindowBuffersCalls = 0;
     gHostTitleStubDeactivateAllTextPrintersCalls = 0;
-    gHostTitleStubClearSaveDataCalls = 0;
     gHostTitleStubMultiBootInitCalls = 0;
     gHostTitleStubMultiBootMainCalls = 0;
     gHostTitleStubMultiBootStartMasterCalls = 0;
@@ -224,19 +127,10 @@ void HostTitleScreenStubReset(void)
     gHostTitleStubIsTextPrinterActiveCalls = 0;
     gHostTitleStubFreeAllSpritePalettesCalls = 0;
     gHostTitleStubStartNewGameSceneCalls = 0;
-    gHostTitleStubTryStartQuestLogPlaybackCalls = 0;
     gHostTitleStubCB2InitMysteryGiftCalls = 0;
-    gHostTitleStubIsWirelessAdapterConnectedCalls = 0;
-    gHostTitleStubIsMysteryGiftEnabledCalls = 0;
-    gHostTitleStubFlagGetCalls = 0;
     gHostTitleStubGetNationalPokedexCountCalls = 0;
     gHostTitleStubGetKantoPokedexCountCalls = 0;
     gHostTitleStubLastMultiBootLength = 0;
-    gHostTitleStubLastHelpContext = 0;
-    gHostTitleStubLastFadeOutMapMusicSpeed = 0;
-    gHostTitleStubLastFadeOutBGMSpeed = 0;
-    gHostTitleStubLastPlayCrySpecies = 0;
-    gHostTitleStubLastPlayCryPan = 0;
     gHostTitleStubLastPrintedText = NULL;
     gHostTitleStubLastPrintedText3 = NULL;
     gHostTitleStubMenuProcessInputResult = MENU_NOTHING_CHOSEN;
@@ -385,279 +279,16 @@ void HostTitleScreenStubForgetMenuWindow(u8 windowId)
         sHostTitleStubYesNoWindowId = HOST_TITLE_NO_MENU_WINDOW;
 }
 
-void SetHelpContext(u8 contextId)
-{
-    gHostTitleStubSetHelpContextCalls++;
-    gHostTitleStubLastHelpContext = contextId;
-}
+/* SetHelpContext, HelpSystem_Enable, HelpSystem_Disable now from help_system.c */
 
-void HelpSystem_Enable(void)
-{
-    gHostTitleStubHelpSystemEnableCalls++;
-}
+/* m4aMPlayAllStop now from m4a.c */
+/* SetSaveBlocksPointers now from load_save.c */
+/* IsMysteryGiftEnabled now from event_data.c */
 
-void HelpSystem_Disable(void)
-{
-    gHostTitleStubHelpSystemDisableCalls++;
-}
+/* IsWirelessAdapterConnected now from link.c */
+/* FlagGet and IsNationalPokedexEnabled now from event_data.c */
 
-void FadeOutMapMusic(u8 speed)
-{
-    gHostTitleStubFadeOutMapMusicCalls++;
-    gHostTitleStubLastFadeOutMapMusicSpeed = speed;
-}
-
-bool8 IsNotWaitingForBGMStop(void)
-{
-    gHostTitleStubIsNotWaitingForBGMStopCalls++;
-    return TRUE;
-}
-
-void FadeOutBGM(u8 speed)
-{
-    gHostTitleStubFadeOutBGMCalls++;
-    gHostTitleStubLastFadeOutBGMSpeed = speed;
-}
-
-void PlayCry_Normal(u16 species, s8 pan)
-{
-    gHostTitleStubPlayCryNormalCalls++;
-    gHostTitleStubLastPlayCrySpecies = species;
-    gHostTitleStubLastPlayCryPan = pan;
-}
-
-void m4aMPlayAllStop(void)
-{
-    gHostTitleStubM4aMPlayAllStopCalls++;
-}
-
-void SetSaveBlocksPointers(void)
-{
-    gHostTitleStubSetSaveBlocksPointersCalls++;
-    gSaveBlock1Ptr = &gSaveBlock1;
-    gSaveBlock2Ptr = &gSaveBlock2;
-    gPokemonStoragePtr = &gPokemonStorage;
-    SetBagPocketsPointers();
-}
-
-void LoadStdWindowGfx(u8 windowId, u16 destOffset, u8 palOffset)
-{
-    gHostTitleStubLoadStdWindowGfxCalls++;
-    (void)windowId;
-    (void)destOffset;
-    (void)palOffset;
-}
-
-void DrawStdFrameWithCustomTileAndPalette(u8 windowId, bool8 copyToVram, u16 baseTileNum, u8 paletteNum)
-{
-    gHostTitleStubDrawStdFrameCalls++;
-    if (windowId < WINDOWS_MAX && gWindows[windowId].tileData != NULL)
-    {
-        FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
-        PutWindowTilemap(windowId);
-        if (copyToVram)
-            CopyWindowToVram(windowId, COPYWIN_FULL);
-    }
-    (void)baseTileNum;
-    (void)paletteNum;
-}
-
-void AddTextPrinterParameterized4(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, const u8 *color, s8 speed, const u8 *str)
-{
-    gHostTitleStubAddTextPrinterParameterized4Calls++;
-    HostOakSpeechStubRecordPrintedText(str);
-    gHostTitleStubLastPrintedText = str;
-    gHostTitleStubTextPrinterActive = FALSE;
-    (void)windowId;
-    (void)fontId;
-    (void)x;
-    (void)y;
-    (void)letterSpacing;
-    (void)lineSpacing;
-    (void)color;
-    (void)speed;
-}
-
-void AddTextPrinterParameterized3(u8 windowId, u8 fontId, u8 x, u8 y, const u8 *color, s8 speed, const u8 *str)
-{
-    gHostTitleStubAddTextPrinterParameterized3Calls++;
-    HostOakSpeechStubRecordPrintedText(str);
-    gHostTitleStubLastPrintedText3 = str;
-    gHostTitleStubTextPrinterActive = FALSE;
-    (void)windowId;
-    (void)fontId;
-    (void)x;
-    (void)y;
-    (void)color;
-    (void)speed;
-}
-
-void CreateYesNoMenu(const struct WindowTemplate *window, u8 fontId, u8 left, u8 top, u16 baseTileNum, u8 paletteNum, u8 initialCursorPos)
-{
-    u8 windowId;
-
-    gHostTitleStubCreateYesNoMenuCalls++;
-    windowId = AddWindow(window);
-    sHostTitleStubYesNoWindowId = windowId;
-    if (windowId == HOST_TITLE_NO_MENU_WINDOW)
-        return;
-
-    DrawStdFrameWithCustomTileAndPalette(windowId, TRUE, baseTileNum, paletteNum);
-    HostTitleScreenStubInitMenuCursor(windowId, left, top, 16, 2, initialCursorPos);
-    (void)fontId;
-}
-
-s8 Menu_ProcessInputNoWrapClearOnChoose(void)
-{
-    s8 result;
-
-    gHostTitleStubMenuProcessInputCalls++;
-    result = HostTitleScreenStubProcessMenuInput(FALSE);
-    if (result != MENU_NOTHING_CHOSEN)
-        DestroyYesNoMenu();
-    return result;
-}
-
-void DestroyYesNoMenu(void)
-{
-    gHostTitleStubDestroyYesNoMenuCalls++;
-    if (sHostTitleStubYesNoWindowId == HOST_TITLE_NO_MENU_WINDOW)
-        return;
-    if (sHostTitleStubYesNoWindowId < WINDOWS_MAX && gWindows[sHostTitleStubYesNoWindowId].tileData != NULL)
-    {
-        ClearStdWindowAndFrameToTransparent(sHostTitleStubYesNoWindowId, TRUE);
-        RemoveWindow(sHostTitleStubYesNoWindowId);
-    }
-    HostTitleScreenStubForgetMenuWindow(sHostTitleStubYesNoWindowId);
-}
-
-void DeactivateAllTextPrinters(void)
-{
-    gHostTitleStubDeactivateAllTextPrintersCalls++;
-    gHostTitleStubTextPrinterActive = FALSE;
-}
-
-void RunTextPrinters(void)
-{
-    gHostTitleStubRunTextPrintersCalls++;
-    gHostTitleStubTextPrinterActive = FALSE;
-}
-
-bool16 IsTextPrinterActive(u8 windowId)
-{
-    gHostTitleStubIsTextPrinterActiveCalls++;
-    (void)windowId;
-    return gHostTitleStubTextPrinterActive;
-}
-
-bool32 IsMysteryGiftEnabled(void)
-{
-    gHostTitleStubIsMysteryGiftEnabledCalls++;
-    return gHostTitleStubMysteryGiftEnabled;
-}
-
-bool8 IsWirelessAdapterConnected(void)
-{
-    gHostTitleStubIsWirelessAdapterConnectedCalls++;
-    return gHostTitleStubWirelessAdapterConnected;
-}
-
-bool8 FlagGet(u16 idx)
-{
-    u8 *ptr;
-
-    gHostTitleStubFlagGetCalls++;
-    if (idx >= FLAG_BADGE01_GET && idx < FLAG_BADGE01_GET + 8)
-    {
-        if ((gHostTitleStubFlagGetBadgeMask & (1u << (idx - FLAG_BADGE01_GET))) != 0)
-            return TRUE;
-    }
-    ptr = GetFlagPointer(idx);
-    if (ptr != NULL && (*ptr & (1 << (idx & 7))) != 0)
-        return TRUE;
-    if (idx == FLAG_SYS_POKEDEX_GET)
-        return gHostTitleStubNationalPokedexEnabled || gHostTitleStubKantoPokedexCount != 0 || gHostTitleStubNationalPokedexCount != 0;
-    return FALSE;
-}
-
-bool32 IsNationalPokedexEnabled(void)
-{
-    if (gHostTitleStubNationalPokedexEnabled)
-        return TRUE;
-    return gSaveBlock2Ptr != NULL
-        && gSaveBlock2Ptr->pokedex.unused == 0xDA
-        && VarGet(VAR_0x403C) == 0x0302
-        && FlagGet(FLAG_0x838);
-}
-
-u16 GetNationalPokedexCount(u8 caseId)
-{
-    gHostTitleStubGetNationalPokedexCountCalls++;
-    (void)caseId;
-    return gHostTitleStubNationalPokedexCount;
-}
-
-u16 GetKantoPokedexCount(u8 caseId)
-{
-    gHostTitleStubGetKantoPokedexCountCalls++;
-    (void)caseId;
-    return gHostTitleStubKantoPokedexCount;
-}
-
-const struct TextWindowGraphics *GetUserWindowGraphics(u8 idx)
-{
-    (void)idx;
-    return &sHostTitleStubUserWindowGraphics;
-}
-
-u8 *ConvertIntToDecimalStringN(u8 *str, s32 value, enum StringConvertMode mode, u8 n)
-{
-    u8 digits[16];
-    u32 magnitude;
-    u8 digit_count = 0;
-    u8 output_len;
-    u8 i;
-
-    if (value < 0)
-        magnitude = (u32)(-value);
-    else
-        magnitude = (u32)value;
-
-    do
-    {
-        digits[digit_count++] = (u8)('0' + (magnitude % 10));
-        magnitude /= 10;
-    } while (magnitude != 0 && digit_count < (u8)sizeof(digits));
-
-    output_len = digit_count;
-    if (mode != STR_CONV_MODE_LEFT_ALIGN && output_len < n)
-        output_len = n;
-
-    for (i = 0; i < output_len; i++)
-    {
-        if (i < output_len - digit_count)
-        {
-            str[i] = (mode == STR_CONV_MODE_LEADING_ZEROS) ? '0' : ' ';
-        }
-        else
-        {
-            str[i] = digits[digit_count - 1 - (i - (output_len - digit_count))];
-        }
-    }
-
-    str[output_len] = EOS;
-    return str + output_len;
-}
-
-u8 *StringAppend(u8 *dest, const u8 *src)
-{
-    while (*dest != EOS && *dest != 0)
-        dest++;
-    while (*src != EOS && *src != 0)
-        *dest++ = *src++;
-    *dest = EOS;
-    return dest;
-}
+/* GetNationalPokedexCount, GetKantoPokedexCount now from pokedex.c */
 
 void StartNewGameScene(void)
 {
@@ -665,21 +296,8 @@ void StartNewGameScene(void)
     UpstreamStartNewGameScene();
 }
 
-void TryStartQuestLogPlayback(u8 taskId)
-{
-    gHostTitleStubTryStartQuestLogPlaybackCalls++;
-    (void)taskId;
-}
-
-void CB2_InitMysteryGift(void)
-{
-    gHostTitleStubCB2InitMysteryGiftCalls++;
-}
-
-void ClearSaveData(void)
-{
-    gHostTitleStubClearSaveDataCalls++;
-}
+/* CB2_InitMysteryGift now from mystery_gift_menu.c */
+/* ClearSaveData now from save.c */
 
 void MultiBootInit(struct MultiBootParam *mp)
 {

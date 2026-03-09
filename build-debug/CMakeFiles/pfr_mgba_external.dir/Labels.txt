@@ -1,0 +1,13 @@
+# Target labels
+ pfr_mgba_external
+# Source files and their labels
+/home/spark-advantage/pokefirered-native/build-debug/CMakeFiles/pfr_mgba_external
+/home/spark-advantage/pokefirered-native/build-debug/CMakeFiles/pfr_mgba_external.rule
+/home/spark-advantage/pokefirered-native/build-debug/CMakeFiles/pfr_mgba_external-complete.rule
+/home/spark-advantage/pokefirered-native/build-debug/pfr_mgba_external-prefix/src/pfr_mgba_external-stamp/pfr_mgba_external-build.rule
+/home/spark-advantage/pokefirered-native/build-debug/pfr_mgba_external-prefix/src/pfr_mgba_external-stamp/pfr_mgba_external-configure.rule
+/home/spark-advantage/pokefirered-native/build-debug/pfr_mgba_external-prefix/src/pfr_mgba_external-stamp/pfr_mgba_external-download.rule
+/home/spark-advantage/pokefirered-native/build-debug/pfr_mgba_external-prefix/src/pfr_mgba_external-stamp/pfr_mgba_external-install.rule
+/home/spark-advantage/pokefirered-native/build-debug/pfr_mgba_external-prefix/src/pfr_mgba_external-stamp/pfr_mgba_external-mkdir.rule
+/home/spark-advantage/pokefirered-native/build-debug/pfr_mgba_external-prefix/src/pfr_mgba_external-stamp/pfr_mgba_external-patch.rule
+/home/spark-advantage/pokefirered-native/build-debug/pfr_mgba_external-prefix/src/pfr_mgba_external-stamp/pfr_mgba_external-update.rule

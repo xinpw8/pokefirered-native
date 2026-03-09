@@ -69,25 +69,10 @@ include CMakeFiles/pfr_upstream_title.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/pfr_upstream_title.dir/flags.make
 
-gen/intro.c: pfr_assets
-gen/intro.c: /home/spark-advantage/pokefirered/src/intro.c
-gen/intro.c: /home/spark-advantage/pokefirered/src/title_screen.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/spark-advantage/pokefirered-native/build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Asset pipeline: PNG/PAL → GBA → .inc → preprocessed sources"
-	/usr/bin/cmake -E make_directory /home/spark-advantage/pokefirered-native/build-debug/assets
-	/usr/bin/cmake -E make_directory /home/spark-advantage/pokefirered-native/build-debug/inc
-	/usr/bin/cmake -E make_directory /home/spark-advantage/pokefirered-native/build-debug/gen
-	./pfr_assets batch /home/spark-advantage/pokefirered-native/../pokefirered /home/spark-advantage/pokefirered-native/build-debug/assets
-	./pfr_assets geninc /home/spark-advantage/pokefirered-native/build-debug/assets /home/spark-advantage/pokefirered-native/build-debug/inc
-	./pfr_assets preproc /home/spark-advantage/pokefirered-native/../pokefirered/src/intro.c /home/spark-advantage/pokefirered-native/build-debug/inc /home/spark-advantage/pokefirered-native/build-debug/gen/intro.c
-	./pfr_assets preproc /home/spark-advantage/pokefirered-native/../pokefirered/src/title_screen.c /home/spark-advantage/pokefirered-native/build-debug/inc /home/spark-advantage/pokefirered-native/build-debug/gen/title_screen.c
-
-gen/title_screen.c: gen/intro.c
-	@$(CMAKE_COMMAND) -E touch_nocreate gen/title_screen.c
-
 CMakeFiles/pfr_upstream_title.dir/gen/title_screen.c.o: CMakeFiles/pfr_upstream_title.dir/flags.make
 CMakeFiles/pfr_upstream_title.dir/gen/title_screen.c.o: gen/title_screen.c
 CMakeFiles/pfr_upstream_title.dir/gen/title_screen.c.o: CMakeFiles/pfr_upstream_title.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/pfr_upstream_title.dir/gen/title_screen.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/pfr_upstream_title.dir/gen/title_screen.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_title.dir/gen/title_screen.c.o -MF CMakeFiles/pfr_upstream_title.dir/gen/title_screen.c.o.d -o CMakeFiles/pfr_upstream_title.dir/gen/title_screen.c.o -c /home/spark-advantage/pokefirered-native/build-debug/gen/title_screen.c
 
 CMakeFiles/pfr_upstream_title.dir/gen/title_screen.c.i: cmake_force
@@ -110,8 +95,7 @@ CMakeFiles/pfr_upstream_title.dir/clean:
 	$(CMAKE_COMMAND) -P CMakeFiles/pfr_upstream_title.dir/cmake_clean.cmake
 .PHONY : CMakeFiles/pfr_upstream_title.dir/clean
 
-CMakeFiles/pfr_upstream_title.dir/depend: gen/intro.c
-CMakeFiles/pfr_upstream_title.dir/depend: gen/title_screen.c
+CMakeFiles/pfr_upstream_title.dir/depend:
 	cd /home/spark-advantage/pokefirered-native/build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/spark-advantage/pokefirered-native /home/spark-advantage/pokefirered-native /home/spark-advantage/pokefirered-native/build-debug /home/spark-advantage/pokefirered-native/build-debug /home/spark-advantage/pokefirered-native/build-debug/CMakeFiles/pfr_upstream_title.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/pfr_upstream_title.dir/depend
 

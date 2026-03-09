@@ -1,36 +1,113 @@
 [000000] pfr_play trace started
-[000000] loaded scripted input file tests/pfr_play_oak_path.input with 7 ranges
 [000000] callback1 -> NULL ((nil))
-[000000] callback2 -> CB2_InitCopyrightScreenAfterBootup (0x406520)
-[000135] framebuffer nearly uniform for 120 frames, color=0xFF000000 callback2=CB2_InitCopyrightScreenAfterBootup
-[000164] callback2 -> (unknown) (0x405590)
-[000165] callback2 -> (unknown) (0x402e10)
-[000168] callback2 -> (unknown) (0x402df0)
-[001260] callback2 -> CB2_InitTitleScreen (0x407c50)
-[001263] callback2 -> (unknown) (0x4066d0)
-[001798] input newKeys=0x0001 heldKeys=0x0001 callback2=(unknown)
-[001913] callback2 -> CB2_InitMainMenu (0x409bc0)
-[001914] callback2 -> (unknown) (0x409360)
-[001917] callback2 -> (unknown) (0x409eb0)
-[001917] StartNewGameScene calls=1
-[001925] Oak controls guide page 1 reached
-[002047] framebuffer nearly uniform for 120 frames, color=0xFF000000 callback2=(unknown)
-[002471] input newKeys=0x0001 heldKeys=0x0001 callback2=(unknown)
-[002491] Oak controls guide page 2 reached
-[002890] input newKeys=0x0001 heldKeys=0x0001 callback2=(unknown)
-[002910] Oak controls guide page 3 reached
-[003310] input newKeys=0x0001 heldKeys=0x0001 callback2=(unknown)
-[003383] Oak Pikachu intro page 1 reached
-[003730] input newKeys=0x0001 heldKeys=0x0001 callback2=(unknown)
-[003739] Oak Pikachu intro page 2 reached
-[004150] input newKeys=0x0001 heldKeys=0x0001 callback2=(unknown)
-[004159] Oak Pikachu intro page 3 reached
-[004570] input newKeys=0x0001 heldKeys=0x0001 callback2=(unknown)
-[004858] Oak welcome message printed
-[004858] Oak placeholder -> (other Oak placeholder)
-[004859] Oak 'This world' message printed
-[004859] Oak placeholder -> (other Oak placeholder)
-[004892] Oak placeholder -> (other Oak placeholder)
-[004958] Oak placeholder -> gOakSpeech_Text_IStudyPokemon
-[005072] Oak placeholder -> gOakSpeech_Text_TellMeALittleAboutYourself
-[005170] Oak placeholder -> gOakSpeech_Text_AskPlayerGender
+[000000] callback2 -> CB2_InitCopyrightScreenAfterBootup (0x403f34)
+[000001] callback2 -> CB2_InitCopyrightScreenAfterBootup (0x403f34) gpu DISPCNT=0x0140 BG0=0x0700 BG1=0x0000 BG2=0x0000 BG3=0x0000 BLDCNT=0x0000 BLDALPHA=0x0000 BLDY=0x0000 WININ=0x0000 WINOUT=0x0000
+[000001] callback2 -> CB2_InitCopyrightScreenAfterBootup (0x403f34) scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=7FFF,7FFF,7FFF,7FFF nonZeroWords pltt=256 vram=604 oam=256
+[000162] input newKeys=0x0008 heldKeys=0x0008 callback2=CB2_InitCopyrightScreenAfterBootup
+[000164] callback2 -> (unknown) (0x403b1c)
+[000165] callback2 -> (unknown) (0x403b1c) gpu DISPCNT=0x0140 BG0=0x0700 BG1=0x0000 BG2=0x0000 BG3=0x0000 BLDCNT=0x0000 BLDALPHA=0x0000 BLDY=0x0000 WININ=0x0000 WINOUT=0x0000
+[000165] callback2 -> (unknown) (0x403b1c) scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=0000,0000,0000,0000 nonZeroWords pltt=0 vram=604 oam=256
+[000165] callback2 -> (unknown) (0x403fc8)
+[000166] callback2 -> (unknown) (0x403fc8) gpu DISPCNT=0x1040 BG0=0x0700 BG1=0x0000 BG2=0x0000 BG3=0x0000 BLDCNT=0x0000 BLDALPHA=0x0000 BLDY=0x0000 WININ=0x0000 WINOUT=0x0000
+[000166] callback2 -> (unknown) (0x403fc8) scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=0000,0000,0000,0000 nonZeroWords pltt=0 vram=0 oam=0
+[000168] callback2 -> (unknown) (0x4041e0)
+[000169] callback2 -> (unknown) (0x4041e0) gpu DISPCNT=0x1040 BG0=0x0700 BG1=0x0000 BG2=0x0000 BG3=0x0000 BLDCNT=0x0000 BLDALPHA=0x0000 BLDY=0x0000 WININ=0x0000 WINOUT=0x0000
+[000169] callback2 -> (unknown) (0x4041e0) scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=0000,0000,0000,0000 nonZeroWords pltt=0 vram=603 oam=256
+[000171] input newKeys=0x0008 heldKeys=0x0008 callback2=(unknown)
+[000173] callback2 -> CB2_InitTitleScreen (0x409708)
+[000174] callback2 -> CB2_InitTitleScreen (0x409708) gpu DISPCNT=0x1040 BG0=0x0700 BG1=0x0000 BG2=0x0000 BG3=0x0000 BLDCNT=0x0000 BLDALPHA=0x0000 BLDY=0x0000 WININ=0x3F00 WINOUT=0x0000
+[000174] callback2 -> CB2_InitTitleScreen (0x409708) scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=0000,0000,0000,0000 nonZeroWords pltt=0 vram=0 oam=0
+[000176] callback2 -> (unknown) (0x409ad0)
+[000177] callback2 -> (unknown) (0x409ad0) gpu DISPCNT=0x1E40 BG0=0x0700 BG1=0x1E05 BG2=0x1D0A BG3=0x1C0F BLDCNT=0x0000 BLDALPHA=0x0000 BLDY=0x0000 WININ=0x3F00 WINOUT=0x0000
+[000177] callback2 -> (unknown) (0x409ad0) scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=0000,0000,0000,0000 nonZeroWords pltt=14 vram=5047 oam=256
+[000179] input newKeys=0x0008 heldKeys=0x0008 callback2=(unknown)
+[000190] input newKeys=0x0008 heldKeys=0x0008 callback2=(unknown)
+[000208] input newKeys=0x0008 heldKeys=0x0008 callback2=(unknown)
+[000216] input newKeys=0x0008 heldKeys=0x0008 callback2=(unknown)
+[000250] input newKeys=0x0008 heldKeys=0x0008 callback2=(unknown)
+[000297] input newKeys=0x0008 heldKeys=0x0008 callback2=(unknown)
+[000305] callback2 -> CB2_InitMainMenu (0x40ccf4)
+[000306] callback2 -> CB2_InitMainMenu (0x40ccf4) gpu DISPCNT=0x3040 BG0=0x0000 BG1=0x0000 BG2=0x0000 BG3=0x1C0F BLDCNT=0x0000 BLDALPHA=0x0000 BLDY=0x0000 WININ=0x0000 WINOUT=0x0000
+[000306] callback2 -> CB2_InitMainMenu (0x40ccf4) scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=7FFF,0000,0000,0000 nonZeroWords pltt=1 vram=0 oam=0
+[000306] callback2 -> (unknown) (0x40ccb0)
+[000307] callback2 -> (unknown) (0x40ccb0) gpu DISPCNT=0x3040 BG0=0x0000 BG1=0x0000 BG2=0x0000 BG3=0x1C0F BLDCNT=0x00FF BLDALPHA=0x0000 BLDY=0x0007 WININ=0x0001 WINOUT=0x0021
+[000307] callback2 -> (unknown) (0x40ccb0) scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=7FFF,0000,0000,0000 nonZeroWords pltt=1 vram=346 oam=0
+[000309] callback2 -> (unknown) (0x40ec38)
+[000309] StartNewGameScene calls=1
+[000310] start_new_game_scene gpu DISPCNT=0x3040 BG0=0x0000 BG1=0x0000 BG2=0x0000 BG3=0x1C0F BLDCNT=0x00FF BLDALPHA=0x0000 BLDY=0x0007 WININ=0x0001 WINOUT=0x0021
+[000310] start_new_game_scene scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=7FFF,0000,0000,0000 nonZeroWords pltt=1 vram=0 oam=0
+[000600] input newKeys=0x0001 heldKeys=0x0001 callback2=(unknown)
+[000744] input newKeys=0x0001 heldKeys=0x0001 callback2=(unknown)
+[000839] input newKeys=0x0001 heldKeys=0x0001 callback2=(unknown)
+[000975] input newKeys=0x0001 heldKeys=0x0001 callback2=(unknown)
+[002356] input newKeys=0x0001 heldKeys=0x0001 callback2=(unknown)
+[002427] input newKeys=0x0001 heldKeys=0x0001 callback2=(unknown)
+[002715] Oak welcome message printed
+[002715] Oak placeholder -> (other Oak placeholder)
+[002716] Oak placeholder -> (other Oak placeholder) gpu DISPCNT=0x1741 BG0=0x1F08 BG1=0x1E02 BG2=0x5C81 BG3=0x1C0F BLDCNT=0x0000 BLDALPHA=0x0000 BLDY=0x0000 WININ=0x0000 WINOUT=0x0000
+[002716] Oak placeholder -> (other Oak placeholder) scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=0000,4228,464A,4E8D nonZeroWords pltt=130 vram=2846 oam=256
+[002744] Oak 'This world' message printed
+[002744] Oak placeholder -> (other Oak placeholder)
+[002745] Oak placeholder -> (other Oak placeholder) gpu DISPCNT=0x1741 BG0=0x1F08 BG1=0x1E02 BG2=0x5C81 BG3=0x1C0F BLDCNT=0x0000 BLDALPHA=0x0000 BLDY=0x0000 WININ=0x0000 WINOUT=0x0000
+[002745] Oak placeholder -> (other Oak placeholder) scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=0000,4228,464A,4E8D nonZeroWords pltt=130 vram=2846 oam=256
+[002793] Oak placeholder -> (other Oak placeholder)
+[002794] Oak placeholder -> (other Oak placeholder) gpu DISPCNT=0x1741 BG0=0x1F08 BG1=0x1E02 BG2=0x5C81 BG3=0x1C0F BLDCNT=0x0000 BLDALPHA=0x0000 BLDY=0x0000 WININ=0x0000 WINOUT=0x0000
+[002794] Oak placeholder -> (other Oak placeholder) scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=0000,4228,464A,4E8D nonZeroWords pltt=130 vram=2846 oam=256
+[002859] Oak placeholder -> gOakSpeech_Text_IStudyPokemon
+[002860] Oak placeholder -> gOakSpeech_Text_IStudyPokemon gpu DISPCNT=0x1741 BG0=0x1F08 BG1=0x1E02 BG2=0x5C81 BG3=0x1C0F BLDCNT=0x0000 BLDALPHA=0x0000 BLDY=0x0000 WININ=0x0000 WINOUT=0x0000
+[002860] Oak placeholder -> gOakSpeech_Text_IStudyPokemon scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=0000,4228,464A,4E8D nonZeroWords pltt=130 vram=2846 oam=256
+[002997] Oak placeholder -> gOakSpeech_Text_TellMeALittleAboutYourself
+[002998] Oak placeholder -> gOakSpeech_Text_TellMeALittleAboutYourself gpu DISPCNT=0x1741 BG0=0x1F08 BG1=0x1E02 BG2=0x5C81 BG3=0x1C0F BLDCNT=0x0000 BLDALPHA=0x0000 BLDY=0x0000 WININ=0x0000 WINOUT=0x0000
+[002998] Oak placeholder -> gOakSpeech_Text_TellMeALittleAboutYourself scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=0000,4228,464A,4E8D nonZeroWords pltt=130 vram=2846 oam=256
+[003107] Oak placeholder -> gOakSpeech_Text_AskPlayerGender
+[003108] Oak placeholder -> gOakSpeech_Text_AskPlayerGender gpu DISPCNT=0x1741 BG0=0x1F08 BG1=0x1E02 BG2=0x5C81 BG3=0x1C0F BLDCNT=0x1244 BLDALPHA=0x1000 BLDY=0x0000 WININ=0x0000 WINOUT=0x0000
+[003108] Oak placeholder -> gOakSpeech_Text_AskPlayerGender scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=0000,4228,464A,4E8D nonZeroWords pltt=130 vram=2813 oam=256
+[003797] input newKeys=0x0001 heldKeys=0x0001 callback2=(unknown)
+[003857] Oak placeholder -> gOakSpeech_Text_YourNameWhatIsIt
+[003858] Oak placeholder -> gOakSpeech_Text_YourNameWhatIsIt gpu DISPCNT=0x1741 BG0=0x1F08 BG1=0x1E02 BG2=0x5C81 BG3=0x1C0F BLDCNT=0x1244 BLDALPHA=0x0010 BLDY=0x0000 WININ=0x0000 WINOUT=0x0000
+[003858] Oak placeholder -> gOakSpeech_Text_YourNameWhatIsIt scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=0000,4228,464A,4E8D nonZeroWords pltt=130 vram=2497 oam=256
+[003896] callback2 -> (unknown) (0x4134e0)
+[003896] Oak naming screen calls=1
+[003897] oak_naming_screen gpu DISPCNT=0x1741 BG0=0x1F08 BG1=0x1E02 BG2=0x5C81 BG3=0x1C0F BLDCNT=0x1244 BLDALPHA=0x0010 BLDY=0x0000 WININ=0x0000 WINOUT=0x0000
+[003897] oak_naming_screen scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=0000,0000,0000,0000 nonZeroWords pltt=0 vram=0 oam=0
+[003904] callback2 -> (unknown) (0x40ec38)
+[003905] callback2 -> (unknown) (0x40ec38) gpu DISPCNT=0x1741 BG0=0x1F08 BG1=0x1E02 BG2=0x5C81 BG3=0x1C0F BLDCNT=0x0000 BLDALPHA=0x0000 BLDY=0x0000 WININ=0x0000 WINOUT=0x0000
+[003905] callback2 -> (unknown) (0x40ec38) scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=0000,0000,0000,0000 nonZeroWords pltt=0 vram=1326 oam=256
+[003927] Oak placeholder -> (other Oak placeholder)
+[003928] Oak placeholder -> (other Oak placeholder) gpu DISPCNT=0x1741 BG0=0x1F08 BG1=0x1E02 BG2=0x5C81 BG3=0x1C0F BLDCNT=0x0000 BLDALPHA=0x0000 BLDY=0x0000 WININ=0x0000 WINOUT=0x0000
+[003928] Oak placeholder -> (other Oak placeholder) scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=71C2,4228,464A,4E8D nonZeroWords pltt=138 vram=2248 oam=256
+[004080] input newKeys=0x0001 heldKeys=0x0001 callback2=(unknown)
+[004196] Oak placeholder -> (other Oak placeholder)
+[004197] Oak placeholder -> (other Oak placeholder) gpu DISPCNT=0x1741 BG0=0x1F08 BG1=0x1E02 BG2=0x5C81 BG3=0x1C0F BLDCNT=0x1244 BLDALPHA=0x0010 BLDY=0x0000 WININ=0x0000 WINOUT=0x0000
+[004197] Oak placeholder -> (other Oak placeholder) scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=71C2,4228,464A,4E8D nonZeroWords pltt=138 vram=2211 oam=256
+[004344] input newKeys=0x0080 heldKeys=0x0080 callback2=(unknown)
+[004363] input newKeys=0x0080 heldKeys=0x0080 callback2=(unknown)
+[004375] input newKeys=0x0080 heldKeys=0x0080 callback2=(unknown)
+[004417] input newKeys=0x0080 heldKeys=0x0080 callback2=(unknown)
+[004445] input newKeys=0x0008 heldKeys=0x0008 callback2=(unknown)
+[004529] input newKeys=0x0001 heldKeys=0x0001 callback2=(unknown)
+[004531] Oak placeholder -> (other Oak placeholder)
+[004532] Oak placeholder -> (other Oak placeholder) gpu DISPCNT=0x1741 BG0=0x1F08 BG1=0x1E02 BG2=0x5C81 BG3=0x1C0F BLDCNT=0x1244 BLDALPHA=0x0010 BLDY=0x0000 WININ=0x0000 WINOUT=0x0000
+[004532] Oak placeholder -> (other Oak placeholder) scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=71C2,4228,464A,4E8D nonZeroWords pltt=138 vram=2259 oam=256
+[004574] input newKeys=0x0001 heldKeys=0x0001 callback2=(unknown)
+[004621] input newKeys=0x0001 heldKeys=0x0001 callback2=(unknown)
+[004622] Oak placeholder -> (other Oak placeholder)
+[004623] Oak placeholder -> (other Oak placeholder) gpu DISPCNT=0x1741 BG0=0x1F08 BG1=0x1E02 BG2=0x5C81 BG3=0x1C0F BLDCNT=0x1244 BLDALPHA=0x0010 BLDY=0x0000 WININ=0x0000 WINOUT=0x0000
+[004623] Oak placeholder -> (other Oak placeholder) scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=71C2,4228,464A,4E8D nonZeroWords pltt=138 vram=2256 oam=256
+[004660] input newKeys=0x0001 heldKeys=0x0001 callback2=(unknown)
+[004761] Oak placeholder -> (other Oak placeholder)
+[004762] Oak placeholder -> (other Oak placeholder) gpu DISPCNT=0x1741 BG0=0x1F08 BG1=0x1E02 BG2=0x5C81 BG3=0x1C0F BLDCNT=0x1244 BLDALPHA=0x0010 BLDY=0x0000 WININ=0x0000 WINOUT=0x0000
+[004762] Oak placeholder -> (other Oak placeholder) scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=71C2,4228,464A,4E8D nonZeroWords pltt=138 vram=2305 oam=256
+[004815] input newKeys=0x0001 heldKeys=0x0001 callback2=(unknown)
+[004862] input newKeys=0x0001 heldKeys=0x0001 callback2=(unknown)
+[005044] callback2 -> (unknown) (0x423108)
+[005045] callback2 -> (unknown) (0x423108) gpu DISPCNT=0x1741 BG0=0x1F08 BG1=0x1E02 BG2=0x5C81 BG3=0x1C0F BLDCNT=0x1244 BLDALPHA=0x0010 BLDY=0x0000 WININ=0x0000 WINOUT=0x0000
+[005045] callback2 -> (unknown) (0x423108) scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=0000,0000,0000,0000 nonZeroWords pltt=0 vram=2305 oam=256
+[005045] callback1 -> HostCB1_Overworld (0x421dcc)
+[005045] callback2 -> HostCB2_Overworld (0x421dd4)
+[005045] CB2_NewGame calls=1
+[005046] cb2_new_game gpu DISPCNT=0x1741 BG0=0x1F08 BG1=0x1E02 BG2=0x5C81 BG3=0x1C0F BLDCNT=0x1244 BLDALPHA=0x0010 BLDY=0x0000 WININ=0x0000 WINOUT=0x0000
+[005046] cb2_new_game scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=0000,0000,0000,0000 nonZeroWords pltt=0 vram=2305 oam=256
+[005067] framebuffer nearly uniform for 120 frames, color=0xFF000000 callback2=HostCB2_Overworld
+[005068] uniform_frame_warning gpu DISPCNT=0x1741 BG0=0x1F08 BG1=0x1E02 BG2=0x5C81 BG3=0x1C0F BLDCNT=0x1244 BLDALPHA=0x0010 BLDY=0x0000 WININ=0x0000 WINOUT=0x0000
+[005068] uniform_frame_warning scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=0000,0000,0000,0000 nonZeroWords pltt=0 vram=2305 oam=256

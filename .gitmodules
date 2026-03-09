@@ -1,0 +1,9 @@
+[submodule "third_party/pokefirered"]
+	path = third_party/pokefirered
+	url = https://github.com/pret/pokefirered.git
+[submodule "third_party/mgba"]
+	path = third_party/mgba
+	url = https://github.com/mgba-emu/mgba.git
+[submodule "third_party/agbcc"]
+	path = third_party/agbcc
+	url = https://github.com/pret/agbcc.git

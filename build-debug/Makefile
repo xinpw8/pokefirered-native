@@ -117,6 +117,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named pfr_generated_headers
+
+# Build rule for target.
+pfr_generated_headers: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_generated_headers
+.PHONY : pfr_generated_headers
+
+# fast build rule for target.
+pfr_generated_headers/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_generated_headers.dir/build.make CMakeFiles/pfr_generated_headers.dir/build
+.PHONY : pfr_generated_headers/fast
+
+#=============================================================================
 # Target rules for targets named pfr_upstream_core
 
 # Build rule for target.
@@ -195,6 +208,45 @@ pfr_upstream_berry_fix/fast:
 .PHONY : pfr_upstream_berry_fix/fast
 
 #=============================================================================
+# Target rules for targets named pfr_upstream_oak_speech
+
+# Build rule for target.
+pfr_upstream_oak_speech: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_oak_speech
+.PHONY : pfr_upstream_oak_speech
+
+# fast build rule for target.
+pfr_upstream_oak_speech/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_oak_speech.dir/build.make CMakeFiles/pfr_upstream_oak_speech.dir/build
+.PHONY : pfr_upstream_oak_speech/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_new_game
+
+# Build rule for target.
+pfr_upstream_new_game: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_new_game
+.PHONY : pfr_upstream_new_game
+
+# fast build rule for target.
+pfr_upstream_new_game/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_new_game.dir/build.make CMakeFiles/pfr_upstream_new_game.dir/build
+.PHONY : pfr_upstream_new_game/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_play_time
+
+# Build rule for target.
+pfr_upstream_play_time: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_play_time
+.PHONY : pfr_upstream_play_time
+
+# fast build rule for target.
+pfr_upstream_play_time/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_play_time.dir/build.make CMakeFiles/pfr_upstream_play_time.dir/build
+.PHONY : pfr_upstream_play_time/fast
+
+#=============================================================================
 # Target rules for targets named pfr_upstream_main_menu
 
 # Build rule for target.
@@ -208,17 +260,69 @@ pfr_upstream_main_menu/fast:
 .PHONY : pfr_upstream_main_menu/fast
 
 #=============================================================================
-# Target rules for targets named pfr_upstream_oak_speech
+# Target rules for targets named pfr_upstream_text_window_graphics
 
 # Build rule for target.
-pfr_upstream_oak_speech: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_oak_speech
-.PHONY : pfr_upstream_oak_speech
+pfr_upstream_text_window_graphics: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_text_window_graphics
+.PHONY : pfr_upstream_text_window_graphics
 
 # fast build rule for target.
-pfr_upstream_oak_speech/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_oak_speech.dir/build.make CMakeFiles/pfr_upstream_oak_speech.dir/build
-.PHONY : pfr_upstream_oak_speech/fast
+pfr_upstream_text_window_graphics/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_text_window_graphics.dir/build.make CMakeFiles/pfr_upstream_text_window_graphics.dir/build
+.PHONY : pfr_upstream_text_window_graphics/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_text
+
+# Build rule for target.
+pfr_upstream_text: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_text
+.PHONY : pfr_upstream_text
+
+# fast build rule for target.
+pfr_upstream_text/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_text.dir/build.make CMakeFiles/pfr_upstream_text.dir/build
+.PHONY : pfr_upstream_text/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_text_window
+
+# Build rule for target.
+pfr_upstream_text_window: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_text_window
+.PHONY : pfr_upstream_text_window
+
+# fast build rule for target.
+pfr_upstream_text_window/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_text_window.dir/build.make CMakeFiles/pfr_upstream_text_window.dir/build
+.PHONY : pfr_upstream_text_window/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_new_menu_helpers
+
+# Build rule for target.
+pfr_upstream_new_menu_helpers: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_new_menu_helpers
+.PHONY : pfr_upstream_new_menu_helpers
+
+# fast build rule for target.
+pfr_upstream_new_menu_helpers/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_new_menu_helpers.dir/build.make CMakeFiles/pfr_upstream_new_menu_helpers.dir/build
+.PHONY : pfr_upstream_new_menu_helpers/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_text_printer
+
+# Build rule for target.
+pfr_upstream_text_printer: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_text_printer
+.PHONY : pfr_upstream_text_printer
+
+# fast build rule for target.
+pfr_upstream_text_printer/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_text_printer.dir/build.make CMakeFiles/pfr_upstream_text_printer.dir/build
+.PHONY : pfr_upstream_text_printer/fast
 
 #=============================================================================
 # Target rules for targets named pfr_smoke
@@ -273,6 +377,71 @@ pfr_play/fast:
 .PHONY : pfr_play/fast
 
 #=============================================================================
+# Target rules for targets named pfr_frame_diff
+
+# Build rule for target.
+pfr_frame_diff: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_frame_diff
+.PHONY : pfr_frame_diff
+
+# fast build rule for target.
+pfr_frame_diff/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_frame_diff.dir/build.make CMakeFiles/pfr_frame_diff.dir/build
+.PHONY : pfr_frame_diff/fast
+
+#=============================================================================
+# Target rules for targets named pfr_reference_rom
+
+# Build rule for target.
+pfr_reference_rom: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_reference_rom
+.PHONY : pfr_reference_rom
+
+# fast build rule for target.
+pfr_reference_rom/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_reference_rom.dir/build.make CMakeFiles/pfr_reference_rom.dir/build
+.PHONY : pfr_reference_rom/fast
+
+#=============================================================================
+# Target rules for targets named pfr_mgba_external
+
+# Build rule for target.
+pfr_mgba_external: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_mgba_external
+.PHONY : pfr_mgba_external
+
+# fast build rule for target.
+pfr_mgba_external/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_mgba_external.dir/build.make CMakeFiles/pfr_mgba_external.dir/build
+.PHONY : pfr_mgba_external/fast
+
+#=============================================================================
+# Target rules for targets named mgba_capture
+
+# Build rule for target.
+mgba_capture: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mgba_capture
+.PHONY : mgba_capture
+
+# fast build rule for target.
+mgba_capture/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mgba_capture.dir/build.make CMakeFiles/mgba_capture.dir/build
+.PHONY : mgba_capture/fast
+
+#=============================================================================
+# Target rules for targets named pfr_refresh_goldens
+
+# Build rule for target.
+pfr_refresh_goldens: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_refresh_goldens
+.PHONY : pfr_refresh_goldens
+
+# fast build rule for target.
+pfr_refresh_goldens/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_refresh_goldens.dir/build.make CMakeFiles/pfr_refresh_goldens.dir/build
+.PHONY : pfr_refresh_goldens/fast
+
+#=============================================================================
 # Target rules for targets named pfr_assets
 
 # Build rule for target.
@@ -284,6 +453,71 @@ pfr_assets: cmake_check_build_system
 pfr_assets/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_assets.dir/build.make CMakeFiles/pfr_assets.dir/build
 .PHONY : pfr_assets/fast
+
+#=============================================================================
+# Target rules for targets named pfr_libpng_external
+
+# Build rule for target.
+pfr_libpng_external: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_libpng_external
+.PHONY : pfr_libpng_external
+
+# fast build rule for target.
+pfr_libpng_external/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_libpng_external.dir/build.make CMakeFiles/pfr_libpng_external.dir/build
+.PHONY : pfr_libpng_external/fast
+
+#=============================================================================
+# Target rules for targets named pfr_gbagfx_tool
+
+# Build rule for target.
+pfr_gbagfx_tool: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_gbagfx_tool
+.PHONY : pfr_gbagfx_tool
+
+# fast build rule for target.
+pfr_gbagfx_tool/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_gbagfx_tool.dir/build.make CMakeFiles/pfr_gbagfx_tool.dir/build
+.PHONY : pfr_gbagfx_tool/fast
+
+#=============================================================================
+# Target rules for targets named pfr_verify_asset_manifests
+
+# Build rule for target.
+pfr_verify_asset_manifests: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_verify_asset_manifests
+.PHONY : pfr_verify_asset_manifests
+
+# fast build rule for target.
+pfr_verify_asset_manifests/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_verify_asset_manifests.dir/build.make CMakeFiles/pfr_verify_asset_manifests.dir/build
+.PHONY : pfr_verify_asset_manifests/fast
+
+#=============================================================================
+# Target rules for targets named pfr_asset_pipeline
+
+# Build rule for target.
+pfr_asset_pipeline: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_asset_pipeline
+.PHONY : pfr_asset_pipeline
+
+# fast build rule for target.
+pfr_asset_pipeline/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_asset_pipeline.dir/build.make CMakeFiles/pfr_asset_pipeline.dir/build
+.PHONY : pfr_asset_pipeline/fast
+
+#=============================================================================
+# Target rules for targets named pfr_golden_check
+
+# Build rule for target.
+pfr_golden_check: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_golden_check
+.PHONY : pfr_golden_check
+
+# fast build rule for target.
+pfr_golden_check/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_golden_check.dir/build.make CMakeFiles/pfr_golden_check.dir/build
+.PHONY : pfr_golden_check/fast
 
 gen/intro.o: gen/intro.c.o
 .PHONY : gen/intro.o
@@ -308,6 +542,126 @@ gen/intro.s: gen/intro.c.s
 gen/intro.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_intro.dir/build.make CMakeFiles/pfr_upstream_intro.dir/gen/intro.c.s
 .PHONY : gen/intro.c.s
+
+gen/main_menu.o: gen/main_menu.c.o
+.PHONY : gen/main_menu.o
+
+# target to build an object file
+gen/main_menu.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_main_menu.dir/build.make CMakeFiles/pfr_upstream_main_menu.dir/gen/main_menu.c.o
+.PHONY : gen/main_menu.c.o
+
+gen/main_menu.i: gen/main_menu.c.i
+.PHONY : gen/main_menu.i
+
+# target to preprocess a source file
+gen/main_menu.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_main_menu.dir/build.make CMakeFiles/pfr_upstream_main_menu.dir/gen/main_menu.c.i
+.PHONY : gen/main_menu.c.i
+
+gen/main_menu.s: gen/main_menu.c.s
+.PHONY : gen/main_menu.s
+
+# target to generate assembly for a file
+gen/main_menu.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_main_menu.dir/build.make CMakeFiles/pfr_upstream_main_menu.dir/gen/main_menu.c.s
+.PHONY : gen/main_menu.c.s
+
+gen/new_menu_helpers.o: gen/new_menu_helpers.c.o
+.PHONY : gen/new_menu_helpers.o
+
+# target to build an object file
+gen/new_menu_helpers.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_new_menu_helpers.dir/build.make CMakeFiles/pfr_upstream_new_menu_helpers.dir/gen/new_menu_helpers.c.o
+.PHONY : gen/new_menu_helpers.c.o
+
+gen/new_menu_helpers.i: gen/new_menu_helpers.c.i
+.PHONY : gen/new_menu_helpers.i
+
+# target to preprocess a source file
+gen/new_menu_helpers.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_new_menu_helpers.dir/build.make CMakeFiles/pfr_upstream_new_menu_helpers.dir/gen/new_menu_helpers.c.i
+.PHONY : gen/new_menu_helpers.c.i
+
+gen/new_menu_helpers.s: gen/new_menu_helpers.c.s
+.PHONY : gen/new_menu_helpers.s
+
+# target to generate assembly for a file
+gen/new_menu_helpers.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_new_menu_helpers.dir/build.make CMakeFiles/pfr_upstream_new_menu_helpers.dir/gen/new_menu_helpers.c.s
+.PHONY : gen/new_menu_helpers.c.s
+
+gen/oak_speech.o: gen/oak_speech.c.o
+.PHONY : gen/oak_speech.o
+
+# target to build an object file
+gen/oak_speech.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_oak_speech.dir/build.make CMakeFiles/pfr_upstream_oak_speech.dir/gen/oak_speech.c.o
+.PHONY : gen/oak_speech.c.o
+
+gen/oak_speech.i: gen/oak_speech.c.i
+.PHONY : gen/oak_speech.i
+
+# target to preprocess a source file
+gen/oak_speech.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_oak_speech.dir/build.make CMakeFiles/pfr_upstream_oak_speech.dir/gen/oak_speech.c.i
+.PHONY : gen/oak_speech.c.i
+
+gen/oak_speech.s: gen/oak_speech.c.s
+.PHONY : gen/oak_speech.s
+
+# target to generate assembly for a file
+gen/oak_speech.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_oak_speech.dir/build.make CMakeFiles/pfr_upstream_oak_speech.dir/gen/oak_speech.c.s
+.PHONY : gen/oak_speech.c.s
+
+gen/text.o: gen/text.c.o
+.PHONY : gen/text.o
+
+# target to build an object file
+gen/text.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_text.dir/build.make CMakeFiles/pfr_upstream_text.dir/gen/text.c.o
+.PHONY : gen/text.c.o
+
+gen/text.i: gen/text.c.i
+.PHONY : gen/text.i
+
+# target to preprocess a source file
+gen/text.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_text.dir/build.make CMakeFiles/pfr_upstream_text.dir/gen/text.c.i
+.PHONY : gen/text.c.i
+
+gen/text.s: gen/text.c.s
+.PHONY : gen/text.s
+
+# target to generate assembly for a file
+gen/text.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_text.dir/build.make CMakeFiles/pfr_upstream_text.dir/gen/text.c.s
+.PHONY : gen/text.c.s
+
+gen/text_window_graphics.o: gen/text_window_graphics.c.o
+.PHONY : gen/text_window_graphics.o
+
+# target to build an object file
+gen/text_window_graphics.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_text_window_graphics.dir/build.make CMakeFiles/pfr_upstream_text_window_graphics.dir/gen/text_window_graphics.c.o
+.PHONY : gen/text_window_graphics.c.o
+
+gen/text_window_graphics.i: gen/text_window_graphics.c.i
+.PHONY : gen/text_window_graphics.i
+
+# target to preprocess a source file
+gen/text_window_graphics.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_text_window_graphics.dir/build.make CMakeFiles/pfr_upstream_text_window_graphics.dir/gen/text_window_graphics.c.i
+.PHONY : gen/text_window_graphics.c.i
+
+gen/text_window_graphics.s: gen/text_window_graphics.c.s
+.PHONY : gen/text_window_graphics.s
+
+# target to generate assembly for a file
+gen/text_window_graphics.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_text_window_graphics.dir/build.make CMakeFiles/pfr_upstream_text_window_graphics.dir/gen/text_window_graphics.c.s
+.PHONY : gen/text_window_graphics.c.s
 
 gen/title_screen.o: gen/title_screen.c.o
 .PHONY : gen/title_screen.o
@@ -357,6 +711,30 @@ home/spark-advantage/pokefirered/src/berry_fix_program.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_berry_fix.dir/build.make CMakeFiles/pfr_upstream_berry_fix.dir/home/spark-advantage/pokefirered/src/berry_fix_program.c.s
 .PHONY : home/spark-advantage/pokefirered/src/berry_fix_program.c.s
 
+home/spark-advantage/pokefirered/src/berry_powder.o: home/spark-advantage/pokefirered/src/berry_powder.c.o
+.PHONY : home/spark-advantage/pokefirered/src/berry_powder.o
+
+# target to build an object file
+home/spark-advantage/pokefirered/src/berry_powder.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/berry_powder.c.o
+.PHONY : home/spark-advantage/pokefirered/src/berry_powder.c.o
+
+home/spark-advantage/pokefirered/src/berry_powder.i: home/spark-advantage/pokefirered/src/berry_powder.c.i
+.PHONY : home/spark-advantage/pokefirered/src/berry_powder.i
+
+# target to preprocess a source file
+home/spark-advantage/pokefirered/src/berry_powder.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/berry_powder.c.i
+.PHONY : home/spark-advantage/pokefirered/src/berry_powder.c.i
+
+home/spark-advantage/pokefirered/src/berry_powder.s: home/spark-advantage/pokefirered/src/berry_powder.c.s
+.PHONY : home/spark-advantage/pokefirered/src/berry_powder.s
+
+# target to generate assembly for a file
+home/spark-advantage/pokefirered/src/berry_powder.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/berry_powder.c.s
+.PHONY : home/spark-advantage/pokefirered/src/berry_powder.c.s
+
 home/spark-advantage/pokefirered/src/bg.o: home/spark-advantage/pokefirered/src/bg.c.o
 .PHONY : home/spark-advantage/pokefirered/src/bg.o
 
@@ -404,6 +782,30 @@ home/spark-advantage/pokefirered/src/blend_palette.s: home/spark-advantage/pokef
 home/spark-advantage/pokefirered/src/blend_palette.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/blend_palette.c.s
 .PHONY : home/spark-advantage/pokefirered/src/blend_palette.c.s
+
+home/spark-advantage/pokefirered/src/blit.o: home/spark-advantage/pokefirered/src/blit.c.o
+.PHONY : home/spark-advantage/pokefirered/src/blit.o
+
+# target to build an object file
+home/spark-advantage/pokefirered/src/blit.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/blit.c.o
+.PHONY : home/spark-advantage/pokefirered/src/blit.c.o
+
+home/spark-advantage/pokefirered/src/blit.i: home/spark-advantage/pokefirered/src/blit.c.i
+.PHONY : home/spark-advantage/pokefirered/src/blit.i
+
+# target to preprocess a source file
+home/spark-advantage/pokefirered/src/blit.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/blit.c.i
+.PHONY : home/spark-advantage/pokefirered/src/blit.c.i
+
+home/spark-advantage/pokefirered/src/blit.s: home/spark-advantage/pokefirered/src/blit.c.s
+.PHONY : home/spark-advantage/pokefirered/src/blit.s
+
+# target to generate assembly for a file
+home/spark-advantage/pokefirered/src/blit.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/blit.c.s
+.PHONY : home/spark-advantage/pokefirered/src/blit.c.s
 
 home/spark-advantage/pokefirered/src/clear_save_data_screen.o: home/spark-advantage/pokefirered/src/clear_save_data_screen.c.o
 .PHONY : home/spark-advantage/pokefirered/src/clear_save_data_screen.o
@@ -477,6 +879,30 @@ home/spark-advantage/pokefirered/src/dma3_manager.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/dma3_manager.c.s
 .PHONY : home/spark-advantage/pokefirered/src/dma3_manager.c.s
 
+home/spark-advantage/pokefirered/src/easy_chat.o: home/spark-advantage/pokefirered/src/easy_chat.c.o
+.PHONY : home/spark-advantage/pokefirered/src/easy_chat.o
+
+# target to build an object file
+home/spark-advantage/pokefirered/src/easy_chat.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/easy_chat.c.o
+.PHONY : home/spark-advantage/pokefirered/src/easy_chat.c.o
+
+home/spark-advantage/pokefirered/src/easy_chat.i: home/spark-advantage/pokefirered/src/easy_chat.c.i
+.PHONY : home/spark-advantage/pokefirered/src/easy_chat.i
+
+# target to preprocess a source file
+home/spark-advantage/pokefirered/src/easy_chat.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/easy_chat.c.i
+.PHONY : home/spark-advantage/pokefirered/src/easy_chat.c.i
+
+home/spark-advantage/pokefirered/src/easy_chat.s: home/spark-advantage/pokefirered/src/easy_chat.c.s
+.PHONY : home/spark-advantage/pokefirered/src/easy_chat.s
+
+# target to generate assembly for a file
+home/spark-advantage/pokefirered/src/easy_chat.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/easy_chat.c.s
+.PHONY : home/spark-advantage/pokefirered/src/easy_chat.c.s
+
 home/spark-advantage/pokefirered/src/gpu_regs.o: home/spark-advantage/pokefirered/src/gpu_regs.c.o
 .PHONY : home/spark-advantage/pokefirered/src/gpu_regs.o
 
@@ -525,30 +951,6 @@ home/spark-advantage/pokefirered/src/main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_runtime.dir/build.make CMakeFiles/pfr_upstream_runtime.dir/home/spark-advantage/pokefirered/src/main.c.s
 .PHONY : home/spark-advantage/pokefirered/src/main.c.s
 
-home/spark-advantage/pokefirered/src/main_menu.o: home/spark-advantage/pokefirered/src/main_menu.c.o
-.PHONY : home/spark-advantage/pokefirered/src/main_menu.o
-
-# target to build an object file
-home/spark-advantage/pokefirered/src/main_menu.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_main_menu.dir/build.make CMakeFiles/pfr_upstream_main_menu.dir/home/spark-advantage/pokefirered/src/main_menu.c.o
-.PHONY : home/spark-advantage/pokefirered/src/main_menu.c.o
-
-home/spark-advantage/pokefirered/src/main_menu.i: home/spark-advantage/pokefirered/src/main_menu.c.i
-.PHONY : home/spark-advantage/pokefirered/src/main_menu.i
-
-# target to preprocess a source file
-home/spark-advantage/pokefirered/src/main_menu.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_main_menu.dir/build.make CMakeFiles/pfr_upstream_main_menu.dir/home/spark-advantage/pokefirered/src/main_menu.c.i
-.PHONY : home/spark-advantage/pokefirered/src/main_menu.c.i
-
-home/spark-advantage/pokefirered/src/main_menu.s: home/spark-advantage/pokefirered/src/main_menu.c.s
-.PHONY : home/spark-advantage/pokefirered/src/main_menu.s
-
-# target to generate assembly for a file
-home/spark-advantage/pokefirered/src/main_menu.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_main_menu.dir/build.make CMakeFiles/pfr_upstream_main_menu.dir/home/spark-advantage/pokefirered/src/main_menu.c.s
-.PHONY : home/spark-advantage/pokefirered/src/main_menu.c.s
-
 home/spark-advantage/pokefirered/src/malloc.o: home/spark-advantage/pokefirered/src/malloc.c.o
 .PHONY : home/spark-advantage/pokefirered/src/malloc.o
 
@@ -573,29 +975,125 @@ home/spark-advantage/pokefirered/src/malloc.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/malloc.c.s
 .PHONY : home/spark-advantage/pokefirered/src/malloc.c.s
 
-home/spark-advantage/pokefirered/src/oak_speech.o: home/spark-advantage/pokefirered/src/oak_speech.c.o
-.PHONY : home/spark-advantage/pokefirered/src/oak_speech.o
+home/spark-advantage/pokefirered/src/menu.o: home/spark-advantage/pokefirered/src/menu.c.o
+.PHONY : home/spark-advantage/pokefirered/src/menu.o
 
 # target to build an object file
-home/spark-advantage/pokefirered/src/oak_speech.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_oak_speech.dir/build.make CMakeFiles/pfr_upstream_oak_speech.dir/home/spark-advantage/pokefirered/src/oak_speech.c.o
-.PHONY : home/spark-advantage/pokefirered/src/oak_speech.c.o
+home/spark-advantage/pokefirered/src/menu.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/menu.c.o
+.PHONY : home/spark-advantage/pokefirered/src/menu.c.o
 
-home/spark-advantage/pokefirered/src/oak_speech.i: home/spark-advantage/pokefirered/src/oak_speech.c.i
-.PHONY : home/spark-advantage/pokefirered/src/oak_speech.i
+home/spark-advantage/pokefirered/src/menu.i: home/spark-advantage/pokefirered/src/menu.c.i
+.PHONY : home/spark-advantage/pokefirered/src/menu.i
 
 # target to preprocess a source file
-home/spark-advantage/pokefirered/src/oak_speech.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_oak_speech.dir/build.make CMakeFiles/pfr_upstream_oak_speech.dir/home/spark-advantage/pokefirered/src/oak_speech.c.i
-.PHONY : home/spark-advantage/pokefirered/src/oak_speech.c.i
+home/spark-advantage/pokefirered/src/menu.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/menu.c.i
+.PHONY : home/spark-advantage/pokefirered/src/menu.c.i
 
-home/spark-advantage/pokefirered/src/oak_speech.s: home/spark-advantage/pokefirered/src/oak_speech.c.s
-.PHONY : home/spark-advantage/pokefirered/src/oak_speech.s
+home/spark-advantage/pokefirered/src/menu.s: home/spark-advantage/pokefirered/src/menu.c.s
+.PHONY : home/spark-advantage/pokefirered/src/menu.s
 
 # target to generate assembly for a file
-home/spark-advantage/pokefirered/src/oak_speech.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_oak_speech.dir/build.make CMakeFiles/pfr_upstream_oak_speech.dir/home/spark-advantage/pokefirered/src/oak_speech.c.s
-.PHONY : home/spark-advantage/pokefirered/src/oak_speech.c.s
+home/spark-advantage/pokefirered/src/menu.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/menu.c.s
+.PHONY : home/spark-advantage/pokefirered/src/menu.c.s
+
+home/spark-advantage/pokefirered/src/menu2.o: home/spark-advantage/pokefirered/src/menu2.c.o
+.PHONY : home/spark-advantage/pokefirered/src/menu2.o
+
+# target to build an object file
+home/spark-advantage/pokefirered/src/menu2.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/menu2.c.o
+.PHONY : home/spark-advantage/pokefirered/src/menu2.c.o
+
+home/spark-advantage/pokefirered/src/menu2.i: home/spark-advantage/pokefirered/src/menu2.c.i
+.PHONY : home/spark-advantage/pokefirered/src/menu2.i
+
+# target to preprocess a source file
+home/spark-advantage/pokefirered/src/menu2.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/menu2.c.i
+.PHONY : home/spark-advantage/pokefirered/src/menu2.c.i
+
+home/spark-advantage/pokefirered/src/menu2.s: home/spark-advantage/pokefirered/src/menu2.c.s
+.PHONY : home/spark-advantage/pokefirered/src/menu2.s
+
+# target to generate assembly for a file
+home/spark-advantage/pokefirered/src/menu2.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/menu2.c.s
+.PHONY : home/spark-advantage/pokefirered/src/menu2.c.s
+
+home/spark-advantage/pokefirered/src/money.o: home/spark-advantage/pokefirered/src/money.c.o
+.PHONY : home/spark-advantage/pokefirered/src/money.o
+
+# target to build an object file
+home/spark-advantage/pokefirered/src/money.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/money.c.o
+.PHONY : home/spark-advantage/pokefirered/src/money.c.o
+
+home/spark-advantage/pokefirered/src/money.i: home/spark-advantage/pokefirered/src/money.c.i
+.PHONY : home/spark-advantage/pokefirered/src/money.i
+
+# target to preprocess a source file
+home/spark-advantage/pokefirered/src/money.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/money.c.i
+.PHONY : home/spark-advantage/pokefirered/src/money.c.i
+
+home/spark-advantage/pokefirered/src/money.s: home/spark-advantage/pokefirered/src/money.c.s
+.PHONY : home/spark-advantage/pokefirered/src/money.s
+
+# target to generate assembly for a file
+home/spark-advantage/pokefirered/src/money.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/money.c.s
+.PHONY : home/spark-advantage/pokefirered/src/money.c.s
+
+home/spark-advantage/pokefirered/src/mystery_gift.o: home/spark-advantage/pokefirered/src/mystery_gift.c.o
+.PHONY : home/spark-advantage/pokefirered/src/mystery_gift.o
+
+# target to build an object file
+home/spark-advantage/pokefirered/src/mystery_gift.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/mystery_gift.c.o
+.PHONY : home/spark-advantage/pokefirered/src/mystery_gift.c.o
+
+home/spark-advantage/pokefirered/src/mystery_gift.i: home/spark-advantage/pokefirered/src/mystery_gift.c.i
+.PHONY : home/spark-advantage/pokefirered/src/mystery_gift.i
+
+# target to preprocess a source file
+home/spark-advantage/pokefirered/src/mystery_gift.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/mystery_gift.c.i
+.PHONY : home/spark-advantage/pokefirered/src/mystery_gift.c.i
+
+home/spark-advantage/pokefirered/src/mystery_gift.s: home/spark-advantage/pokefirered/src/mystery_gift.c.s
+.PHONY : home/spark-advantage/pokefirered/src/mystery_gift.s
+
+# target to generate assembly for a file
+home/spark-advantage/pokefirered/src/mystery_gift.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/mystery_gift.c.s
+.PHONY : home/spark-advantage/pokefirered/src/mystery_gift.c.s
+
+home/spark-advantage/pokefirered/src/new_game.o: home/spark-advantage/pokefirered/src/new_game.c.o
+.PHONY : home/spark-advantage/pokefirered/src/new_game.o
+
+# target to build an object file
+home/spark-advantage/pokefirered/src/new_game.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_new_game.dir/build.make CMakeFiles/pfr_upstream_new_game.dir/home/spark-advantage/pokefirered/src/new_game.c.o
+.PHONY : home/spark-advantage/pokefirered/src/new_game.c.o
+
+home/spark-advantage/pokefirered/src/new_game.i: home/spark-advantage/pokefirered/src/new_game.c.i
+.PHONY : home/spark-advantage/pokefirered/src/new_game.i
+
+# target to preprocess a source file
+home/spark-advantage/pokefirered/src/new_game.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_new_game.dir/build.make CMakeFiles/pfr_upstream_new_game.dir/home/spark-advantage/pokefirered/src/new_game.c.i
+.PHONY : home/spark-advantage/pokefirered/src/new_game.c.i
+
+home/spark-advantage/pokefirered/src/new_game.s: home/spark-advantage/pokefirered/src/new_game.c.s
+.PHONY : home/spark-advantage/pokefirered/src/new_game.s
+
+# target to generate assembly for a file
+home/spark-advantage/pokefirered/src/new_game.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_new_game.dir/build.make CMakeFiles/pfr_upstream_new_game.dir/home/spark-advantage/pokefirered/src/new_game.c.s
+.PHONY : home/spark-advantage/pokefirered/src/new_game.c.s
 
 home/spark-advantage/pokefirered/src/palette.o: home/spark-advantage/pokefirered/src/palette.c.o
 .PHONY : home/spark-advantage/pokefirered/src/palette.o
@@ -621,6 +1119,54 @@ home/spark-advantage/pokefirered/src/palette.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/palette.c.s
 .PHONY : home/spark-advantage/pokefirered/src/palette.c.s
 
+home/spark-advantage/pokefirered/src/play_time.o: home/spark-advantage/pokefirered/src/play_time.c.o
+.PHONY : home/spark-advantage/pokefirered/src/play_time.o
+
+# target to build an object file
+home/spark-advantage/pokefirered/src/play_time.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_play_time.dir/build.make CMakeFiles/pfr_upstream_play_time.dir/home/spark-advantage/pokefirered/src/play_time.c.o
+.PHONY : home/spark-advantage/pokefirered/src/play_time.c.o
+
+home/spark-advantage/pokefirered/src/play_time.i: home/spark-advantage/pokefirered/src/play_time.c.i
+.PHONY : home/spark-advantage/pokefirered/src/play_time.i
+
+# target to preprocess a source file
+home/spark-advantage/pokefirered/src/play_time.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_play_time.dir/build.make CMakeFiles/pfr_upstream_play_time.dir/home/spark-advantage/pokefirered/src/play_time.c.i
+.PHONY : home/spark-advantage/pokefirered/src/play_time.c.i
+
+home/spark-advantage/pokefirered/src/play_time.s: home/spark-advantage/pokefirered/src/play_time.c.s
+.PHONY : home/spark-advantage/pokefirered/src/play_time.s
+
+# target to generate assembly for a file
+home/spark-advantage/pokefirered/src/play_time.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_play_time.dir/build.make CMakeFiles/pfr_upstream_play_time.dir/home/spark-advantage/pokefirered/src/play_time.c.s
+.PHONY : home/spark-advantage/pokefirered/src/play_time.c.s
+
+home/spark-advantage/pokefirered/src/pokemon_size_record.o: home/spark-advantage/pokefirered/src/pokemon_size_record.c.o
+.PHONY : home/spark-advantage/pokefirered/src/pokemon_size_record.o
+
+# target to build an object file
+home/spark-advantage/pokefirered/src/pokemon_size_record.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/pokemon_size_record.c.o
+.PHONY : home/spark-advantage/pokefirered/src/pokemon_size_record.c.o
+
+home/spark-advantage/pokefirered/src/pokemon_size_record.i: home/spark-advantage/pokefirered/src/pokemon_size_record.c.i
+.PHONY : home/spark-advantage/pokefirered/src/pokemon_size_record.i
+
+# target to preprocess a source file
+home/spark-advantage/pokefirered/src/pokemon_size_record.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/pokemon_size_record.c.i
+.PHONY : home/spark-advantage/pokefirered/src/pokemon_size_record.c.i
+
+home/spark-advantage/pokefirered/src/pokemon_size_record.s: home/spark-advantage/pokefirered/src/pokemon_size_record.c.s
+.PHONY : home/spark-advantage/pokefirered/src/pokemon_size_record.s
+
+# target to generate assembly for a file
+home/spark-advantage/pokefirered/src/pokemon_size_record.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/pokemon_size_record.c.s
+.PHONY : home/spark-advantage/pokefirered/src/pokemon_size_record.c.s
+
 home/spark-advantage/pokefirered/src/random.o: home/spark-advantage/pokefirered/src/random.c.o
 .PHONY : home/spark-advantage/pokefirered/src/random.o
 
@@ -644,6 +1190,54 @@ home/spark-advantage/pokefirered/src/random.s: home/spark-advantage/pokefirered/
 home/spark-advantage/pokefirered/src/random.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/random.c.s
 .PHONY : home/spark-advantage/pokefirered/src/random.c.s
+
+home/spark-advantage/pokefirered/src/renewable_hidden_items.o: home/spark-advantage/pokefirered/src/renewable_hidden_items.c.o
+.PHONY : home/spark-advantage/pokefirered/src/renewable_hidden_items.o
+
+# target to build an object file
+home/spark-advantage/pokefirered/src/renewable_hidden_items.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/renewable_hidden_items.c.o
+.PHONY : home/spark-advantage/pokefirered/src/renewable_hidden_items.c.o
+
+home/spark-advantage/pokefirered/src/renewable_hidden_items.i: home/spark-advantage/pokefirered/src/renewable_hidden_items.c.i
+.PHONY : home/spark-advantage/pokefirered/src/renewable_hidden_items.i
+
+# target to preprocess a source file
+home/spark-advantage/pokefirered/src/renewable_hidden_items.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/renewable_hidden_items.c.i
+.PHONY : home/spark-advantage/pokefirered/src/renewable_hidden_items.c.i
+
+home/spark-advantage/pokefirered/src/renewable_hidden_items.s: home/spark-advantage/pokefirered/src/renewable_hidden_items.c.s
+.PHONY : home/spark-advantage/pokefirered/src/renewable_hidden_items.s
+
+# target to generate assembly for a file
+home/spark-advantage/pokefirered/src/renewable_hidden_items.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/renewable_hidden_items.c.s
+.PHONY : home/spark-advantage/pokefirered/src/renewable_hidden_items.c.s
+
+home/spark-advantage/pokefirered/src/roamer.o: home/spark-advantage/pokefirered/src/roamer.c.o
+.PHONY : home/spark-advantage/pokefirered/src/roamer.o
+
+# target to build an object file
+home/spark-advantage/pokefirered/src/roamer.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/roamer.c.o
+.PHONY : home/spark-advantage/pokefirered/src/roamer.c.o
+
+home/spark-advantage/pokefirered/src/roamer.i: home/spark-advantage/pokefirered/src/roamer.c.i
+.PHONY : home/spark-advantage/pokefirered/src/roamer.i
+
+# target to preprocess a source file
+home/spark-advantage/pokefirered/src/roamer.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/roamer.c.i
+.PHONY : home/spark-advantage/pokefirered/src/roamer.c.i
+
+home/spark-advantage/pokefirered/src/roamer.s: home/spark-advantage/pokefirered/src/roamer.c.s
+.PHONY : home/spark-advantage/pokefirered/src/roamer.s
+
+# target to generate assembly for a file
+home/spark-advantage/pokefirered/src/roamer.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/roamer.c.s
+.PHONY : home/spark-advantage/pokefirered/src/roamer.c.s
 
 home/spark-advantage/pokefirered/src/scanline_effect.o: home/spark-advantage/pokefirered/src/scanline_effect.c.o
 .PHONY : home/spark-advantage/pokefirered/src/scanline_effect.o
@@ -717,6 +1311,78 @@ home/spark-advantage/pokefirered/src/task.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/task.c.s
 .PHONY : home/spark-advantage/pokefirered/src/task.c.s
 
+home/spark-advantage/pokefirered/src/text_printer.o: home/spark-advantage/pokefirered/src/text_printer.c.o
+.PHONY : home/spark-advantage/pokefirered/src/text_printer.o
+
+# target to build an object file
+home/spark-advantage/pokefirered/src/text_printer.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_text_printer.dir/build.make CMakeFiles/pfr_upstream_text_printer.dir/home/spark-advantage/pokefirered/src/text_printer.c.o
+.PHONY : home/spark-advantage/pokefirered/src/text_printer.c.o
+
+home/spark-advantage/pokefirered/src/text_printer.i: home/spark-advantage/pokefirered/src/text_printer.c.i
+.PHONY : home/spark-advantage/pokefirered/src/text_printer.i
+
+# target to preprocess a source file
+home/spark-advantage/pokefirered/src/text_printer.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_text_printer.dir/build.make CMakeFiles/pfr_upstream_text_printer.dir/home/spark-advantage/pokefirered/src/text_printer.c.i
+.PHONY : home/spark-advantage/pokefirered/src/text_printer.c.i
+
+home/spark-advantage/pokefirered/src/text_printer.s: home/spark-advantage/pokefirered/src/text_printer.c.s
+.PHONY : home/spark-advantage/pokefirered/src/text_printer.s
+
+# target to generate assembly for a file
+home/spark-advantage/pokefirered/src/text_printer.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_text_printer.dir/build.make CMakeFiles/pfr_upstream_text_printer.dir/home/spark-advantage/pokefirered/src/text_printer.c.s
+.PHONY : home/spark-advantage/pokefirered/src/text_printer.c.s
+
+home/spark-advantage/pokefirered/src/text_window.o: home/spark-advantage/pokefirered/src/text_window.c.o
+.PHONY : home/spark-advantage/pokefirered/src/text_window.o
+
+# target to build an object file
+home/spark-advantage/pokefirered/src/text_window.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_text_window.dir/build.make CMakeFiles/pfr_upstream_text_window.dir/home/spark-advantage/pokefirered/src/text_window.c.o
+.PHONY : home/spark-advantage/pokefirered/src/text_window.c.o
+
+home/spark-advantage/pokefirered/src/text_window.i: home/spark-advantage/pokefirered/src/text_window.c.i
+.PHONY : home/spark-advantage/pokefirered/src/text_window.i
+
+# target to preprocess a source file
+home/spark-advantage/pokefirered/src/text_window.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_text_window.dir/build.make CMakeFiles/pfr_upstream_text_window.dir/home/spark-advantage/pokefirered/src/text_window.c.i
+.PHONY : home/spark-advantage/pokefirered/src/text_window.c.i
+
+home/spark-advantage/pokefirered/src/text_window.s: home/spark-advantage/pokefirered/src/text_window.c.s
+.PHONY : home/spark-advantage/pokefirered/src/text_window.s
+
+# target to generate assembly for a file
+home/spark-advantage/pokefirered/src/text_window.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_text_window.dir/build.make CMakeFiles/pfr_upstream_text_window.dir/home/spark-advantage/pokefirered/src/text_window.c.s
+.PHONY : home/spark-advantage/pokefirered/src/text_window.c.s
+
+home/spark-advantage/pokefirered/src/trainer_fan_club.o: home/spark-advantage/pokefirered/src/trainer_fan_club.c.o
+.PHONY : home/spark-advantage/pokefirered/src/trainer_fan_club.o
+
+# target to build an object file
+home/spark-advantage/pokefirered/src/trainer_fan_club.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/trainer_fan_club.c.o
+.PHONY : home/spark-advantage/pokefirered/src/trainer_fan_club.c.o
+
+home/spark-advantage/pokefirered/src/trainer_fan_club.i: home/spark-advantage/pokefirered/src/trainer_fan_club.c.i
+.PHONY : home/spark-advantage/pokefirered/src/trainer_fan_club.i
+
+# target to preprocess a source file
+home/spark-advantage/pokefirered/src/trainer_fan_club.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/trainer_fan_club.c.i
+.PHONY : home/spark-advantage/pokefirered/src/trainer_fan_club.c.i
+
+home/spark-advantage/pokefirered/src/trainer_fan_club.s: home/spark-advantage/pokefirered/src/trainer_fan_club.c.s
+.PHONY : home/spark-advantage/pokefirered/src/trainer_fan_club.s
+
+# target to generate assembly for a file
+home/spark-advantage/pokefirered/src/trainer_fan_club.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/trainer_fan_club.c.s
+.PHONY : home/spark-advantage/pokefirered/src/trainer_fan_club.c.s
+
 home/spark-advantage/pokefirered/src/trig.o: home/spark-advantage/pokefirered/src/trig.c.o
 .PHONY : home/spark-advantage/pokefirered/src/trig.o
 
@@ -740,6 +1406,54 @@ home/spark-advantage/pokefirered/src/trig.s: home/spark-advantage/pokefirered/sr
 home/spark-advantage/pokefirered/src/trig.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/trig.c.s
 .PHONY : home/spark-advantage/pokefirered/src/trig.c.s
+
+home/spark-advantage/pokefirered/src/window.o: home/spark-advantage/pokefirered/src/window.c.o
+.PHONY : home/spark-advantage/pokefirered/src/window.o
+
+# target to build an object file
+home/spark-advantage/pokefirered/src/window.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/window.c.o
+.PHONY : home/spark-advantage/pokefirered/src/window.c.o
+
+home/spark-advantage/pokefirered/src/window.i: home/spark-advantage/pokefirered/src/window.c.i
+.PHONY : home/spark-advantage/pokefirered/src/window.i
+
+# target to preprocess a source file
+home/spark-advantage/pokefirered/src/window.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/window.c.i
+.PHONY : home/spark-advantage/pokefirered/src/window.c.i
+
+home/spark-advantage/pokefirered/src/window.s: home/spark-advantage/pokefirered/src/window.c.s
+.PHONY : home/spark-advantage/pokefirered/src/window.s
+
+# target to generate assembly for a file
+home/spark-advantage/pokefirered/src/window.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/window.c.s
+.PHONY : home/spark-advantage/pokefirered/src/window.c.s
+
+scripts/mgba_capture.o: scripts/mgba_capture.c.o
+.PHONY : scripts/mgba_capture.o
+
+# target to build an object file
+scripts/mgba_capture.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mgba_capture.dir/build.make CMakeFiles/mgba_capture.dir/scripts/mgba_capture.c.o
+.PHONY : scripts/mgba_capture.c.o
+
+scripts/mgba_capture.i: scripts/mgba_capture.c.i
+.PHONY : scripts/mgba_capture.i
+
+# target to preprocess a source file
+scripts/mgba_capture.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mgba_capture.dir/build.make CMakeFiles/mgba_capture.dir/scripts/mgba_capture.c.i
+.PHONY : scripts/mgba_capture.c.i
+
+scripts/mgba_capture.s: scripts/mgba_capture.c.s
+.PHONY : scripts/mgba_capture.s
+
+# target to generate assembly for a file
+scripts/mgba_capture.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mgba_capture.dir/build.make CMakeFiles/mgba_capture.dir/scripts/mgba_capture.c.s
+.PHONY : scripts/mgba_capture.c.s
 
 src/host_agbmain.o: src/host_agbmain.c.o
 .PHONY : src/host_agbmain.o
@@ -794,6 +1508,33 @@ src/host_bios.s: src/host_bios.c.s
 src/host_bios.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_bios.c.s
 .PHONY : src/host_bios.c.s
+
+src/host_capture_manifest.o: src/host_capture_manifest.c.o
+.PHONY : src/host_capture_manifest.o
+
+# target to build an object file
+src/host_capture_manifest.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_capture_manifest.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mgba_capture.dir/build.make CMakeFiles/mgba_capture.dir/src/host_capture_manifest.c.o
+.PHONY : src/host_capture_manifest.c.o
+
+src/host_capture_manifest.i: src/host_capture_manifest.c.i
+.PHONY : src/host_capture_manifest.i
+
+# target to preprocess a source file
+src/host_capture_manifest.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_capture_manifest.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mgba_capture.dir/build.make CMakeFiles/mgba_capture.dir/src/host_capture_manifest.c.i
+.PHONY : src/host_capture_manifest.c.i
+
+src/host_capture_manifest.s: src/host_capture_manifest.c.s
+.PHONY : src/host_capture_manifest.s
+
+# target to generate assembly for a file
+src/host_capture_manifest.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_capture_manifest.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mgba_capture.dir/build.make CMakeFiles/mgba_capture.dir/src/host_capture_manifest.c.s
+.PHONY : src/host_capture_manifest.c.s
 
 src/host_crt0.o: src/host_crt0.c.o
 .PHONY : src/host_crt0.o
@@ -891,6 +1632,30 @@ src/host_dma.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_dma.c.s
 .PHONY : src/host_dma.c.s
 
+src/host_frame_step.o: src/host_frame_step.c.o
+.PHONY : src/host_frame_step.o
+
+# target to build an object file
+src/host_frame_step.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_frame_step.c.o
+.PHONY : src/host_frame_step.c.o
+
+src/host_frame_step.i: src/host_frame_step.c.i
+.PHONY : src/host_frame_step.i
+
+# target to preprocess a source file
+src/host_frame_step.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_frame_step.c.i
+.PHONY : src/host_frame_step.c.i
+
+src/host_frame_step.s: src/host_frame_step.c.s
+.PHONY : src/host_frame_step.s
+
+# target to generate assembly for a file
+src/host_frame_step.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_frame_step.c.s
+.PHONY : src/host_frame_step.c.s
+
 src/host_intro_stubs.o: src/host_intro_stubs.c.o
 .PHONY : src/host_intro_stubs.o
 
@@ -938,6 +1703,30 @@ src/host_memory.s: src/host_memory.c.s
 src/host_memory.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_memory.c.s
 .PHONY : src/host_memory.c.s
+
+src/host_new_game_stubs.o: src/host_new_game_stubs.c.o
+.PHONY : src/host_new_game_stubs.o
+
+# target to build an object file
+src/host_new_game_stubs.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_new_game_stubs.c.o
+.PHONY : src/host_new_game_stubs.c.o
+
+src/host_new_game_stubs.i: src/host_new_game_stubs.c.i
+.PHONY : src/host_new_game_stubs.i
+
+# target to preprocess a source file
+src/host_new_game_stubs.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_new_game_stubs.c.i
+.PHONY : src/host_new_game_stubs.c.i
+
+src/host_new_game_stubs.s: src/host_new_game_stubs.c.s
+.PHONY : src/host_new_game_stubs.s
+
+# target to generate assembly for a file
+src/host_new_game_stubs.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_new_game_stubs.c.s
+.PHONY : src/host_new_game_stubs.c.s
 
 src/host_oak_speech_stubs.o: src/host_oak_speech_stubs.c.o
 .PHONY : src/host_oak_speech_stubs.o
@@ -1131,6 +1920,30 @@ tools/pfr_assets.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_assets.dir/build.make CMakeFiles/pfr_assets.dir/tools/pfr_assets.c.s
 .PHONY : tools/pfr_assets.c.s
 
+tools/pfr_frame_diff.o: tools/pfr_frame_diff.c.o
+.PHONY : tools/pfr_frame_diff.o
+
+# target to build an object file
+tools/pfr_frame_diff.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_frame_diff.dir/build.make CMakeFiles/pfr_frame_diff.dir/tools/pfr_frame_diff.c.o
+.PHONY : tools/pfr_frame_diff.c.o
+
+tools/pfr_frame_diff.i: tools/pfr_frame_diff.c.i
+.PHONY : tools/pfr_frame_diff.i
+
+# target to preprocess a source file
+tools/pfr_frame_diff.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_frame_diff.dir/build.make CMakeFiles/pfr_frame_diff.dir/tools/pfr_frame_diff.c.i
+.PHONY : tools/pfr_frame_diff.c.i
+
+tools/pfr_frame_diff.s: tools/pfr_frame_diff.c.s
+.PHONY : tools/pfr_frame_diff.s
+
+# target to generate assembly for a file
+tools/pfr_frame_diff.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_frame_diff.dir/build.make CMakeFiles/pfr_frame_diff.dir/tools/pfr_frame_diff.c.s
+.PHONY : tools/pfr_frame_diff.c.s
+
 tools/pfr_lz77.o: tools/pfr_lz77.c.o
 .PHONY : tools/pfr_lz77.o
 
@@ -1163,7 +1976,18 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... pfr_asset_pipeline"
+	@echo "... pfr_gbagfx_tool"
+	@echo "... pfr_generated_headers"
+	@echo "... pfr_golden_check"
+	@echo "... pfr_libpng_external"
+	@echo "... pfr_mgba_external"
+	@echo "... pfr_reference_rom"
+	@echo "... pfr_refresh_goldens"
+	@echo "... pfr_verify_asset_manifests"
+	@echo "... mgba_capture"
 	@echo "... pfr_assets"
+	@echo "... pfr_frame_diff"
 	@echo "... pfr_lz77"
 	@echo "... pfr_play"
 	@echo "... pfr_render_test"
@@ -1173,24 +1997,52 @@ help:
 	@echo "... pfr_upstream_core"
 	@echo "... pfr_upstream_intro"
 	@echo "... pfr_upstream_main_menu"
+	@echo "... pfr_upstream_new_game"
+	@echo "... pfr_upstream_new_menu_helpers"
 	@echo "... pfr_upstream_oak_speech"
+	@echo "... pfr_upstream_play_time"
 	@echo "... pfr_upstream_runtime"
+	@echo "... pfr_upstream_text"
+	@echo "... pfr_upstream_text_printer"
+	@echo "... pfr_upstream_text_window"
+	@echo "... pfr_upstream_text_window_graphics"
 	@echo "... pfr_upstream_title"
 	@echo "... gen/intro.o"
 	@echo "... gen/intro.i"
 	@echo "... gen/intro.s"
+	@echo "... gen/main_menu.o"
+	@echo "... gen/main_menu.i"
+	@echo "... gen/main_menu.s"
+	@echo "... gen/new_menu_helpers.o"
+	@echo "... gen/new_menu_helpers.i"
+	@echo "... gen/new_menu_helpers.s"
+	@echo "... gen/oak_speech.o"
+	@echo "... gen/oak_speech.i"
+	@echo "... gen/oak_speech.s"
+	@echo "... gen/text.o"
+	@echo "... gen/text.i"
+	@echo "... gen/text.s"
+	@echo "... gen/text_window_graphics.o"
+	@echo "... gen/text_window_graphics.i"
+	@echo "... gen/text_window_graphics.s"
 	@echo "... gen/title_screen.o"
 	@echo "... gen/title_screen.i"
 	@echo "... gen/title_screen.s"
 	@echo "... home/spark-advantage/pokefirered/src/berry_fix_program.o"
 	@echo "... home/spark-advantage/pokefirered/src/berry_fix_program.i"
 	@echo "... home/spark-advantage/pokefirered/src/berry_fix_program.s"
+	@echo "... home/spark-advantage/pokefirered/src/berry_powder.o"
+	@echo "... home/spark-advantage/pokefirered/src/berry_powder.i"
+	@echo "... home/spark-advantage/pokefirered/src/berry_powder.s"
 	@echo "... home/spark-advantage/pokefirered/src/bg.o"
 	@echo "... home/spark-advantage/pokefirered/src/bg.i"
 	@echo "... home/spark-advantage/pokefirered/src/bg.s"
 	@echo "... home/spark-advantage/pokefirered/src/blend_palette.o"
 	@echo "... home/spark-advantage/pokefirered/src/blend_palette.i"
 	@echo "... home/spark-advantage/pokefirered/src/blend_palette.s"
+	@echo "... home/spark-advantage/pokefirered/src/blit.o"
+	@echo "... home/spark-advantage/pokefirered/src/blit.i"
+	@echo "... home/spark-advantage/pokefirered/src/blit.s"
 	@echo "... home/spark-advantage/pokefirered/src/clear_save_data_screen.o"
 	@echo "... home/spark-advantage/pokefirered/src/clear_save_data_screen.i"
 	@echo "... home/spark-advantage/pokefirered/src/clear_save_data_screen.s"
@@ -1200,27 +2052,51 @@ help:
 	@echo "... home/spark-advantage/pokefirered/src/dma3_manager.o"
 	@echo "... home/spark-advantage/pokefirered/src/dma3_manager.i"
 	@echo "... home/spark-advantage/pokefirered/src/dma3_manager.s"
+	@echo "... home/spark-advantage/pokefirered/src/easy_chat.o"
+	@echo "... home/spark-advantage/pokefirered/src/easy_chat.i"
+	@echo "... home/spark-advantage/pokefirered/src/easy_chat.s"
 	@echo "... home/spark-advantage/pokefirered/src/gpu_regs.o"
 	@echo "... home/spark-advantage/pokefirered/src/gpu_regs.i"
 	@echo "... home/spark-advantage/pokefirered/src/gpu_regs.s"
 	@echo "... home/spark-advantage/pokefirered/src/main.o"
 	@echo "... home/spark-advantage/pokefirered/src/main.i"
 	@echo "... home/spark-advantage/pokefirered/src/main.s"
-	@echo "... home/spark-advantage/pokefirered/src/main_menu.o"
-	@echo "... home/spark-advantage/pokefirered/src/main_menu.i"
-	@echo "... home/spark-advantage/pokefirered/src/main_menu.s"
 	@echo "... home/spark-advantage/pokefirered/src/malloc.o"
 	@echo "... home/spark-advantage/pokefirered/src/malloc.i"
 	@echo "... home/spark-advantage/pokefirered/src/malloc.s"
-	@echo "... home/spark-advantage/pokefirered/src/oak_speech.o"
-	@echo "... home/spark-advantage/pokefirered/src/oak_speech.i"
-	@echo "... home/spark-advantage/pokefirered/src/oak_speech.s"
+	@echo "... home/spark-advantage/pokefirered/src/menu.o"
+	@echo "... home/spark-advantage/pokefirered/src/menu.i"
+	@echo "... home/spark-advantage/pokefirered/src/menu.s"
+	@echo "... home/spark-advantage/pokefirered/src/menu2.o"
+	@echo "... home/spark-advantage/pokefirered/src/menu2.i"
+	@echo "... home/spark-advantage/pokefirered/src/menu2.s"
+	@echo "... home/spark-advantage/pokefirered/src/money.o"
+	@echo "... home/spark-advantage/pokefirered/src/money.i"
+	@echo "... home/spark-advantage/pokefirered/src/money.s"
+	@echo "... home/spark-advantage/pokefirered/src/mystery_gift.o"
+	@echo "... home/spark-advantage/pokefirered/src/mystery_gift.i"
+	@echo "... home/spark-advantage/pokefirered/src/mystery_gift.s"
+	@echo "... home/spark-advantage/pokefirered/src/new_game.o"
+	@echo "... home/spark-advantage/pokefirered/src/new_game.i"
+	@echo "... home/spark-advantage/pokefirered/src/new_game.s"
 	@echo "... home/spark-advantage/pokefirered/src/palette.o"
 	@echo "... home/spark-advantage/pokefirered/src/palette.i"
 	@echo "... home/spark-advantage/pokefirered/src/palette.s"
+	@echo "... home/spark-advantage/pokefirered/src/play_time.o"
+	@echo "... home/spark-advantage/pokefirered/src/play_time.i"
+	@echo "... home/spark-advantage/pokefirered/src/play_time.s"
+	@echo "... home/spark-advantage/pokefirered/src/pokemon_size_record.o"
+	@echo "... home/spark-advantage/pokefirered/src/pokemon_size_record.i"
+	@echo "... home/spark-advantage/pokefirered/src/pokemon_size_record.s"
 	@echo "... home/spark-advantage/pokefirered/src/random.o"
 	@echo "... home/spark-advantage/pokefirered/src/random.i"
 	@echo "... home/spark-advantage/pokefirered/src/random.s"
+	@echo "... home/spark-advantage/pokefirered/src/renewable_hidden_items.o"
+	@echo "... home/spark-advantage/pokefirered/src/renewable_hidden_items.i"
+	@echo "... home/spark-advantage/pokefirered/src/renewable_hidden_items.s"
+	@echo "... home/spark-advantage/pokefirered/src/roamer.o"
+	@echo "... home/spark-advantage/pokefirered/src/roamer.i"
+	@echo "... home/spark-advantage/pokefirered/src/roamer.s"
 	@echo "... home/spark-advantage/pokefirered/src/scanline_effect.o"
 	@echo "... home/spark-advantage/pokefirered/src/scanline_effect.i"
 	@echo "... home/spark-advantage/pokefirered/src/scanline_effect.s"
@@ -1230,15 +2106,33 @@ help:
 	@echo "... home/spark-advantage/pokefirered/src/task.o"
 	@echo "... home/spark-advantage/pokefirered/src/task.i"
 	@echo "... home/spark-advantage/pokefirered/src/task.s"
+	@echo "... home/spark-advantage/pokefirered/src/text_printer.o"
+	@echo "... home/spark-advantage/pokefirered/src/text_printer.i"
+	@echo "... home/spark-advantage/pokefirered/src/text_printer.s"
+	@echo "... home/spark-advantage/pokefirered/src/text_window.o"
+	@echo "... home/spark-advantage/pokefirered/src/text_window.i"
+	@echo "... home/spark-advantage/pokefirered/src/text_window.s"
+	@echo "... home/spark-advantage/pokefirered/src/trainer_fan_club.o"
+	@echo "... home/spark-advantage/pokefirered/src/trainer_fan_club.i"
+	@echo "... home/spark-advantage/pokefirered/src/trainer_fan_club.s"
 	@echo "... home/spark-advantage/pokefirered/src/trig.o"
 	@echo "... home/spark-advantage/pokefirered/src/trig.i"
 	@echo "... home/spark-advantage/pokefirered/src/trig.s"
+	@echo "... home/spark-advantage/pokefirered/src/window.o"
+	@echo "... home/spark-advantage/pokefirered/src/window.i"
+	@echo "... home/spark-advantage/pokefirered/src/window.s"
+	@echo "... scripts/mgba_capture.o"
+	@echo "... scripts/mgba_capture.i"
+	@echo "... scripts/mgba_capture.s"
 	@echo "... src/host_agbmain.o"
 	@echo "... src/host_agbmain.i"
 	@echo "... src/host_agbmain.s"
 	@echo "... src/host_bios.o"
 	@echo "... src/host_bios.i"
 	@echo "... src/host_bios.s"
+	@echo "... src/host_capture_manifest.o"
+	@echo "... src/host_capture_manifest.i"
+	@echo "... src/host_capture_manifest.s"
 	@echo "... src/host_crt0.o"
 	@echo "... src/host_crt0.i"
 	@echo "... src/host_crt0.s"
@@ -1251,12 +2145,18 @@ help:
 	@echo "... src/host_dma.o"
 	@echo "... src/host_dma.i"
 	@echo "... src/host_dma.s"
+	@echo "... src/host_frame_step.o"
+	@echo "... src/host_frame_step.i"
+	@echo "... src/host_frame_step.s"
 	@echo "... src/host_intro_stubs.o"
 	@echo "... src/host_intro_stubs.i"
 	@echo "... src/host_intro_stubs.s"
 	@echo "... src/host_memory.o"
 	@echo "... src/host_memory.i"
 	@echo "... src/host_memory.s"
+	@echo "... src/host_new_game_stubs.o"
+	@echo "... src/host_new_game_stubs.i"
+	@echo "... src/host_new_game_stubs.s"
 	@echo "... src/host_oak_speech_stubs.o"
 	@echo "... src/host_oak_speech_stubs.i"
 	@echo "... src/host_oak_speech_stubs.s"
@@ -1281,6 +2181,9 @@ help:
 	@echo "... tools/pfr_assets.o"
 	@echo "... tools/pfr_assets.i"
 	@echo "... tools/pfr_assets.s"
+	@echo "... tools/pfr_frame_diff.o"
+	@echo "... tools/pfr_frame_diff.i"
+	@echo "... tools/pfr_frame_diff.s"
 	@echo "... tools/pfr_lz77.o"
 	@echo "... tools/pfr_lz77.i"
 	@echo "... tools/pfr_lz77.s"

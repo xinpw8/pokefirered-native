@@ -1,0 +1,9 @@
+{
+  "pokefirered_commit": "7e3f822652ecce0c99b626d74f455c3b93660377",
+  "mgba_commit": "edb4bae0caa3a81f028dad336a5c1234caf971ac",
+  "agbcc_commit": "da598c1d918402c42c0c0d7128ba14567f3175e9",
+  "reference_rom_sha1": "41cb23d8dccc8ebd7c649cd8fbb58eeace6e2fdc",
+  "input_script": "tests/pfr_play_oak_path.input",
+  "input_script_sha1": "fc9b1bafd3ce27e2505462bbc92482851bd15843",
+  "frame_numbering": "frame 1 is the first completed post-reset frame"
+}

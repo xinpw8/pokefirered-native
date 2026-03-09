@@ -8,8 +8,10 @@
  * Also generates C initializer .inc files and preprocesses upstream
  * source files to replace INCBIN macros with real data includes.
  *
- * This replaces the upstream gbagfx tool without requiring libpng-dev
- * by using stb_image.h for PNG decoding.
+ * For canonical batch builds, the tool now copies exact upstream INCBIN
+ * binaries and asks upstream make to materialize any missing outputs.
+ * The stb_image-backed conversion helpers remain available for ad hoc
+ * developer use, but they are no longer the source of truth for the build.
  *
  * Usage:
  *   pfr_assets png2gba <input.png> <output.4bpp|.8bpp> [--num-tiles N]
@@ -18,7 +20,7 @@
  *   pfr_assets lz77    <input>     <output.lz>
  *   pfr_assets bin2inc <input.bin> <output.inc> [--u8|--u16|--u32]
  *   pfr_assets preproc <input.c> <inc_dir> <output.c>
- *   pfr_assets batch   <upstream_dir> <output_dir>
+ *   pfr_assets batch   <upstream_dir> <output_dir> <manifest...>
  *   pfr_assets geninc  <assets_dir> <inc_dir>
  */
 
@@ -31,8 +33,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
+#include <ctype.h>
 #include <dirent.h>
 #include <sys/stat.h>
+#include <sys/wait.h>
+#include <unistd.h>
 
 /* ---------- GBA palette color ---------- */
 
@@ -73,6 +78,118 @@ static int file_exists(const char *path)
     return stat(path, &st) == 0;
 }
 
+static int run_process(char *const argv[])
+{
+    pid_t pid = fork();
+    int status;
+
+    if (pid < 0)
+    {
+        perror("fork");
+        return 1;
+    }
+
+    if (pid == 0)
+    {
+        execv(argv[0], argv);
+        perror(argv[0]);
+        _exit(127);
+    }
+
+    if (waitpid(pid, &status, 0) < 0)
+    {
+        perror("waitpid");
+        return 1;
+    }
+
+    if (!WIFEXITED(status) || WEXITSTATUS(status) != 0)
+        return 1;
+
+    return 0;
+}
+
+static int run_process_in_dir(const char *cwd, char *const argv[])
+{
+    pid_t pid = fork();
+    int status;
+
+    if (pid < 0)
+    {
+        perror("fork");
+        return 1;
+    }
+
+    if (pid == 0)
+    {
+        if (cwd != NULL && chdir(cwd) != 0)
+        {
+            perror(cwd);
+            _exit(127);
+        }
+        execvp(argv[0], argv);
+        perror(argv[0]);
+        _exit(127);
+    }
+
+    if (waitpid(pid, &status, 0) < 0)
+    {
+        perror("waitpid");
+        return 1;
+    }
+
+    if (!WIFEXITED(status) || WEXITSTATUS(status) != 0)
+        return 1;
+
+    return 0;
+}
+
+static int cmd_gbagfx_png2gba(const char *gbagfx_path, const char *input,
+                              const char *output, int num_tiles)
+{
+    char num_tiles_buf[32];
+    char *argv[7];
+    int argc = 0;
+
+    argv[argc++] = (char *)gbagfx_path;
+    argv[argc++] = (char *)input;
+    argv[argc++] = (char *)output;
+    if (num_tiles > 0)
+    {
+        snprintf(num_tiles_buf, sizeof(num_tiles_buf), "%d", num_tiles);
+        argv[argc++] = "-num_tiles";
+        argv[argc++] = num_tiles_buf;
+        argv[argc++] = "-Wnum_tiles";
+    }
+    argv[argc] = NULL;
+
+    if (run_process(argv) != 0)
+    {
+        fprintf(stderr, "gbagfx failed: %s -> %s\n", input, output);
+        return 1;
+    }
+
+    return 0;
+}
+
+static int cmd_gbagfx_png2pal(const char *gbagfx_path, const char *input,
+                              const char *output)
+{
+    char *argv[4];
+
+    argv[0] = (char *)gbagfx_path;
+    argv[1] = (char *)input;
+    argv[2] = (char *)output;
+    argv[3] = NULL;
+
+    if (run_process(argv) != 0)
+    {
+        fprintf(stderr, "gbagfx failed: %s -> %s\n", input, output);
+        return 1;
+    }
+
+    return 0;
+}
+
 /* ---------- PNG to 4bpp/8bpp tile data ---------- */
 
 /*
@@ -86,7 +203,36 @@ static int file_exists(const char *path)
  * entry (first 16 or 256 colors, derived from the image).
  */
 
-static int cmd_png2gba(const char *input, const char *output, int num_tiles, int bpp)
+/*
+ * Load a JASC-PAL file and return the palette as BGR555 values.
+ * Returns palette count, or 0 on failure.
+ */
+static int load_jasc_pal(const char *path, uint16_t *out_pal, int max_colors)
+{
+    FILE *f = fopen(path, "r");
+    char line[256];
+    int count, i;
+    if (!f) return 0;
+
+    /* Skip JASC-PAL header (3 lines) */
+    if (!fgets(line, sizeof(line), f)) { fclose(f); return 0; }
+    if (!fgets(line, sizeof(line), f)) { fclose(f); return 0; }
+    if (!fgets(line, sizeof(line), f)) { fclose(f); return 0; }
+    count = atoi(line);
+    if (count <= 0 || count > max_colors) count = max_colors;
+
+    for (i = 0; i < count; i++) {
+        int r, g, b;
+        if (!fgets(line, sizeof(line), f)) break;
+        if (sscanf(line, "%d %d %d", &r, &g, &b) == 3)
+            out_pal[i] = rgb_to_bgr555(r, g, b);
+    }
+    fclose(f);
+    return i;
+}
+
+static int cmd_png2gba(const char *input, const char *output, int num_tiles,
+                       int bpp, const char *pal_path)
 {
     size_t png_size;
     uint8_t *png_data = read_file(input, &png_size);
@@ -97,16 +243,50 @@ static int cmd_png2gba(const char *input, const char *output, int num_tiles, int
     free(png_data);
     if (!pixels) { fprintf(stderr, "PNG decode failed: %s\n", input); return 1; }
 
-    /* We need indexed pixel values. If the image has 1 channel, treat as
-     * grayscale indices. If RGB/RGBA, we build a simple palette and quantize. */
+    /*
+     * We need indexed pixel values. Three paths:
+     *   1. Grayscale (1 channel): treat raw values as palette indices
+     *   2. RGB/RGBA with companion .pal file: reverse-map each pixel's
+     *      color to the authoritative palette index (fixes the stb_image
+     *      limitation where indexed PNGs are expanded to RGB)
+     *   3. RGB/RGBA without .pal: build palette from first-seen colors
+     */
     int total_pixels = w * h;
     uint8_t *indices = NULL;
 
     if (channels == 1) {
         /* Grayscale — treat raw values as palette indices */
         indices = pixels; /* steal the buffer */
+    } else if (pal_path != NULL) {
+        /* Palette-guided indexing: load the authoritative .pal file and
+         * reverse-map each pixel's BGR555 color to its palette index. */
+        uint16_t ref_pal[256];
+        int ref_count = load_jasc_pal(pal_path, ref_pal, bpp == 4 ? 16 : 256);
+        if (ref_count <= 0) {
+            fprintf(stderr, "  Warning: could not load companion palette %s, "
+                    "falling back to first-seen ordering\n", pal_path);
+            pal_path = NULL;
+            goto fallback_palette;
+        }
+        indices = malloc(total_pixels);
+        for (int i = 0; i < total_pixels; i++) {
+            uint8_t r = pixels[i * channels + 0];
+            uint8_t g = pixels[i * channels + 1];
+            uint8_t b = pixels[i * channels + 2];
+            uint16_t bgr = rgb_to_bgr555(r, g, b);
+
+            int found = 0; /* default to index 0 (transparent) */
+            for (int j = 0; j < ref_count; j++) {
+                if (ref_pal[j] == bgr) { found = j; break; }
+            }
+            indices[i] = (uint8_t)found;
+        }
+        stbi_image_free(pixels);
+        pixels = NULL;
     } else {
+    fallback_palette:
         /* RGB or RGBA — build a palette from unique colors, then index */
+        ;
         uint16_t palette[256];
         int pal_count = 0;
         indices = malloc(total_pixels);
@@ -277,11 +457,15 @@ static int cmd_png2pal(const char *input, const char *output)
 
     stbi_image_free(pixels);
 
-    /* Pad to 16-color boundary for 4bpp compatibility */
-    int padded = pal_count;
-    if (padded <= 16) padded = 16;
-    else padded = 256;
-    /* Zero-fill padding */
+    /* Clamp to 16 colors — PAL_FROM_PNG is only used with 4bpp assets,
+     * and on GBA 4bpp tiles index into a single 16-color palette slot.
+     * The original gbagfx always outputs exactly 16 colors (32 bytes). */
+    if (pal_count > 16) {
+        fprintf(stderr, "  Warning: %s has %d unique colors, clamping to 16 for 4bpp\n",
+                input, pal_count);
+        pal_count = 16;
+    }
+    int padded = 16;
     for (int i = pal_count; i < padded; i++)
         palette[i] = 0;
 
@@ -620,131 +804,273 @@ static int cmd_preproc(const char *src_path, const char *inc_dir, const char *ou
     return 0;
 }
 
-/* ---------- Batch mode: convert all title/intro assets ---------- */
+/* ---------- Batch mode: materialize exact upstream INCBIN assets ---------- */
 
-struct AssetRule {
-    const char *src;     /* relative to upstream graphics/ dir */
-    const char *dst;     /* relative to output dir */
-    enum { PNG4, PNG8, PAL, PAL_FROM_PNG, BIN_COPY, LZ77_WRAP } type;
-    int num_tiles;       /* for PNG conversion, 0 = all */
+struct AssetPathList
+{
+    char **items;
+    size_t count;
+    size_t capacity;
 };
 
-static const struct AssetRule sTitleScreenAssets[] = {
-    /* FireRed title screen */
-    { "title_screen/firered/game_title_logo.png", "title_screen/firered/game_title_logo.8bpp", PNG8, 0 },
-    { "title_screen/firered/game_title_logo.pal", "title_screen/firered/game_title_logo.gbapal", PAL, 0 },
-    { "title_screen/firered/game_title_logo.bin", "title_screen/firered/game_title_logo.bin", BIN_COPY, 0 },
-    { "title_screen/firered/box_art_mon.png",     "title_screen/firered/box_art_mon.4bpp", PNG4, 135 },
-    { "title_screen/firered/box_art_mon.pal",     "title_screen/firered/box_art_mon.gbapal", PAL, 0 },
-    { "title_screen/firered/box_art_mon.bin",     "title_screen/firered/box_art_mon.bin", BIN_COPY, 0 },
-    { "title_screen/firered/background.pal",      "title_screen/firered/background.gbapal", PAL, 0 },
-    { "title_screen/firered/slash.pal",           "title_screen/firered/slash.gbapal", PAL, 0 },
-    { "title_screen/copyright_press_start.png",   "title_screen/copyright_press_start.4bpp", PNG4, 0 },
-    { "title_screen/copyright_press_start.bin",   "title_screen/copyright_press_start.bin", BIN_COPY, 0 },
-    /* Border BG (referenced by title_screen.c) */
-    { "title_screen/border_bg.png",               "title_screen/border_bg.4bpp", PNG4, 0 },
-    { "title_screen/firered/border_bg.bin",        "title_screen/firered/border_bg.bin", BIN_COPY, 0 },
-    /* Slash sprite (palette from .pal, tiles from .png) */
-    { "title_screen/slash.png",                   "title_screen/slash.4bpp", PNG4, 0 },
-    /* Flames (FireRed version) */
-    { "title_screen/firered/flames.png",          "title_screen/firered/flames.4bpp", PNG4, 0 },
-    { "title_screen/firered/flames.png",          "title_screen/firered/flames.gbapal", PAL_FROM_PNG, 0 },
-    { "title_screen/firered/blank_flames.png",    "title_screen/firered/blank_flames.4bpp", PNG4, 0 },
-    /* Unused tilemaps (referenced but unused) */
-    { "title_screen/unused1.bin",                 "title_screen/unused1.bin", BIN_COPY, 0 },
-    { "title_screen/unused2.bin",                 "title_screen/unused2.bin", BIN_COPY, 0 },
-    { "title_screen/unused3.bin",                 "title_screen/unused3.bin", BIN_COPY, 0 },
-    { "title_screen/unused4.bin",                 "title_screen/unused4.bin", BIN_COPY, 0 },
-    { "title_screen/unused5.bin",                 "title_screen/unused5.bin", BIN_COPY, 0 },
-    { "title_screen/unused6.bin",                 "title_screen/unused6.bin", BIN_COPY, 0 },
-};
+static void mkdirs(const char *path);
 
-static const struct AssetRule sIntroAssets[] = {
-    /* Copyright screen */
-    { "intro/copyright.png",           "intro/copyright.4bpp", PNG4, 0 },
-    { "intro/copyright.pal",           "intro/copyright.gbapal", PAL, 0 },
-    { "intro/copyright.bin",           "intro/copyright.bin", BIN_COPY, 0 },
-    /* Game Freak logo */
-    { "intro/game_freak/bg.png",       "intro/game_freak/bg.4bpp", PNG4, 0 },
-    { "intro/game_freak/bg.pal",       "intro/game_freak/bg.gbapal", PAL, 0 },
-    { "intro/game_freak/bg.bin",       "intro/game_freak/bg.bin", BIN_COPY, 0 },
-    { "intro/game_freak/logo.png",     "intro/game_freak/logo.4bpp", PNG4, 0 },
-    { "intro/game_freak/logo.png",     "intro/game_freak/logo.gbapal", PAL_FROM_PNG, 0 },
-    { "intro/game_freak/game_freak.png","intro/game_freak/game_freak.4bpp", PNG4, 0 },
-    { "intro/game_freak/star.png",     "intro/game_freak/star.4bpp", PNG4, 0 },
-    { "intro/game_freak/star.png",     "intro/game_freak/star.gbapal", PAL_FROM_PNG, 0 },
-    { "intro/game_freak/sparkles_small.png", "intro/game_freak/sparkles_small.4bpp", PNG4, 0 },
-    { "intro/game_freak/sparkles_big.png",   "intro/game_freak/sparkles_big.4bpp", PNG4, 0 },
-    { "intro/game_freak/sparkles.pal", "intro/game_freak/sparkles.gbapal", PAL, 0 },
-    { "intro/game_freak/presents.png", "intro/game_freak/presents.4bpp", PNG4, 0 },
-    /* Scene 1 */
-    { "intro/scene_1/bg.png",         "intro/scene_1/bg.4bpp", PNG4, 0 },
-    { "intro/scene_1/bg.png",         "intro/scene_1/bg.gbapal", PAL_FROM_PNG, 0 },
-    { "intro/scene_1/bg.bin",         "intro/scene_1/bg.bin", BIN_COPY, 0 },
-    { "intro/scene_1/grass.png",      "intro/scene_1/grass.4bpp", PNG4, 0 },
-    { "intro/scene_1/grass.png",      "intro/scene_1/grass.gbapal", PAL_FROM_PNG, 0 },
-    { "intro/scene_1/grass.bin",      "intro/scene_1/grass.bin", BIN_COPY, 0 },
-    /* Scene 2 */
-    { "intro/scene_2/bg.png",         "intro/scene_2/bg.4bpp", PNG4, 0 },
-    { "intro/scene_2/bg.pal",         "intro/scene_2/bg.gbapal", PAL, 0 },
-    { "intro/scene_2/bg.bin",         "intro/scene_2/bg.bin", BIN_COPY, 0 },
-    { "intro/scene_2/plants.png",     "intro/scene_2/plants.4bpp", PNG4, 0 },
-    { "intro/scene_2/plants.png",     "intro/scene_2/plants.gbapal", PAL_FROM_PNG, 0 },
-    { "intro/scene_2/plants.bin",     "intro/scene_2/plants.bin", BIN_COPY, 0 },
-    { "intro/gengar.pal",             "intro/gengar.gbapal", PAL, 0 },
-    { "intro/scene_2/gengar_close.png","intro/scene_2/gengar_close.4bpp", PNG4, 0 },
-    { "intro/scene_2/gengar_close.bin","intro/scene_2/gengar_close.bin", BIN_COPY, 0 },
-    { "intro/scene_2/gengar.png",     "intro/scene_2/gengar.4bpp", PNG4, 0 },
-    { "intro/nidorino.pal",           "intro/nidorino.gbapal", PAL, 0 },
-    { "intro/scene_2/nidorino_close.png","intro/scene_2/nidorino_close.4bpp", PNG4, 0 },
-    { "intro/scene_2/nidorino_close.pal","intro/scene_2/nidorino_close.gbapal", PAL, 0 },
-    { "intro/scene_2/nidorino_close.bin","intro/scene_2/nidorino_close.bin", BIN_COPY, 0 },
-    { "intro/scene_2/nidorino.png",   "intro/scene_2/nidorino.4bpp", PNG4, 0 },
-    /* Scene 3 */
-    { "intro/scene_3/bg.png",         "intro/scene_3/bg.4bpp", PNG4, 0 },
-    { "intro/scene_3/bg.pal",         "intro/scene_3/bg.gbapal", PAL, 0 },
-    { "intro/scene_3/bg.bin",         "intro/scene_3/bg.bin", BIN_COPY, 0 },
-    { "intro/scene_3/gengar_anim.png","intro/scene_3/gengar_anim.4bpp", PNG4, 0 },
-    { "intro/scene_3/gengar_anim.bin","intro/scene_3/gengar_anim.bin", BIN_COPY, 0 },
-    { "intro/scene_3/gengar_static.png","intro/scene_3/gengar_static.4bpp", PNG4, 0 },
-    { "intro/scene_3/grass.png",      "intro/scene_3/grass.4bpp", PNG4, 0 },
-    { "intro/scene_3/grass.png",      "intro/scene_3/grass.gbapal", PAL_FROM_PNG, 0 },
-    { "intro/scene_3/nidorino.png",   "intro/scene_3/nidorino.4bpp", PNG4, 0 },
-    { "intro/scene_3/recoil_dust.png","intro/scene_3/recoil_dust.4bpp", PNG4, 0 },
-    { "intro/scene_3/recoil_dust.png","intro/scene_3/recoil_dust.gbapal", PAL_FROM_PNG, 0 },
-    { "intro/scene_3/swipe.png",      "intro/scene_3/swipe.4bpp", PNG4, 0 },
-    { "intro/scene_3/swipe.png",      "intro/scene_3/swipe.gbapal", PAL_FROM_PNG, 0 },
-};
+static char *dup_string(const char *src)
+{
+    size_t len = strlen(src) + 1;
+    char *dst = malloc(len);
+    if (dst != NULL)
+        memcpy(dst, src, len);
+    return dst;
+}
 
-static const struct AssetRule sOakSpeechAssets[] = {
-    /* Background tiles + palette (no separate .pal, extract from PNG) */
-    { "oak_speech/bg_tiles.png",         "oak_speech/bg_tiles.4bpp", PNG4, 0 },
-    { "oak_speech/bg_tiles.png",         "oak_speech/bg_tiles.gbapal", PAL_FROM_PNG, 0 },
-    /* Oak speech background */
-    { "oak_speech/oak_speech_bg.png",    "oak_speech/oak_speech_bg.4bpp", PNG4, 0 },
-    { "oak_speech/oak_speech_bg.bin",    "oak_speech/oak_speech_bg.bin", BIN_COPY, 0 },
-    /* Platform */
-    { "oak_speech/platform.png",         "oak_speech/platform.4bpp", PNG4, 0 },
-    { "oak_speech/platform.pal",         "oak_speech/platform.gbapal", PAL, 0 },
-    /* Pikachu intro sprites */
-    { "oak_speech/pikachu_intro/body.png",   "oak_speech/pikachu_intro/body.4bpp", PNG4, 0 },
-    { "oak_speech/pikachu_intro/ears.png",   "oak_speech/pikachu_intro/ears.4bpp", PNG4, 0 },
-    { "oak_speech/pikachu_intro/eyes.png",   "oak_speech/pikachu_intro/eyes.4bpp", PNG4, 0 },
-    { "oak_speech/pikachu_intro/pikachu.pal","oak_speech/pikachu_intro/pikachu.gbapal", PAL, 0 },
-    { "oak_speech/pikachu_intro/tilemap.bin","oak_speech/pikachu_intro/tilemap.bin", BIN_COPY, 0 },
-    /* Character portraits (8bpp) */
-    { "oak_speech/red/pic.png",          "oak_speech/red/pic.8bpp", PNG8, 0 },
-    { "oak_speech/red/pal.pal",          "oak_speech/red/pal.gbapal", PAL, 0 },
-    { "oak_speech/leaf/pic.png",         "oak_speech/leaf/pic.8bpp", PNG8, 0 },
-    { "oak_speech/leaf/pal.pal",         "oak_speech/leaf/pal.gbapal", PAL, 0 },
-    { "oak_speech/oak/pic.png",          "oak_speech/oak/pic.8bpp", PNG8, 0 },
-    { "oak_speech/oak/pal.pal",          "oak_speech/oak/pal.gbapal", PAL, 0 },
-    { "oak_speech/rival/pic.png",        "oak_speech/rival/pic.8bpp", PNG8, 0 },
-    { "oak_speech/rival/pal.pal",        "oak_speech/rival/pal.gbapal", PAL, 0 },
-    /* Controls guide binary tilemaps */
-    { "oak_speech/controls_guide_page_2.bin", "oak_speech/controls_guide_page_2.bin", BIN_COPY, 0 },
-    { "oak_speech/controls_guide_page_3.bin", "oak_speech/controls_guide_page_3.bin", BIN_COPY, 0 },
-};
+static void asset_path_list_free(struct AssetPathList *list)
+{
+    size_t i;
+    for (i = 0; i < list->count; i++)
+        free(list->items[i]);
+    free(list->items);
+    list->items = NULL;
+    list->count = 0;
+    list->capacity = 0;
+}
+
+static int asset_path_list_add_unique(struct AssetPathList *list, const char *path)
+{
+    size_t i;
+
+    for (i = 0; i < list->count; i++)
+    {
+        if (strcmp(list->items[i], path) == 0)
+            return 0;
+    }
+
+    if (list->count == list->capacity)
+    {
+        size_t new_capacity = list->capacity == 0 ? 64 : list->capacity * 2;
+        char **new_items = realloc(list->items, new_capacity * sizeof(*new_items));
+        if (new_items == NULL)
+        {
+            fprintf(stderr, "Out of memory while growing asset list\n");
+            return 1;
+        }
+        list->items = new_items;
+        list->capacity = new_capacity;
+    }
+
+    list->items[list->count] = dup_string(path);
+    if (list->items[list->count] == NULL)
+    {
+        fprintf(stderr, "Out of memory while duplicating asset path\n");
+        return 1;
+    }
+    list->count++;
+    return 0;
+}
+
+static char *trim_left(char *s)
+{
+    while (*s != '\0' && isspace((unsigned char)*s))
+        s++;
+    return s;
+}
+
+static void trim_right(char *s)
+{
+    size_t len = strlen(s);
+    while (len > 0 && isspace((unsigned char)s[len - 1]))
+        s[--len] = '\0';
+}
+
+static int load_asset_manifest(const char *manifest_path, struct AssetPathList *list)
+{
+    FILE *f = fopen(manifest_path, "r");
+    char line[1024];
+    int line_no = 0;
+
+    if (f == NULL)
+    {
+        perror(manifest_path);
+        return 1;
+    }
+
+    while (fgets(line, sizeof(line), f) != NULL)
+    {
+        char *comment;
+        char *path;
+        char *types;
+
+        line_no++;
+        comment = strchr(line, '#');
+        if (comment != NULL)
+            *comment = '\0';
+
+        trim_right(line);
+        path = trim_left(line);
+        if (*path == '\0')
+            continue;
+
+        types = path;
+        while (*types != '\0' && !isspace((unsigned char)*types))
+            types++;
+        if (*types == '\0')
+        {
+            fprintf(stderr, "%s:%d: expected '<asset_path> <types>'\n",
+                    manifest_path, line_no);
+            fclose(f);
+            return 1;
+        }
+        *types++ = '\0';
+        types = trim_left(types);
+        if (*types == '\0')
+        {
+            fprintf(stderr, "%s:%d: missing type list for %s\n",
+                    manifest_path, line_no, path);
+            fclose(f);
+            return 1;
+        }
+
+        if (asset_path_list_add_unique(list, path) != 0)
+        {
+            fclose(f);
+            return 1;
+        }
+    }
+
+    fclose(f);
+    return 0;
+}
+
+static int copy_exact_asset(const char *upstream_dir, const char *asset_path, const char *out_dir)
+{
+    char src_path[768];
+    char dst_path[768];
+    size_t sz;
+    uint8_t *data;
+    const char *rel = asset_path;
+
+    snprintf(src_path, sizeof(src_path), "%s/%s", upstream_dir, asset_path);
+    if (strncmp(rel, "graphics/", 9) == 0)
+        rel += 9;
+    snprintf(dst_path, sizeof(dst_path), "%s/%s", out_dir, rel);
+
+    mkdirs(dst_path);
+    data = read_file(src_path, &sz);
+    if (data == NULL)
+    {
+        fprintf(stderr, "Cannot open %s\n", src_path);
+        return 1;
+    }
+
+    if (write_file(dst_path, data, sz) != 0)
+    {
+        free(data);
+        return 1;
+    }
+
+    printf("  %s -> %s (%zu bytes)\n", src_path, dst_path, sz);
+    free(data);
+    return 0;
+}
+
+static int materialize_missing_assets(const char *upstream_dir, const struct AssetPathList *assets)
+{
+    char **argv;
+    size_t i;
+    size_t missing = 0;
+
+    for (i = 0; i < assets->count; i++)
+    {
+        char path[768];
+        snprintf(path, sizeof(path), "%s/%s", upstream_dir, assets->items[i]);
+        if (!file_exists(path))
+            missing++;
+    }
+
+    if (missing == 0)
+        return 0;
+
+    argv = calloc(missing + 6, sizeof(*argv));
+    if (argv == NULL)
+    {
+        fprintf(stderr, "Out of memory while preparing upstream make command\n");
+        return 1;
+    }
+
+    argv[0] = "make";
+    argv[1] = "-C";
+    argv[2] = (char *)upstream_dir;
+    argv[3] = "SETUP_PREREQS=0";
+    argv[4] = "NODEP=1";
+
+    missing = 0;
+    for (i = 0; i < assets->count; i++)
+    {
+        char path[768];
+        snprintf(path, sizeof(path), "%s/%s", upstream_dir, assets->items[i]);
+        if (!file_exists(path))
+            argv[5 + missing++] = assets->items[i];
+    }
+    argv[5 + missing] = NULL;
+
+    printf("Materializing %zu upstream asset(s) via make\n", missing);
+    if (run_process_in_dir(NULL, argv) != 0)
+    {
+        fprintf(stderr, "upstream make failed while materializing INCBIN assets\n");
+        free(argv);
+        return 1;
+    }
+
+    free(argv);
+    return 0;
+}
+
+static int cmd_batch(const char *upstream_dir, const char *out_dir, int manifest_count, const char *const *manifest_paths)
+{
+    struct AssetPathList assets = {0};
+    int errors = 0;
+    int i;
+
+    if (manifest_count <= 0)
+    {
+        fprintf(stderr, "batch requires at least one manifest file\n");
+        return 1;
+    }
+
+    for (i = 0; i < manifest_count; i++)
+    {
+        printf("=== Asset Manifest: %s ===\n", manifest_paths[i]);
+        if (load_asset_manifest(manifest_paths[i], &assets) != 0)
+        {
+            asset_path_list_free(&assets);
+            return 1;
+        }
+    }
+
+    printf("Loaded %zu unique upstream INCBIN asset(s)\n", assets.count);
+    if (materialize_missing_assets(upstream_dir, &assets) != 0)
+    {
+        asset_path_list_free(&assets);
+        return 1;
+    }
+
+    for (i = 0; i < (int)assets.count; i++)
+    {
+        char src_path[768];
+        snprintf(src_path, sizeof(src_path), "%s/%s", upstream_dir, assets.items[i]);
+        if (!file_exists(src_path))
+        {
+            fprintf(stderr, "Missing upstream asset after materialization: %s\n", src_path);
+            errors++;
+            continue;
+        }
+        errors += copy_exact_asset(upstream_dir, assets.items[i], out_dir);
+    }
+
+    asset_path_list_free(&assets);
+    printf("\nDone. %d errors.\n", errors);
+    return errors ? 1 : 0;
+}
 
 static void mkdirs(const char *path)
 {
@@ -759,90 +1085,19 @@ static void mkdirs(const char *path)
     }
 }
 
-static int process_rule(const struct AssetRule *rule,
-                        const char *gfx_dir, const char *out_dir)
-{
-    char src_path[512], dst_path[512], lz_path[512];
-    snprintf(src_path, sizeof(src_path), "%s/%s", gfx_dir, rule->src);
-    snprintf(dst_path, sizeof(dst_path), "%s/%s", out_dir, rule->dst);
-
-    /* Ensure output subdirectory exists */
-    mkdirs(dst_path);
-
-    int ret = 0;
-    switch (rule->type) {
-    case PNG4:
-        ret = cmd_png2gba(src_path, dst_path, rule->num_tiles, 4);
-        break;
-    case PNG8:
-        ret = cmd_png2gba(src_path, dst_path, rule->num_tiles, 8);
-        break;
-    case PAL:
-        ret = cmd_pal2gba(src_path, dst_path);
-        break;
-    case PAL_FROM_PNG:
-        ret = cmd_png2pal(src_path, dst_path);
-        break;
-    case BIN_COPY: {
-        size_t sz;
-        uint8_t *data = read_file(src_path, &sz);
-        if (!data) { fprintf(stderr, "Cannot open %s\n", src_path); return 1; }
-        ret = write_file(dst_path, data, sz);
-        if (ret == 0)
-            printf("  %s -> %s (%zu bytes)\n", src_path, dst_path, sz);
-        free(data);
-        break;
-    }
-    default:
-        break;
-    }
-
-    /* Also produce .lz compressed version */
-    if (ret == 0) {
-        snprintf(lz_path, sizeof(lz_path), "%s.lz", dst_path);
-        ret = cmd_lz77(dst_path, lz_path);
-    }
-
-    return ret;
-}
-
-static int cmd_batch(const char *upstream_dir, const char *out_dir)
-{
-    char gfx_dir[512];
-    snprintf(gfx_dir, sizeof(gfx_dir), "%s/graphics", upstream_dir);
-
-    int errors = 0;
-    size_t i;
-
-    printf("=== Title Screen Assets ===\n");
-    for (i = 0; i < sizeof(sTitleScreenAssets) / sizeof(sTitleScreenAssets[0]); i++)
-        errors += process_rule(&sTitleScreenAssets[i], gfx_dir, out_dir);
-
-    printf("\n=== Intro Assets ===\n");
-    for (i = 0; i < sizeof(sIntroAssets) / sizeof(sIntroAssets[0]); i++)
-        errors += process_rule(&sIntroAssets[i], gfx_dir, out_dir);
-
-    printf("\n=== Oak Speech Assets ===\n");
-    for (i = 0; i < sizeof(sOakSpeechAssets) / sizeof(sOakSpeechAssets[0]); i++)
-        errors += process_rule(&sOakSpeechAssets[i], gfx_dir, out_dir);
-
-    printf("\nDone. %d errors.\n", errors);
-    return errors ? 1 : 0;
-}
-
 /* ---------- Main ---------- */
 
 static void usage(void)
 {
     fprintf(stderr,
         "Usage:\n"
-        "  pfr_assets png2gba  <input.png> <output.4bpp|.8bpp> [--num-tiles N] [--8bpp]\n"
+        "  pfr_assets png2gba  <input.png> <output.4bpp|.8bpp> [--num-tiles N] [--8bpp] [--pal <file.pal>]\n"
         "  pfr_assets pal2gba  <input.pal> <output.gbapal>\n"
         "  pfr_assets png2pal  <input.png> <output.gbapal>\n"
         "  pfr_assets lz77     <input>     <output.lz>\n"
         "  pfr_assets bin2inc  <input.bin> <output.inc> [--u16|--u32]\n"
         "  pfr_assets preproc  <input.c>   <inc_dir> <output.c>\n"
-        "  pfr_assets batch    <upstream_pokefirered_dir> <output_dir>\n"
+        "  pfr_assets batch    <upstream_pokefirered_dir> <output_dir> <manifest...>\n"
         "  pfr_assets geninc   <assets_dir> <inc_dir>\n"
     );
 }
@@ -854,13 +1109,16 @@ int main(int argc, char *argv[])
     if (strcmp(argv[1], "png2gba") == 0) {
         if (argc < 4) { usage(); return 1; }
         int num_tiles = 0, bpp = 4;
+        const char *pal_path = NULL;
         for (int i = 4; i < argc; i++) {
             if (strcmp(argv[i], "--num-tiles") == 0 && i + 1 < argc)
                 num_tiles = atoi(argv[++i]);
             else if (strcmp(argv[i], "--8bpp") == 0)
                 bpp = 8;
+            else if (strcmp(argv[i], "--pal") == 0 && i + 1 < argc)
+                pal_path = argv[++i];
         }
-        return cmd_png2gba(argv[2], argv[3], num_tiles, bpp);
+        return cmd_png2gba(argv[2], argv[3], num_tiles, bpp, pal_path);
     }
     else if (strcmp(argv[1], "pal2gba") == 0) {
         if (argc < 4) { usage(); return 1; }
@@ -888,8 +1146,8 @@ int main(int argc, char *argv[])
         return cmd_preproc(argv[2], argv[3], argv[4]);
     }
     else if (strcmp(argv[1], "batch") == 0) {
-        if (argc < 4) { usage(); return 1; }
-        return cmd_batch(argv[2], argv[3]);
+        if (argc < 5) { usage(); return 1; }
+        return cmd_batch(argv[2], argv[3], argc - 4, (const char *const *)&argv[4]);
     }
     else if (strcmp(argv[1], "geninc") == 0) {
         if (argc < 4) { usage(); return 1; }

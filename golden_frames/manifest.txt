@@ -1,0 +1,15 @@
+# Golden frame manifest for pokefirered-native pixel-perfect verification
+# Frame 1 = first completed post-reset frame after cold boot (no save data)
+# This manifest is the canonical milestone list for both render_test and mgba_capture.
+#
+# Frame numbers chosen well into each stable scene so that small timing
+# differences between builds don't cause false mismatches.
+#
+# milestone_name          frame_number  input_file
+copyright_screen          30            tests/pfr_play_oak_path.input
+gamefreak_logo            500           tests/pfr_play_oak_path.input
+title_screen              1600          tests/pfr_play_oak_path.input
+oak_controls_page1        2000          tests/pfr_play_oak_path.input
+pikachu_intro_2           3800          tests/pfr_play_oak_path.input
+oak_i_study_pokemon       4959          tests/pfr_play_oak_path.input
+oak_ask_player_gender     5171          tests/pfr_play_oak_path.input

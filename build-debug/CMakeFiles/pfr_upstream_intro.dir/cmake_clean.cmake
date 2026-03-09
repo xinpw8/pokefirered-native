@@ -1,8 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/pfr_upstream_intro.dir/gen/intro.c.o"
   "CMakeFiles/pfr_upstream_intro.dir/gen/intro.c.o.d"
-  "gen/intro.c"
-  "gen/title_screen.c"
 )
 
 # Per-language clean rules from dependency scanning.

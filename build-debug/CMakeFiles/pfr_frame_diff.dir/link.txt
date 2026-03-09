@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/pfr_frame_diff.dir/tools/pfr_frame_diff.c.o -o pfr_frame_diff  -lm 

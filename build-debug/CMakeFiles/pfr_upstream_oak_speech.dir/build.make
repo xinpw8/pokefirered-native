@@ -69,21 +69,21 @@ include CMakeFiles/pfr_upstream_oak_speech.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/pfr_upstream_oak_speech.dir/flags.make
 
-CMakeFiles/pfr_upstream_oak_speech.dir/home/spark-advantage/pokefirered/src/oak_speech.c.o: CMakeFiles/pfr_upstream_oak_speech.dir/flags.make
-CMakeFiles/pfr_upstream_oak_speech.dir/home/spark-advantage/pokefirered/src/oak_speech.c.o: /home/spark-advantage/pokefirered/src/oak_speech.c
-CMakeFiles/pfr_upstream_oak_speech.dir/home/spark-advantage/pokefirered/src/oak_speech.c.o: CMakeFiles/pfr_upstream_oak_speech.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/pfr_upstream_oak_speech.dir/home/spark-advantage/pokefirered/src/oak_speech.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_oak_speech.dir/home/spark-advantage/pokefirered/src/oak_speech.c.o -MF CMakeFiles/pfr_upstream_oak_speech.dir/home/spark-advantage/pokefirered/src/oak_speech.c.o.d -o CMakeFiles/pfr_upstream_oak_speech.dir/home/spark-advantage/pokefirered/src/oak_speech.c.o -c /home/spark-advantage/pokefirered/src/oak_speech.c
+CMakeFiles/pfr_upstream_oak_speech.dir/gen/oak_speech.c.o: CMakeFiles/pfr_upstream_oak_speech.dir/flags.make
+CMakeFiles/pfr_upstream_oak_speech.dir/gen/oak_speech.c.o: gen/oak_speech.c
+CMakeFiles/pfr_upstream_oak_speech.dir/gen/oak_speech.c.o: CMakeFiles/pfr_upstream_oak_speech.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/pfr_upstream_oak_speech.dir/gen/oak_speech.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_oak_speech.dir/gen/oak_speech.c.o -MF CMakeFiles/pfr_upstream_oak_speech.dir/gen/oak_speech.c.o.d -o CMakeFiles/pfr_upstream_oak_speech.dir/gen/oak_speech.c.o -c /home/spark-advantage/pokefirered-native/build-debug/gen/oak_speech.c
 
-CMakeFiles/pfr_upstream_oak_speech.dir/home/spark-advantage/pokefirered/src/oak_speech.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_oak_speech.dir/home/spark-advantage/pokefirered/src/oak_speech.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered/src/oak_speech.c > CMakeFiles/pfr_upstream_oak_speech.dir/home/spark-advantage/pokefirered/src/oak_speech.c.i
+CMakeFiles/pfr_upstream_oak_speech.dir/gen/oak_speech.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_oak_speech.dir/gen/oak_speech.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-debug/gen/oak_speech.c > CMakeFiles/pfr_upstream_oak_speech.dir/gen/oak_speech.c.i
 
-CMakeFiles/pfr_upstream_oak_speech.dir/home/spark-advantage/pokefirered/src/oak_speech.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_oak_speech.dir/home/spark-advantage/pokefirered/src/oak_speech.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered/src/oak_speech.c -o CMakeFiles/pfr_upstream_oak_speech.dir/home/spark-advantage/pokefirered/src/oak_speech.c.s
+CMakeFiles/pfr_upstream_oak_speech.dir/gen/oak_speech.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_oak_speech.dir/gen/oak_speech.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-debug/gen/oak_speech.c -o CMakeFiles/pfr_upstream_oak_speech.dir/gen/oak_speech.c.s
 
-pfr_upstream_oak_speech: CMakeFiles/pfr_upstream_oak_speech.dir/home/spark-advantage/pokefirered/src/oak_speech.c.o
+pfr_upstream_oak_speech: CMakeFiles/pfr_upstream_oak_speech.dir/gen/oak_speech.c.o
 pfr_upstream_oak_speech: CMakeFiles/pfr_upstream_oak_speech.dir/build.make
 .PHONY : pfr_upstream_oak_speech
 
