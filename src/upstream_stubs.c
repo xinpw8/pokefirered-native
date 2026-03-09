@@ -62,5 +62,4 @@ void PlayTimeCounter_Update(void) { UpstreamPlayTimeCounter_Update(); }
 /* InitRFU now from link_rfu_2.c */
 /* rfu_REQ_stopMode, rfu_waitREQComplete now from librfu_rfu.c */
 
-/* ---- event_scripts.s symbols (assembly data, no C source) ---- */
-const u8 EventScript_ResetAllMapFlags[] = {0};
+/* EventScript_ResetAllMapFlags — now in upstream_event_scripts.c (real bytecode) */

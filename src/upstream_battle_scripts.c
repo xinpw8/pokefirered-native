@@ -7,7 +7,7 @@
  *       --prefix pfr_bs \
  *       --patch-fn HostPatchBattleScriptPointers \
  *       --output src/upstream_battle_scripts.c \
- *       third_party/pokefirered/data/battle_scripts_1.s
+ *       third_party/pokefirered/data/battle_scripts_1.s third_party/pokefirered/data/battle_scripts_2.s
  */
 
 #include <string.h>
@@ -22,6 +22,8 @@ __asm__(
     "pfr_bs_ext_gAbsorbDrainStringIds = gAbsorbDrainStringIds\n\t"
     ".global pfr_bs_ext_gBRNPreventionStringIds\n\t"
     "pfr_bs_ext_gBRNPreventionStringIds = gBRNPreventionStringIds\n\t"
+    ".global pfr_bs_ext_gBallEscapeStringIds\n\t"
+    "pfr_bs_ext_gBallEscapeStringIds = gBallEscapeStringIds\n\t"
     ".global pfr_bs_ext_gBattleCommunication\n\t"
     "pfr_bs_ext_gBattleCommunication = gBattleCommunication\n\t"
     ".global pfr_bs_ext_gBattleMoveDamage\n\t"
@@ -48,6 +50,8 @@ __asm__(
     "pfr_bs_ext_gBattlersCount = gBattlersCount\n\t"
     ".global pfr_bs_ext_gBerryEffectStringIds\n\t"
     "pfr_bs_ext_gBerryEffectStringIds = gBerryEffectStringIds\n\t"
+    ".global pfr_bs_ext_gCaughtMonStringIds\n\t"
+    "pfr_bs_ext_gCaughtMonStringIds = gCaughtMonStringIds\n\t"
     ".global pfr_bs_ext_gChosenMove\n\t"
     "pfr_bs_ext_gChosenMove = gChosenMove\n\t"
     ".global pfr_bs_ext_gCritMultiplier\n\t"
@@ -90,6 +94,8 @@ __asm__(
     "pfr_bs_ext_gItemSwapStringIds = gItemSwapStringIds\n\t"
     ".global pfr_bs_ext_gKOFailedStringIds\n\t"
     "pfr_bs_ext_gKOFailedStringIds = gKOFailedStringIds\n\t"
+    ".global pfr_bs_ext_gLastUsedItem\n\t"
+    "pfr_bs_ext_gLastUsedItem = gLastUsedItem\n\t"
     ".global pfr_bs_ext_gLeechSeedStringIds\n\t"
     "pfr_bs_ext_gLeechSeedStringIds = gLeechSeedStringIds\n\t"
     ".global pfr_bs_ext_gMistUsedStringIds\n\t"
@@ -100,6 +106,8 @@ __asm__(
     "pfr_bs_ext_gMoveWeatherChangeStringIds = gMoveWeatherChangeStringIds\n\t"
     ".global pfr_bs_ext_gNoEscapeStringIds\n\t"
     "pfr_bs_ext_gNoEscapeStringIds = gNoEscapeStringIds\n\t"
+    ".global pfr_bs_ext_gNumSafariBalls\n\t"
+    "pfr_bs_ext_gNumSafariBalls = gNumSafariBalls\n\t"
     ".global pfr_bs_ext_gPRLZPreventionStringIds\n\t"
     "pfr_bs_ext_gPRLZPreventionStringIds = gPRLZPreventionStringIds\n\t"
     ".global pfr_bs_ext_gPSNPreventionStringIds\n\t"
@@ -114,6 +122,8 @@ __asm__(
     "pfr_bs_ext_gReflectLightScreenSafeguardStringIds = gReflectLightScreenSafeguardStringIds\n\t"
     ".global pfr_bs_ext_gRestUsedStringIds\n\t"
     "pfr_bs_ext_gRestUsedStringIds = gRestUsedStringIds\n\t"
+    ".global pfr_bs_ext_gSafariReactionStringIds\n\t"
+    "pfr_bs_ext_gSafariReactionStringIds = gSafariReactionStringIds\n\t"
     ".global pfr_bs_ext_gSandstormHailContinuesStringIds\n\t"
     "pfr_bs_ext_gSandstormHailContinuesStringIds = gSandstormHailContinuesStringIds\n\t"
     ".global pfr_bs_ext_gSandstormHailDmgStringIds\n\t"
@@ -134,6 +144,8 @@ __asm__(
     "pfr_bs_ext_gSwallowFailStringIds = gSwallowFailStringIds\n\t"
     ".global pfr_bs_ext_gTrainerBattleOpponent_A\n\t"
     "pfr_bs_ext_gTrainerBattleOpponent_A = gTrainerBattleOpponent_A\n\t"
+    ".global pfr_bs_ext_gTrainerItemCuredStatusStringIds\n\t"
+    "pfr_bs_ext_gTrainerItemCuredStatusStringIds = gTrainerItemCuredStatusStringIds\n\t"
     ".global pfr_bs_ext_gTransformUsedStringIds\n\t"
     "pfr_bs_ext_gTransformUsedStringIds = gTransformUsedStringIds\n\t"
     ".global pfr_bs_ext_gUproarAwakeStringIds\n\t"
@@ -150,6 +162,7 @@ __asm__(
 
 extern u8 pfr_bs_ext_gAbsorbDrainStringIds[];
 extern u8 pfr_bs_ext_gBRNPreventionStringIds[];
+extern u8 pfr_bs_ext_gBallEscapeStringIds[];
 extern u8 pfr_bs_ext_gBattleCommunication[];
 extern u8 pfr_bs_ext_gBattleMoveDamage[];
 extern u8 pfr_bs_ext_gBattleOutcome[];
@@ -163,6 +176,7 @@ extern u8 pfr_bs_ext_gBattlerFainted[];
 extern u8 pfr_bs_ext_gBattlerTarget[];
 extern u8 pfr_bs_ext_gBattlersCount[];
 extern u8 pfr_bs_ext_gBerryEffectStringIds[];
+extern u8 pfr_bs_ext_gCaughtMonStringIds[];
 extern u8 pfr_bs_ext_gChosenMove[];
 extern u8 pfr_bs_ext_gCritMultiplier[];
 extern u8 pfr_bs_ext_gCurrentMove[];
@@ -184,11 +198,13 @@ extern u8 pfr_bs_ext_gHpDealt[];
 extern u8 pfr_bs_ext_gInobedientStringIds[];
 extern u8 pfr_bs_ext_gItemSwapStringIds[];
 extern u8 pfr_bs_ext_gKOFailedStringIds[];
+extern u8 pfr_bs_ext_gLastUsedItem[];
 extern u8 pfr_bs_ext_gLeechSeedStringIds[];
 extern u8 pfr_bs_ext_gMistUsedStringIds[];
 extern u8 pfr_bs_ext_gMoveResultFlags[];
 extern u8 pfr_bs_ext_gMoveWeatherChangeStringIds[];
 extern u8 pfr_bs_ext_gNoEscapeStringIds[];
+extern u8 pfr_bs_ext_gNumSafariBalls[];
 extern u8 pfr_bs_ext_gPRLZPreventionStringIds[];
 extern u8 pfr_bs_ext_gPSNPreventionStringIds[];
 extern u8 pfr_bs_ext_gPartyStatusHealStringIds[];
@@ -196,6 +212,7 @@ extern u8 pfr_bs_ext_gProtectLikeUsedStringIds[];
 extern u8 pfr_bs_ext_gRainContinuesStringIds[];
 extern u8 pfr_bs_ext_gReflectLightScreenSafeguardStringIds[];
 extern u8 pfr_bs_ext_gRestUsedStringIds[];
+extern u8 pfr_bs_ext_gSafariReactionStringIds[];
 extern u8 pfr_bs_ext_gSandstormHailContinuesStringIds[];
 extern u8 pfr_bs_ext_gSandstormHailDmgStringIds[];
 extern u8 pfr_bs_ext_gSandstormHailEndStringIds[];
@@ -206,6 +223,7 @@ extern u8 pfr_bs_ext_gStockpileUsedStringIds[];
 extern u8 pfr_bs_ext_gSubstituteUsedStringIds[];
 extern u8 pfr_bs_ext_gSwallowFailStringIds[];
 extern u8 pfr_bs_ext_gTrainerBattleOpponent_A[];
+extern u8 pfr_bs_ext_gTrainerItemCuredStatusStringIds[];
 extern u8 pfr_bs_ext_gTransformUsedStringIds[];
 extern u8 pfr_bs_ext_gUproarAwakeStringIds[];
 extern u8 pfr_bs_ext_gUproarOverTurnStringIds[];
@@ -213,8 +231,8 @@ extern u8 pfr_bs_ext_gWeatherStartsStringIds[];
 extern u8 pfr_bs_ext_gWokeUpStringIds[];
 extern u8 pfr_bs_ext_gWrappedStringIds[];
 
-/* 12548 bytes of assembled script data */
-u8 pfr_bs_data[12548] = {
+/* 13127 bytes of assembled script data */
+u8 pfr_bs_data[13127] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, /* gBattleScriptsForMoveEffects */
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -999,7 +1017,43 @@ u8 pfr_bs_data[12548] = {
     0x3e, 0x45, 0x01, 0x07, 0x00, 0x00, 0x00, 0x00, 0x89, 0x41, 0x00, 0x00, 0x00, 0x00, 0x2e, 0x00,
     0x00, 0x00, 0x00, 0x04, 0x41, 0x00, 0x00, 0x00, 0x00, 0x6a, 0x01, 0x3e, 0x45, 0x01, 0x07, 0x00,
     0x00, 0x00, 0x00, 0x10, 0x46, 0x01, 0x12, 0x40, 0x00, 0x6a, 0x01, 0x3e, 0x11, 0x43, 0x01, 0x44,
-    0x10, 0x30, 0x01, 0x3c, /* BattleScript_FlushMessageBox */
+    0x10, 0x30, 0x01, 0x3c, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, /* BattleScript_FlushMessageBox */
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, /* gBattlescriptsForRunningByItem */
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x2b, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x2b, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x10, 0x01, 0x01, 0xef, 0x10, 0x02, 0x01, 0xef, 0x10, 0x73, 0x01, 0xef,
+    0x10, 0x01, 0x01, 0x98, 0x01, 0xef, 0x2a, 0x00, 0x00, 0x00, 0x00, 0x00, 0x05, 0x00, 0x00, 0x00, /* BattleScript_ThrowSafariBall */
+    0x00, 0x00, 0x60, 0x0b, 0x10, 0x0b, 0x01, 0xf1, 0x00, 0x00, 0x00, 0x00, 0x10, 0x0f, 0x01, 0x3a,
+    0x2e, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf2, 0x10, 0x0d, 0x01, 0x3a, 0x2e, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0xf3, 0x00, 0x00, 0x00, 0x00, 0xf0, 0x13, 0x00, 0x00, 0x00, 0x00, 0x12, 0x40, 0x00, 0x28,
+    0x00, 0x00, 0x00, 0x00, 0xf0, 0x2e, 0x00, 0x00, 0x00, 0x00, 0x07, 0xf7, 0x10, 0x0c, 0x01, 0x2e,
+    0x00, 0x00, 0x00, 0x00, 0x07, 0x57, 0xf7, 0x13, 0x00, 0x00, 0x00, 0x00, 0x12, 0x40, 0x00, 0x2b,
+    0x05, 0x00, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x29, 0x01, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10, 0x22, 0x01, 0x12, 0x40, 0x00, 0x2e, 0x00,
+    0x00, 0x00, 0x00, 0x08, 0xf6, 0x12, 0x40, 0x00, 0x10, 0x03, 0x01, 0x12, 0x40, 0x00, 0x10, 0x04,
+    0x01, 0x12, 0x40, 0x00, 0xf6, 0x12, 0x40, 0x00, 0x10, 0x05, 0x01, 0x12, 0x40, 0x00, 0xf6, 0x2e,
+    0x00, 0x00, 0x00, 0x00, 0x0f, 0x49, 0x01, 0x00, 0x3d, 0x10, 0x30, 0x01, 0x39, 0x30, 0x00, 0x54,
+    0x01, 0x00, 0x10, 0x57, 0x01, 0x12, 0x40, 0x00, 0x75, 0x35, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
+    0x00, 0x00, 0x0b, 0x01, 0x0c, 0x01, 0x10, 0x2a, 0x01, 0x12, 0x40, 0x00, 0x98, 0x01, 0x2e, 0x00,
+    0x00, 0x00, 0x00, 0x0f, 0x49, 0x01, 0x00, 0xf6, 0x10, 0x30, 0x01, 0x39, 0x30, 0x00, 0x54, 0x01,
+    0x00, 0x10, 0x57, 0x01, 0x12, 0x40, 0x00, 0x75, 0x13, 0x00, 0x00, 0x00, 0x00, 0x12, 0x40, 0x00,
+    0x98, 0x01, 0x2e, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x49, 0x01, 0x00, 0xf6, 0x10, 0x30, 0x01, 0x39,
+    0x30, 0x00, 0x54, 0x01, 0x00, 0x10, 0x57, 0x01, 0x12, 0x40, 0x00, 0x75, 0x13, 0x00, 0x00, 0x00,
+    0x00, 0x12, 0x40, 0x00, 0x2e, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x49, 0x01, 0x00, 0xf6, 0x10, 0x30,
+    0x01, 0x39, 0x30, 0x00, 0x54, 0x01, 0x00, 0x10, 0x57, 0x01, 0x12, 0x40, 0x00, 0x75, 0x13, 0x00,
+    0x00, 0x00, 0x00, 0x12, 0x40, 0x00, 0x2e, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x49, 0x01, 0x00, 0xf6,
+    0x54, 0x11, 0x00, 0x2e, 0x00, 0x00, 0x00, 0x00, 0x04, 0xf7, 0x76, 0x01, 0x0b, 0x29, 0x00, 0x00, /* BattleScript_UseFluffyTail */
+    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x10, 0x74, 0x01, 0x12, 0x40, 0x00, 0x28, 0x00,
+    0x00, 0x00, 0x00, 0x10, 0x75, 0x01, 0x12, 0x40, 0x00, 0x55, 0x52, 0x01, 0x76, 0x01, 0x0c, 0x10,
+    0x76, 0x01, 0x12, 0x40, 0x00, 0x98, 0x0d, 0x3a, 0xf6, 0x13, 0x00, 0x00, 0x00, 0x00, 0x12, 0x40,
+    0x00, 0x45, 0x0c, 0x1b, 0x00, 0x00, 0x00, 0x00, 0x3e, 0x10, 0x1b, 0x01, 0x12, 0x40, 0x00, 0x45,
+    0x01, 0x1a, 0x00, 0x00, 0x00, 0x00, 0x3e, 0x10, 0x1c, 0x01, 0x12, 0x40, 0x00, 0x45, 0x01, 0x04,
+    0x00, 0x00, 0x00, 0x00, 0x3e, 0x10, 0x02, 0x00, 0x12, 0x40, 0x00, 0x4b, 0x3a, 0x53, 0x00, 0x3a,
+    0x10, 0x4d, 0x01, 0x12, 0x40, 0x00, 0x3e,
 };
 
 /* Symbol aliases: each script label points into the data array. */
@@ -2195,6 +2249,60 @@ __asm__(
     "BattleScript_ActionSelectionItemsCantBeUsed = pfr_bs_data + 12540\n\t"
     ".global BattleScript_FlushMessageBox\n\t"
     "BattleScript_FlushMessageBox = pfr_bs_data + 12544\n\t"
+    ".global BattleScript_ThrowBall\n\t"
+    "BattleScript_ThrowBall = pfr_bs_data + 12648\n\t"
+    ".global BattleScript_OldManThrowBall\n\t"
+    "BattleScript_OldManThrowBall = pfr_bs_data + 12680\n\t"
+    ".global BattleScript_PokedudeThrowBall\n\t"
+    "BattleScript_PokedudeThrowBall = pfr_bs_data + 12684\n\t"
+    ".global BattleScript_ThrowSafariBall\n\t"
+    "BattleScript_ThrowSafariBall = pfr_bs_data + 12688\n\t"
+    ".global BattleScript_SuccessBallThrow\n\t"
+    "BattleScript_SuccessBallThrow = pfr_bs_data + 12694\n\t"
+    ".global BattleScript_SafariNoIncGameStat\n\t"
+    "BattleScript_SafariNoIncGameStat = pfr_bs_data + 12708\n\t"
+    ".global BattleScript_CaughtPokemonSkipNewDex\n\t"
+    "BattleScript_CaughtPokemonSkipNewDex = pfr_bs_data + 12727\n\t"
+    ".global BattleScript_CaughtPokemonSkipNickname\n\t"
+    "BattleScript_CaughtPokemonSkipNickname = pfr_bs_data + 12756\n\t"
+    ".global BattleScript_CaughtPokemonDone\n\t"
+    "BattleScript_CaughtPokemonDone = pfr_bs_data + 12757\n\t"
+    ".global BattleScript_OldMan_Pokedude_CaughtMessage\n\t"
+    "BattleScript_OldMan_Pokedude_CaughtMessage = pfr_bs_data + 12764\n\t"
+    ".global BattleScript_ShakeBallThrow\n\t"
+    "BattleScript_ShakeBallThrow = pfr_bs_data + 12775\n\t"
+    ".global BattleScript_CatchFailEnd\n\t"
+    "BattleScript_CatchFailEnd = pfr_bs_data + 12820\n\t"
+    ".global BattleScript_TrainerBallBlock\n\t"
+    "BattleScript_TrainerBallBlock = pfr_bs_data + 12821\n\t"
+    ".global BattleScript_GhostBallDodge\n\t"
+    "BattleScript_GhostBallDodge = pfr_bs_data + 12837\n\t"
+    ".global BattleScript_PlayerUseItem\n\t"
+    "BattleScript_PlayerUseItem = pfr_bs_data + 12847\n\t"
+    ".global BattleScript_AIUseFullRestoreOrHpHeal\n\t"
+    "BattleScript_AIUseFullRestoreOrHpHeal = pfr_bs_data + 12857\n\t"
+    ".global BattleScript_AIUseStatRestore\n\t"
+    "BattleScript_AIUseStatRestore = pfr_bs_data + 12904\n\t"
+    ".global BattleScript_AIUseXstat\n\t"
+    "BattleScript_AIUseXstat = pfr_bs_data + 12940\n\t"
+    ".global BattleScript_AIUseGuardSpec\n\t"
+    "BattleScript_AIUseGuardSpec = pfr_bs_data + 12974\n\t"
+    ".global BattleScript_UseFluffyTail\n\t"
+    "BattleScript_UseFluffyTail = pfr_bs_data + 13008\n\t"
+    ".global BattleScript_UsePokeFlute\n\t"
+    "BattleScript_UsePokeFlute = pfr_bs_data + 13018\n\t"
+    ".global BattleScript_PokeFluteWakeUp\n\t"
+    "BattleScript_PokeFluteWakeUp = pfr_bs_data + 13043\n\t"
+    ".global BattleScript_PokeFluteEnd\n\t"
+    "BattleScript_PokeFluteEnd = pfr_bs_data + 13064\n\t"
+    ".global BattleScript_WatchesCarefully\n\t"
+    "BattleScript_WatchesCarefully = pfr_bs_data + 13065\n\t"
+    ".global BattleScript_ThrowRock\n\t"
+    "BattleScript_ThrowRock = pfr_bs_data + 13081\n\t"
+    ".global BattleScript_ThrowBait\n\t"
+    "BattleScript_ThrowBait = pfr_bs_data + 13095\n\t"
+    ".global BattleScript_LeftoverWallyPrepToThrow\n\t"
+    "BattleScript_LeftoverWallyPrepToThrow = pfr_bs_data + 13109\n\t"
 );
 
 /* Forward-declare labels so the patch function can reference them. */
@@ -2793,6 +2901,33 @@ extern u8 BattleScript_BerryStatRaiseDoStatUp[];
 extern u8 BattleScript_BerryFocusEnergyEnd2[];
 extern u8 BattleScript_ActionSelectionItemsCantBeUsed[];
 extern u8 BattleScript_FlushMessageBox[];
+extern u8 BattleScript_ThrowBall[];
+extern u8 BattleScript_OldManThrowBall[];
+extern u8 BattleScript_PokedudeThrowBall[];
+extern u8 BattleScript_ThrowSafariBall[];
+extern u8 BattleScript_SuccessBallThrow[];
+extern u8 BattleScript_SafariNoIncGameStat[];
+extern u8 BattleScript_CaughtPokemonSkipNewDex[];
+extern u8 BattleScript_CaughtPokemonSkipNickname[];
+extern u8 BattleScript_CaughtPokemonDone[];
+extern u8 BattleScript_OldMan_Pokedude_CaughtMessage[];
+extern u8 BattleScript_ShakeBallThrow[];
+extern u8 BattleScript_CatchFailEnd[];
+extern u8 BattleScript_TrainerBallBlock[];
+extern u8 BattleScript_GhostBallDodge[];
+extern u8 BattleScript_PlayerUseItem[];
+extern u8 BattleScript_AIUseFullRestoreOrHpHeal[];
+extern u8 BattleScript_AIUseStatRestore[];
+extern u8 BattleScript_AIUseXstat[];
+extern u8 BattleScript_AIUseGuardSpec[];
+extern u8 BattleScript_UseFluffyTail[];
+extern u8 BattleScript_UsePokeFlute[];
+extern u8 BattleScript_PokeFluteWakeUp[];
+extern u8 BattleScript_PokeFluteEnd[];
+extern u8 BattleScript_WatchesCarefully[];
+extern u8 BattleScript_ThrowRock[];
+extern u8 BattleScript_ThrowBait[];
+extern u8 BattleScript_LeftoverWallyPrepToThrow[];
 
 /* Patch function: writes 32-bit LE pointer into script data at runtime. */
 /* On aarch64 with -no-pie, all symbols have addresses < 4GB, so the  */
@@ -4277,5 +4412,64 @@ void HostPatchBattleScriptPointers(void) {
     pfr_bs_patch4(&pfr_bs_data[12506], BattleScript_BerryStatRaiseDoStatUp);
     pfr_bs_patch4(&pfr_bs_data[12511], ((u8 *)(pfr_bs_ext_gBattleCommunication) + 5));
     pfr_bs_patch4(&pfr_bs_data[12517], BattleScript_StatUp);
+    pfr_bs_patch4(&pfr_bs_data[12548], BattleScript_ThrowBall);
+    pfr_bs_patch4(&pfr_bs_data[12552], BattleScript_ThrowBall);
+    pfr_bs_patch4(&pfr_bs_data[12556], BattleScript_ThrowBall);
+    pfr_bs_patch4(&pfr_bs_data[12560], BattleScript_ThrowBall);
+    pfr_bs_patch4(&pfr_bs_data[12564], BattleScript_ThrowBall);
+    pfr_bs_patch4(&pfr_bs_data[12568], BattleScript_ThrowSafariBall);
+    pfr_bs_patch4(&pfr_bs_data[12572], BattleScript_ThrowBall);
+    pfr_bs_patch4(&pfr_bs_data[12576], BattleScript_ThrowBall);
+    pfr_bs_patch4(&pfr_bs_data[12580], BattleScript_ThrowBall);
+    pfr_bs_patch4(&pfr_bs_data[12584], BattleScript_ThrowBall);
+    pfr_bs_patch4(&pfr_bs_data[12588], BattleScript_ThrowBall);
+    pfr_bs_patch4(&pfr_bs_data[12592], BattleScript_ThrowBall);
+    pfr_bs_patch4(&pfr_bs_data[12596], BattleScript_ThrowBall);
+    pfr_bs_patch4(&pfr_bs_data[12600], BattleScript_PlayerUseItem);
+    pfr_bs_patch4(&pfr_bs_data[12604], BattleScript_AIUseFullRestoreOrHpHeal);
+    pfr_bs_patch4(&pfr_bs_data[12608], BattleScript_AIUseFullRestoreOrHpHeal);
+    pfr_bs_patch4(&pfr_bs_data[12612], BattleScript_AIUseStatRestore);
+    pfr_bs_patch4(&pfr_bs_data[12616], BattleScript_AIUseXstat);
+    pfr_bs_patch4(&pfr_bs_data[12620], BattleScript_AIUseGuardSpec);
+    pfr_bs_patch4(&pfr_bs_data[12624], BattleScript_UseFluffyTail);
+    pfr_bs_patch4(&pfr_bs_data[12628], BattleScript_UsePokeFlute);
+    pfr_bs_patch4(&pfr_bs_data[12632], BattleScript_WatchesCarefully);
+    pfr_bs_patch4(&pfr_bs_data[12636], BattleScript_ThrowRock);
+    pfr_bs_patch4(&pfr_bs_data[12640], BattleScript_ThrowBait);
+    pfr_bs_patch4(&pfr_bs_data[12644], BattleScript_LeftoverWallyPrepToThrow);
+    pfr_bs_patch4(&pfr_bs_data[12650], pfr_bs_ext_gBattleTypeFlags);
+    pfr_bs_patch4(&pfr_bs_data[12658], BattleScript_OldManThrowBall);
+    pfr_bs_patch4(&pfr_bs_data[12664], pfr_bs_ext_gBattleTypeFlags);
+    pfr_bs_patch4(&pfr_bs_data[12672], BattleScript_PokedudeThrowBall);
+    pfr_bs_patch4(&pfr_bs_data[12696], pfr_bs_ext_gLastUsedItem);
+    pfr_bs_patch4(&pfr_bs_data[12702], BattleScript_SafariNoIncGameStat);
+    pfr_bs_patch4(&pfr_bs_data[12712], BattleScript_CaughtPokemonSkipNewDex);
+    pfr_bs_patch4(&pfr_bs_data[12721], pfr_bs_ext_gBattleCommunication);
+    pfr_bs_patch4(&pfr_bs_data[12732], pfr_bs_ext_gBattleCommunication);
+    pfr_bs_patch4(&pfr_bs_data[12738], BattleScript_CaughtPokemonSkipNickname);
+    pfr_bs_patch4(&pfr_bs_data[12744], pfr_bs_ext_gCaughtMonStringIds);
+    pfr_bs_patch4(&pfr_bs_data[12752], BattleScript_CaughtPokemonDone);
+    pfr_bs_patch4(&pfr_bs_data[12758], pfr_bs_ext_gBattleOutcome);
+    pfr_bs_patch4(&pfr_bs_data[12768], pfr_bs_ext_gBattleOutcome);
+    pfr_bs_patch4(&pfr_bs_data[12776], pfr_bs_ext_gBallEscapeStringIds);
+    pfr_bs_patch4(&pfr_bs_data[12785], pfr_bs_ext_gBattleTypeFlags);
+    pfr_bs_patch4(&pfr_bs_data[12793], BattleScript_CatchFailEnd);
+    pfr_bs_patch4(&pfr_bs_data[12799], pfr_bs_ext_gNumSafariBalls);
+    pfr_bs_patch4(&pfr_bs_data[12804], BattleScript_CatchFailEnd);
+    pfr_bs_patch4(&pfr_bs_data[12815], pfr_bs_ext_gBattleOutcome);
+    pfr_bs_patch4(&pfr_bs_data[12848], ((u8 *)(pfr_bs_ext_gBattleScripting) + 20));
+    pfr_bs_patch4(&pfr_bs_data[12874], pfr_bs_ext_gHitMarker);
+    pfr_bs_patch4(&pfr_bs_data[12895], ((u8 *)(pfr_bs_ext_gBattleScripting) + 20));
+    pfr_bs_patch4(&pfr_bs_data[12921], pfr_bs_ext_gTrainerItemCuredStatusStringIds);
+    pfr_bs_patch4(&pfr_bs_data[12931], ((u8 *)(pfr_bs_ext_gBattleScripting) + 20));
+    pfr_bs_patch4(&pfr_bs_data[12957], pfr_bs_ext_gStatUpStringIds);
+    pfr_bs_patch4(&pfr_bs_data[12965], ((u8 *)(pfr_bs_ext_gBattleScripting) + 20));
+    pfr_bs_patch4(&pfr_bs_data[12991], pfr_bs_ext_gMistUsedStringIds);
+    pfr_bs_patch4(&pfr_bs_data[12999], ((u8 *)(pfr_bs_ext_gBattleScripting) + 20));
+    pfr_bs_patch4(&pfr_bs_data[13012], pfr_bs_ext_gBattleOutcome);
+    pfr_bs_patch4(&pfr_bs_data[13023], ((u8 *)(pfr_bs_ext_gBattleCommunication) + 5));
+    pfr_bs_patch4(&pfr_bs_data[13028], BattleScript_PokeFluteWakeUp);
+    pfr_bs_patch4(&pfr_bs_data[13039], BattleScript_PokeFluteEnd);
+    pfr_bs_patch4(&pfr_bs_data[13066], pfr_bs_ext_gSafariReactionStringIds);
 }
 

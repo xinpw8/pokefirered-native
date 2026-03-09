@@ -5,13 +5,6 @@
 
 #include "global.h"
 
-extern const u8 gScriptCmdTable[];
-extern const u8 gScriptCmdTableEnd[];
-extern const u8 gSpecialVars[];
-extern const u8 gSpecials[];
-extern const u8 gSpecialsEnd[];
-extern const u8 gStdScripts[];
-extern const u8 gStdScriptsEnd[];
 extern const u8 BattleColosseum_2P_MapScripts[];
 extern const u8 TradeCenter_MapScripts[];
 extern const u8 RecordCorner_MapScripts[];

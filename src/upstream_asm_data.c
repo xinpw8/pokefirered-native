@@ -505,7 +505,36 @@ u16 *const gSpecialVars[] = {
     /* index 20 = 0x8014 */ NULL,
 };
 
-/* gStdScripts / gStdScriptsEnd: now defined in upstream_event_scripts.c */
+/*
+ * gStdScripts / gStdScriptsEnd: event_scripts.s defines these as .4byte tables.
+ * C code indexes them as pointer arrays (gStdScripts[idx]), so they must be
+ * proper 8-byte pointer entries on 64-bit — cannot use raw 4-byte asm blobs.
+ * Entries reference Std_* event script labels defined in upstream_event_scripts.c.
+ */
+extern const u8 Std_ObtainItem[];
+extern const u8 Std_FindItem[];
+extern const u8 Std_MsgboxNPC[];
+extern const u8 Std_MsgboxSign[];
+extern const u8 Std_MsgboxDefault[];
+extern const u8 Std_MsgboxYesNo[];
+extern const u8 Std_MsgboxAutoclose[];
+extern const u8 Std_ObtainDecoration[];
+extern const u8 Std_PutItemAway[];
+extern const u8 Std_ReceivedItem[];
+
+const u8 *const gStdScripts[] = {
+    Std_ObtainItem,       /* STD_OBTAIN_ITEM */
+    Std_FindItem,         /* STD_FIND_ITEM */
+    Std_MsgboxNPC,        /* MSGBOX_NPC */
+    Std_MsgboxSign,       /* MSGBOX_SIGN */
+    Std_MsgboxDefault,    /* MSGBOX_DEFAULT */
+    Std_MsgboxYesNo,      /* MSGBOX_YESNO */
+    Std_MsgboxAutoclose,  /* MSGBOX_AUTOCLOSE */
+    Std_ObtainDecoration, /* STD_OBTAIN_DECORATION */
+    Std_PutItemAway,      /* STD_PUT_ITEM_AWAY */
+    Std_ReceivedItem,     /* STD_RECEIVED_ITEM */
+};
+const u8 *const gStdScriptsEnd[] = { NULL };
 
 /* =========================================================================
  * Section 5: gMovesWithQuietBGM
@@ -1060,21 +1089,5 @@ const u8 *const gFieldEffectScriptPointers[69] = {NULL};
 u16 (*const gSpecials[445])(void)  = {NULL};
 u16 (*const gSpecialsEnd[1])(void) = {NULL};
 
-/*
- * EventScript_ReleaseEnd
- * data/event_scripts.s — a minimal event script that does 'releaseall' + 'end'.
- * script_menu.c uses this as a fallback script after quest-log operations.
- * Opcode 0x6b = releaseall, 0x02 = end.
- */
-const u8 EventScript_ReleaseEnd[] = {0x6b, 0x02};
-
-/*
- * CableClub_Text_* — string data from data/scripts/cable_club.inc.
- * Provide minimal single-byte strings (0xFF = EOS in the GBA font encoding).
- */
-const u8 CableClub_Text_TradeMonsUsingLinkCable[] = {0xFF};
-const u8 CableClub_Text_BattleUsingLinkCable[]    = {0xFF};
-const u8 CableClub_Text_CancelSelectedItem[]      = {0xFF};
-const u8 CableClub_Text_YouMayTradeHere[]         = {0xFF};
-const u8 CableClub_Text_YouMayBattleHere[]        = {0xFF};
-const u8 CableClub_Text_CanMakeBerryPowder[]      = {0xFF};
+/* EventScript_ReleaseEnd — now in upstream_event_scripts.c (real bytecode) */
+/* CableClub_Text_*       — now in upstream_event_scripts.c (real text data) */
