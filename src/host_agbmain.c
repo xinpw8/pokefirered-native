@@ -135,14 +135,9 @@ enum HostAgbMainExitReason HostRunAgbMainUntilSoftReset(u32 exit_after_cb2_calls
 
 void HostAgbMainOnCb2InitCopyrightScreenAfterBootup(void)
 {
-    if (!sHostAgbMainState.active)
-        return;
-
-    if (sHostAgbMainState.exit_after_cb2_calls != 0
-     && gHostStubCb2InitCopyrightCalls >= sHostAgbMainState.exit_after_cb2_calls)
-    {
-        REG_KEYINPUT = KEYS_MASK & ~(A_BUTTON | B_BUTTON | START_BUTTON | SELECT_BUTTON);
-    }
+    /* Soft-reset key injection is handled by HostMaybePressSoftResetKeys
+       which checks gMain.callback2 and gMain.state each scanline. */
+    (void)0;
 }
 
 void HostAgbMainOnSoftReset(u32 resetFlags)

@@ -52,9 +52,7 @@ void HostIntroStubReset(void)
     gHostIntroStubResetBgPositionsCalls = 0;
     gHostIntroStubStartBlendTaskCalls = 0;
     gHostIntroStubIsBlendTaskActiveCalls = 0;
-    gHostIntroStubPlaySECalls = 0;
-    gHostIntroStubPlayCryByModeCalls = 0;
-    gHostIntroStubLastPokemonCryStereoValue = 0;
+    /* PlaySE, PlayCry_ByMode, SetPokemonCryStereo now from upstream */
     gHostIntroStubLoadGameSaveResult = SAVE_STATUS_EMPTY;
 }
 
@@ -88,7 +86,12 @@ void GameCubeMultiBoot_Quit(void)
     gHostIntroStubGameCubeMultiBootQuitCalls++;
 }
 
-/* ResetMenuAndMonGlobals, Sav2_ClearSetDefault now from new_game.c */
+/* ResetMenuAndMonGlobals and Sav2_ClearSetDefault: the OBJECT target
+   pfr_upstream_new_game compiles new_game.c with these names aliased to
+   Upstream* — so these wrappers provide the real names and call through. */
+void ResetMenuAndMonGlobals(void) { UpstreamResetMenuAndMonGlobals(); }
+void Sav2_ClearSetDefault(void)   { UpstreamSav2_ClearSetDefault(); }
+
 /* SetPokemonCryStereo now from m4a.c */
 /* SerialCB, ResetSerial now from link.c */
 /* m4aSongNumStart now from m4a.c */

@@ -3,7 +3,7 @@
 
 #include "main.h"
 
-extern u32 gHostStubInitRFUCalls;
+/* InitRFU now from link_rfu_2.c */
 extern u32 gHostStubMapMusicMainCalls;
 extern u32 gHostStubSoftResetCalls;
 

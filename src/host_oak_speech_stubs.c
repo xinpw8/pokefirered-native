@@ -152,10 +152,7 @@ const u8 gNameChoice_Kaz[] = {0xC5, 0xBB, 0xD4, 0xFF};
 const u8 gNameChoice_Toru[] = {0xCE, 0xC9, 0xCC, 0xCF, 0xFF};
 const u8 gNameChoice_Leaf[] = {0xC6, 0xBF, 0xBB, 0xC0, 0xFF};
 
-const struct OamData gOamData_AffineOff_ObjBlend_32x32 = {0};
-const struct OamData gOamData_AffineOff_ObjNormal_32x32 = {0};
-const struct OamData gOamData_AffineOff_ObjNormal_32x16 = {0};
-const struct OamData gOamData_AffineOff_ObjNormal_16x8 = {0};
+/* gOamData_* now from battle_anim.h (included via battle_anim.c) */
 /* gMonPaletteTable now from data.c */
 
 static u8 *CopyHostString(u8 *dest, const u8 *src)
@@ -204,30 +201,7 @@ void HostOakSpeechStubReset(void)
     memset(&gTextFlags, 0, sizeof(gTextFlags));
 }
 
-void CreatePokeballSpriteToReleaseMon(u8 monSpriteId, u8 monPalNum, u8 x, u8 y, u8 oamPriority, u8 subpriortiy, u8 delay, u32 fadePalettes)
-{
-    (void)monSpriteId;
-    (void)monPalNum;
-    (void)x;
-    (void)y;
-    (void)oamPriority;
-    (void)subpriortiy;
-    (void)delay;
-    (void)fadePalettes;
-}
-
-u8 CreateTradePokeballSprite(u8 monSpriteId, u8 monPalNum, u8 x, u8 y, u8 oamPriority, u8 subPriority, u8 delay, u32 fadePalettes)
-{
-    (void)monSpriteId;
-    (void)monPalNum;
-    (void)x;
-    (void)y;
-    (void)oamPriority;
-    (void)subPriority;
-    (void)delay;
-    (void)fadePalettes;
-    return 0;
-}
+/* CreatePokeballSpriteToReleaseMon, CreateTradePokeballSprite now from pokeball.c */
 
 void DoNamingScreen(u8 templateNum, u8 *destBuffer, u16 monSpecies, u16 monGender, u32 monPersonality, MainCallback returnCallback)
 {
@@ -243,9 +217,4 @@ void DoNamingScreen(u8 templateNum, u8 *destBuffer, u16 monSpecies, u16 monGende
     SetMainCallback2(returnCallback);
 }
 
-s16 Q_8_8_inv(s16 y)
-{
-    if (y == 0)
-        return 0;
-    return (s16)((256 * 256) / y);
-}
+/* Q_8_8_inv now from math_util.c */

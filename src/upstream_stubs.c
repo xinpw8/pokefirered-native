@@ -14,6 +14,7 @@
 #include "global.h"
 #include "host_runtime_stubs.h"
 #include "link.h"
+#include "play_time.h"
 #include "link_rfu.h"
 #include "librfu.h"
 #include "malloc.h"
@@ -47,6 +48,14 @@ void HostStubReset(void)
     gHostStubMapMusicMainCalls = 0;
     gHostStubSoftResetCalls = 0;
 }
+
+/* ---- Upstream function wrappers ---- */
+
+/* pfr_upstream_play_time compiles play_time.c with
+   PlayTimeCounter_Update renamed to UpstreamPlayTimeCounter_Update,
+   allowing host interception. This wrapper provides the real name. */
+void UpstreamPlayTimeCounter_Update(void);
+void PlayTimeCounter_Update(void) { UpstreamPlayTimeCounter_Update(); }
 
 /* ---- Hardware/assembly stubs (no upstream C source) ---- */
 

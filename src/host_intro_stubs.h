@@ -8,20 +8,15 @@ extern u32 gHostIntroStubGameCubeMultiBootMainCalls;
 extern u32 gHostIntroStubGameCubeMultiBootHandleSerialCalls;
 extern u32 gHostIntroStubGameCubeMultiBootQuitCalls;
 extern u32 gHostIntroStubGameCubeMultiBootExecuteProgramCalls;
-extern u32 gHostIntroStubResetMenuAndMonGlobalsCalls;
-extern u32 gHostIntroStubSav2ClearSetDefaultCalls;
-extern u32 gHostIntroStubSetPokemonCryStereoCalls;
-extern u32 gHostIntroStubSerialCBCalls;
-extern u32 gHostIntroStubResetSerialCalls;
+/* ResetMenuAndMonGlobals, Sav2_ClearSetDefault, SetPokemonCryStereo,
+   SerialCB, ResetSerial now from upstream */
 extern u32 gHostIntroStubResetTempTileDataBuffersCalls;
 extern u32 gHostIntroStubFreeTempTileDataBuffersCalls;
 extern u32 gHostIntroStubDecompressAndCopyTileDataToVramCalls;
 extern u32 gHostIntroStubResetBgPositionsCalls;
 extern u32 gHostIntroStubStartBlendTaskCalls;
 extern u32 gHostIntroStubIsBlendTaskActiveCalls;
-extern u32 gHostIntroStubPlaySECalls;
-extern u32 gHostIntroStubPlayCryByModeCalls;
-extern u32 gHostIntroStubLastPokemonCryStereoValue;
+/* PlaySE, PlayCry_ByMode, SetPokemonCryStereo now from upstream */
 extern u8 gHostIntroStubLoadGameSaveResult;
 
 void HostIntroStubReset(void);
