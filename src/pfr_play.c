@@ -38,6 +38,17 @@
 #include "oak_speech.h"
 #include "save.h"
 #include "sound.h"
+#include "m4a.h"
+#include "link_rfu.h"
+#include "quest_log.h"
+#include "help_system.h"
+#include "new_menu_helpers.h"
+#include "save_failed_screen.h"
+#include "host_sound_init.h"
+
+/* Declared in main.c (non-static) but no header */
+extern void EnableVCountIntrAtLine150(void);
+extern void SetNotInSaveFailedScreen(void);
 #include "title_screen.h"
 #include "host_memory.h"
 #include "host_renderer.h"
@@ -45,6 +56,7 @@
 #include "host_crt0.h"
 #include "host_intro_stubs.h"
 #include "host_frame_step.h"
+#include "overworld.h"
 #include "host_new_game_stubs.h"
 #include "host_oak_speech_stubs.h"
 #include "host_title_screen_stubs.h"
@@ -376,10 +388,8 @@ static const char *CallbackName(MainCallback callback)
         return "CB2_InitTitleScreen";
     if (callback == CB2_InitMainMenu)
         return "CB2_InitMainMenu";
-    if (callback == HostCB1_Overworld)
-        return "HostCB1_Overworld";
-    if (callback == HostCB2_Overworld)
-        return "HostCB2_Overworld";
+    if (callback == CB1_Overworld)
+        return "CB1_Overworld";
     return "(unknown)";
 }
 
@@ -547,11 +557,31 @@ static void TraceFramebufferUniformity(u32 frame)
 
 static void PlayVBlankHandler(void)
 {
+    extern u16 Random(void);
+    /* Match real VBlankIntr from main.c as closely as possible.
+     * Skipped: RfuVSync/LinkVSync (no wireless/link on native).
+     * Skipped: m4aSoundMain (hangs without DMA hardware). */
+
+    if (gMain.vblankCounter1)
+        (*gMain.vblankCounter1)++;
+
     if (gMain.vblankCallback)
         gMain.vblankCallback();
+
     gMain.vblankCounter2++;
+
     CopyBufferedValuesToGpuRegs();
     ProcessDma3Requests();
+
+    /* m4aSoundMain() intentionally omitted: SoundMain's PCM mixer hangs
+     * without real DMA hardware driving pcmDmaCounter. Music state is
+     * safely initialized by HostNativeSoundInit so all sound API calls
+     * (m4aSongNumStart, IsPokemonCryPlaying, etc.) work correctly;
+     * audio just doesn't play. TODO: fix host_sound_mixer.c for native. */
+
+    Random();
+
+    INTR_CHECK |= INTR_FLAG_VBLANK;
     gMain.intrCheck |= INTR_FLAG_VBLANK;
 }
 
@@ -680,28 +710,42 @@ int main(int argc, char *argv[])
     REG_IE |= INTR_FLAG_VBLANK;
 
     InitKeys();
-    ClearDma3Requests();
-    ResetBgs();
-    InitHeap(gHeap, HEAP_SIZE);
 
-    /* Font system initialization (required for text rendering) */
-    {
-        extern void SetDefaultFontsPointer(void);
-        SetDefaultFontsPointer();
-    }
+    /* Full native sound init: sets up SOUND_INFO_PTR, all SoundInfo fields,
+     * music players, and cry players — without DMA/timer hardware writes. */
+    HostNativeSoundInit();
 
-    /* Save block pointers (required by copyright screen) */
-    gSaveBlock2Ptr = &gSaveBlock2;
-    gSaveBlock1Ptr = &gSaveBlock1;
-    gSaveBlock2.encryptionKey = 0;
-    gHostIntroStubLoadGameSaveResult = SAVE_STATUS_EMPTY;
-    HostNewGameStubReset();
-    HostOakSpeechStubReset();
+    EnableVCountIntrAtLine150();
+    /* InitRFU() skipped: spins on rfu_waitREQComplete() waiting for
+     * wireless adapter hardware response. No wireless adapter on native.
+     * Single-player gameplay does not use RFU. */
+    CheckForFlashMemory();
 
+    /* InitMainCallbacks is static in main.c; replicate inline: */
+    gMain.vblankCounter1 = 0;
+    gMain.vblankCounter2 = 0;
     gMain.callback1 = NULL;
     gMain.callback2 = NULL;
     gMain.vblankCallback = NULL;
     gMain.state = 0;
+    gSaveBlock2Ptr = &gSaveBlock2;
+    gSaveBlock1Ptr = &gSaveBlock1;
+    gSaveBlock2.encryptionKey = 0;
+    gQuestLogPlaybackState = QL_PLAYBACK_STATE_STOPPED;
+
+    InitMapMusic();
+    ClearDma3Requests();
+    ResetBgs();
+    InitHeap(gHeap, HEAP_SIZE);
+    SetDefaultFontsPointer();
+
+    gSoftResetDisabled = FALSE;
+    gHelpSystemEnabled = FALSE;
+    SetNotInSaveFailedScreen();
+
+    gHostIntroStubLoadGameSaveResult = SAVE_STATUS_EMPTY;
+    HostNewGameStubReset();
+    HostOakSpeechStubReset();
 
     /* Patch 32-bit LE pointer fields in generated script bytecode arrays.
      * Must run before any game code that reads script pointers. */

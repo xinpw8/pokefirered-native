@@ -36,6 +36,7 @@
 #include "host_title_screen_stubs.h"
 #include "host_oak_speech_stubs.h"
 #include "host_new_game_stubs.h"
+#include "host_sound_init.h"
 
 static struct HostCaptureInputScript sInputScript;
 static struct HostCaptureManifest sManifest;
@@ -136,6 +137,8 @@ static int CheckFrameNonEmpty(void)
 
 static void LogMilestoneGpuState(const char *milestone)
 {
+    int i, j, nz;
+
     printf("[render_test] %s regs DISPCNT=0x%04X BG0=0x%04X BG1=0x%04X BG2=0x%04X BG3=0x%04X BLDCNT=0x%04X\n",
            milestone,
            GetGpuReg(REG_OFFSET_DISPCNT),
@@ -144,12 +147,123 @@ static void LogMilestoneGpuState(const char *milestone)
            GetGpuReg(REG_OFFSET_BG2CNT),
            GetGpuReg(REG_OFFSET_BG3CNT),
            GetGpuReg(REG_OFFSET_BLDCNT));
+
+    /* Palette group summary: 32 groups of 16 entries each.
+     * Groups  0-15 = BG palettes, groups 16-31 = OBJ palettes.
+     * For each source: hw PLTT (0x05000000), unfaded buffer, faded buffer. */
+    printf("[render_test] %s hw_PLTT  groups (nonzero/16): BG[", milestone);
+    for (i = 0; i < 32; i++)
+    {
+        nz = 0;
+        for (j = 0; j < 16; j++)
+        {
+            if (((volatile u16 *)PLTT)[i * 16 + j] != 0)
+                nz++;
+        }
+        if (i == 16)
+            printf("] OBJ[");
+        else if (i > 0 && i != 16)
+            printf(" ");
+        printf("%d", nz);
+    }
+    printf("]\n");
+
+    printf("[render_test] %s unfaded  groups (nonzero/16): BG[", milestone);
+    for (i = 0; i < 32; i++)
+    {
+        nz = 0;
+        for (j = 0; j < 16; j++)
+        {
+            if (gPlttBufferUnfaded[i * 16 + j] != 0)
+                nz++;
+        }
+        if (i == 16)
+            printf("] OBJ[");
+        else if (i > 0 && i != 16)
+            printf(" ");
+        printf("%d", nz);
+    }
+    printf("]\n");
+
+    printf("[render_test] %s faded    groups (nonzero/16): BG[", milestone);
+    for (i = 0; i < 32; i++)
+    {
+        nz = 0;
+        for (j = 0; j < 16; j++)
+        {
+            if (gPlttBufferFaded[i * 16 + j] != 0)
+                nz++;
+        }
+        if (i == 16)
+            printf("] OBJ[");
+        else if (i > 0 && i != 16)
+            printf(" ");
+        printf("%d", nz);
+    }
+    printf("]\n");
+}
+
+
+static void LogMilestoneVramState(const char *milestone)
+{
+    const u32 *vram = (const u32 *)0x06000000;
+    int region, j, nz;
+
+    /* VRAM is 96KB = 24 regions of 4KB each */
+    printf("[render_test] %s VRAM 4KB regions (nonzero u32s/1024):", milestone);
+    for (region = 0; region < 24; region++)
+    {
+        nz = 0;
+        for (j = 0; j < 1024; j++)
+        {
+            if (vram[region * 1024 + j] != 0)
+                nz++;
+        }
+        if (nz > 0)
+            printf(" [0x%04X]=%d", region * 0x1000, nz);
+    }
+    printf("\n");
+
+    /* Also check specific screen bases for the title screen */
+    {
+        const u16 *sb;
+        int nonzero_entries;
+
+        /* Screen base 0xF800 (BG0) - 2KB = 1024 u16 entries */
+        sb = (const u16 *)(0x06000000 + 0xF800);
+        nonzero_entries = 0;
+        for (j = 0; j < 1024; j++)
+            if (sb[j] != 0) nonzero_entries++;
+        printf("[render_test] %s screenBase 0xF800 (BG0): %d/1024 nonzero entries\n", milestone, nonzero_entries);
+
+        /* Screen base 0xF000 (BG1) */
+        sb = (const u16 *)(0x06000000 + 0xF000);
+        nonzero_entries = 0;
+        for (j = 0; j < 1024; j++)
+            if (sb[j] != 0) nonzero_entries++;
+        printf("[render_test] %s screenBase 0xF000 (BG1): %d/1024 nonzero entries\n", milestone, nonzero_entries);
+
+        /* Screen base 0xE800 (BG2) */
+        sb = (const u16 *)(0x06000000 + 0xE800);
+        nonzero_entries = 0;
+        for (j = 0; j < 1024; j++)
+            if (sb[j] != 0) nonzero_entries++;
+        printf("[render_test] %s screenBase 0xE800 (BG2): %d/1024 nonzero entries\n", milestone, nonzero_entries);
+
+        /* Screen base 0xE000 (BG3) */
+        sb = (const u16 *)(0x06000000 + 0xE000);
+        nonzero_entries = 0;
+        for (j = 0; j < 1024; j++)
+            if (sb[j] != 0) nonzero_entries++;
+        printf("[render_test] %s screenBase 0xE000 (BG3): %d/1024 nonzero entries\n", milestone, nonzero_entries);
+    }
 }
 
 static void CaptureMilestone(const char *milestone)
 {
     DumpNamedFramebuffer(milestone);
     LogMilestoneGpuState(milestone);
+    LogMilestoneVramState(milestone);
     sCapturedFrames++;
 
     if (CheckFrameNonEmpty())
@@ -234,6 +348,7 @@ int main(int argc, char *argv[])
            lastFrame, sManifest.milestone_count);
 
     HostMemoryInit();
+    HostNativeSoundInit();
     HostRendererInit();
     HostDisplaySetDumpDir(sOutputDir);
     HostDisplayEnableDump(FALSE);

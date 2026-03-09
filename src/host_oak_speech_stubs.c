@@ -107,18 +107,6 @@ void HostOakSpeechStubReset(void)
 
 /* CreatePokeballSpriteToReleaseMon, CreateTradePokeballSprite now from pokeball.c */
 
-void DoNamingScreen(u8 templateNum, u8 *destBuffer, u16 monSpecies, u16 monGender, u32 monPersonality, MainCallback returnCallback)
-{
-    gHostOakSpeechDoNamingScreenCalls++;
-    (void)monSpecies;
-    (void)monGender;
-    (void)monPersonality;
-    if (templateNum == NAMING_SCREEN_PLAYER)
-        CopyHostString(destBuffer, gNameChoice_Ash);
-    else
-        CopyHostString(destBuffer, gNameChoice_Gary);
-    ResetTasks();
-    SetMainCallback2(returnCallback);
-}
+/* DoNamingScreen stub removed — real implementation in naming_screen.c */
 
 /* Q_8_8_inv now from math_util.c */

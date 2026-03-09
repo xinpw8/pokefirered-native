@@ -745,49 +745,83 @@ static int cmd_preproc(const char *src_path, const char *inc_dir, const char *ou
                 while (q < end && (*q == ' ' || *q == '\t')) q++;
 
                 if (q < end && (*q == '"' || *q == ' ')) {
-                    if (*q == ' ') {
-                        while (q < end && *q == ' ') q++;
-                    }
-                    if (q < end && *q == '"') {
+                    /*
+                     * Handle single or multi-argument INCBIN:
+                     *   INCBIN_U32("path1")
+                     *   INCBIN_U32("path1", "path2", ...)
+                     * Each path becomes a separate #include in the same
+                     * initializer block.
+                     */
+                    int first_path = 1;
+                    int all_found = 1;
+
+                    fprintf(f, "{\n");
+
+                    while (q < end) {
+                        /* Skip whitespace and newlines between args */
+                        while (q < end && (*q == ' ' || *q == '\t' || *q == '\n' || *q == '\r'))
+                            q++;
+
+                        if (q >= end || *q != '"')
+                            break;
+
                         q++; /* skip opening quote */
                         const char *path_start = q;
                         while (q < end && *q != '"') q++;
 
-                        if (q < end) {
-                            size_t path_len = q - path_start;
-                            char asset_path[512];
-                            snprintf(asset_path, sizeof(asset_path),
-                                     "%.*s", (int)path_len, path_start);
-
-                            q++; /* skip closing quote */
-                            /* Skip whitespace and closing paren */
-                            while (q < end && (*q == ' ' || *q == '\t')) q++;
-                            if (q < end && *q == ')') q++;
-
-                            /* Strip "graphics/" prefix if present */
-                            const char *rel = asset_path;
-                            if (strncmp(rel, "graphics/", 9) == 0)
-                                rel += 9;
-
-                            /* Build the .inc file path */
-                            char inc_path[700];
-                            snprintf(inc_path, sizeof(inc_path),
-                                     "%s/%s%s", inc_dir, rel, variants[v].inc_suffix);
-
-                            /* Check if the .inc file exists */
-                            if (file_exists(inc_path)) {
-                                fprintf(f, "{\n#include \"%s\"\n}", inc_path);
-                                replacements++;
-                            } else {
-                                /* Fallback: keep as {0} */
-                                fprintf(f, "{0} /* MISSING: %s */", inc_path);
-                            }
-
-                            p = q;
-                            matched = 1;
+                        if (q >= end)
                             break;
+
+                        size_t path_len = q - path_start;
+                        char asset_path[512];
+                        snprintf(asset_path, sizeof(asset_path),
+                                 "%.*s", (int)path_len, path_start);
+
+                        q++; /* skip closing quote */
+
+                        /* Strip "graphics/" prefix if present */
+                        const char *rel = asset_path;
+                        if (strncmp(rel, "graphics/", 9) == 0)
+                            rel += 9;
+
+                        /* Build the .inc file path */
+                        char inc_path[700];
+                        snprintf(inc_path, sizeof(inc_path),
+                                 "%s/%s%s", inc_dir, rel, variants[v].inc_suffix);
+
+                        /* Emit #include for this path */
+                        if (file_exists(inc_path)) {
+                            fprintf(f, "#include \"%s\"\n,\n", inc_path);
+                            if (first_path) replacements++;
+                        } else {
+                            fprintf(f, "0, /* MISSING: %s */\n", inc_path);
+                            all_found = 0;
+                        }
+                        first_path = 0;
+
+                        /* Skip whitespace/newlines after the quoted path */
+                        while (q < end && (*q == ' ' || *q == '\t' || *q == '\n' || *q == '\r'))
+                            q++;
+
+                        /* Check for comma (more args) or closing paren (done) */
+                        if (q < end && *q == ',') {
+                            q++; /* skip comma, continue to next arg */
+                        } else {
+                            break; /* ')' or end */
                         }
                     }
+
+                    /* Skip closing paren */
+                    while (q < end && (*q == ' ' || *q == '\t' || *q == '\n' || *q == '\r'))
+                        q++;
+                    if (q < end && *q == ')')
+                        q++;
+
+                    fprintf(f, "}");
+
+                    p = q;
+                    matched = 1;
+                    break;
                 }
             }
         }

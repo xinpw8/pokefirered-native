@@ -21,9 +21,6 @@ void ResetSafariZoneFlag(void);
 void ResetInitialPlayerAvatarState(void);
 void ScriptContext_Init(void);
 void UnlockPlayerFieldControls(void);
-void HostCB1_Overworld(void);
-void HostCB2_Overworld(void);
-void HostFieldCB_WarpExitFadeFromBlack(void);
 void HostDoMapLoadLoop(u8 *state);
 void HostSetFieldVBlankCallback(void);
 

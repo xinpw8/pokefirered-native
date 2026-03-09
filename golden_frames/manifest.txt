@@ -8,7 +8,7 @@
 # milestone_name          frame_number  input_file
 copyright_screen          30            tests/pfr_play_oak_path.input
 gamefreak_logo            500           tests/pfr_play_oak_path.input
-title_screen              1600          tests/pfr_play_oak_path.input
+title_screen              1780          tests/pfr_play_oak_path.input
 oak_controls_page1        2000          tests/pfr_play_oak_path.input
 pikachu_intro_2           3800          tests/pfr_play_oak_path.input
 oak_i_study_pokemon       4959          tests/pfr_play_oak_path.input

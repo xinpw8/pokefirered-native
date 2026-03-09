@@ -48,17 +48,7 @@ void HostNewGameStubReset(void)
     gHostNewGameLastRunScript = NULL;
 }
 
-/* Host callback stubs — the real overworld.c will now set callbacks to the
- * real functions instead. These are kept as symbols for the smoke test
- * to reference, but CB2_NewGame no longer calls them. */
-void HostFieldCB_WarpExitFadeFromBlack(void)
-{
-}
-
-void HostCB1_Overworld(void)
-{
-}
-
-void HostCB2_Overworld(void)
-{
-}
+/* Host overworld callback stubs removed — real implementations in
+ * overworld.c (CB1_Overworld, CB2_Overworld) and
+ * field_fadetransition.c (FieldCB_WarpExitFadeFromBlack) are now
+ * compiled directly from upstream. */
