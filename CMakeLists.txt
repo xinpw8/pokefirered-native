@@ -7,11 +7,17 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS ON)
 
 find_package(Threads REQUIRED)
+find_package(Python3 REQUIRED COMPONENTS Interpreter)
+include(ExternalProject)
 
-set(POKEFIRERED_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../pokefirered" CACHE PATH "Path to the upstream pret/pokefirered checkout")
+set(POKEFIRERED_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/third_party/pokefirered" CACHE PATH "Path to the upstream pret/pokefirered checkout")
+set(AGBCC_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/third_party/agbcc" CACHE PATH "Path to the upstream pret/agbcc checkout")
 
 if(NOT EXISTS "${POKEFIRERED_SOURCE_DIR}/README.md")
     message(FATAL_ERROR "POKEFIRERED_SOURCE_DIR must point at a pret/pokefirered checkout")
+endif()
+if(NOT EXISTS "${AGBCC_SOURCE_DIR}/build.sh")
+    message(FATAL_ERROR "AGBCC_SOURCE_DIR must point at a pret/agbcc checkout")
 endif()
 
 set(PFR_COMMON_DEFINES
@@ -27,6 +33,29 @@ set(PFR_INC_DIR    "${CMAKE_BINARY_DIR}/inc")
 set(PFR_GEN_DIR    "${CMAKE_BINARY_DIR}/gen")
 set(PFR_GEN_HEADERS_DIR "${CMAKE_BINARY_DIR}/generated_include")
 set(PFR_MAPJSON_OUT_DIR "${CMAKE_BINARY_DIR}/mapjson")
+set(PFR_ASSET_MANIFEST_DIR "${CMAKE_BINARY_DIR}/asset_manifests")
+set(PFR_BOOT_ASSET_MANIFEST "${PFR_ASSET_MANIFEST_DIR}/boot_path.manifest")
+set(PFR_CHECKED_IN_BOOT_ASSET_MANIFEST "${CMAKE_CURRENT_SOURCE_DIR}/.project/assets/boot_path.manifest")
+set(PFR_ASSET_PIPELINE_STAMP "${PFR_GEN_DIR}/.asset_pipeline.stamp")
+set(PFR_PREPROCESSED_SOURCES
+    "${PFR_GEN_DIR}/intro.c"
+    "${PFR_GEN_DIR}/title_screen.c"
+    "${PFR_GEN_DIR}/main_menu.c"
+    "${PFR_GEN_DIR}/oak_speech.c"
+    "${PFR_GEN_DIR}/text_window_graphics.c"
+    "${PFR_GEN_DIR}/text.c"
+    "${PFR_GEN_DIR}/new_menu_helpers.c"
+)
+
+set(PFR_BOOT_ASSET_TUS
+    "${POKEFIRERED_SOURCE_DIR}/src/intro.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/title_screen.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/main_menu.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/oak_speech.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/text_window_graphics.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/text.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/new_menu_helpers.c"
+)
 
 file(GLOB_RECURSE PFR_MAP_JSONS "${POKEFIRERED_SOURCE_DIR}/data/maps/*/map.json")
 list(SORT PFR_MAP_JSONS)
@@ -92,6 +121,8 @@ add_custom_target(pfr_generated_headers
 
 add_library(pfr_upstream_core STATIC
     src/host_crt0.c
+    src/host_capture_manifest.c
+    src/host_frame_step.c
     src/host_memory.c
     src/host_dma.c
     src/host_bios.c
@@ -125,6 +156,8 @@ add_library(pfr_upstream_core STATIC
     "${POKEFIRERED_SOURCE_DIR}/src/mystery_gift.c"
     "${POKEFIRERED_SOURCE_DIR}/src/renewable_hidden_items.c"
     "${POKEFIRERED_SOURCE_DIR}/src/roamer.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/menu.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/menu2.c"
 )
 
 target_compile_definitions(pfr_upstream_core PRIVATE ${PFR_COMMON_DEFINES})
@@ -143,7 +176,7 @@ target_compile_options(pfr_upstream_core PRIVATE
 target_include_directories(pfr_upstream_core PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
 )
-add_dependencies(pfr_upstream_core pfr_generated_headers)
+add_dependencies(pfr_upstream_core pfr_generated_headers pfr_asset_pipeline)
 
 # SDL2 display backend (optional — falls back to PPM frame dump if unavailable)
 find_package(PkgConfig QUIET)
@@ -262,25 +295,6 @@ target_include_directories(pfr_upstream_berry_fix PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
 )
 
-add_library(pfr_upstream_main_menu OBJECT
-    "${POKEFIRERED_SOURCE_DIR}/src/main_menu.c"
-)
-target_compile_definitions(pfr_upstream_main_menu PRIVATE ${PFR_COMMON_DEFINES})
-target_compile_options(pfr_upstream_main_menu PRIVATE
-    -fno-pie
-    -ffunction-sections
-    -fdata-sections
-    -Wno-int-conversion
-    -Wno-int-to-pointer-cast
-    -Wno-pointer-to-int-cast
-    "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
-    "-iquote${PFR_GEN_HEADERS_DIR}"
-    "-iquote${POKEFIRERED_SOURCE_DIR}/include"
-)
-target_include_directories(pfr_upstream_main_menu PUBLIC
-    "${CMAKE_CURRENT_SOURCE_DIR}/src"
-)
-
 add_library(pfr_upstream_oak_speech OBJECT
     "${PFR_GEN_DIR}/oak_speech.c"
 )
@@ -349,6 +363,83 @@ target_include_directories(pfr_upstream_play_time PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
 )
 
+# --- Text/Window/Font subsystem (preprocessed TUs) ---
+
+set(PFR_UPSTREAM_PREPROC_OPTIONS
+    -fno-pie
+    -ffunction-sections
+    -fdata-sections
+    -Wno-int-conversion
+    -Wno-int-to-pointer-cast
+    -Wno-pointer-to-int-cast
+    "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
+    "-iquote${PFR_GEN_HEADERS_DIR}"
+    "-iquote${POKEFIRERED_SOURCE_DIR}/include"
+)
+
+add_library(pfr_upstream_main_menu OBJECT
+    "${PFR_GEN_DIR}/main_menu.c"
+)
+target_compile_definitions(pfr_upstream_main_menu PRIVATE ${PFR_COMMON_DEFINES})
+target_compile_options(pfr_upstream_main_menu PRIVATE ${PFR_UPSTREAM_PREPROC_OPTIONS})
+target_include_directories(pfr_upstream_main_menu PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+
+add_library(pfr_upstream_text_window_graphics OBJECT
+    "${PFR_GEN_DIR}/text_window_graphics.c"
+)
+target_compile_definitions(pfr_upstream_text_window_graphics PRIVATE ${PFR_COMMON_DEFINES})
+target_compile_options(pfr_upstream_text_window_graphics PRIVATE ${PFR_UPSTREAM_PREPROC_OPTIONS})
+target_include_directories(pfr_upstream_text_window_graphics PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+
+add_library(pfr_upstream_text OBJECT
+    "${PFR_GEN_DIR}/text.c"
+)
+target_compile_definitions(pfr_upstream_text PRIVATE ${PFR_COMMON_DEFINES})
+target_compile_options(pfr_upstream_text PRIVATE ${PFR_UPSTREAM_PREPROC_OPTIONS})
+target_include_directories(pfr_upstream_text PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+
+add_library(pfr_upstream_text_window OBJECT
+    "${POKEFIRERED_SOURCE_DIR}/src/text_window.c"
+)
+target_compile_definitions(pfr_upstream_text_window PRIVATE ${PFR_COMMON_DEFINES})
+target_compile_options(pfr_upstream_text_window PRIVATE ${PFR_UPSTREAM_PREPROC_OPTIONS})
+target_include_directories(pfr_upstream_text_window PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+
+add_library(pfr_upstream_new_menu_helpers OBJECT
+    "${PFR_GEN_DIR}/new_menu_helpers.c"
+)
+target_compile_definitions(pfr_upstream_new_menu_helpers PRIVATE ${PFR_COMMON_DEFINES})
+target_compile_options(pfr_upstream_new_menu_helpers PRIVATE ${PFR_UPSTREAM_PREPROC_OPTIONS})
+target_include_directories(pfr_upstream_new_menu_helpers PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+
+# text_printer.c provides SetFontsPointer, AddTextPrinter*, RunTextPrinters, etc.
+add_library(pfr_upstream_text_printer OBJECT
+    "${POKEFIRERED_SOURCE_DIR}/src/text_printer.c"
+)
+target_compile_definitions(pfr_upstream_text_printer PRIVATE ${PFR_COMMON_DEFINES})
+target_compile_options(pfr_upstream_text_printer PRIVATE ${PFR_UPSTREAM_PREPROC_OPTIONS})
+target_include_directories(pfr_upstream_text_printer PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+
+add_dependencies(pfr_upstream_intro pfr_asset_pipeline)
+add_dependencies(pfr_upstream_title pfr_asset_pipeline)
+add_dependencies(pfr_upstream_main_menu pfr_asset_pipeline)
+add_dependencies(pfr_upstream_oak_speech pfr_asset_pipeline)
+add_dependencies(pfr_upstream_text_window_graphics pfr_asset_pipeline)
+add_dependencies(pfr_upstream_text pfr_asset_pipeline)
+add_dependencies(pfr_upstream_new_menu_helpers pfr_asset_pipeline)
+
 add_executable(pfr_smoke tests/smoke.c)
 target_sources(pfr_smoke PRIVATE
     src/host_agbmain.c
@@ -360,6 +451,11 @@ target_sources(pfr_smoke PRIVATE
     $<TARGET_OBJECTS:pfr_upstream_oak_speech>
     $<TARGET_OBJECTS:pfr_upstream_new_game>
     $<TARGET_OBJECTS:pfr_upstream_play_time>
+    $<TARGET_OBJECTS:pfr_upstream_text_window_graphics>
+    $<TARGET_OBJECTS:pfr_upstream_text>
+    $<TARGET_OBJECTS:pfr_upstream_text_window>
+    $<TARGET_OBJECTS:pfr_upstream_new_menu_helpers>
+    $<TARGET_OBJECTS:pfr_upstream_text_printer>
     $<TARGET_OBJECTS:pfr_upstream_runtime>
 )
 target_compile_definitions(pfr_smoke PRIVATE ${PFR_COMMON_DEFINES})
@@ -405,11 +501,16 @@ target_sources(pfr_render_test PRIVATE
     $<TARGET_OBJECTS:pfr_upstream_clear_save>
     $<TARGET_OBJECTS:pfr_upstream_berry_fix>
     $<TARGET_OBJECTS:pfr_upstream_main_menu>
+    $<TARGET_OBJECTS:pfr_upstream_oak_speech>
     $<TARGET_OBJECTS:pfr_upstream_new_game>
     $<TARGET_OBJECTS:pfr_upstream_play_time>
+    $<TARGET_OBJECTS:pfr_upstream_text_window_graphics>
+    $<TARGET_OBJECTS:pfr_upstream_text>
+    $<TARGET_OBJECTS:pfr_upstream_text_window>
+    $<TARGET_OBJECTS:pfr_upstream_new_menu_helpers>
+    $<TARGET_OBJECTS:pfr_upstream_text_printer>
     $<TARGET_OBJECTS:pfr_upstream_runtime>
 )
-# NOTE: oak_speech excluded from render_test until its stubs are wired
 target_compile_definitions(pfr_render_test PRIVATE ${PFR_COMMON_DEFINES})
 target_compile_options(pfr_render_test PRIVATE
     -fno-pie
@@ -437,6 +538,11 @@ target_sources(pfr_play PRIVATE
     $<TARGET_OBJECTS:pfr_upstream_oak_speech>
     $<TARGET_OBJECTS:pfr_upstream_new_game>
     $<TARGET_OBJECTS:pfr_upstream_play_time>
+    $<TARGET_OBJECTS:pfr_upstream_text_window_graphics>
+    $<TARGET_OBJECTS:pfr_upstream_text>
+    $<TARGET_OBJECTS:pfr_upstream_text_window>
+    $<TARGET_OBJECTS:pfr_upstream_new_menu_helpers>
+    $<TARGET_OBJECTS:pfr_upstream_text_printer>
     $<TARGET_OBJECTS:pfr_upstream_runtime>
 )
 target_compile_definitions(pfr_play PRIVATE ${PFR_COMMON_DEFINES})
@@ -454,28 +560,264 @@ target_link_options(pfr_play PRIVATE
 )
 target_link_libraries(pfr_play PRIVATE pfr_upstream_core Threads::Threads m)
 
+# Frame diff tool: pixel-level PPM comparison for golden frame verification
+add_executable(pfr_frame_diff tools/pfr_frame_diff.c)
+target_compile_options(pfr_frame_diff PRIVATE -O2)
+target_link_libraries(pfr_frame_diff PRIVATE m)
+
+# Reference ROM + mGBA oracle tooling
+set(PFR_REFERENCE_ROM "${POKEFIRERED_SOURCE_DIR}/pokefirered.gba")
+add_custom_target(pfr_reference_rom
+    COMMAND "${CMAKE_CURRENT_SOURCE_DIR}/scripts/build_reference_rom.sh"
+        "${AGBCC_SOURCE_DIR}"
+        "${POKEFIRERED_SOURCE_DIR}"
+    DEPENDS
+        pfr_libpng_external
+        "${CMAKE_CURRENT_SOURCE_DIR}/scripts/build_reference_rom.sh"
+        "${AGBCC_SOURCE_DIR}/build.sh"
+        "${AGBCC_SOURCE_DIR}/install.sh"
+        "${POKEFIRERED_SOURCE_DIR}/INSTALL.md"
+        "${POKEFIRERED_SOURCE_DIR}/README.md"
+    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+    COMMENT "Building exact pokefirered.gba from pinned upstream sources"
+    VERBATIM
+)
+
+set(MGBA_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/third_party/mgba" CACHE PATH "Path to mGBA source tree")
+set(MGBA_BUILD_DIR "${CMAKE_BINARY_DIR}/third_party_build/mgba")
+
+ExternalProject_Add(pfr_mgba_external
+    SOURCE_DIR "${MGBA_SOURCE_DIR}"
+    BINARY_DIR "${MGBA_BUILD_DIR}"
+    UPDATE_COMMAND ""
+    INSTALL_COMMAND ""
+    CMAKE_ARGS
+        -DLIBMGBA_ONLY=ON
+        -DM_CORE_GBA=ON
+        -DM_CORE_GB=OFF
+        -DBUILD_SHARED=OFF
+        -DBUILD_TEST=OFF
+    BUILD_BYPRODUCTS
+        "${MGBA_BUILD_DIR}/libmgba.a"
+        "${MGBA_BUILD_DIR}/include/mgba/internal/config.h"
+)
+
+add_library(mgba_static STATIC IMPORTED GLOBAL)
+set_target_properties(mgba_static PROPERTIES
+    IMPORTED_LOCATION "${MGBA_BUILD_DIR}/libmgba.a"
+)
+add_dependencies(mgba_static pfr_mgba_external)
+
+add_executable(mgba_capture
+    scripts/mgba_capture.c
+    src/host_capture_manifest.c
+)
+target_compile_definitions(mgba_capture PRIVATE
+    BUILD_STATIC
+    ENABLE_DIRECTORIES
+    ENABLE_VFS
+    ENABLE_VFS_FD
+    HAVE_FREELOCALE
+    HAVE_FUTIMENS
+    HAVE_FUTIMES
+    HAVE_LOCALE
+    HAVE_LOCALTIME_R
+    HAVE_NEWLOCALE
+    HAVE_PTHREAD_CREATE
+    HAVE_PTHREAD_SETNAME_NP
+    HAVE_REALPATH
+    HAVE_SETLOCALE
+    HAVE_STRDUP
+    HAVE_STRLCPY
+    HAVE_STRNDUP
+    HAVE_USELOCALE
+    HAVE_VASPRINTF
+    M_CORE_GBA
+    USE_PTHREADS
+    _GNU_SOURCE
+)
+target_include_directories(mgba_capture PRIVATE
+    "${MGBA_BUILD_DIR}/include"
+    "${MGBA_SOURCE_DIR}/src"
+    "${MGBA_SOURCE_DIR}/include"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+target_link_libraries(mgba_capture PRIVATE mgba_static Threads::Threads m)
+
+add_custom_target(pfr_refresh_goldens
+    COMMAND "${CMAKE_CURRENT_SOURCE_DIR}/scripts/capture_golden_frames.sh"
+        "${PFR_REFERENCE_ROM}"
+    DEPENDS
+        pfr_reference_rom
+        mgba_capture
+        "${CMAKE_CURRENT_SOURCE_DIR}/scripts/capture_golden_frames.sh"
+        "${CMAKE_CURRENT_SOURCE_DIR}/golden_frames/manifest.txt"
+    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+    COMMENT "Refreshing golden frames from pinned mGBA and reference ROM"
+    VERBATIM
+)
+
 # Asset compiler: converts upstream PNG/PAL/BIN to GBA intermediate formats
 add_executable(pfr_assets tools/pfr_assets.c)
 target_compile_options(pfr_assets PRIVATE -O2)
 target_link_libraries(pfr_assets PRIVATE m)
 
+set(PFR_LIBPNG_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/third_party/mgba/src/third-party/libpng")
+set(PFR_LIBPNG_BUILD_DIR "${CMAKE_BINARY_DIR}/third_party_build/libpng")
+set(PFR_LIBPNG_INSTALL_DIR "${CMAKE_BINARY_DIR}/third_party_install/libpng")
+
+ExternalProject_Add(pfr_libpng_external
+    SOURCE_DIR "${PFR_LIBPNG_SOURCE_DIR}"
+    BINARY_DIR "${PFR_LIBPNG_BUILD_DIR}"
+    UPDATE_COMMAND ""
+    INSTALL_DIR "${PFR_LIBPNG_INSTALL_DIR}"
+    CMAKE_ARGS
+        -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
+        -DPNG_SHARED=OFF
+        -DPNG_STATIC=ON
+        -DPNG_TESTS=OFF
+        -DPNG_TOOLS=OFF
+        -DPNG_EXECUTABLES=OFF
+    BUILD_BYPRODUCTS
+        "${PFR_LIBPNG_INSTALL_DIR}/lib/libpng.a"
+        "${PFR_LIBPNG_INSTALL_DIR}/lib/pkgconfig/libpng.pc"
+)
+
+add_custom_command(
+    OUTPUT "${POKEFIRERED_SOURCE_DIR}/tools/gbagfx/gbagfx"
+    COMMAND ${CMAKE_COMMAND} -E env
+        "PKG_CONFIG_PATH=${PFR_LIBPNG_INSTALL_DIR}/lib/pkgconfig:$ENV{PKG_CONFIG_PATH}"
+        make -C "${POKEFIRERED_SOURCE_DIR}/tools/gbagfx"
+    DEPENDS
+        pfr_libpng_external
+        "${POKEFIRERED_SOURCE_DIR}/tools/gbagfx/Makefile"
+        "${POKEFIRERED_SOURCE_DIR}/tools/gbagfx/main.c"
+        "${POKEFIRERED_SOURCE_DIR}/tools/gbagfx/convert_png.c"
+        "${POKEFIRERED_SOURCE_DIR}/tools/gbagfx/font.c"
+    COMMENT "Building upstream gbagfx with local libpng"
+    VERBATIM
+)
+
+add_custom_target(pfr_gbagfx_tool
+    DEPENDS "${POKEFIRERED_SOURCE_DIR}/tools/gbagfx/gbagfx"
+)
+
+add_custom_command(
+    OUTPUT "${PFR_BOOT_ASSET_MANIFEST}"
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${PFR_ASSET_MANIFEST_DIR}"
+    COMMAND ${Python3_EXECUTABLE} "${CMAKE_CURRENT_SOURCE_DIR}/tools/extract_incbin.py"
+        emit-manifest
+        ${PFR_BOOT_ASSET_TUS}
+        --upstream-root "${POKEFIRERED_SOURCE_DIR}"
+        --output "${PFR_BOOT_ASSET_MANIFEST}"
+    DEPENDS
+        "${CMAKE_CURRENT_SOURCE_DIR}/tools/extract_incbin.py"
+        ${PFR_BOOT_ASSET_TUS}
+    COMMENT "Generating deterministic boot-path asset manifest"
+    VERBATIM
+)
+
+add_custom_target(pfr_verify_asset_manifests
+    COMMAND ${Python3_EXECUTABLE} "${CMAKE_CURRENT_SOURCE_DIR}/tools/extract_incbin.py"
+        verify-manifest
+        "${PFR_CHECKED_IN_BOOT_ASSET_MANIFEST}"
+        --upstream-root "${POKEFIRERED_SOURCE_DIR}"
+    DEPENDS
+        "${CMAKE_CURRENT_SOURCE_DIR}/tools/extract_incbin.py"
+        "${PFR_CHECKED_IN_BOOT_ASSET_MANIFEST}"
+        ${PFR_BOOT_ASSET_TUS}
+    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+    COMMENT "Verifying checked-in asset manifests against current INCBIN references"
+    VERBATIM
+)
+
 # Asset pipeline: compile assets, generate .inc files, preprocess upstream sources
 add_custom_command(
-    OUTPUT "${PFR_GEN_DIR}/intro.c" "${PFR_GEN_DIR}/title_screen.c" "${PFR_GEN_DIR}/oak_speech.c"
+    OUTPUT "${PFR_ASSET_PIPELINE_STAMP}"
+    BYPRODUCTS ${PFR_PREPROCESSED_SOURCES}
     COMMAND ${CMAKE_COMMAND} -E make_directory "${PFR_ASSETS_DIR}"
     COMMAND ${CMAKE_COMMAND} -E make_directory "${PFR_INC_DIR}"
     COMMAND ${CMAKE_COMMAND} -E make_directory "${PFR_GEN_DIR}"
-    COMMAND $<TARGET_FILE:pfr_assets> batch "${POKEFIRERED_SOURCE_DIR}" "${PFR_ASSETS_DIR}"
+    COMMAND $<TARGET_FILE:pfr_assets> batch
+        "${POKEFIRERED_SOURCE_DIR}" "${PFR_ASSETS_DIR}" "${PFR_BOOT_ASSET_MANIFEST}"
+    # Copy host-stub assets from upstream (not in INCBIN manifest but needed by host_title_screen_stubs.c)
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${PFR_ASSETS_DIR}/title_screen/firered"
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${PFR_ASSETS_DIR}/title_screen"
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${POKEFIRERED_SOURCE_DIR}/graphics/title_screen/firered/game_title_logo.gbapal"
+        "${PFR_ASSETS_DIR}/title_screen/firered/game_title_logo.gbapal"
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${POKEFIRERED_SOURCE_DIR}/graphics/title_screen/firered/game_title_logo.8bpp.lz"
+        "${PFR_ASSETS_DIR}/title_screen/firered/game_title_logo.8bpp.lz"
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${POKEFIRERED_SOURCE_DIR}/graphics/title_screen/firered/game_title_logo.bin.lz"
+        "${PFR_ASSETS_DIR}/title_screen/firered/game_title_logo.bin.lz"
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${POKEFIRERED_SOURCE_DIR}/graphics/title_screen/firered/box_art_mon.gbapal"
+        "${PFR_ASSETS_DIR}/title_screen/firered/box_art_mon.gbapal"
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${POKEFIRERED_SOURCE_DIR}/graphics/title_screen/firered/box_art_mon.4bpp.lz"
+        "${PFR_ASSETS_DIR}/title_screen/firered/box_art_mon.4bpp.lz"
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${POKEFIRERED_SOURCE_DIR}/graphics/title_screen/firered/box_art_mon.bin.lz"
+        "${PFR_ASSETS_DIR}/title_screen/firered/box_art_mon.bin.lz"
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${POKEFIRERED_SOURCE_DIR}/graphics/title_screen/firered/background.gbapal"
+        "${PFR_ASSETS_DIR}/title_screen/firered/background.gbapal"
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${POKEFIRERED_SOURCE_DIR}/graphics/title_screen/copyright_press_start.4bpp.lz"
+        "${PFR_ASSETS_DIR}/title_screen/copyright_press_start.4bpp.lz"
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${POKEFIRERED_SOURCE_DIR}/graphics/title_screen/copyright_press_start.bin.lz"
+        "${PFR_ASSETS_DIR}/title_screen/copyright_press_start.bin.lz"
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${POKEFIRERED_SOURCE_DIR}/graphics/title_screen/firered/slash.gbapal"
+        "${PFR_ASSETS_DIR}/title_screen/firered/slash.gbapal"
     COMMAND $<TARGET_FILE:pfr_assets> geninc "${PFR_ASSETS_DIR}" "${PFR_INC_DIR}"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/intro.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/intro.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/title_screen.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/title_screen.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
+        "${POKEFIRERED_SOURCE_DIR}/src/main_menu.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/main_menu.c"
+    COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/oak_speech.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/oak_speech.c"
-    DEPENDS pfr_assets
+    COMMAND $<TARGET_FILE:pfr_assets> preproc
+        "${POKEFIRERED_SOURCE_DIR}/src/text_window_graphics.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/text_window_graphics.c"
+    COMMAND $<TARGET_FILE:pfr_assets> preproc
+        "${POKEFIRERED_SOURCE_DIR}/src/text.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/text.c"
+    COMMAND $<TARGET_FILE:pfr_assets> preproc
+        "${POKEFIRERED_SOURCE_DIR}/src/new_menu_helpers.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/new_menu_helpers.c"
+    COMMAND ${CMAKE_COMMAND} -E touch "${PFR_ASSET_PIPELINE_STAMP}"
+    DEPENDS
+        pfr_assets
+        pfr_gbagfx_tool
+        pfr_verify_asset_manifests
+        "${PFR_BOOT_ASSET_MANIFEST}"
         "${POKEFIRERED_SOURCE_DIR}/src/intro.c"
         "${POKEFIRERED_SOURCE_DIR}/src/title_screen.c"
+        "${POKEFIRERED_SOURCE_DIR}/src/main_menu.c"
         "${POKEFIRERED_SOURCE_DIR}/src/oak_speech.c"
+        "${POKEFIRERED_SOURCE_DIR}/src/text_window_graphics.c"
+        "${POKEFIRERED_SOURCE_DIR}/src/text.c"
+        "${POKEFIRERED_SOURCE_DIR}/src/new_menu_helpers.c"
     COMMENT "Asset pipeline: PNG/PAL → GBA → .inc → preprocessed sources"
+)
+
+add_custom_target(pfr_asset_pipeline
+    DEPENDS "${PFR_ASSET_PIPELINE_STAMP}"
+)
+
+# Golden frame check: runs pfr_render_test then diffs each milestone against golden references
+add_custom_target(pfr_golden_check
+    COMMAND ${CMAKE_COMMAND} -E echo "Running golden frame check..."
+    COMMAND "${CMAKE_CURRENT_SOURCE_DIR}/scripts/golden_check.sh"
+        "$<TARGET_FILE:pfr_render_test>"
+        "$<TARGET_FILE:pfr_frame_diff>"
+        "${CMAKE_CURRENT_SOURCE_DIR}/golden_frames"
+        "${CMAKE_CURRENT_SOURCE_DIR}/golden_frames/manifest.txt"
+    DEPENDS pfr_render_test pfr_frame_diff
+    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+    COMMENT "Golden check: render_test + frame_diff against golden references"
+    VERBATIM
 )

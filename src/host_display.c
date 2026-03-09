@@ -182,7 +182,9 @@ bool8 HostDisplayPresent(void)
 
     PollInput();
 
-    HostRendererRenderFrame();
+    /* The caller is responsible for rendering (either per-scanline via
+     * HostRendererRenderScanline or full-frame via HostRendererRenderFrame).
+     * We just present whatever is in the framebuffer. */
     fb = HostRendererGetFramebuffer();
 
     if (sDumpEnabled)
@@ -222,7 +224,6 @@ bool8 HostDisplayPresent(void)
 {
     const u32 *fb;
 
-    HostRendererRenderFrame();
     fb = HostRendererGetFramebuffer();
 
     if (sDumpEnabled)

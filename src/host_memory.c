@@ -79,5 +79,11 @@ void HostMemoryReset(void)
     for (i = 0; i < ARRAY_COUNT(sHostRegions); ++i)
         memset((void *)sHostRegions[i].base, 0, sHostRegions[i].size);
 
+    /* GBA hardware defaults: affine BG params reset to identity (1.0 in 8.8 fixed) */
+    *(vu16 *)(REG_BASE + 0x20) = 0x0100; /* BG2PA */
+    *(vu16 *)(REG_BASE + 0x26) = 0x0100; /* BG2PD */
+    *(vu16 *)(REG_BASE + 0x30) = 0x0100; /* BG3PA */
+    *(vu16 *)(REG_BASE + 0x36) = 0x0100; /* BG3PD */
+
     HostDmaReset();
 }

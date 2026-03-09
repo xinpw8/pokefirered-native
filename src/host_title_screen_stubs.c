@@ -21,7 +21,6 @@
 #include "save.h"
 #include "sound.h"
 #include "string_util.h"
-#include "text_window_graphics.h"
 #include "window.h"
 
 #include "host_oak_speech_stubs.h"
@@ -85,12 +84,6 @@ u16 gHostTitleStubKantoPokedexCount = 0;
 u8 gHostTitleStubFlagGetBadgeMask = 0;
 bool8 gHostTitleStubTextPrinterActive = FALSE;
 static bool8 sHostTitleStubMultiBootComplete = FALSE;
-static const u16 sHostTitleStubUserFrameTiles[0x120 / sizeof(u16)] = {0};
-static const u16 sHostTitleStubUserFramePalette[16] = {0};
-static const struct TextWindowGraphics sHostTitleStubUserWindowGraphics = {
-    .tiles = sHostTitleStubUserFrameTiles,
-    .palette = sHostTitleStubUserFramePalette,
-};
 struct HostTitleStubMenuState
 {
     bool8 active;
@@ -179,7 +172,6 @@ const u8 gText_WirelessNotConnected[] = "Wireless adapter not connected";
 const u8 gText_MysteryGiftCantUse[] = "Mystery Gift can't be used";
 const u8 gTextJPDummy_Hiki[] = " caught";
 const u8 gTextJPDummy_Ko[] = " badges";
-const u16 gMenuMessageWindow_Gfx[1] = {0};
 __asm__(
     ".pushsection .rodata.host_multiboot_payload,\"a\",@progbits\n"
     ".global gMultiBootProgram_BerryGlitchFix_Start\n"
@@ -440,116 +432,6 @@ void SetSaveBlocksPointers(void)
     SetBagPocketsPointers();
 }
 
-void LoadStdWindowGfx(u8 windowId, u16 destOffset, u8 palOffset)
-{
-    gHostTitleStubLoadStdWindowGfxCalls++;
-    (void)windowId;
-    (void)destOffset;
-    (void)palOffset;
-}
-
-void DrawStdFrameWithCustomTileAndPalette(u8 windowId, bool8 copyToVram, u16 baseTileNum, u8 paletteNum)
-{
-    gHostTitleStubDrawStdFrameCalls++;
-    if (windowId < WINDOWS_MAX && gWindows[windowId].tileData != NULL)
-    {
-        FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
-        PutWindowTilemap(windowId);
-        if (copyToVram)
-            CopyWindowToVram(windowId, COPYWIN_FULL);
-    }
-    (void)baseTileNum;
-    (void)paletteNum;
-}
-
-void AddTextPrinterParameterized4(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, const u8 *color, s8 speed, const u8 *str)
-{
-    gHostTitleStubAddTextPrinterParameterized4Calls++;
-    HostOakSpeechStubRecordPrintedText(str);
-    gHostTitleStubLastPrintedText = str;
-    gHostTitleStubTextPrinterActive = FALSE;
-    (void)windowId;
-    (void)fontId;
-    (void)x;
-    (void)y;
-    (void)letterSpacing;
-    (void)lineSpacing;
-    (void)color;
-    (void)speed;
-}
-
-void AddTextPrinterParameterized3(u8 windowId, u8 fontId, u8 x, u8 y, const u8 *color, s8 speed, const u8 *str)
-{
-    gHostTitleStubAddTextPrinterParameterized3Calls++;
-    HostOakSpeechStubRecordPrintedText(str);
-    gHostTitleStubLastPrintedText3 = str;
-    gHostTitleStubTextPrinterActive = FALSE;
-    (void)windowId;
-    (void)fontId;
-    (void)x;
-    (void)y;
-    (void)color;
-    (void)speed;
-}
-
-void CreateYesNoMenu(const struct WindowTemplate *window, u8 fontId, u8 left, u8 top, u16 baseTileNum, u8 paletteNum, u8 initialCursorPos)
-{
-    u8 windowId;
-
-    gHostTitleStubCreateYesNoMenuCalls++;
-    windowId = AddWindow(window);
-    sHostTitleStubYesNoWindowId = windowId;
-    if (windowId == HOST_TITLE_NO_MENU_WINDOW)
-        return;
-
-    DrawStdFrameWithCustomTileAndPalette(windowId, TRUE, baseTileNum, paletteNum);
-    HostTitleScreenStubInitMenuCursor(windowId, left, top, 16, 2, initialCursorPos);
-    (void)fontId;
-}
-
-s8 Menu_ProcessInputNoWrapClearOnChoose(void)
-{
-    s8 result;
-
-    gHostTitleStubMenuProcessInputCalls++;
-    result = HostTitleScreenStubProcessMenuInput(FALSE);
-    if (result != MENU_NOTHING_CHOSEN)
-        DestroyYesNoMenu();
-    return result;
-}
-
-void DestroyYesNoMenu(void)
-{
-    gHostTitleStubDestroyYesNoMenuCalls++;
-    if (sHostTitleStubYesNoWindowId == HOST_TITLE_NO_MENU_WINDOW)
-        return;
-    if (sHostTitleStubYesNoWindowId < WINDOWS_MAX && gWindows[sHostTitleStubYesNoWindowId].tileData != NULL)
-    {
-        ClearStdWindowAndFrameToTransparent(sHostTitleStubYesNoWindowId, TRUE);
-        RemoveWindow(sHostTitleStubYesNoWindowId);
-    }
-    HostTitleScreenStubForgetMenuWindow(sHostTitleStubYesNoWindowId);
-}
-
-void DeactivateAllTextPrinters(void)
-{
-    gHostTitleStubDeactivateAllTextPrintersCalls++;
-    gHostTitleStubTextPrinterActive = FALSE;
-}
-
-void RunTextPrinters(void)
-{
-    gHostTitleStubRunTextPrintersCalls++;
-    gHostTitleStubTextPrinterActive = FALSE;
-}
-
-bool16 IsTextPrinterActive(u8 windowId)
-{
-    gHostTitleStubIsTextPrinterActiveCalls++;
-    (void)windowId;
-    return gHostTitleStubTextPrinterActive;
-}
-
 bool32 IsMysteryGiftEnabled(void)
 {
     gHostTitleStubIsMysteryGiftEnabledCalls++;
@@ -602,12 +484,6 @@ u16 GetKantoPokedexCount(u8 caseId)
     gHostTitleStubGetKantoPokedexCountCalls++;
     (void)caseId;
     return gHostTitleStubKantoPokedexCount;
-}
-
-const struct TextWindowGraphics *GetUserWindowGraphics(u8 idx)
-{
-    (void)idx;
-    return &sHostTitleStubUserWindowGraphics;
 }
 
 u8 *ConvertIntToDecimalStringN(u8 *str, s32 value, enum StringConvertMode mode, u8 n)

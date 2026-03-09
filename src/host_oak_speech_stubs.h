@@ -17,6 +17,8 @@ extern u32 gHostOakSpeechPikachuIntroPage2Loads;
 extern u32 gHostOakSpeechPikachuIntroPage3Loads;
 extern u32 gHostOakSpeechWelcomeToTheWorldPrints;
 extern u32 gHostOakSpeechThisWorldPrints;
+extern u32 gHostOakSpeechIStudyPokemonPrints;
+extern u32 gHostOakSpeechAskPlayerGenderPrints;
 extern const u8 *gHostOakSpeechLastExpandedPlaceholderSource;
 extern u16 gHostOakSpeechLastPlayedBGM;
 extern const u8 *gHostOakSpeechLastTopBarLeftText;

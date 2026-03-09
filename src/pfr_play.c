@@ -4,9 +4,11 @@
  * Opens an SDL2 window and runs the game's boot chain (copyright →
  * intro → title → main menu) with live keyboard input.
  *
- * Frame model: simulated scanlines + interrupt dispatch + callback
- * stepping + subsystem updates, matching the validated render_test
- * harness. HostDisplayPresent() handles rendering, display, input
+ * Frame model: per-scanline rendering interleaved with HBlank DMA
+ * and interrupt dispatch, matching real GBA hardware ordering.
+ * The renderer processes one scanline at a time so that HBlank DMA
+ * register changes (e.g. scanline scroll effects) are visible to
+ * the next scanline.  HostDisplayPresent() handles display, input
  * polling, and 60 Hz frame pacing via VSYNC.
  *
  * Keyboard mapping (defined in host_display.c):
@@ -34,6 +36,7 @@
 #include "load_save.h"
 #include "main_menu.h"
 #include "oak_speech.h"
+#include "save.h"
 #include "sound.h"
 #include "title_screen.h"
 #include "host_memory.h"
@@ -41,6 +44,7 @@
 #include "host_display.h"
 #include "host_crt0.h"
 #include "host_intro_stubs.h"
+#include "host_frame_step.h"
 #include "host_new_game_stubs.h"
 #include "host_oak_speech_stubs.h"
 #include "host_title_screen_stubs.h"
@@ -86,6 +90,8 @@ struct ScriptedInputRange
 static struct ScriptedInputRange sScriptedInputRanges[MAX_SCRIPTED_INPUT_RANGES];
 static u32 sScriptedInputRangeCount;
 static bool8 sScriptedInputEnabled;
+
+static void TraceLog(u32 frame, const char *message);
 
 static u16 ParseInputToken(const char *token)
 {
@@ -294,6 +300,62 @@ static void DumpCurrentFramebuffer(u32 frame, const char *label)
     }
 
     fclose(f);
+}
+
+static u32 CountNonZeroWords(const void *data, size_t size)
+{
+    const u32 *words = data;
+    size_t count = size / sizeof(u32);
+    u32 nonZero = 0;
+    size_t i;
+
+    for (i = 0; i < count; i++)
+    {
+        if (words[i] != 0)
+            nonZero++;
+    }
+
+    return nonZero;
+}
+
+static void TraceGpuState(u32 frame, const char *label)
+{
+    char buffer[256];
+    u16 dispcnt = GetGpuReg(REG_OFFSET_DISPCNT);
+    u16 bg0cnt = GetGpuReg(REG_OFFSET_BG0CNT);
+    u16 bg1cnt = GetGpuReg(REG_OFFSET_BG1CNT);
+    u16 bg2cnt = GetGpuReg(REG_OFFSET_BG2CNT);
+    u16 bg3cnt = GetGpuReg(REG_OFFSET_BG3CNT);
+    u16 bldcnt = GetGpuReg(REG_OFFSET_BLDCNT);
+    u16 bldalpha = GetGpuReg(REG_OFFSET_BLDALPHA);
+    u16 bldy = GetGpuReg(REG_OFFSET_BLDY);
+    u16 winin = GetGpuReg(REG_OFFSET_WININ);
+    u16 winout = GetGpuReg(REG_OFFSET_WINOUT);
+    u16 bg0hofs = GetGpuReg(REG_OFFSET_BG0HOFS);
+    u16 bg0vofs = GetGpuReg(REG_OFFSET_BG0VOFS);
+    u16 bg1hofs = GetGpuReg(REG_OFFSET_BG1HOFS);
+    u16 bg1vofs = GetGpuReg(REG_OFFSET_BG1VOFS);
+    u16 bg2hofs = GetGpuReg(REG_OFFSET_BG2HOFS);
+    u16 bg2vofs = GetGpuReg(REG_OFFSET_BG2VOFS);
+    u32 plttNonZero = CountNonZeroWords((const void *)PLTT, PLTT_SIZE);
+    u32 vramNonZero = CountNonZeroWords((const void *)VRAM, VRAM_SIZE);
+    u32 oamNonZero = CountNonZeroWords((const void *)OAM, OAM_SIZE);
+    const u16 *pltt = (const u16 *)PLTT;
+
+    snprintf(buffer, sizeof(buffer),
+             "%s gpu DISPCNT=0x%04X BG0=0x%04X BG1=0x%04X BG2=0x%04X BG3=0x%04X BLDCNT=0x%04X BLDALPHA=0x%04X BLDY=0x%04X WININ=0x%04X WINOUT=0x%04X",
+             label, dispcnt, bg0cnt, bg1cnt, bg2cnt, bg3cnt, bldcnt, bldalpha, bldy, winin, winout);
+    TraceLog(frame, buffer);
+
+    snprintf(buffer, sizeof(buffer),
+             "%s scroll BG0=(%u,%u) BG1=(%u,%u) BG2=(%u,%u) PLTT[0..3]=%04X,%04X,%04X,%04X nonZeroWords pltt=%u vram=%u oam=%u",
+             label,
+             bg0hofs, bg0vofs,
+             bg1hofs, bg1vofs,
+             bg2hofs, bg2vofs,
+             pltt[0], pltt[1], pltt[2], pltt[3],
+             plttNonZero, vramNonZero, oamNonZero);
+    TraceLog(frame, buffer);
 }
 
 static void TraceLog(u32 frame, const char *message)
@@ -578,18 +640,21 @@ static void PlayReadKeys(void)
 
 /* ── Frame simulation ──────────────────────────────────────── */
 
-static void StepFrame(void)
+struct PlayFrameContext
 {
-    int scanline;
-    static u32 frame;
+    u32 frame;
+};
 
-    /* 1. Read key state from REG_KEYINPUT (set by SDL PollInput last present) */
+static void PlayFrameLogic(void *userdata)
+{
+    const struct PlayFrameContext *ctx = userdata;
+    u32 frame = ctx->frame;
+
     ApplyScriptedInput(frame);
     PlayReadKeys();
     TraceInput(frame);
     TraceMilestones(frame);
 
-    /* 2. Run the same high-level loop order as AgbMain before WaitForVBlank. */
     if (gMain.callback1)
         gMain.callback1();
     if (gMain.callback2)
@@ -597,33 +662,14 @@ static void StepFrame(void)
 
     PlayTimeCounter_Update();
     MapMusicMain();
+}
 
-    /* 3. Simulate the wait for the next VBlank by advancing one frame. */
-    gMain.intrCheck &= ~INTR_FLAG_VBLANK;
-    for (scanline = 0; scanline < 228; scanline++)
-    {
-        u16 dispstat, flags, vcountCompare;
+static void StepFrame(void)
+{
+    static u32 frame;
+    struct PlayFrameContext ctx = { .frame = frame };
 
-        REG_VCOUNT = scanline;
-        dispstat = GetGpuReg(REG_OFFSET_DISPSTAT);
-        flags = 0;
-
-        if ((dispstat & DISPSTAT_HBLANK_INTR) && scanline < DISPLAY_HEIGHT)
-            flags |= INTR_FLAG_HBLANK;
-
-        vcountCompare = dispstat >> 8;
-        if ((dispstat & DISPSTAT_VCOUNT_INTR) && scanline == vcountCompare)
-            flags |= INTR_FLAG_VCOUNT;
-
-        if ((dispstat & DISPSTAT_VBLANK_INTR) && scanline == DISPLAY_HEIGHT)
-            flags |= INTR_FLAG_VBLANK;
-
-        if (flags)
-        {
-            HostInterruptRaise(flags);
-            HostInterruptDispatchAll();
-        }
-    }
+    HostFrameStepRun(PlayFrameLogic, &ctx);
 
     frame++;
 }
@@ -670,7 +716,17 @@ int main(int argc, char *argv[])
     ResetBgs();
     InitHeap(gHeap, HEAP_SIZE);
 
+    /* Font system initialization (required for text rendering) */
+    {
+        extern void SetDefaultFontsPointer(void);
+        SetDefaultFontsPointer();
+    }
+
     /* Save block pointers (required by copyright screen) */
+    gSaveBlock2Ptr = &gSaveBlock2;
+    gSaveBlock1Ptr = &gSaveBlock1;
+    gSaveBlock2.encryptionKey = 0;
+    gHostIntroStubLoadGameSaveResult = SAVE_STATUS_EMPTY;
     HostNewGameStubReset();
     HostOakSpeechStubReset();
 
@@ -725,6 +781,7 @@ int main(int argc, char *argv[])
 
         if (sSnapshotRequested)
         {
+            TraceGpuState(HostDisplayGetFrameCount(), sSnapshotLabel);
             DumpCurrentFramebuffer(HostDisplayGetFrameCount(), sSnapshotLabel);
             sSnapshotRequested = FALSE;
         }

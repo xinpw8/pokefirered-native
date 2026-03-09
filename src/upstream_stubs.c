@@ -19,6 +19,9 @@
 #include "save_failed_screen.h"
 #include "sound.h"
 #include "sprite.h"
+#include "text.h"
+#include "m4a.h"
+#include "gba/m4a_internal.h"
 
 EWRAM_DATA u8 gHeap[HEAP_SIZE] = {0};
 COMMON_DATA u32 gRng2Value = 0;
@@ -179,11 +182,6 @@ bool32 RunSaveFailedScreen(void)
     return FALSE;
 }
 
-void SetDefaultFontsPointer(void)
-{
-    gHostStubSetDefaultFontsPointerCalls++;
-}
-
 u16 SetFlashTimerIntr(u8 timerNum, void (**intrFunc)(void))
 {
     gHostStubLastFlashTimerNum = timerNum;
@@ -238,4 +236,73 @@ void rfu_REQ_stopMode(void)
 u16 rfu_waitREQComplete(void)
 {
     return 0;
+}
+
+/* --- Text/window/font subsystem stubs --- */
+
+/* OAM data template referenced by text cursor sprite */
+const struct OamData gOamData_AffineOff_ObjNormal_16x16 = {0};
+
+/* Sound stubs for text.c RenderText (BGM pause/resume during text scroll) */
+struct MusicPlayerInfo gMPlayInfo_BGM = {0};
+
+void m4aMPlayStop(struct MusicPlayerInfo *mplayInfo)
+{
+    (void)mplayInfo;
+}
+
+void m4aMPlayContinue(struct MusicPlayerInfo *mplayInfo)
+{
+    (void)mplayInfo;
+}
+
+bool8 IsSEPlaying(void)
+{
+    return FALSE;
+}
+
+/* Braille font is unused in Oak speech path — stub with no-op renderer */
+u16 FontFunc_Braille(struct TextPrinter *textPrinter)
+{
+    (void)textPrinter;
+    return 1; /* return 1 = done rendering */
+}
+
+/* Quest log / map name / signpost stubs — not relevant to Oak speech */
+void MapNamePopupWindowIdSetDummy(void)
+{
+}
+
+void CommitQuestLogWindow1(void)
+{
+}
+
+bool8 IsMsgSignpost(void)
+{
+    return FALSE;
+}
+
+/* Text strings referenced by menu.c (GBA text encoding) */
+const u8 gText_YesNo[] = {
+    0xD9, 0xBF, 0xCD, 0xFE,  /* YES\n */
+    0xC8, 0xC9, 0xFF,         /* NO\EOS */
+};
+const u8 gText_SelectorArrow2[] = {
+    0xF9, 0x05, 0xFF,         /* ▶ selector arrow */
+};
+
+/* Braille glyph width (unused in Oak speech path) */
+s32 GetGlyphWidth_Braille(u16 fontType, bool32 isJapanese)
+{
+    (void)fontType;
+    (void)isJapanese;
+    return 16;
+}
+
+/* Dynamic placeholder text (used by GetStringWidth for control codes) */
+const u8 *DynamicPlaceholderTextUtil_GetPlaceholderPtr(u8 idx)
+{
+    static const u8 sEmptyString[] = {0xFF}; /* EOS */
+    (void)idx;
+    return sEmptyString;
 }

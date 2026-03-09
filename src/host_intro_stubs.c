@@ -2,6 +2,7 @@
 
 #include "bg.h"
 #include "gba/m4a_internal.h"
+#include "gpu_regs.h"
 #include "libgcnmultiboot.h"
 #include "link.h"
 #include "malloc.h"
@@ -10,6 +11,7 @@
 #include "new_menu_helpers.h"
 #include "save.h"
 #include "sound.h"
+#include "task.h"
 #include "util.h"
 #include "window.h"
 
@@ -141,99 +143,6 @@ void SerialCB(void)
 void ResetSerial(void)
 {
     gHostIntroStubResetSerialCalls++;
-}
-
-static u16 sTempTileDataBufferCursor = 0;
-static void *sTempTileDataBuffers[0x20] = {NULL};
-
-static u16 CopyDecompressedTileDataToVram(u8 bgId, const void *src, u16 size, u16 offset, u8 mode)
-{
-    switch (mode)
-    {
-    case 1:
-        break;
-    case 0:
-    default:
-        return LoadBgTiles(bgId, src, size, offset);
-    }
-    return LoadBgTilemap(bgId, src, size, offset);
-}
-
-void ResetTempTileDataBuffers(void)
-{
-    int i;
-
-    gHostIntroStubResetTempTileDataBuffersCalls++;
-    for (i = 0; i < (s32)NELEMS(sTempTileDataBuffers); i++)
-    {
-        sTempTileDataBuffers[i] = NULL;
-    }
-    sTempTileDataBufferCursor = 0;
-}
-
-bool8 FreeTempTileDataBuffersIfPossible(void)
-{
-    int i;
-
-    gHostIntroStubFreeTempTileDataBuffersCalls++;
-    if (!IsDma3ManagerBusyWithBgCopy())
-    {
-        if (sTempTileDataBufferCursor)
-        {
-            for (i = 0; i < sTempTileDataBufferCursor; i++)
-            {
-                FREE_AND_SET_NULL(sTempTileDataBuffers[i]);
-            }
-            sTempTileDataBufferCursor = 0;
-        }
-        return FALSE;
-    }
-    else
-    {
-        return TRUE;
-    }
-}
-
-void *DecompressAndCopyTileDataToVram(u8 bgId, const void *src, u32 size, u16 offset, u8 mode)
-{
-    u32 sizeOut;
-
-    gHostIntroStubDecompressAndCopyTileDataToVramCalls++;
-    if (sTempTileDataBufferCursor < NELEMS(sTempTileDataBuffers))
-    {
-        void *ptr = MallocAndDecompress(src, &sizeOut);
-        if (!size)
-            size = sizeOut;
-        if (ptr)
-        {
-            CopyDecompressedTileDataToVram(bgId, ptr, size, offset, mode);
-            sTempTileDataBuffers[sTempTileDataBufferCursor++] = ptr;
-        }
-        return ptr;
-    }
-    return NULL;
-}
-
-void ResetBgPositions(void)
-{
-    gHostIntroStubResetBgPositionsCalls++;
-}
-
-void StartBlendTask(u8 eva_start, u8 evb_start, u8 eva_end, u8 evb_end, u8 ev_step, u8 priority)
-{
-    gHostIntroStubStartBlendTaskCalls++;
-    (void)eva_start;
-    (void)evb_start;
-    (void)eva_end;
-    (void)evb_end;
-    (void)ev_step;
-    (void)priority;
-}
-
-bool8 IsBlendTaskActive(void)
-{
-    gHostIntroStubIsBlendTaskActiveCalls++;
-    return FALSE;
 }
 
 void m4aSongNumStart(u16 songNum)

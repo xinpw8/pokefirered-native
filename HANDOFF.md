@@ -58,6 +58,7 @@ Current native-project files:
 - host `gba/macro.h` wrapper: `/home/spark-advantage/pokefirered-native/src/host_include/gba/macro.h`
 - host `dma3.h` shim: `/home/spark-advantage/pokefirered-native/src/host_include/dma3.h`
 - smoke test: `/home/spark-advantage/pokefirered-native/tests/smoke.c`
+- autonomous Oak-path input script: `/home/spark-advantage/pokefirered-native/tests/pfr_play_oak_path.input`
 - LZ77 CLI: `/home/spark-advantage/pokefirered-native/tools/pfr_lz77.c`
 
 ## What Has Been Verified
@@ -99,6 +100,8 @@ Important qualification:
 - this now verifies real `main.c` helper behavior, a host C translation of `crt0.s:intr_main`, a bounded `AgbMain` init/frame/soft-reset slice, the real `intro.c` path through the non-skipped Game Freak / Scene 1 / Scene 2 / Scene 3 sequence into natural title handoff, real `title_screen.c` progression from init into run-state plus restart/cry/main-menu/save-clear/berry-fix downstream handoffs, the real `main_menu.c` provider through save-present menu setup and New Game selection handoff, the real `clear_save_data_screen.c` provider through its confirmation/menu/clear-selection path, the real `berry_fix_program.c` provider through its multiboot progression path, and the real `new_game.c` data-init path once Oak hands off into `CB2_NewGame`
 - `intro.c` and `title_screen.c` currently run against host zero-INCBIN or placeholder asset fallbacks plus narrow helper stubs; that is enough for source-driven control-flow verification, not a finished asset/runtime rehost
 - `oak_speech.c` now reaches `IStudyPokemon`, the gender-selection menu, player/rival naming stubs, and a host-owned `CB2_NewGame` wrapper that executes the real upstream `NewGameInitData()` / `PlayTimeCounter_Start()` path plus the immediate stop-music, safari-reset, script-context, field-callback, and callback-handoff setup that upstream `CB2_NewGame` performs before entering overworld
+- `pfr_play` now accepts an optional scripted-input file and can autonomously drive the title -> main menu -> Oak Speech path while dumping milestone frames and a trace log
+- the major interactive black-screen bug after title was narrowed to the host renderer only supporting mode 0; Oak Speech switches to `DISPCNT` mode 1, so `host_renderer.c` now renders mode 1 text BG0/BG1 plus affine BG2 instead of returning a black backdrop
 - it is still not a full hosted boot through the complete `AgbMain` -> `intro.c` -> `title_screen.c` -> main-menu -> overworld flow because upstream `overworld.c` and the field/map stack are not in the build yet
 
 ## Why The Build Is Structured This Way
@@ -228,6 +231,8 @@ Verified commands and outcomes:
   - expected outcome: `PASS: Renderer produced visible output.` with `14 non-empty frames out of 20 sampled`
 - `timeout 8 /home/spark-advantage/pokefirered-native/build/pfr_play`
   - expected outcome: the interactive SDL loop survives until `timeout` kills it, with no immediate crash during boot
+- `timeout 12 /home/spark-advantage/pokefirered-native/build/pfr_play /home/spark-advantage/pokefirered-native/tests/pfr_play_oak_path.input`
+  - expected outcome: the trace reports `loaded scripted input file ...`, reaches `StartNewGameScene`, advances through Oak milestones up to at least `gOakSpeech_Text_AskPlayerGender`, and dumps milestone frames under `pfr_play_frames/`
 - `/home/spark-advantage/pokefirered-native/build/pfr_lz77` on a known simple blob
   - expected outcome: successful decode to `ABCD`
 
