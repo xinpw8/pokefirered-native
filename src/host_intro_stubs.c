@@ -23,22 +23,15 @@ u32 gHostIntroStubGameCubeMultiBootMainCalls = 0;
 u32 gHostIntroStubGameCubeMultiBootHandleSerialCalls = 0;
 u32 gHostIntroStubGameCubeMultiBootQuitCalls = 0;
 u32 gHostIntroStubGameCubeMultiBootExecuteProgramCalls = 0;
-u32 gHostIntroStubResetMenuAndMonGlobalsCalls = 0;
-/* Save_ResetSaveCounters and LoadGameSave now from save.c */
-u32 gHostIntroStubSav2ClearSetDefaultCalls = 0;
-u32 gHostIntroStubSetPokemonCryStereoCalls = 0;
-u32 gHostIntroStubSerialCBCalls = 0;
-u32 gHostIntroStubResetSerialCalls = 0;
+/* ResetMenuAndMonGlobals, Sav2_ClearSetDefault now from new_game.c */
+/* SetPokemonCryStereo, SerialCB, ResetSerial now upstream */
 u32 gHostIntroStubResetTempTileDataBuffersCalls = 0;
 u32 gHostIntroStubFreeTempTileDataBuffersCalls = 0;
 u32 gHostIntroStubDecompressAndCopyTileDataToVramCalls = 0;
 u32 gHostIntroStubResetBgPositionsCalls = 0;
 u32 gHostIntroStubStartBlendTaskCalls = 0;
 u32 gHostIntroStubIsBlendTaskActiveCalls = 0;
-/* m4aSongNumStart now from m4a.c */
-u32 gHostIntroStubPlaySECalls = 0;
-u32 gHostIntroStubPlayCryByModeCalls = 0;
-u32 gHostIntroStubLastPokemonCryStereoValue = 0;
+/* m4aSongNumStart, PlaySE, PlayCry_ByMode now upstream */
 u8 gHostIntroStubLoadGameSaveResult = SAVE_STATUS_EMPTY;
 /* gSaveFileStatus now from save.c */
 
@@ -52,11 +45,7 @@ void HostIntroStubReset(void)
     gHostIntroStubGameCubeMultiBootHandleSerialCalls = 0;
     gHostIntroStubGameCubeMultiBootQuitCalls = 0;
     gHostIntroStubGameCubeMultiBootExecuteProgramCalls = 0;
-    gHostIntroStubResetMenuAndMonGlobalsCalls = 0;
-    gHostIntroStubSav2ClearSetDefaultCalls = 0;
-    gHostIntroStubSetPokemonCryStereoCalls = 0;
-    gHostIntroStubSerialCBCalls = 0;
-    gHostIntroStubResetSerialCalls = 0;
+    /* removed counters for upstream functions */
     gHostIntroStubResetTempTileDataBuffersCalls = 0;
     gHostIntroStubFreeTempTileDataBuffersCalls = 0;
     gHostIntroStubDecompressAndCopyTileDataToVramCalls = 0;
