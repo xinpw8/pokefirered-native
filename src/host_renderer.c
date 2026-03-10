@@ -409,6 +409,19 @@ static void RenderTextBgScanline(int bgNum, int y)
         if (colorIdx == 0)
             continue;
 
+#ifdef PFR_DIAG
+        {
+            static u32 sDiagLastFrame = (u32)-1;
+            extern u32 HostDisplayGetFrameCount(void);
+            u32 curFrame = HostDisplayGetFrameCount();
+            if (curFrame != sDiagLastFrame) {
+                sDiagLastFrame = curFrame;
+                fprintf(stderr, "[PFR_DIAG] RenderTextBg: bg=%d bgcnt=0x%04X charBase=0x%X screenBase=0x%X tile=%d tpx=%d tpy=%d colorIdx=%d palNum=%d\n",
+                        bgNum, bgcnt, charBase, screenBase, tileNum, tpx, tpy, colorIdx, palNum);
+            }
+        }
+#endif
+
         color = is8bpp ? PPU_BG_PLTT[colorIdx]
                        : PPU_BG_PLTT[palNum * 16 + colorIdx];
         CompositPixel(x, color, bgNum, priority);

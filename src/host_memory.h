@@ -5,5 +5,6 @@
 
 void HostMemoryInit(void);
 void HostMemoryReset(void);
+void HostMemoryResetByFlags(u32 resetFlags);
 
 #endif

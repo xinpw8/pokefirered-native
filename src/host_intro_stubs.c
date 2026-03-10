@@ -35,10 +35,19 @@ u32 gHostIntroStubIsBlendTaskActiveCalls = 0;
 u8 gHostIntroStubLoadGameSaveResult = SAVE_STATUS_EMPTY;
 /* gSaveFileStatus now from save.c */
 
-const u32 gMultiBootProgram_PokemonColosseum_Start[1] = {0};
-const u32 gMultiBootProgram_PokemonColosseum_End[1] = {0};
-const u32 gMultiBootProgram_EReader_Start[1] = {0};
-const u32 gMultiBootProgram_EReader_End[1] = {0};
+__asm__(
+    ".pushsection .rodata.host_multiboot_payload,\"a\",@progbits\n"
+    ".global gMultiBootProgram_PokemonColosseum_Start\n"
+    "gMultiBootProgram_PokemonColosseum_Start:\n"
+    ".incbin \"../third_party/pokefirered/data/mb_colosseum.gba\"\n"
+    ".global gMultiBootProgram_PokemonColosseum_End\n"
+    "gMultiBootProgram_PokemonColosseum_End:\n"
+    ".global gMultiBootProgram_EReader_Start\n"
+    "gMultiBootProgram_EReader_Start:\n"
+    ".incbin \"../third_party/pokefirered/data/mb_ereader.gba\"\n"
+    ".global gMultiBootProgram_EReader_End\n"
+    "gMultiBootProgram_EReader_End:\n"
+    ".popsection\n");
 
 void HostIntroStubReset(void)
 {

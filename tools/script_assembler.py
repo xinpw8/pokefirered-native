@@ -41,8 +41,21 @@ def safe_eval(expr: str, syms: dict) -> "int | None":
         return None
     # Replace known symbols with their values
     replaced = expr
-    for name, val in sorted(syms.items(), key=lambda kv: -len(kv[0])):
-        replaced = re.sub(r'\b' + re.escape(name) + r'\b', str(val), replaced)
+    tokens = sorted(
+        {
+            token for token in re.findall(r'(?:\.[A-Za-z_][\w\.]*|[A-Za-z_]\w*)', expr)
+            if token in syms
+        },
+        key=len,
+        reverse=True,
+    )
+    for name in tokens:
+        val = syms[name]
+        replaced = re.sub(
+            r'(?<![A-Za-z0-9_.])' + re.escape(name) + r'(?![A-Za-z0-9_.])',
+            str(val),
+            replaced,
+        )
     # Let eval() catch NameError for any remaining unresolvable identifiers.
     # Do NOT pre-check with a regex — that would reject valid hex literals like
     # '0x3a' because the letter 'x' matches [A-Za-z_].
@@ -92,7 +105,7 @@ def parse_4byte(expr: str, syms: dict) -> "tuple":
         return ('num', val)
 
     # Extract leading identifier
-    m = re.match(r'^([A-Za-z_]\w*)(.*)', expr)
+    m = re.match(r'^((?:[A-Za-z_]\w*|\.[A-Za-z_][\w\.]*))(.*)', expr)
     if not m:
         return ('num', 0)
 
@@ -127,14 +140,31 @@ def parse_4byte(expr: str, syms: dict) -> "tuple":
 class Macro:
     def __init__(self, name: str, params: list, body: list):
         self.name = name   # str
-        self.params = params  # list of (name, required, default)
+        self.params = params  # list of (name, required, default, is_vararg)
         self.body = body   # list of raw line strings
+        self._expand_serial = 0
 
     def expand(self, args: list) -> list:
         bindings = {}
-        for i, (pname, required, default) in enumerate(self.params):
-            if i < len(args):
-                bindings[pname] = args[i].strip()
+        arg_index = 0
+        for pname, required, default, is_vararg in self.params:
+            if is_vararg:
+                if arg_index < len(args):
+                    bindings[pname] = ', '.join(arg.strip() for arg in args[arg_index:])
+                elif default is not None:
+                    bindings[pname] = default
+                elif required:
+                    sys.stderr.write(f"Warning: missing required vararg {pname} "
+                                     f"for macro {self.name}, using empty string\n")
+                    bindings[pname] = ''
+                else:
+                    bindings[pname] = ''
+                arg_index = len(args)
+                continue
+
+            if arg_index < len(args):
+                bindings[pname] = args[arg_index].strip()
+                arg_index += 1
             elif default is not None:
                 bindings[pname] = default
             elif required:
@@ -144,17 +174,20 @@ class Macro:
             else:
                 bindings[pname] = ''
 
+        expansion_id = self._expand_serial
+        self._expand_serial += 1
         expanded = []
         for line in self.body:
             result = line
-            for name, val in bindings.items():
+            for name, val in sorted(bindings.items(), key=lambda item: -len(item[0])):
                 result = result.replace(f'\\{name}', val)
+            result = result.replace(r'\@', str(expansion_id))
             expanded.append(result)
         return expanded
 
 
 def parse_macro_params(params_str: str) -> list:
-    """Parse 'name:req, name2=default, name3:req' into param tuples."""
+    """Parse GAS macro params like 'name:req, argv:vararg, x=1' into tuples."""
     params = []
     if not params_str.strip():
         return params
@@ -162,14 +195,15 @@ def parse_macro_params(params_str: str) -> list:
         p = p.strip()
         if not p:
             continue
-        if ':req' in p:
-            pname = p.replace(':req', '').strip()
-            params.append((pname, True, None))
-        elif '=' in p:
-            pname, pdefault = p.split('=', 1)
-            params.append((pname.strip(), False, pdefault.strip()))
-        else:
-            params.append((p, False, None))
+        default = None
+        if '=' in p:
+            p, default = p.split('=', 1)
+            default = default.strip()
+
+        parts = [part.strip() for part in p.split(':') if part.strip()]
+        pname = parts[0]
+        qualifiers = set(parts[1:])
+        params.append((pname, 'req' in qualifiers, default, 'vararg' in qualifiers))
     return params
 
 
@@ -477,13 +511,13 @@ def expand_line(line: str, macros: dict, syms: dict, depth=0) -> list:
             return [stripped]
 
     # Label definitions: Name:: or Name:
-    if re.match(r'^[A-Za-z_]\w*::?\s*$', stripped):
+    if re.match(r'^(?:[A-Za-z_]\w*|\.[A-Za-z_][\w\.]*)\s*::?\s*$', stripped):
         return [stripped]
 
     # Line might be "Label:   rest" — split label from rest
-    m = re.match(r'^([A-Za-z_]\w*::?)\s+(.*)', stripped)
+    m = re.match(r'^((?:[A-Za-z_]\w*|\.[A-Za-z_][\w\.]*)\s*::?)\s+(.*)', stripped)
     if m:
-        label_part = m.group(1)
+        label_part = re.sub(r'\s+(?=::?$)', '', m.group(1))
         rest_part = m.group(2)
         expanded_rest = expand_line('\t' + rest_part, macros, syms, depth)
         return [label_part] + expanded_rest
@@ -504,6 +538,9 @@ def expand_line(line: str, macros: dict, syms: dict, depth=0) -> list:
         #   - .ifnb blocks select the correct branch for trycompare/goto_if_*
         #   - .if EXPR blocks evaluate numeric conditions (compare, stringvar)
         body = apply_conditionals(body, syms)
+        if any(re.match(r'^\s*\.macro\b', bline) for bline in body):
+            macros.update(load_macros_from_lines(body))
+            return []
         result = []
         for bline in body:
             result.extend(expand_line(bline, macros, syms, depth + 1))
@@ -708,6 +745,7 @@ class Assembler:
         cmd = [
             'gcc', '-E', '-P', '-x', 'assembler-with-cpp',
             '-I', os.path.join(self.pokefiredir, 'include'),
+            '-include', os.path.join(self.pokefiredir, 'include/constants/event_object_movement.h'),
             '-',
         ]
         try:
@@ -814,7 +852,7 @@ class Assembler:
                 continue
 
             # Label definitions
-            m = re.match(r'^([A-Za-z_]\w*)(::?)\s*$', stripped)
+            m = re.match(r'^((?:[A-Za-z_]\w*|\.[A-Za-z_][\w\.]*))\s*(::?)\s*$', stripped)
             if m:
                 self.labels[m.group(1)] = offset
                 continue
@@ -892,7 +930,7 @@ class Assembler:
                 continue
 
             # Label definitions
-            m = re.match(r'^([A-Za-z_]\w*)(::?)\s*$', stripped)
+            m = re.match(r'^((?:[A-Za-z_]\w*|\.[A-Za-z_][\w\.]*))\s*(::?)\s*$', stripped)
             if m:
                 # Label offset already collected in pass1; nothing to emit
                 continue
@@ -930,7 +968,7 @@ class Assembler:
             m = re.match(r'^\.byte\s+(.+)', stripped)
             if m:
                 for arg in split_args(m.group(1)):
-                    val = safe_eval(arg.strip(), self.syms)
+                    val = safe_eval(arg.strip(), self.syms | self.labels)
                     if val is None:
                         sys.stderr.write(f"Warning: .byte: unresolved '{arg}', using 0\n")
                         val = 0
@@ -941,7 +979,7 @@ class Assembler:
             m = re.match(r'^\.(?:2byte|hword)\s+(.+)', stripped)
             if m:
                 for arg in split_args(m.group(1)):
-                    val = safe_eval(arg.strip(), self.syms)
+                    val = safe_eval(arg.strip(), self.syms | self.labels)
                     if val is None:
                         sys.stderr.write(f"Warning: .2byte: unresolved '{arg}', using 0\n")
                         val = 0
@@ -954,7 +992,7 @@ class Assembler:
             m = re.match(r'^\.(?:4byte|word)\s+(.+)', stripped)
             if m:
                 for arg in split_args(m.group(1)):
-                    kind, *rest = parse_4byte(arg.strip(), self.syms)
+                    kind, *rest = parse_4byte(arg.strip(), self.syms | self.labels)
                     if kind == 'num':
                         val = rest[0] & 0xFFFFFFFF
                         self.data.extend([
@@ -1079,7 +1117,7 @@ def emit_c(asm: Assembler, data_name: str, prefix: str, patch_fn: str,
     # Emit GCC inline-asm symbol aliases for all labels
     # Sort by offset for readability
     sorted_labels = [(n, o) for n, o in sorted(asm.labels.items(), key=lambda kv: kv[1])
-                     if n not in exclude_labels]
+                     if n not in exclude_labels and not n.startswith('.')]
 
     add("/* Symbol aliases: each script label points into the data array. */")
     add("/* These satisfy 'extern const u8 LabelName[]' in upstream headers. */")

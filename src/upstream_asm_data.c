@@ -8,8 +8,9 @@
  * BattleScript_* bytecode: now in src/upstream_battle_scripts.c (generated).
  * EventScript_* bytecode:  now in src/upstream_event_scripts.c  (generated).
  *
- * Data tables: sized correctly with NULL/zero entries where the target symbols
- * are not yet available as C data.
+ * Data tables that must exist as host-native C structures because upstream
+ * assembly uses 32-bit GBA pointer layouts that are not valid on a 64-bit
+ * native build.
  */
 
 #include "global.h"
@@ -25,6 +26,18 @@
 #include "constants/maps.h"
 #include "battle_scripts.h"
 #include "upstream_battle_scripts.h"
+#include "upstream_battle_ai_scripts.h"
+#include "upstream_field_effect_scripts.h"
+
+#define HOST_PTR_BYTES 8
+#define G_SCRIPT_CMD_TABLE_COUNT 0xD5
+#define G_STD_SCRIPTS_COUNT 10
+#define G_MYSTERY_EVENT_SCRIPT_CMD_COUNT 17
+
+#define STR_HELPER(x) #x
+#define STR(x) STR_HELPER(x)
+
+_Static_assert(sizeof(void *) == HOST_PTR_BYTES, "native asm tables expect 64-bit pointers");
 
 /* BattleScript_* symbols are now defined in upstream_battle_scripts.c */
 /* EventScript_* symbols are now defined in upstream_event_scripts.c   */
@@ -469,15 +482,19 @@ ScrCmdFunc gScriptCmdTable[] = {
     ScrCmd_bufferitemnameplural,         /* 0xd4 */
 };
 
-/* gScriptCmdTableEnd: one past the last valid entry (points to nop sentinel) */
-ScrCmdFunc gScriptCmdTableEnd[] = {
-    ScrCmd_nop,
-};
+_Static_assert(ARRAY_COUNT(gScriptCmdTable) == G_SCRIPT_CMD_TABLE_COUNT,
+               "gScriptCmdTable size drifted from script_cmd_table.inc");
+__asm__(
+    ".global gScriptCmdTableEnd\n\t"
+    "gScriptCmdTableEnd = gScriptCmdTable + " STR(G_SCRIPT_CMD_TABLE_COUNT * HOST_PTR_BYTES) "\n\t"
+);
 
 /* =========================================================================
  * Section 4: gSpecialVars
  * Matches the .4byte list in data/event_scripts.s (21 entries).
  * ========================================================================= */
+
+extern u16 gSpecialVar_0x8014;
 
 u16 *const gSpecialVars[] = {
     &gSpecialVar_0x8000,
@@ -500,9 +517,7 @@ u16 *const gSpecialVars[] = {
     &gSpecialVar_MonBoxPos,
     &gSpecialVar_TextColor,
     &gSpecialVar_PrevTextColor,
-    /* gSpecialVar_0x8014 is defined in event_data.c but not declared in any
-     * public header — forward-declare it here for the table entry. */
-    /* index 20 = 0x8014 */ NULL,
+    &gSpecialVar_0x8014,
 };
 
 /*
@@ -534,7 +549,129 @@ const u8 *const gStdScripts[] = {
     Std_PutItemAway,      /* STD_PUT_ITEM_AWAY */
     Std_ReceivedItem,     /* STD_RECEIVED_ITEM */
 };
-const u8 *const gStdScriptsEnd[] = { NULL };
+_Static_assert(ARRAY_COUNT(gStdScripts) == G_STD_SCRIPTS_COUNT,
+               "gStdScripts size drifted from data/event_scripts.s");
+__asm__(
+    ".global gStdScriptsEnd\n\t"
+    "gStdScriptsEnd = gStdScripts + " STR(G_STD_SCRIPTS_COUNT * HOST_PTR_BYTES) "\n\t"
+);
+
+/*
+ * field_effect_scripts.s is generated into host-native bytecode by
+ * tools/script_assembler.py. The table itself still needs to be a true native
+ * pointer array because field_effect.c indexes it directly.
+ */
+const u8 *const gFieldEffectScriptPointers[] = {
+    gFldEffScript_ExclamationMarkIcon,
+    gFldEffScript_UseCutOnGrass,
+    gFldEffScript_UseCutOnTree,
+    gFldEffScript_Shadow,
+    gFldEffScript_TallGrass,
+    gFldEffScript_Ripple,
+    gFldEffScript_FieldMoveShowMon,
+    gFldEffScript_Ash,
+    gFldEffScript_SurfBlob,
+    gFldEffScript_UseSurf,
+    gFldEffScript_Dust,
+    gFldEffScript_UseSecretPowerCave,
+    gFldEffScript_JumpTallGrass,
+    gFldEffScript_SandFootprints,
+    gFldEffScript_JumpBigSplash,
+    gFldEffScript_Splash,
+    gFldEffScript_JumpSmallSplash,
+    gFldEffScript_LongGrass,
+    gFldEffScript_JumpLongGrass,
+    gFldEffScript_UnusedGrass,
+    gFldEffScript_UnusedGrass2,
+    gFldEffScript_UnusedSand,
+    gFldEffScript_UnusedWaterSurfacing,
+    gFldEffScript_BerryTreeGrowthSparkle,
+    gFldEffScript_DeepSandFootprints,
+    gFldEffScript_PokecenterHeal,
+    gFldEffScript_UseSecretPowerTree,
+    gFldEffScript_UseSecretPowerShrub,
+    gFldEffScript_TreeDisguise,
+    gFldEffScript_MountainDisguise,
+    gFldEffScript_NpcflyOut,
+    gFldEffScript_FlyOut,
+    gFldEffScript_FlyIn,
+    gFldEffScript_QuestionMarkIcon,
+    gFldEffScript_FeetInFlowingWater,
+    gFldEffScript_BikeTireTracks,
+    gFldEffScript_SandDisguise,
+    gFldEffScript_UseRockSmash,
+    gFldEffScript_UseDig,
+    gFldEffScript_SandPile,
+    gFldEffScript_UseStrength,
+    gFldEffScript_ShortGrass,
+    gFldEffScript_HotSpringsWater,
+    gFldEffScript_UseWaterfall,
+    gFldEffScript_UseDive,
+    gFldEffScript_Pokeball,
+    gFldEffScript_XIcon,
+    gFldEffScript_Nop47,
+    gFldEffScript_Nop48,
+    gFldEffScript_PopOutOfAsh,
+    gFldEffScript_LavaridgeGymWarp,
+    gFldEffScript_SweetScent,
+    gFldEffScript_SandPillar,
+    gFldEffScript_Bubbles,
+    gFldEffScript_Sparkle,
+    gFldEffScript_SecretPowerCave,
+    gFldEffScript_SecretPowerTree,
+    gFldEffScript_SecretPowerShrub,
+    gFldEffScript_CutGrass,
+    gFldEffScript_FieldMoveShowMonInit,
+    gFldEffScript_UseFlyAncientTomb,
+    gFldEffScript_PcturnOn,
+    gFldEffScript_HallOfFameRecord,
+    gFldEffScript_UseTeleport,
+    gFldEffScript_SmileyFaceIcon,
+    gFldEffScript_UseVsSeeker,
+    gFldEffScript_DoubleExclMarkIcon,
+    gFldEffScript_MoveDeoxysRock,
+    gFldEffScript_DestroyDeoxysRock,
+    gFldEffScript_PhotoFlash,
+};
+
+/*
+ * battle_ai_scripts.s is likewise generated into host-native bytecode, while
+ * the jump table must be a real host pointer array.
+ */
+u8 *gBattleAI_ScriptsTable[] = {
+    (u8 *)AI_CheckBadMove,
+    (u8 *)AI_CheckViability,
+    (u8 *)AI_TryToFaint,
+    (u8 *)AI_SetupFirstTurn,
+    (u8 *)AI_Risky,
+    (u8 *)AI_PreferStrongestMove,
+    (u8 *)AI_PreferBatonPass,
+    (u8 *)AI_DoubleBattle,
+    (u8 *)AI_HPAware,
+    (u8 *)AI_Unknown,
+    (u8 *)AI_Ret,
+    (u8 *)AI_Ret,
+    (u8 *)AI_Ret,
+    (u8 *)AI_Ret,
+    (u8 *)AI_Ret,
+    (u8 *)AI_Ret,
+    (u8 *)AI_Ret,
+    (u8 *)AI_Ret,
+    (u8 *)AI_Ret,
+    (u8 *)AI_Ret,
+    (u8 *)AI_Ret,
+    (u8 *)AI_Ret,
+    (u8 *)AI_Ret,
+    (u8 *)AI_Ret,
+    (u8 *)AI_Ret,
+    (u8 *)AI_Ret,
+    (u8 *)AI_Ret,
+    (u8 *)AI_Ret,
+    (u8 *)AI_Ret,
+    (u8 *)AI_Roaming,
+    (u8 *)AI_Safari,
+    (u8 *)AI_FirstBattle,
+};
 
 /* =========================================================================
  * Section 5: gMovesWithQuietBGM
@@ -602,64 +739,16 @@ ScrCmdFunc gMysteryEventScriptCmdTable[] = {
     MEScrCmd_crc,
 };
 
-ScrCmdFunc gMysteryEventScriptCmdTableEnd[] = {
-    MEScrCmd_nop,
-};
+_Static_assert(ARRAY_COUNT(gMysteryEventScriptCmdTable) == G_MYSTERY_EVENT_SCRIPT_CMD_COUNT,
+               "gMysteryEventScriptCmdTable size drifted from mystery_event_script_cmd_table.inc");
+__asm__(
+    ".global gMysteryEventScriptCmdTableEnd\n\t"
+    "gMysteryEventScriptCmdTableEnd = gMysteryEventScriptCmdTable + "
+        STR(G_MYSTERY_EVENT_SCRIPT_CMD_COUNT * HOST_PTR_BYTES) "\n\t"
+);
 
-/* =========================================================================
- * Section 8: voicegroup000
- * Type: const struct ToneData (from m4a_internal.h).
- * Minimal definition — type=0, key=60, all zeros.
- * ========================================================================= */
-
-const struct ToneData voicegroup000 = {
-    .type      = 0,
-    .key       = 60,
-    .length    = 0,
-    .pan_sweep = 0,
-    .wav       = NULL,
-    .attack    = 0,
-    .decay     = 0,
-    .sustain   = 0,
-    .release   = 0,
-};
-
-/* =========================================================================
- * Section 8b: mus_victory_gym_leader
- * Type: const struct SongHeader (from m4a_internal.h).
- * Minimal valid header with 0 tracks — will play silence.
- * ========================================================================= */
-
-const struct SongHeader mus_victory_gym_leader = {
-    .trackCount = 0,
-    .blockCount = 0,
-    .priority   = 0,
-    .reverb     = 0,
-    .tone       = NULL,
-    /* .part[] not initialised (zero tracks) */
-};
-
-/* =========================================================================
- * Section 9: gSongTable
- * 347 entries from sound/song_table.inc, each {header, ms, me}.
- * We do NOT reference undefined song-label symbols; all headers are NULL.
- * Code accesses gSongTable[songId] where songId comes from constants/songs.h.
- * 347 null-filled entries covers the full table safely.
- * ========================================================================= */
-
-const struct Song gSongTable[347] = {
-    /* All entries zeroed — header=NULL, ms=0, me=0 */
-};
-
-/* =========================================================================
- * Section 10: gCryTable, gCryTable_Reverse
- * sound.c accesses: &gCryTable[(128 * tableId) + speciesIndex]
- * There are 2 tableIds (0 and 1), 128 entries each = 256 total per table.
- * Provide 256-entry arrays of zeroed ToneData structs.
- * ========================================================================= */
-
-struct ToneData gCryTable[256]         = {{0}};
-struct ToneData gCryTable_Reverse[256] = {{0}};
+/* Sections 8–10 (voicegroup000, gSongTable, gCryTable) now provided by
+ * src/upstream_sound_data.c (auto-generated by tools/sound_data_to_c.py).  */
 
 /* =========================================================================
  * Section 11: gMPlayTable, gNumMusicPlayers, gMaxLines
@@ -721,32 +810,6 @@ const struct MusicPlayer gMPlayTable[] = {
  */
 char gNumMusicPlayers[4] = {0};  /* size=4 → NUM_MUSIC_PLAYERS cast gives address, not 4 */
 char gMaxLines[1]        = {0};  /* size=1 → MAX_LINES cast gives address, not 0 */
-
-/* =========================================================================
- * Section 12: gMapGroups, gMapLayouts, Route1_Layout
- *
- * gMapGroups: array of 43 pointers (one per map group), all NULL.
- * gMapLayouts: array of 383 pointers (one per layout id-1), all NULL.
- * Route1_Layout: MapLayout struct with zero/NULL values.
- * ========================================================================= */
-
-/* MapHeader is needed for gMapGroups type */
-struct MapHeader;
-
-const struct MapHeader *const *gMapGroups[43] = { NULL };
-
-const struct MapLayout *gMapLayouts[383] = { NULL };
-
-const struct MapLayout Route1_Layout = {
-    .width            = 0,
-    .height           = 0,
-    .border           = NULL,
-    .map              = NULL,
-    .primaryTileset   = NULL,
-    .secondaryTileset = NULL,
-    .borderWidth      = 0,
-    .borderHeight     = 0,
-};
 
 /* =========================================================================
  * Section 13: gBattleScriptsForMoveEffects and related ball/item/safari tables
@@ -990,104 +1053,47 @@ const u8 *const gBattleScriptsForMoveEffects[] = {
     BattleScript_EffectCamouflage,           /* EFFECT_CAMOUFLAGE */
 };
 
-/*
- * battle_scripts_2.s is not compiled in the native build (ARM Thumb).
- * Use our minimal 'end' stubs for all table entries that would otherwise
- * reference those symbols.
- *
- * gBattlescriptsForBallThrow: 13 entries (data/battle_scripts_2.s lines 21-35)
- * gBattlescriptsForUsingItem: 6 entries (battle_scripts_2.s lines 36-43)
- * gBattlescriptsForRunningByItem: 2 entries (battle_scripts_2.s lines 44-47)
- * gBattlescriptsForSafariActions: 4 entries (battle_scripts_2.s lines 48-51)
- */
-
-/* Minimal script stubs for ball/item/safari actions (battle 'end' opcode) */
-static const u8 sBattleScript_BallThrowStub[]        = {0x3d};
-static const u8 sBattleScript_SafariBallStub[]       = {0x3d};
-static const u8 sBattleScript_PlayerUseItemStub[]    = {0x3d};
-static const u8 sBattleScript_AIUseItemStub[]        = {0x3d};
-static const u8 sBattleScript_RunByItemStub[]        = {0x3d};
-static const u8 sBattleScript_SafariActionStub[]     = {0x3d};
-
 const u8 *const gBattlescriptsForBallThrow[] = {
-    sBattleScript_BallThrowStub,   /* Poke Ball */
-    sBattleScript_BallThrowStub,   /* Great Ball */
-    sBattleScript_BallThrowStub,   /* Ultra Ball */
-    sBattleScript_BallThrowStub,   /* Master Ball */
-    sBattleScript_BallThrowStub,   /* Safari Ball (throw) */
-    sBattleScript_SafariBallStub,  /* Safari Ball (safari) */
-    sBattleScript_BallThrowStub,   /* Net Ball */
-    sBattleScript_BallThrowStub,   /* Dive Ball */
-    sBattleScript_BallThrowStub,   /* Nest Ball */
-    sBattleScript_BallThrowStub,   /* Repeat Ball */
-    sBattleScript_BallThrowStub,   /* Timer Ball */
-    sBattleScript_BallThrowStub,   /* Luxury Ball */
-    sBattleScript_BallThrowStub,   /* Premier Ball */
+    BattleScript_ThrowBall,        /* Poke Ball */
+    BattleScript_ThrowBall,        /* Great Ball */
+    BattleScript_ThrowBall,        /* Ultra Ball */
+    BattleScript_ThrowBall,        /* Master Ball */
+    BattleScript_ThrowBall,        /* Safari Ball (throw) */
+    BattleScript_ThrowSafariBall,  /* Safari Ball (safari) */
+    BattleScript_ThrowBall,        /* Net Ball */
+    BattleScript_ThrowBall,        /* Dive Ball */
+    BattleScript_ThrowBall,        /* Nest Ball */
+    BattleScript_ThrowBall,        /* Repeat Ball */
+    BattleScript_ThrowBall,        /* Timer Ball */
+    BattleScript_ThrowBall,        /* Luxury Ball */
+    BattleScript_ThrowBall,        /* Premier Ball */
 };
 
 const u8 *const gBattlescriptsForUsingItem[] = {
-    sBattleScript_PlayerUseItemStub,  /* player use item */
-    sBattleScript_AIUseItemStub,      /* AI full restore / HP heal */
-    sBattleScript_AIUseItemStub,      /* AI full restore / HP heal (2) */
-    sBattleScript_AIUseItemStub,      /* AI stat restore */
-    sBattleScript_AIUseItemStub,      /* AI X-stat */
-    sBattleScript_AIUseItemStub,      /* AI guard spec */
+    BattleScript_PlayerUseItem,             /* player use item */
+    BattleScript_AIUseFullRestoreOrHpHeal,  /* AI full restore / HP heal */
+    BattleScript_AIUseFullRestoreOrHpHeal,  /* AI full restore / HP heal (2) */
+    BattleScript_AIUseStatRestore,          /* AI stat restore */
+    BattleScript_AIUseXstat,                /* AI X-stat */
+    BattleScript_AIUseGuardSpec,            /* AI guard spec */
 };
 
 const u8 *const gBattlescriptsForRunningByItem[] = {
-    sBattleScript_RunByItemStub,   /* Fluffy Tail */
-    sBattleScript_RunByItemStub,   /* Poke Flute */
+    BattleScript_UseFluffyTail,  /* Fluffy Tail */
+    BattleScript_UsePokeFlute,   /* Poke Flute */
 };
 
 const u8 *const gBattlescriptsForSafariActions[] = {
-    sBattleScript_SafariActionStub,  /* watches carefully */
-    sBattleScript_SafariActionStub,  /* throw rock */
-    sBattleScript_SafariActionStub,  /* throw bait */
-    sBattleScript_SafariActionStub,  /* leftover (Wally) */
+    BattleScript_WatchesCarefully,         /* watches carefully */
+    BattleScript_ThrowRock,                /* throw rock */
+    BattleScript_ThrowBait,                /* throw bait */
+    BattleScript_LeftoverWallyPrepToThrow, /* leftover (Wally) */
 };
-
-/* =========================================================================
- * Section 14: gBattleAI_ScriptsTable, gBattleAnims_*
- *
- * These reference AI/animation scripts NOT in our 302 list.
- * Provide NULL-filled arrays of the correct sizes so indexing is safe.
- *
- * Sizes (from assembly):
- *   gBattleAI_ScriptsTable:          22 entries (battle_ai_scripts.s lines 18-39)
- *   gBattleAnims_Moves:             356 entries (battle_anim_scripts.s, MOVE_NONE..MOVE_COUNT)
- *   gBattleAnims_StatusConditions:    9 entries (battle_anim_scripts.s lines 381-389)
- *   gBattleAnims_General:            28 entries (battle_anim_scripts.s lines 393-420)
- *   gBattleAnims_Special:             7 entries (battle_anim_scripts.s lines 424-430)
- * ========================================================================= */
-
-const u8 *const gBattleAI_ScriptsTable[22]             = {NULL};
-const u8 *const gBattleAnims_Moves[356]                = {NULL};
-const u8 *const gBattleAnims_StatusConditions[9]       = {NULL};
-const u8 *const gBattleAnims_General[28]               = {NULL};
-const u8 *const gBattleAnims_Special[7]                = {NULL};
-
-/* =========================================================================
- * Section 15: gFieldEffectScriptPointers
- * 69 entries (field_effect_scripts.s lines 4-72)
- * ========================================================================= */
-
-const u8 *const gFieldEffectScriptPointers[69] = {NULL};
 
 /* =========================================================================
  * Additional symbols from ASM files that are not in the original 302-symbol
  * list but are needed to link the final executables.
  * ========================================================================= */
-
-/*
- * gSpecials / gSpecialsEnd
- * data/specials.inc (445 entries, all C functions).
- * The table is indexed by the argument to the 'special' script command.
- * A NULL-filled table is safe: ScrCmd_special/specialvar will be unable
- * to dispatch (they check bounds against gSpecialsEnd) so any 'special'
- * bytecode call will silently do nothing rather than crash.
- */
-u16 (*const gSpecials[445])(void)  = {NULL};
-u16 (*const gSpecialsEnd[1])(void) = {NULL};
 
 /* EventScript_ReleaseEnd — now in upstream_event_scripts.c (real bytecode) */
 /* CableClub_Text_*       — now in upstream_event_scripts.c (real text data) */

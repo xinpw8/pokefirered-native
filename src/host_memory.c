@@ -31,6 +31,19 @@ static const struct HostRegion sHostRegions[] = {
 
 static bool8 sHostMemoryMapped = FALSE;
 
+static void ResetAffineBgIdentity(void)
+{
+    *(vu16 *)(REG_BASE + REG_OFFSET_BG2PA) = 0x0100;
+    *(vu16 *)(REG_BASE + REG_OFFSET_BG2PD) = 0x0100;
+    *(vu16 *)(REG_BASE + REG_OFFSET_BG3PA) = 0x0100;
+    *(vu16 *)(REG_BASE + REG_OFFSET_BG3PD) = 0x0100;
+}
+
+static void ZeroIoRange(u32 offset, size_t size)
+{
+    memset((void *)(REG_BASE + offset), 0, size);
+}
+
 static void MapRegion(const struct HostRegion *region)
 {
     void *mapped;
@@ -72,20 +85,45 @@ void HostMemoryInit(void)
 
 void HostMemoryReset(void)
 {
-    size_t i;
+    HostMemoryResetByFlags(RESET_ALL);
+}
 
+void HostMemoryResetByFlags(u32 resetFlags)
+{
     if (!sHostMemoryMapped)
         return;
 
-    for (i = 0; i < ARRAY_COUNT(sHostRegions); ++i)
-        memset((void *)sHostRegions[i].base, 0, sHostRegions[i].size);
+    if (resetFlags & RESET_EWRAM)
+        memset((void *)EWRAM_START, 0, EWRAM_END - EWRAM_START);
+    if (resetFlags & RESET_IWRAM)
+        memset((void *)IWRAM_START, 0, IWRAM_END - IWRAM_START);
+    if (resetFlags & RESET_PALETTE)
+        memset((void *)PLTT, 0, PLTT_SIZE);
+    if (resetFlags & RESET_VRAM)
+        memset((void *)VRAM, 0, VRAM_SIZE);
+    if (resetFlags & RESET_OAM)
+        memset((void *)OAM, 0, OAM_SIZE);
 
-    /* GBA hardware defaults: affine BG params reset to identity (1.0 in 8.8 fixed) */
-    *(vu16 *)(REG_BASE + 0x20) = 0x0100; /* BG2PA */
-    *(vu16 *)(REG_BASE + 0x26) = 0x0100; /* BG2PD */
-    *(vu16 *)(REG_BASE + 0x30) = 0x0100; /* BG3PA */
-    *(vu16 *)(REG_BASE + 0x36) = 0x0100; /* BG3PD */
+    if (resetFlags & RESET_SOUND_REGS)
+        ZeroIoRange(REG_OFFSET_SOUND1CNT_L, REG_OFFSET_FIFO_B + sizeof(u32) - REG_OFFSET_SOUND1CNT_L);
 
-    HostDmaReset();
-    HostTimerReset();
+    if (resetFlags & RESET_SIO_REGS)
+    {
+        ZeroIoRange(REG_OFFSET_SIODATA32, REG_OFFSET_KEYINPUT - REG_OFFSET_SIODATA32);
+        ZeroIoRange(REG_OFFSET_RCNT, sizeof(u16));
+        ZeroIoRange(REG_OFFSET_JOYCNT, REG_OFFSET_JOYSTAT + sizeof(u16) - REG_OFFSET_JOYCNT);
+    }
+
+    if (resetFlags & RESET_REGS)
+    {
+        ZeroIoRange(REG_OFFSET_DISPCNT, REG_OFFSET_SOUND1CNT_L - REG_OFFSET_DISPCNT);
+        ZeroIoRange(REG_OFFSET_DMA0, REG_OFFSET_TM0CNT - REG_OFFSET_DMA0);
+        ZeroIoRange(REG_OFFSET_TM0CNT, REG_OFFSET_SIODATA32 - REG_OFFSET_TM0CNT);
+        ZeroIoRange(REG_OFFSET_IE, REG_OFFSET_IME + sizeof(u16) - REG_OFFSET_IE);
+        HostDmaReset();
+        HostTimerReset();
+        ResetAffineBgIdentity();
+    }
+
+    REG_KEYINPUT = KEYS_MASK;
 }

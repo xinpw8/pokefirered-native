@@ -30,13 +30,9 @@ COMMON_DATA u32 gRng2Value = 0;
 
 /* gSTWIStatus now from librfu_stwi.c */
 
-/* Interrupt vector table — lives in assembly crt0.s */
-u32 intr_main[0x200] = {
-    [0] = 0x11223344,
-    [1] = 0x55667788,
-    [2] = 0x99AABBCC,
-    [0x1FF] = 0xA5A5A5A5,
-};
+/* Native interrupt dispatch never executes the GBA crt0 blob. HostCrt0Init
+ * only needs a stable non-null address to store in INTR_VECTOR. */
+u32 intr_main[0x200] = {0};
 
 /* ---- Host stub tracking counters ---- */
 

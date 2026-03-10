@@ -1,1 +1,0 @@
-/usr/bin/cc -g CMakeFiles/mgba_capture.dir/scripts/mgba_capture.c.o CMakeFiles/mgba_capture.dir/src/host_capture_manifest.c.o -o mgba_capture  third_party_build/mgba/libmgba.a -lm 

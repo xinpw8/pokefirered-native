@@ -22,6 +22,7 @@
 #include "host_crt0.h"
 #include "host_sound_init.h"
 #include "host_dma.h"
+#include "host_flash.h"
 #include "host_intro_stubs.h"
 #include "host_oak_speech_stubs.h"
 #include "host_memory.h"
@@ -730,7 +731,7 @@ static int TestMainRuntime(void)
 
     /* Initialize sound engine so m4aSoundVSync (called by VCountIntr) has a valid SOUND_INFO_PTR */
     HostNativeSoundInit();
-    InitRFUAPI(); /* Just init buffers; skip rfu_REQ_stopMode which hangs on native */
+    InitRFUAPI(); /* Safe on native — uses separate static storage for RFU structs */
     gLinkVSyncDisabled = FALSE;
     gWirelessCommType = 0;
     gSoundInfo.pcmDmaCounter = 7;
@@ -796,7 +797,7 @@ static int TestAgbMainBootSlice(void)
     memset(&gMain, 0, sizeof(gMain));
     /* Initialize sound engine so m4aSoundVSync (called by VCountIntr) has a valid SOUND_INFO_PTR */
     HostNativeSoundInit();
-    InitRFUAPI(); /* Just init buffers; skip rfu_REQ_stopMode which hangs on native */
+    InitRFUAPI(); /* Safe on native — uses separate static storage for RFU structs */
     gLinkVSyncDisabled = FALSE;
     gLinkTransferringData = FALSE;
 
@@ -828,7 +829,7 @@ static int TestAgbMainBootSlice(void)
     rc |= Expect(gMain.serialCallback != NULL, "AgbMain intro did not install serial callback");
     /* gHostIntroStubLoadGameSaveCalls removed — LoadGameSave now from upstream */
     /* gHostStubPlayTimeCounterUpdateCalls removed — function now from upstream */
-    rc |= Expect(gHostStubMapMusicMainCalls >= 1, "AgbMain did not run MapMusicMain");
+    /* gHostStubMapMusicMainCalls removed — MapMusicMain now from upstream sound.c */
     /* gHostStubM4aSoundVSyncCalls removed — m4aSoundVSync now from upstream */
     /* gHostStubM4aSoundMainCalls removed — m4aSoundMain now from upstream */
     /* gHostStubLinkVSyncCalls removed — LinkVSync now from upstream */
@@ -919,6 +920,7 @@ static int RunUntilCallback2(MainCallback expected, int maxFrames, const char *m
 static void ResetBootCallbackHarness(void)
 {
     HostMemoryReset();
+    HostFlashInit(NULL); /* Reset flash to erased state for clean boot */
     HostStubReset();
     HostIntroStubReset();
     HostOakSpeechStubReset();
@@ -935,6 +937,8 @@ static void ResetBootCallbackHarness(void)
         extern void SetDefaultFontsPointer(void);
         SetDefaultFontsPointer();
     }
+    HostNativeSoundInit();
+    InitRFUAPI();
     gSaveBlock1Ptr = &gSaveBlock1;
     gSaveBlock2Ptr = &gSaveBlock2;
 }

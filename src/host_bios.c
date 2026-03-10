@@ -8,6 +8,7 @@
 
 #include "gba/gba.h"
 #include "host_agbmain.h"
+#include "host_memory.h"
 #include "host_runtime_stubs.h"
 
 static void HostUnimplemented(const char *name)
@@ -20,12 +21,11 @@ void SoftReset(u32 resetFlags)
 {
     gHostStubSoftResetCalls++;
     HostAgbMainOnSoftReset(resetFlags);
-    HostUnimplemented("SoftReset");
 }
 
 void RegisterRamReset(u32 resetFlags)
 {
-    (void)resetFlags;
+    HostMemoryResetByFlags(resetFlags);
 }
 
 void VBlankIntrWait(void)
@@ -39,10 +39,10 @@ u16 Sqrt(u32 num)
 
 u16 ArcTan2(s16 x, s16 y)
 {
-    (void)x;
-    (void)y;
-    HostUnimplemented("ArcTan2");
-    return 0;
+    double angle = atan2((double)y, (double)x);
+    long gba_angle = lround(angle * (65536.0 / (2.0 * M_PI)));
+
+    return (u16)gba_angle;
 }
 
 static void CpuTransfer(const void *src, void *dest, u32 control, bool32 fast_mode)

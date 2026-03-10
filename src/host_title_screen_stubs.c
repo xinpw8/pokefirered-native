@@ -96,10 +96,9 @@ __asm__(
     ".pushsection .rodata.host_multiboot_payload,\"a\",@progbits\n"
     ".global gMultiBootProgram_BerryGlitchFix_Start\n"
     "gMultiBootProgram_BerryGlitchFix_Start:\n"
-    ".zero 0xD0\n"
+    ".incbin \"../third_party/pokefirered/data/mb_berry_fix.gba\"\n"
     ".global gMultiBootProgram_BerryGlitchFix_End\n"
     "gMultiBootProgram_BerryGlitchFix_End:\n"
-    ".byte 0\n"
     ".popsection\n");
 
 void HostTitleScreenStubReset(void)

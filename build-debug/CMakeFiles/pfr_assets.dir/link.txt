@@ -1,1 +1,0 @@
-/usr/bin/cc -g CMakeFiles/pfr_assets.dir/tools/pfr_assets.c.o -o pfr_assets  -lm 

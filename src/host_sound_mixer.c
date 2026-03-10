@@ -88,6 +88,8 @@ void SoundMainBTM(void *dest)
 void RealClearChain(void *x)
 {
     struct SoundChannel *chan = (struct SoundChannel *)x;
+    if (chan == NULL)
+        return;
     struct MusicPlayerTrack *track = chan->track;
 
     if (track == NULL)
@@ -241,6 +243,12 @@ void SoundMain(void)
                 continue;
 
             wav = chan->wav;
+
+            /* Guard against NULL wav (e.g. stub voicegroup data) */
+            if (wav == NULL) {
+                chan->statusFlags = 0;
+                continue;
+            }
 
             /* ---- Envelope state machine ---- */
             if (sf & SOUND_CHANNEL_SF_START) {
@@ -911,8 +919,9 @@ void MPlayMain(struct MusicPlayerInfo *mplayInfo)
                             cgbType, (u8)finalKey, trk->pitM);
                         cgb->modify |= CGB_CHANNEL_MO_PIT;
                     } else {
-                        c->frequency = MidiKeyToFreq(
-                            c->wav, (u8)finalKey, trk->pitM);
+                        if (c->wav != NULL)
+                            c->frequency = MidiKeyToFreq(
+                                c->wav, (u8)finalKey, trk->pitM);
                     }
                 }
 
@@ -977,15 +986,22 @@ static inline u8 TrackReadByte(struct MusicPlayerTrack *track)
     return val;
 }
 
-static inline u32 TrackReadPointer(struct MusicPlayerTrack *track)
+/* Read a 4-byte self-relative offset from the command stream and return
+ * the absolute native pointer it references.
+ *
+ * On GBA, song data embeds 32-bit absolute ROM addresses.  On 64-bit native,
+ * we instead store signed 32-bit offsets relative to the position of the
+ * offset field itself:  target = &offset_field + offset_value.
+ */
+static inline u8 *TrackReadPointer(struct MusicPlayerTrack *track)
 {
     u8 *p = track->cmdPtr;
-    u32 val = (u32)p[0]
-            | ((u32)p[1] << 8)
-            | ((u32)p[2] << 16)
-            | ((u32)p[3] << 24);
+    s32 rel = (s32)((u32)p[0]
+                  | ((u32)p[1] << 8)
+                  | ((u32)p[2] << 16)
+                  | ((u32)p[3] << 24));
     track->cmdPtr = p + 4;
-    return val;
+    return p + rel;
 }
 
 /* ================================================================
@@ -1009,8 +1025,7 @@ void ply_fine(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track)
 void ply_goto(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track)
 {
     (void)mplayInfo;
-    u32 dest = TrackReadPointer(track);
-    track->cmdPtr = (u8 *)(uintptr_t)dest;
+    track->cmdPtr = TrackReadPointer(track);
 }
 
 void ply_patt(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track)
@@ -1091,11 +1106,12 @@ void ply_voice(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track
     u8 voiceNum = TrackReadByte(track);
     struct ToneData *tone = &mplayInfo->tone[voiceNum];
 
-    /* Copy the 12-byte ToneData into the track's embedded copy.
+    /* Copy the ToneData into the track's embedded copy.
      * Assembly reads three 32-bit words with address validation. */
     *(u32 *)&track->tone.type = *(const u32 *)&tone->type;
     track->tone.wav = tone->wav;
     *(u32 *)&track->tone.attack = *(const u32 *)&tone->attack;
+    track->tone.keySplitTable = tone->keySplitTable;
 }
 
 void ply_vol(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track)
@@ -1251,8 +1267,9 @@ void ply_note(u32 note_cmd, struct MusicPlayerInfo *mplayInfo,
 
         if (trackToneType & TONEDATA_TYPE_SPL) {
             /* Key-split: use the keySplitTable to map key -> voice index */
-            const u8 *keySplitTable = (const u8 *)(uintptr_t)
-                *(u32 *)&track->tone.attack; /* ToneData_keySplitTable alias */
+            const u8 *keySplitTable = track->tone.keySplitTable;
+            if (keySplitTable == NULL)
+                return;
             lookupKey = keySplitTable[key];
         }
 
@@ -1319,8 +1336,9 @@ void ply_note(u32 note_cmd, struct MusicPlayerInfo *mplayInfo,
         for (n = maxChans; n > 0; n--, c++) {
             u8 csf = c->statusFlags;
             if (!(csf & SOUND_CHANNEL_SF_ON)) {
-                /* Free channel */
-                best = c;
+                /* Free channel — set allocChan directly because
+                 * the goto skips the `allocChan = best` assignment. */
+                allocChan = c;
                 goto alloc_ok;
             }
 
@@ -1429,7 +1447,10 @@ void ply_note(u32 note_cmd, struct MusicPlayerInfo *mplayInfo,
     } else {
         /* Direct sound channel */
         allocChan->count = track->unk_3C;
-        allocChan->frequency = MidiKeyToFreq(wav, (u8)finalKey, track->pitM);
+        if (wav != NULL)
+            allocChan->frequency = MidiKeyToFreq(wav, (u8)finalKey, track->pitM);
+        else
+            allocChan->frequency = 0;
     }
 
     allocChan->statusFlags = SOUND_CHANNEL_SF_START;

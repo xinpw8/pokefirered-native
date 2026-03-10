@@ -20,3 +20,5 @@ Thumbs.db
 /tmp/
 *.tmp
 build-debug/
+pfr_play_frames/
+pfr_play_trace.log

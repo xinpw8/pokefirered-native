@@ -224,38 +224,24 @@ static void LogMilestoneVramState(const char *milestone)
     }
     printf("\n");
 
-    /* Also check specific screen bases for the title screen */
+    /* Check actual screen bases from BGxCNT registers */
     {
         const u16 *sb;
         int nonzero_entries;
+        int bg;
+        const volatile u16 *bgcnt_base = (const volatile u16 *)0x04000008;
 
-        /* Screen base 0xF800 (BG0) - 2KB = 1024 u16 entries */
-        sb = (const u16 *)(0x06000000 + 0xF800);
-        nonzero_entries = 0;
-        for (j = 0; j < 1024; j++)
-            if (sb[j] != 0) nonzero_entries++;
-        printf("[render_test] %s screenBase 0xF800 (BG0): %d/1024 nonzero entries\n", milestone, nonzero_entries);
-
-        /* Screen base 0xF000 (BG1) */
-        sb = (const u16 *)(0x06000000 + 0xF000);
-        nonzero_entries = 0;
-        for (j = 0; j < 1024; j++)
-            if (sb[j] != 0) nonzero_entries++;
-        printf("[render_test] %s screenBase 0xF000 (BG1): %d/1024 nonzero entries\n", milestone, nonzero_entries);
-
-        /* Screen base 0xE800 (BG2) */
-        sb = (const u16 *)(0x06000000 + 0xE800);
-        nonzero_entries = 0;
-        for (j = 0; j < 1024; j++)
-            if (sb[j] != 0) nonzero_entries++;
-        printf("[render_test] %s screenBase 0xE800 (BG2): %d/1024 nonzero entries\n", milestone, nonzero_entries);
-
-        /* Screen base 0xE000 (BG3) */
-        sb = (const u16 *)(0x06000000 + 0xE000);
-        nonzero_entries = 0;
-        for (j = 0; j < 1024; j++)
-            if (sb[j] != 0) nonzero_entries++;
-        printf("[render_test] %s screenBase 0xE000 (BG3): %d/1024 nonzero entries\n", milestone, nonzero_entries);
+        for (bg = 0; bg < 4; bg++) {
+            u16 bgcnt = bgcnt_base[bg]; /* BG0CNT..BG3CNT at 0x04000008..0x0400000E */
+            u32 mapBase = (bgcnt >> 8) & 0x1F;
+            u32 screenOffset = mapBase * 0x800;
+            sb = (const u16 *)(0x06000000 + screenOffset);
+            nonzero_entries = 0;
+            for (j = 0; j < 1024; j++)
+                if (sb[j] != 0) nonzero_entries++;
+            printf("[render_test] %s screenBase 0x%04X (BG%d): %d/1024 nonzero entries\n",
+                   milestone, screenOffset, bg, nonzero_entries);
+        }
     }
 }
 
