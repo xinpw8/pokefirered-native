@@ -37,6 +37,8 @@ u8 gHostIntroStubLoadGameSaveResult = SAVE_STATUS_EMPTY;
 
 const u32 gMultiBootProgram_PokemonColosseum_Start[1] = {0};
 const u32 gMultiBootProgram_PokemonColosseum_End[1] = {0};
+const u32 gMultiBootProgram_EReader_Start[1] = {0};
+const u32 gMultiBootProgram_EReader_End[1] = {0};
 
 void HostIntroStubReset(void)
 {

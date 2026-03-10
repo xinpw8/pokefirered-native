@@ -1873,7 +1873,8 @@ target_link_options(pfr_render_test PRIVATE
 target_link_libraries(pfr_render_test PRIVATE pfr_upstream_core Threads::Threads m)
 
 # Interactive player: SDL2 window with live keyboard input
-add_executable(pfr_play src/pfr_play.c)
+add_executable(pfr_play src/pfr_play.c src/host_audio.c)
+set_target_properties(pfr_play PROPERTIES ENABLE_EXPORTS TRUE)
 target_sources(pfr_play PRIVATE
     src/host_agbmain.c
     $<TARGET_OBJECTS:pfr_upstream_intro>
@@ -1971,12 +1972,13 @@ target_compile_options(pfr_play PRIVATE
     "-iquote${POKEFIRERED_SOURCE_DIR}/include"
     -Wno-int-to-pointer-cast
     -Wno-pointer-to-int-cast
+    ${SDL2_CFLAGS}
 )
 target_link_options(pfr_play PRIVATE
     -no-pie
     -Wl,--gc-sections
 )
-target_link_libraries(pfr_play PRIVATE pfr_upstream_core Threads::Threads m)
+target_link_libraries(pfr_play PRIVATE pfr_upstream_core Threads::Threads m dl ${SDL2_LIBRARIES})
 
 # Frame diff tool: pixel-level PPM comparison for golden frame verification
 add_executable(pfr_frame_diff tools/pfr_frame_diff.c)

@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 /*
  * pfr_play.c — Interactive player for pokefirered-native
  *
@@ -20,6 +21,8 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <string.h>
+#include <dlfcn.h>
+#include <unistd.h>
 
 #include "global.h"
 #include "gba/gba.h"
@@ -45,6 +48,7 @@
 #include "new_menu_helpers.h"
 #include "save_failed_screen.h"
 #include "host_sound_init.h"
+#include "host_audio.h"
 
 /* Declared in main.c (non-static) but no header */
 extern void EnableVCountIntrAtLine150(void);
@@ -378,19 +382,108 @@ static void TraceLog(u32 frame, const char *message)
     fprintf(stderr, "[%06u] %s\n", frame, message);
 }
 
+/* ---- ELF symbol table lookup for callback tracing ---- */
+
+struct SymEntry {
+    uintptr_t addr;
+    const char *name;
+};
+
+static struct SymEntry *sSymTable = NULL;
+static int sSymCount = 0;
+
+static int SymEntryCmp(const void *a, const void *b)
+{
+    uintptr_t aa = ((const struct SymEntry *)a)->addr;
+    uintptr_t bb = ((const struct SymEntry *)b)->addr;
+    return (aa > bb) - (aa < bb);
+}
+
+/* Build a sorted symbol table from `nm /proc/self/exe` at startup.
+ * This captures ALL symbols including static (local) functions,
+ * so every callback pointer resolves to a human-readable name. */
+/* Use libc allocators directly — the game overrides malloc with its
+ * own heap allocator that operates on gHeap, which isn't set up yet
+ * when InitSymbolTable runs (and would corrupt the game heap). */
+extern void *__libc_malloc(size_t);
+extern void *__libc_realloc(void *, size_t);
+extern void __libc_free(void *);
+
+static char *sys_strdup(const char *s)
+{
+    size_t len = strlen(s) + 1;
+    char *d = __libc_malloc(len);
+    if (d) memcpy(d, s, len);
+    return d;
+}
+
+static void InitSymbolTable(void)
+{
+    FILE *fp;
+    char line[512];
+    int capacity = 4096;
+
+    sSymTable = __libc_malloc(capacity * sizeof(struct SymEntry));
+    sSymCount = 0;
+    if (!sSymTable)
+        return;
+
+    /* readlink /proc/self/exe to get the actual binary path,
+     * then run nm on it to get all symbols including static ones. */
+    char exe_path[1024];
+    ssize_t len = readlink("/proc/self/exe", exe_path, sizeof(exe_path) - 1);
+    if (len <= 0) return;
+    exe_path[len] = 0;
+    char cmd[1200];
+    snprintf(cmd, sizeof(cmd), "nm -n %s 2>/dev/null", exe_path);
+    fp = popen(cmd, "r");
+    if (!fp) { __libc_free(sSymTable); sSymTable = NULL; return; }
+
+    while (fgets(line, sizeof(line), fp))
+    {
+        uintptr_t addr;
+        char type;
+        char name[256];
+        if (sscanf(line, "%lx %c %255s", &addr, &type, name) != 3)
+            continue;
+        if (type != 't' && type != 'T')
+            continue;
+        if (sSymCount >= capacity) {
+            capacity *= 2;
+            sSymTable = __libc_realloc(sSymTable, capacity * sizeof(struct SymEntry));
+            if (!sSymTable) { sSymCount = 0; pclose(fp); return; }
+        }
+        sSymTable[sSymCount].addr = addr;
+        sSymTable[sSymCount].name = sys_strdup(name);
+        sSymCount++;
+    }
+    pclose(fp);
+    qsort(sSymTable, sSymCount, sizeof(struct SymEntry), SymEntryCmp);
+}
+
 static const char *CallbackName(MainCallback callback)
 {
+    static char addr_buf[64];
+
     if (callback == NULL)
         return "NULL";
-    if (callback == CB2_InitCopyrightScreenAfterBootup)
-        return "CB2_InitCopyrightScreenAfterBootup";
-    if (callback == CB2_InitTitleScreen)
-        return "CB2_InitTitleScreen";
-    if (callback == CB2_InitMainMenu)
-        return "CB2_InitMainMenu";
-    if (callback == CB1_Overworld)
-        return "CB1_Overworld";
-    return "(unknown)";
+
+    /* Binary search the symbol table for an exact match */
+    uintptr_t target = (uintptr_t)callback;
+    int lo = 0, hi = sSymCount - 1;
+    while (lo <= hi) {
+        int mid = (lo + hi) / 2;
+        if (sSymTable[mid].addr == target)
+            return sSymTable[mid].name;
+        else if (sSymTable[mid].addr < target)
+            lo = mid + 1;
+        else
+            hi = mid - 1;
+    }
+
+    snprintf(addr_buf, sizeof(addr_buf), "0x%lx",
+             (unsigned long)(uintptr_t)callback);
+    return addr_buf;
 }
 
 /* OakPlaceholderName removed — StringExpandPlaceholders now from upstream */
@@ -568,16 +661,22 @@ static void PlayVBlankHandler(void)
     if (gMain.vblankCallback)
         gMain.vblankCallback();
 
+#ifdef PFR_DIAG
+    {
+        static u32 sDiagVBlankCount = 0;
+        if (gMain.vblankCallback != NULL && sDiagVBlankCount % 60 == 0)
+            fprintf(stderr, "[PFR_DIAG] PlayVBlankHandler: vblankCallback=%p frame=%u\n",
+                    (void *)gMain.vblankCallback, gMain.vblankCounter2);
+        sDiagVBlankCount++;
+    }
+#endif
+
     gMain.vblankCounter2++;
 
     CopyBufferedValuesToGpuRegs();
     ProcessDma3Requests();
 
-    /* m4aSoundMain() intentionally omitted: SoundMain's PCM mixer hangs
-     * without real DMA hardware driving pcmDmaCounter. Music state is
-     * safely initialized by HostNativeSoundInit so all sound API calls
-     * (m4aSongNumStart, IsPokemonCryPlaying, etc.) work correctly;
-     * audio just doesn't play. TODO: fix host_sound_mixer.c for native. */
+    HostAudioMixAndPush();
 
     Random();
 
@@ -714,6 +813,7 @@ int main(int argc, char *argv[])
     /* Full native sound init: sets up SOUND_INFO_PTR, all SoundInfo fields,
      * music players, and cry players — without DMA/timer hardware writes. */
     HostNativeSoundInit();
+    HostAudioInit();
 
     EnableVCountIntrAtLine150();
     /* InitRFU() skipped: spins on rfu_waitREQComplete() waiting for
@@ -764,6 +864,7 @@ int main(int argc, char *argv[])
     sUniformFrameRunLength = 0;
     sScriptedInputEnabled = FALSE;
     sScriptedInputRangeCount = 0;
+    InitSymbolTable();
     TraceLog(0, "pfr_play trace started");
 
     if (scriptPath != NULL)
@@ -805,6 +906,7 @@ int main(int argc, char *argv[])
         TraceFramebufferUniformity(HostDisplayGetFrameCount());
     }
 
+    HostAudioShutdown();
     HostDisplayDestroy();
     if (sTraceFile != NULL)
         fclose(sTraceFile);
