@@ -40,6 +40,7 @@
 #include "play_time.h"
 #include "malloc.h"
 #include "load_save.h"
+#include "pokemon.h"
 #include "main_menu.h"
 #include "oak_speech.h"
 #include "save.h"
@@ -53,6 +54,7 @@
 #include "window.h"
 #include "host_sound_init.h"
 #include "host_audio.h"
+#include "host_flash.h"
 
 /* Declared in main.c (non-static) but no header */
 extern void EnableVCountIntrAtLine150(void);
@@ -1286,6 +1288,7 @@ int main(int argc, char *argv[])
     /* InitRFU() skipped: spins on rfu_waitREQComplete() waiting for
      * wireless adapter hardware response. No wireless adapter on native.
      * Single-player gameplay does not use RFU. */
+    HostFlashInit("pokefirered.sav");
     CheckForFlashMemory();
 
     /* InitMainCallbacks is static in main.c; replicate inline: */
@@ -1297,6 +1300,7 @@ int main(int argc, char *argv[])
     gMain.state = 0;
     gSaveBlock2Ptr = &gSaveBlock2;
     gSaveBlock1Ptr = &gSaveBlock1;
+    gPokemonStoragePtr = &gPokemonStorage;
     gSaveBlock2.encryptionKey = 0;
     gQuestLogPlaybackState = QL_PLAYBACK_STATE_STOPPED;
 
