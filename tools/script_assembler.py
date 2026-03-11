@@ -992,7 +992,7 @@ class Assembler:
             m = re.match(r'^\.(?:4byte|word)\s+(.+)', stripped)
             if m:
                 for arg in split_args(m.group(1)):
-                    kind, *rest = parse_4byte(arg.strip(), self.syms | self.labels)
+                    kind, *rest = parse_4byte(arg.strip(), self.syms)
                     if kind == 'num':
                         val = rest[0] & 0xFFFFFFFF
                         self.data.extend([

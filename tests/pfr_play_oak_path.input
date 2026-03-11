@@ -1,4 +1,7 @@
 # start_frame end_frame buttons
+# This script only covers the early Oak-path capture milestones.
+# It does not reliably reach player/rival naming on the current build.
+# For accurate deep-path verification, use `PFR_AUTOPLAY_OAK_NEWGAME=1`.
 # Open the title screen menu / advance out of title.
 1798 1804 A
 

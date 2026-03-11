@@ -36,6 +36,7 @@
 #include "sprite.h"
 #include "bg.h"
 #include "dma3.h"
+#include "field_weather.h"
 #include "play_time.h"
 #include "malloc.h"
 #include "load_save.h"
@@ -49,6 +50,7 @@
 #include "help_system.h"
 #include "new_menu_helpers.h"
 #include "save_failed_screen.h"
+#include "window.h"
 #include "host_sound_init.h"
 #include "host_audio.h"
 
@@ -92,6 +94,8 @@ static u32 sLastPikachuIntroPage2Loads;
 static u32 sLastPikachuIntroPage3Loads;
 static u32 sLastWelcomePrints;
 static u32 sLastThisWorldPrints;
+static u32 sLastIStudyPokemonPrints;
+static u32 sLastAskPlayerGenderPrints;
 static u32 sUniformFrameRunLength;
 static u32 sLastUniformColor;
 static bool8 sSnapshotRequested;
@@ -109,8 +113,44 @@ struct ScriptedInputRange
 static struct ScriptedInputRange sScriptedInputRanges[MAX_SCRIPTED_INPUT_RANGES];
 static u32 sScriptedInputRangeCount;
 static bool8 sScriptedInputEnabled;
+static bool8 sAutoPlayOakNewGameEnabled;
+static bool8 sAutoPlayOakLoggedGenderMenu;
+static bool8 sAutoPlayOakLoggedNamingScreen;
+static bool8 sAutoPlayOakLoggedRivalMenu;
+static bool8 sAutoPlayOakLoggedOverworld;
+static u8 sAutoPlayOakGenderStep;
+static u8 sAutoPlayOakNamingStep;
+static u8 sAutoPlayOakRivalStep;
+static u8 sAutoPlayOakWaitFrames;
+static bool8 sTraceNamingFramesEnabled;
+static bool8 sTraceOverworldStartupEnabled;
+static bool8 sDebugGiveStarterEnabled;
+static bool8 sTraceOverworldStartupActive;
+static bool8 sTraceOverworldStartupCompleted;
+static bool8 sTraceOverworldFirstVisibleLogged;
+static u32 sTraceOverworldStartupFrame;
 
 static void TraceLog(u32 frame, const char *message);
+static const char *CallbackName(MainCallback callback);
+static void RequestSnapshot(const char *label);
+static void TraceGpuState(u32 frame, const char *label);
+
+static bool8 ShouldTraceDetailedFrame(u32 frame)
+{
+    const char *cb2Name = CallbackName(gMain.callback2);
+
+    if (!sTraceNamingFramesEnabled)
+        return FALSE;
+
+    if (frame >= 4300)
+        return TRUE;
+
+    return strcmp(cb2Name, "CB2_LoadNamingScreen") == 0
+        || strcmp(cb2Name, "CB2_NamingScreen") == 0
+        || strcmp(cb2Name, "CB2_ReturnFromNamingScreen") == 0
+        || strcmp(cb2Name, "CB2_NewGame") == 0
+        || strcmp(cb2Name, "CB2_Overworld") == 0;
+}
 
 static u16 ParseInputToken(const char *token)
 {
@@ -249,21 +289,206 @@ static bool8 LoadScriptedInputFile(const char *path)
     return TRUE;
 }
 
+static bool8 WindowMatches(u8 windowId, u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height)
+{
+    return windowId < WINDOWS_MAX
+        && gWindows[windowId].tileData != NULL
+        && gWindows[windowId].window.bg == bg
+        && gWindows[windowId].window.tilemapLeft == tilemapLeft
+        && gWindows[windowId].window.tilemapTop == tilemapTop
+        && gWindows[windowId].window.width == width
+        && gWindows[windowId].window.height == height;
+}
+
+static int FindWindowIdMatching(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height)
+{
+    int i;
+
+    for (i = 0; i < WINDOWS_MAX; i++)
+    {
+        if (WindowMatches(i, bg, tilemapLeft, tilemapTop, width, height))
+            return i;
+    }
+
+    return -1;
+}
+
+static void ResetAutoPlayOakState(void)
+{
+    sAutoPlayOakLoggedGenderMenu = FALSE;
+    sAutoPlayOakLoggedNamingScreen = FALSE;
+    sAutoPlayOakLoggedRivalMenu = FALSE;
+    sAutoPlayOakLoggedOverworld = FALSE;
+    sAutoPlayOakGenderStep = 0;
+    sAutoPlayOakNamingStep = 0;
+    sAutoPlayOakRivalStep = 0;
+    sAutoPlayOakWaitFrames = 0;
+}
+
+static u16 ComputeAutoPlayOakInput(u32 frame)
+{
+    int genderWindowId;
+    int yesNoWindowId;
+    int rivalWindowId;
+    const char *cb2Name;
+
+    if (!sAutoPlayOakNewGameEnabled)
+        return 0;
+
+    cb2Name = CallbackName(gMain.callback2);
+    genderWindowId = FindWindowIdMatching(0, 18, 9, 9, 4);
+    yesNoWindowId = FindWindowIdMatching(0, 2, 2, 6, 4);
+    rivalWindowId = FindWindowIdMatching(0, 2, 2, 12, 10);
+
+    if (!sAutoPlayOakLoggedOverworld
+     && gMain.callback1 == CB1_Overworld
+     && strcmp(cb2Name, "CB2_Overworld") == 0)
+    {
+        sAutoPlayOakLoggedOverworld = TRUE;
+        TraceLog(frame, "autoplay: overworld reached");
+        RequestSnapshot("autoplay_overworld_reached");
+        if (sDebugGiveStarterEnabled)
+        {
+            extern bool8 ScriptGiveMon(u16 species, u8 level, u16 item, u32 unk1, u32 unk2, u8 unk3);
+            extern u8 FlagSet(u16 id);
+            extern bool8 VarSet(u16 id, u16 value);
+            ScriptGiveMon(1, 5, 0, 0, 0, 0);  /* SPECIES_BULBASAUR lv5 */
+            FlagSet(0x828);  /* FLAG_SYS_POKEMON_GET */
+            VarSet(0x4050, 1);  /* VAR_MAP_SCENE_PALLET_TOWN_OAK = 1 (skip Oak event) */
+            VarSet(0x4053, 3);  /* VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB = 3 */
+            TraceLog(frame, "debug: gave Bulbasaur lv5, set flags to skip Oak sequence");
+        }
+        return 0;
+    }
+
+    if (sAutoPlayOakWaitFrames != 0)
+    {
+        sAutoPlayOakWaitFrames--;
+        return 0;
+    }
+
+    if (genderWindowId >= 0)
+    {
+        if (!sAutoPlayOakLoggedGenderMenu)
+        {
+            sAutoPlayOakLoggedGenderMenu = TRUE;
+            TraceLog(frame, "autoplay: gender menu detected");
+        }
+
+        if (sAutoPlayOakGenderStep == 0)
+        {
+            sAutoPlayOakGenderStep = 1;
+            sAutoPlayOakWaitFrames = 1;
+            return DPAD_DOWN;
+        }
+        if (sAutoPlayOakGenderStep == 1)
+        {
+            sAutoPlayOakGenderStep = 2;
+            sAutoPlayOakWaitFrames = 1;
+            return A_BUTTON;
+        }
+        return 0;
+    }
+
+    if (strcmp(cb2Name, "CB2_LoadNamingScreen") == 0
+     || strcmp(cb2Name, "CB2_ReturnFromNamingScreen") == 0)
+    {
+        return 0;
+    }
+
+    if (strcmp(cb2Name, "CB2_NamingScreen") == 0)
+    {
+        if (!sAutoPlayOakLoggedNamingScreen)
+        {
+            sAutoPlayOakLoggedNamingScreen = TRUE;
+            TraceLog(frame, "autoplay: player naming screen detected");
+        }
+
+        if (sAutoPlayOakNamingStep == 0)
+        {
+            if (gPaletteFade.active)
+                return 0;
+
+            sAutoPlayOakNamingStep = 1;
+            sAutoPlayOakWaitFrames = 32;
+            return 0;
+        }
+        if (sAutoPlayOakNamingStep == 1)
+        {
+            sAutoPlayOakNamingStep = 2;
+            sAutoPlayOakWaitFrames = 8;
+            return START_BUTTON;
+        }
+        if (sAutoPlayOakNamingStep == 2)
+        {
+            sAutoPlayOakNamingStep = 3;
+            sAutoPlayOakWaitFrames = 1;
+            return A_BUTTON;
+        }
+        return 0;
+    }
+
+    if (rivalWindowId >= 0)
+    {
+        if (!sAutoPlayOakLoggedRivalMenu)
+        {
+            sAutoPlayOakLoggedRivalMenu = TRUE;
+            TraceLog(frame, "autoplay: rival naming menu detected");
+        }
+
+        if (sAutoPlayOakRivalStep == 0 || sAutoPlayOakRivalStep == 1)
+        {
+            sAutoPlayOakRivalStep++;
+            sAutoPlayOakWaitFrames = 1;
+            return DPAD_DOWN;
+        }
+        if (sAutoPlayOakRivalStep == 2)
+        {
+            sAutoPlayOakRivalStep = 3;
+            sAutoPlayOakWaitFrames = 1;
+            return A_BUTTON;
+        }
+        return 0;
+    }
+
+    if (yesNoWindowId >= 0)
+    {
+        sAutoPlayOakWaitFrames = 1;
+        return A_BUTTON;
+    }
+
+    if (strcmp(cb2Name, "CB2_TitleScreenRun") == 0)
+        return (frame % 32 == 0) ? START_BUTTON : 0;
+
+    if (strcmp(cb2Name, "CB2_InitMainMenu") == 0 || strcmp(cb2Name, "CB2_MainMenu") == 0)
+        return (frame % 12 == 0) ? A_BUTTON : 0;
+
+    if (strcmp(cb2Name, "CB2_NewGameScene") == 0)
+        return (frame % 16 == 0) ? A_BUTTON : 0;
+
+    return 0;
+}
+
 static void ApplyScriptedInput(u32 frame)
 {
     u16 pressedMask = 0;
     u32 i;
 
-    if (!sScriptedInputEnabled)
-        return;
-
-    for (i = 0; i < sScriptedInputRangeCount; i++)
+    if (sScriptedInputEnabled)
     {
-        if (frame >= sScriptedInputRanges[i].startFrame && frame <= sScriptedInputRanges[i].endFrame)
-            pressedMask |= sScriptedInputRanges[i].pressedMask;
+        for (i = 0; i < sScriptedInputRangeCount; i++)
+        {
+            if (frame >= sScriptedInputRanges[i].startFrame && frame <= sScriptedInputRanges[i].endFrame)
+                pressedMask |= sScriptedInputRanges[i].pressedMask;
+        }
     }
 
-    REG_KEYINPUT = KEYS_MASK & ~pressedMask;
+    pressedMask |= ComputeAutoPlayOakInput(frame);
+
+    /* Only override REG_KEYINPUT when scripted/autoplay input is active.
+     * Otherwise, preserve the keyboard state set by PollInput(). */
+    if (pressedMask != 0)
+        REG_KEYINPUT &= ~pressedMask;
 }
 
 static void RequestSnapshot(const char *label)
@@ -335,6 +560,150 @@ static u32 CountNonZeroWords(const void *data, size_t size)
     }
 
     return nonZero;
+}
+
+static u32 CountSampledNonBlackPixels(void)
+{
+    const u32 *framebuffer = HostRendererGetFramebuffer();
+    u32 nonBlack = 0;
+    int i;
+
+    for (i = 0; i < GBA_SCREEN_WIDTH * GBA_SCREEN_HEIGHT; i += 32)
+    {
+        if ((framebuffer[i] & 0x00FFFFFF) != 0)
+            nonBlack++;
+    }
+
+    return nonBlack;
+}
+
+static void FormatActiveTasks(char *buffer, size_t size)
+{
+    size_t used = 0;
+    int i;
+
+    used += snprintf(buffer + used, size - used, "tasks=");
+    for (i = 0; i < NUM_TASKS && used + 1 < size; i++)
+    {
+        if (!gTasks[i].isActive)
+            continue;
+
+        used += snprintf(buffer + used, size - used,
+                         "%s%d:%s(d0=%d)",
+                         (used > 6) ? " " : "",
+                         i,
+                         CallbackName((MainCallback)gTasks[i].func),
+                         gTasks[i].data[0]);
+    }
+}
+
+static void TraceOverworldStartupState(u32 frame)
+{
+    char buffer[512];
+    u32 delta = frame - sTraceOverworldStartupFrame;
+    u32 plttNonZero = CountNonZeroWords((const void *)PLTT, PLTT_SIZE);
+    u32 unfadedNonZero = CountNonZeroWords(gPlttBufferUnfaded, PLTT_SIZE);
+    u32 fadedNonZero = CountNonZeroWords(gPlttBufferFaded, PLTT_SIZE);
+    u32 sampledNonBlack = CountSampledNonBlackPixels();
+
+    snprintf(buffer, sizeof(buffer),
+             "overworld_startup delta=%u fade(active=%u mode=%u y=%u target=%u bufDis=%u) "
+             "weather(state=%u ready=%u fadeIn=%u cur=%u next=%u) "
+             "palette(pltt=%u unfaded=%u faded=%u) framebuffer(sampledNonBlack=%u)",
+             delta,
+             gPaletteFade.active,
+             gPaletteFade.mode,
+             gPaletteFade.y,
+             gPaletteFade.targetY,
+             gPaletteFade.bufferTransferDisabled,
+             gWeatherPtr->palProcessingState,
+             gWeatherPtr->readyForInit,
+             gWeatherPtr->fadeInActive,
+             gWeatherPtr->currWeather,
+             gWeatherPtr->nextWeather,
+             plttNonZero,
+             unfadedNonZero,
+             fadedNonZero,
+             sampledNonBlack);
+    TraceLog(frame, buffer);
+
+    FormatActiveTasks(buffer, sizeof(buffer));
+    TraceLog(frame, buffer);
+}
+
+static bool8 ShouldDumpOverworldStartupFrame(u32 delta)
+{
+    return delta == 0
+        || delta == 1
+        || delta == 2
+        || delta == 4
+        || delta == 8
+        || delta == 16
+        || delta == 32
+        || delta == 64
+        || delta == 128
+        || delta == 256
+        || delta == 512;
+}
+
+static void TraceOverworldStartup(u32 frame)
+{
+    char label[64];
+    u32 delta;
+    u32 sampledNonBlack;
+    const char *cb2Name = CallbackName(gMain.callback2);
+
+    if (!sTraceOverworldStartupEnabled)
+        return;
+    if (sTraceOverworldStartupCompleted)
+        return;
+
+    if (!sTraceOverworldStartupActive)
+    {
+        if (gMain.callback1 == CB1_Overworld
+         && strcmp(cb2Name, "CB2_Overworld") == 0)
+        {
+            sTraceOverworldStartupActive = TRUE;
+            sTraceOverworldStartupFrame = frame;
+            sTraceOverworldFirstVisibleLogged = FALSE;
+            TraceLog(frame, "overworld_startup tracing activated");
+        }
+        else
+        {
+            return;
+        }
+    }
+
+    delta = frame - sTraceOverworldStartupFrame;
+    if (delta > 900)
+    {
+        TraceLog(frame, "overworld_startup tracing finished without visible framebuffer sample");
+        sTraceOverworldStartupActive = FALSE;
+        sTraceOverworldStartupCompleted = TRUE;
+        return;
+    }
+
+    if ((delta & 7) == 0 || ShouldDumpOverworldStartupFrame(delta))
+        TraceOverworldStartupState(frame);
+
+    if (ShouldDumpOverworldStartupFrame(delta))
+    {
+        snprintf(label, sizeof(label), "overworld_startup_%03u", delta);
+        TraceGpuState(frame, label);
+        DumpCurrentFramebuffer(frame, label);
+    }
+
+    sampledNonBlack = CountSampledNonBlackPixels();
+    if (!sTraceOverworldFirstVisibleLogged && sampledNonBlack != 0)
+    {
+        sTraceOverworldFirstVisibleLogged = TRUE;
+        snprintf(label, sizeof(label), "overworld_visible_%03u", delta);
+        TraceLog(frame, "overworld_startup first non-black framebuffer sample detected");
+        TraceGpuState(frame, label);
+        DumpCurrentFramebuffer(frame, label);
+        sTraceOverworldStartupActive = FALSE;
+        sTraceOverworldStartupCompleted = TRUE;
+    }
 }
 
 static void TraceGpuState(u32 frame, const char *label)
@@ -597,6 +966,18 @@ static void TraceMilestones(u32 frame)
         TraceLog(frame, "Oak 'This world' message printed");
         RequestSnapshot("oak_this_world_message");
     }
+    if (gHostOakSpeechIStudyPokemonPrints != sLastIStudyPokemonPrints)
+    {
+        sLastIStudyPokemonPrints = gHostOakSpeechIStudyPokemonPrints;
+        TraceLog(frame, "Oak 'I study Pokemon' message printed");
+        RequestSnapshot("oak_i_study_pokemon");
+    }
+    if (gHostOakSpeechAskPlayerGenderPrints != sLastAskPlayerGenderPrints)
+    {
+        sLastAskPlayerGenderPrints = gHostOakSpeechAskPlayerGenderPrints;
+        TraceLog(frame, "Oak player gender prompt printed");
+        RequestSnapshot("oak_ask_player_gender");
+    }
 
     /* StringExpandPlaceholders and CB2_NewGame now from upstream —
        placeholder source tracking removed */
@@ -738,6 +1119,18 @@ static void PlayReadKeys(void)
 
     if (JOY_NEW(gMain.watchedKeysMask))
         gMain.watchedKeysPressed = TRUE;
+
+    /* Auto-repeat A button every 4 frames while held (speeds up dialog) */
+    if ((gMain.heldKeys & A_BUTTON) && !(gMain.newKeys & A_BUTTON))
+    {
+        static u8 sARepeatTimer = 0;
+        if (++sARepeatTimer >= 4)
+        {
+            gMain.newKeys |= A_BUTTON;
+            gMain.newAndRepeatedKeys |= A_BUTTON;
+            sARepeatTimer = 0;
+        }
+    }
 }
 
 /* ── Frame simulation ──────────────────────────────────────── */
@@ -751,19 +1144,54 @@ static void PlayFrameLogic(void *userdata)
 {
     const struct PlayFrameContext *ctx = userdata;
     u32 frame = ctx->frame;
+    bool8 traceDetailed = ShouldTraceDetailedFrame(frame);
+    char buffer[256];
 
     ApplyScriptedInput(frame);
     PlayReadKeys();
     TraceInput(frame);
     TraceMilestones(frame);
 
-    if (gMain.callback1)
-        gMain.callback1();
-    if (gMain.callback2)
-        gMain.callback2();
+    if (traceDetailed)
+    {
+        snprintf(buffer, sizeof(buffer),
+                 "frame_detail begin cb1=%s cb2=%s state=%u tasks=%u vblank=%s",
+                 CallbackName(gMain.callback1),
+                 CallbackName(gMain.callback2),
+                 gMain.state,
+                 GetTaskCount(),
+                 CallbackName(gMain.vblankCallback));
+        TraceLog(frame, buffer);
+    }
 
+    if (gMain.callback1)
+    {
+        if (traceDetailed)
+            TraceLog(frame, "frame_detail before callback1");
+        gMain.callback1();
+        if (traceDetailed)
+            TraceLog(frame, "frame_detail after callback1");
+    }
+    if (gMain.callback2)
+    {
+        if (traceDetailed)
+            TraceLog(frame, "frame_detail before callback2");
+        gMain.callback2();
+        if (traceDetailed)
+            TraceLog(frame, "frame_detail after callback2");
+    }
+
+    if (traceDetailed)
+        TraceLog(frame, "frame_detail before PlayTimeCounter_Update");
     PlayTimeCounter_Update();
+    if (traceDetailed)
+        TraceLog(frame, "frame_detail after PlayTimeCounter_Update");
+
+    if (traceDetailed)
+        TraceLog(frame, "frame_detail before MapMusicMain");
     MapMusicMain();
+    if (traceDetailed)
+        TraceLog(frame, "frame_detail after MapMusicMain");
 }
 
 static void StepFrame(void)
@@ -794,9 +1222,31 @@ int main(int argc, char *argv[])
 
     int i;
     const char *scriptPath = NULL;
+    const char *autoPlayOak = getenv("PFR_AUTOPLAY_OAK_NEWGAME");
+    const char *traceNamingFrames = getenv("PFR_TRACE_NAMING_FRAMES");
+    const char *traceOverworldStartup = getenv("PFR_TRACE_OVERWORLD_STARTUP");
 
     if (argc > 1)
         scriptPath = argv[1];
+
+    sAutoPlayOakNewGameEnabled = (autoPlayOak != NULL
+                               && autoPlayOak[0] != '\0'
+                               && strcmp(autoPlayOak, "0") != 0);
+    sTraceNamingFramesEnabled = (traceNamingFrames != NULL
+                              && traceNamingFrames[0] != '\0'
+                              && strcmp(traceNamingFrames, "0") != 0);
+    sTraceOverworldStartupEnabled = (traceOverworldStartup != NULL
+                                  && traceOverworldStartup[0] != '\0'
+                                  && strcmp(traceOverworldStartup, "0") != 0);
+    const char *debugGiveStarter = getenv("PFR_DEBUG_GIVE_STARTER");
+    sDebugGiveStarterEnabled = (debugGiveStarter != NULL
+                             && debugGiveStarter[0] != ' '
+                             && strcmp(debugGiveStarter, "0") != 0);
+    ResetAutoPlayOakState();
+    sTraceOverworldStartupActive = FALSE;
+    sTraceOverworldStartupCompleted = FALSE;
+    sTraceOverworldFirstVisibleLogged = FALSE;
+    sTraceOverworldStartupFrame = 0;
 
     /* Initialize host subsystems */
     HostMemoryInit();
@@ -886,6 +1336,12 @@ int main(int argc, char *argv[])
     sScriptedInputRangeCount = 0;
     InitSymbolTable();
     TraceLog(0, "pfr_play trace started");
+    if (sAutoPlayOakNewGameEnabled)
+        TraceLog(0, "autoplay oak-newgame enabled");
+    if (sTraceNamingFramesEnabled)
+        TraceLog(0, "trace naming frames enabled");
+    if (sTraceOverworldStartupEnabled)
+        TraceLog(0, "trace overworld startup enabled");
 
     if (scriptPath != NULL)
     {
@@ -923,10 +1379,12 @@ int main(int argc, char *argv[])
             sSnapshotRequested = FALSE;
         }
 
+        TraceOverworldStartup(HostDisplayGetFrameCount());
+
         /* Periodic snapshots at stable frames for debugging */
         {
             u32 fc = HostDisplayGetFrameCount();
-            if (fc == 2000 || fc == 13100 || fc == 13200 || fc == 13300 ||
+            if (fc % 200 == 0 && fc >= 6200 && fc <= 14000 || fc == 13100 || fc == 13200 || fc == 13300 ||
                 fc == 13500 || fc == 14000 || fc == 14500 || fc == 15000 ||
                 fc == 16000 || fc == 17000 || fc == 18000 || fc == 20000)
             {

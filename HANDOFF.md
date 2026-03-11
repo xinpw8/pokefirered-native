@@ -99,10 +99,11 @@ Important qualification:
 - `main.c` currently builds on host through the upstream non-`MODERN` path so the ARM-only entry-clear inline assembly in `AgbMain` is skipped
 - this now verifies real `main.c` helper behavior, a host C translation of `crt0.s:intr_main`, a bounded `AgbMain` init/frame/soft-reset slice, the real `intro.c` path through the non-skipped Game Freak / Scene 1 / Scene 2 / Scene 3 sequence into natural title handoff, real `title_screen.c` progression from init into run-state plus restart/cry/main-menu/save-clear/berry-fix downstream handoffs, the real `main_menu.c` provider through save-present menu setup and New Game selection handoff, the real `clear_save_data_screen.c` provider through its confirmation/menu/clear-selection path, the real `berry_fix_program.c` provider through its multiboot progression path, and the real `new_game.c` data-init path once Oak hands off into `CB2_NewGame`
 - `intro.c` and `title_screen.c` currently run against host zero-INCBIN or placeholder asset fallbacks plus narrow helper stubs; that is enough for source-driven control-flow verification, not a finished asset/runtime rehost
-- `oak_speech.c` now reaches `IStudyPokemon`, the gender-selection menu, player/rival naming stubs, and a host-owned `CB2_NewGame` wrapper that executes the real upstream `NewGameInitData()` / `PlayTimeCounter_Start()` path plus the immediate stop-music, safari-reset, script-context, field-callback, and callback-handoff setup that upstream `CB2_NewGame` performs before entering overworld
-- `pfr_play` now accepts an optional scripted-input file and can autonomously drive the title -> main menu -> Oak Speech path while dumping milestone frames and a trace log
+- `oak_speech.c` now reaches `IStudyPokemon`, the gender-selection menu, real player naming via upstream `naming_screen.c`, the rival naming/confirmation flow, and the real upstream `CB2_NewGame` / `overworld.c` handoff into hosted overworld callbacks
+- `pfr_play` now accepts an optional scripted-input file and also supports state-driven autoplay via `PFR_AUTOPLAY_OAK_NEWGAME=1`, which uses normal button presses against live callback/window state to drive title -> main menu -> Oak -> naming -> rival -> new-game while dumping milestone frames and a trace log
 - the major interactive black-screen bug after title was narrowed to the host renderer only supporting mode 0; Oak Speech switches to `DISPCNT` mode 1, so `host_renderer.c` now renders mode 1 text BG0/BG1 plus affine BG2 instead of returning a black backdrop
-- it is still not a full hosted boot through the complete `AgbMain` -> `intro.c` -> `title_screen.c` -> main-menu -> overworld flow because upstream `overworld.c` and the field/map stack are not in the build yet
+- upstream `overworld.c`, `field_fadetransition.c`, `field_weather.c`, `map_preview_screen.c`, and the immediate field/map load stack are now in the build deeply enough for `CB2_NewGame` to install `CB1_Overworld` / `CB2_Overworld` and render the player room into the host framebuffer
+- it is still not a finished native boot: there are remaining user-visible/runtime gaps in the early overworld presentation path, and the full smoke suite still has unrelated pre-existing failures in the title restart and berry-fix slices
 
 ## Why The Build Is Structured This Way
 
@@ -226,13 +227,62 @@ Produced targets:
 Verified commands and outcomes:
 - `cmake --build /home/spark-advantage/pokefirered-native/build -j4`
 - `/home/spark-advantage/pokefirered-native/build/pfr_smoke`
+  - note: the full suite currently still has pre-existing failures in `TestTitleScreenRestartHandoff` and `TestTitleScreenBerryFixHandoff`
+- `PFR_SMOKE_FILTER=CB2NewGame /home/spark-advantage/pokefirered-native/build/pfr_smoke`
   - expected output: `pfr_smoke: ok`
 - `/home/spark-advantage/pokefirered-native/build/pfr_render_test /tmp/pfr_render_codex_20260308`
   - expected outcome: `PASS: Renderer produced visible output.` with `14 non-empty frames out of 20 sampled`
 - `timeout 8 /home/spark-advantage/pokefirered-native/build/pfr_play`
   - expected outcome: the interactive SDL loop survives until `timeout` kills it, with no immediate crash during boot
 - `timeout 12 /home/spark-advantage/pokefirered-native/build/pfr_play /home/spark-advantage/pokefirered-native/tests/pfr_play_oak_path.input`
-  - expected outcome: the trace reports `loaded scripted input file ...`, reaches `StartNewGameScene`, advances through Oak milestones up to at least `gOakSpeech_Text_AskPlayerGender`, and dumps milestone frames under `pfr_play_frames/`
+  - expected outcome: the trace reports `loaded scripted input file ...`, reaches `StartNewGameScene`, advances through early Oak milestones up to at least the player-gender prompt, and dumps milestone frames under `pfr_play_frames/`
+  - important qualification: this file is intentionally an early-path capture script only; it is stale for deep Oak verification and will stall before player/rival naming on newer builds
+- `PFR_AUTOPLAY_OAK_NEWGAME=1 /home/spark-advantage/pokefirered-native/build/pfr_play`
+  - expected outcome: real button input drives title -> main menu -> Oak -> player naming -> rival naming -> `CB2_NewGame` using live callback/window/palette state, not hard-coded frame numbers
+- `SDL_AUDIODRIVER=dummy PFR_AUTOPLAY_OAK_NEWGAME=1 /home/spark-advantage/pokefirered-native/build/pfr_play`
+  - important qualification: this was used only because the shell environment here aborts inside PulseAudio during `SDL_OpenAudioDevice`; the host sound mixer still runs because `HostAudioMixAndPush()` always executes `m4aSoundVSync()` + `SoundMain()` each VBlank even if the host audio device path changes
+  - observed result: the run reaches real upstream `CB2_NewGame` at frame `006269`, then immediately installs `CB1_Overworld` / `CB2_Overworld` at frame `006270`
+  - first two post-handoff framebuffer dumps are fully black:
+    - `pfr_play_frames/006270_callback2_-__CB2_NewGame__0x8d2148_.ppm`
+    - `pfr_play_frames/006271_callback2_-__CB2_Overworld__0x8d2030_.ppm`
+  - later periodic dumps are not black and show the player room rendered correctly:
+    - `pfr_play_frames/013100_periodic_13100.png`
+    - `pfr_play_frames/013200_periodic_13200.ppm`
+  - implication: the remaining issue is not missing `CB2_NewGame` / overworld linkage or missing room graphics assets; it is in the early overworld presentation/timing path between the initial black post-handoff frames and the later correct room render
+
+## Important 2026-03-10 Findings
+
+- The old frame-number-only Oak input script is stale. On the current build it stalls on Oak dialogue before naming unless more `A` presses are injected.
+- A current accurate `pfr_play` run with normal host audio enabled confirms the state-driven Oak autoplay is not stuck on the `"For some people, Pokemon are pets. Others use them for battling."` line. It keeps pressing real `A` inputs and advances through the deep Oak path.
+- Concrete frame markers from that accurate normal-audio run:
+  - command used: `timeout 120 env PFR_AUTOPLAY_OAK_NEWGAME=1 PFR_TRACE_OVERWORLD_STARTUP=1 ./build/pfr_play`
+  - `autoplay: gender menu detected` at frame `004138`
+  - `callback2 -> CB2_LoadNamingScreen` at frame `004380`
+  - `autoplay: player naming screen detected` and `callback2 -> CB2_NamingScreen` at frame `004389`
+  - `autoplay: rival naming menu detected` at frame `005172`
+  - `callback2 -> CB2_NewGame` at frame `006269`
+  - `callback1 -> CB1_Overworld`, `callback2 -> CB2_Overworld`, and `autoplay: overworld reached` at frame `006270`
+  - `overworld_startup first non-black framebuffer sample detected` at frame `006272`
+  - implication: if a run is paused on Oak dialogue, it is almost certainly using the stale frame script or a timed-out trace-heavy run, not the current state-driven autoplay logic
+- The real naming screen was not broken. The broken piece was the original `pfr_play` autoplay timing: it pressed `START` on the same frame `CB2_NamingScreen` first appeared, while the naming task was still in fade-in states `0/1`, so that `START` was ignored and the later `A` only typed a character. The current autoplay fix waits for `gPaletteFade.active` to clear, waits an additional 32 frames, then presses `START`, then `A`.
+- After that autoplay fix, the accurate hosted run reaches:
+  - player gender selection
+  - player naming via upstream `naming_screen.c`
+  - rival naming menu
+  - real upstream `CB2_NewGame`
+  - real upstream `CB1_Overworld` / `CB2_Overworld`
+- The early black screen immediately after `CB2_NewGame` is real in framebuffer captures, but it is not permanent in the hosted framebuffer path. The player room later appears in periodic captures. That strongly suggests the next debugging target is the early field fade / field callback / user-visible presentation path, not missing symbols or missing tileset/object data.
+- Exact current code/data evidence:
+  - `nm build/pfr_play | rg 'CB2_NewGame|CB1_Overworld|CB2_Overworld|FieldCB_WarpExitFadeFromBlack|VBlankCB_Field'` shows the real upstream symbols linked into the binary
+  - `pfr_play_trace.log` shows:
+    - `callback2 -> CB2_NewGame`
+    - `callback1 -> CB1_Overworld`
+    - `callback2 -> CB2_Overworld`
+  - the current `pfr_play` trace logs the deep Oak interactive milestones that matter for diagnosis:
+    - `autoplay: gender menu detected`
+    - `autoplay: player naming screen detected`
+    - `autoplay: rival naming menu detected`
+  - `pfr_play_frames/013100_periodic_13100.png` is a real rendered player-room framebuffer, not a placeholder
 - `/home/spark-advantage/pokefirered-native/build/pfr_lz77` on a known simple blob
   - expected outcome: successful decode to `ABCD`
 

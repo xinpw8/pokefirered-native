@@ -47,6 +47,9 @@ set(PFR_PREPROCESSED_SOURCES
     "${PFR_GEN_DIR}/text.c"
     "${PFR_GEN_DIR}/new_menu_helpers.c"
     "${PFR_GEN_DIR}/graphics.c"
+    "${PFR_GEN_DIR}/tilesets.c"
+    "${PFR_GEN_DIR}/event_object_movement.c"
+    "${PFR_GEN_DIR}/party_menu.c"
     "${PFR_GEN_DIR}/bag.c"
     "${PFR_GEN_DIR}/battle_anim_effects_3.c"
     "${PFR_GEN_DIR}/battle_anim_flying.c"
@@ -263,7 +266,42 @@ set(PFR_BOOT_ASSET_TUS
     "${POKEFIRERED_SOURCE_DIR}/src/scrcmd.c"
     "${POKEFIRERED_SOURCE_DIR}/src/string_util.c"
     "${POKEFIRERED_SOURCE_DIR}/src/tm_case.c"
+    # Source files whose #included data headers contain INCBINs
+    "${POKEFIRERED_SOURCE_DIR}/src/tilesets.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/event_object_movement.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/party_menu.c"
 )
+
+# Data headers that contain INCBIN macros (included by source files above).
+# These must be preprocessed so INCBIN_XX("...") is replaced with real data
+# instead of expanding to {0} via the HOST_NATIVE fallback macro.
+set(PFR_DATA_HEADERS_WITH_INCBIN
+    "data/graphics/pokemon.h"
+    "data/graphics/trainers.h"
+    "data/graphics/items.h"
+    "data/graphics/mail.h"
+    "data/graphics/interface_pokeballs.h"
+    "data/graphics/battle_terrain_unused.h"
+    "data/tilesets/graphics.h"
+    "data/tilesets/metatiles.h"
+    "data/object_events/object_event_graphics.h"
+    "data/party_menu.h"
+)
+
+# Build preproc commands for data headers → PFR_GEN_HEADERS_DIR
+set(PFR_DATA_HEADER_PREPROC_COMMANDS)
+set(PFR_DATA_HEADER_OUTPUTS)
+foreach(header_rel IN LISTS PFR_DATA_HEADERS_WITH_INCBIN)
+    set(header_src "${POKEFIRERED_SOURCE_DIR}/src/${header_rel}")
+    set(header_out "${PFR_GEN_HEADERS_DIR}/${header_rel}")
+    get_filename_component(header_out_dir "${header_out}" DIRECTORY)
+    list(APPEND PFR_DATA_HEADER_PREPROC_COMMANDS
+        COMMAND ${CMAKE_COMMAND} -E make_directory "${header_out_dir}"
+        COMMAND $<TARGET_FILE:pfr_assets> preproc
+            "${header_src}" "${PFR_INC_DIR}" "${header_out}"
+    )
+    list(APPEND PFR_DATA_HEADER_OUTPUTS "${header_out}")
+endforeach()
 
 file(GLOB_RECURSE PFR_MAP_JSONS "${POKEFIRERED_SOURCE_DIR}/data/maps/*/map.json")
 list(SORT PFR_MAP_JSONS)
@@ -561,7 +599,7 @@ add_library(pfr_upstream_core STATIC
     "${POKEFIRERED_SOURCE_DIR}/src/ereader_screen.c"
     "${POKEFIRERED_SOURCE_DIR}/src/event_data.c"
     "${POKEFIRERED_SOURCE_DIR}/src/event_object_lock.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/event_object_movement.c"
+    # event_object_movement.c excluded — compiled separately as pfr_upstream_event_object_movement (preprocessed, data headers with INCBINs)
     # evolution_graphics.c excluded — compiled separately as pfr_upstream_evolution_graphics (preprocessed)
     # evolution_scene.c excluded — compiled separately as pfr_upstream_evolution_scene (preprocessed)
     # fame_checker.c excluded — compiled separately as pfr_upstream_fame_checker (preprocessed)
@@ -664,7 +702,7 @@ add_library(pfr_upstream_core STATIC
     "${POKEFIRERED_SOURCE_DIR}/src/overworld.c"
     "${POKEFIRERED_SOURCE_DIR}/src/palette.c"
     "${POKEFIRERED_SOURCE_DIR}/src/palette_util.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/party_menu.c"
+    # party_menu.c excluded — compiled separately as pfr_upstream_party_menu (preprocessed, data headers with INCBINs)
     "${POKEFIRERED_SOURCE_DIR}/src/party_menu_specials.c"
     "${POKEFIRERED_SOURCE_DIR}/src/pc_screen_effect.c"
     # play_time.c excluded — compiled separately as pfr_upstream_play_time (with rename)
@@ -732,7 +770,7 @@ add_library(pfr_upstream_core STATIC
     # text_window_graphics.c excluded — compiled separately as pfr_upstream_text_window_graphics (preprocessed)
     "${POKEFIRERED_SOURCE_DIR}/src/tilemap_util.c"
     # tileset_anims.c excluded — compiled separately as pfr_upstream_tileset_anims (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/tilesets.c"
+    # tilesets.c excluded — compiled separately as pfr_upstream_tilesets (preprocessed, data headers with INCBINs)
     # title_screen.c excluded — compiled separately as pfr_upstream_title (preprocessed)
     # tm_case.c — compiled from gen (charmap _() strings)
     "${PFR_GEN_DIR}/tm_case.c"
@@ -1845,6 +1883,41 @@ target_include_directories(pfr_upstream_wireless_communication_status_screen PUB
 )
 add_dependencies(pfr_upstream_wireless_communication_status_screen pfr_asset_pipeline)
 
+# Source files with data headers containing INCBINs — must be compiled from gen/
+# so the -iquote path finds preprocessed headers in PFR_GEN_HEADERS_DIR before upstream src/
+add_library(pfr_upstream_tilesets OBJECT
+    "${PFR_GEN_DIR}/tilesets.c"
+)
+target_compile_definitions(pfr_upstream_tilesets PRIVATE ${PFR_COMMON_DEFINES})
+target_compile_options(pfr_upstream_tilesets PRIVATE ${PFR_UPSTREAM_PREPROC_OPTIONS})
+target_include_directories(pfr_upstream_tilesets PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+    "${POKEFIRERED_SOURCE_DIR}/src"
+)
+add_dependencies(pfr_upstream_tilesets pfr_asset_pipeline)
+
+add_library(pfr_upstream_event_object_movement OBJECT
+    "${PFR_GEN_DIR}/event_object_movement.c"
+)
+target_compile_definitions(pfr_upstream_event_object_movement PRIVATE ${PFR_COMMON_DEFINES})
+target_compile_options(pfr_upstream_event_object_movement PRIVATE ${PFR_UPSTREAM_PREPROC_OPTIONS})
+target_include_directories(pfr_upstream_event_object_movement PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+    "${POKEFIRERED_SOURCE_DIR}/src"
+)
+add_dependencies(pfr_upstream_event_object_movement pfr_asset_pipeline)
+
+add_library(pfr_upstream_party_menu OBJECT
+    "${PFR_GEN_DIR}/party_menu.c"
+)
+target_compile_definitions(pfr_upstream_party_menu PRIVATE ${PFR_COMMON_DEFINES})
+target_compile_options(pfr_upstream_party_menu PRIVATE ${PFR_UPSTREAM_PREPROC_OPTIONS})
+target_include_directories(pfr_upstream_party_menu PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+    "${POKEFIRERED_SOURCE_DIR}/src"
+)
+add_dependencies(pfr_upstream_party_menu pfr_asset_pipeline)
+
 add_executable(pfr_smoke tests/smoke.c)
 target_sources(pfr_smoke PRIVATE
     src/host_agbmain.c
@@ -1934,6 +2007,9 @@ target_sources(pfr_smoke PRIVATE
     $<TARGET_OBJECTS:pfr_upstream_union_room_chat_objects>
     $<TARGET_OBJECTS:pfr_upstream_util>
     $<TARGET_OBJECTS:pfr_upstream_wireless_communication_status_screen>
+    $<TARGET_OBJECTS:pfr_upstream_tilesets>
+    $<TARGET_OBJECTS:pfr_upstream_event_object_movement>
+    $<TARGET_OBJECTS:pfr_upstream_party_menu>
 )
 target_compile_definitions(pfr_smoke PRIVATE ${PFR_COMMON_DEFINES})
 target_compile_options(pfr_smoke PRIVATE
@@ -2059,6 +2135,9 @@ target_sources(pfr_render_test PRIVATE
     $<TARGET_OBJECTS:pfr_upstream_union_room_chat_objects>
     $<TARGET_OBJECTS:pfr_upstream_util>
     $<TARGET_OBJECTS:pfr_upstream_wireless_communication_status_screen>
+    $<TARGET_OBJECTS:pfr_upstream_tilesets>
+    $<TARGET_OBJECTS:pfr_upstream_event_object_movement>
+    $<TARGET_OBJECTS:pfr_upstream_party_menu>
 )
 target_compile_definitions(pfr_render_test PRIVATE ${PFR_COMMON_DEFINES})
 target_compile_options(pfr_render_test PRIVATE
@@ -2166,6 +2245,9 @@ target_sources(pfr_play PRIVATE
     $<TARGET_OBJECTS:pfr_upstream_union_room_chat_objects>
     $<TARGET_OBJECTS:pfr_upstream_util>
     $<TARGET_OBJECTS:pfr_upstream_wireless_communication_status_screen>
+    $<TARGET_OBJECTS:pfr_upstream_tilesets>
+    $<TARGET_OBJECTS:pfr_upstream_event_object_movement>
+    $<TARGET_OBJECTS:pfr_upstream_party_menu>
 )
 target_compile_definitions(pfr_play PRIVATE ${PFR_COMMON_DEFINES})
 target_compile_options(pfr_play PRIVATE
@@ -2357,7 +2439,7 @@ add_custom_target(pfr_verify_asset_manifests
 # Asset pipeline: compile assets, generate .inc files, preprocess upstream sources
 add_custom_command(
     OUTPUT "${PFR_ASSET_PIPELINE_STAMP}"
-    BYPRODUCTS ${PFR_PREPROCESSED_SOURCES} ${PFR_CHARMAP_HEADER_OUTPUTS}
+    BYPRODUCTS ${PFR_PREPROCESSED_SOURCES} ${PFR_CHARMAP_HEADER_OUTPUTS} ${PFR_DATA_HEADER_OUTPUTS}
     COMMAND ${CMAKE_COMMAND} -E make_directory "${PFR_ASSETS_DIR}"
     COMMAND ${CMAKE_COMMAND} -E make_directory "${PFR_INC_DIR}"
     COMMAND ${CMAKE_COMMAND} -E make_directory "${PFR_GEN_DIR}"
@@ -2563,6 +2645,15 @@ add_custom_command(
         "${POKEFIRERED_SOURCE_DIR}/src/string_util.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/string_util.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/tm_case.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/tm_case.c"
+    # Preprocess source files whose data headers contain INCBIN macros
+    COMMAND $<TARGET_FILE:pfr_assets> preproc
+        "${POKEFIRERED_SOURCE_DIR}/src/tilesets.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/tilesets.c"
+    COMMAND $<TARGET_FILE:pfr_assets> preproc
+        "${POKEFIRERED_SOURCE_DIR}/src/event_object_movement.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/event_object_movement.c"
+    COMMAND $<TARGET_FILE:pfr_assets> preproc
+        "${POKEFIRERED_SOURCE_DIR}/src/party_menu.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/party_menu.c"
+    # Preprocess data headers that contain INCBIN macros (pokemon sprites, tilesets, etc.)
+    ${PFR_DATA_HEADER_PREPROC_COMMANDS}
     ${PFR_CHARMAP_HEADER_COMMANDS}
     # Charmap: convert _("text") to Pokemon character encoding in ALL generated files
     COMMAND "${CMAKE_CURRENT_SOURCE_DIR}/scripts/charmap_preproc.sh"

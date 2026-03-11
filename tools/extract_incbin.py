@@ -32,12 +32,30 @@ INCBIN_PATTERN = re.compile(
     r'INCBIN_([US])(\d+)\s*\(\s*"([^"]+)"\s*\)'
 )
 
+INCLUDE_DATA_PATTERN = re.compile(
+    r'#\s*include\s+"(data/[^"]+\.h)"'
+)
+
 MANIFEST_HEADER = "# pfr_asset_manifest v1"
 
 
-def extract_incbins(filepath):
-    """Extract all INCBIN asset paths from a C source file."""
+def extract_incbins(filepath, follow_includes=True, _visited=None):
+    """Extract all INCBIN asset paths from a C source file.
+
+    When follow_includes is True, also follows #include "data/..." directives
+    to scan headers that contain INCBIN macros (e.g. data/graphics/pokemon.h).
+    """
+    if _visited is None:
+        _visited = set()
+
+    real_path = os.path.realpath(filepath)
+    if real_path in _visited:
+        return []
+    _visited.add(real_path)
+
     results = []
+    src_dir = os.path.dirname(filepath)
+
     with open(filepath, "r", encoding="utf-8") as f:
         for lineno, line in enumerate(f, 1):
             for match in INCBIN_PATTERN.finditer(line):
@@ -50,6 +68,17 @@ def extract_incbins(filepath):
                     "file": filepath,
                     "line": lineno,
                 })
+
+            if follow_includes:
+                inc_match = INCLUDE_DATA_PATTERN.search(line)
+                if inc_match:
+                    inc_rel = inc_match.group(1)
+                    inc_path = os.path.join(src_dir, inc_rel)
+                    if os.path.exists(inc_path):
+                        results.extend(
+                            extract_incbins(inc_path, follow_includes=True, _visited=_visited)
+                        )
+
     return results
 
 
