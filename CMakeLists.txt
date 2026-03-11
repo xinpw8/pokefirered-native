@@ -66,6 +66,8 @@ set(PFR_PREPROCESSED_SOURCES
     "${PFR_GEN_DIR}/digit_obj_util.c"
     "${PFR_GEN_DIR}/diploma.c"
     "${PFR_GEN_DIR}/dodrio_berry_picking.c"
+    "${PFR_GEN_DIR}/easy_chat.c"
+    "${PFR_GEN_DIR}/easy_chat_2.c"
     "${PFR_GEN_DIR}/easy_chat_3.c"
     "${PFR_GEN_DIR}/evolution_graphics.c"
     "${PFR_GEN_DIR}/evolution_scene.c"
@@ -136,12 +138,18 @@ set(PFR_PREPROCESSED_SOURCES
     "${PFR_GEN_DIR}/battle_tower.c"
     "${PFR_GEN_DIR}/berry_pouch.c"
     "${PFR_GEN_DIR}/field_player_avatar.c"
+    "${PFR_GEN_DIR}/item.c"
     "${PFR_GEN_DIR}/link_rfu_2.c"
     "${PFR_GEN_DIR}/mailbox_pc.c"
     "${PFR_GEN_DIR}/mystery_gift_scripts.c"
     "${PFR_GEN_DIR}/scrcmd.c"
     "${PFR_GEN_DIR}/string_util.c"
     "${PFR_GEN_DIR}/tm_case.c"
+    # data.c includes data/text/species_names.h etc. — must be preprocessed
+    # so _() strings become GBA charmap bytes instead of ASCII
+    "${PFR_GEN_DIR}/data.c"
+    # decoration.c includes data/decoration/description.h and header.h with _()
+    "${PFR_GEN_DIR}/decoration.c"
 )
 
 set(PFR_CHARMAP_HEADER_INPUTS)
@@ -152,7 +160,8 @@ file(GLOB_RECURSE PFR_DATA_HEADER_CANDIDATES
 )
 foreach(header_path IN LISTS PFR_DATA_HEADER_CANDIDATES)
     file(READ "${header_path}" header_contents)
-    if(header_contents MATCHES "_\\(\"" OR header_contents MATCHES "__\\(\"")
+    # Match _("...") on same line, or _(\n  "...") across lines
+    if(header_contents MATCHES "_\\(\"" OR header_contents MATCHES "__\\(\"" OR header_contents MATCHES "_\\([ \t\r\n]+\"")
         file(RELATIVE_PATH header_rel "${POKEFIRERED_SOURCE_DIR}/src" "${header_path}")
         set(header_out "${PFR_GEN_HEADERS_DIR}/${header_rel}")
         get_filename_component(header_out_dir "${header_out}" DIRECTORY)
@@ -190,6 +199,8 @@ set(PFR_BOOT_ASSET_TUS
     "${POKEFIRERED_SOURCE_DIR}/src/digit_obj_util.c"
     "${POKEFIRERED_SOURCE_DIR}/src/diploma.c"
     "${POKEFIRERED_SOURCE_DIR}/src/dodrio_berry_picking.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/easy_chat.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/easy_chat_2.c"
     "${POKEFIRERED_SOURCE_DIR}/src/easy_chat_3.c"
     "${POKEFIRERED_SOURCE_DIR}/src/evolution_graphics.c"
     "${POKEFIRERED_SOURCE_DIR}/src/evolution_scene.c"
@@ -266,6 +277,8 @@ set(PFR_BOOT_ASSET_TUS
     "${POKEFIRERED_SOURCE_DIR}/src/scrcmd.c"
     "${POKEFIRERED_SOURCE_DIR}/src/string_util.c"
     "${POKEFIRERED_SOURCE_DIR}/src/tm_case.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/data.c"
+    "${POKEFIRERED_SOURCE_DIR}/src/decoration.c"
     # Source files whose #included data headers contain INCBINs
     "${POKEFIRERED_SOURCE_DIR}/src/tilesets.c"
     "${POKEFIRERED_SOURCE_DIR}/src/event_object_movement.c"
@@ -484,6 +497,7 @@ add_library(pfr_upstream_core STATIC
     src/host_dma.c
     src/host_bios.c
     src/host_debug.c
+    src/host_log.c
     src/host_renderer.c
     src/host_display.c
     src/host_sound_mixer.c
@@ -582,18 +596,18 @@ add_library(pfr_upstream_core STATIC
     "${POKEFIRERED_SOURCE_DIR}/src/coins.c"
     "${POKEFIRERED_SOURCE_DIR}/src/coord_event_weather.c"
     # credits.c excluded — compiled separately as pfr_upstream_credits (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/data.c"
+    "${PFR_GEN_DIR}/data.c"  # preprocessed: species_names.h _() → GBA charmap
     # daycare.c excluded — compiled separately as pfr_upstream_daycare (preprocessed)
     "${POKEFIRERED_SOURCE_DIR}/src/decompress.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/decoration.c"
+    "${PFR_GEN_DIR}/decoration.c"  # preprocessed: decoration description/header _() → GBA charmap
     # digit_obj_util.c excluded — compiled separately as pfr_upstream_digit_obj_util (preprocessed)
     # diploma.c excluded — compiled separately as pfr_upstream_diploma (preprocessed)
     "${POKEFIRERED_SOURCE_DIR}/src/dma3_manager.c"
     # dodrio_berry_picking.c excluded — compiled separately as pfr_upstream_dodrio_berry_picking (preprocessed)
     "${POKEFIRERED_SOURCE_DIR}/src/dodrio_berry_picking_comm.c"
     "${POKEFIRERED_SOURCE_DIR}/src/dynamic_placeholder_text_util.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/easy_chat.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/easy_chat_2.c"
+    # easy_chat.c excluded — compiled separately as pfr_upstream_easy_chat (preprocessed, 1000+ _() strings in data headers)
+    # easy_chat_2.c excluded — compiled separately as pfr_upstream_easy_chat_2 (preprocessed)
     # easy_chat_3.c excluded — compiled separately as pfr_upstream_easy_chat_3 (preprocessed)
     "${POKEFIRERED_SOURCE_DIR}/src/ereader_helpers.c"
     "${POKEFIRERED_SOURCE_DIR}/src/ereader_screen.c"
@@ -642,7 +656,9 @@ add_library(pfr_upstream_core STATIC
     "${POKEFIRERED_SOURCE_DIR}/src/image_processing_effects.c"
     # intro.c excluded — compiled separately as pfr_upstream_intro (preprocessed)
     # isagbprn.c excluded — host_debug.c provides native debug print implementations
-    "${POKEFIRERED_SOURCE_DIR}/src/item.c"
+    # item.c includes data/items.h, so compile the generated copy to ensure
+    # quoted includes resolve into build/generated_include after charmap pass.
+    "${PFR_GEN_DIR}/item.c"
     # item_menu.c excluded — compiled separately as pfr_upstream_item_menu (preprocessed)
     "${POKEFIRERED_SOURCE_DIR}/src/item_menu_icons.c"
     "${POKEFIRERED_SOURCE_DIR}/src/item_pc.c"
@@ -1277,6 +1293,28 @@ target_include_directories(pfr_upstream_dodrio_berry_picking PUBLIC
     "${POKEFIRERED_SOURCE_DIR}/src"
 )
 add_dependencies(pfr_upstream_dodrio_berry_picking pfr_asset_pipeline)
+
+add_library(pfr_upstream_easy_chat OBJECT
+    "${PFR_GEN_DIR}/easy_chat.c"
+)
+target_compile_definitions(pfr_upstream_easy_chat PRIVATE ${PFR_COMMON_DEFINES})
+target_compile_options(pfr_upstream_easy_chat PRIVATE ${PFR_UPSTREAM_PREPROC_OPTIONS})
+target_include_directories(pfr_upstream_easy_chat PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+    "${POKEFIRERED_SOURCE_DIR}/src"
+)
+add_dependencies(pfr_upstream_easy_chat pfr_asset_pipeline)
+
+add_library(pfr_upstream_easy_chat_2 OBJECT
+    "${PFR_GEN_DIR}/easy_chat_2.c"
+)
+target_compile_definitions(pfr_upstream_easy_chat_2 PRIVATE ${PFR_COMMON_DEFINES})
+target_compile_options(pfr_upstream_easy_chat_2 PRIVATE ${PFR_UPSTREAM_PREPROC_OPTIONS})
+target_include_directories(pfr_upstream_easy_chat_2 PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+    "${POKEFIRERED_SOURCE_DIR}/src"
+)
+add_dependencies(pfr_upstream_easy_chat_2 pfr_asset_pipeline)
 
 add_library(pfr_upstream_easy_chat_3 OBJECT
     "${PFR_GEN_DIR}/easy_chat_3.c"
@@ -1952,6 +1990,8 @@ target_sources(pfr_smoke PRIVATE
     $<TARGET_OBJECTS:pfr_upstream_digit_obj_util>
     $<TARGET_OBJECTS:pfr_upstream_diploma>
     $<TARGET_OBJECTS:pfr_upstream_dodrio_berry_picking>
+    $<TARGET_OBJECTS:pfr_upstream_easy_chat>
+    $<TARGET_OBJECTS:pfr_upstream_easy_chat_2>
     $<TARGET_OBJECTS:pfr_upstream_easy_chat_3>
     $<TARGET_OBJECTS:pfr_upstream_evolution_graphics>
     $<TARGET_OBJECTS:pfr_upstream_evolution_scene>
@@ -2080,6 +2120,8 @@ target_sources(pfr_render_test PRIVATE
     $<TARGET_OBJECTS:pfr_upstream_digit_obj_util>
     $<TARGET_OBJECTS:pfr_upstream_diploma>
     $<TARGET_OBJECTS:pfr_upstream_dodrio_berry_picking>
+    $<TARGET_OBJECTS:pfr_upstream_easy_chat>
+    $<TARGET_OBJECTS:pfr_upstream_easy_chat_2>
     $<TARGET_OBJECTS:pfr_upstream_easy_chat_3>
     $<TARGET_OBJECTS:pfr_upstream_evolution_graphics>
     $<TARGET_OBJECTS:pfr_upstream_evolution_scene>
@@ -2155,7 +2197,7 @@ target_link_options(pfr_render_test PRIVATE
 target_link_libraries(pfr_render_test PRIVATE pfr_upstream_core Threads::Threads m)
 
 # Interactive player: SDL2 window with live keyboard input
-add_executable(pfr_play src/pfr_play.c src/host_audio.c)
+add_executable(pfr_play src/pfr_play.c src/host_audio.c src/host_savestate.c)
 set_target_properties(pfr_play PROPERTIES ENABLE_EXPORTS TRUE)
 target_sources(pfr_play PRIVATE
     src/host_agbmain.c
@@ -2190,6 +2232,8 @@ target_sources(pfr_play PRIVATE
     $<TARGET_OBJECTS:pfr_upstream_digit_obj_util>
     $<TARGET_OBJECTS:pfr_upstream_diploma>
     $<TARGET_OBJECTS:pfr_upstream_dodrio_berry_picking>
+    $<TARGET_OBJECTS:pfr_upstream_easy_chat>
+    $<TARGET_OBJECTS:pfr_upstream_easy_chat_2>
     $<TARGET_OBJECTS:pfr_upstream_easy_chat_3>
     $<TARGET_OBJECTS:pfr_upstream_evolution_graphics>
     $<TARGET_OBJECTS:pfr_upstream_evolution_scene>
@@ -2496,6 +2540,10 @@ add_custom_command(
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/dodrio_berry_picking.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/dodrio_berry_picking.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
+        "${POKEFIRERED_SOURCE_DIR}/src/easy_chat.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/easy_chat.c"
+    COMMAND $<TARGET_FILE:pfr_assets> preproc
+        "${POKEFIRERED_SOURCE_DIR}/src/easy_chat_2.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/easy_chat_2.c"
+    COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/easy_chat_3.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/easy_chat_3.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/evolution_graphics.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/evolution_graphics.c"
@@ -2634,6 +2682,8 @@ add_custom_command(
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/field_player_avatar.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/field_player_avatar.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
+        "${POKEFIRERED_SOURCE_DIR}/src/item.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/item.c"
+    COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/link_rfu_2.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/link_rfu_2.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/mailbox_pc.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/mailbox_pc.c"
@@ -2645,6 +2695,10 @@ add_custom_command(
         "${POKEFIRERED_SOURCE_DIR}/src/string_util.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/string_util.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/tm_case.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/tm_case.c"
+    COMMAND $<TARGET_FILE:pfr_assets> preproc
+        "${POKEFIRERED_SOURCE_DIR}/src/data.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/data.c"
+    COMMAND $<TARGET_FILE:pfr_assets> preproc
+        "${POKEFIRERED_SOURCE_DIR}/src/decoration.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/decoration.c"
     # Preprocess source files whose data headers contain INCBIN macros
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/tilesets.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/tilesets.c"
@@ -2691,6 +2745,8 @@ add_custom_command(
         "${POKEFIRERED_SOURCE_DIR}/src/digit_obj_util.c"
         "${POKEFIRERED_SOURCE_DIR}/src/diploma.c"
         "${POKEFIRERED_SOURCE_DIR}/src/dodrio_berry_picking.c"
+        "${POKEFIRERED_SOURCE_DIR}/src/easy_chat.c"
+        "${POKEFIRERED_SOURCE_DIR}/src/easy_chat_2.c"
         "${POKEFIRERED_SOURCE_DIR}/src/easy_chat_3.c"
         "${POKEFIRERED_SOURCE_DIR}/src/evolution_graphics.c"
         "${POKEFIRERED_SOURCE_DIR}/src/evolution_scene.c"
@@ -2761,12 +2817,15 @@ add_custom_command(
         "${POKEFIRERED_SOURCE_DIR}/src/battle_tower.c"
         "${POKEFIRERED_SOURCE_DIR}/src/berry_pouch.c"
         "${POKEFIRERED_SOURCE_DIR}/src/field_player_avatar.c"
+        "${POKEFIRERED_SOURCE_DIR}/src/item.c"
         "${POKEFIRERED_SOURCE_DIR}/src/link_rfu_2.c"
         "${POKEFIRERED_SOURCE_DIR}/src/mailbox_pc.c"
         "${POKEFIRERED_SOURCE_DIR}/src/mystery_gift_scripts.c"
         "${POKEFIRERED_SOURCE_DIR}/src/scrcmd.c"
         "${POKEFIRERED_SOURCE_DIR}/src/string_util.c"
         "${POKEFIRERED_SOURCE_DIR}/src/tm_case.c"
+        "${POKEFIRERED_SOURCE_DIR}/src/data.c"
+        "${POKEFIRERED_SOURCE_DIR}/src/decoration.c"
         ${PFR_CHARMAP_HEADER_INPUTS}
         "${POKEFIRERED_SOURCE_DIR}/charmap.txt"
         "${CMAKE_CURRENT_SOURCE_DIR}/scripts/charmap_preproc.sh"

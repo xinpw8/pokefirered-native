@@ -384,7 +384,7 @@ int main(int argc, char *argv[])
     for (frame = 1; frame <= lastFrame; frame++)
     {
         ApplyScriptedInput(frame);
-        HostFrameStepRun(RenderTestFrameLogic, NULL);
+        HostFrameStepRun(RenderTestFrameLogic, NULL, TRUE);
 
         while (nextMilestone < sManifest.milestone_count
             && sManifest.milestones[nextMilestone].frame == frame)

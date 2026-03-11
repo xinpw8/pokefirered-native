@@ -52,6 +52,12 @@ static void CpuTransfer(const void *src, void *dest, u32 control, bool32 fast_mo
     const u8 *src_bytes = src;
     u8 *dest_bytes = dest;
 
+    /* On GBA, CpuSet to/from NULL or freed memory is a harmless no-op
+     * (writes to BIOS ROM or stale heap).  On native 64-bit, NULL deref
+     * is SIGSEGV.  Guard here to match GBA behavior. */
+    if (src == NULL || dest == NULL || unit_count == 0)
+        return;
+
     if (fast_mode)
         unit_size = sizeof(u32);
 

@@ -28,6 +28,7 @@
 #include "global.h"
 #include "gba/gba.h"
 #include "gba/m4a_internal.h"
+#include "host_log.h"
 #include "m4a.h"
 #include "host_audio.h"
 
@@ -100,15 +101,15 @@ void HostAudioInit(void)
 {
     if (SDL_InitSubSystem(SDL_INIT_AUDIO) < 0)
     {
-        fprintf(stderr, "host_audio: SDL_InitSubSystem(AUDIO) failed: %s\n",
-                SDL_GetError());
+        HostLogPrintf("host_audio: SDL_InitSubSystem(AUDIO) failed: %s\n",
+                      SDL_GetError());
         return;
     }
 
     sRingBuf = (s8 *)calloc(RING_SIZE, 1);
     if (!sRingBuf)
     {
-        fprintf(stderr, "host_audio: ring buffer allocation failed\n");
+        HostLogPrintf("host_audio: ring buffer allocation failed\n");
         SDL_QuitSubSystem(SDL_INIT_AUDIO);
         return;
     }
@@ -127,8 +128,8 @@ void HostAudioInit(void)
     sAudioDevice = SDL_OpenAudioDevice(NULL, 0, &want, &have, 0);
     if (sAudioDevice == 0)
     {
-        fprintf(stderr, "host_audio: SDL_OpenAudioDevice failed: %s\n",
-                SDL_GetError());
+        HostLogPrintf("host_audio: SDL_OpenAudioDevice failed: %s\n",
+                      SDL_GetError());
         free(sRingBuf);
         sRingBuf = NULL;
         SDL_QuitSubSystem(SDL_INIT_AUDIO);
@@ -138,8 +139,8 @@ void HostAudioInit(void)
     /* Unpause — audio callback starts running */
     SDL_PauseAudioDevice(sAudioDevice, 0);
 
-    fprintf(stderr, "host_audio: opened device (freq=%d fmt=0x%04x ch=%d buf=%d)\n",
-            have.freq, have.format, have.channels, have.samples);
+    HostLogPrintf("host_audio: opened device (freq=%d fmt=0x%04x ch=%d buf=%d)\n",
+                  have.freq, have.format, have.channels, have.samples);
 }
 
 void HostAudioShutdown(void)
@@ -155,6 +156,26 @@ void HostAudioShutdown(void)
         sRingBuf = NULL;
     }
     SDL_QuitSubSystem(SDL_INIT_AUDIO);
+}
+
+void HostAudioLock(void)
+{
+    if (sAudioDevice != 0)
+        SDL_LockAudioDevice(sAudioDevice);
+}
+
+void HostAudioUnlock(void)
+{
+    if (sAudioDevice != 0)
+        SDL_UnlockAudioDevice(sAudioDevice);
+}
+
+void HostAudioResetBufferedSamples(void)
+{
+    sRingHead = 0;
+    sRingTail = 0;
+    if (sRingBuf != NULL)
+        memset(sRingBuf, 0, RING_SIZE);
 }
 
 void HostAudioMixAndPush(void)
@@ -226,13 +247,13 @@ void HostAudioMixAndPush(void)
     /* Periodic diagnostic every 300 frames (~5 seconds) */
     if (sFrameCount % 300 == 0)
     {
-        fprintf(stderr, "host_audio: frame=%u nonZeroFrames=%u activeChannelFrames=%u ident=0x%08X "
-                "maxChans=%u pcmDmaCounter=%u pcmDmaPeriod=%u samplesPerVBlank=%u "
-                "MPlayMainHead=%p musicPlayerHead=%p\n",
-                sFrameCount, sNonZeroFrames, sActiveChannelFrames,
-                si->ident, si->maxChans, si->pcmDmaCounter, si->pcmDmaPeriod,
-                si->pcmSamplesPerVBlank,
-                (void *)si->MPlayMainHead, (void *)si->musicPlayerHead);
+        HostLogPrintf("host_audio: frame=%u nonZeroFrames=%u activeChannelFrames=%u ident=0x%08X "
+                      "maxChans=%u pcmDmaCounter=%u pcmDmaPeriod=%u samplesPerVBlank=%u "
+                      "MPlayMainHead=%p musicPlayerHead=%p\n",
+                      sFrameCount, sNonZeroFrames, sActiveChannelFrames,
+                      si->ident, si->maxChans, si->pcmDmaCounter, si->pcmDmaPeriod,
+                      si->pcmSamplesPerVBlank,
+                      (void *)si->MPlayMainHead, (void *)si->musicPlayerHead);
         sNonZeroFrames = 0;
         sActiveChannelFrames = 0;
     }

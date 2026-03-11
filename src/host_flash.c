@@ -8,6 +8,7 @@
 #include "global.h"
 #include "gba/flash_internal.h"
 #include "host_flash.h"
+#include "host_log.h"
 #include "save.h"
 #include <stdio.h>
 #include <string.h>
@@ -77,16 +78,23 @@ static void HostFlashSyncToDisk(void)
 
     f = fopen(tmpPath, "wb");
     if (f == NULL)
+    {
+        HostLogPrintf("[pokefirered-native] save: failed to open %s for writing\n", tmpPath);
         return;
+    }
 
     if (fwrite(sFlashBuffer, 1, FLASH_BUFFER_SIZE, f) != FLASH_BUFFER_SIZE)
     {
+        HostLogPrintf("[pokefirered-native] save: write to %s incomplete\n", tmpPath);
         fclose(f);
         return;
     }
 
     fclose(f);
-    rename(tmpPath, sSaveFilePath);
+    if (rename(tmpPath, sSaveFilePath) != 0)
+        HostLogPrintf("[pokefirered-native] save: rename %s -> %s failed\n", tmpPath, sSaveFilePath);
+    else
+        HostLogPrintf("[pokefirered-native] save: written to %s\n", sSaveFilePath);
 }
 
 // ---------------------------------------------------------------------------

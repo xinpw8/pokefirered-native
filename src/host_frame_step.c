@@ -10,7 +10,7 @@
 
 #define CYCLES_PER_SCANLINE 1232
 
-void HostFrameStepRun(HostFrameStepLogicFn logicFn, void *userdata)
+void HostFrameStepRun(HostFrameStepLogicFn logicFn, void *userdata, bool8 renderFrame)
 {
     int scanline;
     u16 dispstat;
@@ -75,13 +75,15 @@ void HostFrameStepRun(HostFrameStepLogicFn logicFn, void *userdata)
     }
 
     /* === Phase 3: visible display period === */
-    HostRendererStartFrame();
+    if (renderFrame)
+        HostRendererStartFrame();
 
     for (scanline = 0; scanline < DISPLAY_HEIGHT; scanline++)
     {
         REG_VCOUNT = scanline;
         HostTimerSync(CYCLES_PER_SCANLINE);
-        HostRendererRenderScanline(scanline);
+        if (renderFrame)
+            HostRendererRenderScanline(scanline);
 
         dispstat = GetGpuReg(REG_OFFSET_DISPSTAT);
         flags = 0;

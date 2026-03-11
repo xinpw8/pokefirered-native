@@ -6,5 +6,8 @@
 void HostAudioInit(void);
 void HostAudioShutdown(void);
 void HostAudioMixAndPush(void);
+void HostAudioLock(void);
+void HostAudioUnlock(void);
+void HostAudioResetBufferedSamples(void);
 
 #endif /* HOST_AUDIO_H */

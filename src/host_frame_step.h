@@ -14,6 +14,6 @@ typedef void (*HostFrameStepLogicFn)(void *userdata);
  * The caller installs interrupt handlers separately and decides how
  * to present or consume the finished framebuffer after stepping.
  */
-void HostFrameStepRun(HostFrameStepLogicFn logicFn, void *userdata);
+void HostFrameStepRun(HostFrameStepLogicFn logicFn, void *userdata, bool8 renderFrame);
 
 #endif /* POKEFIRERED_NATIVE_HOST_FRAME_STEP_H */

@@ -86,6 +86,11 @@ static void ExecuteTransfer(u8 dma_num)
     u32 control_hi = control >> 16;
     u32 i;
 
+    /* On GBA, DMA to/from address 0 is harmless (BIOS ROM area).
+     * On native, NULL deref is SIGSEGV. Skip transfer. */
+    if (src_addr == 0 || dest_addr == 0)
+        goto update_regs;
+
     for (i = 0; i < count; ++i)
     {
         memcpy((void *)dest_addr, (const void *)src_addr, unit_size);
@@ -93,6 +98,7 @@ static void ExecuteTransfer(u8 dma_num)
         dest_addr += dest_step;
     }
 
+update_regs:
     if ((control_hi & 0x0060) == DMA_DEST_RELOAD)
         dest_addr = initial_dest;
 

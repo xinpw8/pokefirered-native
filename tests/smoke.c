@@ -7,13 +7,23 @@
 
 #include "global.h"
 #include "bg.h"
+#include "battle.h"
+#include "battle_main.h"
+#include "battle_controllers.h"
+#include "battle_setup.h"
+#include "battle_util2.h"
+#include "battle_transition.h"
 #include "decompress.h"
+#include "data.h"
 #include "dma3.h"
 #include "berry_fix_program.h"
 #include "characters.h"
 #include "constants/flags.h"
 #include "constants/items.h"
 #include "constants/maps.h"
+#include "constants/moves.h"
+#include "constants/opponents.h"
+#include "constants/region_map_sections.h"
 #include "constants/songs.h"
 #include "constants/trainer_tower.h"
 #include "constants/vars.h"
@@ -34,6 +44,7 @@
 #include "host_runtime_stubs.h"
 #include "host_title_screen_stubs.h"
 #include "intro.h"
+#include "item.h"
 #include "link.h"
 #include "link_rfu.h"
 #include "load_save.h"
@@ -45,17 +56,28 @@
 #include "overworld.h"
 #include "field_fadetransition.h"
 #include "palette.h"
+#include "pokemon.h"
+#include "pokemon_storage_system_internal.h"
+#include "pokemon_summary_screen.h"
 #include "quest_log.h"
+#include "region_map.h"
 #include "random.h"
 #include "scanline_effect.h"
 #include "save.h"
 #include "sprite.h"
+#include "string_util.h"
+#include "start_menu.h"
 #include "strings.h"
 #include "task.h"
 #include "title_screen.h"
+#include "trainer_card.h"
 #include "window.h"
 
 bool32 CheckHeap(void);
+void HostPatchBattleScriptPointers(void);
+void HostPatchFieldEffectScriptPointers(void);
+void HostPatchBattleAIScriptPointers(void);
+void HostPatchBattleAnimScriptPointers(void);
 static volatile int sLastGoodFrame = -1;
 extern u16 gBattle_BG0_X;
 extern const IntrFunc gIntrTableTemplate[];
@@ -80,6 +102,11 @@ extern const u8 gOakSpeech_Text_WhatWasHisName[];
 extern const u8 *gHostLastOakSpeechSource;
 
 void EnableVCountIntrAtLine150(void);
+
+void HostLogSaveStatus(u8 status)
+{
+    (void)status;
+}
 
 static bool8 ShouldRunSmokeTest(const char *name)
 {
@@ -107,6 +134,10 @@ static void PrintSmokeTestLabel(const char *name)
     } while (0)
 void InitIntrHandlers(void);
 static bool32 WindowMatches(u8 windowId, u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height);
+static void RunMainCallbackFrame(void);
+static void RunAllCallbacksFrame(void);
+static void SetKeys(u16 newKeys, u16 heldKeys);
+static void ClearKeys(void);
 
 static int sHBlankCallbackCalls;
 static int sSerialCallbackCalls;
@@ -180,6 +211,93 @@ static u8 AsciiToPokemonChar(char c)
     if (c == '?') return 0xAC;
     if (c == '\'') return 0xB4;
     return (u8)c;
+}
+
+static void CopyAsciiToPokemonName(u8 *dest, const char *src)
+{
+    while (*src != '\0')
+        *dest++ = AsciiToPokemonChar(*src++);
+
+    *dest = EOS;
+}
+
+static void SeedBattleTestPlayerMon(u16 species, u8 level, u16 move)
+{
+    u32 exp = gExperienceTables[gSpeciesInfo[species].growthRate][level + 1] - 1;
+    u16 none = MOVE_NONE;
+    u8 pp = 15;
+    u8 zeroPp = 0;
+    u16 hp;
+
+    ZeroPlayerPartyMons();
+    CreateMon(&gPlayerParty[0], species, level, 32, TRUE, 0, OT_ID_PLAYER_ID, 0);
+    SetMonData(&gPlayerParty[0], MON_DATA_EXP, &exp);
+    SetMonData(&gPlayerParty[0], MON_DATA_MOVE1, &move);
+    SetMonData(&gPlayerParty[0], MON_DATA_MOVE2, &none);
+    SetMonData(&gPlayerParty[0], MON_DATA_MOVE3, &none);
+    SetMonData(&gPlayerParty[0], MON_DATA_MOVE4, &none);
+    SetMonData(&gPlayerParty[0], MON_DATA_PP1, &pp);
+    SetMonData(&gPlayerParty[0], MON_DATA_PP2, &zeroPp);
+    SetMonData(&gPlayerParty[0], MON_DATA_PP3, &zeroPp);
+    SetMonData(&gPlayerParty[0], MON_DATA_PP4, &zeroPp);
+    CalculateMonStats(&gPlayerParty[0]);
+    hp = GetMonData(&gPlayerParty[0], MON_DATA_MAX_HP, NULL);
+    SetMonData(&gPlayerParty[0], MON_DATA_HP, &hp);
+    gPlayerPartyCount = CalculatePlayerPartyCount();
+}
+
+static int RunUntilPlayerLevelAndEnemySpeciesWithAPulses(u8 expectedLevel, u16 expectedSpecies, int maxFrames, const char *message)
+{
+    int i;
+
+    for (i = 0; i < maxFrames; i++)
+    {
+        sLastGoodFrame = i;
+        if (GetMonData(&gPlayerParty[0], MON_DATA_LEVEL, NULL) == expectedLevel
+         && gMain.callback2 == BattleMainCB2
+         && gBattleMons[B_POSITION_OPPONENT_LEFT].species == expectedSpecies)
+            break;
+
+        if ((i % 6) == 0)
+            SetKeys(A_BUTTON, A_BUTTON);
+        else
+            ClearKeys();
+        RunAllCallbacksFrame();
+    }
+
+    ClearKeys();
+    return Expect(GetMonData(&gPlayerParty[0], MON_DATA_LEVEL, NULL) == expectedLevel
+               && gMain.callback2 == BattleMainCB2
+               && gBattleMons[B_POSITION_OPPONENT_LEFT].species == expectedSpecies,
+                  message);
+}
+
+static int RunUntilPlayerLevelAndBattleEndsWithAPulses(u8 expectedLevel, int maxFrames, const char *message)
+{
+    int i;
+
+    for (i = 0; i < maxFrames; i++)
+    {
+        sLastGoodFrame = i;
+        if (GetMonData(&gPlayerParty[0], MON_DATA_LEVEL, NULL) == expectedLevel
+         && gBattleOutcome == B_OUTCOME_WON
+         && !gMain.inBattle
+         && gMain.callback2 != BattleMainCB2)
+            break;
+
+        if ((i % 6) == 0)
+            SetKeys(A_BUTTON, A_BUTTON);
+        else
+            ClearKeys();
+        RunAllCallbacksFrame();
+    }
+
+    ClearKeys();
+    return Expect(GetMonData(&gPlayerParty[0], MON_DATA_LEVEL, NULL) == expectedLevel
+               && gBattleOutcome == B_OUTCOME_WON
+               && !gMain.inBattle
+               && gMain.callback2 != BattleMainCB2,
+                  message);
 }
 
 static bool32 NameBufferEquals(const u8 *name, const char *expected)
@@ -657,6 +775,42 @@ static int TestSprite(void)
     return rc;
 }
 
+static int TestEncodedStringsPreserveSpaces(void)
+{
+    int rc = 0;
+    u8 buffer[32];
+
+    memset(buffer, 0, sizeof(buffer));
+    StringCopy(buffer, gMoveNames[MOVE_TAIL_WHIP]);
+    rc |= Expect(NameBufferEquals(buffer, "TAIL WHIP"),
+                 "StringCopy truncated MOVE_TAIL_WHIP at the encoded space");
+    rc |= Expect(StringLength(buffer) == strlen("TAIL WHIP"),
+                 "StringLength truncated MOVE_TAIL_WHIP at the encoded space");
+
+    memset(buffer, 0, sizeof(buffer));
+    GetMapName(buffer, MAPSEC_ROUTE_1, 0);
+    rc |= Expect(NameBufferEquals(buffer, "ROUTE 1"),
+                 "GetMapName truncated ROUTE 1 at the encoded space");
+    rc |= Expect(StringLength(buffer) == strlen("ROUTE 1"),
+                 "StringLength truncated ROUTE 1 at the encoded space");
+
+    memset(buffer, 0, sizeof(buffer));
+    CopyItemName(ITEM_POTION, buffer);
+    rc |= Expect(NameBufferEquals(buffer, "POTION"),
+                 "CopyItemName failed to copy POTION");
+
+    return rc;
+}
+
+static int TestDestroySpriteAndFreeResourcesNullSafe(void)
+{
+    HostMemoryReset();
+    ResetSpriteData();
+    FreeAllSpritePalettes();
+    DestroySpriteAndFreeResources(NULL);
+    return 0;
+}
+
 static int TestMainRuntime(void)
 {
     int rc = 0;
@@ -883,6 +1037,17 @@ static void RunMainCallbackFrame(void)
         gMain.vblankCallback();
 }
 
+static void RunAllCallbacksFrame(void)
+{
+    if (gMain.callback1 != NULL)
+        gMain.callback1();
+    if (gMain.callback2 != NULL)
+        gMain.callback2();
+    ProcessDma3Requests();
+    if (gMain.vblankCallback != NULL)
+        gMain.vblankCallback();
+}
+
 static void SetKeys(u16 newKeys, u16 heldKeys)
 {
     gMain.newKeys = newKeys;
@@ -991,6 +1156,89 @@ static int RunUntilCallback2WithAPulses(MainCallback expected, int maxFrames, co
     return Expect(gMain.callback2 == expected, message);
 }
 
+static int RunUntilCallback2WithAPulsesAllCallbacks(MainCallback expected, int maxFrames, const char *message)
+{
+    int i;
+
+    for (i = 0; i < maxFrames && gMain.callback2 != expected; i++)
+    {
+        if ((i % 16) == 0)
+            SetKeys(A_BUTTON, A_BUTTON);
+        else if ((i % 16) == 1)
+            ClearKeys();
+        RunAllCallbacksFrame();
+    }
+
+    ClearKeys();
+    return Expect(gMain.callback2 == expected, message);
+}
+
+static int RunUntilNoFadeAndWindowCountAtLeast(int minWindowCount, int maxFrames, const char *message)
+{
+    int i;
+
+    for (i = 0; i < maxFrames; i++)
+    {
+        sLastGoodFrame = i;
+        if (!gPaletteFade.active && CountWindowsWithTileData() >= minWindowCount)
+            break;
+        RunMainCallbackFrame();
+    }
+
+    return Expect(!gPaletteFade.active && CountWindowsWithTileData() >= minWindowCount, message);
+}
+
+static int RunUntilTaskCountEquals(int expectedCount, int maxFrames, const char *message)
+{
+    int i;
+
+    for (i = 0; i < maxFrames; i++)
+    {
+        sLastGoodFrame = i;
+        if (GetTaskCount() == expectedCount && !gPaletteFade.active)
+            break;
+        RunMainCallbackFrame();
+    }
+
+    return Expect(GetTaskCount() == expectedCount && !gPaletteFade.active, message);
+}
+
+static int PulseButtonUntilCallback2WithButton(u16 button, MainCallback expected, int maxFrames, const char *message)
+{
+    int i;
+
+    for (i = 0; i < maxFrames && gMain.callback2 != expected; i++)
+    {
+        sLastGoodFrame = i;
+        if ((i % 6) == 0)
+            SetKeys(button, button);
+        else
+            ClearKeys();
+        RunMainCallbackFrame();
+    }
+
+    ClearKeys();
+    return Expect(gMain.callback2 == expected, message);
+}
+
+static int PulseButtonUntilTaskCountExceeds(u16 button, int baselineTaskCount, int maxFrames, const char *message)
+{
+    int i;
+
+    for (i = 0; i < maxFrames && GetTaskCount() <= baselineTaskCount; i++)
+    {
+        sLastGoodFrame = i;
+        if ((i % 6) == 0)
+            SetKeys(button, button);
+        else
+            ClearKeys();
+        RunMainCallbackFrame();
+    }
+
+    ClearKeys();
+    return Expect(GetTaskCount() > baselineTaskCount, message);
+}
+
 static void ResetBootCallbackHarness(void)
 {
     HostMemoryReset();
@@ -1012,6 +1260,10 @@ static void ResetBootCallbackHarness(void)
         SetDefaultFontsPointer();
     }
     HostNativeSoundInit();
+    HostPatchBattleScriptPointers();
+    HostPatchFieldEffectScriptPointers();
+    HostPatchBattleAIScriptPointers();
+    HostPatchBattleAnimScriptPointers();
     InitRFUAPI();
     CheckForFlashMemory();
     gSaveBlock1Ptr = &gSaveBlock1;
@@ -1794,6 +2046,247 @@ static int TestOakSpeechToCB2NewGameHandoff(void)
     return rc;
 }
 
+static int TestBattleTransitionAngledWipesCleanup(void)
+{
+    int rc = 0;
+    int i;
+    bool8 done = FALSE;
+
+    rc |= TestOakSpeechToCB2NewGameHandoff();
+
+    ClearKeys();
+    BattleTransition_StartOnField(B_TRANSITION_ANGLED_WIPES);
+
+    rc |= Expect(gMain.callback2 == CB2_OverworldBasic,
+                 "battle transition did not hand off to CB2_OverworldBasic");
+    rc |= Expect(gMain.vblankCallback != NULL,
+                 "battle transition did not install a VBlank callback");
+
+    for (i = 0; i < 1024 && !done; i++)
+    {
+        sLastGoodFrame = i;
+        gMain.callback2();
+        ProcessDma3Requests();
+        done = IsBattleTransitionDone();
+        if (gMain.vblankCallback != NULL)
+            gMain.vblankCallback();
+    }
+
+    rc |= Expect(done == TRUE, "AngledWipes transition did not finish");
+    rc |= Expect(gMain.vblankCallback == NULL,
+                 "AngledWipes cleanup did not clear the VBlank callback");
+    rc |= Expect(gMain.hblankCallback == NULL,
+                 "AngledWipes cleanup did not clear the HBlank callback");
+    rc |= Expect((REG_DMA0CNT_H & DMA_ENABLE) == 0,
+                 "AngledWipes cleanup did not stop DMA0");
+
+    return rc;
+}
+
+static int TestBattleChosenMonReturnValueNullOrderUsesBattlerOrder(void)
+{
+    static const u8 sExpectedOrder[PARTY_SIZE / 2] = {0x21, 0x43, 0x65};
+    int rc = 0;
+    int i;
+
+    ResetBootCallbackHarness();
+    gBattleTypeFlags = 0;
+    gActiveBattler = 0;
+    memset(gBattleBufferB, 0, sizeof(gBattleBufferB));
+    gBattleStruct = AllocZeroed(sizeof(*gBattleStruct));
+    rc |= Expect(gBattleStruct != NULL,
+                 "chosen-mon return regression failed to allocate BattleStruct");
+    if (gBattleStruct != NULL)
+    {
+        memcpy(gBattleStruct->battlerPartyOrders[gActiveBattler], sExpectedOrder, sizeof(sExpectedOrder));
+        BtlController_EmitChosenMonReturnValue(BUFFER_B, 4, NULL);
+
+        rc |= Expect(gBattleBufferB[gActiveBattler][0] == CONTROLLER_CHOSENMONRETURNVALUE,
+                     "chosen-mon return did not emit the controller id");
+        rc |= Expect(gBattleBufferB[gActiveBattler][1] == 4,
+                     "chosen-mon return did not preserve the party id");
+
+        for (i = 0; i < (int)ARRAY_COUNT(sExpectedOrder); i++)
+        {
+            rc |= Expect(gBattleBufferB[gActiveBattler][2 + i] == sExpectedOrder[i],
+                         "chosen-mon return did not fall back to the battler party order");
+        }
+
+        Free(gBattleStruct);
+        gBattleStruct = NULL;
+    }
+
+    return rc;
+}
+
+static int TestPokeStorageMoveItemsEmptyBoxNullSafe(void)
+{
+    int rc = 0;
+    int i;
+
+    rc |= TestOakSpeechToCB2NewGameHandoff();
+
+    rc |= Expect(GetBoxMonDataAt(StorageGetCurrentBox(), 0, MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE,
+                 "storage regression expected an empty first box slot");
+
+    ClearKeys();
+    EnterPokeStorage(OPTION_MOVE_ITEMS);
+
+    for (i = 0; i < 64; i++)
+    {
+        sLastGoodFrame = i;
+        RunMainCallbackFrame();
+
+        if (gStorage != NULL
+         && gStorage->cursorSprite != NULL
+         && gStorage->boxMonsSprites[0] == NULL)
+            break;
+    }
+
+    rc |= Expect(gStorage != NULL,
+                 "poke storage did not allocate runtime state");
+    rc |= Expect(gStorage->boxOption == OPTION_MOVE_ITEMS,
+                 "poke storage did not preserve Move Items mode");
+    rc |= Expect(gStorage->cursorSprite != NULL,
+                 "poke storage did not create the storage cursor");
+    rc |= Expect(gStorage->boxMonsSprites[0] == NULL,
+                 "empty box slot unexpectedly produced a box sprite");
+
+    return rc;
+}
+
+static int TestTrainerCardNoPokemonNullSafe(void)
+{
+    int rc = 0;
+
+    rc |= TestOakSpeechToCB2NewGameHandoff();
+    rc |= Expect(gPlayerPartyCount == 0,
+                 "trainer card regression expected an empty party");
+    CopyAsciiToPokemonName(gSaveBlock2Ptr->playerName, "ASH");
+
+    ClearKeys();
+    ShowStartMenu();
+
+    rc |= RunUntilNoFadeAndWindowCountAtLeast(1, 512,
+                                              "start menu did not finish opening");
+
+    SetKeys(DPAD_DOWN, DPAD_DOWN);
+    RunMainCallbackFrame();
+    ClearKeys();
+    RunMainCallbackFrame();
+
+    SetKeys(A_BUTTON, A_BUTTON);
+    RunMainCallbackFrame();
+    ClearKeys();
+
+    rc |= RunUntilNoFadeAndWindowCountAtLeast(2, 1024,
+                                              "trainer card did not finish opening");
+    rc |= PulseButtonUntilCallback2WithButton(B_BUTTON, CB2_ReturnToFieldWithOpenMenu, 1024,
+                                              "trainer card did not return to the field callback");
+
+    RunFrames(16);
+    rc |= Expect(gMain.callback2 != NULL,
+                 "trainer card return path cleared callback2 unexpectedly");
+
+    return rc;
+}
+
+static int TestPokemonSummaryExitAfterPageFlipsNullSafe(void)
+{
+    int rc = 0;
+    int summaryTaskCount;
+
+    rc |= TestOakSpeechToCB2NewGameHandoff();
+    rc |= Expect(gPlayerPartyCount == 0,
+                 "summary regression expected an empty party before seeding a test mon");
+
+    ZeroPlayerPartyMons();
+    CreateMon(&gPlayerParty[0], SPECIES_BULBASAUR, 5, 32, FALSE, 0, OT_ID_PLAYER_ID, 0);
+    rc |= Expect(CalculatePlayerPartyCount() == 1,
+                 "summary regression failed to seed a test party mon");
+
+    ClearKeys();
+    ShowPokemonSummaryScreen(gPlayerParty, 0, 0, TestMainCallback, PSS_MODE_NORMAL);
+
+    rc |= Expect(gMain.callback2 != TestMainCallback,
+                 "summary screen did not take over callback2");
+    rc |= RunUntilNoFadeAndWindowCountAtLeast(2, 1536,
+                                              "summary screen did not finish opening");
+    summaryTaskCount = GetTaskCount();
+
+    rc |= PulseButtonUntilTaskCountExceeds(DPAD_RIGHT, summaryTaskCount, 256,
+                                           "summary screen did not start the first page flip");
+    rc |= RunUntilTaskCountEquals(summaryTaskCount, 512,
+                                  "summary screen did not settle after the first page flip");
+
+    rc |= PulseButtonUntilTaskCountExceeds(DPAD_RIGHT, summaryTaskCount, 256,
+                                           "summary screen did not start the second page flip");
+    rc |= RunUntilTaskCountEquals(summaryTaskCount, 512,
+                                  "summary screen did not settle after the second page flip");
+
+    rc |= PulseButtonUntilTaskCountExceeds(DPAD_LEFT, summaryTaskCount, 256,
+                                           "summary screen did not start the reverse page flip");
+    rc |= RunUntilTaskCountEquals(summaryTaskCount, 512,
+                                  "summary screen did not settle after the reverse page flip");
+
+    rc |= PulseButtonUntilCallback2WithButton(B_BUTTON, TestMainCallback, 1024,
+                                              "summary screen did not return to the saved callback");
+    rc |= Expect(CountWindowsWithTileData() == 0,
+                 "summary screen did not free its window buffers on close");
+
+    return rc;
+}
+
+static int TestWildBattleLevelUpDialogReturnsSafely(void)
+{
+    int rc = 0;
+
+    rc |= TestOakSpeechToCB2NewGameHandoff();
+
+    SeedBattleTestPlayerMon(SPECIES_ARTICUNO, 20, MOVE_PSYCHIC);
+    rc |= Expect(gPlayerPartyCount == 1,
+                 "wild battle regression failed to seed a single player mon");
+
+    ZeroEnemyPartyMons();
+    CreateMon(&gEnemyParty[0], SPECIES_CATERPIE, 2, 0, TRUE, 0, OT_ID_RANDOM_NO_SHINY, 0);
+
+    ClearKeys();
+    gBattleTypeFlags = 0;
+    gMain.savedCallback = CB2_ReturnToFieldContinueScriptPlayMapMusic;
+    SetMainCallback2(CB2_InitBattle);
+    rc |= RunUntilCallback2WithAPulsesAllCallbacks(BattleMainCB2, 4096,
+                                                   "wild battle did not reach BattleMainCB2");
+    rc |= RunUntilPlayerLevelAndBattleEndsWithAPulses(21, 8192,
+                                                      "wild battle did not survive the level-up dialog return");
+
+    return rc;
+}
+
+static int TestTrainerBattleLevelUpDialogSendsNextMonSafely(void)
+{
+    int rc = 0;
+
+    rc |= TestOakSpeechToCB2NewGameHandoff();
+
+    gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SET;
+    SeedBattleTestPlayerMon(SPECIES_ARTICUNO, 20, MOVE_PSYCHIC);
+    rc |= Expect(gPlayerPartyCount == 1,
+                 "trainer battle regression failed to seed a single player mon");
+
+    gTrainerBattleOpponent_A = TRAINER_YOUNGSTER_BEN;
+
+    ClearKeys();
+    gBattleTypeFlags = BATTLE_TYPE_TRAINER;
+    gMain.savedCallback = CB2_ReturnToFieldContinueScriptPlayMapMusic;
+    SetMainCallback2(CB2_InitBattle);
+    rc |= RunUntilCallback2WithAPulsesAllCallbacks(BattleMainCB2, 4096,
+                                                   "trainer battle did not reach BattleMainCB2");
+    rc |= RunUntilPlayerLevelAndEnemySpeciesWithAPulses(21, SPECIES_EKANS, 8192,
+                                                        "trainer battle did not survive the level-up dialog return to the opponent's next mon");
+
+    return rc;
+}
+
 static int TestTitleScreenSaveClearHandoff(void)
 {
     int rc = 0;
@@ -1930,6 +2423,8 @@ int main(void)
     RUN_FILTERED_TEST("TestPalette", TestPalette());
     RUN_FILTERED_TEST("TestBg", TestBg());
     RUN_FILTERED_TEST("TestSprite", TestSprite());
+    RUN_FILTERED_TEST("TestEncodedStringsPreserveSpaces", TestEncodedStringsPreserveSpaces());
+    RUN_FILTERED_TEST("TestDestroySpriteAndFreeResourcesNullSafe", TestDestroySpriteAndFreeResourcesNullSafe());
     RUN_FILTERED_TEST("TestMainRuntime", TestMainRuntime());
     RUN_FILTERED_TEST("TestAgbMainBootSlice", TestAgbMainBootSlice());
     RUN_FILTERED_TEST("TestIntroBootCallbacks", TestIntroBootCallbacks());
@@ -1948,6 +2443,13 @@ int main(void)
     RUN_FILTERED_TEST("TestOakSpeechGenderSelectionFlow", TestOakSpeechGenderSelectionFlow());
     RUN_FILTERED_TEST("TestOakSpeechPlayerNaming", TestOakSpeechPlayerNaming());
     RUN_FILTERED_TEST("TestOakSpeechToCB2NewGameHandoff", TestOakSpeechToCB2NewGameHandoff());
+    RUN_FILTERED_TEST("TestBattleTransitionAngledWipesCleanup", TestBattleTransitionAngledWipesCleanup());
+    RUN_FILTERED_TEST("TestBattleChosenMonReturnValueNullOrderUsesBattlerOrder", TestBattleChosenMonReturnValueNullOrderUsesBattlerOrder());
+    RUN_FILTERED_TEST("TestPokeStorageMoveItemsEmptyBoxNullSafe", TestPokeStorageMoveItemsEmptyBoxNullSafe());
+    RUN_FILTERED_TEST("TestTrainerCardNoPokemonNullSafe", TestTrainerCardNoPokemonNullSafe());
+    RUN_FILTERED_TEST("TestPokemonSummaryExitAfterPageFlipsNullSafe", TestPokemonSummaryExitAfterPageFlipsNullSafe());
+    RUN_FILTERED_TEST("TestWildBattleLevelUpDialogReturnsSafely", TestWildBattleLevelUpDialogReturnsSafely());
+    RUN_FILTERED_TEST("TestTrainerBattleLevelUpDialogSendsNextMonSafely", TestTrainerBattleLevelUpDialogSendsNextMonSafely());
     RUN_FILTERED_TEST("TestTitleScreenSaveClearHandoff", TestTitleScreenSaveClearHandoff());
     RUN_FILTERED_TEST("TestTitleScreenBerryFixHandoff", TestTitleScreenBerryFixHandoff());
 

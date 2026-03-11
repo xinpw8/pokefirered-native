@@ -83,6 +83,82 @@ Targets:
 - `pfr_play`: runs the current interactive SDL boot harness so a user can drive the intro/title/main-menu path live, subject to the remaining renderer/window/text fidelity gaps.
 - `pfr_lz77`: uses the original upstream decompression entrypoints to decode an LZ77 blob.
 
+Debug workflow:
+```sh
+# Clone an existing save into a branch file, boot that branch headless and
+# unthrottled, and auto-continue straight into gameplay.
+/home/spark-advantage/pokefirered-native/build/pfr_play \
+  --headless --unthrottled --mute \
+  --save-path /tmp/branches/viridian_branch.sav \
+  --load-save /home/spark-advantage/pokefirered-native/build/pokefirered.sav \
+  --autoplay-continue
+```
+
+Useful `pfr_play` options:
+- `--save-path <path>`: choose the active save file for this run.
+- `--load-save <path>`: copy another save file into the active save path before boot.
+- `--snapshot-dir <path>`: choose where F5 quicksave snapshots are written.
+- `--state-dir <path>`: choose where Shift+F1 / Shift+F2 browse for savestate files.
+- `--quickload-path <path>`: choose which snapshot F9 quickload restores.
+- `--control-file <path>`: consume live debug commands from a regular file and delete it after processing.
+- `--headless`: run without opening an SDL window.
+- `--unthrottled`: disable SDL vsync pacing for faster runs.
+- `--fast-forward <n>`: simulate `n` frames per present when unthrottled.
+- `--mute`: skip host audio init.
+- `--max-speed`: shorthand for `--headless --unthrottled --mute` plus heavier debug suppression.
+- `--autoplay-continue`: auto-press through title/menu and continue from the current save.
+- `--autoplay-oak`: auto-drive the new-game Oak flow.
+
+Interactive debug shortcuts:
+- `F1`: instant hotload of the latest in-memory savestate.
+- `F2`: instant hotsave of the full current in-memory state.
+- `Shift+F1`: open an in-window modal overlay to browse and load a savestate file without restarting.
+- `Shift+F2`: open an in-window modal overlay to browse and save a savestate file without restarting.
+- `Space`: toggle the currently selected turbo speed on and off while the game is running.
+- `Shift+Space`: cycle the windowed turbo preset between `2x`, `4x`, `8x`, `16x`, `32x`, `64x`, `128x`, and `256x` without leaving the game. The default preset is `16x`.
+- `F5`: force an overworld save when possible, then export an immutable timestamped snapshot under the snapshot dir.
+- `F9`: copy the configured quickload snapshot, or the newest snapshot in the snapshot dir, into the active save path and restart `pfr_play`.
+
+Savestate note:
+- `F1` / `F2` and `statesave` / `stateload` are true live-process savestates. They restore instantly, but the `.pfrstate` files are only compatible with the same running `pfr_play` session.
+- `F5` / `F9`, `saveas`, and `load` are battery-save branch files. They survive restarts and are the right tool for long-lived branch trees like separate starter paths.
+- While the Shift+F1 / Shift+F2 overlay is open, gameplay input is locked to the overlay and emulation is paused until you finish or cancel.
+
+Agent-friendly live commands:
+```sh
+# Start a branch headless at max speed and listen for live commands.
+/home/spark-advantage/pokefirered-native/build/pfr_play \
+  --max-speed \
+  --fast-forward 4096 \
+  --save-path /tmp/branches/squirtle_route1.sav \
+  --load-save /home/spark-advantage/pokefirered-native/build/pokefirered.sav \
+  --state-dir /tmp/states \
+  --autoplay-continue \
+  --control-file /tmp/pfr_control.txt
+
+# While it is running, queue a command by writing a fresh file.
+printf 'saveas /tmp/branches/squirtle_route1_after_oak.sav\n' > /tmp/pfr_control.txt
+printf 'quicksave route1_branch\n' > /tmp/pfr_control.txt
+printf 'hotsave\n' > /tmp/pfr_control.txt
+printf 'statesave /tmp/states/route1_live.pfrstate\n' > /tmp/pfr_control.txt
+printf 'hotload\n' > /tmp/pfr_control.txt
+printf 'stateload /tmp/states/route1_live.pfrstate\n' > /tmp/pfr_control.txt
+printf 'load /tmp/branches/bulbasaur_lab.sav\n' > /tmp/pfr_control.txt
+printf 'quickload\n' > /tmp/pfr_control.txt
+```
+
+Supported control-file commands:
+- `hotsave`: capture an instant in-memory savestate.
+- `hotload`: restore the latest in-memory savestate without restarting.
+- `statesave <path>`: save the current live savestate to a new `.pfrstate` file without overwriting an existing one.
+- `stateload <path>`: restore a `.pfrstate` file from the current live session without restarting.
+- `quicksave [label]`: create an immutable timestamped snapshot in the snapshot dir.
+- `saveas <path>`: copy the current active save to an exact path without overwriting an existing file.
+- `load <path>`: restore an exact save file into the active save path and restart into Continue.
+- `quickload [path]`: restore the configured quickload path, the provided path, or the newest snapshot and restart.
+- `list`: log known snapshot paths to `pfr_play_trace.log`.
+- `quit`: stop the current `pfr_play` process.
+
 LZ77 tool:
 ```sh
 /home/spark-advantage/pokefirered-native/build/pfr_lz77 input.bin output.bin

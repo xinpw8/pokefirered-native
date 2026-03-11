@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 #include "global.h"
+#include "host_log.h"
 
 /* Undo isagbprint.h empty macros so we can define real implementations */
 #ifdef MgbaOpen
@@ -17,9 +18,14 @@
 
 static void HostVPrint(const char *prefix, const char *fmt, va_list args)
 {
-    fprintf(stderr, "%s", prefix);
-    vfprintf(stderr, fmt, args);
-    fputc('\n', stderr);
+    char line[1024];
+    int prefix_len = snprintf(line, sizeof(line), "%s", prefix);
+
+    if (prefix_len < 0)
+        return;
+
+    vsnprintf(line + prefix_len, sizeof(line) - (size_t)prefix_len, fmt, args);
+    HostLogPrintf("%s\n", line);
 }
 
 bool32 MgbaOpen(void)
@@ -44,7 +50,7 @@ void MgbaPrintf(s32 level, const char *pBuf, ...)
 
 void MgbaAssert(const char *pFile, s32 nLine, const char *pExpression, bool32 nStopProgram)
 {
-    fprintf(stderr, "[mgba assert] %s:%d: %s\n", pFile, nLine, pExpression);
+    HostLogPrintf("[mgba assert] %s:%d: %s\n", pFile, nLine, pExpression);
     if (nStopProgram)
         abort();
 }
@@ -59,7 +65,7 @@ void NoCashGBAPrintf(const char *pBuf, ...)
 
 void NoCashGBAAssert(const char *pFile, s32 nLine, const char *pExpression, bool32 nStopProgram)
 {
-    fprintf(stderr, "[nocash assert] %s:%d: %s\n", pFile, nLine, pExpression);
+    HostLogPrintf("[nocash assert] %s:%d: %s\n", pFile, nLine, pExpression);
     if (nStopProgram)
         abort();
 }
@@ -74,7 +80,7 @@ void AGBPrintf(const char *pBuf, ...)
 
 void AGBAssert(const char *pFile, int nLine, const char *pExpression, int nStopProgram)
 {
-    fprintf(stderr, "[agb assert] %s:%d: %s\n", pFile, nLine, pExpression);
+    HostLogPrintf("[agb assert] %s:%d: %s\n", pFile, nLine, pExpression);
     if (nStopProgram)
         abort();
 }
