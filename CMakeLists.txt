@@ -392,7 +392,10 @@ add_custom_command(
         "${PFR_GEN_HEADERS_DIR}/constants/map_groups.h"
         "${PFR_GEN_HEADERS_DIR}/constants/map_event_ids.h"
         "${PFR_GEN_HEADERS_DIR}/constants/region_map_sections.h"
+        "${PFR_GEN_HEADERS_DIR}/constants/heal_locations.h"
+        "${PFR_GEN_HEADERS_DIR}/data/heal_locations.h"
     COMMAND ${CMAKE_COMMAND} -E make_directory "${PFR_GEN_HEADERS_DIR}/constants"
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${PFR_GEN_HEADERS_DIR}/data"
     COMMAND ${CMAKE_COMMAND} -E make_directory "${PFR_MAPJSON_OUT_DIR}"
     COMMAND "${POKEFIRERED_SOURCE_DIR}/tools/mapjson/mapjson" groups firered
         "${POKEFIRERED_SOURCE_DIR}/data/maps/map_groups.json"
@@ -405,14 +408,25 @@ add_custom_command(
         "${POKEFIRERED_SOURCE_DIR}/src/data/region_map/region_map_sections.json"
         "${POKEFIRERED_SOURCE_DIR}/src/data/region_map/region_map_sections.constants.json.txt"
         "${PFR_GEN_HEADERS_DIR}/constants/region_map_sections.h"
+    COMMAND "${POKEFIRERED_SOURCE_DIR}/tools/jsonproc/jsonproc"
+        "${POKEFIRERED_SOURCE_DIR}/src/data/heal_locations.json"
+        "${POKEFIRERED_SOURCE_DIR}/src/data/heal_locations.constants.json.txt"
+        "${PFR_GEN_HEADERS_DIR}/constants/heal_locations.h"
+    COMMAND "${POKEFIRERED_SOURCE_DIR}/tools/jsonproc/jsonproc"
+        "${POKEFIRERED_SOURCE_DIR}/src/data/heal_locations.json"
+        "${POKEFIRERED_SOURCE_DIR}/src/data/heal_locations.json.txt"
+        "${PFR_GEN_HEADERS_DIR}/data/heal_locations.h"
     DEPENDS
         "${POKEFIRERED_SOURCE_DIR}/tools/mapjson/mapjson"
         "${POKEFIRERED_SOURCE_DIR}/tools/jsonproc/jsonproc"
         "${POKEFIRERED_SOURCE_DIR}/data/maps/map_groups.json"
         "${POKEFIRERED_SOURCE_DIR}/src/data/region_map/region_map_sections.json"
         "${POKEFIRERED_SOURCE_DIR}/src/data/region_map/region_map_sections.constants.json.txt"
+        "${POKEFIRERED_SOURCE_DIR}/src/data/heal_locations.json"
+        "${POKEFIRERED_SOURCE_DIR}/src/data/heal_locations.constants.json.txt"
+        "${POKEFIRERED_SOURCE_DIR}/src/data/heal_locations.json.txt"
         ${PFR_MAP_JSONS}
-    COMMENT "Generating upstream constant headers needed by new_game/roamer"
+    COMMENT "Generating upstream constant/data headers needed by map and heal consumers"
 )
 
 add_custom_target(pfr_generated_headers
@@ -420,6 +434,8 @@ add_custom_target(pfr_generated_headers
         "${PFR_GEN_HEADERS_DIR}/constants/map_groups.h"
         "${PFR_GEN_HEADERS_DIR}/constants/map_event_ids.h"
         "${PFR_GEN_HEADERS_DIR}/constants/region_map_sections.h"
+        "${PFR_GEN_HEADERS_DIR}/constants/heal_locations.h"
+        "${PFR_GEN_HEADERS_DIR}/data/heal_locations.h"
 )
 
 add_custom_command(
