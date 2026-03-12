@@ -16,6 +16,7 @@ extern u32 gHostOakSpeechWelcomeToTheWorldPrints;
 extern u32 gHostOakSpeechThisWorldPrints;
 extern u32 gHostOakSpeechIStudyPokemonPrints;
 extern u32 gHostOakSpeechAskPlayerGenderPrints;
+extern const u8 *gHostLastOakSpeechSource;
 extern const u8 *gHostOakSpeechLastTopBarLeftText;
 extern const u8 *gHostOakSpeechLastTopBarRightText;
 

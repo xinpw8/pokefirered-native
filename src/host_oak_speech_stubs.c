@@ -43,6 +43,7 @@ u32 gHostOakSpeechWelcomeToTheWorldPrints = 0;
 u32 gHostOakSpeechThisWorldPrints = 0;
 u32 gHostOakSpeechIStudyPokemonPrints = 0;
 u32 gHostOakSpeechAskPlayerGenderPrints = 0;
+const u8 *gHostLastOakSpeechSource = NULL;
 const u8 *gHostOakSpeechLastTopBarLeftText = NULL;
 const u8 *gHostOakSpeechLastTopBarRightText = NULL;
 
@@ -69,6 +70,7 @@ static u8 *CopyHostString(u8 *dest, const u8 *src)
 
 void HostOakSpeechStubRecordPrintedText(const u8 *text)
 {
+    gHostLastOakSpeechSource = text;
     if (text == gControlsGuide_Text_Intro)
         gHostOakSpeechControlsGuidePage1Loads++;
     else if (text == gControlsGuide_Text_DPad)
@@ -98,6 +100,7 @@ void HostOakSpeechStubReset(void)
     gHostOakSpeechThisWorldPrints = 0;
     gHostOakSpeechIStudyPokemonPrints = 0;
     gHostOakSpeechAskPlayerGenderPrints = 0;
+    gHostLastOakSpeechSource = NULL;
     gHostOakSpeechLastTopBarLeftText = NULL;
     gHostOakSpeechLastTopBarRightText = NULL;
     sHostOakSpeechNewGameInitialized = FALSE;

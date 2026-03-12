@@ -1,6 +1,6 @@
 [submodule "third_party/pokefirered"]
 	path = third_party/pokefirered
-	url = https://github.com/pret/pokefirered.git
+	url = https://github.com/xinpw8/pokefirered.git
 [submodule "third_party/mgba"]
 	path = third_party/mgba
 	url = https://github.com/mgba-emu/mgba.git

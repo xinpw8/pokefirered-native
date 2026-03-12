@@ -42,6 +42,7 @@
 #include "host_memory.h"
 #include "host_new_game_stubs.h"
 #include "host_runtime_stubs.h"
+#include "host_savestate.h"
 #include "host_title_screen_stubs.h"
 #include "intro.h"
 #include "item.h"
@@ -55,7 +56,11 @@
 #include "money.h"
 #include "overworld.h"
 #include "field_fadetransition.h"
+#include "field_player_avatar.h"
+#include "global.fieldmap.h"
 #include "palette.h"
+#include "pfr_env_slot.h"
+#include "pfr_firered_state.h"
 #include "pokemon.h"
 #include "pokemon_storage_system_internal.h"
 #include "pokemon_summary_screen.h"
@@ -102,6 +107,8 @@ extern const u8 gOakSpeech_Text_WhatWasHisName[];
 extern const u8 *gHostLastOakSpeechSource;
 
 void EnableVCountIntrAtLine150(void);
+static void SeedBattleTestPlayerMon(u16 species, u8 level, u16 move);
+static int TestOakSpeechToCB2NewGameHandoff(void);
 
 void HostLogSaveStatus(u8 status)
 {
@@ -170,6 +177,242 @@ static int Expect(int condition, const char *message)
         return 1;
     }
     return 0;
+}
+
+static int TestSavestateSnapshots(void)
+{
+    int rc = 0;
+    struct HostSavestateSnapshot *baseline = NULL;
+    struct HostSavestateSnapshot *slotA = NULL;
+    struct HostSavestateSnapshot *slotB = NULL;
+    volatile u32 *probe = (volatile u32 *)EWRAM_START;
+    const u32 valueA = 0x13572468u;
+    const u32 valueB = 0x24681357u;
+
+    rc |= Expect(HostSavestateInit(), "savestate init failed");
+    baseline = HostSavestateCreateSnapshot();
+    slotA = HostSavestateCreateSnapshot();
+    slotB = HostSavestateCreateSnapshot();
+    rc |= Expect(baseline != NULL, "baseline savestate snapshot allocation failed");
+    rc |= Expect(slotA != NULL, "slot A savestate snapshot allocation failed");
+    rc |= Expect(slotB != NULL, "slot B savestate snapshot allocation failed");
+    if (rc != 0)
+        goto cleanup;
+
+    rc |= Expect(HostSavestateCaptureSnapshot(baseline), "baseline savestate capture failed");
+    *probe = valueA;
+    rc |= Expect(HostSavestateCaptureSnapshot(slotA), "slot A savestate capture failed");
+    *probe = valueB;
+    rc |= Expect(HostSavestateCaptureSnapshot(slotB), "slot B savestate capture failed");
+    *probe = 0;
+
+    rc |= Expect(HostSavestateRestoreSnapshot(slotA), "slot A savestate restore failed");
+    rc |= Expect(*probe == valueA, "slot A restore did not recover the saved EWRAM value");
+    rc |= Expect(HostSavestateRestoreSnapshot(slotB), "slot B savestate restore failed");
+    rc |= Expect(*probe == valueB, "slot B restore did not recover the saved EWRAM value");
+
+cleanup:
+    if (baseline != NULL)
+        HostSavestateRestoreSnapshot(baseline);
+    HostSavestateDestroySnapshot(slotB);
+    HostSavestateDestroySnapshot(slotA);
+    HostSavestateDestroySnapshot(baseline);
+    return rc;
+}
+
+static int TestPfrRlCapturePacketUsesFireRedRam(void)
+{
+    struct PfrRlPacket packet;
+    u16 heldItem = ITEM_POTION;
+    u16 move2 = MOVE_GROWL;
+    u32 status = STATUS1_POISON;
+    int rc = 0;
+
+    memset(&gSaveBlock1, 0, sizeof(gSaveBlock1));
+    memset(&gSaveBlock2, 0, sizeof(gSaveBlock2));
+    memset(&gPlayerAvatar, 0, sizeof(gPlayerAvatar));
+    memset(gObjectEvents, 0, sizeof(gObjectEvents));
+    memset(&gMain, 0, sizeof(gMain));
+    gSaveBlock1Ptr = &gSaveBlock1;
+    gSaveBlock2Ptr = &gSaveBlock2;
+    gSaveBlock1Ptr->pos.x = 12;
+    gSaveBlock1Ptr->pos.y = 34;
+    gSaveBlock1Ptr->location.mapGroup = 3;
+    gSaveBlock1Ptr->location.mapNum = 5;
+    gSaveBlock1Ptr->mapLayoutId = 77;
+    gSaveBlock1Ptr->trainerRematchStepCounter = 77;
+    gSaveBlock1Ptr->gameStats[GAME_STAT_STEPS] = 999;
+    gSaveBlock1Ptr->gameStats[GAME_STAT_TOTAL_BATTLES] = 12;
+    gSaveBlock1Ptr->gameStats[GAME_STAT_WILD_BATTLES] = 8;
+    gSaveBlock1Ptr->gameStats[GAME_STAT_TRAINER_BATTLES] = 4;
+    gSaveBlock1Ptr->gameStats[GAME_STAT_POKEMON_CAPTURES] = 2;
+    gSaveBlock2Ptr->playerGender = FEMALE;
+    gSaveBlock2Ptr->optionsButtonMode = OPTIONS_BUTTON_MODE_L_EQUALS_A;
+    gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SET;
+    gSaveBlock2Ptr->optionsBattleSceneOff = TRUE;
+    gSaveBlock2Ptr->optionsSound = OPTIONS_SOUND_STEREO;
+    gSaveBlock2Ptr->playTimeHours = 12;
+    gSaveBlock2Ptr->playTimeMinutes = 34;
+    gSaveBlock2Ptr->playTimeSeconds = 56;
+    gSaveBlock2Ptr->playTimeVBlanks = 7;
+    gPlayerAvatar.objectEventId = 0;
+    gObjectEvents[0].facingDirection = DIR_NORTH;
+    SeedBattleTestPlayerMon(SPECIES_BULBASAUR, 7, MOVE_TACKLE);
+    SetMonData(&gPlayerParty[0], MON_DATA_HELD_ITEM, &heldItem);
+    SetMonData(&gPlayerParty[0], MON_DATA_MOVE2, &move2);
+    SetMonData(&gPlayerParty[0], MON_DATA_STATUS, &status);
+    gPlayerPartyCount = CalculatePlayerPartyCount();
+
+    SetMoney(&gSaveBlock1Ptr->money, 54321);
+    gSaveBlock1Ptr->coins = 123;
+    gSaveBlock1Ptr->registeredItem = ITEM_BICYCLE;
+    gSaveBlock1Ptr->trainerRematchStepCounter = 77;
+    FlagSet(FLAG_BADGE01_GET);
+    gPlayerAvatar.flags = PLAYER_AVATAR_FLAG_ON_FOOT | PLAYER_AVATAR_FLAG_CONTROLLABLE;
+    gPlayerAvatar.runningState = MOVING;
+    gPlayerAvatar.tileTransitionState = T_NOT_MOVING;
+
+    PfrRlCapturePacket(&packet, 1234, A_BUTTON | B_BUTTON, TRUE, FALSE);
+
+    rc |= Expect(packet.magic == PFR_RL_MAGIC, "packet capture did not stamp the FireRed magic");
+    rc |= Expect(packet.frame == 1234, "packet capture did not preserve the frame number");
+    rc |= Expect(packet.heldButtons == (A_BUTTON | B_BUTTON), "packet capture did not preserve held buttons");
+    rc |= Expect(packet.x == gSaveBlock1Ptr->pos.x && packet.y == gSaveBlock1Ptr->pos.y,
+                 "packet capture did not preserve the player coordinates");
+    rc |= Expect(packet.mapGroup == gSaveBlock1Ptr->location.mapGroup
+              && packet.mapNum == gSaveBlock1Ptr->location.mapNum
+              && packet.mapLayoutId == gSaveBlock1Ptr->mapLayoutId,
+                 "packet capture did not preserve the current map identity");
+    rc |= Expect(packet.facingDirection == DIR_NORTH,
+                 "packet capture did not preserve the player facing direction");
+    rc |= Expect(packet.playerAvatarFlags == gPlayerAvatar.flags
+              && packet.playerRunningState == gPlayerAvatar.runningState
+              && packet.playerTileTransitionState == gPlayerAvatar.tileTransitionState,
+                 "packet capture did not preserve the player avatar runtime state");
+    rc |= Expect(packet.registeredItem == ITEM_BICYCLE && packet.trainerRematchStepCounter == 77,
+                 "packet capture did not preserve key SaveBlock1 fields");
+    rc |= Expect(packet.money == 54321 && packet.moneyRemainder == 321 && packet.coins == 123,
+                 "packet capture did not preserve money or coins");
+    rc |= Expect(packet.badges == 1,
+                 "packet capture did not derive badge count from FireRed flags");
+    rc |= Expect(packet.partyCount == 1,
+                 "packet capture did not preserve party count");
+    rc |= Expect(packet.pokedexSeen == 0 && packet.pokedexCaught == 0,
+                 "packet capture did not preserve pokedex counts");
+    rc |= Expect(packet.playerGender == gSaveBlock2Ptr->playerGender
+              && packet.optionsButtonMode == gSaveBlock2Ptr->optionsButtonMode
+              && packet.optionsBattleStyle == gSaveBlock2Ptr->optionsBattleStyle
+              && packet.optionsBattleSceneOff == gSaveBlock2Ptr->optionsBattleSceneOff
+              && packet.optionsSound == gSaveBlock2Ptr->optionsSound,
+                 "packet capture did not preserve SaveBlock2 option state");
+    rc |= Expect(packet.playTimeHours == gSaveBlock2Ptr->playTimeHours
+              && packet.playTimeMinutes == gSaveBlock2Ptr->playTimeMinutes
+              && packet.playTimeSeconds == gSaveBlock2Ptr->playTimeSeconds
+              && packet.playTimeVBlanks == gSaveBlock2Ptr->playTimeVBlanks,
+                 "packet capture did not preserve play time");
+    rc |= Expect(packet.inOverworld == TRUE && packet.inBattle == FALSE,
+                 "packet capture did not preserve runtime mode flags");
+    rc |= Expect(packet.steps == GetGameStat(GAME_STAT_STEPS)
+              && packet.totalBattles == GetGameStat(GAME_STAT_TOTAL_BATTLES)
+              && packet.wildBattles == GetGameStat(GAME_STAT_WILD_BATTLES)
+              && packet.trainerBattles == GetGameStat(GAME_STAT_TRAINER_BATTLES)
+              && packet.pokemonCaptures == GetGameStat(GAME_STAT_POKEMON_CAPTURES),
+                 "packet capture did not preserve FireRed game stats");
+    rc |= Expect(packet.party[0].species == SPECIES_BULBASAUR
+              && packet.party[0].heldItem == ITEM_POTION
+              && packet.party[0].level == 7
+              && packet.party[0].status == STATUS1_POISON
+              && packet.party[0].moves[0] == MOVE_TACKLE
+              && packet.party[0].moves[1] == MOVE_GROWL,
+                 "packet capture did not preserve party move or status data");
+    rc |= Expect(packet.party[0].types[0] == gSpeciesInfo[SPECIES_BULBASAUR].types[0]
+              && packet.party[0].types[1] == gSpeciesInfo[SPECIES_BULBASAUR].types[1],
+                 "packet capture did not preserve the mon's exact species typing");
+    rc |= Expect(packet.party[0].hp == GetMonData(&gPlayerParty[0], MON_DATA_HP, NULL)
+              && packet.party[0].maxHp == GetMonData(&gPlayerParty[0], MON_DATA_MAX_HP, NULL)
+              && packet.party[0].exp == GetMonData(&gPlayerParty[0], MON_DATA_EXP, NULL),
+                 "packet capture did not preserve party battle stats");
+
+    return rc;
+}
+
+static void SeedPfrRlRamState(u16 species, u8 level, u32 money, s16 x, s16 y, u8 mapGroup, u8 mapNum, u8 facingDirection)
+{
+    memset(&gSaveBlock1, 0, sizeof(gSaveBlock1));
+    memset(&gSaveBlock2, 0, sizeof(gSaveBlock2));
+    memset(&gPlayerAvatar, 0, sizeof(gPlayerAvatar));
+    memset(gObjectEvents, 0, sizeof(gObjectEvents));
+    memset(&gMain, 0, sizeof(gMain));
+    gSaveBlock1Ptr = &gSaveBlock1;
+    gSaveBlock2Ptr = &gSaveBlock2;
+    gSaveBlock1Ptr->pos.x = x;
+    gSaveBlock1Ptr->pos.y = y;
+    gSaveBlock1Ptr->location.mapGroup = mapGroup;
+    gSaveBlock1Ptr->location.mapNum = mapNum;
+    gSaveBlock1Ptr->mapLayoutId = (u16)(mapGroup * 32 + mapNum);
+    SetMoney(&gSaveBlock1Ptr->money, money);
+    gPlayerAvatar.objectEventId = 0;
+    gObjectEvents[0].facingDirection = facingDirection;
+    SeedBattleTestPlayerMon(species, level, MOVE_TACKLE);
+}
+
+static int TestPfrEnvSlotsPreserveDistinctRamStates(void)
+{
+    struct HostSavestateSnapshot *baseline = NULL;
+    struct PfrEnvSlot slotA;
+    struct PfrEnvSlot slotB;
+    struct PfrRlPacket packetA;
+    struct PfrRlPacket packetB;
+    int rc = 0;
+
+    memset(&slotA, 0, sizeof(slotA));
+    memset(&slotB, 0, sizeof(slotB));
+
+    rc |= Expect(HostSavestateInit(), "savestate init failed for env slot test");
+    baseline = HostSavestateCreateSnapshot();
+    rc |= Expect(baseline != NULL, "baseline snapshot allocation failed for env slot test");
+    if (rc != 0)
+        goto cleanup;
+
+    rc |= Expect(HostSavestateCaptureSnapshot(baseline), "baseline snapshot capture failed for env slot test");
+    rc |= Expect(PfrEnvSlotCreate(&slotA), "slot A creation failed");
+    rc |= Expect(PfrEnvSlotCreate(&slotB), "slot B creation failed");
+    if (rc != 0)
+        goto cleanup;
+
+    SeedPfrRlRamState(SPECIES_BULBASAUR, 5, 111, 1, 2, 3, 4, DIR_NORTH);
+    rc |= Expect(PfrEnvSlotCaptureCurrent(&slotA), "slot A RAM capture failed");
+    SeedPfrRlRamState(SPECIES_CHARMANDER, 8, 222, 5, 6, 7, 8, DIR_WEST);
+    rc |= Expect(PfrEnvSlotCaptureCurrent(&slotB), "slot B RAM capture failed");
+    rc |= Expect(PfrEnvSlotReadPacket(&slotA, &packetA, 10, 0, TRUE, FALSE), "slot A packet read failed");
+    rc |= Expect(PfrEnvSlotReadPacket(&slotB, &packetB, 11, 0, TRUE, FALSE), "slot B packet read failed");
+
+    rc |= Expect(packetA.money == 111
+              && packetA.x == 1
+              && packetA.y == 2
+              && packetA.mapGroup == 3
+              && packetA.mapNum == 4
+              && packetA.facingDirection == DIR_NORTH
+              && packetA.party[0].species == SPECIES_BULBASAUR
+              && packetA.party[0].level == 5,
+                 "slot A did not preserve its distinct FireRed RAM state");
+    rc |= Expect(packetB.money == 222
+              && packetB.x == 5
+              && packetB.y == 6
+              && packetB.mapGroup == 7
+              && packetB.mapNum == 8
+              && packetB.facingDirection == DIR_WEST
+              && packetB.party[0].species == SPECIES_CHARMANDER
+              && packetB.party[0].level == 8,
+                 "slot B did not preserve its distinct FireRed RAM state");
+
+cleanup:
+    if (baseline != NULL)
+        HostSavestateRestoreSnapshot(baseline);
+    HostSavestateDestroySnapshot(baseline);
+    PfrEnvSlotDestroy(&slotB);
+    PfrEnvSlotDestroy(&slotA);
+    return rc;
 }
 
 static int CountWindowsWithTileData(void)
@@ -2417,6 +2660,9 @@ int main(void)
     RUN_FILTERED_TEST("TestCpuSet", TestCpuSet());
     RUN_FILTERED_TEST("TestLz77", TestLz77());
     RUN_FILTERED_TEST("TestRl", TestRl());
+    RUN_FILTERED_TEST("TestSavestateSnapshots", TestSavestateSnapshots());
+    RUN_FILTERED_TEST("TestPfrRlCapturePacketUsesFireRedRam", TestPfrRlCapturePacketUsesFireRedRam());
+    RUN_FILTERED_TEST("TestPfrEnvSlotsPreserveDistinctRamStates", TestPfrEnvSlotsPreserveDistinctRamStates());
     RUN_FILTERED_TEST("TestGpuRegs", TestGpuRegs());
     RUN_FILTERED_TEST("TestDma3Manager", TestDma3Manager());
     RUN_FILTERED_TEST("TestScanlineEffect", TestScanlineEffect());

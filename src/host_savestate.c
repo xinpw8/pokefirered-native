@@ -38,6 +38,12 @@ struct HostSavestateRuntime
     char lastError[256];
 };
 
+struct HostSavestateSnapshot
+{
+    u32 segmentCount;
+    struct HostSavestateBuffer *buffers;
+};
+
 struct HostSavestateFileHeader
 {
     u32 magic;
@@ -101,6 +107,12 @@ static void *MapRuntimeBytes(size_t size)
 
     memset(mapped, 0, size);
     return mapped;
+}
+
+static void UnmapRuntimeBytes(void *mapped, size_t size)
+{
+    if (mapped != NULL)
+        munmap(mapped, size);
 }
 
 static bool8 AppendSegment(struct HostSegmentCollection *collection, uintptr_t base, size_t size)
@@ -211,6 +223,64 @@ static void RestoreFromBuffers(const struct HostSavestateBuffer *buffers)
     }
 }
 
+static void FreeBuffers(struct HostSavestateBuffer *buffers, u32 segmentCount)
+{
+    u32 i;
+
+    if (buffers == NULL)
+        return;
+
+    for (i = 0; i < segmentCount; i++)
+    {
+        if (buffers[i].data != NULL)
+            UnmapRuntimeBytes(buffers[i].data, buffers[i].size);
+    }
+    UnmapRuntimeBytes(buffers, segmentCount * sizeof(*buffers));
+}
+
+static bool8 EnsureSnapshotBuffersAllocated(struct HostSavestateSnapshot *snapshot)
+{
+    u32 i;
+
+    if (snapshot == NULL)
+    {
+        SetError("savestate: snapshot is NULL");
+        return FALSE;
+    }
+
+    if (snapshot->segmentCount != sRuntime->segmentCount)
+    {
+        SetError("savestate: snapshot does not match the current segment layout");
+        return FALSE;
+    }
+
+    if (snapshot->buffers == NULL)
+    {
+        snapshot->buffers = MapRuntimeBytes(snapshot->segmentCount * sizeof(*snapshot->buffers));
+        if (snapshot->buffers == NULL)
+        {
+            SetError("savestate: could not allocate snapshot buffer table");
+            return FALSE;
+        }
+    }
+
+    for (i = 0; i < snapshot->segmentCount; i++)
+    {
+        if (snapshot->buffers[i].data != NULL)
+            continue;
+
+        snapshot->buffers[i].size = sRuntime->segments[i].size;
+        snapshot->buffers[i].data = MapRuntimeBytes(snapshot->buffers[i].size);
+        if (snapshot->buffers[i].data == NULL)
+        {
+            SetError("savestate: could not allocate snapshot buffer %u", i);
+            return FALSE;
+        }
+    }
+
+    return TRUE;
+}
+
 static bool8 BuildTempPath(char *outPath, size_t outSize, const char *path)
 {
     int written;
@@ -276,6 +346,77 @@ bool8 HostSavestateRestoreHot(void)
     }
 
     RestoreFromBuffers(sRuntime->hotBuffers);
+    return TRUE;
+}
+
+struct HostSavestateSnapshot *HostSavestateCreateSnapshot(void)
+{
+    struct HostSavestateSnapshot *snapshot;
+
+    ClearError();
+
+    if (!HostSavestateInit())
+        return NULL;
+
+    snapshot = MapRuntimeBytes(sizeof(*snapshot));
+    if (snapshot == NULL)
+    {
+        SetError("savestate: could not allocate snapshot");
+        return NULL;
+    }
+
+    snapshot->segmentCount = sRuntime->segmentCount;
+    if (!EnsureSnapshotBuffersAllocated(snapshot))
+    {
+        HostSavestateDestroySnapshot(snapshot);
+        return NULL;
+    }
+
+    return snapshot;
+}
+
+void HostSavestateDestroySnapshot(struct HostSavestateSnapshot *snapshot)
+{
+    if (snapshot == NULL)
+        return;
+
+    FreeBuffers(snapshot->buffers, snapshot->segmentCount);
+    UnmapRuntimeBytes(snapshot, sizeof(*snapshot));
+}
+
+bool8 HostSavestateCaptureSnapshot(struct HostSavestateSnapshot *snapshot)
+{
+    ClearError();
+
+    if (!HostSavestateInit())
+        return FALSE;
+
+    if (!EnsureSnapshotBuffersAllocated(snapshot))
+        return FALSE;
+
+    return CaptureIntoBuffers(snapshot->buffers);
+}
+
+bool8 HostSavestateRestoreSnapshot(const struct HostSavestateSnapshot *snapshot)
+{
+    ClearError();
+
+    if (!HostSavestateInit())
+        return FALSE;
+
+    if (snapshot == NULL)
+    {
+        SetError("savestate: snapshot is NULL");
+        return FALSE;
+    }
+
+    if (snapshot->segmentCount != sRuntime->segmentCount || snapshot->buffers == NULL)
+    {
+        SetError("savestate: snapshot is not initialized for the current runtime");
+        return FALSE;
+    }
+
+    RestoreFromBuffers(snapshot->buffers);
     return TRUE;
 }
 
@@ -407,13 +548,6 @@ bool8 HostSavestateLoadFromFile(const char *path)
     if (header.magic != HOST_SAVESTATE_MAGIC || header.version != HOST_SAVESTATE_VERSION)
     {
         SetError("savestate: %s is not a compatible savestate", path);
-        fclose(file);
-        return FALSE;
-    }
-
-    if (header.sessionId != sRuntime->sessionId)
-    {
-        SetError("savestate: %s belongs to a different live session", path);
         fclose(file);
         return FALSE;
     }

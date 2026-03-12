@@ -820,6 +820,14 @@ class Assembler:
                 stripped = stripped[:stripped.index(';')].strip()
                 if not stripped:
                     continue
+            if '@' in stripped:
+                stripped = stripped[:stripped.index('@')].strip()
+                if not stripped:
+                    continue
+            if '//' in stripped:
+                stripped = stripped[:stripped.index('//')].strip()
+                if not stripped:
+                    continue
             if stripped.startswith('@') or stripped.startswith('//'):
                 continue
             # Track .macro/.endm nesting depth to skip macro bodies
@@ -1057,6 +1065,7 @@ def emit_c(asm: Assembler, data_name: str, prefix: str, patch_fn: str,
     add("")
     add("#include <string.h>")
     add("#include \"global.h\"")
+    add("#include \"host_pointer_codec.h\"")
     add("")
 
     # Collect all unique external symbols referenced in relocations
@@ -1138,16 +1147,11 @@ def emit_c(asm: Assembler, data_name: str, prefix: str, patch_fn: str,
     add("")
 
     # Emit static patch helper
-    add("/* Patch function: writes 32-bit LE pointer into script data at runtime. */")
-    add("/* On aarch64 with -no-pie, all symbols have addresses < 4GB, so the  */")
-    add("/* 32-bit truncation is safe. The script interpreter reads them back   */")
-    add("/* via T1_READ_PTR which zero-extends to 64-bit via (uintptr_t) cast.  */")
+    add("/* Patch function: writes encoded 32-bit host pointers into script data. */")
+    add("/* Internal script-label references are mirrored into low alias space so */")
+    add("/* the original 32-bit script pointer math still works on 64-bit hosts.  */")
     add(f"static void {prefix}_patch4(u8 *dst, const void *target) {{")
-    add("    u32 addr = (u32)(uintptr_t)target;")
-    add("    dst[0] = (u8)(addr);")
-    add("    dst[1] = (u8)(addr >> 8);")
-    add("    dst[2] = (u8)(addr >> 16);")
-    add("    dst[3] = (u8)(addr >> 24);")
+    add(f"    HostWritePatchedPointer({data_name}, sizeof({data_name}), dst, target);")
     add("}")
     add("")
 

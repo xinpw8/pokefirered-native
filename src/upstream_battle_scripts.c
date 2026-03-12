@@ -12,6 +12,7 @@
 
 #include <string.h>
 #include "global.h"
+#include "host_pointer_codec.h"
 
 /* GCC asm aliases for external C symbols referenced in script .4byte relocations.
  * Using mangled names avoids type-conflict errors when the symbol is a function.
@@ -2929,16 +2930,11 @@ extern u8 BattleScript_ThrowRock[];
 extern u8 BattleScript_ThrowBait[];
 extern u8 BattleScript_LeftoverWallyPrepToThrow[];
 
-/* Patch function: writes 32-bit LE pointer into script data at runtime. */
-/* On aarch64 with -no-pie, all symbols have addresses < 4GB, so the  */
-/* 32-bit truncation is safe. The script interpreter reads them back   */
-/* via T1_READ_PTR which zero-extends to 64-bit via (uintptr_t) cast.  */
+/* Patch function: writes encoded 32-bit host pointers into script data. */
+/* Internal script-label references are mirrored into low alias space so */
+/* the original 32-bit script pointer math still works on 64-bit hosts.  */
 static void pfr_bs_patch4(u8 *dst, const void *target) {
-    u32 addr = (u32)(uintptr_t)target;
-    dst[0] = (u8)(addr);
-    dst[1] = (u8)(addr >> 8);
-    dst[2] = (u8)(addr >> 16);
-    dst[3] = (u8)(addr >> 24);
+    HostWritePatchedPointer(pfr_bs_data, sizeof(pfr_bs_data), dst, target);
 }
 
 void HostPatchBattleScriptPointers(void) {
@@ -4472,4 +4468,3 @@ void HostPatchBattleScriptPointers(void) {
     pfr_bs_patch4(&pfr_bs_data[13039], BattleScript_PokeFluteEnd);
     pfr_bs_patch4(&pfr_bs_data[13066], pfr_bs_ext_gSafariReactionStringIds);
 }
-

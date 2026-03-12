@@ -76,6 +76,7 @@ extern void SetNotInSaveFailedScreen(void);
 #include "host_crt0.h"
 #include "host_intro_stubs.h"
 #include "host_frame_step.h"
+#include "host_pointer_codec.h"
 #include "overworld.h"
 #include "host_new_game_stubs.h"
 #include "host_oak_speech_stubs.h"
@@ -134,6 +135,7 @@ static char sSnapshotDir[PATH_MAX] = "pfr_debug_saves";
 static char sStateDir[PATH_MAX] = "pfr_debug_states";
 static char sQuickLoadPath[PATH_MAX];
 static char sControlFilePath[PATH_MAX];
+static char sExportStateOnOverworldPath[PATH_MAX];
 static char **sProgramArgv;
 static MainCallback sLastCallback1;
 static MainCallback sLastCallback2;
@@ -182,6 +184,7 @@ static bool8 sTraceNamingFramesEnabled;
 static bool8 sTraceOverworldStartupEnabled;
 static bool8 sDebugGiveStarterEnabled;
 static bool8 sDisableAudioEnabled;
+static bool8 sHeadlessEnabled;
 static bool8 sFastModeEnabled;
 static bool8 sRestartRequested;
 static bool8 sShutdownRequested;
@@ -189,6 +192,8 @@ static bool8 sPresentRestoredFramePending;
 static bool8 sTraceOverworldStartupActive;
 static bool8 sTraceOverworldStartupCompleted;
 static bool8 sTraceOverworldFirstVisibleLogged;
+static bool8 sExitAfterOverworldExport;
+static bool8 sOverworldExportCompleted;
 static u32 sTraceOverworldStartupFrame;
 
 static void TraceLog(u32 frame, const char *message);
@@ -220,6 +225,7 @@ static void ProcessControlCommand(u32 frame, const char *command);
 static void ProcessControlFile(u32 frame);
 static void HandleHostActions(u32 frame);
 static u16 ComputeAutoPlayContinueInput(u32 frame);
+static void MaybeExportStateOnOverworld(u32 frame, const char *reason);
 
 static bool8 ShouldTraceDetailedFrame(u32 frame)
 {
@@ -727,6 +733,40 @@ static void ResetAutoPlayOakState(void)
     sAutoPlayOakNamingStep = 0;
     sAutoPlayOakRivalStep = 0;
     sAutoPlayOakWaitFrames = 0;
+    sOverworldExportCompleted = FALSE;
+}
+
+static void MaybeExportStateOnOverworld(u32 frame, const char *reason)
+{
+    char buffer[PATH_MAX + 160];
+
+    if (sOverworldExportCompleted || sExportStateOnOverworldPath[0] == '\0')
+        return;
+
+    if (!EnsureParentDirectoryForFile(sExportStateOnOverworldPath))
+    {
+        snprintf(buffer, sizeof(buffer),
+                 "overworld export (%s) failed creating parent for %s",
+                 reason,
+                 sExportStateOnOverworldPath);
+        TraceLog(frame, buffer);
+        return;
+    }
+
+    if (!SaveSavestateToFileAtPath(frame, reason, sExportStateOnOverworldPath))
+        return;
+
+    sOverworldExportCompleted = TRUE;
+    snprintf(buffer, sizeof(buffer),
+             "overworld export (%s): %s",
+             reason,
+             sExportStateOnOverworldPath);
+    TraceLog(frame, buffer);
+    if (sExitAfterOverworldExport)
+    {
+        sShutdownRequested = TRUE;
+        TraceLog(frame, "overworld export: shutdown requested");
+    }
 }
 
 static bool8 SaveCurrentGameCopy(u32 frame, const char *action, const char *reason, const char *dstPath, bool8 overwrite)
@@ -827,6 +867,7 @@ static u16 ComputeAutoPlayContinueInput(u32 frame)
         sAutoPlayContinueLoggedOverworld = TRUE;
         TraceLog(frame, "autoplay: continued save reached overworld");
         RequestSnapshot("autoplay_continue_overworld");
+        MaybeExportStateOnOverworld(frame, "autoplay_continue");
         return 0;
     }
 
@@ -1151,6 +1192,7 @@ static u16 ComputeAutoPlayOakInput(u32 frame)
         sAutoPlayOakLoggedOverworld = TRUE;
         TraceLog(frame, "autoplay: overworld reached");
         RequestSnapshot("autoplay_overworld_reached");
+        MaybeExportStateOnOverworld(frame, "autoplay_oak");
         if (sDebugGiveStarterEnabled)
         {
             extern bool8 ScriptGiveMon(u16 species, u8 level, u16 item, u32 unk1, u32 unk2, u8 unk3);
@@ -1290,10 +1332,16 @@ static void ApplyScriptedInput(u32 frame)
     pressedMask |= ComputeAutoPlayOakInput(frame);
     pressedMask |= ComputeAutoPlayContinueInput(frame);
 
-    /* Only override REG_KEYINPUT when scripted/autoplay input is active.
-     * Otherwise, preserve the keyboard state set by PollInput(). */
     if (pressedMask != 0)
+    {
+        if (sHeadlessEnabled)
+            REG_KEYINPUT = KEYS_MASK;
         REG_KEYINPUT &= ~pressedMask;
+    }
+    else if (sHeadlessEnabled)
+    {
+        REG_KEYINPUT = KEYS_MASK;
+    }
 }
 
 static void RequestSnapshot(const char *label)
@@ -2076,8 +2124,10 @@ int main(int argc, char *argv[])
     SetPathOption(sStateDir, sizeof(sStateDir), getenv("PFR_STATE_DIR"), "pfr_debug_states");
     SetPathOption(sQuickLoadPath, sizeof(sQuickLoadPath), getenv("PFR_QUICKLOAD_PATH"), NULL);
     SetPathOption(sControlFilePath, sizeof(sControlFilePath), getenv("PFR_CONTROL_FILE"), NULL);
+    SetPathOption(sExportStateOnOverworldPath, sizeof(sExportStateOnOverworldPath), getenv("PFR_EXPORT_STATE_ON_OVERWORLD"), NULL);
     sAutoPlayContinueEnabled = FlagEnabled(getenv("PFR_AUTOPLAY_CONTINUE"));
     sDisableAudioEnabled = FlagEnabled(getenv("PFR_DISABLE_AUDIO"));
+    sExitAfterOverworldExport = FlagEnabled(getenv("PFR_EXIT_AFTER_OVERWORLD_EXPORT"));
     if (scriptPath == NULL)
         scriptPath = getenv("PFR_INPUT_SCRIPT");
 
@@ -2110,6 +2160,14 @@ int main(int argc, char *argv[])
         else if (strcmp(argv[argi], "--control-file") == 0 && argi + 1 < argc)
         {
             SetPathOption(sControlFilePath, sizeof(sControlFilePath), argv[++argi], NULL);
+        }
+        else if (strcmp(argv[argi], "--export-state-on-overworld") == 0 && argi + 1 < argc)
+        {
+            SetPathOption(sExportStateOnOverworldPath, sizeof(sExportStateOnOverworldPath), argv[++argi], NULL);
+        }
+        else if (strcmp(argv[argi], "--exit-after-overworld-export") == 0)
+        {
+            sExitAfterOverworldExport = TRUE;
         }
         else if (strcmp(argv[argi], "--headless") == 0)
         {
@@ -2157,6 +2215,7 @@ int main(int argc, char *argv[])
             fprintf(stderr,
                     "usage: %s [input_script] [--input path] [--save-path path] [--load-save path]\n"
                     "          [--snapshot-dir path] [--state-dir path] [--quickload-path path] [--control-file path]\n"
+                    "          [--export-state-on-overworld path] [--exit-after-overworld-export]\n"
                     "          [--headless] [--unthrottled] [--fast-forward n] [--mute] [--max-speed]\n"
                     "          [--autoplay-continue] [--autoplay-oak]\n",
                     argv[0]);
@@ -2172,6 +2231,8 @@ int main(int argc, char *argv[])
             return 1;
         }
     }
+
+    sHeadlessEnabled = FlagEnabled(getenv("PFR_HEADLESS"));
 
     if (!EnsureParentDirectoryForFile(sActiveSavePath))
     {
@@ -2279,6 +2340,7 @@ int main(int argc, char *argv[])
 
     /* Patch 32-bit LE pointer fields in generated script bytecode arrays.
      * Must run before any game code that reads script pointers. */
+    HostPointerCodecReset();
     HostPatchBattleScriptPointers();
     HostPatchEventScriptPointers();
     HostPatchFieldEffectScriptPointers();

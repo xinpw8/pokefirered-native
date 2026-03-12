@@ -14,6 +14,10 @@ Pinned upstream:
 - Local checkout: `../pokefirered`
 - Verified commit: `7e3f822652ecce0c99b626d74f455c3b93660377`
 
+Published compatibility fork:
+- Submodule URL: `https://github.com/xinpw8/pokefirered`
+- Branch with native-host compatibility changes: `pokemon-firered-native-puffer`
+
 What is wired today:
 - Original upstream files compiled directly into the native build:
   - `src/random.c`
@@ -77,11 +81,20 @@ cmake -S /home/spark-advantage/pokefirered-native -B /home/spark-advantage/pokef
 cmake --build /home/spark-advantage/pokefirered-native/build -j
 ```
 
+Reproducible clone:
+```sh
+git clone --recurse-submodules https://github.com/xinpw8/pokefirered-native.git
+cd pokefirered-native
+git submodule update --init --recursive
+```
+
 Targets:
 - `pfr_smoke`: verifies the native bootstrap against exact-source RNG, heap, decompression, GPU register buffering, DMA3 request processing, scanline-effect HBlank DMA/task behavior, palette transfer/fade setup, BG control/tilemap/VRAM behavior, sprite sheet/palette/core object behavior, `main.c` helper/interrupt/runtime behavior, a `crt0.s`-derived host interrupt dispatcher, a bounded hosted `AgbMain` init/frame/soft-reset slice, the real upstream `intro.c` path through the full non-skipped Game Freak / Scene 1 / Scene 2 / Scene 3 sequence into natural title-screen handoff, real upstream `title_screen.c` progression from init into run-state plus restart/cry/main-menu/save-clear/berry-fix downstream handoffs, the real upstream `main_menu.c` provider through save-present continue/new-game menu setup and New Game selection handoff, the real upstream `oak_speech.c` provider through `StartNewGameScene()`, controls-guide page transitions, Pikachu intro exit, Oak init / `MUS_ROUTE24`, `IStudyPokemon`, gender selection, player/rival naming handoffs, and the callback transition into `CB2_NewGame`, the real upstream `new_game.c` effects under a host-owned `CB2_NewGame` seam that mirrors more of the upstream setup sequence, the real upstream `clear_save_data_screen.c` provider through confirmation prompt, yes-no menu creation, and clear-save selection handling, and the real upstream `berry_fix_program.c` provider through begin/connect/power-off scenes and successful multiboot progression into the follow-instructions scene.
 - `pfr_render_test`: runs a bounded 600-frame boot through copyright/Game Freak/intro rendering and currently passes with `11` non-empty sampled frames after the corrected `AgbMain`-order frame loop.
 - `pfr_play`: runs the current interactive SDL boot harness so a user can drive the intro/title/main-menu path live, subject to the remaining renderer/window/text fidelity gaps.
 - `pfr_lz77`: uses the original upstream decompression entrypoints to decode an LZ77 blob.
+- `pfr_rl_native`: reusable native RL/staticvec archive exposing `PfrRlCore`, `PfrEnvSlot`, savestate slots, and RAM packet/state helpers for external consumers.
+- `pfr_rl_runner`: minimal CLI over `PfrRlCore` for save/state boot, step, reset, and packet capture.
 
 Debug workflow:
 ```sh
