@@ -11,7 +11,7 @@ Scope:
 
 Pinned upstream:
 - Repository: `https://github.com/pret/pokefirered`
-- Local checkout: `../pokefirered`
+- Submodule checkout: `third_party/pokefirered`
 - Verified commit: `7e3f822652ecce0c99b626d74f455c3b93660377`
 
 Published compatibility fork:
@@ -77,9 +77,11 @@ What is explicitly not done yet:
 
 Build:
 ```sh
-cmake -S /home/spark-advantage/pokefirered-native -B /home/spark-advantage/pokefirered-native/build
-cmake --build /home/spark-advantage/pokefirered-native/build -j
+cmake -S . -B build
+cmake --build build --target pfr_rl_native pfr_rl_runner pfr_smoke -j
 ```
+
+The build bootstraps the upstream `tools/preproc/preproc` helper into the CMake build tree automatically, so a fresh clone does not need a manual submodule-side tool build before preprocessing/charmap generation.
 
 Reproducible clone:
 ```sh

@@ -10,6 +10,7 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 find_package(Threads REQUIRED)
 find_package(Python3 REQUIRED COMPONENTS Interpreter)
 include(ExternalProject)
+find_program(PFR_CXX_COMPILER NAMES c++ g++)
 
 set(POKEFIRERED_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/third_party/pokefirered" CACHE PATH "Path to the upstream pret/pokefirered checkout")
 set(AGBCC_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/third_party/agbcc" CACHE PATH "Path to the upstream pret/agbcc checkout")
@@ -20,6 +21,48 @@ endif()
 if(NOT EXISTS "${AGBCC_SOURCE_DIR}/build.sh")
     message(FATAL_ERROR "AGBCC_SOURCE_DIR must point at a pret/agbcc checkout")
 endif()
+if(NOT PFR_CXX_COMPILER)
+    message(FATAL_ERROR "A C++ compiler is required to build the upstream preproc tool")
+endif()
+
+set(PFR_UPSTREAM_PREPROC_DIR "${POKEFIRERED_SOURCE_DIR}/tools/preproc")
+set(PFR_UPSTREAM_PREPROC_BIN "${CMAKE_BINARY_DIR}/tools/preproc/preproc")
+set(PFR_UPSTREAM_PREPROC_SOURCES
+    "${PFR_UPSTREAM_PREPROC_DIR}/asm_file.cpp"
+    "${PFR_UPSTREAM_PREPROC_DIR}/c_file.cpp"
+    "${PFR_UPSTREAM_PREPROC_DIR}/charmap.cpp"
+    "${PFR_UPSTREAM_PREPROC_DIR}/preproc.cpp"
+    "${PFR_UPSTREAM_PREPROC_DIR}/string_parser.cpp"
+    "${PFR_UPSTREAM_PREPROC_DIR}/utf8.cpp"
+    "${PFR_UPSTREAM_PREPROC_DIR}/io.cpp"
+)
+set(PFR_UPSTREAM_PREPROC_HEADERS
+    "${PFR_UPSTREAM_PREPROC_DIR}/asm_file.h"
+    "${PFR_UPSTREAM_PREPROC_DIR}/c_file.h"
+    "${PFR_UPSTREAM_PREPROC_DIR}/char_util.h"
+    "${PFR_UPSTREAM_PREPROC_DIR}/charmap.h"
+    "${PFR_UPSTREAM_PREPROC_DIR}/io.h"
+    "${PFR_UPSTREAM_PREPROC_DIR}/preproc.h"
+    "${PFR_UPSTREAM_PREPROC_DIR}/string_parser.h"
+    "${PFR_UPSTREAM_PREPROC_DIR}/utf8.h"
+)
+
+add_custom_command(
+    OUTPUT "${PFR_UPSTREAM_PREPROC_BIN}"
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_BINARY_DIR}/tools/preproc"
+    COMMAND "${PFR_CXX_COMPILER}" -std=c++11 -O2 -Wall -Wno-switch -Werror
+        ${PFR_UPSTREAM_PREPROC_SOURCES}
+        -o "${PFR_UPSTREAM_PREPROC_BIN}"
+    DEPENDS
+        ${PFR_UPSTREAM_PREPROC_SOURCES}
+        ${PFR_UPSTREAM_PREPROC_HEADERS}
+    COMMENT "Building upstream preproc tool"
+    VERBATIM
+)
+
+add_custom_target(pfr_upstream_preproc_tool
+    DEPENDS "${PFR_UPSTREAM_PREPROC_BIN}"
+)
 
 set(PFR_COMMON_DEFINES
     MODERN=1
@@ -2831,7 +2874,7 @@ add_custom_command(
     ${PFR_CHARMAP_HEADER_COMMANDS}
     # Charmap: convert _("text") to Pokemon character encoding in ALL generated files
     COMMAND "${CMAKE_CURRENT_SOURCE_DIR}/scripts/charmap_preproc.sh"
-        "${POKEFIRERED_SOURCE_DIR}/tools/preproc/preproc"
+        "${PFR_UPSTREAM_PREPROC_BIN}"
         "${POKEFIRERED_SOURCE_DIR}/charmap.txt"
         ${PFR_PREPROCESSED_SOURCES}
         ${PFR_CHARMAP_HEADER_OUTPUTS}
@@ -2839,6 +2882,7 @@ add_custom_command(
     DEPENDS
         pfr_assets
         pfr_gbagfx_tool
+        pfr_upstream_preproc_tool
         pfr_verify_asset_manifests
         "${PFR_BOOT_ASSET_MANIFEST}"
         "${POKEFIRERED_SOURCE_DIR}/src/intro.c"
