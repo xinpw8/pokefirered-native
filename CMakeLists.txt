@@ -64,6 +64,59 @@ add_custom_target(pfr_upstream_preproc_tool
     DEPENDS "${PFR_UPSTREAM_PREPROC_BIN}"
 )
 
+set(PFR_UPSTREAM_WAV2AGB_DIR "${POKEFIRERED_SOURCE_DIR}/tools/wav2agb")
+set(PFR_UPSTREAM_WAV2AGB_BIN "${CMAKE_BINARY_DIR}/tools/wav2agb/wav2agb")
+set(PFR_UPSTREAM_WAV2AGB_SOURCES
+    "${PFR_UPSTREAM_WAV2AGB_DIR}/converter.cpp"
+    "${PFR_UPSTREAM_WAV2AGB_DIR}/wav_file.cpp"
+    "${PFR_UPSTREAM_WAV2AGB_DIR}/wav2agb.cpp"
+)
+set(PFR_UPSTREAM_WAV2AGB_HEADERS
+    "${PFR_UPSTREAM_WAV2AGB_DIR}/converter.h"
+    "${PFR_UPSTREAM_WAV2AGB_DIR}/wav_file.h"
+)
+
+add_custom_command(
+    OUTPUT "${PFR_UPSTREAM_WAV2AGB_BIN}"
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_BINARY_DIR}/tools/wav2agb"
+    COMMAND "${PFR_CXX_COMPILER}" -std=c++17 -O2 -Wall -Werror
+        ${PFR_UPSTREAM_WAV2AGB_SOURCES}
+        -o "${PFR_UPSTREAM_WAV2AGB_BIN}"
+    DEPENDS
+        ${PFR_UPSTREAM_WAV2AGB_SOURCES}
+        ${PFR_UPSTREAM_WAV2AGB_HEADERS}
+    COMMENT "Building upstream wav2agb tool"
+    VERBATIM
+)
+
+add_custom_target(pfr_upstream_wav2agb_tool
+    DEPENDS "${PFR_UPSTREAM_WAV2AGB_BIN}"
+)
+
+file(GLOB_RECURSE PFR_UPSTREAM_DIRECT_SOUND_WAVS
+    "${POKEFIRERED_SOURCE_DIR}/sound/direct_sound_samples/*.wav"
+)
+set(PFR_UPSTREAM_SOUND_BINS_STAMP "${CMAKE_BINARY_DIR}/sound/.direct_sound_bins.stamp")
+
+add_custom_command(
+    OUTPUT "${PFR_UPSTREAM_SOUND_BINS_STAMP}"
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_BINARY_DIR}/sound"
+    COMMAND ${Python3_EXECUTABLE} "${CMAKE_CURRENT_SOURCE_DIR}/tools/generate_sound_bins.py"
+        --pokedir "${POKEFIRERED_SOURCE_DIR}"
+        --wav2agb "${PFR_UPSTREAM_WAV2AGB_BIN}"
+    COMMAND ${CMAKE_COMMAND} -E touch "${PFR_UPSTREAM_SOUND_BINS_STAMP}"
+    DEPENDS
+        pfr_upstream_wav2agb_tool
+        "${CMAKE_CURRENT_SOURCE_DIR}/tools/generate_sound_bins.py"
+        ${PFR_UPSTREAM_DIRECT_SOUND_WAVS}
+    COMMENT "Materializing upstream direct sound sample bins"
+    VERBATIM
+)
+
+add_custom_target(pfr_upstream_sound_bins
+    DEPENDS "${PFR_UPSTREAM_SOUND_BINS_STAMP}"
+)
+
 set(PFR_COMMON_DEFINES
     MODERN=1
     REVISION=0
@@ -389,6 +442,7 @@ add_custom_command(
 
 add_custom_command(
     OUTPUT
+        "${PFR_GEN_HEADERS_DIR}/constants/layouts.h"
         "${PFR_GEN_HEADERS_DIR}/constants/map_groups.h"
         "${PFR_GEN_HEADERS_DIR}/constants/map_event_ids.h"
         "${PFR_GEN_HEADERS_DIR}/constants/region_map_sections.h"
@@ -404,6 +458,10 @@ add_custom_command(
     COMMAND ${CMAKE_COMMAND} -E make_directory "${PFR_MAPJSON_OUT_DIR}"
     COMMAND "${POKEFIRERED_SOURCE_DIR}/tools/mapjson/mapjson" groups firered
         "${POKEFIRERED_SOURCE_DIR}/data/maps/map_groups.json"
+        "${PFR_MAPJSON_OUT_DIR}"
+        "${PFR_GEN_HEADERS_DIR}/constants"
+    COMMAND "${POKEFIRERED_SOURCE_DIR}/tools/mapjson/mapjson" layouts firered
+        "${POKEFIRERED_SOURCE_DIR}/data/layouts/layouts.json"
         "${PFR_MAPJSON_OUT_DIR}"
         "${PFR_GEN_HEADERS_DIR}/constants"
     COMMAND "${POKEFIRERED_SOURCE_DIR}/tools/mapjson/mapjson" event_constants firered
@@ -440,6 +498,7 @@ add_custom_command(
     DEPENDS
         "${POKEFIRERED_SOURCE_DIR}/tools/mapjson/mapjson"
         "${POKEFIRERED_SOURCE_DIR}/tools/jsonproc/jsonproc"
+        "${POKEFIRERED_SOURCE_DIR}/data/layouts/layouts.json"
         "${POKEFIRERED_SOURCE_DIR}/data/maps/map_groups.json"
         "${POKEFIRERED_SOURCE_DIR}/src/data/wild_encounters.json"
         "${POKEFIRERED_SOURCE_DIR}/src/data/wild_encounters.json.txt"
@@ -458,6 +517,7 @@ add_custom_command(
 
 add_custom_target(pfr_generated_headers
     DEPENDS
+        "${PFR_GEN_HEADERS_DIR}/constants/layouts.h"
         "${PFR_GEN_HEADERS_DIR}/constants/map_groups.h"
         "${PFR_GEN_HEADERS_DIR}/constants/map_event_ids.h"
         "${PFR_GEN_HEADERS_DIR}/constants/region_map_sections.h"
@@ -934,6 +994,7 @@ add_dependencies(pfr_upstream_core
     pfr_generated_headers
     pfr_asset_pipeline
     pfr_generated_upstream_native_data
+    pfr_upstream_sound_bins
 )
 
 # SDL2 display backend (optional — falls back to PPM frame dump if unavailable)

@@ -81,7 +81,7 @@ cmake -S . -B build
 cmake --build build --target pfr_rl_native pfr_rl_runner pfr_smoke -j
 ```
 
-The build bootstraps the upstream `tools/preproc/preproc` helper into the CMake build tree automatically, so a fresh clone does not need a manual submodule-side tool build before preprocessing/charmap generation.
+The build bootstraps the upstream helper tools it needs (`tools/preproc/preproc` and `tools/wav2agb/wav2agb`) into the CMake build tree automatically, generates the required JSON/map headers into `build/generated_include`, and materializes the direct-sound `.bin` assets from the tracked upstream `.wav` sources. A fresh clone does not need a manual submodule-side tool build before preprocessing, charmap generation, or sound-sample assembly.
 
 Reproducible clone:
 ```sh
