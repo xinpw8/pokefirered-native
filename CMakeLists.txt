@@ -271,6 +271,14 @@ foreach(header_path IN LISTS PFR_DATA_HEADER_CANDIDATES)
     endif()
 endforeach()
 
+# These headers are generated from JSON templates rather than copied from
+# src/data, so they bypass the scan above but still need the same _()/__()
+# charmap pass before host compilation.
+list(APPEND PFR_CHARMAP_HEADER_OUTPUTS
+    "${PFR_GEN_HEADERS_DIR}/data/items.h"
+    "${PFR_GEN_HEADERS_DIR}/data/region_map/region_map_entry_strings.h"
+)
+
 set(PFR_BOOT_ASSET_TUS
     "${POKEFIRERED_SOURCE_DIR}/src/intro.c"
     "${POKEFIRERED_SOURCE_DIR}/src/title_screen.c"
