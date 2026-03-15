@@ -26,6 +26,7 @@ enum
     HOST_DISPLAY_ACTION_STATE_LOAD     = 1 << 3,
     HOST_DISPLAY_ACTION_STATE_SAVE_AS  = 1 << 4,
     HOST_DISPLAY_ACTION_STATE_LOAD_AS  = 1 << 5,
+    HOST_DISPLAY_ACTION_REPAIR_BAG     = 1 << 6,
 };
 
 /* Render the current GBA state and present it.

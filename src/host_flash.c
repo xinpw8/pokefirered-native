@@ -9,7 +9,9 @@
 #include "gba/flash_internal.h"
 #include "host_flash.h"
 #include "host_log.h"
+#include "host_savestate.h"
 #include "save.h"
+#include "pokemon_storage_system.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -62,6 +64,10 @@ static const u16 sHostMaxTime[] = {
     2000, 65469, TIMER_ENABLE | TIMER_INTR_ENABLE | TIMER_256CLK,
 };
 
+// Forward declarations for format marker (defined further below)
+static void HostFlashStampFormatMarker(void);
+static s8 HostFlashCheckFormatMarker(void);
+
 // ---------------------------------------------------------------------------
 // Disk sync (atomic: write .tmp then rename)
 // ---------------------------------------------------------------------------
@@ -73,6 +79,9 @@ static void HostFlashSyncToDisk(void)
 
     if (sSaveFilePath == NULL)
         return;
+
+    // Stamp format marker so future loads can detect struct-size changes
+    HostFlashStampFormatMarker();
 
     snprintf(tmpPath, sizeof(tmpPath), "%s.tmp", sSaveFilePath);
 
@@ -211,12 +220,81 @@ const struct FlashSetupInfo LE26FV10N1TS = {
 // Public flash API (matching flash_internal.h declarations)
 // ---------------------------------------------------------------------------
 
+// Native save format marker — stored in the last SECTOR_SIZE bytes of
+// the flash buffer (sector 31, normally Trainer Tower slot 2).  When we
+// write, we stamp the current struct sizes so we can detect loads from
+// builds with incompatible layouts.
+#define FORMAT_MARKER_SECTOR   31
+#define FORMAT_MARKER_OFFSET   (FORMAT_MARKER_SECTOR * SECTOR_SIZE_HOST)
+#define FORMAT_MARKER_MAGIC    0x5046524E  // "PFRN"
+
+struct HostSaveFormatMarker
+{
+    u32 magic;
+    u16 sizeofSaveBlock2;
+    u16 sizeofSaveBlock1;
+    u16 sizeofPokemonStorage;
+    u16 reserved;
+};
+
+static bool8 sFormatMarkerValid = FALSE;
+
+static void HostFlashStampFormatMarker(void)
+{
+    struct HostSaveFormatMarker *marker =
+        (struct HostSaveFormatMarker *)&sFlashBuffer[FORMAT_MARKER_OFFSET];
+
+    marker->magic              = FORMAT_MARKER_MAGIC;
+    marker->sizeofSaveBlock2   = (u16)sizeof(struct SaveBlock2);
+    marker->sizeofSaveBlock1   = (u16)sizeof(struct SaveBlock1);
+    marker->sizeofPokemonStorage = (u16)sizeof(struct PokemonStorage);
+    marker->reserved           = 0;
+    sFormatMarkerValid = TRUE;
+}
+
+// Returns:  1 = marker present and matching
+//           0 = no marker (legacy save, allow it)
+//          -1 = marker present but sizes mismatch (reject)
+static s8 HostFlashCheckFormatMarker(void)
+{
+    const struct HostSaveFormatMarker *marker =
+        (const struct HostSaveFormatMarker *)&sFlashBuffer[FORMAT_MARKER_OFFSET];
+
+    if (marker->magic != FORMAT_MARKER_MAGIC)
+        return 0; // no marker — legacy save, allow
+
+    if (marker->sizeofSaveBlock2 != (u16)sizeof(struct SaveBlock2)
+     || marker->sizeofSaveBlock1 != (u16)sizeof(struct SaveBlock1)
+     || marker->sizeofPokemonStorage != (u16)sizeof(struct PokemonStorage))
+    {
+        HostLogPrintf("[pokefirered-native] save: FORMAT MISMATCH — "
+                      "save has SB2=%u SB1=%u PS=%u, "
+                      "build has SB2=%lu SB1=%lu PS=%lu. "
+                      "Discarding incompatible save.\n",
+                      marker->sizeofSaveBlock2,
+                      marker->sizeofSaveBlock1,
+                      marker->sizeofPokemonStorage,
+                      (unsigned long)sizeof(struct SaveBlock2),
+                      (unsigned long)sizeof(struct SaveBlock1),
+                      (unsigned long)sizeof(struct PokemonStorage));
+        return -1; // mismatch — reject
+    }
+
+    return 1; // marker present and matching
+}
+
 void HostFlashInit(const char *savePath)
 {
     FILE *f;
+    long fileSize;
 
     sSaveFilePath = savePath;
+    sFormatMarkerValid = FALSE;
     memset(sFlashBuffer, 0xFF, FLASH_BUFFER_SIZE);
+
+    /* Protect the file path pointer from savestate restore —
+     * the pointer must stay valid for the current process. */
+    HostSavestateProtectRegion(&sSaveFilePath, sizeof(sSaveFilePath));
 
     if (savePath == NULL)
         return;
@@ -225,8 +303,42 @@ void HostFlashInit(const char *savePath)
     if (f == NULL)
         return;
 
+    // Validate file size — must be exactly 128KB flash image
+    fseek(f, 0, SEEK_END);
+    fileSize = ftell(f);
+    fseek(f, 0, SEEK_SET);
+
+    if (fileSize != FLASH_BUFFER_SIZE)
+    {
+        HostLogPrintf("[pokefirered-native] save: %s is %ld bytes "
+                      "(expected %d). Ignoring corrupt/incompatible save.\n",
+                      savePath, fileSize, FLASH_BUFFER_SIZE);
+        fclose(f);
+        return;
+    }
+
     fread(sFlashBuffer, 1, FLASH_BUFFER_SIZE, f);
     fclose(f);
+
+    // Check struct-size format marker.
+    // -1 = sizes mismatch (definitely incompatible, discard)
+    //  0 = no marker (legacy save, allow — can't verify)
+    //  1 = marker matches (all good)
+    {
+        s8 markerResult = HostFlashCheckFormatMarker();
+
+        if (markerResult < 0)
+        {
+            HostLogPrintf("[pokefirered-native] save: incompatible format "
+                          "in %s — treating as empty.\n", savePath);
+            memset(sFlashBuffer, 0xFF, FLASH_BUFFER_SIZE);
+        }
+        else if (markerResult == 0)
+        {
+            HostLogPrintf("[pokefirered-native] save: no format marker "
+                          "in %s — loading as legacy save.\n", savePath);
+        }
+    }
 }
 
 u16 IdentifyFlash(void)

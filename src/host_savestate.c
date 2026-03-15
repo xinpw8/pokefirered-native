@@ -14,7 +14,10 @@
 #include "gba/gba.h"
 
 #define HOST_SAVESTATE_MAGIC   0x50465356u
-#define HOST_SAVESTATE_VERSION 1u
+#define HOST_SAVESTATE_VERSION 2u
+
+/* Build fingerprint forward declaration — defined after linker symbol externs */
+static u32 ComputeBuildFingerprint(void);
 
 struct HostSavestateSegment
 {
@@ -28,6 +31,14 @@ struct HostSavestateBuffer
     size_t size;
 };
 
+#define HOST_SAVESTATE_MAX_PROTECT 64
+
+struct HostProtectedRegion
+{
+    uintptr_t addr;
+    size_t size;
+};
+
 struct HostSavestateRuntime
 {
     u64 sessionId;
@@ -36,6 +47,9 @@ struct HostSavestateRuntime
     struct HostSavestateSegment *segments;
     struct HostSavestateBuffer *hotBuffers;
     char lastError[256];
+    struct HostProtectedRegion protect[HOST_SAVESTATE_MAX_PROTECT];
+    u32 protectCount;
+    size_t fileSavedSizes[8]; /* original sizes from the last loaded file */
 };
 
 struct HostSavestateFileHeader
@@ -44,6 +58,7 @@ struct HostSavestateFileHeader
     u32 version;
     u64 sessionId;
     u32 segmentCount;
+    u32 buildFingerprint; /* v2: reject savestates from different builds */
 };
 
 struct HostSavestateFileSegment
@@ -65,14 +80,39 @@ extern char _edata[];
 extern char __bss_start[];
 extern char _end[];
 
-static const struct HostSavestateSegment sFixedHostRegions[] = {
-    { EWRAM_START, EWRAM_END - EWRAM_START },
-    { IWRAM_START, IWRAM_END - IWRAM_START },
-    { REG_BASE, 0x1000 },
-    { PLTT, PLTT_SIZE },
-    { VRAM, VRAM_SIZE },
-    { OAM, OAM_SIZE },
-};
+/* Build fingerprint: hash of .data/.bss segment addresses and sizes.
+ * Only changes when the binary layout actually changes (code added/removed,
+ * struct sizes changed, etc.), NOT on every recompile of identical source.
+ * This is what matters — function pointers in the savestate are only
+ * invalid when code addresses shift. */
+static u32 ComputeBuildFingerprint(void)
+{
+    u32 hash = 5381;
+    u32 vals[4];
+
+    vals[0] = (u32)(uintptr_t)__data_start;
+    vals[1] = (u32)(_edata - __data_start);
+    vals[2] = (u32)(uintptr_t)__bss_start;
+    vals[3] = (u32)(_end - __bss_start);
+
+    hash = ((hash << 5) + hash) ^ vals[0];
+    hash = ((hash << 5) + hash) ^ vals[1];
+    hash = ((hash << 5) + hash) ^ vals[2];
+    hash = ((hash << 5) + hash) ^ vals[3];
+    return hash;
+}
+
+#define HOST_GBA_REGION_COUNT 6
+
+static void FillGbaRegions(struct HostSavestateSegment *out)
+{
+    out[0].base = EWRAM_START; out[0].size = EWRAM_END - EWRAM_START;
+    out[1].base = IWRAM_START; out[1].size = IWRAM_END - IWRAM_START;
+    out[2].base = REG_BASE;   out[2].size = 0x1000;
+    out[3].base = PLTT;       out[3].size = PLTT_SIZE;
+    out[4].base = VRAM;       out[4].size = VRAM_SIZE;
+    out[5].base = OAM;        out[5].size = OAM_SIZE;
+}
 
 static void SetError(const char *fmt, ...)
 {
@@ -120,7 +160,7 @@ static bool8 BuildSegmentTable(void)
     size_t i;
 
     memset(&collection, 0, sizeof(collection));
-    collection.capacity = ARRAY_COUNT(sFixedHostRegions) + 2;
+    collection.capacity = HOST_GBA_REGION_COUNT + 2;
     collection.segments = MapRuntimeBytes(collection.capacity * sizeof(*collection.segments));
     if (collection.segments == NULL)
     {
@@ -144,12 +184,16 @@ static bool8 BuildSegmentTable(void)
         return FALSE;
     }
 
-    for (i = 0; i < ARRAY_COUNT(sFixedHostRegions); i++)
     {
-        if (!AppendSegment(&collection, sFixedHostRegions[i].base, sFixedHostRegions[i].size))
+        struct HostSavestateSegment gbaRegions[HOST_GBA_REGION_COUNT];
+        FillGbaRegions(gbaRegions);
+        for (i = 0; i < HOST_GBA_REGION_COUNT; i++)
         {
-            SetError("savestate: segment table exhausted");
-            return FALSE;
+            if (!AppendSegment(&collection, gbaRegions[i].base, gbaRegions[i].size))
+            {
+                SetError("savestate: segment table exhausted");
+                return FALSE;
+            }
         }
     }
 
@@ -204,10 +248,42 @@ static bool8 CaptureIntoBuffers(struct HostSavestateBuffer *buffers)
 static void RestoreFromBuffers(const struct HostSavestateBuffer *buffers)
 {
     u32 i;
+    /* Snapshot the runtime state onto the stack BEFORE the bulk memcpy.
+     * The .bss memcpy will overwrite the sRuntime pointer mid-loop,
+     * making it point to a stale mmap address from the saved session.
+     * Using stack-local copies avoids dereferencing sRuntime after
+     * it's been clobbered. */
+    struct HostSavestateRuntime *rt = sRuntime;
+    u32 segmentCount = rt->segmentCount;
+    struct HostSavestateSegment *segments = rt->segments;
+    u32 protectCount = rt->protectCount;
 
-    for (i = 0; i < sRuntime->segmentCount; i++)
+    /* Back up protected regions (host pointers like SDL handles)
+     * before the bulk memcpy overwrites .data/.bss. */
+    u8 protectBackup[HOST_SAVESTATE_MAX_PROTECT * sizeof(void *)];
+    size_t backupOffset = 0;
+
+    for (i = 0; i < protectCount; i++)
     {
-        memcpy((void *)sRuntime->segments[i].base, buffers[i].data, sRuntime->segments[i].size);
+        memcpy(protectBackup + backupOffset,
+               (const void *)rt->protect[i].addr,
+               rt->protect[i].size);
+        backupOffset += rt->protect[i].size;
+    }
+
+    for (i = 0; i < segmentCount; i++)
+    {
+        memcpy((void *)segments[i].base, buffers[i].data, segments[i].size);
+    }
+
+    /* Restore protected regions so host handles remain valid. */
+    backupOffset = 0;
+    for (i = 0; i < protectCount; i++)
+    {
+        memcpy((void *)rt->protect[i].addr,
+               protectBackup + backupOffset,
+               rt->protect[i].size);
+        backupOffset += rt->protect[i].size;
     }
 }
 
@@ -238,6 +314,11 @@ bool8 HostSavestateInit(void)
 
     if (!BuildSegmentTable())
         return FALSE;
+
+    /* sRuntime itself is a static pointer in .bss — it MUST be
+     * protected so that RestoreFromBuffers doesn't overwrite it
+     * with a stale mmap address from a captured state. */
+    HostSavestateProtectRegion(&sRuntime, sizeof(sRuntime));
 
     return EnsureHotBuffersAllocated();
 }
@@ -311,10 +392,12 @@ bool8 HostSavestateSaveToFile(const char *path)
         return FALSE;
     }
 
+    memset(&header, 0, sizeof(header));
     header.magic = HOST_SAVESTATE_MAGIC;
     header.version = HOST_SAVESTATE_VERSION;
     header.sessionId = sRuntime->sessionId;
     header.segmentCount = sRuntime->segmentCount;
+    header.buildFingerprint = ComputeBuildFingerprint();
 
     if (fwrite(&header, sizeof(header), 1, file) != 1)
         goto cleanup;
@@ -343,18 +426,9 @@ bool8 HostSavestateSaveToFile(const char *path)
     }
     file = NULL;
 
-    if (link(tmpPath, path) != 0)
+    if (rename(tmpPath, path) != 0)
     {
-        if (errno == EEXIST)
-            SetError("savestate: refusing to overwrite existing %s", path);
-        else
-            SetError("savestate: link(%s -> %s) failed: %s", tmpPath, path, strerror(errno));
-        goto cleanup;
-    }
-    if (unlink(tmpPath) != 0)
-    {
-        SetError("savestate: unlink(%s) failed: %s", tmpPath, strerror(errno));
-        unlink(path);
+        SetError("savestate: rename(%s -> %s) failed: %s", tmpPath, path, strerror(errno));
         goto cleanup;
     }
     tmpPath[0] = '\0';
@@ -404,16 +478,36 @@ bool8 HostSavestateLoadFromFile(const char *path)
         return FALSE;
     }
 
-    if (header.magic != HOST_SAVESTATE_MAGIC || header.version != HOST_SAVESTATE_VERSION)
+    if (header.magic != HOST_SAVESTATE_MAGIC)
     {
-        SetError("savestate: %s is not a compatible savestate", path);
+        SetError("savestate: %s is not a valid savestate file", path);
         fclose(file);
         return FALSE;
     }
 
-    if (header.sessionId != sRuntime->sessionId)
+    if (header.version < 1 || header.version > HOST_SAVESTATE_VERSION)
     {
-        SetError("savestate: %s belongs to a different live session", path);
+        SetError("savestate: %s has unsupported version %u (need %u)",
+                 path, header.version, HOST_SAVESTATE_VERSION);
+        fclose(file);
+        return FALSE;
+    }
+
+    /* v1 savestates lack a build fingerprint — always reject them
+     * since function pointers are almost certainly stale after rebuild. */
+    if (header.version < 2)
+    {
+        SetError("savestate: %s is a v1 savestate from a prior build — "
+                 "incompatible after recompile (re-save with current build)", path);
+        fclose(file);
+        return FALSE;
+    }
+
+    if (header.buildFingerprint != ComputeBuildFingerprint())
+    {
+        SetError("savestate: %s was created by a different build "
+                 "(fingerprint 0x%08X vs current 0x%08X) — re-save with current build",
+                 path, header.buildFingerprint, ComputeBuildFingerprint());
         fclose(file);
         return FALSE;
     }
@@ -442,9 +536,13 @@ bool8 HostSavestateLoadFromFile(const char *path)
             return FALSE;
         }
 
-        if (segment.base != sRuntime->segments[i].base || segment.size != sRuntime->segments[i].size)
+        /* Tolerate size differences for .data/.bss (segments 0,1).
+         * GBA regions (segments 2+) must match exactly. */
+        sRuntime->fileSavedSizes[i] = (size_t)segment.size;
+        if (i >= 2 && segment.size != sRuntime->segments[i].size)
         {
-            SetError("savestate: %s does not match the current executable layout", path);
+            SetError("savestate: %s GBA region %u size mismatch (saved=%llu, current=%zu)",
+                     path, i, (unsigned long long)segment.size, sRuntime->segments[i].size);
             fclose(file);
             return FALSE;
         }
@@ -452,11 +550,27 @@ bool8 HostSavestateLoadFromFile(const char *path)
 
     for (i = 0; i < sRuntime->segmentCount; i++)
     {
-        if (fread(sRuntime->hotBuffers[i].data, 1, sRuntime->hotBuffers[i].size, file) != sRuntime->hotBuffers[i].size)
+        size_t savedSize = sRuntime->fileSavedSizes[i];
+        size_t currentSize = sRuntime->hotBuffers[i].size;
+        size_t copySize = (savedSize < currentSize) ? savedSize : currentSize;
+
+        /* Read the portion we'll use */
+        if (fread(sRuntime->hotBuffers[i].data, 1, copySize, file) != copySize)
         {
             SetError("savestate: could not read segment %u from %s", i, path);
             fclose(file);
             return FALSE;
+        }
+
+        /* Skip any extra bytes from a larger saved segment */
+        if (savedSize > currentSize)
+        {
+            if (fseek(file, (long)(savedSize - currentSize), SEEK_CUR) != 0)
+            {
+                SetError("savestate: could not skip excess bytes in segment %u of %s", i, path);
+                fclose(file);
+                return FALSE;
+            }
         }
     }
 
@@ -464,6 +578,19 @@ bool8 HostSavestateLoadFromFile(const char *path)
     sRuntime->hotValid = TRUE;
     RestoreFromBuffers(sRuntime->hotBuffers);
     return TRUE;
+}
+
+void HostSavestateProtectRegion(void *addr, size_t size)
+{
+    if (sRuntime == NULL && !HostSavestateInit())
+        return;
+
+    if (sRuntime->protectCount < HOST_SAVESTATE_MAX_PROTECT)
+    {
+        sRuntime->protect[sRuntime->protectCount].addr = (uintptr_t)addr;
+        sRuntime->protect[sRuntime->protectCount].size = size;
+        sRuntime->protectCount++;
+    }
 }
 
 const char *HostSavestateGetLastError(void)

@@ -60,6 +60,11 @@
 #include "new_menu_helpers.h"
 #include "save_failed_screen.h"
 #include "window.h"
+#include "script.h"
+#include "global.fieldmap.h"
+#include "event_object_movement.h"
+#include "battle_main.h"
+#include "battle.h"
 #include "host_sound_init.h"
 #include "host_audio.h"
 #include "host_flash.h"
@@ -80,6 +85,8 @@ extern void SetNotInSaveFailedScreen(void);
 #include "host_new_game_stubs.h"
 #include "host_oak_speech_stubs.h"
 #include "host_title_screen_stubs.h"
+#include "item.h"
+#include "constants/items.h"
 
 #ifndef PATH_MAX
 #define PATH_MAX 4096
@@ -135,6 +142,10 @@ static char sStateDir[PATH_MAX] = "pfr_debug_states";
 static char sQuickLoadPath[PATH_MAX];
 static char sControlFilePath[PATH_MAX];
 static char **sProgramArgv;
+static bool8 sBenchmarkEnabled;
+static bool8 sBenchmarkCompleted;
+static u32 sBenchmarkFrameLimit;
+static u32 sEmulatedFrameCount;
 static MainCallback sLastCallback1;
 static MainCallback sLastCallback2;
 static u32 sLastMainMenuInitCalls;
@@ -199,6 +210,8 @@ static void TraceGpuState(u32 frame, const char *label);
 static bool8 FlagEnabled(const char *value);
 static bool8 ParseU32Option(const char *value, u32 *outValue);
 static void SetPathOption(char *dest, size_t size, const char *value, const char *fallback);
+static double TimespecDiffSeconds(const struct timespec *start, const struct timespec *end);
+static void PrintBenchmarkSummary(double elapsedSeconds);
 static bool8 EnsureDirectoryPath(const char *path);
 static bool8 EnsureParentDirectoryForFile(const char *path);
 static bool8 CopyFileToPath(const char *srcPath, const char *dstPath, bool8 overwrite);
@@ -434,6 +447,40 @@ static void SetPathOption(char *dest, size_t size, const char *value, const char
     }
 
     snprintf(dest, size, "%s", source);
+}
+
+static double TimespecDiffSeconds(const struct timespec *start, const struct timespec *end)
+{
+    time_t seconds = end->tv_sec - start->tv_sec;
+    long nanoseconds = end->tv_nsec - start->tv_nsec;
+
+    if (nanoseconds < 0)
+    {
+        seconds--;
+        nanoseconds += 1000000000L;
+    }
+
+    return (double)seconds + (double)nanoseconds / 1000000000.0;
+}
+
+static void PrintBenchmarkSummary(double elapsedSeconds)
+{
+    double emulatedFps = 0.0;
+    double speedupVsRealtime = 0.0;
+
+    if (elapsedSeconds > 0.0)
+    {
+        emulatedFps = (double)sEmulatedFrameCount / elapsedSeconds;
+        speedupVsRealtime = emulatedFps / 60.0;
+    }
+
+    printf("benchmark_result mode=pfr_play emulated_frames=%u presents=%u elapsed_seconds=%.6f emulated_fps=%.2f speedup_vs_realtime=%.2f\n",
+           sEmulatedFrameCount,
+           HostDisplayGetFrameCount(),
+           elapsedSeconds,
+           emulatedFps,
+           speedupVsRealtime);
+    fflush(stdout);
 }
 
 static bool8 EnsureDirectoryPath(const char *path)
@@ -1097,6 +1144,136 @@ static void ProcessControlFile(u32 frame)
         TraceLog(frame, "control: failed to consume command file");
 }
 
+static const char *const sPocketNames[] = {
+    "Items", "Key Items", "Poke Balls", "TM Case", "Berry Pouch"
+};
+
+static void RepairBag(u32 frame)
+{
+    static const u8 sPocketCapacities[] = {
+        BAG_ITEMS_COUNT, BAG_KEYITEMS_COUNT, BAG_POKEBALLS_COUNT,
+        BAG_TMHM_COUNT, BAG_BERRIES_COUNT
+    };
+    char buf[256];
+    u32 p, j;
+    u32 totalRepaired = 0;
+    u32 encKey;
+
+    if (gSaveBlock1Ptr == NULL || gSaveBlock2Ptr == NULL)
+    {
+        TraceLog(frame, "bag_repair: save blocks not initialized");
+        return;
+    }
+
+    encKey = gSaveBlock2Ptr->encryptionKey;
+    snprintf(buf, sizeof(buf), "bag_repair: encryptionKey=0x%08X", encKey);
+    TraceLog(frame, buf);
+
+    /* Re-establish bag pocket pointers in case they're stale */
+    SetBagPocketsPointers();
+
+    for (p = 0; p < NUM_BAG_POCKETS; p++)
+    {
+        struct BagPocket *pocket = &gBagPockets[p];
+        u8 expectedCap = sPocketCapacities[p];
+        u32 pocketRepaired = 0;
+
+        if (pocket->capacity != expectedCap)
+        {
+            snprintf(buf, sizeof(buf), "bag_repair: pocket %s capacity=%u (expected %u) -- fixing",
+                     sPocketNames[p], pocket->capacity, expectedCap);
+            TraceLog(frame, buf);
+            pocket->capacity = expectedCap;
+            pocketRepaired++;
+        }
+
+        if (pocket->itemSlots == NULL)
+        {
+            snprintf(buf, sizeof(buf), "bag_repair: pocket %s has NULL itemSlots", sPocketNames[p]);
+            TraceLog(frame, buf);
+            continue;
+        }
+
+        for (j = 0; j < pocket->capacity; j++)
+        {
+            struct ItemSlot *slot = &pocket->itemSlots[j];
+            u16 rawQty = slot->quantity;
+            u16 decQty = rawQty ^ (u16)encKey;
+
+            if (slot->itemId == ITEM_NONE)
+            {
+                if (rawQty != 0)
+                {
+                    snprintf(buf, sizeof(buf), "bag_repair: %s[%u] itemId=NONE but rawQty=0x%04X -- clearing",
+                             sPocketNames[p], j, rawQty);
+                    TraceLog(frame, buf);
+                    slot->quantity = 0;
+                    pocketRepaired++;
+                }
+                continue;
+            }
+
+            if (slot->itemId >= ITEMS_COUNT)
+            {
+                snprintf(buf, sizeof(buf), "bag_repair: %s[%u] invalid itemId=%u (max=%u) -- clearing slot",
+                         sPocketNames[p], j, slot->itemId, ITEMS_COUNT - 1);
+                TraceLog(frame, buf);
+                slot->itemId = ITEM_NONE;
+                slot->quantity = 0;
+                pocketRepaired++;
+                continue;
+            }
+
+            if (decQty > 999)
+            {
+                snprintf(buf, sizeof(buf), "bag_repair: %s[%u] itemId=%u decQty=%u (raw=0x%04X) -- clamping to 1",
+                         sPocketNames[p], j, slot->itemId, decQty, rawQty);
+                TraceLog(frame, buf);
+                slot->quantity = 1 ^ (u16)encKey;
+                pocketRepaired++;
+            }
+
+            {
+                u8 correctPocket = ItemId_GetPocket(slot->itemId);
+                if (correctPocket != 0 && (correctPocket - 1) != p)
+                {
+                    snprintf(buf, sizeof(buf), "bag_repair: %s[%u] itemId=%u belongs in pocket %u -- clearing",
+                             sPocketNames[p], j, slot->itemId, correctPocket - 1);
+                    TraceLog(frame, buf);
+                    slot->itemId = ITEM_NONE;
+                    slot->quantity = 0;
+                    pocketRepaired++;
+                }
+            }
+        }
+
+        if (pocketRepaired > 0)
+        {
+            BagPocketCompaction(pocket->itemSlots, pocket->capacity);
+            snprintf(buf, sizeof(buf), "bag_repair: %s -- repaired %u slots, compacted",
+                     sPocketNames[p], pocketRepaired);
+            TraceLog(frame, buf);
+        }
+        else
+        {
+            u32 usedSlots = 0;
+            for (j = 0; j < pocket->capacity; j++)
+            {
+                if (pocket->itemSlots[j].itemId != ITEM_NONE)
+                    usedSlots++;
+            }
+            snprintf(buf, sizeof(buf), "bag_repair: %s -- %u/%u slots used, OK",
+                     sPocketNames[p], usedSlots, pocket->capacity);
+            TraceLog(frame, buf);
+        }
+
+        totalRepaired += pocketRepaired;
+    }
+
+    snprintf(buf, sizeof(buf), "bag_repair: done -- %u total repairs", totalRepaired);
+    TraceLog(frame, buf);
+}
+
 static void HandleHostActions(u32 frame)
 {
     u32 actions = HostDisplayConsumeActions();
@@ -1125,6 +1302,9 @@ static void HandleHostActions(u32 frame)
     {
         LoadSavestateFromFileAtPath(frame, "hotkey", path);
     }
+
+    if (actions & HOST_DISPLAY_ACTION_REPAIR_BAG)
+        RepairBag(frame);
 
     ProcessControlFile(frame);
 }
@@ -1850,40 +2030,54 @@ static void TraceFramebufferUniformity(u32 frame)
     }
 }
 
+static double sVBAccCb = 0, sVBAccGpu = 0, sVBAccDma = 0, sVBAccAudio = 0, sVBAccOther = 0;
+static unsigned long sVBCount = 0;
+
 static void PlayVBlankHandler(void)
 {
     extern u16 Random(void);
-    /* Match real VBlankIntr from main.c as closely as possible.
-     * Skipped: RfuVSync/LinkVSync (no wireless/link on native).
-     * Skipped: m4aSoundMain (hangs without DMA hardware). */
+    struct timespec _ts;
+    double va, vb, vc, vd, ve, vf;
 
+    clock_gettime(CLOCK_MONOTONIC, &_ts); va = _ts.tv_sec * 1e9 + _ts.tv_nsec;
     if (gMain.vblankCounter1)
         (*gMain.vblankCounter1)++;
-
     if (gMain.vblankCallback)
         gMain.vblankCallback();
-
-#ifdef PFR_DIAG
-    {
-        static u32 sDiagVBlankCount = 0;
-        if (gMain.vblankCallback != NULL && sDiagVBlankCount % 60 == 0)
-            HostLogPrintf("[PFR_DIAG] PlayVBlankHandler: vblankCallback=%p frame=%u\n",
-                          (void *)gMain.vblankCallback, gMain.vblankCounter2);
-        sDiagVBlankCount++;
-    }
-#endif
+    clock_gettime(CLOCK_MONOTONIC, &_ts); vb = _ts.tv_sec * 1e9 + _ts.tv_nsec;
 
     gMain.vblankCounter2++;
-
     CopyBufferedValuesToGpuRegs();
+    clock_gettime(CLOCK_MONOTONIC, &_ts); vc = _ts.tv_sec * 1e9 + _ts.tv_nsec;
+
     ProcessDma3Requests();
+    clock_gettime(CLOCK_MONOTONIC, &_ts); vd = _ts.tv_sec * 1e9 + _ts.tv_nsec;
 
     HostAudioMixAndPush();
+    clock_gettime(CLOCK_MONOTONIC, &_ts); ve = _ts.tv_sec * 1e9 + _ts.tv_nsec;
 
     Random();
-
     INTR_CHECK |= INTR_FLAG_VBLANK;
     gMain.intrCheck |= INTR_FLAG_VBLANK;
+    clock_gettime(CLOCK_MONOTONIC, &_ts); vf = _ts.tv_sec * 1e9 + _ts.tv_nsec;
+
+    sVBAccCb    += (vb - va);
+    sVBAccGpu   += (vc - vb);
+    sVBAccDma   += (vd - vc);
+    sVBAccAudio += (ve - vd);
+    sVBAccOther += (vf - ve);
+    sVBCount++;
+
+    if (sVBCount % 60000 == 0) {
+        double tot = sVBAccCb + sVBAccGpu + sVBAccDma + sVBAccAudio + sVBAccOther;
+        fprintf(stderr, "VB_PROF n=%lu cb=%.0fns(%.1f%%) gpu=%.0fns(%.1f%%) dma=%.0fns(%.1f%%) audio=%.0fns(%.1f%%) other=%.0fns(%.1f%%)\n",
+            sVBCount,
+            sVBAccCb/sVBCount, 100.0*sVBAccCb/tot,
+            sVBAccGpu/sVBCount, 100.0*sVBAccGpu/tot,
+            sVBAccDma/sVBCount, 100.0*sVBAccDma/tot,
+            sVBAccAudio/sVBCount, 100.0*sVBAccAudio/tot,
+            sVBAccOther/sVBCount, 100.0*sVBAccOther/tot);
+    }
 }
 
 static void PlayHBlankHandler(void)
@@ -1936,7 +2130,10 @@ static void PlayReadKeys(void)
     if (JOY_NEW(gMain.watchedKeysMask))
         gMain.watchedKeysPressed = TRUE;
 
-    /* Auto-repeat A button every 4 frames while held (speeds up dialog) */
+    /* Auto-repeat A and B while held — injects into both newKeys and
+     * newAndRepeatedKeys so JOY_NEW() and JOY_REPT() both see repeats.
+     * This makes text advancement, dialog, and overworld interaction
+     * fast without needing to physically mash the button. */
     if ((gMain.heldKeys & A_BUTTON) && !(gMain.newKeys & A_BUTTON))
     {
         static u8 sARepeatTimer = 0;
@@ -1945,6 +2142,16 @@ static void PlayReadKeys(void)
             gMain.newKeys |= A_BUTTON;
             gMain.newAndRepeatedKeys |= A_BUTTON;
             sARepeatTimer = 0;
+        }
+    }
+    if ((gMain.heldKeys & B_BUTTON) && !(gMain.newKeys & B_BUTTON))
+    {
+        static u8 sBRepeatTimer = 0;
+        if (++sBRepeatTimer >= 4)
+        {
+            gMain.newKeys |= B_BUTTON;
+            gMain.newAndRepeatedKeys |= B_BUTTON;
+            sBRepeatTimer = 0;
         }
     }
 }
@@ -2010,24 +2217,140 @@ static void PlayFrameLogic(void *userdata)
         TraceLog(frame, "frame_detail after MapMusicMain");
 }
 
+
+/* ── RL Action Boundary Instrumentation ──────────────────── */
+
+static bool8 sRlInstrumentEnabled = FALSE;
+static u32 sRlFramesSinceReady = 0;
+static bool8 sRlWasReady = FALSE;
+static u32 sRlActionCount = 0;
+static FILE *sRlInstrumentLog = NULL;
+
+static const char *GetGameModeName(void)
+{
+    if (gMain.callback1 == CB1_Overworld)
+        return "overworld";
+    if (gMain.callback2 == BattleMainCB2)
+        return "battle";
+    if (gMain.inBattle)
+        return "battle_other";
+    return "other";
+}
+
+static bool8 PlayerReadyCheck(void)
+{
+    /* Overworld mode: callback1 == CB1_Overworld */
+    if (gMain.callback1 == CB1_Overworld)
+    {
+        /* Text printer waiting for A/B? That is an action point. */
+        /* We check via script lock + tile state */
+        if (!ArePlayerFieldControlsLocked()
+            && (gPlayerAvatar.tileTransitionState == T_NOT_MOVING
+             || gPlayerAvatar.tileTransitionState == T_TILE_CENTER)
+            && !ObjectEventIsMovementOverridden(
+                   &gObjectEvents[gPlayerAvatar.objectEventId]))
+            return TRUE;
+        
+        /* Script is running but text is waiting for player A/B press. */
+        /* We detect this by checking if field controls are locked but */
+        /* newKeys would be consumed by WaitForAorBPress.             */
+        /* For now, we check if ScriptContext is in WAITING state AND  */
+        /* no movement is happening — meaning dialog is up.           */
+        if (ArePlayerFieldControlsLocked()
+            && gPlayerAvatar.tileTransitionState != T_TILE_TRANSITION)
+        {
+            /* Could be dialog wait, menu wait, or cutscene in progress. */
+            /* Log this as a sub-state for analysis. */
+        }
+        return FALSE;
+    }
+    
+    /* Battle mode: callback2 == BattleMainCB2 */
+    if (gMain.callback2 == BattleMainCB2)
+    {
+        /* Controllers all done = waiting for player input */
+        if (gBattleControllerExecFlags == 0)
+            return TRUE;
+        return FALSE;
+    }
+    
+    /* Other modes (menus, etc) — always accepting input */
+    if (gMain.inBattle)
+        return FALSE; /* battle transition, not ready yet */
+    
+    return FALSE; /* unknown state, be conservative */
+}
+
+static void RlInstrumentFrame(void)
+{
+    bool8 ready;
+    
+    if (!sRlInstrumentEnabled)
+        return;
+    
+    ready = PlayerReadyCheck();
+    sRlFramesSinceReady++;
+    
+    if (ready && !sRlWasReady)
+    {
+        /* Transition: not-ready → ready = action boundary reached */
+        if (sRlInstrumentLog)
+        {
+            fprintf(sRlInstrumentLog,
+                "action=%u frames=%u mode=%s cb2=%p tileState=%u locked=%u battleExec=%u frame=%u\n",
+                sRlActionCount,
+                sRlFramesSinceReady,
+                GetGameModeName(),
+                (void *)gMain.callback2,
+                (unsigned)gPlayerAvatar.tileTransitionState,
+                (unsigned)ArePlayerFieldControlsLocked(),
+                (unsigned)gBattleControllerExecFlags,
+                sEmulatedFrameCount);
+            fflush(sRlInstrumentLog);
+        }
+        sRlActionCount++;
+        sRlFramesSinceReady = 0;
+    }
+    else if (!ready && sRlWasReady)
+    {
+        /* Transition: ready → not-ready = player took an action */
+        if (sRlInstrumentLog)
+        {
+            fprintf(sRlInstrumentLog,
+                "ACTION_START action=%u mode=%s idle_frames=%u frame=%u\n",
+                sRlActionCount,
+                GetGameModeName(),
+                sRlFramesSinceReady,
+                sEmulatedFrameCount);
+            fflush(sRlInstrumentLog);
+        }
+        sRlFramesSinceReady = 0;
+    }
+    
+    sRlWasReady = ready;
+}
+
 static void StepFrame(bool8 renderFrame)
 {
-    static u32 frame;
-    struct PlayFrameContext ctx = { .frame = frame };
+    struct PlayFrameContext ctx = { .frame = sEmulatedFrameCount };
 
-    HostFrameStepRun(PlayFrameLogic, &ctx, renderFrame);
+    if (renderFrame)
+        HostFrameStepRun(PlayFrameLogic, &ctx, TRUE);
+    else
+        HostFrameStepRunFast(PlayFrameLogic, &ctx);
 
-    frame++;
+    sEmulatedFrameCount++;
+    RlInstrumentFrame();
 }
 
 /* ── Main ──────────────────────────────────────────────────── */
 
-static void crash_handler(int sig)
+static void crash_handler(int sig, siginfo_t *info, void *ucontext)
 {
     void *frames[32];
     int logFd;
     int n = backtrace(frames, 32);
-    fprintf(stderr, "\n=== CRASH: signal %d ===\n", sig);
+    fprintf(stderr, "\n=== CRASH: signal %d (%s) fault_addr=%p si_code=%d ===\n", sig, sig==11?"SIGSEGV":sig==7?"SIGBUS":"other", info->si_addr, info->si_code);
     backtrace_symbols_fd(frames, n, STDERR_FILENO);
     logFd = HostLogGetFd();
     if (logFd >= 0 && logFd != STDERR_FILENO)
@@ -2041,8 +2364,21 @@ static void crash_handler(int sig)
 
 int main(int argc, char *argv[])
 {
-    signal(SIGSEGV, crash_handler);
-    signal(SIGABRT, crash_handler);
+    struct timespec benchmarkStartTime;
+    struct timespec benchmarkEndTime;
+    bool8 benchmarkClockStarted = FALSE;
+    bool8 benchmarkClockStopped = FALSE;
+    double benchmarkElapsedSeconds = 0.0;
+
+    {
+        struct sigaction sa;
+        memset(&sa, 0, sizeof(sa));
+        sa.sa_sigaction = crash_handler;
+        sa.sa_flags = SA_SIGINFO;
+        sigaction(SIGSEGV, &sa, NULL);
+        sigaction(SIGBUS, &sa, NULL);
+        sigaction(SIGABRT, &sa, NULL);
+    }
 
     int i;
     int argi;
@@ -2131,6 +2467,16 @@ int main(int argc, char *argv[])
             setenv("PFR_UNTHROTTLED", "1", 1);
             setenv("PFR_FAST_FORWARD_FACTOR", argv[++argi], 1);
         }
+        else if (strcmp(argv[argi], "--benchmark-frames") == 0 && argi + 1 < argc)
+        {
+            if (!ParseU32Option(argv[argi + 1], &sBenchmarkFrameLimit) || sBenchmarkFrameLimit == 0)
+            {
+                fprintf(stderr, "pfr_play: invalid benchmark frame count %s\n", argv[argi + 1]);
+                return 1;
+            }
+            sBenchmarkEnabled = TRUE;
+            argi++;
+        }
         else if (strcmp(argv[argi], "--mute") == 0)
         {
             sDisableAudioEnabled = TRUE;
@@ -2152,13 +2498,26 @@ int main(int argc, char *argv[])
         {
             sAutoPlayOakNewGameEnabled = TRUE;
         }
+        else if (strcmp(argv[argi], "--rl-instrument") == 0)
+        {
+            sRlInstrumentEnabled = TRUE;
+            sRlInstrumentLog = fopen("rl_instrument.log", "w");
+            if (!sRlInstrumentLog)
+            {
+                fprintf(stderr, "pfr_play: could not open rl_instrument.log\n");
+                return 1;
+            }
+            fprintf(sRlInstrumentLog, "# RL Action Boundary Instrumentation\n");
+            fprintf(sRlInstrumentLog, "# Play the game normally. Each line logs a player_ready() transition.\n");
+            fflush(sRlInstrumentLog);
+        }
         else if (strcmp(argv[argi], "--help") == 0)
         {
             fprintf(stderr,
                     "usage: %s [input_script] [--input path] [--save-path path] [--load-save path]\n"
                     "          [--snapshot-dir path] [--state-dir path] [--quickload-path path] [--control-file path]\n"
-                    "          [--headless] [--unthrottled] [--fast-forward n] [--mute] [--max-speed]\n"
-                    "          [--autoplay-continue] [--autoplay-oak]\n",
+                    "          [--headless] [--unthrottled] [--fast-forward n] [--benchmark-frames n] [--mute] [--max-speed]\n"
+                    "          [--autoplay-continue] [--autoplay-oak] [--rl-instrument]\n",
                     argv[0]);
             return 0;
         }
@@ -2250,6 +2609,16 @@ int main(int argc, char *argv[])
     CheckForFlashMemory();
     HostSavestateInit();
 
+    /* Protect host-side resource pointers from savestate restore.
+     * Savestate restore does a bulk memcpy of .data/.bss, which
+     * would overwrite these with stale values from a prior session.
+     * Any pointer to heap, libc, or OS resources MUST be protected. */
+    HostSavestateProtectRegion(&sTraceFile, sizeof(sTraceFile));
+    HostSavestateProtectRegion(&sRlInstrumentLog, sizeof(sRlInstrumentLog));
+    HostSavestateProtectRegion(&sSymTable, sizeof(sSymTable));
+    HostSavestateProtectRegion(&sSymCount, sizeof(sSymCount));
+    HostSavestateProtectRegion(&sProgramArgv, sizeof(sProgramArgv));
+
     /* InitMainCallbacks is static in main.c; replicate inline: */
     gMain.vblankCounter1 = 0;
     gMain.vblankCounter2 = 0;
@@ -2321,6 +2690,11 @@ int main(int argc, char *argv[])
         }
         snprintf(buffer, sizeof(buffer), "fast-forward factor: %u", HostDisplayGetFastForwardFactor());
         TraceLog(0, buffer);
+        if (sBenchmarkEnabled)
+        {
+            snprintf(buffer, sizeof(buffer), "benchmark frame limit: %u", sBenchmarkFrameLimit);
+            TraceLog(0, buffer);
+        }
     }
     if (sAutoPlayOakNewGameEnabled)
         TraceLog(0, "autoplay oak-newgame enabled");
@@ -2353,21 +2727,40 @@ int main(int argc, char *argv[])
 
     /* ── Main loop ── */
 
+    if (sBenchmarkEnabled && clock_gettime(CLOCK_MONOTONIC, &benchmarkStartTime) == 0)
+        benchmarkClockStarted = TRUE;
+
     for (;;)
     {
         u32 burst = HostDisplayGetFastForwardFactor();
+        u32 stepsThisBurst;
         u32 step;
         bool8 renderFrame = HostDisplayNeedsFrameRender();
         bool8 modalOverlayActive = HostDisplayHasModalOverlay();
 
         if (burst == 0)
             burst = 1;
+        stepsThisBurst = burst;
+        if (sBenchmarkEnabled)
+        {
+            u32 remainingFrames;
+
+            if (sEmulatedFrameCount >= sBenchmarkFrameLimit)
+            {
+                sBenchmarkCompleted = TRUE;
+                break;
+            }
+
+            remainingFrames = sBenchmarkFrameLimit - sEmulatedFrameCount;
+            if (stepsThisBurst > remainingFrames)
+                stepsThisBurst = remainingFrames;
+        }
 
         if (!sPresentRestoredFramePending && !modalOverlayActive)
         {
-            for (step = 0; step < burst; step++)
+            for (step = 0; step < stepsThisBurst; step++)
             {
-                bool8 renderThisStep = renderFrame && (step + 1 == burst);
+                bool8 renderThisStep = renderFrame && (step + 1 == stepsThisBurst);
                 StepFrame(renderThisStep);
             }
         }
@@ -2380,6 +2773,12 @@ int main(int argc, char *argv[])
          * Returns FALSE on ESC / window close. */
         if (!HostDisplayPresent())
             break;
+
+        if (sBenchmarkEnabled && sEmulatedFrameCount >= sBenchmarkFrameLimit)
+        {
+            sBenchmarkCompleted = TRUE;
+            break;
+        }
 
         HandleHostActions(HostDisplayGetFrameCount());
         if (sRestartRequested || sShutdownRequested)
@@ -2411,6 +2810,12 @@ int main(int argc, char *argv[])
         TraceFramebufferUniformity(HostDisplayGetFrameCount());
     }
 
+    if (sBenchmarkEnabled && benchmarkClockStarted && clock_gettime(CLOCK_MONOTONIC, &benchmarkEndTime) == 0)
+    {
+        benchmarkElapsedSeconds = TimespecDiffSeconds(&benchmarkStartTime, &benchmarkEndTime);
+        benchmarkClockStopped = TRUE;
+    }
+
     if (sRestartRequested && RestartSelf())
         return 0;
 
@@ -2418,5 +2823,9 @@ int main(int argc, char *argv[])
     HostDisplayDestroy();
     if (sTraceFile != NULL)
         fclose(sTraceFile);
+    if (sBenchmarkCompleted && benchmarkClockStopped)
+        PrintBenchmarkSummary(benchmarkElapsedSeconds);
+    if (sBenchmarkEnabled && !sBenchmarkCompleted)
+        return 1;
     return 0;
 }

@@ -5,6 +5,7 @@ project(pokefirered_native_bootstrap C ASM)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS ON)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)  # Required for libpfr_game.so
 
 find_package(Threads REQUIRED)
 find_package(Python3 REQUIRED COMPONENTS Interpreter)
@@ -490,6 +491,8 @@ add_custom_target(pfr_generated_upstream_native_data
 
 add_library(pfr_upstream_core STATIC
     # ---- Host shim layer ----
+    src/host_bg_regs.c
+    src/host_script_ptrtab.c
     src/host_crt0.c
     src/host_capture_manifest.c
     src/host_frame_step.c
@@ -503,6 +506,7 @@ add_library(pfr_upstream_core STATIC
     src/host_sound_mixer.c
     src/host_sound_init.c
     src/host_flash.c
+    src/host_ptr_store.c
     src/host_timer.c
     src/host_intro_stubs.c
     src/host_new_game_stubs.c
@@ -583,7 +587,8 @@ add_library(pfr_upstream_core STATIC
     "${PFR_GEN_DIR}/berry_pouch.c"
     "${POKEFIRERED_SOURCE_DIR}/src/berry_powder.c"
     "${POKEFIRERED_SOURCE_DIR}/src/bg.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/bg_regs.c"
+    # bg_regs.c excluded — compiled separately as host_bg_regs.c (dynamic GBA addresses)
+    # "${POKEFIRERED_SOURCE_DIR}/src/bg_regs.c"
     "${POKEFIRERED_SOURCE_DIR}/src/bike.c"
     "${POKEFIRERED_SOURCE_DIR}/src/blend_palette.c"
     "${POKEFIRERED_SOURCE_DIR}/src/blit.c"
@@ -816,15 +821,20 @@ add_library(pfr_upstream_core STATIC
     "${POKEFIRERED_SOURCE_DIR}/src/wonder_news.c"
 )
 
+set_target_properties(pfr_upstream_core PROPERTIES POSITION_INDEPENDENT_CODE ON)
 target_compile_definitions(pfr_upstream_core PRIVATE ${PFR_COMMON_DEFINES})
 # Upstream headers must be quote-only to avoid colliding with the system's <strings.h>.
 target_compile_options(pfr_upstream_core PRIVATE
-    -fno-pie
+    # # -fno-pie  # removed for PIC/shared lib compat
     -ffunction-sections
     -fdata-sections
     -Wno-int-conversion
     -Wno-int-to-pointer-cast
     -Wno-pointer-to-int-cast
+    # Force-include host global.h first so its include guard (GUARD_GLOBAL_H)
+    # is set before any upstream #include "global.h" resolves via -iquote.
+    # This fixes librfu_*.c which start with #include "librfu.h" (not "global.h").
+    "-include${CMAKE_CURRENT_SOURCE_DIR}/src/host_include/force_host_global.h"
     "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
     "-iquote${PFR_INC_DIR}"
     "-iquote${PFR_GEN_DIR}"
@@ -872,7 +882,7 @@ target_compile_definitions(pfr_upstream_runtime PRIVATE
     ENGLISH
 )
 target_compile_options(pfr_upstream_runtime PRIVATE
-    -fno-pie
+    # # -fno-pie  # removed for PIC/shared lib compat
     -ffunction-sections
     -fdata-sections
     -Wno-int-conversion
@@ -891,7 +901,7 @@ add_library(pfr_upstream_intro OBJECT
 )
 target_compile_definitions(pfr_upstream_intro PRIVATE ${PFR_COMMON_DEFINES})
 target_compile_options(pfr_upstream_intro PRIVATE
-    -fno-pie
+    # # -fno-pie  # removed for PIC compat
     -ffunction-sections
     -fdata-sections
     -Wno-int-conversion
@@ -910,7 +920,7 @@ add_library(pfr_upstream_title OBJECT
 )
 target_compile_definitions(pfr_upstream_title PRIVATE ${PFR_COMMON_DEFINES})
 target_compile_options(pfr_upstream_title PRIVATE
-    -fno-pie
+    # # -fno-pie  # removed for PIC compat
     -ffunction-sections
     -fdata-sections
     -Wno-int-conversion
@@ -929,7 +939,7 @@ add_library(pfr_upstream_clear_save OBJECT
 )
 target_compile_definitions(pfr_upstream_clear_save PRIVATE ${PFR_COMMON_DEFINES})
 target_compile_options(pfr_upstream_clear_save PRIVATE
-    -fno-pie
+    # # -fno-pie  # removed for PIC compat
     -ffunction-sections
     -fdata-sections
     -Wno-int-conversion
@@ -948,7 +958,7 @@ add_library(pfr_upstream_berry_fix OBJECT
 )
 target_compile_definitions(pfr_upstream_berry_fix PRIVATE ${PFR_COMMON_DEFINES})
 target_compile_options(pfr_upstream_berry_fix PRIVATE
-    -fno-pie
+    # # -fno-pie  # removed for PIC compat
     -ffunction-sections
     -fdata-sections
     -Wno-int-conversion
@@ -970,7 +980,7 @@ target_compile_definitions(pfr_upstream_oak_speech PRIVATE
     StartNewGameScene=UpstreamStartNewGameScene
 )
 target_compile_options(pfr_upstream_oak_speech PRIVATE
-    -fno-pie
+    # # -fno-pie  # removed for PIC compat
     -ffunction-sections
     -fdata-sections
     -Wno-int-conversion
@@ -993,7 +1003,7 @@ target_compile_definitions(pfr_upstream_new_game PRIVATE
     Sav2_ClearSetDefault=UpstreamSav2_ClearSetDefault
 )
 target_compile_options(pfr_upstream_new_game PRIVATE
-    -fno-pie
+    # # -fno-pie  # removed for PIC compat
     -ffunction-sections
     -fdata-sections
     -Wno-int-conversion
@@ -1016,7 +1026,7 @@ target_compile_definitions(pfr_upstream_play_time PRIVATE
     PlayTimeCounter_Update=UpstreamPlayTimeCounter_Update
 )
 target_compile_options(pfr_upstream_play_time PRIVATE
-    -fno-pie
+    # # -fno-pie  # removed for PIC compat
     -ffunction-sections
     -fdata-sections
     -Wno-int-conversion
@@ -1033,12 +1043,14 @@ target_include_directories(pfr_upstream_play_time PUBLIC
 # --- Text/Window/Font subsystem (preprocessed TUs) ---
 
 set(PFR_UPSTREAM_PREPROC_OPTIONS
-    -fno-pie
+    # # -fno-pie  # removed for PIC compat
     -ffunction-sections
     -fdata-sections
     -Wno-int-conversion
     -Wno-int-to-pointer-cast
     -Wno-pointer-to-int-cast
+    # Force-include host global.h (same rationale as pfr_upstream_core above)
+    "-include${CMAKE_CURRENT_SOURCE_DIR}/src/host_include/force_host_global.h"
     "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
     "-iquote${PFR_GEN_HEADERS_DIR}"
     "-iquote${POKEFIRERED_SOURCE_DIR}/include"
@@ -1959,6 +1971,7 @@ add_dependencies(pfr_upstream_party_menu pfr_asset_pipeline)
 add_executable(pfr_smoke tests/smoke.c)
 target_sources(pfr_smoke PRIVATE
     src/host_agbmain.c
+    src/host_savestate.c
     $<TARGET_OBJECTS:pfr_upstream_intro>
     $<TARGET_OBJECTS:pfr_upstream_title>
     $<TARGET_OBJECTS:pfr_upstream_clear_save>
@@ -2053,7 +2066,7 @@ target_sources(pfr_smoke PRIVATE
 )
 target_compile_definitions(pfr_smoke PRIVATE ${PFR_COMMON_DEFINES})
 target_compile_options(pfr_smoke PRIVATE
-    -fno-pie
+    # # -fno-pie  # removed for PIC compat
     "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
     "-iquote${PFR_GEN_HEADERS_DIR}"
     "-iquote${POKEFIRERED_SOURCE_DIR}/include"
@@ -2071,7 +2084,7 @@ target_link_libraries(pfr_smoke PRIVATE pfr_upstream_core Threads::Threads m)
 add_executable(pfr_lz77 tools/pfr_lz77.c)
 target_compile_definitions(pfr_lz77 PRIVATE ${PFR_COMMON_DEFINES})
 target_compile_options(pfr_lz77 PRIVATE
-    -fno-pie
+    # # -fno-pie  # removed for PIC compat
     "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
     "-iquote${POKEFIRERED_SOURCE_DIR}/include"
 )
@@ -2089,6 +2102,7 @@ target_link_libraries(pfr_lz77 PRIVATE pfr_upstream_core m)
 add_executable(pfr_render_test tests/render_test.c)
 target_sources(pfr_render_test PRIVATE
     src/host_agbmain.c
+    src/host_savestate.c
     $<TARGET_OBJECTS:pfr_upstream_intro>
     $<TARGET_OBJECTS:pfr_upstream_title>
     $<TARGET_OBJECTS:pfr_upstream_clear_save>
@@ -2183,7 +2197,7 @@ target_sources(pfr_render_test PRIVATE
 )
 target_compile_definitions(pfr_render_test PRIVATE ${PFR_COMMON_DEFINES})
 target_compile_options(pfr_render_test PRIVATE
-    -fno-pie
+    # # -fno-pie  # removed for PIC compat
     "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
     "-iquote${PFR_GEN_HEADERS_DIR}"
     "-iquote${POKEFIRERED_SOURCE_DIR}/include"
@@ -2295,7 +2309,7 @@ target_sources(pfr_play PRIVATE
 )
 target_compile_definitions(pfr_play PRIVATE ${PFR_COMMON_DEFINES})
 target_compile_options(pfr_play PRIVATE
-    -fno-pie
+    # # -fno-pie  # removed for PIC compat
     "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
     "-iquote${PFR_GEN_HEADERS_DIR}"
     "-iquote${POKEFIRERED_SOURCE_DIR}/include"
@@ -2308,6 +2322,124 @@ target_link_options(pfr_play PRIVATE
     -Wl,--gc-sections
 )
 target_link_libraries(pfr_play PRIVATE pfr_upstream_core Threads::Threads m dl ${SDL2_LIBRARIES})
+
+# ── libpfr_game.so — headless game shared library for RL env ──
+# Each dlmopen(LM_ID_NEWLM) load gets independent .data/.bss (globals).
+
+add_library(pfr_game SHARED
+    src/pfr_game_api.c
+    src/host_savestate.c
+    src/host_agbmain.c
+)
+set_target_properties(pfr_game PROPERTIES
+    OUTPUT_NAME pfr_game
+    POSITION_INDEPENDENT_CODE ON
+)
+target_sources(pfr_game PRIVATE
+    $<TARGET_OBJECTS:pfr_upstream_intro>
+    $<TARGET_OBJECTS:pfr_upstream_title>
+    $<TARGET_OBJECTS:pfr_upstream_clear_save>
+    $<TARGET_OBJECTS:pfr_upstream_berry_fix>
+    $<TARGET_OBJECTS:pfr_upstream_main_menu>
+    $<TARGET_OBJECTS:pfr_upstream_oak_speech>
+    $<TARGET_OBJECTS:pfr_upstream_new_game>
+    $<TARGET_OBJECTS:pfr_upstream_play_time>
+    $<TARGET_OBJECTS:pfr_upstream_text_window_graphics>
+    $<TARGET_OBJECTS:pfr_upstream_text>
+    $<TARGET_OBJECTS:pfr_upstream_text_window>
+    $<TARGET_OBJECTS:pfr_upstream_new_menu_helpers>
+    $<TARGET_OBJECTS:pfr_upstream_text_printer>
+    $<TARGET_OBJECTS:pfr_upstream_runtime>
+    $<TARGET_OBJECTS:pfr_upstream_graphics>
+    $<TARGET_OBJECTS:pfr_upstream_bag>
+    $<TARGET_OBJECTS:pfr_upstream_battle_anim_effects_3>
+    $<TARGET_OBJECTS:pfr_upstream_battle_anim_flying>
+    $<TARGET_OBJECTS:pfr_upstream_battle_anim_water>
+    $<TARGET_OBJECTS:pfr_upstream_battle_bg>
+    $<TARGET_OBJECTS:pfr_upstream_battle_interface>
+    $<TARGET_OBJECTS:pfr_upstream_battle_records>
+    $<TARGET_OBJECTS:pfr_upstream_battle_script_commands>
+    $<TARGET_OBJECTS:pfr_upstream_battle_transition>
+    $<TARGET_OBJECTS:pfr_upstream_berry_crush>
+    $<TARGET_OBJECTS:pfr_upstream_braille_text>
+    $<TARGET_OBJECTS:pfr_upstream_credits>
+    $<TARGET_OBJECTS:pfr_upstream_daycare>
+    $<TARGET_OBJECTS:pfr_upstream_digit_obj_util>
+    $<TARGET_OBJECTS:pfr_upstream_diploma>
+    $<TARGET_OBJECTS:pfr_upstream_dodrio_berry_picking>
+    $<TARGET_OBJECTS:pfr_upstream_easy_chat>
+    $<TARGET_OBJECTS:pfr_upstream_easy_chat_2>
+    $<TARGET_OBJECTS:pfr_upstream_easy_chat_3>
+    $<TARGET_OBJECTS:pfr_upstream_evolution_graphics>
+    $<TARGET_OBJECTS:pfr_upstream_evolution_scene>
+    $<TARGET_OBJECTS:pfr_upstream_fame_checker>
+    $<TARGET_OBJECTS:pfr_upstream_field_door>
+    $<TARGET_OBJECTS:pfr_upstream_field_effect>
+    $<TARGET_OBJECTS:pfr_upstream_field_specials>
+    $<TARGET_OBJECTS:pfr_upstream_field_weather>
+    $<TARGET_OBJECTS:pfr_upstream_fldeff_flash>
+    $<TARGET_OBJECTS:pfr_upstream_hall_of_fame>
+    $<TARGET_OBJECTS:pfr_upstream_help_message>
+    $<TARGET_OBJECTS:pfr_upstream_help_system>
+    $<TARGET_OBJECTS:pfr_upstream_help_system_util>
+    $<TARGET_OBJECTS:pfr_upstream_item_menu>
+    $<TARGET_OBJECTS:pfr_upstream_itemfinder>
+    $<TARGET_OBJECTS:pfr_upstream_learn_move>
+    $<TARGET_OBJECTS:pfr_upstream_link>
+    $<TARGET_OBJECTS:pfr_upstream_link_rfu_3>
+    $<TARGET_OBJECTS:pfr_upstream_map_preview_screen>
+    $<TARGET_OBJECTS:pfr_upstream_menu_indicators>
+    $<TARGET_OBJECTS:pfr_upstream_minigame_countdown>
+    $<TARGET_OBJECTS:pfr_upstream_mon_markings>
+    $<TARGET_OBJECTS:pfr_upstream_mystery_gift_menu>
+    $<TARGET_OBJECTS:pfr_upstream_mystery_gift_show_card>
+    $<TARGET_OBJECTS:pfr_upstream_mystery_gift_show_news>
+    $<TARGET_OBJECTS:pfr_upstream_naming_screen>
+    $<TARGET_OBJECTS:pfr_upstream_option_menu>
+    $<TARGET_OBJECTS:pfr_upstream_pokedex_area_markers>
+    $<TARGET_OBJECTS:pfr_upstream_pokedex_screen>
+    $<TARGET_OBJECTS:pfr_upstream_pokemon>
+    $<TARGET_OBJECTS:pfr_upstream_pokemon_icon>
+    $<TARGET_OBJECTS:pfr_upstream_pokemon_jump>
+    $<TARGET_OBJECTS:pfr_upstream_pokemon_special_anim_scene>
+    $<TARGET_OBJECTS:pfr_upstream_pokemon_storage_system_data>
+    $<TARGET_OBJECTS:pfr_upstream_pokemon_storage_system_graphics>
+    $<TARGET_OBJECTS:pfr_upstream_pokemon_storage_system_menu>
+    $<TARGET_OBJECTS:pfr_upstream_pokemon_storage_system_misc>
+    $<TARGET_OBJECTS:pfr_upstream_pokemon_storage_system_tasks>
+    $<TARGET_OBJECTS:pfr_upstream_pokemon_summary_screen>
+    $<TARGET_OBJECTS:pfr_upstream_quest_log>
+    $<TARGET_OBJECTS:pfr_upstream_region_map>
+    $<TARGET_OBJECTS:pfr_upstream_save_failed_screen>
+    $<TARGET_OBJECTS:pfr_upstream_script_menu>
+    $<TARGET_OBJECTS:pfr_upstream_seagallop>
+    $<TARGET_OBJECTS:pfr_upstream_slot_machine>
+    $<TARGET_OBJECTS:pfr_upstream_ss_anne>
+    $<TARGET_OBJECTS:pfr_upstream_tileset_anims>
+    $<TARGET_OBJECTS:pfr_upstream_trade>
+    $<TARGET_OBJECTS:pfr_upstream_trade_scene>
+    $<TARGET_OBJECTS:pfr_upstream_trainer_card>
+    $<TARGET_OBJECTS:pfr_upstream_trainer_see>
+    $<TARGET_OBJECTS:pfr_upstream_union_room_chat_display>
+    $<TARGET_OBJECTS:pfr_upstream_union_room_chat_objects>
+    $<TARGET_OBJECTS:pfr_upstream_util>
+    $<TARGET_OBJECTS:pfr_upstream_wireless_communication_status_screen>
+    $<TARGET_OBJECTS:pfr_upstream_tilesets>
+    $<TARGET_OBJECTS:pfr_upstream_event_object_movement>
+    $<TARGET_OBJECTS:pfr_upstream_party_menu>
+)
+target_compile_definitions(pfr_game PRIVATE ${PFR_COMMON_DEFINES})
+target_compile_options(pfr_game PRIVATE
+    -fPIC
+    "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
+    "-iquote${PFR_GEN_HEADERS_DIR}"
+    "-iquote${POKEFIRERED_SOURCE_DIR}/include"
+    "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src"
+    -Wno-int-to-pointer-cast
+    -Wno-pointer-to-int-cast
+)
+target_link_libraries(pfr_game PRIVATE pfr_upstream_core Threads::Threads m dl)
+
 
 # Frame diff tool: pixel-level PPM comparison for golden frame verification
 add_executable(pfr_frame_diff tools/pfr_frame_diff.c)
@@ -2392,6 +2524,40 @@ target_include_directories(mgba_capture PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
 )
 target_link_libraries(mgba_capture PRIVATE mgba_static Threads::Threads m)
+
+add_executable(mgba_bench
+    scripts/mgba_bench.c
+)
+target_compile_definitions(mgba_bench PRIVATE
+    BUILD_STATIC
+    ENABLE_DIRECTORIES
+    ENABLE_VFS
+    ENABLE_VFS_FD
+    HAVE_FREELOCALE
+    HAVE_FUTIMENS
+    HAVE_FUTIMES
+    HAVE_LOCALE
+    HAVE_LOCALTIME_R
+    HAVE_NEWLOCALE
+    HAVE_PTHREAD_CREATE
+    HAVE_PTHREAD_SETNAME_NP
+    HAVE_REALPATH
+    HAVE_SETLOCALE
+    HAVE_STRDUP
+    HAVE_STRLCPY
+    HAVE_STRNDUP
+    HAVE_USELOCALE
+    HAVE_VASPRINTF
+    M_CORE_GBA
+    USE_PTHREADS
+    _GNU_SOURCE
+)
+target_include_directories(mgba_bench PRIVATE
+    "${MGBA_BUILD_DIR}/include"
+    "${MGBA_SOURCE_DIR}/src"
+    "${MGBA_SOURCE_DIR}/include"
+)
+target_link_libraries(mgba_bench PRIVATE mgba_static Threads::Threads m)
 
 add_custom_target(pfr_refresh_goldens
     COMMAND "${CMAKE_CURRENT_SOURCE_DIR}/scripts/capture_golden_frames.sh"
@@ -2670,6 +2836,7 @@ add_custom_command(
         "${POKEFIRERED_SOURCE_DIR}/src/keyboard_text.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/keyboard_text.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/battle_main.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/battle_main.c"
+    COMMAND ${Python3_EXECUTABLE} "${CMAKE_CURRENT_SOURCE_DIR}/tools/fixup_battle_main.py" "${PFR_GEN_DIR}/battle_main.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/mystery_event_msg.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/mystery_event_msg.c"
     # Additional charmap-only files (contain _() but no INCBINs)

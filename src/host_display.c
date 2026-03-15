@@ -27,6 +27,7 @@
 #include <string.h>
 #include <strings.h>
 #include <sys/stat.h>
+#include <time.h>
 #include <unistd.h>
 
 /* Undo upstream abs macro before any further system header interaction */
@@ -36,6 +37,7 @@
 
 #include "host_display.h"
 #include "host_renderer.h"
+#include "host_savestate.h"
 #include "gba/gba.h"
 
 #ifndef PATH_MAX
@@ -72,6 +74,7 @@ struct HostDisplayOverlayEntry
     char path[PATH_MAX];
     char name[NAME_MAX + 1];
     bool8 isDirectory;
+    time_t mtime;
 };
 
 struct HostDisplayOverlayState
@@ -83,8 +86,11 @@ struct HostDisplayOverlayState
     int selectedIndex;
     int scrollIndex;
     int entryCount;
+    int viewCount;
+    int viewIndices[HOST_DISPLAY_OVERLAY_MAX_ENTRIES];
     char currentDir[PATH_MAX];
     char input[PATH_MAX];
+    char lastFilter[PATH_MAX];
     char message[160];
     char committedPath[PATH_MAX];
     bool8 committedPathReady;
@@ -380,12 +386,12 @@ static void OverlaySetMessage(const char *message)
 
 static void OverlayAdjustScroll(void)
 {
+    int count = sOverlayState.viewCount;
+
     if (sOverlayState.selectedIndex < 0)
         sOverlayState.selectedIndex = 0;
-
-    if (sOverlayState.selectedIndex >= sOverlayState.entryCount)
-        sOverlayState.selectedIndex = sOverlayState.entryCount - 1;
-
+    if (sOverlayState.selectedIndex >= count)
+        sOverlayState.selectedIndex = count - 1;
     if (sOverlayState.selectedIndex < 0)
         sOverlayState.selectedIndex = 0;
 
@@ -395,6 +401,47 @@ static void OverlayAdjustScroll(void)
         sOverlayState.scrollIndex = sOverlayState.selectedIndex - HOST_DISPLAY_OVERLAY_ROWS + 1;
     if (sOverlayState.scrollIndex < 0)
         sOverlayState.scrollIndex = 0;
+}
+
+static bool8 OverlayCaseContains(const char *haystack, const char *needle)
+{
+    size_t nlen = strlen(needle);
+    size_t hlen = strlen(haystack);
+    size_t i;
+
+    if (nlen == 0)
+        return TRUE;
+    if (nlen > hlen)
+        return FALSE;
+    for (i = 0; i <= hlen - nlen; i++)
+    {
+        if (strncasecmp(haystack + i, needle, nlen) == 0)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+static void OverlayRebuildView(void)
+{
+    int i;
+    const char *filter = sOverlayState.input;
+
+    sOverlayState.viewCount = 0;
+    for (i = 0; i < sOverlayState.entryCount; i++)
+    {
+        if (filter[0] != '\0' && sOverlayState.loadMode
+            && !sOverlayState.entries[i].isDirectory
+            && !OverlayCaseContains(sOverlayState.entries[i].name, filter))
+            continue;
+        sOverlayState.viewIndices[sOverlayState.viewCount++] = i;
+    }
+    snprintf(sOverlayState.lastFilter, sizeof(sOverlayState.lastFilter), "%s", filter);
+
+    if (sOverlayState.selectedIndex >= sOverlayState.viewCount)
+        sOverlayState.selectedIndex = sOverlayState.viewCount - 1;
+    if (sOverlayState.selectedIndex < 0)
+        sOverlayState.selectedIndex = 0;
+    OverlayAdjustScroll();
 }
 
 static void OverlayRefreshEntries(void)
@@ -442,11 +489,13 @@ static void OverlayRefreshEntries(void)
                  "%s",
                  entry->d_name);
         sOverlayState.entries[sOverlayState.entryCount].isDirectory = S_ISDIR(st.st_mode);
+        sOverlayState.entries[sOverlayState.entryCount].mtime = st.st_mtime;
         sOverlayState.entryCount++;
     }
 
     closedir(dir);
 
+    /* Sort: directories first (alpha ascending), then files by mtime descending */
     for (i = 1; i < sOverlayState.entryCount; i++)
     {
         struct HostDisplayOverlayEntry value = sOverlayState.entries[i];
@@ -461,9 +510,16 @@ static void OverlayRefreshEntries(void)
                 if (prev->isDirectory)
                     break;
             }
-            else if (strcasecmp(prev->name, value.name) <= 0)
+            else if (prev->isDirectory)
             {
-                break;
+                if (strcasecmp(prev->name, value.name) <= 0)
+                    break;
+            }
+            else
+            {
+                /* Files: newest first */
+                if (prev->mtime >= value.mtime)
+                    break;
             }
 
             sOverlayState.entries[j] = sOverlayState.entries[j - 1];
@@ -474,6 +530,8 @@ static void OverlayRefreshEntries(void)
     }
 
     sOverlayState.refreshRequested = FALSE;
+    sOverlayState.lastFilter[0] = '\0';
+    OverlayRebuildView();
     OverlaySetMessage("");
 }
 
@@ -584,15 +642,84 @@ static void OverlayActivateSelection(void)
 
     if (sOverlayState.input[0] != '\0')
     {
-        if (!ResolveOverlayPath(sOverlayState.input, path, sizeof(path)))
+        /* In load mode, input acts as a filter — Enter activates the
+         * selected entry in the filtered view rather than trying to
+         * resolve the typed text as a file path. */
+        if (sOverlayState.loadMode && sOverlayState.viewCount > 0)
         {
-            OverlaySetMessage("Path is too long");
+            /* Fall through to the selection handling below */
+        }
+        else if (sOverlayState.loadMode)
+        {
+            /* Filter active but no matches — try as literal path */
+            if (!ResolveOverlayPath(sOverlayState.input, path, sizeof(path)))
+            {
+                OverlaySetMessage("Path is too long");
+                return;
+            }
+            if (PathIsDirectory(path))
+            {
+                snprintf(sOverlayState.currentDir, sizeof(sOverlayState.currentDir), "%s", path);
+                sOverlayState.input[0] = '\0';
+                sOverlayState.refreshRequested = TRUE;
+                OverlayRefreshEntries();
+                return;
+            }
+            if (access(path, F_OK) != 0)
+            {
+                OverlaySetMessage("No matching files");
+                return;
+            }
+            OverlayCommitPath(HOST_DISPLAY_ACTION_STATE_LOAD_AS, path);
             return;
         }
-
-        if (PathIsDirectory(path))
+        else
         {
-            snprintf(sOverlayState.currentDir, sizeof(sOverlayState.currentDir), "%s", path);
+            /* Save mode — input is a file name */
+            if (!ResolveOverlayPath(sOverlayState.input, path, sizeof(path)))
+            {
+                OverlaySetMessage("Path is too long");
+                return;
+            }
+            if (PathIsDirectory(path))
+            {
+                snprintf(sOverlayState.currentDir, sizeof(sOverlayState.currentDir), "%s", path);
+                sOverlayState.input[0] = '\0';
+                sOverlayState.refreshRequested = TRUE;
+                OverlayRefreshEntries();
+                return;
+            }
+            if (!MaybeAppendStateExtension(path, sizeof(path)))
+            {
+                OverlaySetMessage("Save path is too long");
+                return;
+            }
+            if (access(path, F_OK) == 0)
+            {
+                OverlaySetMessage("Refusing to overwrite existing state");
+                return;
+            }
+            OverlayCommitPath(HOST_DISPLAY_ACTION_STATE_SAVE_AS, path);
+            return;
+        }
+    }
+
+    if (sOverlayState.viewCount == 0)
+    {
+        OverlaySetMessage("No matching files");
+        return;
+    }
+
+    if (sOverlayState.selectedIndex < 0 || sOverlayState.selectedIndex >= sOverlayState.viewCount)
+        return;
+
+    {
+        int realIdx = sOverlayState.viewIndices[sOverlayState.selectedIndex];
+        const struct HostDisplayOverlayEntry *sel = &sOverlayState.entries[realIdx];
+
+        if (sel->isDirectory)
+        {
+            snprintf(sOverlayState.currentDir, sizeof(sOverlayState.currentDir), "%s", sel->path);
             sOverlayState.input[0] = '\0';
             sOverlayState.refreshRequested = TRUE;
             OverlayRefreshEntries();
@@ -601,54 +728,13 @@ static void OverlayActivateSelection(void)
 
         if (sOverlayState.loadMode)
         {
-            if (access(path, F_OK) != 0)
-            {
-                OverlaySetMessage("State file not found");
-                return;
-            }
-            OverlayCommitPath(HOST_DISPLAY_ACTION_STATE_LOAD_AS, path);
-            return;
+            OverlayCommitPath(HOST_DISPLAY_ACTION_STATE_LOAD_AS, sel->path);
         }
-
-        if (!MaybeAppendStateExtension(path, sizeof(path)))
+        else
         {
-            OverlaySetMessage("Save path is too long");
-            return;
+            snprintf(sOverlayState.input, sizeof(sOverlayState.input), "%s", sel->name);
+            OverlaySetMessage("Edit the name and press Enter to save");
         }
-        if (access(path, F_OK) == 0)
-        {
-            OverlaySetMessage("Refusing to overwrite existing state");
-            return;
-        }
-        OverlayCommitPath(HOST_DISPLAY_ACTION_STATE_SAVE_AS, path);
-        return;
-    }
-
-    if (sOverlayState.entryCount == 0)
-    {
-        OverlaySetMessage("Directory is empty");
-        return;
-    }
-
-    if (sOverlayState.selectedIndex < 0 || sOverlayState.selectedIndex >= sOverlayState.entryCount)
-        return;
-
-    if (sOverlayState.entries[sOverlayState.selectedIndex].isDirectory)
-    {
-        snprintf(sOverlayState.currentDir, sizeof(sOverlayState.currentDir), "%s", sOverlayState.entries[sOverlayState.selectedIndex].path);
-        sOverlayState.refreshRequested = TRUE;
-        OverlayRefreshEntries();
-        return;
-    }
-
-    if (sOverlayState.loadMode)
-    {
-        OverlayCommitPath(HOST_DISPLAY_ACTION_STATE_LOAD_AS, sOverlayState.entries[sOverlayState.selectedIndex].path);
-    }
-    else
-    {
-        snprintf(sOverlayState.input, sizeof(sOverlayState.input), "%s", sOverlayState.entries[sOverlayState.selectedIndex].name);
-        OverlaySetMessage("Edit the name and press Enter to save");
     }
 }
 
@@ -670,6 +756,8 @@ static void OverlayHandleTextInput(const char *text)
         sOverlayState.input[len++] = (char)c;
     }
     sOverlayState.input[len] = '\0';
+    if (sOverlayState.loadMode && strcmp(sOverlayState.input, sOverlayState.lastFilter) != 0)
+        OverlayRebuildView();
     OverlaySetMessage("");
 }
 
@@ -690,6 +778,8 @@ static void OverlayHandleKeyDown(SDL_Scancode scancode)
         {
             size_t len = strlen(sOverlayState.input);
             sOverlayState.input[len - 1] = '\0';
+            if (sOverlayState.loadMode)
+                OverlayRebuildView();
             OverlaySetMessage("");
         }
         else
@@ -708,7 +798,7 @@ static void OverlayHandleKeyDown(SDL_Scancode scancode)
         OverlayAdjustScroll();
         break;
     case SDL_SCANCODE_DOWN:
-        if (sOverlayState.selectedIndex + 1 < sOverlayState.entryCount)
+        if (sOverlayState.selectedIndex + 1 < sOverlayState.viewCount)
             sOverlayState.selectedIndex++;
         OverlayAdjustScroll();
         break;
@@ -725,7 +815,7 @@ static void OverlayHandleKeyDown(SDL_Scancode scancode)
         OverlayAdjustScroll();
         break;
     case SDL_SCANCODE_END:
-        sOverlayState.selectedIndex = sOverlayState.entryCount - 1;
+        sOverlayState.selectedIndex = sOverlayState.viewCount - 1;
         OverlayAdjustScroll();
         break;
     default:
@@ -940,19 +1030,21 @@ static void DrawOverlayPanel(void)
     SDL_RenderFillRect(sSDLRenderer, &inputBox);
     SDL_SetRenderDrawColor(sSDLRenderer, 80, 92, 124, 255);
     SDL_RenderDrawRect(sSDLRenderer, &inputBox);
-    DrawTextClipped(18, 40, 24, sGold, sOverlayState.loadMode ? "PATH" : "NAME");
+    DrawTextClipped(18, 40, 24, sGold, sOverlayState.loadMode ? "FIND" : "NAME");
     DrawTextTail(48, 40, inputBox.w - 34, sWhite, sOverlayState.input);
     DrawGlyph(18 + inputBox.w - 10, 40, 1, sMuted, '_');
 
     startRow = sOverlayState.scrollIndex;
     endRow = startRow + HOST_DISPLAY_OVERLAY_ROWS;
-    if (endRow > sOverlayState.entryCount)
-        endRow = sOverlayState.entryCount;
+    if (endRow > sOverlayState.viewCount)
+        endRow = sOverlayState.viewCount;
 
     for (i = startRow; i < endRow; i++)
     {
         SDL_Rect row = {16, 56 + (i - startRow) * 9, panel.w - 12, 8};
-        const struct HostDisplayOverlayEntry *entry = &sOverlayState.entries[i];
+        int realIdx = sOverlayState.viewIndices[i];
+        const struct HostDisplayOverlayEntry *entry = &sOverlayState.entries[realIdx];
+        char timeBuf[18]; /* "HH:MM MM/DD/YYYY" */
 
         if (i == sOverlayState.selectedIndex)
         {
@@ -963,11 +1055,28 @@ static void DrawOverlayPanel(void)
         }
 
         DrawTextClipped(20, row.y + 1, 20, entry->isDirectory ? sGold : sMuted, entry->isDirectory ? "[D]" : "[F]");
-        DrawTextClipped(42, row.y + 1, row.w - 26, sWhite, entry->name);
+
+        if (!entry->isDirectory && entry->mtime > 0)
+        {
+            struct tm *tm = localtime(&entry->mtime);
+            if (tm != NULL)
+                strftime(timeBuf, sizeof(timeBuf), "%H:%M %m/%d/%Y", tm);
+            else
+                timeBuf[0] = '\0';
+            /* Name on left, timestamp right-aligned */
+            DrawTextClipped(42, row.y + 1, row.w - 120, sWhite, entry->name);
+            if (timeBuf[0] != '\0')
+                DrawTextClipped(row.w - 76, row.y + 1, 96, sMuted, timeBuf);
+        }
+        else
+        {
+            DrawTextClipped(42, row.y + 1, row.w - 26, sWhite, entry->name);
+        }
     }
 
-    if (sOverlayState.entryCount == 0)
-        DrawTextClipped(16, 58, panel.w - 12, sMuted, "[NO FILES]");
+    if (sOverlayState.viewCount == 0)
+        DrawTextClipped(16, 58, panel.w - 12, sMuted,
+                        sOverlayState.input[0] != '\0' ? "[NO MATCHING FILES]" : "[NO FILES]");
     if (sOverlayState.truncated)
         DrawTextClipped(16, 149, panel.w - 12, sMuted, "LIST TRUNCATED TO 256 ENTRIES");
 
@@ -1063,6 +1172,14 @@ bool8 HostDisplayInit(void)
     }
 
     sSDLInit = TRUE;
+
+    /* Protect SDL handles from savestate restore (they live in .bss
+     * which gets overwritten, but must keep current-session values). */
+    HostSavestateProtectRegion(&sWindow, sizeof(sWindow));
+    HostSavestateProtectRegion(&sSDLRenderer, sizeof(sSDLRenderer));
+    HostSavestateProtectRegion(&sTexture, sizeof(sTexture));
+    HostSavestateProtectRegion(&sSDLInit, sizeof(sSDLInit));
+
     return TRUE;
 }
 
@@ -1104,7 +1221,7 @@ bool8 HostDisplayPresent(void)
             return FALSE;
         if (sOverlayState.active)
         {
-            if (event.type == SDL_KEYDOWN && event.key.repeat == 0)
+            if (event.type == SDL_KEYDOWN)
                 OverlayHandleKeyDown(event.key.keysym.scancode);
             else if (event.type == SDL_TEXTINPUT)
                 OverlayHandleTextInput(event.text.text);
@@ -1132,6 +1249,8 @@ bool8 HostDisplayPresent(void)
                 sActionBits |= HOST_DISPLAY_ACTION_QUICKSAVE;
             else if (event.key.keysym.scancode == SDL_SCANCODE_F9)
                 sActionBits |= HOST_DISPLAY_ACTION_QUICKLOAD;
+            else if (event.key.keysym.scancode == SDL_SCANCODE_F10)
+                sActionBits |= HOST_DISPLAY_ACTION_REPAIR_BAG;
             else if (event.key.keysym.scancode == SDL_SCANCODE_SPACE)
             {
                 if (event.key.keysym.mod & KMOD_SHIFT)

@@ -1005,7 +1005,7 @@ class Assembler:
                         sym_name, addend = rest
                         offset = len(self.data)
                         self.relocs.append((offset, sym_name, addend))
-                        # Emit 4 zero bytes as placeholder
+                        # Emit 4 zero bytes as placeholder (index into ptr table)
                         self.data.extend(b'\x00\x00\x00\x00')
                 continue
 
@@ -1137,17 +1137,16 @@ def emit_c(asm: Assembler, data_name: str, prefix: str, patch_fn: str,
         add(f"extern u8 {lname}[];")
     add("")
 
-    # Emit static patch helper
-    add("/* Patch function: writes 32-bit LE pointer into script data at runtime. */")
-    add("/* On aarch64 with -no-pie, all symbols have addresses < 4GB, so the  */")
-    add("/* 32-bit truncation is safe. The script interpreter reads them back   */")
-    add("/* via T1_READ_PTR which zero-extends to 64-bit via (uintptr_t) cast.  */")
-    add(f"static void {prefix}_patch4(u8 *dst, const void *target) {{")
-    add("    u32 addr = (u32)(uintptr_t)target;")
-    add("    dst[0] = (u8)(addr);")
-    add("    dst[1] = (u8)(addr >> 8);")
-    add("    dst[2] = (u8)(addr >> 16);")
-    add("    dst[3] = (u8)(addr >> 24);")
+    # Emit static patch helper using unified pointer table
+    add("/* Uses HostScriptPtrTabRegister from host_script_ptrtab.c */")
+    add("extern u32 HostScriptPtrTabRegister(const u8 *ptr);")
+    add("")
+    add(f"static void {prefix}_patch_idx(u8 *dst, const void *target) {{")
+    add("    u32 idx = HostScriptPtrTabRegister((const u8 *)target);")
+    add("    dst[0] = (u8)(idx);")
+    add("    dst[1] = (u8)(idx >> 8);")
+    add("    dst[2] = (u8)(idx >> 16);")
+    add("    dst[3] = (u8)(idx >> 24);")
     add("}")
     add("")
 
@@ -1162,7 +1161,7 @@ def emit_c(asm: Assembler, data_name: str, prefix: str, patch_fn: str,
             target = f"((u8 *)({ref}) + {addend})"
         else:
             target = ref
-        add(f"    {prefix}_patch4(&{data_name}[{offset}], {target});")
+        add(f"    {prefix}_patch_idx(&{data_name}[{offset}], {target});")
     add("}")
     add("")
 

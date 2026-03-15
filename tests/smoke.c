@@ -78,6 +78,7 @@ void HostPatchBattleScriptPointers(void);
 void HostPatchFieldEffectScriptPointers(void);
 void HostPatchBattleAIScriptPointers(void);
 void HostPatchBattleAnimScriptPointers(void);
+void HostScriptPtrTabReset(void);
 static volatile int sLastGoodFrame = -1;
 extern u16 gBattle_BG0_X;
 extern const IntrFunc gIntrTableTemplate[];
@@ -1241,6 +1242,7 @@ static int PulseButtonUntilTaskCountExceeds(u16 button, int baselineTaskCount, i
 
 static void ResetBootCallbackHarness(void)
 {
+    HostScriptPtrTabReset();
     HostMemoryReset();
     HostFlashInit(NULL); /* Reset flash to erased state for clean boot */
     HostStubReset();
@@ -2151,6 +2153,72 @@ static int TestPokeStorageMoveItemsEmptyBoxNullSafe(void)
                  "poke storage did not create the storage cursor");
     rc |= Expect(gStorage->boxMonsSprites[0] == NULL,
                  "empty box slot unexpectedly produced a box sprite");
+    rc |= Expect(gStorage->movingMonSprite == NULL,
+                 "storage regression expected no moving mon sprite before priority update");
+
+    SetMovingMonPriority(2);
+    rc |= Expect(gMain.callback2 != NULL,
+                 "poke storage priority update unexpectedly cleared callback2");
+    rc |= Expect(gStorage->movingMonSprite == NULL,
+                 "storage priority update unexpectedly created a moving mon sprite");
+
+    return rc;
+}
+
+static int TestPokeStorageExitBoxOnBNullSafe(void)
+{
+    int rc = 0;
+    int i;
+    MainCallback storageCallback;
+
+    rc |= TestOakSpeechToCB2NewGameHandoff();
+
+    ClearKeys();
+    EnterPokeStorage(OPTION_MOVE_ITEMS);
+
+    for (i = 0; i < 64; i++)
+    {
+        sLastGoodFrame = i;
+        RunMainCallbackFrame();
+
+        if (gStorage != NULL
+         && gStorage->cursorSprite != NULL
+         && gStorage->boxMonsSprites[0] == NULL)
+            break;
+    }
+
+    rc |= Expect(gStorage != NULL,
+                 "poke storage did not allocate runtime state for exit test");
+    rc |= Expect(gStorage->cursorSprite != NULL,
+                 "poke storage exit test did not create the storage cursor");
+
+    storageCallback = gMain.callback2;
+    rc |= Expect(storageCallback != NULL,
+                 "poke storage exit test started without callback2");
+
+    for (i = 0; i < 256 && gStorage->state != 2; i++)
+    {
+        sLastGoodFrame = i;
+        if ((i % 6) == 0)
+            SetKeys(B_BUTTON, B_BUTTON);
+        else
+            ClearKeys();
+        RunMainCallbackFrame();
+    }
+    ClearKeys();
+
+    rc |= Expect(gStorage != NULL && gStorage->state == 2,
+                 "poke storage did not open the continue-box confirmation on B");
+    rc |= PulseButtonUntilCallback2WithButton(B_BUTTON, CB2_ExitPokeStorage, 1024,
+                                              "poke storage did not exit cleanly after B on the confirmation dialog");
+    RunMainCallbackFrame();
+    rc |= Expect(gMain.callback2 == CB2_ReturnToField,
+                 "poke storage exit did not hand off to CB2_ReturnToField");
+    RunFrames(8);
+    rc |= Expect(gMain.callback2 != storageCallback,
+                 "poke storage exit confirmation did not leave the storage callback");
+    rc |= Expect(gMain.callback2 != NULL,
+                 "poke storage exit confirmation cleared callback2 unexpectedly");
 
     return rc;
 }
@@ -2446,6 +2514,7 @@ int main(void)
     RUN_FILTERED_TEST("TestBattleTransitionAngledWipesCleanup", TestBattleTransitionAngledWipesCleanup());
     RUN_FILTERED_TEST("TestBattleChosenMonReturnValueNullOrderUsesBattlerOrder", TestBattleChosenMonReturnValueNullOrderUsesBattlerOrder());
     RUN_FILTERED_TEST("TestPokeStorageMoveItemsEmptyBoxNullSafe", TestPokeStorageMoveItemsEmptyBoxNullSafe());
+    RUN_FILTERED_TEST("TestPokeStorageExitBoxOnBNullSafe", TestPokeStorageExitBoxOnBNullSafe());
     RUN_FILTERED_TEST("TestTrainerCardNoPokemonNullSafe", TestTrainerCardNoPokemonNullSafe());
     RUN_FILTERED_TEST("TestPokemonSummaryExitAfterPageFlipsNullSafe", TestPokemonSummaryExitAfterPageFlipsNullSafe());
     RUN_FILTERED_TEST("TestWildBattleLevelUpDialogReturnsSafely", TestWildBattleLevelUpDialogReturnsSafely());

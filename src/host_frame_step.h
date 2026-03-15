@@ -16,4 +16,11 @@ typedef void (*HostFrameStepLogicFn)(void *userdata);
  */
 void HostFrameStepRun(HostFrameStepLogicFn logicFn, void *userdata, bool8 renderFrame);
 
+/*
+ * Fast frame step for headless RL — runs game logic + VBlank handler
+ * only, skipping per-scanline timer sync, HBlank DMA, VCount interrupts,
+ * and all rendering.  Sound engine still ticks for game-logic correctness.
+ */
+void HostFrameStepRunFast(HostFrameStepLogicFn logicFn, void *userdata);
+
 #endif /* POKEFIRERED_NATIVE_HOST_FRAME_STEP_H */

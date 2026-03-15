@@ -7,26 +7,38 @@
 #include "gba/gba.h"
 #include "host_dma.h"
 #include "host_memory.h"
+#include "host_savestate.h"
 #include "host_timer.h"
 
-#ifndef MAP_FIXED_NOREPLACE
-#define MAP_FIXED_NOREPLACE 0x100000
-#endif
+/* Forward declaration — defined in host_bg_regs.c */
+extern void HostBgRegsInit(void);
+
+/* ── Dynamic GBA memory base addresses ──
+ * These are the extern globals declared in gba.h.
+ * Each dlmopen namespace gets its own copy.
+ * HostMemoryInit() sets them from mmap() return values.
+ */
+uintptr_t pfr_ewram_base = 0;
+uintptr_t pfr_iwram_base = 0;
+uintptr_t pfr_reg_base   = 0;
+uintptr_t pfr_pltt_base  = 0;
+uintptr_t pfr_vram_base  = 0;
+uintptr_t pfr_oam_base   = 0;
 
 struct HostRegion
 {
-    uintptr_t base;
+    uintptr_t *base_ptr;   /* pointer to the global holding the mapped address */
     size_t size;
     const char *name;
 };
 
 static const struct HostRegion sHostRegions[] = {
-    { EWRAM_START, EWRAM_END - EWRAM_START, "EWRAM" },
-    { IWRAM_START, IWRAM_END - IWRAM_START, "IWRAM" },
-    { REG_BASE, 0x1000, "IO" },
-    { PLTT, PLTT_SIZE, "PLTT" },
-    { VRAM, VRAM_SIZE, "VRAM" },
-    { OAM, OAM_SIZE, "OAM" },
+    { &pfr_ewram_base, 0x40000, "EWRAM" },
+    { &pfr_iwram_base, 0x8000,  "IWRAM" },
+    { &pfr_reg_base,   0x1000,  "IO" },
+    { &pfr_pltt_base,  0x400,   "PLTT" },
+    { &pfr_vram_base,  0x18000, "VRAM" },
+    { &pfr_oam_base,   0x400,   "OAM" },
 };
 
 static bool8 sHostMemoryMapped = FALSE;
@@ -48,22 +60,23 @@ static void MapRegion(const struct HostRegion *region)
 {
     void *mapped;
 
-    mapped = mmap((void *)region->base,
+    mapped = mmap(NULL,
                   region->size,
                   PROT_READ | PROT_WRITE,
-                  MAP_PRIVATE | MAP_ANONYMOUS | MAP_FIXED_NOREPLACE,
+                  MAP_PRIVATE | MAP_ANONYMOUS,
                   -1,
                   0);
     if (mapped == MAP_FAILED)
     {
         fprintf(stderr,
-                "failed to map host region %s at 0x%08lx (%zu bytes): %s\n",
+                "failed to map host region %s (%zu bytes): %s\n",
                 region->name,
-                (unsigned long)region->base,
                 region->size,
                 strerror(errno));
         abort();
     }
+
+    *(region->base_ptr) = (uintptr_t)mapped;
 }
 
 void HostMemoryInit(void)
@@ -80,7 +93,16 @@ void HostMemoryInit(void)
         MapRegion(&sHostRegions[i]);
 
     sHostMemoryMapped = TRUE;
+    HostSavestateProtectRegion(&sHostMemoryMapped, sizeof(sHostMemoryMapped));
+    HostSavestateProtectRegion(&pfr_ewram_base, sizeof(pfr_ewram_base));
+    HostSavestateProtectRegion(&pfr_iwram_base, sizeof(pfr_iwram_base));
+    HostSavestateProtectRegion(&pfr_reg_base,   sizeof(pfr_reg_base));
+    HostSavestateProtectRegion(&pfr_pltt_base,  sizeof(pfr_pltt_base));
+    HostSavestateProtectRegion(&pfr_vram_base,  sizeof(pfr_vram_base));
+    HostSavestateProtectRegion(&pfr_oam_base,   sizeof(pfr_oam_base));
+
     HostMemoryReset();
+    HostBgRegsInit();
 }
 
 void HostMemoryReset(void)

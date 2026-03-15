@@ -124,13 +124,22 @@
 #define T1_READ_8(ptr)  ((ptr)[0])
 #define T1_READ_16(ptr) ((ptr)[0] | ((ptr)[1] << 8))
 #define T1_READ_32(ptr) ((ptr)[0] | ((ptr)[1] << 8) | ((ptr)[2] << 16) | ((ptr)[3] << 24))
+#if HOST_NATIVE && __SIZEOF_POINTER__ == 8
+extern const u8 *HostScriptPtrLookup(u32 index);
+#define T1_READ_PTR(ptr) ((u8 *)HostScriptPtrLookup(T1_READ_32(ptr)))
+#else
 #define T1_READ_PTR(ptr) (u8 *) T1_READ_32(ptr)
+#endif
 
 // T2_READ_8 is a duplicate to remain consistent with each group.
 #define T2_READ_8(ptr)  ((ptr)[0])
 #define T2_READ_16(ptr) ((ptr)[0] + ((ptr)[1] << 8))
 #define T2_READ_32(ptr) ((ptr)[0] + ((ptr)[1] << 8) + ((ptr)[2] << 16) + ((ptr)[3] << 24))
+#if HOST_NATIVE && __SIZEOF_POINTER__ == 8
+#define T2_READ_PTR(ptr) ((void *)HostScriptPtrLookup(T2_READ_32(ptr)))
+#else
 #define T2_READ_PTR(ptr) (void *) T2_READ_32(ptr)
+#endif
 
 // This macro is required to prevent the compiler from optimizing
 // a dpad up/down check in sub_812CAD8 (fame_checker.c).

@@ -1,4 +1,5 @@
 #include "host_log.h"
+#include "host_savestate.h"
 
 #include <stdarg.h>
 #include <unistd.h>
@@ -8,6 +9,7 @@ static FILE *sHostLogFile;
 void HostLogAttachFile(FILE *file)
 {
     sHostLogFile = file;
+    HostSavestateProtectRegion(&sHostLogFile, sizeof(sHostLogFile));
 }
 
 int HostLogGetFd(void)

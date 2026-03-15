@@ -38,6 +38,11 @@
 #include "host_new_game_stubs.h"
 #include "host_sound_init.h"
 
+void HostLogSaveStatus(u8 status)
+{
+    (void)status;
+}
+
 static struct HostCaptureInputScript sInputScript;
 static struct HostCaptureManifest sManifest;
 static const char *sOutputDir = "/tmp/pfr_render_test";

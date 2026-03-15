@@ -27,6 +27,7 @@
 #include <string.h>
 #include "global.h"
 #include "gba/gba.h"
+#include "host_savestate.h"
 #include "gba/m4a_internal.h"
 #include "host_log.h"
 #include "m4a.h"
@@ -138,6 +139,10 @@ void HostAudioInit(void)
 
     /* Unpause — audio callback starts running */
     SDL_PauseAudioDevice(sAudioDevice, 0);
+
+    /* Protect audio handles from savestate restore */
+    HostSavestateProtectRegion(&sAudioDevice, sizeof(sAudioDevice));
+    HostSavestateProtectRegion(&sRingBuf, sizeof(sRingBuf));
 
     HostLogPrintf("host_audio: opened device (freq=%d fmt=0x%04x ch=%d buf=%d)\n",
                   have.freq, have.format, have.channels, have.samples);
