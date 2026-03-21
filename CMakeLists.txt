@@ -34,6 +34,13 @@ set(PFR_ASSETS_DIR "${CMAKE_BINARY_DIR}/assets")
 set(PFR_INC_DIR    "${CMAKE_BINARY_DIR}/inc")
 set(PFR_GEN_DIR    "${CMAKE_BINARY_DIR}/gen")
 set(PFR_GEN_HEADERS_DIR "${CMAKE_BINARY_DIR}/generated_include")
+
+## GameCtx: force-include game_ctx headers to redirect EWRAM globals to g_ctx->
+##DISABLED-GAMECTX set(PFR_GAMECTX_INCLUDES
+##DISABLED-GAMECTX
+#    "$<$<COMPILE_LANGUAGE:C>:-include${PFR_GEN_HEADERS_DIR}/game_ctx_macros.h>"
+#)
+set(PFR_GAMECTX_INCLUDES "")  # Disabled: will re-enable with proper GameCtx
 set(PFR_MAPJSON_OUT_DIR "${CMAKE_BINARY_DIR}/mapjson")
 set(PFR_ASSET_MANIFEST_DIR "${CMAKE_BINARY_DIR}/asset_manifests")
 set(PFR_BOOT_ASSET_MANIFEST "${PFR_ASSET_MANIFEST_DIR}/boot_path.manifest")
@@ -176,114 +183,114 @@ foreach(header_path IN LISTS PFR_DATA_HEADER_CANDIDATES)
 endforeach()
 
 set(PFR_BOOT_ASSET_TUS
-    "${POKEFIRERED_SOURCE_DIR}/src/intro.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/title_screen.c"
+    "${PFR_GEN_DIR}/intro.c"
+    "${PFR_GEN_DIR}/title_screen.c"
     "${POKEFIRERED_SOURCE_DIR}/src/main_menu.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/oak_speech.c"
+    "${PFR_GEN_DIR}/oak_speech.c"
     "${POKEFIRERED_SOURCE_DIR}/src/text_window_graphics.c"
     "${POKEFIRERED_SOURCE_DIR}/src/text.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/new_menu_helpers.c"
+    "${PFR_GEN_DIR}/new_menu_helpers.c"
     "${POKEFIRERED_SOURCE_DIR}/src/graphics.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/bag.c"
+    "${PFR_GEN_DIR}/bag.c"
     "${POKEFIRERED_SOURCE_DIR}/src/battle_anim_effects_3.c"
     "${POKEFIRERED_SOURCE_DIR}/src/battle_anim_flying.c"
     "${POKEFIRERED_SOURCE_DIR}/src/battle_anim_water.c"
     "${POKEFIRERED_SOURCE_DIR}/src/battle_bg.c"
     "${POKEFIRERED_SOURCE_DIR}/src/battle_interface.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_records.c"
+    "${PFR_GEN_DIR}/battle_records.c"
     "${POKEFIRERED_SOURCE_DIR}/src/battle_script_commands.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_transition.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/berry_crush.c"
+    "${PFR_GEN_DIR}/battle_transition.c"
+    "${PFR_GEN_DIR}/berry_crush.c"
     "${POKEFIRERED_SOURCE_DIR}/src/braille_text.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/credits.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/daycare.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/digit_obj_util.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/diploma.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/dodrio_berry_picking.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/easy_chat.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/easy_chat_2.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/easy_chat_3.c"
+    "${PFR_GEN_DIR}/credits.c"
+    "${PFR_GEN_DIR}/daycare.c"
+    "${PFR_GEN_DIR}/digit_obj_util.c"
+    "${PFR_GEN_DIR}/diploma.c"
+    "${PFR_GEN_DIR}/dodrio_berry_picking.c"
+    "${PFR_GEN_DIR}/easy_chat.c"
+    "${PFR_GEN_DIR}/easy_chat_2.c"
+    "${PFR_GEN_DIR}/easy_chat_3.c"
     "${POKEFIRERED_SOURCE_DIR}/src/evolution_graphics.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/evolution_scene.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/fame_checker.c"
+    "${PFR_GEN_DIR}/evolution_scene.c"
+    "${PFR_GEN_DIR}/fame_checker.c"
     "${POKEFIRERED_SOURCE_DIR}/src/field_door.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/field_effect.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/field_specials.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/field_weather.c"
+    "${PFR_GEN_DIR}/field_effect.c"
+    "${PFR_GEN_DIR}/field_specials.c"
+    "${PFR_GEN_DIR}/field_weather.c"
     "${POKEFIRERED_SOURCE_DIR}/src/fldeff_flash.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/hall_of_fame.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/help_message.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/help_system.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/help_system_util.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/item_menu.c"
+    "${PFR_GEN_DIR}/hall_of_fame.c"
+    "${PFR_GEN_DIR}/help_message.c"
+    "${PFR_GEN_DIR}/help_system.c"
+    "${PFR_GEN_DIR}/help_system_util.c"
+    "${PFR_GEN_DIR}/item_menu.c"
     "${POKEFIRERED_SOURCE_DIR}/src/itemfinder.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/learn_move.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/link.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/link_rfu_3.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/map_preview_screen.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/menu_indicators.c"
+    "${PFR_GEN_DIR}/learn_move.c"
+    "${PFR_GEN_DIR}/link.c"
+    "${PFR_GEN_DIR}/link_rfu_3.c"
+    "${PFR_GEN_DIR}/map_preview_screen.c"
+    "${PFR_GEN_DIR}/menu_indicators.c"
     "${POKEFIRERED_SOURCE_DIR}/src/minigame_countdown.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/mon_markings.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/mystery_gift_menu.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/mystery_gift_show_card.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/mystery_gift_show_news.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/naming_screen.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/option_menu.c"
+    "${PFR_GEN_DIR}/mon_markings.c"
+    "${PFR_GEN_DIR}/mystery_gift_menu.c"
+    "${PFR_GEN_DIR}/mystery_gift_show_card.c"
+    "${PFR_GEN_DIR}/mystery_gift_show_news.c"
+    "${PFR_GEN_DIR}/naming_screen.c"
+    "${PFR_GEN_DIR}/option_menu.c"
     "${POKEFIRERED_SOURCE_DIR}/src/pokedex_area_markers.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/pokedex_screen.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/pokemon.c"
+    "${PFR_GEN_DIR}/pokedex_screen.c"
+    "${PFR_GEN_DIR}/pokemon.c"
     "${POKEFIRERED_SOURCE_DIR}/src/pokemon_icon.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/pokemon_jump.c"
+    "${PFR_GEN_DIR}/pokemon_jump.c"
     "${POKEFIRERED_SOURCE_DIR}/src/pokemon_special_anim_scene.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/pokemon_storage_system_data.c"
+    "${PFR_GEN_DIR}/pokemon_storage_system_data.c"
     "${POKEFIRERED_SOURCE_DIR}/src/pokemon_storage_system_graphics.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/pokemon_storage_system_menu.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/pokemon_storage_system_misc.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/pokemon_storage_system_tasks.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/pokemon_summary_screen.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/quest_log.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/region_map.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/save_failed_screen.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/script_menu.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/seagallop.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/slot_machine.c"
+    "${PFR_GEN_DIR}/pokemon_storage_system_menu.c"
+    "${PFR_GEN_DIR}/pokemon_storage_system_misc.c"
+    "${PFR_GEN_DIR}/pokemon_storage_system_tasks.c"
+    "${PFR_GEN_DIR}/pokemon_summary_screen.c"
+    "${PFR_GEN_DIR}/quest_log.c"
+    "${PFR_GEN_DIR}/region_map.c"
+    "${PFR_GEN_DIR}/save_failed_screen.c"
+    "${PFR_GEN_DIR}/script_menu.c"
+    "${PFR_GEN_DIR}/seagallop.c"
+    "${PFR_GEN_DIR}/slot_machine.c"
     "${POKEFIRERED_SOURCE_DIR}/src/ss_anne.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/tileset_anims.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/trade.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/trade_scene.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/trainer_card.c"
+    "${PFR_GEN_DIR}/tileset_anims.c"
+    "${PFR_GEN_DIR}/trade.c"
+    "${PFR_GEN_DIR}/trade_scene.c"
+    "${PFR_GEN_DIR}/trainer_card.c"
     "${POKEFIRERED_SOURCE_DIR}/src/trainer_see.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/union_room_chat_display.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/union_room_chat_objects.c"
+    "${PFR_GEN_DIR}/union_room_chat_display.c"
+    "${PFR_GEN_DIR}/union_room_chat_objects.c"
     "${POKEFIRERED_SOURCE_DIR}/src/util.c"
     "${POKEFIRERED_SOURCE_DIR}/src/wireless_communication_status_screen.c"
     # Charmap-only files
     "${POKEFIRERED_SOURCE_DIR}/src/strings.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_message.c"
+    "${PFR_GEN_DIR}/battle_message.c"
     "${POKEFIRERED_SOURCE_DIR}/src/trainer_tower_sets.c"
     "${POKEFIRERED_SOURCE_DIR}/src/move_descriptions.c"
     "${POKEFIRERED_SOURCE_DIR}/src/union_room_message.c"
     "${POKEFIRERED_SOURCE_DIR}/src/berry.c"
     "${POKEFIRERED_SOURCE_DIR}/src/keyboard_text.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_main.c"
+    "${PFR_GEN_DIR}/battle_main.c"
     "${POKEFIRERED_SOURCE_DIR}/src/mystery_event_msg.c"
     # Additional charmap-only files
     "${POKEFIRERED_SOURCE_DIR}/src/battle_anim_status_effects.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_tower.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/berry_pouch.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/field_player_avatar.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/link_rfu_2.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/mailbox_pc.c"
+    "${PFR_GEN_DIR}/battle_tower.c"
+    "${PFR_GEN_DIR}/berry_pouch.c"
+    "${PFR_GEN_DIR}/field_player_avatar.c"
+    "${PFR_GEN_DIR}/link_rfu_2.c"
+    "${PFR_GEN_DIR}/mailbox_pc.c"
     "${POKEFIRERED_SOURCE_DIR}/src/mystery_gift_scripts.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/scrcmd.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/string_util.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/tm_case.c"
+    "${PFR_GEN_DIR}/scrcmd.c"
+    "${PFR_GEN_DIR}/string_util.c"
+    "${PFR_GEN_DIR}/tm_case.c"
     "${POKEFIRERED_SOURCE_DIR}/src/data.c"
     "${POKEFIRERED_SOURCE_DIR}/src/decoration.c"
     # Source files whose #included data headers contain INCBINs
     "${POKEFIRERED_SOURCE_DIR}/src/tilesets.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/event_object_movement.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/party_menu.c"
+    "${PFR_GEN_DIR}/event_object_movement.c"
+    "${PFR_GEN_DIR}/party_menu.c"
 )
 
 # Data headers that contain INCBIN macros (included by source files above).
@@ -512,7 +519,10 @@ add_library(pfr_upstream_core STATIC
     src/host_new_game_stubs.c
     src/host_oak_speech_stubs.c
     src/host_title_screen_stubs.c
-    src/upstream_stubs.c
+    "${PFR_GEN_DIR}/upstream_stubs.c"
+    # ---- GameCtx: per-instance global state ----
+    src/game_ctx.c
+    "${PFR_GEN_DIR}/game_ctx_stubs.c"
     # upstream_text_data.c excluded — all symbols provided by upstream_event_scripts.c
     src/upstream_asm_data.c
     src/upstream_sound_data.c       # auto-generated by tools/sound_data_to_c.py
@@ -526,270 +536,270 @@ add_library(pfr_upstream_core STATIC
     "${PFR_GEN_DIR}/upstream_battle_anim_tables.c"
     "${PFR_GEN_DIR}/upstream_specials_table.c"
     # ---- ALL upstream C source files (282 files) ----
-    "${POKEFIRERED_SOURCE_DIR}/src/AgbRfu_LinkManager.c"
+    "${PFR_GEN_DIR}/AgbRfu_LinkManager.c"
     # agb_flash*.c replaced by src/host_flash.c
     # bag.c excluded — compiled separately as pfr_upstream_bag (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_ai_script_commands.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_ai_switch_items.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_anim.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_anim_bug.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_anim_dark.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_anim_dragon.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_anim_effects_1.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_anim_effects_2.c"
+    "${PFR_GEN_DIR}/battle_ai_script_commands.c"
+    "${PFR_GEN_DIR}/battle_ai_switch_items.c"
+    "${PFR_GEN_DIR}/battle_anim.c"
+    "${PFR_GEN_DIR}/battle_anim_bug.c"
+    "${PFR_GEN_DIR}/battle_anim_dark.c"
+    "${PFR_GEN_DIR}/battle_anim_dragon.c"
+    "${PFR_GEN_DIR}/battle_anim_effects_1.c"
+    "${PFR_GEN_DIR}/battle_anim_effects_2.c"
     # battle_anim_effects_3.c excluded — compiled separately as pfr_upstream_battle_anim_effects_3 (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_anim_electric.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_anim_fight.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_anim_fire.c"
+    "${PFR_GEN_DIR}/battle_anim_electric.c"
+    "${PFR_GEN_DIR}/battle_anim_fight.c"
+    "${PFR_GEN_DIR}/battle_anim_fire.c"
     # battle_anim_flying.c excluded — compiled separately as pfr_upstream_battle_anim_flying (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_anim_ghost.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_anim_ground.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_anim_ice.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_anim_mon_movement.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_anim_mons.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_anim_normal.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_anim_poison.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_anim_psychic.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_anim_rock.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_anim_smokescreen.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_anim_sound_tasks.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_anim_special.c"
+    "${PFR_GEN_DIR}/battle_anim_ghost.c"
+    "${PFR_GEN_DIR}/battle_anim_ground.c"
+    "${PFR_GEN_DIR}/battle_anim_ice.c"
+    "${PFR_GEN_DIR}/battle_anim_mon_movement.c"
+    "${PFR_GEN_DIR}/battle_anim_mons.c"
+    "${PFR_GEN_DIR}/battle_anim_normal.c"
+    "${PFR_GEN_DIR}/battle_anim_poison.c"
+    "${PFR_GEN_DIR}/battle_anim_psychic.c"
+    "${PFR_GEN_DIR}/battle_anim_rock.c"
+    "${PFR_GEN_DIR}/battle_anim_smokescreen.c"
+    "${PFR_GEN_DIR}/battle_anim_sound_tasks.c"
+    "${PFR_GEN_DIR}/battle_anim_special.c"
     # battle_anim_status_effects.c — compiled from gen (charmap _() strings)
     "${PFR_GEN_DIR}/battle_anim_status_effects.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_anim_utility_funcs.c"
+    "${PFR_GEN_DIR}/battle_anim_utility_funcs.c"
     # battle_anim_water.c excluded — compiled separately as pfr_upstream_battle_anim_water (preprocessed)
     # battle_bg.c excluded — compiled separately as pfr_upstream_battle_bg (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_controller_link_opponent.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_controller_link_partner.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_controller_oak_old_man.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_controller_opponent.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_controller_player.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_controller_pokedude.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_controller_safari.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_controllers.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_gfx_sfx_util.c"
+    "${PFR_GEN_DIR}/battle_controller_link_opponent.c"
+    "${PFR_GEN_DIR}/battle_controller_link_partner.c"
+    "${PFR_GEN_DIR}/battle_controller_oak_old_man.c"
+    "${PFR_GEN_DIR}/battle_controller_opponent.c"
+    "${PFR_GEN_DIR}/battle_controller_player.c"
+    "${PFR_GEN_DIR}/battle_controller_pokedude.c"
+    "${PFR_GEN_DIR}/battle_controller_safari.c"
+    "${PFR_GEN_DIR}/battle_controllers.c"
+    "${PFR_GEN_DIR}/battle_gfx_sfx_util.c"
     # battle_interface.c excluded — compiled separately as pfr_upstream_battle_interface (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_intro.c"
+    "${PFR_GEN_DIR}/battle_intro.c"
     "${PFR_GEN_DIR}/battle_main.c"
     "${PFR_GEN_DIR}/battle_message.c"
     # battle_records.c excluded — compiled separately as pfr_upstream_battle_records (preprocessed)
     # battle_script_commands.c excluded — compiled separately as pfr_upstream_battle_script_commands (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_setup.c"
+    "${PFR_GEN_DIR}/battle_setup.c"
     # battle_tower.c — compiled from gen (charmap _() strings)
     "${PFR_GEN_DIR}/battle_tower.c"
     # battle_transition.c excluded — compiled separately as pfr_upstream_battle_transition (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_util.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/battle_util2.c"
+    "${PFR_GEN_DIR}/battle_util.c"
+    "${PFR_GEN_DIR}/battle_util2.c"
     "${PFR_GEN_DIR}/berry.c"
     # berry_crush.c excluded — compiled separately as pfr_upstream_berry_crush (preprocessed)
-    # berry_fix_program.c excluded — compiled separately as pfr_upstream_berry_fix
+    "${PFR_GEN_DIR}/berry_fix_program.c"
     # berry_pouch.c — compiled from gen (charmap _() strings)
     "${PFR_GEN_DIR}/berry_pouch.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/berry_powder.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/bg.c"
+    "${PFR_GEN_DIR}/berry_powder.c"
+    "${PFR_GEN_DIR}/bg.c"
     # bg_regs.c excluded — compiled separately as host_bg_regs.c (dynamic GBA addresses)
-    # "${POKEFIRERED_SOURCE_DIR}/src/bg_regs.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/bike.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/blend_palette.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/blit.c"
+    # "${PFR_GEN_DIR}/bg_regs.c"
+    "${PFR_GEN_DIR}/bike.c"
+    "${PFR_GEN_DIR}/blend_palette.c"
+    "${PFR_GEN_DIR}/blit.c"
     # braille_text.c excluded — compiled separately as pfr_upstream_braille_text (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/buy_menu_helpers.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/cable_car_util.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/cable_club.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/cereader_tool.c"
-    # clear_save_data_screen.c excluded — compiled separately as pfr_upstream_clear_save
-    "${POKEFIRERED_SOURCE_DIR}/src/coins.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/coord_event_weather.c"
+    "${PFR_GEN_DIR}/buy_menu_helpers.c"
+    "${PFR_GEN_DIR}/cable_car_util.c"
+    "${PFR_GEN_DIR}/cable_club.c"
+    "${PFR_GEN_DIR}/cereader_tool.c"
+    "${PFR_GEN_DIR}/clear_save_data_screen.c"
+    "${PFR_GEN_DIR}/coins.c"
+    "${PFR_GEN_DIR}/coord_event_weather.c"
     # credits.c excluded — compiled separately as pfr_upstream_credits (preprocessed)
     "${PFR_GEN_DIR}/data.c"  # preprocessed: species_names.h _() → GBA charmap
     # daycare.c excluded — compiled separately as pfr_upstream_daycare (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/decompress.c"
+    "${PFR_GEN_DIR}/decompress.c"
     "${PFR_GEN_DIR}/decoration.c"  # preprocessed: decoration description/header _() → GBA charmap
     # digit_obj_util.c excluded — compiled separately as pfr_upstream_digit_obj_util (preprocessed)
     # diploma.c excluded — compiled separately as pfr_upstream_diploma (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/dma3_manager.c"
+    "${PFR_GEN_DIR}/dma3_manager.c"
     # dodrio_berry_picking.c excluded — compiled separately as pfr_upstream_dodrio_berry_picking (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/dodrio_berry_picking_comm.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/dynamic_placeholder_text_util.c"
+    "${PFR_GEN_DIR}/dodrio_berry_picking_comm.c"
+    "${PFR_GEN_DIR}/dynamic_placeholder_text_util.c"
     # easy_chat.c excluded — compiled separately as pfr_upstream_easy_chat (preprocessed, 1000+ _() strings in data headers)
     # easy_chat_2.c excluded — compiled separately as pfr_upstream_easy_chat_2 (preprocessed)
     # easy_chat_3.c excluded — compiled separately as pfr_upstream_easy_chat_3 (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/ereader_helpers.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/ereader_screen.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/event_data.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/event_object_lock.c"
+    "${PFR_GEN_DIR}/ereader_helpers.c"
+    "${PFR_GEN_DIR}/ereader_screen.c"
+    "${PFR_GEN_DIR}/event_data.c"
+    "${PFR_GEN_DIR}/event_object_lock.c"
     # event_object_movement.c excluded — compiled separately as pfr_upstream_event_object_movement (preprocessed, data headers with INCBINs)
     # evolution_graphics.c excluded — compiled separately as pfr_upstream_evolution_graphics (preprocessed)
     # evolution_scene.c excluded — compiled separately as pfr_upstream_evolution_scene (preprocessed)
     # fame_checker.c excluded — compiled separately as pfr_upstream_fame_checker (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/field_camera.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/field_control_avatar.c"
+    "${PFR_GEN_DIR}/field_camera.c"
+    "${PFR_GEN_DIR}/field_control_avatar.c"
     # field_door.c excluded — compiled separately as pfr_upstream_field_door (preprocessed)
     # field_effect.c excluded — compiled separately as pfr_upstream_field_effect (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/field_effect_helpers.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/field_fadetransition.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/field_message_box.c"
+    "${PFR_GEN_DIR}/field_effect_helpers.c"
+    "${PFR_GEN_DIR}/field_fadetransition.c"
+    "${PFR_GEN_DIR}/field_message_box.c"
     # field_player_avatar.c — compiled from gen (charmap _() strings)
     "${PFR_GEN_DIR}/field_player_avatar.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/field_poison.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/field_screen_effect.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/field_special_scene.c"
+    "${PFR_GEN_DIR}/field_poison.c"
+    "${PFR_GEN_DIR}/field_screen_effect.c"
+    "${PFR_GEN_DIR}/field_special_scene.c"
     # field_specials.c excluded — compiled separately as pfr_upstream_field_specials (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/field_tasks.c"
+    "${PFR_GEN_DIR}/field_tasks.c"
     # field_weather.c excluded — compiled separately as pfr_upstream_field_weather (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/field_weather_effects.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/field_weather_util.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/fieldmap.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/fldeff_berrytree.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/fldeff_cut.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/fldeff_dig.c"
+    "${PFR_GEN_DIR}/field_weather_effects.c"
+    "${PFR_GEN_DIR}/field_weather_util.c"
+    "${PFR_GEN_DIR}/fieldmap.c"
+    "${PFR_GEN_DIR}/fldeff_berrytree.c"
+    "${PFR_GEN_DIR}/fldeff_cut.c"
+    "${PFR_GEN_DIR}/fldeff_dig.c"
     # fldeff_flash.c excluded — compiled separately as pfr_upstream_fldeff_flash (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/fldeff_poison.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/fldeff_rocksmash.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/fldeff_softboiled.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/fldeff_strength.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/fldeff_sweetscent.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/fldeff_teleport.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/gpu_regs.c"
+    "${PFR_GEN_DIR}/fldeff_poison.c"
+    "${PFR_GEN_DIR}/fldeff_rocksmash.c"
+    "${PFR_GEN_DIR}/fldeff_softboiled.c"
+    "${PFR_GEN_DIR}/fldeff_strength.c"
+    "${PFR_GEN_DIR}/fldeff_sweetscent.c"
+    "${PFR_GEN_DIR}/fldeff_teleport.c"
+    "${PFR_GEN_DIR}/gpu_regs.c"
     # graphics.c excluded — compiled separately as pfr_upstream_graphics (preprocessed)
     # hall_of_fame.c excluded — compiled separately as pfr_upstream_hall_of_fame (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/heal_location.c"
+    "${PFR_GEN_DIR}/heal_location.c"
     # help_message.c excluded — compiled separately as pfr_upstream_help_message (preprocessed)
     # help_system.c excluded — compiled separately as pfr_upstream_help_system (preprocessed)
     # help_system_util.c excluded — compiled separately as pfr_upstream_help_system_util (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/hof_pc.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/image_processing_effects.c"
+    "${PFR_GEN_DIR}/hof_pc.c"
+    "${PFR_GEN_DIR}/image_processing_effects.c"
     # intro.c excluded — compiled separately as pfr_upstream_intro (preprocessed)
     # isagbprn.c excluded — host_debug.c provides native debug print implementations
     # item.c includes data/items.h, so compile the generated copy to ensure
     # quoted includes resolve into build/generated_include after charmap pass.
     "${PFR_GEN_DIR}/item.c"
     # item_menu.c excluded — compiled separately as pfr_upstream_item_menu (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/item_menu_icons.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/item_pc.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/item_use.c"
+    "${PFR_GEN_DIR}/item_menu_icons.c"
+    "${PFR_GEN_DIR}/item_pc.c"
+    "${PFR_GEN_DIR}/item_use.c"
     # itemfinder.c excluded — compiled separately as pfr_upstream_itemfinder (preprocessed)
     "${PFR_GEN_DIR}/keyboard_text.c"
     # learn_move.c excluded — compiled separately as pfr_upstream_learn_move (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/librfu_intr.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/librfu_rfu.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/librfu_sio32id.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/librfu_stwi.c"
+    "${PFR_GEN_DIR}/librfu_intr.c"
+    "${PFR_GEN_DIR}/librfu_rfu.c"
+    "${PFR_GEN_DIR}/librfu_sio32id.c"
+    "${PFR_GEN_DIR}/librfu_stwi.c"
     # link.c excluded — compiled separately as pfr_upstream_link (preprocessed)
     # link_rfu_2.c — compiled from gen (charmap _() strings)
     "${PFR_GEN_DIR}/link_rfu_2.c"
     # link_rfu_3.c excluded — compiled separately as pfr_upstream_link_rfu_3 (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/list_menu.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/load_save.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/m4a.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/m4a_tables.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/mail.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/mail_data.c"
+    "${PFR_GEN_DIR}/list_menu.c"
+    "${PFR_GEN_DIR}/load_save.c"
+    "${PFR_GEN_DIR}/m4a.c"
+    "${PFR_GEN_DIR}/m4a_tables.c"
+    "${PFR_GEN_DIR}/mail.c"
+    "${PFR_GEN_DIR}/mail_data.c"
     # mailbox_pc.c — compiled from gen (charmap _() strings)
     "${PFR_GEN_DIR}/mailbox_pc.c"
-    # main.c excluded — compiled separately as pfr_upstream_runtime
+    "${PFR_GEN_DIR}/main.c"
     # main_menu.c excluded — compiled separately as pfr_upstream_main_menu (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/malloc.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/map_name_popup.c"
+    "${PFR_GEN_DIR}/malloc.c"
+    "${PFR_GEN_DIR}/map_name_popup.c"
     # map_preview_screen.c excluded — compiled separately as pfr_upstream_map_preview_screen (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/math_util.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/menu.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/menu2.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/menu_helpers.c"
+    "${PFR_GEN_DIR}/math_util.c"
+    "${PFR_GEN_DIR}/menu.c"
+    "${PFR_GEN_DIR}/menu2.c"
+    "${PFR_GEN_DIR}/menu_helpers.c"
     # menu_indicators.c excluded — compiled separately as pfr_upstream_menu_indicators (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/metatile_behavior.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/mini_printf.c"
+    "${PFR_GEN_DIR}/metatile_behavior.c"
+    "${PFR_GEN_DIR}/mini_printf.c"
     # minigame_countdown.c excluded — compiled separately as pfr_upstream_minigame_countdown (preprocessed)
     # mon_markings.c excluded — compiled separately as pfr_upstream_mon_markings (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/money.c"
+    "${PFR_GEN_DIR}/money.c"
     "${PFR_GEN_DIR}/move_descriptions.c"
     # multiboot.c excluded — stubs in host_intro_stubs.c / host_title_screen_stubs.c
     "${PFR_GEN_DIR}/mystery_event_msg.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/mystery_event_script.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/mystery_gift.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/mystery_gift_client.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/mystery_gift_link.c"
+    "${PFR_GEN_DIR}/mystery_event_script.c"
+    "${PFR_GEN_DIR}/mystery_gift.c"
+    "${PFR_GEN_DIR}/mystery_gift_client.c"
+    "${PFR_GEN_DIR}/mystery_gift_link.c"
     # mystery_gift_menu.c excluded — compiled separately as pfr_upstream_mystery_gift_menu (preprocessed)
     # mystery_gift_scripts.c — compiled from gen (charmap _() strings)
     "${PFR_GEN_DIR}/mystery_gift_scripts.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/mystery_gift_server.c"
+    "${PFR_GEN_DIR}/mystery_gift_server.c"
     # mystery_gift_show_card.c excluded — compiled separately as pfr_upstream_mystery_gift_show_card (preprocessed)
     # mystery_gift_show_news.c excluded — compiled separately as pfr_upstream_mystery_gift_show_news (preprocessed)
     # naming_screen.c excluded — compiled separately as pfr_upstream_naming_screen (preprocessed)
-    # new_game.c excluded — compiled separately as pfr_upstream_new_game (with renames)
+    "${PFR_GEN_DIR}/new_game.c"
     # new_menu_helpers.c excluded — compiled separately as pfr_upstream_new_menu_helpers (preprocessed)
     # oak_speech.c excluded — compiled separately as pfr_upstream_oak_speech (preprocessed, with rename)
     # option_menu.c excluded — compiled separately as pfr_upstream_option_menu (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/overworld.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/palette.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/palette_util.c"
+    "${PFR_GEN_DIR}/overworld.c"
+    "${PFR_GEN_DIR}/palette.c"
+    "${PFR_GEN_DIR}/palette_util.c"
     # party_menu.c excluded — compiled separately as pfr_upstream_party_menu (preprocessed, data headers with INCBINs)
-    "${POKEFIRERED_SOURCE_DIR}/src/party_menu_specials.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/pc_screen_effect.c"
-    # play_time.c excluded — compiled separately as pfr_upstream_play_time (with rename)
-    "${POKEFIRERED_SOURCE_DIR}/src/player_pc.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/pokeball.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/pokedex.c"
+    "${PFR_GEN_DIR}/party_menu_specials.c"
+    "${PFR_GEN_DIR}/pc_screen_effect.c"
+    "${PFR_GEN_DIR}/play_time.c"
+    "${PFR_GEN_DIR}/player_pc.c"
+    "${PFR_GEN_DIR}/pokeball.c"
+    "${PFR_GEN_DIR}/pokedex.c"
     # pokedex_area_markers.c excluded — compiled separately as pfr_upstream_pokedex_area_markers (preprocessed)
     # pokedex_screen.c excluded — compiled separately as pfr_upstream_pokedex_screen (preprocessed)
     # pokemon.c excluded — compiled separately as pfr_upstream_pokemon (preprocessed)
     # pokemon_icon.c excluded — compiled separately as pfr_upstream_pokemon_icon (preprocessed)
     # pokemon_jump.c excluded — compiled separately as pfr_upstream_pokemon_jump (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/pokemon_size_record.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/pokemon_special_anim.c"
+    "${PFR_GEN_DIR}/pokemon_size_record.c"
+    "${PFR_GEN_DIR}/pokemon_special_anim.c"
     # pokemon_special_anim_scene.c excluded — compiled separately as pfr_upstream_pokemon_special_anim_scene (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/pokemon_storage_system.c"
+    "${PFR_GEN_DIR}/pokemon_storage_system.c"
     # pokemon_storage_system_data.c excluded — compiled separately as pfr_upstream_pokemon_storage_system_data (preprocessed)
     # pokemon_storage_system_graphics.c excluded — compiled separately as pfr_upstream_pokemon_storage_system_graphics (preprocessed)
     # pokemon_storage_system_menu.c excluded — compiled separately as pfr_upstream_pokemon_storage_system_menu (preprocessed)
     # pokemon_storage_system_misc.c excluded — compiled separately as pfr_upstream_pokemon_storage_system_misc (preprocessed)
     # pokemon_storage_system_tasks.c excluded — compiled separately as pfr_upstream_pokemon_storage_system_tasks (preprocessed)
     # pokemon_summary_screen.c excluded — compiled separately as pfr_upstream_pokemon_summary_screen (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/post_battle_event_funcs.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/prof_pc.c"
+    "${PFR_GEN_DIR}/post_battle_event_funcs.c"
+    "${PFR_GEN_DIR}/prof_pc.c"
     # quest_log.c excluded — compiled separately as pfr_upstream_quest_log (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/quest_log_battle.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/quest_log_events.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/quest_log_objects.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/quest_log_player.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/random.c"
+    "${PFR_GEN_DIR}/quest_log_battle.c"
+    "${PFR_GEN_DIR}/quest_log_events.c"
+    "${PFR_GEN_DIR}/quest_log_objects.c"
+    "${PFR_GEN_DIR}/quest_log_player.c"
+    "${PFR_GEN_DIR}/random.c"
     # region_map.c excluded — compiled separately as pfr_upstream_region_map (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/renewable_hidden_items.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/reset_save_heap.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/reshow_battle_screen.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/roamer.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/rom_header_gf.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/safari_zone.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/save.c"
+    "${PFR_GEN_DIR}/renewable_hidden_items.c"
+    "${PFR_GEN_DIR}/reset_save_heap.c"
+    "${PFR_GEN_DIR}/reshow_battle_screen.c"
+    "${PFR_GEN_DIR}/roamer.c"
+    "${PFR_GEN_DIR}/rom_header_gf.c"
+    "${PFR_GEN_DIR}/safari_zone.c"
+    "${PFR_GEN_DIR}/save.c"
     # save_failed_screen.c excluded — compiled separately as pfr_upstream_save_failed_screen (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/save_location.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/save_menu_util.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/scanline_effect.c"
+    "${PFR_GEN_DIR}/save_location.c"
+    "${PFR_GEN_DIR}/save_menu_util.c"
+    "${PFR_GEN_DIR}/scanline_effect.c"
     # scrcmd.c — compiled from gen (charmap _() strings)
     "${PFR_GEN_DIR}/scrcmd.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/script.c"
+    "${PFR_GEN_DIR}/script.c"
     # script_menu.c excluded — compiled separately as pfr_upstream_script_menu (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/script_movement.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/script_pokemon_util.c"
+    "${PFR_GEN_DIR}/script_movement.c"
+    "${PFR_GEN_DIR}/script_pokemon_util.c"
     # seagallop.c excluded — compiled separately as pfr_upstream_seagallop (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/shop.c"
+    "${PFR_GEN_DIR}/shop.c"
     # slot_machine.c excluded — compiled separately as pfr_upstream_slot_machine (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/sound.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/special_field_anim.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/sprite.c"
+    "${PFR_GEN_DIR}/sound.c"
+    "${PFR_GEN_DIR}/special_field_anim.c"
+    "${PFR_GEN_DIR}/sprite.c"
     # ss_anne.c excluded — compiled separately as pfr_upstream_ss_anne (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/start_menu.c"
+    "${PFR_GEN_DIR}/start_menu.c"
     # string_util.c — compiled from gen (charmap __() strings)
     "${PFR_GEN_DIR}/string_util.c"
     # strings.c — compiled from gen (charmap-processed _() strings)
     "${PFR_GEN_DIR}/strings.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/task.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/teachy_tv.c"
+    "${PFR_GEN_DIR}/task.c"
+    "${PFR_GEN_DIR}/teachy_tv.c"
     # text.c excluded — compiled separately as pfr_upstream_text (preprocessed)
-    # text_printer.c excluded — compiled separately as pfr_upstream_text_printer
-    # text_window.c excluded — compiled separately as pfr_upstream_text_window
+    "${PFR_GEN_DIR}/text_printer.c"
+    "${PFR_GEN_DIR}/text_window.c"
     # text_window_graphics.c excluded — compiled separately as pfr_upstream_text_window_graphics (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/tilemap_util.c"
+    "${PFR_GEN_DIR}/tilemap_util.c"
     # tileset_anims.c excluded — compiled separately as pfr_upstream_tileset_anims (preprocessed)
     # tilesets.c excluded — compiled separately as pfr_upstream_tilesets (preprocessed, data headers with INCBINs)
     # title_screen.c excluded — compiled separately as pfr_upstream_title (preprocessed)
@@ -798,27 +808,27 @@ add_library(pfr_upstream_core STATIC
     # trade.c excluded — compiled separately as pfr_upstream_trade (preprocessed)
     # trade_scene.c excluded — compiled separately as pfr_upstream_trade_scene (preprocessed)
     # trainer_card.c excluded — compiled separately as pfr_upstream_trainer_card (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/trainer_fan_club.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/trainer_pokemon_sprites.c"
+    "${PFR_GEN_DIR}/trainer_fan_club.c"
+    "${PFR_GEN_DIR}/trainer_pokemon_sprites.c"
     # trainer_see.c excluded — compiled separately as pfr_upstream_trainer_see (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/trainer_tower.c"
+    "${PFR_GEN_DIR}/trainer_tower.c"
     "${PFR_GEN_DIR}/trainer_tower_sets.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/trig.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/union_room.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/union_room_battle.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/union_room_chat.c"
+    "${PFR_GEN_DIR}/trig.c"
+    "${PFR_GEN_DIR}/union_room.c"
+    "${PFR_GEN_DIR}/union_room_battle.c"
+    "${PFR_GEN_DIR}/union_room_chat.c"
     # union_room_chat_display.c excluded — compiled separately as pfr_upstream_union_room_chat_display (preprocessed)
     # union_room_chat_objects.c excluded — compiled separately as pfr_upstream_union_room_chat_objects (preprocessed)
     "${PFR_GEN_DIR}/union_room_message.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/union_room_player_avatar.c"
+    "${PFR_GEN_DIR}/union_room_player_avatar.c"
     # util.c excluded — compiled separately as pfr_upstream_util (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/vs_seeker.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/wild_encounter.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/wild_pokemon_area.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/window.c"
-    "${POKEFIRERED_SOURCE_DIR}/src/window_8bpp.c"
+    "${PFR_GEN_DIR}/vs_seeker.c"
+    "${PFR_GEN_DIR}/wild_encounter.c"
+    "${PFR_GEN_DIR}/wild_pokemon_area.c"
+    "${PFR_GEN_DIR}/window.c"
+    "${PFR_GEN_DIR}/window_8bpp.c"
     # wireless_communication_status_screen.c excluded — compiled separately as pfr_upstream_wireless_communication_status_screen (preprocessed)
-    "${POKEFIRERED_SOURCE_DIR}/src/wonder_news.c"
+    "${PFR_GEN_DIR}/wonder_news.c"
 )
 
 set_target_properties(pfr_upstream_core PROPERTIES POSITION_INDEPENDENT_CODE ON)
@@ -835,6 +845,7 @@ target_compile_options(pfr_upstream_core PRIVATE
     # is set before any upstream #include "global.h" resolves via -iquote.
     # This fixes librfu_*.c which start with #include "librfu.h" (not "global.h").
     "-include${CMAKE_CURRENT_SOURCE_DIR}/src/host_include/force_host_global.h"
+    ${PFR_GAMECTX_INCLUDES}
     "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
     "-iquote${PFR_INC_DIR}"
     "-iquote${PFR_GEN_DIR}"
@@ -854,6 +865,13 @@ add_dependencies(pfr_upstream_core
     pfr_asset_pipeline
     pfr_generated_upstream_native_data
 )
+# Per-file compile definitions for sources merged from former OBJECT targets
+set_source_files_properties("${PFR_GEN_DIR}/new_game.c" PROPERTIES
+    COMPILE_DEFINITIONS "ResetMenuAndMonGlobals=UpstreamResetMenuAndMonGlobals;Sav2_ClearSetDefault=UpstreamSav2_ClearSetDefault"
+)
+set_source_files_properties("${PFR_GEN_DIR}/play_time.c" PROPERTIES
+    COMPILE_DEFINITIONS "PlayTimeCounter_Update=UpstreamPlayTimeCounter_Update"
+)
 
 # SDL2 display backend (optional — falls back to PPM frame dump if unavailable)
 find_package(PkgConfig QUIET)
@@ -872,30 +890,6 @@ endif()
 
 target_link_libraries(pfr_upstream_core PRIVATE m)
 
-add_library(pfr_upstream_runtime OBJECT
-    "${POKEFIRERED_SOURCE_DIR}/src/main.c"
-)
-target_compile_definitions(pfr_upstream_runtime PRIVATE
-    MODERN=0
-    REVISION=0
-    FIRERED
-    ENGLISH
-)
-target_compile_options(pfr_upstream_runtime PRIVATE
-    # # -fno-pie  # removed for PIC/shared lib compat
-    -ffunction-sections
-    -fdata-sections
-    -Wno-int-conversion
-    -Wno-int-to-pointer-cast
-    -Wno-pointer-to-int-cast
-    "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
-    "-iquote${PFR_GEN_HEADERS_DIR}"
-    "-iquote${POKEFIRERED_SOURCE_DIR}/include"
-)
-target_include_directories(pfr_upstream_runtime PUBLIC
-    "${CMAKE_CURRENT_SOURCE_DIR}/src"
-)
-
 add_library(pfr_upstream_intro OBJECT
     "${PFR_GEN_DIR}/intro.c"
 )
@@ -910,6 +904,7 @@ target_compile_options(pfr_upstream_intro PRIVATE
     "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
     "-iquote${PFR_GEN_HEADERS_DIR}"
     "-iquote${POKEFIRERED_SOURCE_DIR}/include"
+    ${PFR_GAMECTX_INCLUDES}
 )
 target_include_directories(pfr_upstream_intro PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
@@ -929,46 +924,9 @@ target_compile_options(pfr_upstream_title PRIVATE
     "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
     "-iquote${PFR_GEN_HEADERS_DIR}"
     "-iquote${POKEFIRERED_SOURCE_DIR}/include"
+    ${PFR_GAMECTX_INCLUDES}
 )
 target_include_directories(pfr_upstream_title PUBLIC
-    "${CMAKE_CURRENT_SOURCE_DIR}/src"
-)
-
-add_library(pfr_upstream_clear_save OBJECT
-    "${POKEFIRERED_SOURCE_DIR}/src/clear_save_data_screen.c"
-)
-target_compile_definitions(pfr_upstream_clear_save PRIVATE ${PFR_COMMON_DEFINES})
-target_compile_options(pfr_upstream_clear_save PRIVATE
-    # # -fno-pie  # removed for PIC compat
-    -ffunction-sections
-    -fdata-sections
-    -Wno-int-conversion
-    -Wno-int-to-pointer-cast
-    -Wno-pointer-to-int-cast
-    "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
-    "-iquote${PFR_GEN_HEADERS_DIR}"
-    "-iquote${POKEFIRERED_SOURCE_DIR}/include"
-)
-target_include_directories(pfr_upstream_clear_save PUBLIC
-    "${CMAKE_CURRENT_SOURCE_DIR}/src"
-)
-
-add_library(pfr_upstream_berry_fix OBJECT
-    "${POKEFIRERED_SOURCE_DIR}/src/berry_fix_program.c"
-)
-target_compile_definitions(pfr_upstream_berry_fix PRIVATE ${PFR_COMMON_DEFINES})
-target_compile_options(pfr_upstream_berry_fix PRIVATE
-    # # -fno-pie  # removed for PIC compat
-    -ffunction-sections
-    -fdata-sections
-    -Wno-int-conversion
-    -Wno-int-to-pointer-cast
-    -Wno-pointer-to-int-cast
-    "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
-    "-iquote${PFR_GEN_HEADERS_DIR}"
-    "-iquote${POKEFIRERED_SOURCE_DIR}/include"
-)
-target_include_directories(pfr_upstream_berry_fix PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
 )
 
@@ -989,54 +947,9 @@ target_compile_options(pfr_upstream_oak_speech PRIVATE
     "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
     "-iquote${PFR_GEN_HEADERS_DIR}"
     "-iquote${POKEFIRERED_SOURCE_DIR}/include"
+    ${PFR_GAMECTX_INCLUDES}
 )
 target_include_directories(pfr_upstream_oak_speech PUBLIC
-    "${CMAKE_CURRENT_SOURCE_DIR}/src"
-)
-
-add_library(pfr_upstream_new_game OBJECT
-    "${POKEFIRERED_SOURCE_DIR}/src/new_game.c"
-)
-target_compile_definitions(pfr_upstream_new_game PRIVATE
-    ${PFR_COMMON_DEFINES}
-    ResetMenuAndMonGlobals=UpstreamResetMenuAndMonGlobals
-    Sav2_ClearSetDefault=UpstreamSav2_ClearSetDefault
-)
-target_compile_options(pfr_upstream_new_game PRIVATE
-    # # -fno-pie  # removed for PIC compat
-    -ffunction-sections
-    -fdata-sections
-    -Wno-int-conversion
-    -Wno-int-to-pointer-cast
-    -Wno-pointer-to-int-cast
-    "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
-    "-iquote${PFR_GEN_HEADERS_DIR}"
-    "-iquote${POKEFIRERED_SOURCE_DIR}/include"
-)
-target_include_directories(pfr_upstream_new_game PUBLIC
-    "${CMAKE_CURRENT_SOURCE_DIR}/src"
-)
-add_dependencies(pfr_upstream_new_game pfr_generated_headers)
-
-add_library(pfr_upstream_play_time OBJECT
-    "${POKEFIRERED_SOURCE_DIR}/src/play_time.c"
-)
-target_compile_definitions(pfr_upstream_play_time PRIVATE
-    ${PFR_COMMON_DEFINES}
-    PlayTimeCounter_Update=UpstreamPlayTimeCounter_Update
-)
-target_compile_options(pfr_upstream_play_time PRIVATE
-    # # -fno-pie  # removed for PIC compat
-    -ffunction-sections
-    -fdata-sections
-    -Wno-int-conversion
-    -Wno-int-to-pointer-cast
-    -Wno-pointer-to-int-cast
-    "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
-    "-iquote${PFR_GEN_HEADERS_DIR}"
-    "-iquote${POKEFIRERED_SOURCE_DIR}/include"
-)
-target_include_directories(pfr_upstream_play_time PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
 )
 
@@ -1051,6 +964,7 @@ set(PFR_UPSTREAM_PREPROC_OPTIONS
     -Wno-pointer-to-int-cast
     # Force-include host global.h (same rationale as pfr_upstream_core above)
     "-include${CMAKE_CURRENT_SOURCE_DIR}/src/host_include/force_host_global.h"
+    ${PFR_GAMECTX_INCLUDES}
     "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
     "-iquote${PFR_GEN_HEADERS_DIR}"
     "-iquote${POKEFIRERED_SOURCE_DIR}/include"
@@ -1083,31 +997,12 @@ target_include_directories(pfr_upstream_text PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
 )
 
-add_library(pfr_upstream_text_window OBJECT
-    "${POKEFIRERED_SOURCE_DIR}/src/text_window.c"
-)
-target_compile_definitions(pfr_upstream_text_window PRIVATE ${PFR_COMMON_DEFINES})
-target_compile_options(pfr_upstream_text_window PRIVATE ${PFR_UPSTREAM_PREPROC_OPTIONS})
-target_include_directories(pfr_upstream_text_window PUBLIC
-    "${CMAKE_CURRENT_SOURCE_DIR}/src"
-)
-
 add_library(pfr_upstream_new_menu_helpers OBJECT
     "${PFR_GEN_DIR}/new_menu_helpers.c"
 )
 target_compile_definitions(pfr_upstream_new_menu_helpers PRIVATE ${PFR_COMMON_DEFINES})
 target_compile_options(pfr_upstream_new_menu_helpers PRIVATE ${PFR_UPSTREAM_PREPROC_OPTIONS})
 target_include_directories(pfr_upstream_new_menu_helpers PUBLIC
-    "${CMAKE_CURRENT_SOURCE_DIR}/src"
-)
-
-# text_printer.c provides SetFontsPointer, AddTextPrinter*, RunTextPrinters, etc.
-add_library(pfr_upstream_text_printer OBJECT
-    "${POKEFIRERED_SOURCE_DIR}/src/text_printer.c"
-)
-target_compile_definitions(pfr_upstream_text_printer PRIVATE ${PFR_COMMON_DEFINES})
-target_compile_options(pfr_upstream_text_printer PRIVATE ${PFR_UPSTREAM_PREPROC_OPTIONS})
-target_include_directories(pfr_upstream_text_printer PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
 )
 
@@ -1974,18 +1869,11 @@ target_sources(pfr_smoke PRIVATE
     src/host_savestate.c
     $<TARGET_OBJECTS:pfr_upstream_intro>
     $<TARGET_OBJECTS:pfr_upstream_title>
-    $<TARGET_OBJECTS:pfr_upstream_clear_save>
-    $<TARGET_OBJECTS:pfr_upstream_berry_fix>
     $<TARGET_OBJECTS:pfr_upstream_main_menu>
     $<TARGET_OBJECTS:pfr_upstream_oak_speech>
-    $<TARGET_OBJECTS:pfr_upstream_new_game>
-    $<TARGET_OBJECTS:pfr_upstream_play_time>
     $<TARGET_OBJECTS:pfr_upstream_text_window_graphics>
     $<TARGET_OBJECTS:pfr_upstream_text>
-    $<TARGET_OBJECTS:pfr_upstream_text_window>
     $<TARGET_OBJECTS:pfr_upstream_new_menu_helpers>
-    $<TARGET_OBJECTS:pfr_upstream_text_printer>
-    $<TARGET_OBJECTS:pfr_upstream_runtime>
     $<TARGET_OBJECTS:pfr_upstream_graphics>
     $<TARGET_OBJECTS:pfr_upstream_bag>
     $<TARGET_OBJECTS:pfr_upstream_battle_anim_effects_3>
@@ -2078,8 +1966,119 @@ target_compile_options(pfr_smoke PRIVATE
 target_link_options(pfr_smoke PRIVATE
     -no-pie
     -Wl,--gc-sections
+    -Wl,-z,relro,-z,now
 )
 target_link_libraries(pfr_smoke PRIVATE pfr_upstream_core Threads::Threads m)
+
+# ── pfr_env_smoke — RL environment ground truth verification ──
+add_executable(pfr_env_smoke
+    tests/pfr_env_smoke.c
+    src/pfr_env.c
+    src/pfr_game_api.c
+    src/host_agbmain.c
+    src/host_savestate.c
+)
+target_sources(pfr_env_smoke PRIVATE
+    $<TARGET_OBJECTS:pfr_upstream_intro>
+    $<TARGET_OBJECTS:pfr_upstream_title>
+    $<TARGET_OBJECTS:pfr_upstream_main_menu>
+    $<TARGET_OBJECTS:pfr_upstream_oak_speech>
+    $<TARGET_OBJECTS:pfr_upstream_text_window_graphics>
+    $<TARGET_OBJECTS:pfr_upstream_text>
+    $<TARGET_OBJECTS:pfr_upstream_new_menu_helpers>
+    $<TARGET_OBJECTS:pfr_upstream_graphics>
+    $<TARGET_OBJECTS:pfr_upstream_bag>
+    $<TARGET_OBJECTS:pfr_upstream_battle_anim_effects_3>
+    $<TARGET_OBJECTS:pfr_upstream_battle_anim_flying>
+    $<TARGET_OBJECTS:pfr_upstream_battle_anim_water>
+    $<TARGET_OBJECTS:pfr_upstream_battle_bg>
+    $<TARGET_OBJECTS:pfr_upstream_battle_interface>
+    $<TARGET_OBJECTS:pfr_upstream_battle_records>
+    $<TARGET_OBJECTS:pfr_upstream_battle_script_commands>
+    $<TARGET_OBJECTS:pfr_upstream_battle_transition>
+    $<TARGET_OBJECTS:pfr_upstream_berry_crush>
+    $<TARGET_OBJECTS:pfr_upstream_braille_text>
+    $<TARGET_OBJECTS:pfr_upstream_credits>
+    $<TARGET_OBJECTS:pfr_upstream_daycare>
+    $<TARGET_OBJECTS:pfr_upstream_digit_obj_util>
+    $<TARGET_OBJECTS:pfr_upstream_diploma>
+    $<TARGET_OBJECTS:pfr_upstream_dodrio_berry_picking>
+    $<TARGET_OBJECTS:pfr_upstream_easy_chat>
+    $<TARGET_OBJECTS:pfr_upstream_easy_chat_2>
+    $<TARGET_OBJECTS:pfr_upstream_easy_chat_3>
+    $<TARGET_OBJECTS:pfr_upstream_evolution_graphics>
+    $<TARGET_OBJECTS:pfr_upstream_evolution_scene>
+    $<TARGET_OBJECTS:pfr_upstream_fame_checker>
+    $<TARGET_OBJECTS:pfr_upstream_field_door>
+    $<TARGET_OBJECTS:pfr_upstream_field_effect>
+    $<TARGET_OBJECTS:pfr_upstream_field_specials>
+    $<TARGET_OBJECTS:pfr_upstream_field_weather>
+    $<TARGET_OBJECTS:pfr_upstream_fldeff_flash>
+    $<TARGET_OBJECTS:pfr_upstream_hall_of_fame>
+    $<TARGET_OBJECTS:pfr_upstream_help_message>
+    $<TARGET_OBJECTS:pfr_upstream_help_system>
+    $<TARGET_OBJECTS:pfr_upstream_help_system_util>
+    $<TARGET_OBJECTS:pfr_upstream_item_menu>
+    $<TARGET_OBJECTS:pfr_upstream_itemfinder>
+    $<TARGET_OBJECTS:pfr_upstream_learn_move>
+    $<TARGET_OBJECTS:pfr_upstream_link>
+    $<TARGET_OBJECTS:pfr_upstream_link_rfu_3>
+    $<TARGET_OBJECTS:pfr_upstream_map_preview_screen>
+    $<TARGET_OBJECTS:pfr_upstream_menu_indicators>
+    $<TARGET_OBJECTS:pfr_upstream_minigame_countdown>
+    $<TARGET_OBJECTS:pfr_upstream_mon_markings>
+    $<TARGET_OBJECTS:pfr_upstream_mystery_gift_menu>
+    $<TARGET_OBJECTS:pfr_upstream_mystery_gift_show_card>
+    $<TARGET_OBJECTS:pfr_upstream_mystery_gift_show_news>
+    $<TARGET_OBJECTS:pfr_upstream_naming_screen>
+    $<TARGET_OBJECTS:pfr_upstream_option_menu>
+    $<TARGET_OBJECTS:pfr_upstream_pokedex_area_markers>
+    $<TARGET_OBJECTS:pfr_upstream_pokedex_screen>
+    $<TARGET_OBJECTS:pfr_upstream_pokemon>
+    $<TARGET_OBJECTS:pfr_upstream_pokemon_icon>
+    $<TARGET_OBJECTS:pfr_upstream_pokemon_jump>
+    $<TARGET_OBJECTS:pfr_upstream_pokemon_special_anim_scene>
+    $<TARGET_OBJECTS:pfr_upstream_pokemon_storage_system_data>
+    $<TARGET_OBJECTS:pfr_upstream_pokemon_storage_system_graphics>
+    $<TARGET_OBJECTS:pfr_upstream_pokemon_storage_system_menu>
+    $<TARGET_OBJECTS:pfr_upstream_pokemon_storage_system_misc>
+    $<TARGET_OBJECTS:pfr_upstream_pokemon_storage_system_tasks>
+    $<TARGET_OBJECTS:pfr_upstream_pokemon_summary_screen>
+    $<TARGET_OBJECTS:pfr_upstream_quest_log>
+    $<TARGET_OBJECTS:pfr_upstream_region_map>
+    $<TARGET_OBJECTS:pfr_upstream_save_failed_screen>
+    $<TARGET_OBJECTS:pfr_upstream_script_menu>
+    $<TARGET_OBJECTS:pfr_upstream_seagallop>
+    $<TARGET_OBJECTS:pfr_upstream_slot_machine>
+    $<TARGET_OBJECTS:pfr_upstream_ss_anne>
+    $<TARGET_OBJECTS:pfr_upstream_tileset_anims>
+    $<TARGET_OBJECTS:pfr_upstream_trade>
+    $<TARGET_OBJECTS:pfr_upstream_trade_scene>
+    $<TARGET_OBJECTS:pfr_upstream_trainer_card>
+    $<TARGET_OBJECTS:pfr_upstream_trainer_see>
+    $<TARGET_OBJECTS:pfr_upstream_union_room_chat_display>
+    $<TARGET_OBJECTS:pfr_upstream_union_room_chat_objects>
+    $<TARGET_OBJECTS:pfr_upstream_util>
+    $<TARGET_OBJECTS:pfr_upstream_wireless_communication_status_screen>
+    $<TARGET_OBJECTS:pfr_upstream_tilesets>
+    $<TARGET_OBJECTS:pfr_upstream_event_object_movement>
+    $<TARGET_OBJECTS:pfr_upstream_party_menu>
+)
+target_compile_definitions(pfr_env_smoke PRIVATE ${PFR_COMMON_DEFINES})
+target_compile_options(pfr_env_smoke PRIVATE
+    "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
+    "-iquote${PFR_GEN_HEADERS_DIR}"
+    "-iquote${POKEFIRERED_SOURCE_DIR}/include"
+    "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src"
+    -Wno-int-to-pointer-cast
+    -Wno-pointer-to-int-cast
+)
+target_link_options(pfr_env_smoke PRIVATE
+    -no-pie
+    -Wl,--gc-sections
+    -Wl,-z,relro,-z,now
+)
+target_link_libraries(pfr_env_smoke PRIVATE pfr_upstream_core Threads::Threads m dl)
 
 add_executable(pfr_lz77 tools/pfr_lz77.c)
 target_compile_definitions(pfr_lz77 PRIVATE ${PFR_COMMON_DEFINES})
@@ -2095,6 +2094,7 @@ target_compile_options(pfr_lz77 PRIVATE
 target_link_options(pfr_lz77 PRIVATE
     -no-pie
     -Wl,--gc-sections
+    -Wl,-z,relro,-z,now
 )
 target_link_libraries(pfr_lz77 PRIVATE pfr_upstream_core m)
 
@@ -2105,18 +2105,11 @@ target_sources(pfr_render_test PRIVATE
     src/host_savestate.c
     $<TARGET_OBJECTS:pfr_upstream_intro>
     $<TARGET_OBJECTS:pfr_upstream_title>
-    $<TARGET_OBJECTS:pfr_upstream_clear_save>
-    $<TARGET_OBJECTS:pfr_upstream_berry_fix>
     $<TARGET_OBJECTS:pfr_upstream_main_menu>
     $<TARGET_OBJECTS:pfr_upstream_oak_speech>
-    $<TARGET_OBJECTS:pfr_upstream_new_game>
-    $<TARGET_OBJECTS:pfr_upstream_play_time>
     $<TARGET_OBJECTS:pfr_upstream_text_window_graphics>
     $<TARGET_OBJECTS:pfr_upstream_text>
-    $<TARGET_OBJECTS:pfr_upstream_text_window>
     $<TARGET_OBJECTS:pfr_upstream_new_menu_helpers>
-    $<TARGET_OBJECTS:pfr_upstream_text_printer>
-    $<TARGET_OBJECTS:pfr_upstream_runtime>
     $<TARGET_OBJECTS:pfr_upstream_graphics>
     $<TARGET_OBJECTS:pfr_upstream_bag>
     $<TARGET_OBJECTS:pfr_upstream_battle_anim_effects_3>
@@ -2207,28 +2200,22 @@ target_compile_options(pfr_render_test PRIVATE
 target_link_options(pfr_render_test PRIVATE
     -no-pie
     -Wl,--gc-sections
+    -Wl,-z,relro,-z,now
 )
 target_link_libraries(pfr_render_test PRIVATE pfr_upstream_core Threads::Threads m)
 
 # Interactive player: SDL2 window with live keyboard input
-add_executable(pfr_play src/pfr_play.c src/host_audio.c src/host_savestate.c)
+add_executable(pfr_play src/pfr_play.c src/host_audio.c src/host_savestate.c )
 set_target_properties(pfr_play PROPERTIES ENABLE_EXPORTS TRUE)
 target_sources(pfr_play PRIVATE
     src/host_agbmain.c
     $<TARGET_OBJECTS:pfr_upstream_intro>
     $<TARGET_OBJECTS:pfr_upstream_title>
-    $<TARGET_OBJECTS:pfr_upstream_clear_save>
-    $<TARGET_OBJECTS:pfr_upstream_berry_fix>
     $<TARGET_OBJECTS:pfr_upstream_main_menu>
     $<TARGET_OBJECTS:pfr_upstream_oak_speech>
-    $<TARGET_OBJECTS:pfr_upstream_new_game>
-    $<TARGET_OBJECTS:pfr_upstream_play_time>
     $<TARGET_OBJECTS:pfr_upstream_text_window_graphics>
     $<TARGET_OBJECTS:pfr_upstream_text>
-    $<TARGET_OBJECTS:pfr_upstream_text_window>
     $<TARGET_OBJECTS:pfr_upstream_new_menu_helpers>
-    $<TARGET_OBJECTS:pfr_upstream_text_printer>
-    $<TARGET_OBJECTS:pfr_upstream_runtime>
     $<TARGET_OBJECTS:pfr_upstream_graphics>
     $<TARGET_OBJECTS:pfr_upstream_bag>
     $<TARGET_OBJECTS:pfr_upstream_battle_anim_effects_3>
@@ -2320,6 +2307,7 @@ target_compile_options(pfr_play PRIVATE
 target_link_options(pfr_play PRIVATE
     -no-pie
     -Wl,--gc-sections
+    -Wl,-z,relro,-z,now
 )
 target_link_libraries(pfr_play PRIVATE pfr_upstream_core Threads::Threads m dl ${SDL2_LIBRARIES})
 
@@ -2328,6 +2316,7 @@ target_link_libraries(pfr_play PRIVATE pfr_upstream_core Threads::Threads m dl $
 
 add_library(pfr_game SHARED
     src/pfr_game_api.c
+    src/pfr_obs_adapter.c
     src/host_savestate.c
     src/host_agbmain.c
 )
@@ -2338,18 +2327,11 @@ set_target_properties(pfr_game PROPERTIES
 target_sources(pfr_game PRIVATE
     $<TARGET_OBJECTS:pfr_upstream_intro>
     $<TARGET_OBJECTS:pfr_upstream_title>
-    $<TARGET_OBJECTS:pfr_upstream_clear_save>
-    $<TARGET_OBJECTS:pfr_upstream_berry_fix>
     $<TARGET_OBJECTS:pfr_upstream_main_menu>
     $<TARGET_OBJECTS:pfr_upstream_oak_speech>
-    $<TARGET_OBJECTS:pfr_upstream_new_game>
-    $<TARGET_OBJECTS:pfr_upstream_play_time>
     $<TARGET_OBJECTS:pfr_upstream_text_window_graphics>
     $<TARGET_OBJECTS:pfr_upstream_text>
-    $<TARGET_OBJECTS:pfr_upstream_text_window>
     $<TARGET_OBJECTS:pfr_upstream_new_menu_helpers>
-    $<TARGET_OBJECTS:pfr_upstream_text_printer>
-    $<TARGET_OBJECTS:pfr_upstream_runtime>
     $<TARGET_OBJECTS:pfr_upstream_graphics>
     $<TARGET_OBJECTS:pfr_upstream_bag>
     $<TARGET_OBJECTS:pfr_upstream_battle_anim_effects_3>
@@ -2439,7 +2421,6 @@ target_compile_options(pfr_game PRIVATE
     -Wno-pointer-to-int-cast
 )
 target_link_libraries(pfr_game PRIVATE pfr_upstream_core Threads::Threads m dl)
-
 
 # Frame diff tool: pixel-level PPM comparison for golden frame verification
 add_executable(pfr_frame_diff tools/pfr_frame_diff.c)
@@ -2658,23 +2639,23 @@ add_custom_command(
         "${POKEFIRERED_SOURCE_DIR}" "${PFR_ASSETS_DIR}" "${PFR_BOOT_ASSET_MANIFEST}"
     COMMAND $<TARGET_FILE:pfr_assets> geninc "${PFR_ASSETS_DIR}" "${PFR_INC_DIR}"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/intro.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/intro.c"
+        "${PFR_GEN_DIR}/intro.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/intro.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/title_screen.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/title_screen.c"
+        "${PFR_GEN_DIR}/title_screen.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/title_screen.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/main_menu.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/main_menu.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/oak_speech.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/oak_speech.c"
+        "${PFR_GEN_DIR}/oak_speech.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/oak_speech.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/text_window_graphics.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/text_window_graphics.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/text.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/text.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/new_menu_helpers.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/new_menu_helpers.c"
+        "${PFR_GEN_DIR}/new_menu_helpers.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/new_menu_helpers.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/graphics.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/graphics.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/bag.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/bag.c"
+        "${PFR_GEN_DIR}/bag.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/bag.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/battle_anim_effects_3.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/battle_anim_effects_3.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
@@ -2686,135 +2667,135 @@ add_custom_command(
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/battle_interface.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/battle_interface.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/battle_records.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/battle_records.c"
+        "${PFR_GEN_DIR}/battle_records.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/battle_records.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/battle_script_commands.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/battle_script_commands.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/battle_transition.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/battle_transition.c"
+        "${PFR_GEN_DIR}/battle_transition.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/battle_transition.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/berry_crush.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/berry_crush.c"
+        "${PFR_GEN_DIR}/berry_crush.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/berry_crush.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/braille_text.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/braille_text.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/credits.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/credits.c"
+        "${PFR_GEN_DIR}/credits.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/credits.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/daycare.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/daycare.c"
+        "${PFR_GEN_DIR}/daycare.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/daycare.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/digit_obj_util.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/digit_obj_util.c"
+        "${PFR_GEN_DIR}/digit_obj_util.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/digit_obj_util.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/diploma.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/diploma.c"
+        "${PFR_GEN_DIR}/diploma.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/diploma.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/dodrio_berry_picking.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/dodrio_berry_picking.c"
+        "${PFR_GEN_DIR}/dodrio_berry_picking.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/dodrio_berry_picking.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/easy_chat.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/easy_chat.c"
+        "${PFR_GEN_DIR}/easy_chat.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/easy_chat.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/easy_chat_2.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/easy_chat_2.c"
+        "${PFR_GEN_DIR}/easy_chat_2.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/easy_chat_2.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/easy_chat_3.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/easy_chat_3.c"
+        "${PFR_GEN_DIR}/easy_chat_3.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/easy_chat_3.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/evolution_graphics.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/evolution_graphics.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/evolution_scene.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/evolution_scene.c"
+        "${PFR_GEN_DIR}/evolution_scene.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/evolution_scene.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/fame_checker.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/fame_checker.c"
+        "${PFR_GEN_DIR}/fame_checker.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/fame_checker.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/field_door.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/field_door.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/field_effect.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/field_effect.c"
+        "${PFR_GEN_DIR}/field_effect.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/field_effect.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/field_specials.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/field_specials.c"
+        "${PFR_GEN_DIR}/field_specials.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/field_specials.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/field_weather.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/field_weather.c"
+        "${PFR_GEN_DIR}/field_weather.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/field_weather.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/fldeff_flash.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/fldeff_flash.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/hall_of_fame.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/hall_of_fame.c"
+        "${PFR_GEN_DIR}/hall_of_fame.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/hall_of_fame.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/help_message.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/help_message.c"
+        "${PFR_GEN_DIR}/help_message.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/help_message.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/help_system.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/help_system.c"
+        "${PFR_GEN_DIR}/help_system.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/help_system.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/help_system_util.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/help_system_util.c"
+        "${PFR_GEN_DIR}/help_system_util.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/help_system_util.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/item_menu.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/item_menu.c"
+        "${PFR_GEN_DIR}/item_menu.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/item_menu.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/itemfinder.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/itemfinder.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/learn_move.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/learn_move.c"
+        "${PFR_GEN_DIR}/learn_move.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/learn_move.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/link.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/link.c"
+        "${PFR_GEN_DIR}/link.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/link.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/link_rfu_3.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/link_rfu_3.c"
+        "${PFR_GEN_DIR}/link_rfu_3.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/link_rfu_3.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/map_preview_screen.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/map_preview_screen.c"
+        "${PFR_GEN_DIR}/map_preview_screen.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/map_preview_screen.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/menu_indicators.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/menu_indicators.c"
+        "${PFR_GEN_DIR}/menu_indicators.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/menu_indicators.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/minigame_countdown.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/minigame_countdown.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/mon_markings.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/mon_markings.c"
+        "${PFR_GEN_DIR}/mon_markings.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/mon_markings.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/mystery_gift_menu.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/mystery_gift_menu.c"
+        "${PFR_GEN_DIR}/mystery_gift_menu.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/mystery_gift_menu.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/mystery_gift_show_card.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/mystery_gift_show_card.c"
+        "${PFR_GEN_DIR}/mystery_gift_show_card.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/mystery_gift_show_card.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/mystery_gift_show_news.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/mystery_gift_show_news.c"
+        "${PFR_GEN_DIR}/mystery_gift_show_news.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/mystery_gift_show_news.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/naming_screen.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/naming_screen.c"
+        "${PFR_GEN_DIR}/naming_screen.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/naming_screen.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/option_menu.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/option_menu.c"
+        "${PFR_GEN_DIR}/option_menu.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/option_menu.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/pokedex_area_markers.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/pokedex_area_markers.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/pokedex_screen.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/pokedex_screen.c"
+        "${PFR_GEN_DIR}/pokedex_screen.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/pokedex_screen.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/pokemon.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/pokemon.c"
+        "${PFR_GEN_DIR}/pokemon.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/pokemon.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/pokemon_icon.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/pokemon_icon.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/pokemon_jump.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/pokemon_jump.c"
+        "${PFR_GEN_DIR}/pokemon_jump.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/pokemon_jump.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/pokemon_special_anim_scene.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/pokemon_special_anim_scene.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/pokemon_storage_system_data.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/pokemon_storage_system_data.c"
+        "${PFR_GEN_DIR}/pokemon_storage_system_data.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/pokemon_storage_system_data.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/pokemon_storage_system_graphics.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/pokemon_storage_system_graphics.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/pokemon_storage_system_menu.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/pokemon_storage_system_menu.c"
+        "${PFR_GEN_DIR}/pokemon_storage_system_menu.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/pokemon_storage_system_menu.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/pokemon_storage_system_misc.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/pokemon_storage_system_misc.c"
+        "${PFR_GEN_DIR}/pokemon_storage_system_misc.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/pokemon_storage_system_misc.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/pokemon_storage_system_tasks.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/pokemon_storage_system_tasks.c"
+        "${PFR_GEN_DIR}/pokemon_storage_system_tasks.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/pokemon_storage_system_tasks.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/pokemon_summary_screen.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/pokemon_summary_screen.c"
+        "${PFR_GEN_DIR}/pokemon_summary_screen.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/pokemon_summary_screen.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/quest_log.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/quest_log.c"
+        "${PFR_GEN_DIR}/quest_log.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/quest_log.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/region_map.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/region_map.c"
+        "${PFR_GEN_DIR}/region_map.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/region_map.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/save_failed_screen.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/save_failed_screen.c"
+        "${PFR_GEN_DIR}/save_failed_screen.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/save_failed_screen.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/script_menu.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/script_menu.c"
+        "${PFR_GEN_DIR}/script_menu.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/script_menu.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/seagallop.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/seagallop.c"
+        "${PFR_GEN_DIR}/seagallop.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/seagallop.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/slot_machine.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/slot_machine.c"
+        "${PFR_GEN_DIR}/slot_machine.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/slot_machine.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/ss_anne.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/ss_anne.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/tileset_anims.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/tileset_anims.c"
+        "${PFR_GEN_DIR}/tileset_anims.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/tileset_anims.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/trade.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/trade.c"
+        "${PFR_GEN_DIR}/trade.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/trade.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/trade_scene.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/trade_scene.c"
+        "${PFR_GEN_DIR}/trade_scene.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/trade_scene.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/trainer_card.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/trainer_card.c"
+        "${PFR_GEN_DIR}/trainer_card.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/trainer_card.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/trainer_see.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/trainer_see.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/union_room_chat_display.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/union_room_chat_display.c"
+        "${PFR_GEN_DIR}/union_room_chat_display.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/union_room_chat_display.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/union_room_chat_objects.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/union_room_chat_objects.c"
+        "${PFR_GEN_DIR}/union_room_chat_objects.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/union_room_chat_objects.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/util.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/util.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
@@ -2823,7 +2804,7 @@ add_custom_command(
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/strings.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/strings.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/battle_message.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/battle_message.c"
+        "${PFR_GEN_DIR}/battle_message.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/battle_message.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/trainer_tower_sets.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/trainer_tower_sets.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
@@ -2835,7 +2816,7 @@ add_custom_command(
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/keyboard_text.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/keyboard_text.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/battle_main.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/battle_main.c"
+        "${PFR_GEN_DIR}/battle_main.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/battle_main.c"
     COMMAND ${Python3_EXECUTABLE} "${CMAKE_CURRENT_SOURCE_DIR}/tools/fixup_battle_main.py" "${PFR_GEN_DIR}/battle_main.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/mystery_event_msg.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/mystery_event_msg.c"
@@ -2843,25 +2824,25 @@ add_custom_command(
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/battle_anim_status_effects.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/battle_anim_status_effects.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/battle_tower.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/battle_tower.c"
+        "${PFR_GEN_DIR}/battle_tower.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/battle_tower.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/berry_pouch.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/berry_pouch.c"
+        "${PFR_GEN_DIR}/berry_pouch.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/berry_pouch.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/field_player_avatar.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/field_player_avatar.c"
+        "${PFR_GEN_DIR}/field_player_avatar.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/field_player_avatar.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/item.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/item.c"
+        "${PFR_GEN_DIR}/item.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/item.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/link_rfu_2.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/link_rfu_2.c"
+        "${PFR_GEN_DIR}/link_rfu_2.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/link_rfu_2.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/mailbox_pc.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/mailbox_pc.c"
+        "${PFR_GEN_DIR}/mailbox_pc.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/mailbox_pc.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/mystery_gift_scripts.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/mystery_gift_scripts.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/scrcmd.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/scrcmd.c"
+        "${PFR_GEN_DIR}/scrcmd.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/scrcmd.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/string_util.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/string_util.c"
+        "${PFR_GEN_DIR}/string_util.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/string_util.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/tm_case.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/tm_case.c"
+        "${PFR_GEN_DIR}/tm_case.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/tm_case.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/data.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/data.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
@@ -2870,9 +2851,9 @@ add_custom_command(
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/tilesets.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/tilesets.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/event_object_movement.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/event_object_movement.c"
+        "${PFR_GEN_DIR}/event_object_movement.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/event_object_movement.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/party_menu.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/party_menu.c"
+        "${PFR_GEN_DIR}/party_menu.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/party_menu.c"
     # Preprocess data headers that contain INCBIN macros (pokemon sprites, tilesets, etc.)
     ${PFR_DATA_HEADER_PREPROC_COMMANDS}
     ${PFR_CHARMAP_HEADER_COMMANDS}
@@ -2882,122 +2863,125 @@ add_custom_command(
         "${POKEFIRERED_SOURCE_DIR}/charmap.txt"
         ${PFR_PREPROCESSED_SOURCES}
         ${PFR_CHARMAP_HEADER_OUTPUTS}
+    # GameCtx: inject game_ctx.h / game_ctx_macros.h into preprocessed sources
+    COMMAND ${Python3_EXECUTABLE} "${CMAKE_CURRENT_SOURCE_DIR}/tools/inject_game_ctx.py" "${PFR_GEN_DIR}"
     COMMAND ${CMAKE_COMMAND} -E touch "${PFR_ASSET_PIPELINE_STAMP}"
     DEPENDS
         pfr_assets
         pfr_gbagfx_tool
         pfr_verify_asset_manifests
         "${PFR_BOOT_ASSET_MANIFEST}"
-        "${POKEFIRERED_SOURCE_DIR}/src/intro.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/title_screen.c"
+        "${PFR_GEN_DIR}/intro.c"
+        "${PFR_GEN_DIR}/title_screen.c"
         "${POKEFIRERED_SOURCE_DIR}/src/main_menu.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/oak_speech.c"
+        "${PFR_GEN_DIR}/oak_speech.c"
         "${POKEFIRERED_SOURCE_DIR}/src/text_window_graphics.c"
         "${POKEFIRERED_SOURCE_DIR}/src/text.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/new_menu_helpers.c"
+        "${PFR_GEN_DIR}/new_menu_helpers.c"
         "${POKEFIRERED_SOURCE_DIR}/src/graphics.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/bag.c"
+        "${PFR_GEN_DIR}/bag.c"
         "${POKEFIRERED_SOURCE_DIR}/src/battle_anim_effects_3.c"
         "${POKEFIRERED_SOURCE_DIR}/src/battle_anim_flying.c"
         "${POKEFIRERED_SOURCE_DIR}/src/battle_anim_water.c"
         "${POKEFIRERED_SOURCE_DIR}/src/battle_bg.c"
         "${POKEFIRERED_SOURCE_DIR}/src/battle_interface.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/battle_records.c"
+        "${PFR_GEN_DIR}/battle_records.c"
         "${POKEFIRERED_SOURCE_DIR}/src/battle_script_commands.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/battle_transition.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/berry_crush.c"
+        "${PFR_GEN_DIR}/battle_transition.c"
+        "${PFR_GEN_DIR}/berry_crush.c"
         "${POKEFIRERED_SOURCE_DIR}/src/braille_text.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/credits.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/daycare.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/digit_obj_util.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/diploma.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/dodrio_berry_picking.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/easy_chat.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/easy_chat_2.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/easy_chat_3.c"
+        "${PFR_GEN_DIR}/credits.c"
+        "${PFR_GEN_DIR}/daycare.c"
+        "${PFR_GEN_DIR}/digit_obj_util.c"
+        "${PFR_GEN_DIR}/diploma.c"
+        "${PFR_GEN_DIR}/dodrio_berry_picking.c"
+        "${PFR_GEN_DIR}/easy_chat.c"
+        "${PFR_GEN_DIR}/easy_chat_2.c"
+        "${PFR_GEN_DIR}/easy_chat_3.c"
         "${POKEFIRERED_SOURCE_DIR}/src/evolution_graphics.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/evolution_scene.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/fame_checker.c"
+        "${PFR_GEN_DIR}/evolution_scene.c"
+        "${PFR_GEN_DIR}/fame_checker.c"
         "${POKEFIRERED_SOURCE_DIR}/src/field_door.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/field_effect.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/field_specials.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/field_weather.c"
+        "${PFR_GEN_DIR}/field_effect.c"
+        "${PFR_GEN_DIR}/field_specials.c"
+        "${PFR_GEN_DIR}/field_weather.c"
         "${POKEFIRERED_SOURCE_DIR}/src/fldeff_flash.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/hall_of_fame.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/help_message.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/help_system.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/help_system_util.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/item_menu.c"
+        "${PFR_GEN_DIR}/hall_of_fame.c"
+        "${PFR_GEN_DIR}/help_message.c"
+        "${PFR_GEN_DIR}/help_system.c"
+        "${PFR_GEN_DIR}/help_system_util.c"
+        "${PFR_GEN_DIR}/item_menu.c"
         "${POKEFIRERED_SOURCE_DIR}/src/itemfinder.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/learn_move.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/link.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/link_rfu_3.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/map_preview_screen.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/menu_indicators.c"
+        "${PFR_GEN_DIR}/learn_move.c"
+        "${PFR_GEN_DIR}/link.c"
+        "${PFR_GEN_DIR}/link_rfu_3.c"
+        "${PFR_GEN_DIR}/map_preview_screen.c"
+        "${PFR_GEN_DIR}/menu_indicators.c"
         "${POKEFIRERED_SOURCE_DIR}/src/minigame_countdown.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/mon_markings.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/mystery_gift_menu.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/mystery_gift_show_card.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/mystery_gift_show_news.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/naming_screen.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/option_menu.c"
+        "${PFR_GEN_DIR}/mon_markings.c"
+        "${PFR_GEN_DIR}/mystery_gift_menu.c"
+        "${PFR_GEN_DIR}/mystery_gift_show_card.c"
+        "${PFR_GEN_DIR}/mystery_gift_show_news.c"
+        "${PFR_GEN_DIR}/naming_screen.c"
+        "${PFR_GEN_DIR}/option_menu.c"
         "${POKEFIRERED_SOURCE_DIR}/src/pokedex_area_markers.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/pokedex_screen.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/pokemon.c"
+        "${PFR_GEN_DIR}/pokedex_screen.c"
+        "${PFR_GEN_DIR}/pokemon.c"
         "${POKEFIRERED_SOURCE_DIR}/src/pokemon_icon.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/pokemon_jump.c"
+        "${PFR_GEN_DIR}/pokemon_jump.c"
         "${POKEFIRERED_SOURCE_DIR}/src/pokemon_special_anim_scene.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/pokemon_storage_system_data.c"
+        "${PFR_GEN_DIR}/pokemon_storage_system_data.c"
         "${POKEFIRERED_SOURCE_DIR}/src/pokemon_storage_system_graphics.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/pokemon_storage_system_menu.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/pokemon_storage_system_misc.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/pokemon_storage_system_tasks.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/pokemon_summary_screen.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/quest_log.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/region_map.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/save_failed_screen.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/script_menu.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/seagallop.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/slot_machine.c"
+        "${PFR_GEN_DIR}/pokemon_storage_system_menu.c"
+        "${PFR_GEN_DIR}/pokemon_storage_system_misc.c"
+        "${PFR_GEN_DIR}/pokemon_storage_system_tasks.c"
+        "${PFR_GEN_DIR}/pokemon_summary_screen.c"
+        "${PFR_GEN_DIR}/quest_log.c"
+        "${PFR_GEN_DIR}/region_map.c"
+        "${PFR_GEN_DIR}/save_failed_screen.c"
+        "${PFR_GEN_DIR}/script_menu.c"
+        "${PFR_GEN_DIR}/seagallop.c"
+        "${PFR_GEN_DIR}/slot_machine.c"
         "${POKEFIRERED_SOURCE_DIR}/src/ss_anne.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/tileset_anims.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/trade.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/trade_scene.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/trainer_card.c"
+        "${PFR_GEN_DIR}/tileset_anims.c"
+        "${PFR_GEN_DIR}/trade.c"
+        "${PFR_GEN_DIR}/trade_scene.c"
+        "${PFR_GEN_DIR}/trainer_card.c"
         "${POKEFIRERED_SOURCE_DIR}/src/trainer_see.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/union_room_chat_display.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/union_room_chat_objects.c"
+        "${PFR_GEN_DIR}/union_room_chat_display.c"
+        "${PFR_GEN_DIR}/union_room_chat_objects.c"
         "${POKEFIRERED_SOURCE_DIR}/src/util.c"
         "${POKEFIRERED_SOURCE_DIR}/src/wireless_communication_status_screen.c"
         # Charmap-only files
         "${POKEFIRERED_SOURCE_DIR}/src/strings.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/battle_message.c"
+        "${PFR_GEN_DIR}/battle_message.c"
         "${POKEFIRERED_SOURCE_DIR}/src/trainer_tower_sets.c"
         "${POKEFIRERED_SOURCE_DIR}/src/move_descriptions.c"
         "${POKEFIRERED_SOURCE_DIR}/src/union_room_message.c"
         "${POKEFIRERED_SOURCE_DIR}/src/berry.c"
         "${POKEFIRERED_SOURCE_DIR}/src/keyboard_text.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/battle_main.c"
+        "${PFR_GEN_DIR}/battle_main.c"
         "${POKEFIRERED_SOURCE_DIR}/src/mystery_event_msg.c"
         # Additional charmap-only files
         "${POKEFIRERED_SOURCE_DIR}/src/battle_anim_status_effects.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/battle_tower.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/berry_pouch.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/field_player_avatar.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/item.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/link_rfu_2.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/mailbox_pc.c"
+        "${PFR_GEN_DIR}/battle_tower.c"
+        "${PFR_GEN_DIR}/berry_pouch.c"
+        "${PFR_GEN_DIR}/field_player_avatar.c"
+        "${PFR_GEN_DIR}/item.c"
+        "${PFR_GEN_DIR}/link_rfu_2.c"
+        "${PFR_GEN_DIR}/mailbox_pc.c"
         "${POKEFIRERED_SOURCE_DIR}/src/mystery_gift_scripts.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/scrcmd.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/string_util.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/tm_case.c"
+        "${PFR_GEN_DIR}/scrcmd.c"
+        "${PFR_GEN_DIR}/string_util.c"
+        "${PFR_GEN_DIR}/tm_case.c"
         "${POKEFIRERED_SOURCE_DIR}/src/data.c"
         "${POKEFIRERED_SOURCE_DIR}/src/decoration.c"
         ${PFR_CHARMAP_HEADER_INPUTS}
         "${POKEFIRERED_SOURCE_DIR}/charmap.txt"
         "${CMAKE_CURRENT_SOURCE_DIR}/scripts/charmap_preproc.sh"
         "${CMAKE_CURRENT_SOURCE_DIR}/tools/preproc_charmap.py"
-    COMMENT "Asset pipeline: PNG/PAL → GBA → .inc → preprocessed sources → charmap"
+        "${CMAKE_CURRENT_SOURCE_DIR}/tools/inject_game_ctx.py"
+    COMMENT "Asset pipeline: PNG/PAL → GBA → .inc → preprocessed sources → charmap → GameCtx injection"
 )
 
 add_custom_target(pfr_asset_pipeline
@@ -3017,3 +3001,149 @@ add_custom_target(pfr_golden_check
     COMMENT "Golden check: render_test + frame_diff against golden references"
     VERBATIM
 )
+
+# -- pfr_battle_test -- headless battle crash test --
+add_executable(pfr_battle_test tests/battle_test.c)
+target_sources(pfr_battle_test PRIVATE
+    src/host_agbmain.c
+    src/host_savestate.c
+    $<TARGET_OBJECTS:pfr_upstream_intro>
+    $<TARGET_OBJECTS:pfr_upstream_title>
+    $<TARGET_OBJECTS:pfr_upstream_main_menu>
+    $<TARGET_OBJECTS:pfr_upstream_oak_speech>
+    $<TARGET_OBJECTS:pfr_upstream_text_window_graphics>
+    $<TARGET_OBJECTS:pfr_upstream_text>
+    $<TARGET_OBJECTS:pfr_upstream_new_menu_helpers>
+    $<TARGET_OBJECTS:pfr_upstream_graphics>
+    $<TARGET_OBJECTS:pfr_upstream_bag>
+    $<TARGET_OBJECTS:pfr_upstream_battle_anim_effects_3>
+    $<TARGET_OBJECTS:pfr_upstream_battle_anim_flying>
+    $<TARGET_OBJECTS:pfr_upstream_battle_anim_water>
+    $<TARGET_OBJECTS:pfr_upstream_battle_bg>
+    $<TARGET_OBJECTS:pfr_upstream_battle_interface>
+    $<TARGET_OBJECTS:pfr_upstream_battle_records>
+    $<TARGET_OBJECTS:pfr_upstream_battle_script_commands>
+    $<TARGET_OBJECTS:pfr_upstream_battle_transition>
+    $<TARGET_OBJECTS:pfr_upstream_berry_crush>
+    $<TARGET_OBJECTS:pfr_upstream_braille_text>
+    $<TARGET_OBJECTS:pfr_upstream_credits>
+    $<TARGET_OBJECTS:pfr_upstream_daycare>
+    $<TARGET_OBJECTS:pfr_upstream_digit_obj_util>
+    $<TARGET_OBJECTS:pfr_upstream_diploma>
+    $<TARGET_OBJECTS:pfr_upstream_dodrio_berry_picking>
+    $<TARGET_OBJECTS:pfr_upstream_easy_chat>
+    $<TARGET_OBJECTS:pfr_upstream_easy_chat_2>
+    $<TARGET_OBJECTS:pfr_upstream_easy_chat_3>
+    $<TARGET_OBJECTS:pfr_upstream_evolution_graphics>
+    $<TARGET_OBJECTS:pfr_upstream_evolution_scene>
+    $<TARGET_OBJECTS:pfr_upstream_fame_checker>
+    $<TARGET_OBJECTS:pfr_upstream_field_door>
+    $<TARGET_OBJECTS:pfr_upstream_field_effect>
+    $<TARGET_OBJECTS:pfr_upstream_field_specials>
+    $<TARGET_OBJECTS:pfr_upstream_field_weather>
+    $<TARGET_OBJECTS:pfr_upstream_fldeff_flash>
+    $<TARGET_OBJECTS:pfr_upstream_hall_of_fame>
+    $<TARGET_OBJECTS:pfr_upstream_help_message>
+    $<TARGET_OBJECTS:pfr_upstream_help_system>
+    $<TARGET_OBJECTS:pfr_upstream_help_system_util>
+    $<TARGET_OBJECTS:pfr_upstream_item_menu>
+    $<TARGET_OBJECTS:pfr_upstream_itemfinder>
+    $<TARGET_OBJECTS:pfr_upstream_learn_move>
+    $<TARGET_OBJECTS:pfr_upstream_link>
+    $<TARGET_OBJECTS:pfr_upstream_link_rfu_3>
+    $<TARGET_OBJECTS:pfr_upstream_map_preview_screen>
+    $<TARGET_OBJECTS:pfr_upstream_menu_indicators>
+    $<TARGET_OBJECTS:pfr_upstream_minigame_countdown>
+    $<TARGET_OBJECTS:pfr_upstream_mon_markings>
+    $<TARGET_OBJECTS:pfr_upstream_mystery_gift_menu>
+    $<TARGET_OBJECTS:pfr_upstream_mystery_gift_show_card>
+    $<TARGET_OBJECTS:pfr_upstream_mystery_gift_show_news>
+    $<TARGET_OBJECTS:pfr_upstream_naming_screen>
+    $<TARGET_OBJECTS:pfr_upstream_option_menu>
+    $<TARGET_OBJECTS:pfr_upstream_pokedex_area_markers>
+    $<TARGET_OBJECTS:pfr_upstream_pokedex_screen>
+    $<TARGET_OBJECTS:pfr_upstream_pokemon>
+    $<TARGET_OBJECTS:pfr_upstream_pokemon_icon>
+    $<TARGET_OBJECTS:pfr_upstream_pokemon_jump>
+    $<TARGET_OBJECTS:pfr_upstream_pokemon_special_anim_scene>
+    $<TARGET_OBJECTS:pfr_upstream_pokemon_storage_system_data>
+    $<TARGET_OBJECTS:pfr_upstream_pokemon_storage_system_graphics>
+    $<TARGET_OBJECTS:pfr_upstream_pokemon_storage_system_menu>
+    $<TARGET_OBJECTS:pfr_upstream_pokemon_storage_system_misc>
+    $<TARGET_OBJECTS:pfr_upstream_pokemon_storage_system_tasks>
+    $<TARGET_OBJECTS:pfr_upstream_pokemon_summary_screen>
+    $<TARGET_OBJECTS:pfr_upstream_quest_log>
+    $<TARGET_OBJECTS:pfr_upstream_region_map>
+    $<TARGET_OBJECTS:pfr_upstream_save_failed_screen>
+    $<TARGET_OBJECTS:pfr_upstream_script_menu>
+    $<TARGET_OBJECTS:pfr_upstream_seagallop>
+    $<TARGET_OBJECTS:pfr_upstream_slot_machine>
+    $<TARGET_OBJECTS:pfr_upstream_ss_anne>
+    $<TARGET_OBJECTS:pfr_upstream_tileset_anims>
+    $<TARGET_OBJECTS:pfr_upstream_trade>
+    $<TARGET_OBJECTS:pfr_upstream_trade_scene>
+    $<TARGET_OBJECTS:pfr_upstream_trainer_card>
+    $<TARGET_OBJECTS:pfr_upstream_trainer_see>
+    $<TARGET_OBJECTS:pfr_upstream_union_room_chat_display>
+    $<TARGET_OBJECTS:pfr_upstream_union_room_chat_objects>
+    $<TARGET_OBJECTS:pfr_upstream_util>
+    $<TARGET_OBJECTS:pfr_upstream_wireless_communication_status_screen>
+    $<TARGET_OBJECTS:pfr_upstream_tilesets>
+    $<TARGET_OBJECTS:pfr_upstream_event_object_movement>
+    $<TARGET_OBJECTS:pfr_upstream_party_menu>
+)
+target_compile_definitions(pfr_battle_test PRIVATE ${PFR_COMMON_DEFINES})
+target_compile_options(pfr_battle_test PRIVATE
+    "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
+    "-iquote${PFR_GEN_HEADERS_DIR}"
+    "-iquote${POKEFIRERED_SOURCE_DIR}/include"
+    -Wno-int-to-pointer-cast
+    -Wno-pointer-to-int-cast
+)
+target_link_options(pfr_battle_test PRIVATE -no-pie -Wl,--gc-sections
+    -Wl,-z,relro,-z,now)
+target_link_libraries(pfr_battle_test PRIVATE pfr_upstream_core Threads::Threads m)
+
+# ── pfr_native_core — standalone stable-state native slice ──
+set(PFR_NATIVE_GEN_DIR "${CMAKE_BINARY_DIR}/generated_native")
+set(PFR_NATIVE_DATA_C "${PFR_NATIVE_GEN_DIR}/pfr_native_data.c")
+
+add_custom_command(
+    OUTPUT "${PFR_NATIVE_DATA_C}"
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${PFR_NATIVE_GEN_DIR}"
+    COMMAND ${Python3_EXECUTABLE}
+        "${CMAKE_CURRENT_SOURCE_DIR}/tools/gen_pfr_native_data.py"
+        --repo-root "${CMAKE_CURRENT_SOURCE_DIR}"
+        --output-c "${PFR_NATIVE_DATA_C}"
+    DEPENDS
+        "${CMAKE_CURRENT_SOURCE_DIR}/tools/gen_pfr_native_data.py"
+        "${CMAKE_CURRENT_SOURCE_DIR}/src/pfr_native_data.h"
+        "${CMAKE_CURRENT_SOURCE_DIR}/third_party/pokefirered/data/layouts/layouts.json"
+        "${CMAKE_CURRENT_SOURCE_DIR}/third_party/pokefirered/data/maps/map_groups.json"
+        "${CMAKE_CURRENT_SOURCE_DIR}/third_party/pokefirered/data/maps/PalletTown_PlayersHouse_1F/map.json"
+        "${CMAKE_CURRENT_SOURCE_DIR}/third_party/pokefirered/data/maps/PalletTown_PlayersHouse_1F/text.inc"
+        "${CMAKE_CURRENT_SOURCE_DIR}/third_party/pokefirered/data/maps/PalletTown_PlayersHouse_2F/map.json"
+        "${CMAKE_CURRENT_SOURCE_DIR}/third_party/pokefirered/data/maps/PalletTown_PlayersHouse_2F/text.inc"
+        "${CMAKE_CURRENT_SOURCE_DIR}/third_party/pokefirered/data/layouts/PalletTown_PlayersHouse_1F/map.bin"
+        "${CMAKE_CURRENT_SOURCE_DIR}/third_party/pokefirered/data/layouts/PalletTown_PlayersHouse_2F/map.bin"
+        "${CMAKE_CURRENT_SOURCE_DIR}/third_party/pokefirered/data/tilesets/primary/building/metatile_attributes.bin"
+        "${CMAKE_CURRENT_SOURCE_DIR}/third_party/pokefirered/data/tilesets/secondary/generic_building_1/metatile_attributes.bin"
+    VERBATIM
+)
+
+add_custom_target(pfr_native_generated_data DEPENDS "${PFR_NATIVE_DATA_C}")
+
+add_library(pfr_native_core STATIC
+    src/pfr_native.c
+    "${PFR_NATIVE_DATA_C}"
+)
+add_dependencies(pfr_native_core pfr_native_generated_data)
+target_include_directories(pfr_native_core PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+    "${PFR_NATIVE_GEN_DIR}"
+)
+target_compile_options(pfr_native_core PRIVATE -Wall -Wextra -Werror)
+target_link_libraries(pfr_native_core PRIVATE m)
+
+add_executable(pfr_native_smoke tests/pfr_native_smoke.c)
+target_link_libraries(pfr_native_smoke PRIVATE pfr_native_core m)
