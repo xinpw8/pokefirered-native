@@ -8,8 +8,17 @@ set(CMAKE_C_EXTENSIONS ON)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)  # Required for libpfr_game.so
 
 find_package(Threads REQUIRED)
-find_package(Python3 REQUIRED COMPONENTS Interpreter)
+find_package(Python3 REQUIRED COMPONENTS Interpreter Development.Module)
 include(ExternalProject)
+
+execute_process(
+    COMMAND ${Python3_EXECUTABLE} -c "import numpy; print(numpy.get_include(), end='')"
+    OUTPUT_VARIABLE PFR_NUMPY_INCLUDE_DIR
+)
+execute_process(
+    COMMAND ${Python3_EXECUTABLE} -c "import sysconfig; print(sysconfig.get_config_var('EXT_SUFFIX') or '.so', end='')"
+    OUTPUT_VARIABLE PFR_PYTHON_EXTENSION_SUFFIX
+)
 
 set(POKEFIRERED_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/third_party/pokefirered" CACHE PATH "Path to the upstream pret/pokefirered checkout")
 set(AGBCC_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/third_party/agbcc" CACHE PATH "Path to the upstream pret/agbcc checkout")
@@ -2710,6 +2719,9 @@ add_custom_command(
         "${POKEFIRERED_SOURCE_DIR}/src/fldeff_flash.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/fldeff_flash.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${PFR_GEN_DIR}/hall_of_fame.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/hall_of_fame.c"
+    # Fix 64-bit pointer truncation: ClearVramOamPltt_LoadHofPal stores
+    # VRAM/OAM/PLTT (uintptr_t) in u32 locals, truncating on aarch64.
+    COMMAND sed -i "s/u32 vramOffset, oamOffset, plttOffset/uintptr_t vramOffset, oamOffset, plttOffset/" "${PFR_GEN_DIR}/hall_of_fame.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${PFR_GEN_DIR}/help_message.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/help_message.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
@@ -3147,3 +3159,50 @@ target_link_libraries(pfr_native_core PRIVATE m)
 
 add_executable(pfr_native_smoke tests/pfr_native_smoke.c)
 target_link_libraries(pfr_native_smoke PRIVATE pfr_native_core m)
+
+add_library(pfrn_binding MODULE
+    src/pfrn_binding_module.c
+    src/pfr_so_instance.c
+)
+add_dependencies(pfrn_binding pfr_game)
+target_include_directories(pfrn_binding PRIVATE
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+    "${CMAKE_CURRENT_SOURCE_DIR}/pufferlib/ocean"
+    ${Python3_INCLUDE_DIRS}
+    "${PFR_NUMPY_INCLUDE_DIR}"
+)
+target_link_libraries(pfrn_binding PRIVATE dl)
+set_target_properties(pfrn_binding PROPERTIES
+    PREFIX ""
+    OUTPUT_NAME "binding"
+    SUFFIX "${PFR_PYTHON_EXTENSION_SUFFIX}"
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/pfrn_native"
+)
+
+add_library(pfr_env_binding_native MODULE
+    src/pfr_env_binding.c
+    src/pfr_env.c
+)
+add_dependencies(pfr_env_binding_native pfr_game)
+target_compile_definitions(pfr_env_binding_native PRIVATE ${PFR_COMMON_DEFINES})
+target_compile_options(pfr_env_binding_native PRIVATE
+    "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src/host_include"
+    "-iquote${PFR_GEN_HEADERS_DIR}"
+    "-iquote${POKEFIRERED_SOURCE_DIR}/include"
+    "-iquote${CMAKE_CURRENT_SOURCE_DIR}/src"
+    -Wno-int-to-pointer-cast
+    -Wno-pointer-to-int-cast
+)
+target_include_directories(pfr_env_binding_native PRIVATE
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+    "${CMAKE_CURRENT_SOURCE_DIR}/pufferlib/ocean"
+    ${Python3_INCLUDE_DIRS}
+    "${PFR_NUMPY_INCLUDE_DIR}"
+)
+target_link_libraries(pfr_env_binding_native PRIVATE pfr_game Threads::Threads m dl)
+set_target_properties(pfr_env_binding_native PROPERTIES
+    PREFIX ""
+    OUTPUT_NAME "binding"
+    SUFFIX "${PFR_PYTHON_EXTENSION_SUFFIX}"
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/pfr_env_native"
+)
