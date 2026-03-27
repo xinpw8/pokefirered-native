@@ -343,10 +343,10 @@ void pfr_game_boot(void)
 
             if (walk_info.map_group == 4) {
                 int warp_frame;
-                fprintf(stderr, "[PFR-BOOT] Warping to Route 2...\n");
+                fprintf(stderr, "[PFR-BOOT] Warping to Viridian Forest...\n");
 
-                /* Route 2 = map (3, 20), position (10, 60) — south of Viridian Forest */
-                SetWarpDestination(3, 20, -1, 10, 60);
+                /* Viridian Forest = map (1, 0), position (15, 20) — north half */
+                SetWarpDestination(1, 0, -1, 15, 20);
 
                 /* Replicate the game's own warp flow from
                  * field_fadetransition.c:  WarpIntoMap + CB2_LoadMap.
