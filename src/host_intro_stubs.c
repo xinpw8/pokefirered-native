@@ -32,7 +32,7 @@ u32 gHostIntroStubResetBgPositionsCalls = 0;
 u32 gHostIntroStubStartBlendTaskCalls = 0;
 u32 gHostIntroStubIsBlendTaskActiveCalls = 0;
 /* m4aSongNumStart, PlaySE, PlayCry_ByMode now upstream */
-u8 gHostIntroStubLoadGameSaveResult = SAVE_STATUS_EMPTY;
+u32 gHostIntroStubLoadGameSaveResult = SAVE_STATUS_EMPTY;
 /* gSaveFileStatus now from save.c */
 
 __asm__(

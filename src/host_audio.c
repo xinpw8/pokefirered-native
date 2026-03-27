@@ -189,6 +189,9 @@ void HostAudioMixAndPush(void)
     static u32 sNonZeroFrames;
     static u32 sActiveChannelFrames;
     struct SoundInfo *si = SOUND_INFO_PTR;
+    /* RL mode: skip entire sound engine */
+    if (gHostNoAudio)
+        return;
     if (si == NULL)
         return;
 

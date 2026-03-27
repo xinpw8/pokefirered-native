@@ -47,7 +47,7 @@ const u8 *gHostOakSpeechLastTopBarLeftText = NULL;
 const u8 *gHostOakSpeechLastTopBarRightText = NULL;
 
 static u8 sOakSpeechMonSpriteBuffer[0x8000] = {0};
-static bool8 sHostOakSpeechNewGameInitialized = FALSE;
+static u32 sHostOakSpeechNewGameInitialized = FALSE;
 static const u32 sHostBlankMonPaletteLz77[] = {0x00002000};
 
 /*

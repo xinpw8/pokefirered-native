@@ -41,7 +41,7 @@ static const struct HostRegion sHostRegions[] = {
     { &pfr_oam_base,   0x400,   "OAM" },
 };
 
-static bool8 sHostMemoryMapped = FALSE;
+static u32 sHostMemoryMapped = FALSE;
 
 static void ResetAffineBgIdentity(void)
 {

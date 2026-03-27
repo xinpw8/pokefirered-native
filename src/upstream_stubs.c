@@ -23,7 +23,7 @@
 /* ---- Global data that lives in assembly or in files not yet compiled ---- */
 
 /* Heap lives here because main.c's definition might clash with our host_crt0 */
-EWRAM_DATA u8 gHeap[HEAP_SIZE] = {0};
+/* gHeap: now defined in game_ctx_stubs.c */
 
 /* RNG2 used by battle system */
 COMMON_DATA u32 gRng2Value = 0;
@@ -59,3 +59,4 @@ void PlayTimeCounter_Update(void) { UpstreamPlayTimeCounter_Update(); }
 /* rfu_REQ_stopMode, rfu_waitREQComplete now from librfu_rfu.c */
 
 /* EventScript_ResetAllMapFlags — now in upstream_event_scripts.c (real bytecode) */
+bool8 gHostNoAudio = FALSE;

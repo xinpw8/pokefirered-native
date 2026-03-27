@@ -17,7 +17,7 @@ extern u32 gHostIntroStubResetBgPositionsCalls;
 extern u32 gHostIntroStubStartBlendTaskCalls;
 extern u32 gHostIntroStubIsBlendTaskActiveCalls;
 /* PlaySE, PlayCry_ByMode, SetPokemonCryStereo now from upstream */
-extern u8 gHostIntroStubLoadGameSaveResult;
+extern u32 gHostIntroStubLoadGameSaveResult;
 
 void HostIntroStubReset(void);
 

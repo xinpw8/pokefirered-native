@@ -12,6 +12,7 @@
 #include "gpu_regs.h"
 #include "intro.h"
 #include "main.h"
+#include "game_ctx.h"
 
 struct HostAgbMainState
 {
@@ -75,14 +76,14 @@ static void HostAdvanceScanline(void)
     HostMaybePressSoftResetKeys();
 }
 
-static void *HostIrqThreadMain(void *unused)
+static void *HostIrqThreadMain(void *arg)
 {
     static const struct timespec sleep_time = {
         .tv_sec = 0,
         .tv_nsec = 100000,
     };
 
-    (void)unused;
+    g_ctx = (GameCtx *)arg;
 
     while (atomic_load(&sHostAgbMainState.irq_thread_should_run))
     {
@@ -113,7 +114,7 @@ enum HostAgbMainExitReason HostRunAgbMainUntilSoftReset(u32 exit_after_cb2_calls
     REG_VCOUNT = DISPLAY_HEIGHT + 1;
     REG_KEYINPUT = KEYS_MASK;
 
-    thread_err = pthread_create(&sHostAgbMainState.irq_thread, NULL, HostIrqThreadMain, NULL);
+    thread_err = pthread_create(&sHostAgbMainState.irq_thread, NULL, HostIrqThreadMain, (void *)g_ctx);
     if (thread_err != 0)
         HostAbortPthread("create", thread_err);
 

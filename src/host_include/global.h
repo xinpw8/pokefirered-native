@@ -141,6 +141,14 @@ extern const u8 *HostScriptPtrLookup(u32 index);
 #define T2_READ_PTR(ptr) (void *) T2_READ_32(ptr)
 #endif
 
+// Side table for storing 64-bit pointers in s16 pairs (task/sprite data).
+// On GBA, pointers fit in 32 bits (two s16). On 64-bit native they don't.
+#if HOST_NATIVE && __SIZEOF_POINTER__ == 8
+extern void HostPtrStore_Put(s16 *lo, s16 *hi, const void *ptr);
+extern void *HostPtrStore_Get(s16 lo, s16 hi);
+extern void HostPtrStore_Reset(void);
+#endif
+
 // This macro is required to prevent the compiler from optimizing
 // a dpad up/down check in sub_812CAD8 (fame_checker.c).
 #define TEST_BUTTON(field, button) ({(field) & (button);})

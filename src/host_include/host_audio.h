@@ -5,6 +5,7 @@
 
 void HostAudioInit(void);
 void HostAudioShutdown(void);
+extern bool8 gHostNoAudio;
 void HostAudioMixAndPush(void);
 void HostAudioLock(void);
 void HostAudioUnlock(void);

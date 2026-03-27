@@ -100,6 +100,9 @@ const uint32_t *pfr_game_get_framebuffer(void);
  */
 void pfr_game_copy_framebuffer(uint32_t *dst, int stride_pixels);
 
+/* Render the current GBA screen state without advancing the game. */
+void pfr_game_render_current_frame(void);
+
 /* Save current state to file. */
 int pfr_game_save_state(const char *path);
 
@@ -115,5 +118,10 @@ int pfr_game_save_state(const char *path);
  * Use pfr_game_step_frames() or pfr_game_step_frames_exact() before rendering.
  */
 void pfr_game_step_frames_fast(uint16_t keys, int n);
+
+/* Comprehensive observation and reward (pfr_obs_full.h) */
+#include "pfr_obs_full.h"
+void pfr_game_extract_obs_full(void *buf);
+void pfr_game_get_reward_info_full(PfrRewardInfoFull *info);
 
 #endif /* PFR_GAME_API_H */

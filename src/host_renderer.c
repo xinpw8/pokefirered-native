@@ -179,7 +179,7 @@ static bool8 sObjWindowPixels[GBA_SCREEN_WIDTH];
 static s32 sAffineRefX[2];   /* [0]=BG2, [1]=BG3 */
 static s32 sAffineRefY[2];
 
-static bool8 sInitialized;
+static u32 sInitialized;
 
 /* ================================================================
  *  Color conversion
@@ -833,9 +833,12 @@ static void BlendScanline(void)
 
         /*
          * Semi-transparent OBJ: force alpha blend regardless of BLDCNT
-         * first-target bits, but second target must still be set.
+         * first-target bits AND window SFX enable.  On real GBA hardware
+         * (and in mGBA), OBJ_MODE_SEMITRANSPARENT always blends; the
+         * window Color-Special-Effect bit only gates normal BG blending.
+         * Second target must still match.
          */
-        if (sScanObjSemiTrans[x] && sfxEnabled)
+        if (sScanObjSemiTrans[x])
         {
             u8 blendLayer = sScanBotNonObjLayer[x];
             if (secondTarget & (1 << blendLayer))

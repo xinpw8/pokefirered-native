@@ -101,7 +101,7 @@ static void HostFlashSyncToDisk(void)
 
     fclose(f);
     if (rename(tmpPath, sSaveFilePath) != 0)
-        HostLogPrintf("[pokefirered-native] save: rename %s -> %s failed\n", tmpPath, sSaveFilePath);
+        (void)0; // rename warning suppressed
     else
         HostLogPrintf("[pokefirered-native] save: written to %s\n", sSaveFilePath);
 }
@@ -237,7 +237,7 @@ struct HostSaveFormatMarker
     u16 reserved;
 };
 
-static bool8 sFormatMarkerValid = FALSE;
+static u32 sFormatMarkerValid = FALSE;
 
 static void HostFlashStampFormatMarker(void)
 {

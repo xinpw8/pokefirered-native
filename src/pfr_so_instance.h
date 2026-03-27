@@ -34,6 +34,7 @@ typedef void     (*pfr_step_frames_fast_fn)(uint16_t keys, int n);
 typedef void            (*pfr_step_frames_exact_fn)(uint16_t keys, int n);
 typedef const uint32_t *(*pfr_get_framebuffer_fn)(void);
 typedef void            (*pfr_copy_framebuffer_fn)(uint32_t *dst, int stride);
+typedef void            (*pfr_render_current_frame_fn)(void);
 
 typedef struct {
     void *dl_handle;                    /* dlopen handle */
@@ -56,6 +57,7 @@ typedef struct {
     pfr_step_frames_exact_fn step_frames_exact;
     pfr_get_framebuffer_fn   get_framebuffer;
     pfr_copy_framebuffer_fn  copy_framebuffer;
+    pfr_render_current_frame_fn render_current_frame;
 } PfrInstance;
 
 /*

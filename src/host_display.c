@@ -53,18 +53,28 @@
 static u32 sFrameCount = 0;
 static char sDumpDir[256] = "/tmp";
 static char sStateDir[PATH_MAX] = "pfr_debug_states";
-static bool8 sDumpEnabled = FALSE;
-static bool8 sForceHeadless = FALSE;
-static bool8 sUnthrottled = FALSE;
+static u32 sDumpEnabled = FALSE;
+static u32 sForceHeadless = FALSE;
+static u32 sUnthrottled = FALSE;
 static u32 sActionBits = 0;
 static u32 sFastForwardFactor = 1;
 static u32 sBaseFastForwardFactor = 1;
 static const u32 sTurboPresetOptions[] = { 2, 4, 8, 16, 32, 64, 128, 256 };
 static u32 sTurboFastForwardFactor = 16;
 static size_t sTurboPresetIndex = 3;
-static bool8 sTurboEnabled = FALSE;
+static u32 sTurboEnabled = FALSE;
+
+/* ── Egg-hatch auto-walk state ── */
+static u32 sEggHatchActive = FALSE;
+static u32 sEggHatchFrame = 0;
+static struct EggHatchInfo sEggHatchInfo;
+static u32 sEggHatchInfoValid = FALSE;
+
 static char sStatusText[64];
 static u32 sStatusTextFrames = 0;
+static char sScreenshotDir[256] = "screenshots";
+static u32 sScreenshotCounter = 0;
+static void SetStatusText(const char *text);
 
 #define HOST_DISPLAY_OVERLAY_MAX_ENTRIES 256
 #define HOST_DISPLAY_OVERLAY_ROWS 10
@@ -158,6 +168,61 @@ static void SyncTurboPresetFromFactor(void)
     }
 
     sTurboFastForwardFactor = sTurboPresetOptions[sTurboPresetIndex];
+}
+
+void HostDisplayTakeScreenshot(void)
+{
+    const u32 *fb = HostRendererGetFramebuffer();
+    char path[512];
+    time_t now;
+    struct tm tmNow;
+    SDL_Surface *surface;
+    int x, y;
+    u32 *pixels;
+
+    /* Ensure directory exists */
+    mkdir(sScreenshotDir, 0775);
+
+    /* Build timestamped filename */
+    now = time(NULL);
+    localtime_r(&now, &tmNow);
+    snprintf(path, sizeof(path), "%s/pfr_%04d%02d%02d_%02d%02d%02d_%04u.bmp",
+             sScreenshotDir,
+             tmNow.tm_year + 1900, tmNow.tm_mon + 1, tmNow.tm_mday,
+             tmNow.tm_hour, tmNow.tm_min, tmNow.tm_sec,
+             sScreenshotCounter++);
+
+    /* Create SDL surface from GBA framebuffer (ARGB8888 -> RGB888 BMP) */
+    surface = SDL_CreateRGBSurface(0, GBA_SCREEN_WIDTH, GBA_SCREEN_HEIGHT,
+                                   32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0);
+    if (!surface)
+    {
+        fprintf(stderr, "screenshot: SDL_CreateRGBSurface failed: %s\n", SDL_GetError());
+        return;
+    }
+
+    SDL_LockSurface(surface);
+    pixels = (u32 *)surface->pixels;
+    for (y = 0; y < GBA_SCREEN_HEIGHT; y++)
+    {
+        for (x = 0; x < GBA_SCREEN_WIDTH; x++)
+            pixels[y * (surface->pitch / 4) + x] = fb[y * GBA_SCREEN_WIDTH + x];
+    }
+    SDL_UnlockSurface(surface);
+
+    if (SDL_SaveBMP(surface, path) == 0)
+    {
+        char status[80];
+        snprintf(status, sizeof(status), "SCREENSHOT: %s", strrchr(path, '/') + 1);
+        SetStatusText(status);
+        fprintf(stderr, "screenshot: saved %s\n", path);
+    }
+    else
+    {
+        fprintf(stderr, "screenshot: SDL_SaveBMP failed: %s\n", SDL_GetError());
+    }
+
+    SDL_FreeSurface(surface);
 }
 
 static void SetStatusText(const char *text)
@@ -303,7 +368,7 @@ static bool8 HeadlessDisplayPresentImpl(void)
 static SDL_Window *sWindow = NULL;
 static SDL_Renderer *sSDLRenderer = NULL;
 static SDL_Texture *sTexture = NULL;
-static bool8 sSDLInit = FALSE;
+static u32 sSDLInit = FALSE;
 
 /* GBA button → SDL scancode mapping */
 static const struct {
@@ -636,6 +701,10 @@ static void OverlayStepToParent(void)
 static void OverlayActivateSelection(void)
 {
     char path[PATH_MAX];
+
+    /* Ensure currentDir is valid (may have been cleared by savestate restore) */
+    if (sOverlayState.currentDir[0] == '\0')
+        snprintf(sOverlayState.currentDir, sizeof(sOverlayState.currentDir), "%s", sStateDir);
 
     if (sOverlayState.refreshRequested)
         OverlayRefreshEntries();
@@ -1084,6 +1153,115 @@ static void DrawOverlayPanel(void)
         DrawTextClipped(16, 140, panel.w - 12, sRed, sOverlayState.message);
 }
 
+
+static void DrawEggHatchPanel(void)
+{
+    SDL_Rect panel;
+    SDL_Color white = {255, 255, 255, 255};
+    SDL_Color green = {120, 230, 120, 255};
+    SDL_Color yellow = {255, 214, 102, 255};
+    SDL_Color cyan = {102, 220, 255, 255};
+    char line[80];
+    int y;
+    int i;
+    int lineCount;
+
+    if (!sEggHatchActive)
+        return;
+
+    /* Calculate panel height */
+    lineCount = 1; /* header */
+    if (!sEggHatchInfoValid)
+    {
+        lineCount++; /* "waiting for data" */
+    }
+    else if (sEggHatchInfo.route5_occupied == 0
+          && sEggHatchInfo.daycare_count == 0
+          && sEggHatchInfo.egg_count == 0)
+    {
+        lineCount++; /* "no daycare/eggs" */
+    }
+    if (sEggHatchInfo.route5_occupied)
+        lineCount++;
+    lineCount += sEggHatchInfo.daycare_count;
+    if (sEggHatchInfo.egg_count > 0)
+        lineCount++; /* "EGGS:" header */
+    lineCount += sEggHatchInfo.egg_count;
+
+    panel.x = 4;
+    panel.y = GBA_SCREEN_HEIGHT - 4 - (lineCount * 10 + 6);
+    panel.w = 180;
+    panel.h = lineCount * 10 + 6;
+
+    SDL_SetRenderDrawBlendMode(sSDLRenderer, SDL_BLENDMODE_BLEND);
+    SDL_SetRenderDrawColor(sSDLRenderer, 0, 0, 0, 180);
+    SDL_RenderFillRect(sSDLRenderer, &panel);
+    SDL_SetRenderDrawColor(sSDLRenderer, 80, 160, 80, 255);
+    SDL_RenderDrawRect(sSDLRenderer, &panel);
+
+    y = panel.y + 3;
+
+    /* Header */
+    DrawTextClipped(panel.x + 4, y, panel.w - 8, green, "EGG HATCH MODE");
+    y += 10;
+
+    if (!sEggHatchInfoValid)
+    {
+        DrawTextClipped(panel.x + 4, y, panel.w - 8, white, "Waiting for data...");
+        return;
+    }
+    if (sEggHatchInfo.route5_occupied == 0
+     && sEggHatchInfo.daycare_count == 0
+     && sEggHatchInfo.egg_count == 0)
+    {
+        DrawTextClipped(panel.x + 4, y, panel.w - 8, white, "No daycare mon / eggs");
+        return;
+    }
+
+    /* Route 5 daycare */
+    if (sEggHatchInfo.route5_occupied)
+    {
+        snprintf(line, sizeof(line), "R5: #%03u Lv%u +%u steps",
+                 sEggHatchInfo.route5.species,
+                 sEggHatchInfo.route5.level,
+                 (unsigned)sEggHatchInfo.route5.steps);
+        DrawTextClipped(panel.x + 4, y, panel.w - 8, cyan, line);
+        y += 10;
+    }
+
+    /* Four Island daycare */
+    for (i = 0; i < sEggHatchInfo.daycare_count; i++)
+    {
+        snprintf(line, sizeof(line), "DC%d: #%03u Lv%u +%u steps",
+                 i, sEggHatchInfo.daycare[i].species,
+                 sEggHatchInfo.daycare[i].level,
+                 (unsigned)sEggHatchInfo.daycare[i].steps);
+        DrawTextClipped(panel.x + 4, y, panel.w - 8, cyan, line);
+        y += 10;
+    }
+
+    /* Eggs in party */
+    if (sEggHatchInfo.egg_count > 0)
+    {
+        DrawTextClipped(panel.x + 4, y, panel.w - 8, yellow, "EGGS IN PARTY:");
+        y += 10;
+        for (i = 0; i < sEggHatchInfo.egg_count; i++)
+        {
+            u32 stepsPerCycle = 256;
+            u32 stepsRemaining = (u32)sEggHatchInfo.eggs[i].egg_cycles * stepsPerCycle;
+            u32 totalSteps = (u32)sEggHatchInfo.eggs[i].base_egg_cycles * stepsPerCycle;
+            u32 stepped = totalSteps > stepsRemaining ? totalSteps - stepsRemaining : 0;
+            snprintf(line, sizeof(line), " #%03u %u/%u steps (cyc %u/%u)",
+                     sEggHatchInfo.eggs[i].species,
+                     (unsigned)stepped, (unsigned)totalSteps,
+                     sEggHatchInfo.eggs[i].egg_cycles,
+                     sEggHatchInfo.eggs[i].base_egg_cycles);
+            DrawTextClipped(panel.x + 4, y, panel.w - 8, white, line);
+            y += 10;
+        }
+    }
+}
+
 static void DrawTurboIndicator(void)
 {
     SDL_Rect box;
@@ -1204,6 +1382,17 @@ static void PollInput(void)
             keyinput &= ~sKeyMap[i].gba_bit;
     }
 
+    /* Egg-hatch auto-walk: alternate UP/DOWN each frame */
+    if (sEggHatchActive && !sOverlayState.active)
+    {
+        sEggHatchFrame++;
+        /* Alternate: even frames = DOWN, odd frames = UP */
+        if (sEggHatchFrame & 1)
+            keyinput = (keyinput | 0x00C0) & ~0x0040; /* UP only */
+        else
+            keyinput = (keyinput | 0x00C0) & ~0x0080; /* DOWN only */
+    }
+
     REG_KEYINPUT = keyinput;
 }
 
@@ -1234,16 +1423,28 @@ bool8 HostDisplayPresent(void)
             if (event.key.keysym.scancode == SDL_SCANCODE_F1)
             {
                 if (event.key.keysym.mod & KMOD_SHIFT)
+                {
+                    fprintf(stderr, "[KEY] Shift+F1 -> overlay load\n");
                     OverlayOpen(TRUE);
+                }
                 else
+                {
+                    fprintf(stderr, "[KEY] F1 -> state load\n");
                     sActionBits |= HOST_DISPLAY_ACTION_STATE_LOAD;
+                }
             }
             else if (event.key.keysym.scancode == SDL_SCANCODE_F2)
             {
                 if (event.key.keysym.mod & KMOD_SHIFT)
+                {
+                    fprintf(stderr, "[KEY] Shift+F2 -> overlay save\n");
                     OverlayOpen(FALSE);
+                }
                 else
+                {
+                    fprintf(stderr, "[KEY] F2 -> state save\n");
                     sActionBits |= HOST_DISPLAY_ACTION_STATE_SAVE;
+                }
             }
             else if (event.key.keysym.scancode == SDL_SCANCODE_F5)
                 sActionBits |= HOST_DISPLAY_ACTION_QUICKSAVE;
@@ -1251,6 +1452,8 @@ bool8 HostDisplayPresent(void)
                 sActionBits |= HOST_DISPLAY_ACTION_QUICKLOAD;
             else if (event.key.keysym.scancode == SDL_SCANCODE_F10)
                 sActionBits |= HOST_DISPLAY_ACTION_REPAIR_BAG;
+            else if (event.key.keysym.scancode == SDL_SCANCODE_F12 || event.key.keysym.scancode == SDL_SCANCODE_PRINTSCREEN)
+                HostDisplayTakeScreenshot();
             else if (event.key.keysym.scancode == SDL_SCANCODE_SPACE)
             {
                 if (event.key.keysym.mod & KMOD_SHIFT)
@@ -1260,6 +1463,15 @@ bool8 HostDisplayPresent(void)
                     sTurboEnabled = !sTurboEnabled;
                     UpdateTurboToggleStatus();
                 }
+            }
+            else if (event.key.keysym.scancode == SDL_SCANCODE_F3)
+            {
+                sEggHatchActive = !sEggHatchActive;
+                sEggHatchFrame = 0;
+                if (sEggHatchActive)
+                    SetStatusText("EGG HATCH: ON");
+                else
+                    SetStatusText("EGG HATCH: OFF");
             }
         }
     }
@@ -1280,6 +1492,7 @@ bool8 HostDisplayPresent(void)
     if (sOverlayState.active)
         DrawOverlayPanel();
     DrawTurboIndicator();
+    DrawEggHatchPanel();
     SDL_RenderPresent(sSDLRenderer);
     if (sStatusTextFrames != 0)
         sStatusTextFrames--;
@@ -1326,6 +1539,25 @@ void HostDisplayDestroy(void)
 }
 
 #endif /* HOST_DISPLAY_SDL2 */
+
+
+void HostDisplaySetEggHatchInfo(const struct EggHatchInfo *info)
+{
+    if (info != NULL)
+    {
+        sEggHatchInfo = *info;
+        sEggHatchInfoValid = TRUE;
+    }
+    else
+    {
+        sEggHatchInfoValid = FALSE;
+    }
+}
+
+bool8 HostDisplayIsEggHatchActive(void)
+{
+    return sEggHatchActive;
+}
 
 u32 HostDisplayConsumeActions(void)
 {

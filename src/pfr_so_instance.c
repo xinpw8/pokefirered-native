@@ -53,6 +53,8 @@ static int copy_file(const char *src, const char *dst)
     return 0;
 }
 
+static const char *base_so_path_g = NULL;
+
 /* Resolve all 7 exported function pointers from the dlopen'd handle. */
 static int resolve_symbols(PfrInstance *inst)
 {
@@ -84,7 +86,36 @@ static int resolve_symbols(PfrInstance *inst)
     RESOLVE(step_frames_exact, "pfr_game_step_frames_exact");
     RESOLVE(get_framebuffer,   "pfr_game_get_framebuffer");
     RESOLVE(copy_framebuffer,  "pfr_game_copy_framebuffer");
+    /* Try render_current_frame from game SO first */
+    *(void **)(&inst->render_current_frame) = dlsym(inst->dl_handle, "pfr_game_render_current_frame");
 
+    /* If not in game SO, load a per-instance copy of the render patch SO */
+    if (!inst->render_current_frame && base_so_path_g) {
+        char patch_src[512], patch_dst[512];
+        const char *last_slash = strrchr(base_so_path_g, '/');
+        if (last_slash) {
+            int dir_len = (int)(last_slash - base_so_path_g + 1);
+            snprintf(patch_src, sizeof(patch_src), "%.*slibpfr_render_patch.so", dir_len, base_so_path_g);
+        } else {
+            snprintf(patch_src, sizeof(patch_src), "libpfr_render_patch.so");
+        }
+        /* Copy patch SO per instance so each gets its own static state */
+        snprintf(patch_dst, sizeof(patch_dst), "%s_render_patch_%d.so",
+                 inst->so_path, inst->instance_id);
+        if (copy_file(patch_src, patch_dst) == 0) {
+            void *patch_handle = dlopen(patch_dst, RTLD_NOW | RTLD_LOCAL);
+            if (patch_handle) {
+                typedef void (*set_fns_t)(void (*)(void), void (*)(void));
+                set_fns_t set_fns = (set_fns_t)dlsym(patch_handle, "pfr_render_patch_set_fns");
+                void (*ri)(void) = (void (*)(void))dlsym(inst->dl_handle, "HostRendererInit");
+                void (*rf)(void) = (void (*)(void))dlsym(inst->dl_handle, "HostRendererRenderFrame");
+                if (set_fns && ri && rf) {
+                    set_fns(ri, rf);
+                    *(void **)(&inst->render_current_frame) = dlsym(patch_handle, "pfr_game_render_current_frame");
+                }
+            }
+        }
+    }
     #undef RESOLVE
     return 0;
 }
@@ -93,6 +124,7 @@ int pfr_instances_create(const char *base_so_path, const char *tmp_dir,
                          PfrInstance *instances, int n)
 {
     pid_t pid = getpid();
+    base_so_path_g = base_so_path;
 
     /* Ensure tmp_dir exists (ignore EEXIST) */
     mkdir(tmp_dir, 0755);

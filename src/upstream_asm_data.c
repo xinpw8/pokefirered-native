@@ -28,6 +28,9 @@
 #include "upstream_battle_scripts.h"
 #include "upstream_battle_ai_scripts.h"
 #include "upstream_field_effect_scripts.h"
+#include "game_ctx.h"
+#include <stdio.h>
+#include "game_ctx_macros.h"
 
 #define HOST_PTR_BYTES 8
 #define G_SCRIPT_CMD_TABLE_COUNT 0xD5
@@ -494,31 +497,34 @@ __asm__(
  * Matches the .4byte list in data/event_scripts.s (21 entries).
  * ========================================================================= */
 
-extern u16 gSpecialVar_0x8014;
+/* gSpecialVar_0x8014: now via game_ctx_macros.h */
 
-u16 *const gSpecialVars[] = {
-    &gSpecialVar_0x8000,
-    &gSpecialVar_0x8001,
-    &gSpecialVar_0x8002,
-    &gSpecialVar_0x8003,
-    &gSpecialVar_0x8004,
-    &gSpecialVar_0x8005,
-    &gSpecialVar_0x8006,
-    &gSpecialVar_0x8007,
-    &gSpecialVar_0x8008,
-    &gSpecialVar_0x8009,
-    &gSpecialVar_0x800A,
-    &gSpecialVar_0x800B,
-    &gSpecialVar_Facing,
-    &gSpecialVar_Result,
-    &gSpecialVar_ItemId,
-    &gSpecialVar_LastTalked,
-    &gSpecialVar_MonBoxId,
-    &gSpecialVar_MonBoxPos,
-    &gSpecialVar_TextColor,
-    &gSpecialVar_PrevTextColor,
-    &gSpecialVar_0x8014,
-};
+u16 * gSpecialVars[21];  /* 21 entries, initialized at runtime */
+
+void InitSpecialVars(void)
+{
+    gSpecialVars[0]  = &gSpecialVar_0x8000;
+    gSpecialVars[1]  = &gSpecialVar_0x8001;
+    gSpecialVars[2]  = &gSpecialVar_0x8002;
+    gSpecialVars[3]  = &gSpecialVar_0x8003;
+    gSpecialVars[4]  = &gSpecialVar_0x8004;
+    gSpecialVars[5]  = &gSpecialVar_0x8005;
+    gSpecialVars[6]  = &gSpecialVar_0x8006;
+    gSpecialVars[7]  = &gSpecialVar_0x8007;
+    gSpecialVars[8]  = &gSpecialVar_0x8008;
+    gSpecialVars[9]  = &gSpecialVar_0x8009;
+    gSpecialVars[10] = &gSpecialVar_0x800A;
+    gSpecialVars[11] = &gSpecialVar_0x800B;
+    gSpecialVars[12] = &gSpecialVar_Facing;
+    gSpecialVars[13] = &gSpecialVar_Result;
+    gSpecialVars[14] = &gSpecialVar_ItemId;
+    gSpecialVars[15] = &gSpecialVar_LastTalked;
+    gSpecialVars[16] = &gSpecialVar_MonBoxId;
+    gSpecialVars[17] = &gSpecialVar_MonBoxPos;
+    gSpecialVars[18] = &gSpecialVar_TextColor;
+    gSpecialVars[19] = &gSpecialVar_PrevTextColor;
+    gSpecialVars[20] = &gSpecialVar_0x8014;
+}
 
 /*
  * gStdScripts / gStdScriptsEnd: event_scripts.s defines these as .4byte tables.

@@ -27,6 +27,7 @@ enum
     HOST_DISPLAY_ACTION_STATE_SAVE_AS  = 1 << 4,
     HOST_DISPLAY_ACTION_STATE_LOAD_AS  = 1 << 5,
     HOST_DISPLAY_ACTION_REPAIR_BAG     = 1 << 6,
+    HOST_DISPLAY_ACTION_SCREENSHOT     = 1 << 7,
 };
 
 /* Render the current GBA state and present it.
@@ -42,6 +43,7 @@ u32 HostDisplayConsumeActions(void);
 bool8 HostDisplayConsumeSelectedStatePath(char *outPath, size_t outSize);
 bool8 HostDisplayHasModalOverlay(void);
 void HostDisplaySetStateDir(const char *dir);
+void HostDisplayTakeScreenshot(void);
 
 /* Frame dump control (works in both SDL and headless modes). */
 void HostDisplaySetDumpDir(const char *dir);
@@ -53,5 +55,39 @@ u32 HostDisplayGetFrameCount(void);
 /* Fast-forward / render policy. */
 u32 HostDisplayGetFastForwardFactor(void);
 bool8 HostDisplayNeedsFrameRender(void);
+
+
+/* ── Egg-hatch auto-walk + daycare/egg tracking OSD ── */
+
+#define EGG_HATCH_MAX_DAYCARE 2
+#define EGG_HATCH_MAX_EGGS    6
+
+struct EggHatchDaycareMon {
+    u16 species;
+    u8  level;
+    u32 steps;
+};
+
+struct EggHatchEggInfo {
+    u16 species;
+    u8  egg_cycles;     /* current friendship value (acts as egg cycle counter) */
+    u8  base_egg_cycles; /* from species base stats (initial value) */
+};
+
+struct EggHatchInfo {
+    struct EggHatchDaycareMon daycare[EGG_HATCH_MAX_DAYCARE];
+    u8 daycare_count;
+    struct EggHatchDaycareMon route5;
+    bool8 route5_occupied;
+    struct EggHatchEggInfo eggs[EGG_HATCH_MAX_EGGS];
+    u8 egg_count;
+    u32 total_steps;  /* player step counter for reference */
+};
+
+/* Called by pfr_play.c each frame to provide tracking data. */
+void HostDisplaySetEggHatchInfo(const struct EggHatchInfo *info);
+
+/* Query auto-walk state (for input injection). */
+bool8 HostDisplayIsEggHatchActive(void);
 
 #endif

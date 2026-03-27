@@ -59,15 +59,15 @@ u32 gHostTitleStubGetKantoPokedexCountCalls = 0;
 int gHostTitleStubLastMultiBootLength = 0;
 const u8 *gHostTitleStubLastPrintedText = NULL;
 const u8 *gHostTitleStubLastPrintedText3 = NULL;
-s8 gHostTitleStubMenuProcessInputResult = MENU_NOTHING_CHOSEN;
-bool8 gHostTitleStubWirelessAdapterConnected = FALSE;
+s32 gHostTitleStubMenuProcessInputResult = MENU_NOTHING_CHOSEN;
+u32 gHostTitleStubWirelessAdapterConnected = FALSE;
 bool32 gHostTitleStubMysteryGiftEnabled = FALSE;
-bool8 gHostTitleStubNationalPokedexEnabled = FALSE;
-u16 gHostTitleStubNationalPokedexCount = 0;
-u16 gHostTitleStubKantoPokedexCount = 0;
-u8 gHostTitleStubFlagGetBadgeMask = 0;
-bool8 gHostTitleStubTextPrinterActive = FALSE;
-static bool8 sHostTitleStubMultiBootComplete = FALSE;
+u32 gHostTitleStubNationalPokedexEnabled = FALSE;
+u32 gHostTitleStubNationalPokedexCount = 0;
+u32 gHostTitleStubKantoPokedexCount = 0;
+u32 gHostTitleStubFlagGetBadgeMask = 0;
+u32 gHostTitleStubTextPrinterActive = FALSE;
+static u32 sHostTitleStubMultiBootComplete = FALSE;
 struct HostTitleStubMenuState
 {
     bool8 active;
@@ -85,7 +85,7 @@ static struct HostTitleStubMenuState sHostTitleStubMenu = {
     .active = FALSE,
     .windowId = HOST_TITLE_NO_MENU_WINDOW,
 };
-static u8 sHostTitleStubYesNoWindowId = HOST_TITLE_NO_MENU_WINDOW;
+static u32 sHostTitleStubYesNoWindowId = HOST_TITLE_NO_MENU_WINDOW;
 
 static void HostTitleScreenStubResetMenuState(void);
 static void HostTitleScreenStubRedrawMenuCursor(void);

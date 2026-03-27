@@ -28,6 +28,7 @@
 #include "constants/trainer_tower.h"
 #include "constants/vars.h"
 #include "gba/macro.h"
+#include "game_ctx.h"
 #include "gpu_regs.h"
 #include "clear_save_data_screen.h"
 #include "event_data.h"
@@ -102,6 +103,7 @@ extern const u8 gOakSpeech_Text_YourNameWhatIsIt[];
 extern const u8 gOakSpeech_Text_WhatWasHisName[];
 extern const u8 *gHostLastOakSpeechSource;
 
+#include "game_ctx_macros.h"
 void EnableVCountIntrAtLine150(void);
 
 void HostLogSaveStatus(u8 status)
@@ -2479,6 +2481,7 @@ int main(void)
     int rc = 0;
 
     signal(SIGSEGV, crash_handler);
+    g_ctx = game_ctx_alloc();
     HostMemoryInit();
     RUN_FILTERED_TEST("TestRandom", TestRandom());
     RUN_FILTERED_TEST("TestHeap", TestHeap());

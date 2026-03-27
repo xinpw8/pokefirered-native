@@ -22,6 +22,7 @@
  */
 
 #include <stdio.h>
+#include <stddef.h>
 #include <stdlib.h>
 #include <dirent.h>
 #include <errno.h>
@@ -70,6 +71,7 @@
 #include "host_flash.h"
 #include "host_log.h"
 #include "host_savestate.h"
+#include "host_runtime_stubs.h"
 
 /* Declared in main.c (non-static) but no header */
 extern void EnableVCountIntrAtLine150(void);
@@ -78,11 +80,13 @@ extern void SetNotInSaveFailedScreen(void);
 #include "host_memory.h"
 #include "host_renderer.h"
 #include "host_display.h"
+#include "game_ctx.h"
 #include "host_crt0.h"
 #include "host_intro_stubs.h"
 #include "host_frame_step.h"
 #include "overworld.h"
 #include "host_new_game_stubs.h"
+#include "new_game.h"
 #include "host_oak_speech_stubs.h"
 #include "host_title_screen_stubs.h"
 #include "item.h"
@@ -98,6 +102,7 @@ void HostPatchEventScriptPointers(void);
 void HostPatchFieldEffectScriptPointers(void);
 void HostPatchBattleAIScriptPointers(void);
 void HostPatchBattleAnimScriptPointers(void);
+void HostScriptPtrTabReset(void);
 
 /* ── Save diagnostic ──────────────────────────────────────── */
 
@@ -141,6 +146,7 @@ static char sSnapshotDir[PATH_MAX] = "pfr_debug_saves";
 static char sStateDir[PATH_MAX] = "pfr_debug_states";
 static char sQuickLoadPath[PATH_MAX];
 static char sControlFilePath[PATH_MAX];
+static char sBootLoadStatePath[PATH_MAX];
 static char **sProgramArgv;
 static bool8 sBenchmarkEnabled;
 static bool8 sBenchmarkCompleted;
@@ -164,6 +170,7 @@ static u32 sLastAskPlayerGenderPrints;
 static u32 sUniformFrameRunLength;
 static u32 sLastUniformColor;
 static bool8 sSnapshotRequested;
+static bool8 sGhostBattlePending;
 static char sSnapshotLabel[96];
 
 #define MAX_SCRIPTED_INPUT_RANGES 256
@@ -197,6 +204,9 @@ static bool8 sFastModeEnabled;
 static bool8 sRestartRequested;
 static bool8 sShutdownRequested;
 static bool8 sPresentRestoredFramePending;
+static bool8 sBattleEntryLogged;
+static u32 sBattleTraceCounter;
+static u32 sBattleTraceInterval;
 static bool8 sTraceOverworldStartupActive;
 static bool8 sTraceOverworldStartupCompleted;
 static bool8 sTraceOverworldFirstVisibleLogged;
@@ -924,12 +934,14 @@ static bool8 CaptureHotSavestate(u32 frame, const char *reason)
         HostAudioUnlock();
         snprintf(buffer, sizeof(buffer), "state save (%s) failed: %s", reason, HostSavestateGetLastError());
         TraceLog(frame, buffer);
+        fprintf(stderr, "[SAVESTATE] STATE SAVE FAILED: %s\n", HostSavestateGetLastError());
         return FALSE;
     }
     HostAudioUnlock();
 
     snprintf(buffer, sizeof(buffer), "state save (%s): captured hot snapshot", reason);
     TraceLog(frame, buffer);
+    fprintf(stderr, "[SAVESTATE] STATE SAVED (hot)\n");
     return TRUE;
 }
 
@@ -943,14 +955,29 @@ static bool8 RestoreHotSavestate(u32 frame, const char *reason)
         HostAudioUnlock();
         snprintf(buffer, sizeof(buffer), "state load (%s) failed: %s", reason, HostSavestateGetLastError());
         TraceLog(frame, buffer);
+        fprintf(stderr, "[SAVESTATE] STATE LOAD FAILED: %s\n", HostSavestateGetLastError());
         return FALSE;
     }
     HostAudioResetBufferedSamples();
     HostAudioUnlock();
 
+    /* Re-seat pointers and re-patch script bytecode after bulk memory restore.
+     * The restore overwrites .data/.bss (including ewram_data) with snapshot
+     * values, which invalidates function pointers and script pointer table. */
+    gSaveBlock2Ptr = &gSaveBlock2;
+    gSaveBlock1Ptr = &gSaveBlock1;
+    gPokemonStoragePtr = &gPokemonStorage;
+    HostScriptPtrTabReset();
+    HostPatchBattleScriptPointers();
+    HostPatchEventScriptPointers();
+    HostPatchFieldEffectScriptPointers();
+    HostPatchBattleAIScriptPointers();
+    HostPatchBattleAnimScriptPointers();
+
     sPresentRestoredFramePending = TRUE;
     snprintf(buffer, sizeof(buffer), "state load (%s): restored hot snapshot", reason);
     TraceLog(frame, buffer);
+    fprintf(stderr, "[SAVESTATE] STATE LOADED (hot)\n");
     return TRUE;
 }
 
@@ -980,6 +1007,56 @@ static bool8 SaveSavestateToFileAtPath(u32 frame, const char *reason, const char
     return TRUE;
 }
 
+static bool8 TryDegradedStateLoad(u32 frame, const char *path)
+{
+    size_t savedSize = 0;
+    void *savedCtx;
+    size_t minNeeded;
+
+    savedCtx = HostSavestateExtractGCtx(path, &savedSize);
+    if (savedCtx == NULL)
+        return FALSE;
+
+    /* The saved blob must be large enough to contain all three save
+     * structures.  We require at least the sum of their sizes. */
+    minNeeded = sizeof(struct SaveBlock2)
+              + sizeof(struct SaveBlock1)
+              + sizeof(struct PokemonStorage);
+    if (savedSize < minNeeded)
+    {
+        fprintf(stderr, "savestate degraded: saved blob too small (%zu vs %zu needed)\n",
+                savedSize, minNeeded);
+        free(savedCtx);
+        return FALSE;
+    }
+
+    /* Copy save-relevant data from the saved blob into the current globals.
+     * Layout assumption: SaveBlock2, SaveBlock1, PokemonStorage packed
+     * sequentially at the start of the old GameCtx. */
+    {
+        char *p = (char *)savedCtx;
+        memcpy(&gSaveBlock2, p, sizeof(struct SaveBlock2));
+        p += sizeof(struct SaveBlock2);
+        memcpy(&gSaveBlock1, p, sizeof(struct SaveBlock1));
+        p += sizeof(struct SaveBlock1);
+        memcpy(&gPokemonStorage, p, sizeof(struct PokemonStorage));
+    }
+    free(savedCtx);
+
+    /* Re-seat pointers */
+    gSaveBlock2Ptr = &gSaveBlock2;
+    gSaveBlock1Ptr = &gSaveBlock1;
+    gPokemonStoragePtr = &gPokemonStorage;
+
+    /* Force title screen -- all execution state (tasks, sprites, callbacks)
+     * stays from the current build, only game progress is restored. */
+    SetMainCallback2(CB2_ContinueSavedGame);
+
+    fprintf(stderr, "savestate degraded: restored save blocks from %s "
+            "(different build). Resuming via CONTINUE.\n", path);
+    return TRUE;
+}
+
 static bool8 LoadSavestateFromFileAtPath(u32 frame, const char *reason, const char *path)
 {
     char buffer[PATH_MAX + 384];
@@ -988,12 +1065,43 @@ static bool8 LoadSavestateFromFileAtPath(u32 frame, const char *reason, const ch
     if (!HostSavestateLoadFromFile(path))
     {
         HostAudioUnlock();
+
+        /* If the normal load failed due to fingerprint mismatch, try a
+         * degraded load that extracts only the save blocks (game progress)
+         * from the old state and resumes via CONTINUE. */
+        if (!HostSavestateCheckFingerprint(path))
+        {
+            HostAudioLock();
+            bool8 ok = TryDegradedStateLoad(frame, path);
+            HostAudioUnlock();
+            if (ok)
+            {
+                sPresentRestoredFramePending = TRUE;
+                snprintf(buffer, sizeof(buffer),
+                    "state degraded-load (%s): restored save blocks from %s", reason, path);
+                TraceLog(frame, buffer);
+                return TRUE;
+            }
+        }
+
         snprintf(buffer, sizeof(buffer), "state load-as (%s) failed: %s", reason, HostSavestateGetLastError());
         TraceLog(frame, buffer);
         return FALSE;
     }
     HostAudioResetBufferedSamples();
     HostAudioUnlock();
+
+    /* After cross-session state restore, re-seat the save block pointers
+     * and re-patch script bytecode in case the restore overwrote them. */
+    gSaveBlock2Ptr = &gSaveBlock2;
+    gSaveBlock1Ptr = &gSaveBlock1;
+    gPokemonStoragePtr = &gPokemonStorage;
+    HostScriptPtrTabReset();
+    HostPatchBattleScriptPointers();
+    HostPatchEventScriptPointers();
+    HostPatchFieldEffectScriptPointers();
+    HostPatchBattleAIScriptPointers();
+    HostPatchBattleAnimScriptPointers();
 
     sPresentRestoredFramePending = TRUE;
     snprintf(buffer, sizeof(buffer), "state load-as (%s): %s", reason, path);
@@ -1084,6 +1192,17 @@ static void ProcessControlCommand(u32 frame, const char *command)
     else if (strcmp(line, "list") == 0)
     {
         LogAvailableSnapshots(frame);
+    }
+    else if (strcmp(line, "ghostbattle") == 0)
+    {
+        extern bool8 sGhostBattlePending;
+        sGhostBattlePending = TRUE;
+        TraceLog(frame, "control: ghost battle queued (will trigger in overworld)");
+    }
+    else if (strcmp(line, "screenshot") == 0)
+    {
+        HostDisplayTakeScreenshot();
+        TraceLog(frame, "control: screenshot taken");
     }
     else if (strcmp(line, "quit") == 0)
     {
@@ -1274,6 +1393,88 @@ static void RepairBag(u32 frame)
     TraceLog(frame, buf);
 }
 
+
+/* -- Egg-hatch tracking: read daycare + party egg state -- */
+static void UpdateEggHatchInfo(void)
+{
+    struct EggHatchInfo info;
+    int i;
+    static u32 sEggDebugCounter = 0;
+
+    if (gSaveBlock1Ptr == NULL)
+    {
+        if (sEggDebugCounter++ % 300 == 0)
+            fprintf(stderr, "EGG_DBG: gSaveBlock1Ptr is NULL\n");
+        return;
+    }
+
+    memset(&info, 0, sizeof(info));
+
+    /* Route 5 daycare (single mon) */
+    {
+        struct DaycareMon *r5 = &gSaveBlock1Ptr->route5DayCareMon;
+        /* Use MON_DATA_SANITY_HAS_SPECIES (field 5, below encrypt separator)
+         * to avoid triggering decrypt->checksum->encrypt on every frame.
+         * A single checksum mismatch permanently sets isBadEgg = TRUE. */
+        if (GetBoxMonData(&r5->mon, MON_DATA_SANITY_HAS_SPECIES, NULL))
+        {
+            info.route5_occupied = TRUE;
+            info.route5.species = 0;  /* species/level require decrypt; omit for safety */
+            info.route5.level = 0;
+            info.route5.steps = r5->steps;
+        }
+    }
+
+    /* Four Island daycare (2 mons) */
+    for (i = 0; i < DAYCARE_MON_COUNT && i < EGG_HATCH_MAX_DAYCARE; i++)
+    {
+        struct DaycareMon *dc = &gSaveBlock1Ptr->daycare.mons[i];
+        /* Safe check: MON_DATA_SANITY_HAS_SPECIES never decrypts */
+        if (GetBoxMonData(&dc->mon, MON_DATA_SANITY_HAS_SPECIES, NULL))
+        {
+            info.daycare[info.daycare_count].species = 0;
+            info.daycare[info.daycare_count].level = 0;
+            info.daycare[info.daycare_count].steps = dc->steps;
+            info.daycare_count++;
+        }
+    }
+
+    /* Eggs in party */
+    {
+        u8 partyCount = gSaveBlock1Ptr->playerPartyCount;
+        if (partyCount > PARTY_SIZE)
+            partyCount = PARTY_SIZE;
+
+        for (i = 0; i < partyCount && info.egg_count < EGG_HATCH_MAX_EGGS; i++)
+        {
+            struct Pokemon *mon = &gPlayerParty[i];
+            u16 isEgg = GetMonData(mon, MON_DATA_IS_EGG, NULL);
+            if (isEgg)
+            {
+                u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+                u8 friendship = (u8)GetMonData(mon, MON_DATA_FRIENDSHIP, NULL);
+                u8 baseCycles = 0;
+
+                /* Look up base egg cycles from species data */
+                if (species < NUM_SPECIES)
+                    baseCycles = gSpeciesInfo[species].eggCycles;
+
+                info.eggs[info.egg_count].species = species;
+                info.eggs[info.egg_count].egg_cycles = friendship;
+                info.eggs[info.egg_count].base_egg_cycles = baseCycles;
+                info.egg_count++;
+            }
+        }
+    }
+
+    if (sEggDebugCounter++ % 300 == 0)
+        fprintf(stderr, "EGG_DBG: r5_occ=%d dc_cnt=%d egg_cnt=%d party=%d\n",
+                info.route5_occupied, info.daycare_count, info.egg_count,
+                gSaveBlock1Ptr->playerPartyCount);
+
+    HostDisplaySetEggHatchInfo(&info);
+}
+
 static void HandleHostActions(u32 frame)
 {
     u32 actions = HostDisplayConsumeActions();
@@ -1305,6 +1506,9 @@ static void HandleHostActions(u32 frame)
 
     if (actions & HOST_DISPLAY_ACTION_REPAIR_BAG)
         RepairBag(frame);
+
+    if (actions & HOST_DISPLAY_ACTION_SCREENSHOT)
+        HostDisplayTakeScreenshot();
 
     ProcessControlFile(frame);
 }
@@ -1850,6 +2054,80 @@ static const char *CallbackName(MainCallback callback)
 
 /* OakPlaceholderName removed — StringExpandPlaceholders now from upstream */
 
+
+static void TraceBattleState(u32 frame)
+{
+    char buf[256];
+    u32 i;
+
+    if (0) /* always trace battles */
+        return;
+
+    /* Player party */
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
+        if (species == SPECIES_NONE)
+            break;
+        u16 hp = GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL);
+        u16 maxHp = GetMonData(&gPlayerParty[i], MON_DATA_MAX_HP, NULL);
+        u16 level = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL, NULL);
+        u16 move1 = GetMonData(&gPlayerParty[i], MON_DATA_MOVE1, NULL);
+        u16 move2 = GetMonData(&gPlayerParty[i], MON_DATA_MOVE2, NULL);
+        u16 move3 = GetMonData(&gPlayerParty[i], MON_DATA_MOVE3, NULL);
+        u16 move4 = GetMonData(&gPlayerParty[i], MON_DATA_MOVE4, NULL);
+        snprintf(buf, sizeof(buf),
+            "battle: playerParty[%u] species=%u lv=%u hp=%u/%u moves=%u,%u,%u,%u",
+            i, species, level, hp, maxHp, move1, move2, move3, move4);
+        TraceLog(frame, buf);
+    }
+
+    /* Enemy party */
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        u16 species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES, NULL);
+        if (species == SPECIES_NONE)
+            break;
+        u16 hp = GetMonData(&gEnemyParty[i], MON_DATA_HP, NULL);
+        u16 maxHp = GetMonData(&gEnemyParty[i], MON_DATA_MAX_HP, NULL);
+        u16 level = GetMonData(&gEnemyParty[i], MON_DATA_LEVEL, NULL);
+        snprintf(buf, sizeof(buf),
+            "battle: enemyParty[%u] species=%u lv=%u hp=%u/%u",
+            i, species, level, hp, maxHp);
+        TraceLog(frame, buf);
+    }
+
+    /* Battle mons (active battlers) */
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+    {
+        if (gBattleMons[i].species == SPECIES_NONE)
+            continue;
+        snprintf(buf, sizeof(buf),
+            "battle: gBattleMons[%u] species=%u lv=%u hp=%u/%u atk=%u def=%u spatk=%u spdef=%u spd=%u",
+            i, gBattleMons[i].species, gBattleMons[i].level,
+            gBattleMons[i].hp, gBattleMons[i].maxHP,
+            gBattleMons[i].attack, gBattleMons[i].defense,
+            gBattleMons[i].spAttack, gBattleMons[i].spDefense, gBattleMons[i].speed);
+        TraceLog(frame, buf);
+    }
+
+    /* Battler positions and party indexes */
+    snprintf(buf, sizeof(buf),
+        "battle: partyIdx=[%u,%u,%u,%u] positions=[%u,%u,%u,%u] spriteIds=[%u,%u,%u,%u]",
+        gBattlerPartyIndexes[0], gBattlerPartyIndexes[1],
+        gBattlerPartyIndexes[2], gBattlerPartyIndexes[3],
+        gBattlerPositions[0], gBattlerPositions[1],
+        gBattlerPositions[2], gBattlerPositions[3],
+        gBattlerSpriteIds[0], gBattlerSpriteIds[1],
+        gBattlerSpriteIds[2], gBattlerSpriteIds[3]);
+    TraceLog(frame, buf);
+
+    /* gBattleTypeFlags and gBattleMainFunc */
+    snprintf(buf, sizeof(buf), "battle: typeFlags=0x%08X mainFunc=%p cnt=%u",
+        gBattleTypeFlags, (void*)gBattleMainFunc, gBattlersCount);
+    TraceLog(frame, buf);
+}
+
 static void TraceCallbackChange(u32 frame, const char *label, MainCallback callback)
 {
     char buffer[160];
@@ -1891,6 +2169,18 @@ static void TraceMilestones(u32 frame)
     {
         sLastCallback2 = gMain.callback2;
         TraceCallbackChange(frame, "callback2", gMain.callback2);
+        if (gMain.callback2 == BattleMainCB2 && !sBattleEntryLogged)
+        {
+            sBattleEntryLogged = TRUE;
+            sBattleTraceCounter = 0;
+            sBattleTraceInterval = 30; /* trace every 30 frames */
+            TraceBattleState(frame);
+        }
+        if (gMain.callback2 != BattleMainCB2)
+        {
+            sBattleEntryLogged = FALSE;
+            sBattleTraceCounter = 0;
+        }
     }
 
     if (gHostTitleStubCB2InitMainMenuCalls != sLastMainMenuInitCalls)
@@ -2187,6 +2477,20 @@ static void PlayFrameLogic(void *userdata)
         TraceLog(frame, buffer);
     }
 
+    /* Ghost battle debug trigger */
+    {
+        extern bool8 sGhostBattlePending;
+        if (sGhostBattlePending
+         && gMain.callback1 == CB1_Overworld
+         && strcmp(CallbackName(gMain.callback2), "CB2_Overworld") == 0)
+        {
+            extern void StartMarowakBattle(void);
+            sGhostBattlePending = FALSE;
+            TraceLog(frame, "debug: triggering ghost marowak battle now");
+            StartMarowakBattle();
+        }
+    }
+
     if (gMain.callback1)
     {
         if (traceDetailed)
@@ -2221,10 +2525,16 @@ static void PlayFrameLogic(void *userdata)
 /* ── RL Action Boundary Instrumentation ──────────────────── */
 
 static bool8 sRlInstrumentEnabled = FALSE;
+static bool8 sSkipIntro = FALSE;
 static u32 sRlFramesSinceReady = 0;
 static bool8 sRlWasReady = FALSE;
 static u32 sRlActionCount = 0;
 static FILE *sRlInstrumentLog = NULL;
+
+/* ── RL HUD — print observation/reward data to stderr ── */
+static bool8 sHudEnabled = FALSE;
+static u32 sHudInterval = 60; /* print every N frames */
+static u32 sHudFrameCount = 0;
 
 static const char *GetGameModeName(void)
 {
@@ -2330,6 +2640,46 @@ static void RlInstrumentFrame(void)
     sRlWasReady = ready;
 }
 
+
+static void HudPrintFrame(void)
+{
+    if (!sHudEnabled) return;
+    sHudFrameCount++;
+    if (sHudFrameCount % sHudInterval != 0) return;
+
+    /* Tile coordinates (verified: tile units, NOT pixels) */
+    int16_t px = gSaveBlock1Ptr->pos.x;
+    int16_t py = gSaveBlock1Ptr->pos.y;
+    uint8_t mg = gSaveBlock1Ptr->location.mapGroup;
+    uint8_t mn = gSaveBlock1Ptr->location.mapNum;
+
+    /* Player direction */
+    struct ObjectEvent *playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+    uint8_t dir = playerObj->facingDirection & 0x0F;
+    static const char *sDirNames[] = {"NONE","S","N","W","E"};
+    const char *dirStr = (dir < 5) ? sDirNames[dir] : "?";
+
+    /* Party info */
+    uint8_t partyCount = gSaveBlock1Ptr->playerPartyCount;
+    uint16_t lvlSum = 0;
+    for (int i = 0; i < partyCount && i < 6; i++)
+        lvlSum += (uint16_t)GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+
+    /* Badges */
+    uint8_t badges = 0;
+    for (int i = 0; i < 8; i++)
+        if (FlagGet(FLAG_BADGE01_GET + i)) badges |= (1u << i);
+
+    /* Metatile at player pos (absolute = pos + MAP_OFFSET(7)) */
+    uint32_t behavior = MapGridGetMetatileBehaviorAt(px + 7, py + 7);
+
+    /* Print HUD line: pos, map, dir, party, badges, tile behavior */
+    fprintf(stderr,
+        "[HUD f=%u] pos=(%d,%d) map=(%u,%u) dir=%s party=%u lvl=%u badges=0x%02X tile=0x%02X mode=%s\n",
+        sHudFrameCount, (int)px, (int)py, (unsigned)mg, (unsigned)mn,
+        dirStr, (unsigned)partyCount, (unsigned)lvlSum, (unsigned)badges,
+        (unsigned)(behavior & 0xFF), GetGameModeName());
+}
 static void StepFrame(bool8 renderFrame)
 {
     struct PlayFrameContext ctx = { .frame = sEmulatedFrameCount };
@@ -2341,6 +2691,7 @@ static void StepFrame(bool8 renderFrame)
 
     sEmulatedFrameCount++;
     RlInstrumentFrame();
+    HudPrintFrame();
 }
 
 /* ── Main ──────────────────────────────────────────────────── */
@@ -2490,6 +2841,10 @@ int main(int argc, char *argv[])
                 setenv("PFR_FAST_FORWARD_FACTOR", "4096", 1);
             sDisableAudioEnabled = TRUE;
         }
+        else if (strcmp(argv[argi], "--load-state") == 0 && argi + 1 < argc)
+        {
+            SetPathOption(sBootLoadStatePath, sizeof(sBootLoadStatePath), argv[++argi], NULL);
+        }
         else if (strcmp(argv[argi], "--autoplay-continue") == 0)
         {
             sAutoPlayContinueEnabled = TRUE;
@@ -2511,13 +2866,22 @@ int main(int argc, char *argv[])
             fprintf(sRlInstrumentLog, "# Play the game normally. Each line logs a player_ready() transition.\n");
             fflush(sRlInstrumentLog);
         }
+        else if (strcmp(argv[argi], "--skip-intro") == 0)
+        {
+            sSkipIntro = TRUE;
+        }
+        else if (strcmp(argv[argi], "--hud") == 0)
+        {
+            sHudEnabled = TRUE;
+            fprintf(stderr, "pfr_play: HUD enabled (printing env state every %u frames to stderr)\n", sHudInterval);
+        }
         else if (strcmp(argv[argi], "--help") == 0)
         {
             fprintf(stderr,
                     "usage: %s [input_script] [--input path] [--save-path path] [--load-save path]\n"
                     "          [--snapshot-dir path] [--state-dir path] [--quickload-path path] [--control-file path]\n"
                     "          [--headless] [--unthrottled] [--fast-forward n] [--benchmark-frames n] [--mute] [--max-speed]\n"
-                    "          [--autoplay-continue] [--autoplay-oak] [--rl-instrument]\n",
+                    "          [--autoplay-continue] [--autoplay-oak] [--rl-instrument] [--skip-intro] [--hud]\n",
                     argv[0]);
             return 0;
         }
@@ -2599,7 +2963,10 @@ int main(int argc, char *argv[])
     if (!sDisableAudioEnabled)
         HostAudioInit();
     else
+    {
         TraceLog(0, "audio disabled by debug configuration");
+        gHostNoAudio = TRUE;
+    }
 
     EnableVCountIntrAtLine150();
     /* InitRFU() skipped: spins on rfu_waitREQComplete() waiting for
@@ -2607,7 +2974,8 @@ int main(int argc, char *argv[])
      * Single-player gameplay does not use RFU. */
     HostFlashInit(sActiveSavePath);
     CheckForFlashMemory();
-    HostSavestateInit();
+    if (!HostSavestateInit())
+        fprintf(stderr, "WARNING: HostSavestateInit failed -- savestates disabled\n");
 
     /* Protect host-side resource pointers from savestate restore.
      * Savestate restore does a bulk memcpy of .data/.bss, which
@@ -2636,6 +3004,7 @@ int main(int argc, char *argv[])
     ClearDma3Requests();
     ResetBgs();
     InitHeap(gHeap, HEAP_SIZE);
+    { extern void InitSpecialVars(void); InitSpecialVars(); }
     SetDefaultFontsPointer();
 
     gSoftResetDisabled = FALSE;
@@ -2646,6 +3015,7 @@ int main(int argc, char *argv[])
     HostNewGameStubReset();
     HostOakSpeechStubReset();
 
+    HostScriptPtrTabReset();
     /* Patch 32-bit LE pointer fields in generated script bytecode arrays.
      * Must run before any game code that reads script pointers. */
     HostPatchBattleScriptPointers();
@@ -2720,9 +3090,37 @@ int main(int argc, char *argv[])
         TraceLog(0, buffer);
     }
 
+    if (sSkipIntro || sRlInstrumentEnabled)
+    {
+        /* Direct-to-overworld boot: skip copyright, intro, title, and
+         * main menu.  Load save and jump straight to overworld. */
+        ResetMenuAndMonGlobals();
+        Save_ResetSaveCounters();
+        LoadGameSave(SAVE_NORMAL);
+        HostLogSaveStatus(gSaveFileStatus);
+        if (gSaveFileStatus == SAVE_STATUS_EMPTY || gSaveFileStatus == SAVE_STATUS_INVALID)
+            Sav2_ClearSetDefault();
+        SetPokemonCryStereo(gSaveBlock2Ptr->optionsSound);
+        /* Force RL-friendly options */
+        gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_FAST;
+        gSaveBlock2Ptr->optionsBattleSceneOff = TRUE;
+        gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SET;
+        SetMainCallback2(CB2_ContinueSavedGame);
+    }
+    else
     {
         extern void CB2_InitCopyrightScreenAfterBootup(void);
         SetMainCallback2(CB2_InitCopyrightScreenAfterBootup);
+    }
+
+    /* --load-state: restore a .pfrstate file immediately after boot */
+    if (sBootLoadStatePath[0] != '\0')
+    {
+        fprintf(stderr, "[SAVESTATE] Loading state from: %s\n", sBootLoadStatePath);
+        if (!LoadSavestateFromFileAtPath(0, "boot", sBootLoadStatePath))
+            fprintf(stderr, "[SAVESTATE] Failed to load state: %s\n", HostSavestateGetLastError());
+        else
+            fprintf(stderr, "[SAVESTATE] State loaded successfully\n");
     }
 
     /* ── Main loop ── */
@@ -2766,7 +3164,23 @@ int main(int argc, char *argv[])
         }
         else
         {
+            /* After a savestate restore, VRAM/OAM/PLTT contain the saved
+             * frame data but the renderer's framebuffer is stale.  Force
+             * a full render pass from the restored GPU state so the next
+             * HostDisplayPresent shows the correct image. */
+            HostRendererRenderFrame();
             sPresentRestoredFramePending = FALSE;
+        }
+
+        /* Game called SoftReset (e.g. after credits finish).
+         * In frame-by-frame mode SoftReset is a no-op, so detect it
+         * here and restart the process to emulate a real reboot. */
+        if (gHostStubSoftResetCalls > 0)
+        {
+            gHostStubSoftResetCalls = 0;
+            sRestartRequested = TRUE;
+            TraceLog(sEmulatedFrameCount, "soft reset detected, restarting");
+            break;
         }
 
         /* HostDisplayPresent: render → present → poll input → vsync pacing.
@@ -2781,6 +3195,7 @@ int main(int argc, char *argv[])
         }
 
         HandleHostActions(HostDisplayGetFrameCount());
+        UpdateEggHatchInfo();
         if (sRestartRequested || sShutdownRequested)
             break;
 
