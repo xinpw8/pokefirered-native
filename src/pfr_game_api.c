@@ -133,6 +133,13 @@ void pfr_game_boot(void)
     HostCrt0Init();
     REG_KEYINPUT = KEYS_MASK;
 
+    /* Initialize save block pointers. These were previously set by GameCtx
+     * initialization. With GameCtx gutted to a stub, we must set them
+     * explicitly before any code dereferences them. */
+    gSaveBlock2Ptr = &gSaveBlock2;
+    gSaveBlock1Ptr = &gSaveBlock1;
+    gPokemonStoragePtr = &gPokemonStorage;
+
     /* 3. GPU register manager */
     InitGpuRegManager();
 
@@ -259,8 +266,57 @@ void pfr_game_boot(void)
                     boot_info.money, boot_info.badges, boot_info.in_battle,
                     frame);
             if (boot_info.party_count == 0) {
-                fprintf(stderr, "[PFR-BOOT] WARNING: party is EMPTY after boot! "
-                        "Game may not have started properly.\n");
+                fprintf(stderr, "[PFR-BOOT] party EMPTY — auto-injecting Charmander lv5\n");
+                {
+                    extern struct Pokemon gPlayerParty[];
+                    extern u8 gPlayerPartyCount;
+                    extern void CreateMon(struct Pokemon *mon, u16 species, u8 level,
+                                          u8 fixedIV, u8 hasFixedPersonality,
+                                          u32 fixedPersonality, u8 otIdType, u32 fixedOtId);
+                    extern u8 CalculatePlayerPartyCount(void);
+
+                    /* Direct party injection - no script engine needed */
+                    CreateMon(&gPlayerParty[0], 4, 5, 32, 0, 0, 0, 0);
+                    /* species=4 (CHARMANDER), level=5, fixedIV=32 (random) */
+                    CalculatePlayerPartyCount();
+                    /* Sync save block party count too */
+                    gSaveBlock1Ptr->playerPartyCount = gPlayerPartyCount;
+
+                    pfr_game_get_reward_info(&boot_info);
+                    fprintf(stderr, "[PFR-BOOT] after inject: party=%u levels=%u count=%u\n",
+                            boot_info.party_count, boot_info.party_level_sum,
+                            gPlayerPartyCount);
+                }
+
+                /* Set game flags to bypass Oak's Route 1 cutscene.
+                 * Without these, walking north triggers "don't go in grass!"
+                 * event that blocks Route 1 access entirely. */
+                {
+                    extern u8 FlagSet(u16 id);
+                    extern bool8 VarSet(u16 id, u16 value);
+
+                    /* VAR_MAP_SCENE_PALLET_TOWN_OAK = 1: disables coord triggers */
+                    VarSet(0x4050, 1);
+
+                    /* FLAG_SYS_POKEMON_GET: game knows player has a Pokemon */
+                    FlagSet(0x828);
+
+                    /* FLAG_SYS_POKEDEX_GET: enables Pokedex */
+                    FlagSet(0x829);
+
+                    /* FLAG_HIDE_OAK_IN_PALLET_TOWN: hides Oak sprite */
+                    FlagSet(0x02C);
+
+                    /* FLAG_SYS_B_DASH: enables running shoes */
+                    FlagSet(0x82F);
+
+                    /* Permanent repel: suppress wild encounters so agents
+                     * spend time exploring, not battling.  0x4020 is
+                     * VAR_REPEL_STEP_COUNT; 0xFFFF = ~65535 steps. */
+                    VarSet(0x4020, 0xFFFF);
+
+                    fprintf(stderr, "[PFR-BOOT] Game flags set: Oak bypassed, running enabled, repel active\n");
+                }
             }
             if (boot_info.money > 999999) {
                 fprintf(stderr, "[PFR-BOOT] WARNING: corrupt money=%u after boot!\n",
@@ -268,7 +324,60 @@ void pfr_game_boot(void)
             }
         }
 
-        /* Capture hot savestate at overworld for instant reset */
+        /* Warp agent out of the house to Pallet Town.
+         * The bedroom is a random-walk trap — warp tiles need specific
+         * positioning that random agents rarely achieve. Use the game's
+         * warp API to teleport to Pallet Town overworld directly. */
+        {
+            extern void SetWarpDestination(s8 mapGroup, s8 mapNum,
+                                           s8 warpId, s8 x, s8 y);
+            extern void WarpIntoMap(void);
+            extern void SetMainCallback2(MainCallback callback);
+            extern void CB2_LoadMap(void);
+
+            PfrRewardInfo walk_info;
+            pfr_game_get_reward_info(&walk_info);
+
+            if (walk_info.map_group == 4) {
+                int warp_frame;
+                fprintf(stderr, "[PFR-BOOT] Warping to Route 1...\n");
+
+                /* Route 1 = map (3, 19), position (9, 20) */
+                SetWarpDestination(3, 19, -1, 9, 20);
+
+                /* Replicate the game's own warp flow from
+                 * field_fadetransition.c:  WarpIntoMap + CB2_LoadMap.
+                 *
+                 * WarpIntoMap: ApplyCurrentWarp (copies warp dest to
+                 *   gSaveBlock1Ptr->location) + LoadCurrentMapData +
+                 *   SetPlayerCoordsFromWarp.
+                 *
+                 * CB2_LoadMap triggers the full callback chain:
+                 *   CB2_LoadMap → CB2_DoChangeMap → CB2_LoadMap2
+                 *   which runs DoMapLoadLoop (14-step init: BGs, tileset,
+                 *   ResumeMap, InitObjectEventsLocal, camera, etc.)
+                 *   and finally sets CB1_Overworld + CB2_Overworld. */
+                WarpIntoMap();
+                SetMainCallback2(CB2_LoadMap);
+
+                /* Run frames until the overworld callback chain completes */
+                for (warp_frame = 0; warp_frame < 5000; warp_frame++) {
+                    pfr_game_step_frames(0, 1);
+                    if (gMain.callback1 == CB1_Overworld)
+                        break;
+                }
+                /* A few extra frames for the map to fully settle */
+                pfr_game_step_frames(0, 30);
+
+                pfr_game_get_reward_info(&walk_info);
+                fprintf(stderr,
+                    "[PFR-BOOT] After warp (%d frames): pos=(%d,%d) map=%d.%d\n",
+                    warp_frame, walk_info.player_x, walk_info.player_y,
+                    walk_info.map_group, walk_info.map_num);
+            }
+        }
+
+
         HostSavestateCaptureHot();
     }
 }
@@ -410,6 +519,13 @@ void pfr_game_step_frames(uint16_t keys, int n)
 {
     int i;
 
+    /* Clear held-key state so the key reader sees this press as "new".
+     * The GBA key reader computes: newKeysRaw = keyInput & ~heldKeysRaw.
+     * Without clearing, consecutive calls with the same key are treated
+     * as "held" and never "new" — menus/battles only respond to newKeys. */
+    gMain.heldKeysRaw = 0;
+    gMain.heldKeys = 0;
+
     /* REG_KEYINPUT is active-low: all bits set = released, clear = pressed */
     REG_KEYINPUT = KEYS_MASK & ~keys;
 
@@ -550,7 +666,7 @@ void pfr_game_extract_obs(unsigned char *buf)
     memset(buf, 0, PFR_OBS_SIZE);
 
     /* --- MONITOR: guard against null pointers --- */
-    if (!gSaveBlock1Ptr || !g_ctx) {
+    if (!gSaveBlock1Ptr) {
         fprintf(stderr, "[PFR-MONITOR] FATAL: null pointer in extract_obs "
                 "(gSaveBlock1Ptr=%p, g_ctx=%p)\n",
                 (void*)gSaveBlock1Ptr, (void*)g_ctx);
@@ -733,10 +849,6 @@ void pfr_game_get_reward_info(PfrRewardInfo *info)
     /* --- MONITOR: guard against null pointer dereference --- */
     if (!gSaveBlock1Ptr) {
         fprintf(stderr, "[PFR-MONITOR] FATAL: gSaveBlock1Ptr is NULL in get_reward_info!\n");
-        return;
-    }
-    if (!g_ctx) {
-        fprintf(stderr, "[PFR-MONITOR] FATAL: g_ctx is NULL in get_reward_info!\n");
         return;
     }
 
