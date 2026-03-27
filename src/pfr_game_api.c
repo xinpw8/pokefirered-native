@@ -45,6 +45,7 @@
 
 #include <string.h>
 #include <stdio.h>
+#include <time.h>
 
 /* Forward-declare getenv to avoid stdlib.h vs global.h abs() conflict */
 extern char *getenv(const char *);
@@ -266,7 +267,7 @@ void pfr_game_boot(void)
                     boot_info.money, boot_info.badges, boot_info.in_battle,
                     frame);
             if (boot_info.party_count == 0) {
-                fprintf(stderr, "[PFR-BOOT] party EMPTY — auto-injecting Charmander lv5\n");
+                fprintf(stderr, "[PFR-BOOT] party EMPTY — auto-injecting Charmander lv30\n");
                 {
                     extern struct Pokemon gPlayerParty[];
                     extern u8 gPlayerPartyCount;
@@ -276,8 +277,8 @@ void pfr_game_boot(void)
                     extern u8 CalculatePlayerPartyCount(void);
 
                     /* Direct party injection - no script engine needed */
-                    CreateMon(&gPlayerParty[0], 4, 5, 32, 0, 0, 0, 0);
-                    /* species=4 (CHARMANDER), level=5, fixedIV=32 (random) */
+                    CreateMon(&gPlayerParty[0], 4, 30, 32, 0, 0, 0, 0);
+                    /* species=4 (CHARMANDER), level=30, fixedIV=32 (random) */
                     CalculatePlayerPartyCount();
                     /* Sync save block party count too */
                     gSaveBlock1Ptr->playerPartyCount = gPlayerPartyCount;
@@ -318,6 +319,17 @@ void pfr_game_boot(void)
                      * VAR_REPEL_STEP_COUNT; 0xFFFF = ~65535 steps. */
                     VarSet(0x4020, 0xFFFF);
 
+                    /* Pewter City: bypass gym guide + running shoes aide cutscenes */
+                    VarSet(0x406C, 2);   /* VAR_MAP_SCENE_PEWTER_CITY */
+
+                    /* Set last-heal location to Pewter City so white-out
+                     * respawns near Route 3, not in Pallet Town.
+                     * HEAL_LOCATION_PEWTER_CITY = 3. */
+                    {
+                        extern void SetLastHealLocationWarp(u8 healLocationId);
+                        SetLastHealLocationWarp(3);
+                    }
+
                     fprintf(stderr, "[PFR-BOOT] Game flags set: Oak bypassed, running enabled, repel active\n");
                 }
             }
@@ -343,10 +355,31 @@ void pfr_game_boot(void)
 
             if (walk_info.map_group == 4) {
                 int warp_frame;
-                fprintf(stderr, "[PFR-BOOT] Warping to Viridian Forest...\n");
 
-                /* Viridian Forest = map (1, 0), position (15, 20) — north half */
-                SetWarpDestination(1, 0, -1, 15, 20);
+                /* Multi-spawn: distribute instances across 4 map positions
+                 * to maximize exploration coverage. Each SO-copy has unique
+                 * ASLR addresses, so (uintptr_t)&walk_info varies per instance. */
+                {
+                    static const struct { s8 mg; s8 mn; s8 x; s8 y; const char *name; } spawns[] = {
+                        { 3, 21, 10, 10, "Route3-west" },   /* near Pewter City */
+                        { 3, 21, 43,  5, "Route3-mid" },    /* middle corridor */
+                        { 3, 21, 68,  0, "Route3-east" },   /* near Route 4 exit */
+                        { 3, 22, 43,  2, "Route4-mid" },    /* Route 4 middle */
+                    };
+                    /* Use nanosecond clock for per-instance randomization.
+                     * Each boot takes ~1s (game init + warp), so tv_nsec
+                     * differs significantly between sequential instances.
+                     * Multiply by golden ratio to decorrelate clustering. */
+                    struct timespec _ts;
+                    clock_gettime(CLOCK_MONOTONIC, &_ts);
+                    int spawn_idx = (int)(((unsigned long)_ts.tv_nsec * 2654435761UL) >> 28) % 4;
+                    fprintf(stderr, "[PFR-BOOT] Warping to %s (%d,%d) map(%d,%d)...\n",
+                            spawns[spawn_idx].name,
+                            spawns[spawn_idx].x, spawns[spawn_idx].y,
+                            spawns[spawn_idx].mg, spawns[spawn_idx].mn);
+                    SetWarpDestination(spawns[spawn_idx].mg, spawns[spawn_idx].mn,
+                                       -1, spawns[spawn_idx].x, spawns[spawn_idx].y);
+                }
 
                 /* Replicate the game's own warp flow from
                  * field_fadetransition.c:  WarpIntoMap + CB2_LoadMap.
