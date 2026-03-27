@@ -94,7 +94,7 @@ void pfr_game_extract_obs_native_format(unsigned char *buf)
     }
 
     /* direction (1 byte) */
-    playerObj = &g_ctx->gObjectEvents[g_ctx->gPlayerAvatar.objectEventId];
+    playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
     buf[6] = playerObj->facingDirection & 0x0F;
 
     /* mode (1 byte)
@@ -165,7 +165,7 @@ void pfr_game_extract_obs_native_format(unsigned char *buf)
 
         /* Collect all active non-player NPCs */
         for (i = 0; i < OBJECT_EVENTS_COUNT; i++) {
-            struct ObjectEvent *obj = &g_ctx->gObjectEvents[i];
+            struct ObjectEvent *obj = &gObjectEvents[i];
             int odx, ody;
             if (!obj->active || obj->isPlayer)
                 continue;
@@ -197,7 +197,7 @@ void pfr_game_extract_obs_native_format(unsigned char *buf)
 
                 used[best] = 1;
                 {
-                    struct ObjectEvent *obj = &g_ctx->gObjectEvents[cand_idx[best]];
+                    struct ObjectEvent *obj = &gObjectEvents[cand_idx[best]];
                     int odx = obj->currentCoords.x - px;
                     int ody = obj->currentCoords.y - py;
 
@@ -265,8 +265,8 @@ void pfr_game_extract_obs_native_format(unsigned char *buf)
      * - bobs[37]: menu_party_cursor
      * - bobs[38]: reserved (0)
      *
-     * The GBA engine has all this data in g_ctx->gBattleMons[0..3] and
-     * g_ctx->gPlayerParty[0..5], but the move type/power lookup requires
+     * The GBA engine has all this data in gBattleMons[0..3] and
+     * gPlayerParty[0..5], but the move type/power lookup requires
      * pfr_native's PFR_MOVES table which isn't available in the hosted
      * runtime. A shared move data table or runtime lookup is needed.
      *
