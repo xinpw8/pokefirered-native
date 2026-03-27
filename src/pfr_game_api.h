@@ -124,4 +124,8 @@ void pfr_game_step_frames_fast(uint16_t keys, int n);
 void pfr_game_extract_obs_full(void *buf);
 void pfr_game_get_reward_info_full(PfrRewardInfoFull *info);
 
+/* Warp to a random spawn point for per-episode exploration diversity.
+ * Called during episode reset to vary starting position each episode. */
+void pfr_game_randomize_spawn(void);
+
 #endif /* PFR_GAME_API_H */

@@ -82,6 +82,10 @@ static int resolve_symbols(PfrInstance *inst)
         "pfr_game_extract_obs_native_format");
     /* extract_obs_native is allowed to be NULL for backward compat */
 
+    /* Spawn randomization (optional — not fatal if missing) */
+    *(void **)(&inst->randomize_spawn) = dlsym(inst->dl_handle,
+        "pfr_game_randomize_spawn");
+
     /* Exact rendering exports */
     RESOLVE(step_frames_exact, "pfr_game_step_frames_exact");
     RESOLVE(get_framebuffer,   "pfr_game_get_framebuffer");

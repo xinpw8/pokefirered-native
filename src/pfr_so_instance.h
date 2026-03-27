@@ -30,6 +30,8 @@ typedef void     (*pfr_get_reward_info_fn)(void *info);
 /* Fast training function pointer type */
 typedef void     (*pfr_step_frames_fast_fn)(uint16_t keys, int n);
 
+typedef void     (*pfr_randomize_spawn_fn)(void);
+
 /* Exact rendering function pointer types */
 typedef void            (*pfr_step_frames_exact_fn)(uint16_t keys, int n);
 typedef const uint32_t *(*pfr_get_framebuffer_fn)(void);
@@ -58,6 +60,8 @@ typedef struct {
     pfr_get_framebuffer_fn   get_framebuffer;
     pfr_copy_framebuffer_fn  copy_framebuffer;
     pfr_render_current_frame_fn render_current_frame;
+
+    pfr_randomize_spawn_fn randomize_spawn;
 } PfrInstance;
 
 /*

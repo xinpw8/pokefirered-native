@@ -360,21 +360,35 @@ void pfr_game_boot(void)
                  * to maximize exploration coverage. Each SO-copy has unique
                  * ASLR addresses, so (uintptr_t)&walk_info varies per instance. */
                 {
-                    static const struct { s8 mg; s8 mn; s8 x; s8 y; const char *name; } spawns[] = {
-                        { 3, 21, 10, 10, "Route3-west" },   /* near Pewter City */
-                        { 3, 21, 43,  5, "Route3-mid" },    /* middle corridor */
-                        { 3, 21, 68,  0, "Route3-east" },   /* near Route 4 exit */
-                        { 3, 22, 43,  2, "Route4-mid" },    /* Route 4 middle */
+                    static const struct { s8 mg; s8 mn; s8 x; s8 y; } spawns[] = {
+                        { 3, 21, 10, 10 },  /* Route3-west */
+                        { 3, 21, 43,  5 },  /* Route3-mid */
+                        { 3, 21, 68,  0 },  /* Route3-east */
+                        { 3, 22, 43,  2 },  /* Route4-mid */
+                        { 3, 22, 90,  2 },  /* Route4-east */
+                        { 3,  2, 20, 10 },  /* Pewter-center */
+                        { 3,  2, 22, 33 },  /* Pewter-south */
+                        { 3, 20,  5,  3 },  /* Route2-NW */
+                        { 3, 20, 18,  5 },  /* Route2-NE */
+                        { 3, 20,  5, 62 },  /* Route2-south */
+                        { 3, 19, 10,  3 },  /* Route1-north */
+                        { 3, 19, 10, 22 },  /* Route1-mid */
+                        { 3,  3, 20, 33 },  /* Cerulean-south */
+                        { 1,  0, 20,  5 },  /* VF-north */
+                        { 1,  0, 35,  5 },  /* VF-NE */
+                        { 1,  0, 10, 30 },  /* VF-mid */
+                        { 1,  0, 15, 55 },  /* VF-south */
+                        { 1,  0, 25, 60 },  /* VF-SE */
+                        { 1,  1,  8,  5 },  /* MM-NW */
+                        { 1,  1, 30,  5 },  /* MM-NE */
+                        { 1,  1, 30, 15 },  /* MM-mid-E */
+                        { 1,  1, 15, 25 },  /* MM-mid-W */
                     };
-                    /* Use nanosecond clock for per-instance randomization.
-                     * Each boot takes ~1s (game init + warp), so tv_nsec
-                     * differs significantly between sequential instances.
-                     * Multiply by golden ratio to decorrelate clustering. */
                     struct timespec _ts;
                     clock_gettime(CLOCK_MONOTONIC, &_ts);
-                    int spawn_idx = (int)(((unsigned long)_ts.tv_nsec * 2654435761UL) >> 28) % 4;
-                    fprintf(stderr, "[PFR-BOOT] Warping to %s (%d,%d) map(%d,%d)...\n",
-                            spawns[spawn_idx].name,
+                    int spawn_idx = (int)(((unsigned long)_ts.tv_nsec * 2654435761UL) % 22);
+                    fprintf(stderr, "[PFR-BOOT] Warping spawn %d: (%d,%d) map(%d,%d)...\n",
+                            spawn_idx,
                             spawns[spawn_idx].x, spawns[spawn_idx].y,
                             spawns[spawn_idx].mg, spawns[spawn_idx].mn);
                     SetWarpDestination(spawns[spawn_idx].mg, spawns[spawn_idx].mn,
@@ -936,4 +950,92 @@ void pfr_game_get_reward_info(PfrRewardInfo *info)
                 info->money);
     }
     info->in_battle = gMain.inBattle;
+}
+
+void pfr_game_randomize_spawn(void) {
+    extern void SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
+    extern void WarpIntoMap(void);
+    extern void SetMainCallback2(MainCallback callback);
+    extern void CB2_LoadMap(void);
+
+    static int initialized = 0;
+    #define N_SPAWNS 22
+    static char paths[N_SPAWNS][256];
+
+    static const struct { s8 mg; s8 mn; s8 x; s8 y; } spawns[] = {
+        /* Route 3 (group 3, map 21, 84x20) */
+        { 3, 21, 10, 10 },  /* Route 3 west */
+        { 3, 21, 43,  5 },  /* Route 3 middle */
+        { 3, 21, 68,  0 },  /* Route 3 east */
+        /* Route 4 (group 3, map 22, 108x20) */
+        { 3, 22, 43,  2 },  /* Route 4 middle */
+        { 3, 22, 90,  2 },  /* Route 4 east (near Cerulean) */
+        /* Pewter City (group 3, map 2, 48x40) */
+        { 3,  2, 20, 10 },  /* Pewter City center */
+        { 3,  2, 22, 33 },  /* Pewter City south */
+        /* Route 2 (group 3, map 20, 24x80) */
+        { 3, 20,  5,  3 },  /* Route 2 north-west */
+        { 3, 20, 18,  5 },  /* Route 2 north-east */
+        { 3, 20,  5, 62 },  /* Route 2 south */
+        /* Route 1 (group 3, map 19, 24x40) */
+        { 3, 19, 10,  3 },  /* Route 1 north */
+        { 3, 19, 10, 22 },  /* Route 1 middle */
+        /* Cerulean City (group 3, map 3, 48x40) */
+        { 3,  3, 20, 33 },  /* Cerulean City south */
+        /* Viridian Forest (group 1, map 0, 54x69) */
+        { 1,  0, 20,  5 },  /* VF north */
+        { 1,  0, 35,  5 },  /* VF north-east */
+        { 1,  0, 10, 30 },  /* VF mid-west */
+        { 1,  0, 15, 55 },  /* VF south */
+        { 1,  0, 25, 60 },  /* VF south-east */
+        /* Mt Moon 1F (group 1, map 1, 48x40) */
+        { 1,  1,  8,  5 },  /* MM north-west */
+        { 1,  1, 30,  5 },  /* MM north-east */
+        { 1,  1, 30, 15 },  /* MM mid-east */
+        { 1,  1, 15, 25 },  /* MM mid-west */
+    };
+    static const int n_spawns = N_SPAWNS;
+
+    if (!initialized) {
+        /* First call: create one savestate file per spawn point.
+         * Each starts from a clean restore_hot, warps, stabilizes, saves.
+         * File paths use address of 'initialized' as per-instance unique ID
+         * (each dlopen'd SO copy has its own .data segment). */
+        int i;
+        for (i = 0; i < n_spawns; i++) {
+            pfr_game_restore_hot();
+
+            SetWarpDestination(spawns[i].mg, spawns[i].mn,
+                               -1, spawns[i].x, spawns[i].y);
+            WarpIntoMap();
+            SetMainCallback2(CB2_LoadMap);
+
+            /* Step one frame to kick CB2_LoadMap, then wait for overworld */
+            pfr_game_step_frames(0, 1);
+            {
+                int f;
+                for (f = 0; f < 5000; f++) {
+                    pfr_game_step_frames(0, 1);
+                    if (gMain.callback1 == CB1_Overworld)
+                        break;
+                }
+            }
+            pfr_game_step_frames(0, 30);
+
+            snprintf(paths[i], sizeof(paths[i]),
+                     "/tmp/pfr_spawn_%lx_%d.sav",
+                     (unsigned long)(uintptr_t)&initialized, i);
+            pfr_game_save_state(paths[i]);
+            fprintf(stderr, "[PFR-SPAWN] Saved spawn %d to %s\n", i, paths[i]);
+        }
+        initialized = 1;
+    }
+
+    /* Pick random spawn and load complete savestate (no live warping) */
+    {
+        struct timespec _ts;
+        clock_gettime(CLOCK_MONOTONIC, &_ts);
+        int idx = (int)(((unsigned long)_ts.tv_nsec * 2654435761UL) % (unsigned long)n_spawns);
+        pfr_game_load_state(paths[idx]);
+    }
 }
