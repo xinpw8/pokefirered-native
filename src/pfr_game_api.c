@@ -361,32 +361,24 @@ void pfr_game_boot(void)
                  * ASLR addresses, so (uintptr_t)&walk_info varies per instance. */
                 {
                     static const struct { s8 mg; s8 mn; s8 x; s8 y; } spawns[] = {
-                        { 3, 21, 10, 10 },  /* Route3-west */
-                        { 3, 21, 43,  5 },  /* Route3-mid */
-                        { 3, 21, 68,  0 },  /* Route3-east */
-                        { 3, 22, 43,  2 },  /* Route4-mid */
-                        { 3, 22, 90,  2 },  /* Route4-east */
-                        { 3,  2, 20, 10 },  /* Pewter-center */
-                        { 3,  2, 22, 33 },  /* Pewter-south */
-                        { 3, 20,  5,  3 },  /* Route2-NW */
-                        { 3, 20, 18,  5 },  /* Route2-NE */
-                        { 3, 20,  5, 62 },  /* Route2-south */
-                        { 3, 19, 10,  3 },  /* Route1-north */
-                        { 3, 19, 10, 22 },  /* Route1-mid */
-                        { 3,  3, 20, 33 },  /* Cerulean-south */
-                        { 1,  0, 20,  5 },  /* VF-north */
-                        { 1,  0, 35,  5 },  /* VF-NE */
-                        { 1,  0, 10, 30 },  /* VF-mid */
-                        { 1,  0, 15, 55 },  /* VF-south */
-                        { 1,  0, 25, 60 },  /* VF-SE */
-                        { 1,  1,  8,  5 },  /* MM-NW */
-                        { 1,  1, 30,  5 },  /* MM-NE */
-                        { 1,  1, 30, 15 },  /* MM-mid-E */
-                        { 1,  1, 15, 25 },  /* MM-mid-W */
+                        { 3, 21, 10, 10 },  { 3, 21, 43,  5 },  { 3, 21, 68,  0 },
+                        { 3, 22, 43,  2 },  { 3, 22, 90,  2 },
+                        { 3,  2, 20, 10 },  { 3,  2, 22, 33 },
+                        { 3, 20,  5,  3 },  { 3, 20, 18,  5 },  { 3, 20,  5, 62 },
+                        { 3, 19, 10,  3 },  { 3, 19, 10, 22 },
+                        { 3,  3, 20, 33 },
+                        { 1,  0, 20,  5 },  { 1,  0, 35,  5 },  { 1,  0, 10, 30 },
+                        { 1,  0, 15, 55 },  { 1,  0, 25, 60 },
+                        { 1,  1,  8,  5 },  { 1,  1, 30,  5 },  { 1,  1, 30, 15 },
+                        { 1,  1, 15, 25 },
+                        { 3, 43,  8,  5 },  { 3, 43, 10, 20 },
+                        { 3, 44, 10,  5 },  { 3, 44, 40,  5 },
+                        { 1,  3, 10,  5 },  { 1,  3, 10, 30 },
+                        { 3,  1, 20, 20 },  { 3,  1, 20,  5 },
                     };
                     struct timespec _ts;
                     clock_gettime(CLOCK_MONOTONIC, &_ts);
-                    int spawn_idx = (int)(((unsigned long)_ts.tv_nsec * 2654435761UL) % 22);
+                    int spawn_idx = (int)(((unsigned long)_ts.tv_nsec * 2654435761UL) % 30);
                     fprintf(stderr, "[PFR-BOOT] Warping spawn %d: (%d,%d) map(%d,%d)...\n",
                             spawn_idx,
                             spawns[spawn_idx].x, spawns[spawn_idx].y,
@@ -959,7 +951,7 @@ void pfr_game_randomize_spawn(void) {
     extern void CB2_LoadMap(void);
 
     static int initialized = 0;
-    #define N_SPAWNS 22
+    #define N_SPAWNS 30
     static char paths[N_SPAWNS][256];
 
     static const struct { s8 mg; s8 mn; s8 x; s8 y; } spawns[] = {
@@ -969,30 +961,41 @@ void pfr_game_randomize_spawn(void) {
         { 3, 21, 68,  0 },  /* Route 3 east */
         /* Route 4 (group 3, map 22, 108x20) */
         { 3, 22, 43,  2 },  /* Route 4 middle */
-        { 3, 22, 90,  2 },  /* Route 4 east (near Cerulean) */
+        { 3, 22, 90,  2 },  /* Route 4 east */
         /* Pewter City (group 3, map 2, 48x40) */
-        { 3,  2, 20, 10 },  /* Pewter City center */
-        { 3,  2, 22, 33 },  /* Pewter City south */
+        { 3,  2, 20, 10 },  /* Pewter center */
+        { 3,  2, 22, 33 },  /* Pewter south */
         /* Route 2 (group 3, map 20, 24x80) */
-        { 3, 20,  5,  3 },  /* Route 2 north-west */
-        { 3, 20, 18,  5 },  /* Route 2 north-east */
+        { 3, 20,  5,  3 },  /* Route 2 NW */
+        { 3, 20, 18,  5 },  /* Route 2 NE */
         { 3, 20,  5, 62 },  /* Route 2 south */
         /* Route 1 (group 3, map 19, 24x40) */
         { 3, 19, 10,  3 },  /* Route 1 north */
-        { 3, 19, 10, 22 },  /* Route 1 middle */
+        { 3, 19, 10, 22 },  /* Route 1 mid */
         /* Cerulean City (group 3, map 3, 48x40) */
-        { 3,  3, 20, 33 },  /* Cerulean City south */
+        { 3,  3, 20, 33 },  /* Cerulean south */
         /* Viridian Forest (group 1, map 0, 54x69) */
         { 1,  0, 20,  5 },  /* VF north */
-        { 1,  0, 35,  5 },  /* VF north-east */
-        { 1,  0, 10, 30 },  /* VF mid-west */
+        { 1,  0, 35,  5 },  /* VF NE */
+        { 1,  0, 10, 30 },  /* VF mid */
         { 1,  0, 15, 55 },  /* VF south */
-        { 1,  0, 25, 60 },  /* VF south-east */
+        { 1,  0, 25, 60 },  /* VF SE */
         /* Mt Moon 1F (group 1, map 1, 48x40) */
-        { 1,  1,  8,  5 },  /* MM north-west */
-        { 1,  1, 30,  5 },  /* MM north-east */
-        { 1,  1, 30, 15 },  /* MM mid-east */
-        { 1,  1, 15, 25 },  /* MM mid-west */
+        { 1,  1,  8,  5 },  /* MM1F NW */
+        { 1,  1, 30,  5 },  /* MM1F NE */
+        { 1,  1, 30, 15 },  /* MM1F mid-E */
+        { 1,  1, 15, 25 },  /* MM1F mid-W */
+        /* Route 24 (group 3, map 43, 24x40) */
+        { 3, 43,  8,  5 },  /* Route 24 north */
+        { 3, 43, 10, 20 },  /* Route 24 mid */
+        /* Route 25 (group 3, map 44, 72x20) */
+        { 3, 44, 10,  5 },  /* Route 25 west */
+        { 3, 44, 40,  5 },  /* Route 25 east */
+        /* Mt Moon B2F (group 1, map 3, 48x40) */
+        { 1,  3, 10,  5 },  /* MMB2F north */
+        { 1,  3, 10, 30 },  /* MMB2F south */
+        /* Viridian City (group 3, map 1, 48x40) */
+        { 3,  1, 20, 20 },  /* Viridian mid */
     };
     static const int n_spawns = N_SPAWNS;
 
