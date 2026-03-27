@@ -7,7 +7,6 @@ shared objects, so each environment has truly independent game globals.
 
 import json
 import os
-import warnings
 
 import gymnasium
 import numpy as np
@@ -86,13 +85,7 @@ class PFRN(pufferlib.PufferEnv):
         self._num_envs = num_envs
         self._frames_per_step = frames_per_step
         self._max_steps = max_steps
-        if savestate_path:
-            warnings.warn(
-                "PFRN ignores savestate_path and resets from each instance's hot boot state.",
-                stacklevel=2,
-            )
-            savestate_path = ""
-        self._savestate_path = savestate_path
+        self._savestate_path = savestate_path if savestate_path else ""
 
         self.single_observation_space = gymnasium.spaces.Box(
             low=0, high=255, shape=(OBS_SIZE,), dtype=np.uint8
