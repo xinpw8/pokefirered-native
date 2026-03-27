@@ -136,10 +136,6 @@ class PFRN(pufferlib.PufferEnv):
     def reset(self, seed=0):
         self.rewards.fill(0)
         binding.vec_reset(self.c_envs, seed)
-        # DISABLED: setup_game_state locks the game in a cutscene
-        # The agent must get the starter through normal gameplay
-        # for i in range(self.num_agents):
-        #     binding.setup_game_state(i)
         self.explore_map.fill(0)
         self._update_explore_map()
         info = [{"pokemon_exploration_map": self.explore_map}]
