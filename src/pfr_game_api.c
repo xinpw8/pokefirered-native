@@ -375,10 +375,12 @@ void pfr_game_boot(void)
                         { 3, 44, 10,  5 },  { 3, 44, 40,  5 },
                         { 1,  3, 10,  5 },  { 1,  3, 10, 30 },
                         { 3,  1, 20, 20 },  { 3,  1, 20,  5 },
+                        { 1,  2, 15,  8 },  { 1,  2, 35, 20 },
+                        { 3,  0, 10, 10 },
                     };
                     struct timespec _ts;
                     clock_gettime(CLOCK_MONOTONIC, &_ts);
-                    int spawn_idx = (int)(((unsigned long)_ts.tv_nsec * 2654435761UL) % 30);
+                    int spawn_idx = (int)(((unsigned long)_ts.tv_nsec * 2654435761UL) % 32);
                     fprintf(stderr, "[PFR-BOOT] Warping spawn %d: (%d,%d) map(%d,%d)...\n",
                             spawn_idx,
                             spawns[spawn_idx].x, spawns[spawn_idx].y,
@@ -951,7 +953,7 @@ void pfr_game_randomize_spawn(void) {
     extern void CB2_LoadMap(void);
 
     static int initialized = 0;
-    #define N_SPAWNS 30
+    #define N_SPAWNS 32
     static char paths[N_SPAWNS][256];
 
     static const struct { s8 mg; s8 mn; s8 x; s8 y; } spawns[] = {
@@ -996,6 +998,9 @@ void pfr_game_randomize_spawn(void) {
         { 1,  3, 10, 30 },  /* MMB2F south */
         /* Viridian City (group 3, map 1, 48x40) */
         { 3,  1, 20, 20 },  /* Viridian mid */
+        /* Mt Moon B1F (group 1, map 2, 49x40) */
+        { 1,  2, 15,  8 },  /* MMB1F NW */
+        { 1,  2, 35, 20 },  /* MMB1F mid-E */
     };
     static const int n_spawns = N_SPAWNS;
 
