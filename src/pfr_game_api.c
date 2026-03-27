@@ -310,6 +310,9 @@ void pfr_game_boot(void)
                     /* FLAG_SYS_B_DASH: enables running shoes */
                     FlagSet(0x82F);
 
+                    /* Viridian City: bypass old man road block */
+                    VarSet(0x4051, 2);   /* VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN */
+
                     /* Permanent repel: suppress wild encounters so agents
                      * spend time exploring, not battling.  0x4020 is
                      * VAR_REPEL_STEP_COUNT; 0xFFFF = ~65535 steps. */
@@ -340,10 +343,10 @@ void pfr_game_boot(void)
 
             if (walk_info.map_group == 4) {
                 int warp_frame;
-                fprintf(stderr, "[PFR-BOOT] Warping to Route 1...\n");
+                fprintf(stderr, "[PFR-BOOT] Warping to Route 2...\n");
 
-                /* Route 1 = map (3, 19), position (9, 20) */
-                SetWarpDestination(3, 19, -1, 9, 20);
+                /* Route 2 = map (3, 20), position (10, 60) — south of Viridian Forest */
+                SetWarpDestination(3, 20, -1, 10, 60);
 
                 /* Replicate the game's own warp flow from
                  * field_fadetransition.c:  WarpIntoMap + CB2_LoadMap.
