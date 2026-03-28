@@ -330,9 +330,38 @@ void pfr_game_boot(void)
                         SetLastHealLocationWarp(3);
                     }
 
-                    fprintf(stderr, "[PFR-BOOT] Game flags set: Oak bypassed, running enabled, repel active\n");
+                    fprintf(stderr, "[PFR-BOOT] Game flags set (in party-inject path)\n");
                 }
             }
+
+            /* --- Unconditional trigger/flag bypass (runs on EVERY boot) --- */
+            /* Moved outside party_count==0 check so that savestate-based
+             * boots also get triggers disabled. */
+            {
+                extern u8 FlagSet(u16 id);
+                extern bool8 VarSet(u16 id, u16 value);
+
+                /* Disable coord-trigger scripts that hang in headless mode */
+                VarSet(0x4050, 1);   /* Pallet Town: Oak north-exit trigger    */
+                VarSet(0x4051, 2);   /* Viridian City: Old man road block      */
+                VarSet(0x406C, 2);   /* Pewter City: Gym guide east exit       */
+
+                /* Essential game progression flags */
+                FlagSet(0x828);      /* FLAG_SYS_POKEMON_GET                   */
+                FlagSet(0x829);      /* FLAG_SYS_POKEDEX_GET                   */
+                FlagSet(0x02C);      /* FLAG_HIDE_OAK_IN_PALLET_TOWN           */
+                FlagSet(0x82F);      /* FLAG_SYS_B_DASH (running shoes)        */
+
+                /* Permanent repel: suppress wild encounters during exploration */
+                VarSet(0x4020, 0xFFFF);
+
+                /* Last-heal = Pewter City so white-out respawns near Route 3 */
+                {
+                    extern void SetLastHealLocationWarp(u8 healLocationId);
+                    SetLastHealLocationWarp(3);
+                }
+            }
+
             if (boot_info.money > 999999) {
                 fprintf(stderr, "[PFR-BOOT] WARNING: corrupt money=%u after boot!\n",
                         boot_info.money);
@@ -380,7 +409,7 @@ void pfr_game_boot(void)
                     };
                     struct timespec _ts;
                     clock_gettime(CLOCK_MONOTONIC, &_ts);
-                    int spawn_idx = (int)(((unsigned long)_ts.tv_nsec * 2654435761UL) % 32);
+                    int spawn_idx = (int)(((unsigned long)_ts.tv_nsec * 2654435761UL) % (sizeof(spawns)/sizeof(spawns[0])));
                     fprintf(stderr, "[PFR-BOOT] Warping spawn %d: (%d,%d) map(%d,%d)...\n",
                             spawn_idx,
                             spawns[spawn_idx].x, spawns[spawn_idx].y,
@@ -1002,7 +1031,7 @@ void pfr_game_randomize_spawn(void) {
         { 1,  2, 15,  8 },  /* MMB1F NW */
         { 1,  2, 35, 20 },  /* MMB1F mid-E */
     };
-    static const int n_spawns = N_SPAWNS;
+    static const int n_spawns = sizeof(spawns) / sizeof(spawns[0]);
 
     if (!initialized) {
         /* First call: create one savestate file per spawn point.

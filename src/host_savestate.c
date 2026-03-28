@@ -744,15 +744,21 @@ bool8 HostSavestateLoadFromFile(const char *path)
             return FALSE;
         }
 
-        /* Tolerate size differences for .data/.bss (segments 0,1).
-         * GBA regions (segments 2+) must match exactly. */
+        /* Tolerate size differences for .data/.bss (segments 0,1)
+         * and last segment (GameCtx). Middle GBA regions must match exactly. */
         sRuntime->fileSavedSizes[i] = (size_t)segment.size;
-        if (i >= 2 && segment.size != sRuntime->segments[i].size)
+        if (i >= 2 && i < sRuntime->segmentCount - 1 && segment.size != sRuntime->segments[i].size)
         {
             SetError("savestate: %s GBA region %u size mismatch (saved=%llu, current=%zu)",
                      path, i, (unsigned long long)segment.size, sRuntime->segments[i].size);
             fclose(file);
             return FALSE;
+        }
+        /* Warn (but allow) size mismatch on last segment (GameCtx) */
+        if (i == sRuntime->segmentCount - 1 && segment.size != sRuntime->segments[i].size)
+        {
+            fprintf(stderr, "savestate: WARNING: last segment (GameCtx) size mismatch (saved=%llu, current=%zu) — truncating\n",
+                     (unsigned long long)segment.size, sRuntime->segments[i].size);
         }
     }
 
