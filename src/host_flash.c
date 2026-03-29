@@ -555,3 +555,9 @@ void HostFlashInjectTestSave(void)
         sector->checksum  = HostCalculateChecksum(sector->data, SECTOR_DATA_SIZE);
     }
 }
+
+/* Public wrapper for pfr_play to force-sync flash to disk after state load */
+void HostFlashForceSync(void)
+{
+    HostFlashSyncToDisk();
+}

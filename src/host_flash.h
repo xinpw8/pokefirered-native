@@ -7,3 +7,4 @@ void HostFlashInit(const char *savePath);
 void HostFlashInjectTestSave(void);
 
 #endif
+void HostFlashForceSync(void);

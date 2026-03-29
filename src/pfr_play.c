@@ -3131,6 +3131,16 @@ int main(int argc, char *argv[])
             fprintf(stderr, "[SAVESTATE] Failed to load state: %s\n", HostSavestateGetLastError());
         else
             fprintf(stderr, "[SAVESTATE] State loaded successfully\n");
+        /* Force immediate save to .sav after state load */
+        {
+            extern u8 TrySavingData(u8 saveType);
+            fprintf(stderr, "[SAVESTATE] Forcing save to disk...\n");
+            gSaveBlock2Ptr = &gSaveBlock2;
+            gSaveBlock1Ptr = &gSaveBlock1;
+            gPokemonStoragePtr = &gPokemonStorage;
+            u8 result = TrySavingData(0);
+            fprintf(stderr, "[SAVESTATE] Force save result: %u\n", result);
+        }
     }
 
     /* ── Main loop ── */
