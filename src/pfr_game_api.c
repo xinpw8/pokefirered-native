@@ -57,6 +57,7 @@ extern void HostOakSpeechStubReset(void);
 extern void HostIntroStubReset(void);
 extern void HostTitleScreenStubReset(void);
 extern void HostNativeSoundInit(void);
+extern bool8 gHostNoAudio;
 extern void HostFlashInit(const char *savePath);
 extern void HostPatchBattleScriptPointers(void);
 extern void HostPatchEventScriptPointers(void);
@@ -158,6 +159,8 @@ void pfr_game_boot(void)
 
     /* 6. Sound init (sets up SOUND_INFO_PTR etc.) */
     HostNativeSoundInit();
+    /* Audio disabled for headless/web play */
+    gHostNoAudio = TRUE;
 
     /* 7. VCount interrupt at line 150 */
     EnableVCountIntrAtLine150();
