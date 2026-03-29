@@ -56,7 +56,7 @@ class WebHandler(BaseHTTPRequestHandler):
             with self.game.lock:
                 info = {
                     "step": self.game.step_count,
-                    "reward": round(float(self.game.total_reward), 2),
+                    "reward": round(self.game.total_reward, 2),
                     "action": ACTION_NAMES[self.game.last_action],
                 }
                 if self.game.obs is not None:
@@ -223,7 +223,7 @@ def main():
     truncations = np.zeros((1,), dtype=np.uint8)
 
     c_envs = binding.vec_init(obs, actions, rewards, terminals, truncations,
-                              1, 42, frames_per_step=4, max_steps=999999, savestate_path=os.environ.get('PFR_STATE_PATH', ''))
+                              1, 42, frames_per_step=4, max_steps=999999, savestate_path="")
     binding.vec_reset(c_envs, 42)
 
     # Settle

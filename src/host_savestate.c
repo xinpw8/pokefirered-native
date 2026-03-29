@@ -717,8 +717,6 @@ bool8 HostSavestateLoadFromFile(const char *path)
     {
         fprintf(stderr, "[WARN] ignoring fingerprint mismatch (file=0x%08X vs build=0x%08X)\n",
                 header.buildFingerprint, ComputeBuildFingerprint());
-        SetError("savestate: build fingerprint mismatch");
-        return FALSE;
     }
 
     if (header.segmentCount != sRuntime->segmentCount)
