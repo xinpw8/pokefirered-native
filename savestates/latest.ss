@@ -1,0 +1,1 @@
+/home/spark-advantage/pokefirered-native/savestates/char_got_pokeballs_and_dex.ss

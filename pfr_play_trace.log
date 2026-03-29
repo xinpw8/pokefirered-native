@@ -1,20 +1,186 @@
+host_audio: opened device (freq=13379 fmt=0x8008 ch=1 buf=1024)
 [000000] pfr_play trace started
+[000000] active save path: pokefirered.sav
+[000000] snapshot dir: pfr_debug_saves
+[000000] state dir: pfr_debug_states
+[000000] fast-forward factor: 1
 [000000] callback1 -> NULL ((nil))
-[000000] callback2 -> CB2_InitCopyrightScreenAfterBootup (0x5ac9f0)
-[000001] callback2 -> CB2_InitCopyrightScreenAfterBootup (0x5ac9f0) gpu DISPCNT=0x0140 BG0=0x0700 BG1=0x0000 BG2=0x0000 BG3=0x0000 BLDCNT=0x0000 BLDALPHA=0x0000 BLDY=0x0000 WININ=0x0000 WINOUT=0x0000
-[000001] callback2 -> CB2_InitCopyrightScreenAfterBootup (0x5ac9f0) scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=7FFF,7FFF,7FFF,7FFF nonZeroWords pltt=256 vram=604 oam=256
-[000164] callback2 -> CB2_WaitFadeBeforeSetUpIntro (0x5ac5d8)
-[000165] callback2 -> CB2_WaitFadeBeforeSetUpIntro (0x5ac5d8) gpu DISPCNT=0x0140 BG0=0x0700 BG1=0x0000 BG2=0x0000 BG3=0x0000 BLDCNT=0x0000 BLDALPHA=0x0000 BLDY=0x0000 WININ=0x0000 WINOUT=0x0000
-[000165] callback2 -> CB2_WaitFadeBeforeSetUpIntro (0x5ac5d8) scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=0000,0000,0000,0000 nonZeroWords pltt=0 vram=604 oam=256
-[000165] callback2 -> CB2_SetUpIntro (0x5aca84)
-[000166] callback2 -> CB2_SetUpIntro (0x5aca84) gpu DISPCNT=0x1040 BG0=0x0700 BG1=0x0000 BG2=0x0000 BG3=0x0000 BLDCNT=0x0000 BLDALPHA=0x0000 BLDY=0x0000 WININ=0x0000 WINOUT=0x0000
-[000166] callback2 -> CB2_SetUpIntro (0x5aca84) scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=0000,0000,0000,0000 nonZeroWords pltt=0 vram=0 oam=0
-[000168] callback2 -> CB2_Intro (0x5acc9c)
-[000169] callback2 -> CB2_Intro (0x5acc9c) gpu DISPCNT=0x1040 BG0=0x0700 BG1=0x0000 BG2=0x0000 BG3=0x0000 BLDCNT=0x0000 BLDALPHA=0x0000 BLDY=0x0000 WININ=0x0000 WINOUT=0x0000
-[000169] callback2 -> CB2_Intro (0x5acc9c) scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=0000,0000,0000,0000 nonZeroWords pltt=0 vram=603 oam=256
-[001423] callback2 -> CB2_InitTitleScreen (0x5b2234)
-[001424] callback2 -> CB2_InitTitleScreen (0x5b2234) gpu DISPCNT=0x1040 BG0=0x9E04 BG1=0x1D01 BG2=0x1B0E BG3=0x9E07 BLDCNT=0x0000 BLDALPHA=0x0000 BLDY=0x0000 WININ=0x3F12 WINOUT=0x0000
-[001424] callback2 -> CB2_InitTitleScreen (0x5b2234) scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=0000,0000,0000,0000 nonZeroWords pltt=0 vram=0 oam=0
-[001426] callback2 -> CB2_TitleScreenRun (0x5b25fc)
-[001427] callback2 -> CB2_TitleScreenRun (0x5b25fc) gpu DISPCNT=0x1E40 BG0=0x9E04 BG1=0x1E05 BG2=0x1D0A BG3=0x1C0F BLDCNT=0x0000 BLDALPHA=0x0000 BLDY=0x0000 WININ=0x3F12 WINOUT=0x0000
-[001427] callback2 -> CB2_TitleScreenRun (0x5b25fc) scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=0000,0000,0000,0000 nonZeroWords pltt=14 vram=5047 oam=256
+[000000] callback2 -> CB2_InitCopyrightScreenAfterBootup (0x5f84e0)
+[000001] callback2 -> CB2_InitCopyrightScreenAfterBootup (0x5f84e0) gpu DISPCNT=0x0140 BG0=0x0700 BG1=0x0000 BG2=0x0000 BG3=0x0000 BLDCNT=0x0000 BLDALPHA=0x0000 BLDY=0x0000 WININ=0x0000 WINOUT=0x0000
+[000001] callback2 -> CB2_InitCopyrightScreenAfterBootup (0x5f84e0) scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=7FFF,7FFF,7FFF,7FFF nonZeroWords pltt=256 vram=533 oam=256
+[pokefirered-native] LoadGameSave result: OK (1)
+[000164] callback2 -> CB2_WaitFadeBeforeSetUpIntro (0x5f7550)
+[000165] callback2 -> CB2_SetUpIntro (0x5f72e0)
+[000168] callback2 -> CB2_Intro (0x5f4e00)
+[000095] callback2 -> CB2_Intro (0x5f4e00) gpu DISPCNT=0x1040 BG0=0x0700 BG1=0x0000 BG2=0x0000 BG3=0x0000 BLDCNT=0x0000 BLDALPHA=0x0000 BLDY=0x0000 WININ=0x0000 WINOUT=0x0000
+[000095] callback2 -> CB2_Intro (0x5f4e00) scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=0000,0000,0000,0000 nonZeroWords pltt=0 vram=697 oam=256
+host_audio: frame=300 nonZeroFrames=122 activeChannelFrames=122 ident=0x68736D53 maxChans=5 pcmDmaCounter=2 pcmDmaPeriod=7 samplesPerVBlank=224 MPlayMainHead=0x6f5d40 musicPlayerHead=0x10c02b8
+host_audio: frame=600 nonZeroFrames=300 activeChannelFrames=300 ident=0x68736D53 maxChans=5 pcmDmaCounter=3 pcmDmaPeriod=7 samplesPerVBlank=224 MPlayMainHead=0x6f5d40 musicPlayerHead=0x10c02b8
+host_audio: frame=900 nonZeroFrames=235 activeChannelFrames=300 ident=0x68736D53 maxChans=5 pcmDmaCounter=4 pcmDmaPeriod=7 samplesPerVBlank=224 MPlayMainHead=0x6f5d40 musicPlayerHead=0x10c02b8
+[001130] input newKeys=0x0008 heldKeys=0x0008 callback2=CB2_Intro
+[001132] callback2 -> CB2_InitTitleScreen (0x5f9c90)
+[001135] callback2 -> CB2_TitleScreenRun (0x5f86b0)
+[000156] callback2 -> CB2_TitleScreenRun (0x5f86b0) gpu DISPCNT=0x1E40 BG0=0x9E04 BG1=0x1E05 BG2=0x1D0A BG3=0x1C0F BLDCNT=0x0082 BLDALPHA=0x0000 BLDY=0x0000 WININ=0x3F12 WINOUT=0x0000
+[000156] callback2 -> CB2_TitleScreenRun (0x5f86b0) scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=0000,0000,0000,0000 nonZeroWords pltt=13 vram=5039 oam=256
+host_audio: frame=1200 nonZeroFrames=300 activeChannelFrames=298 ident=0x68736D53 maxChans=5 pcmDmaCounter=5 pcmDmaPeriod=7 samplesPerVBlank=224 MPlayMainHead=0x6f5d40 musicPlayerHead=0x10c02b8
+host_audio: frame=1500 nonZeroFrames=289 activeChannelFrames=265 ident=0x68736D53 maxChans=5 pcmDmaCounter=6 pcmDmaPeriod=7 samplesPerVBlank=224 MPlayMainHead=0x6f5d40 musicPlayerHead=0x10c02b8
+host_audio: frame=1800 nonZeroFrames=300 activeChannelFrames=297 ident=0x68736D53 maxChans=5 pcmDmaCounter=7 pcmDmaPeriod=7 samplesPerVBlank=224 MPlayMainHead=0x6f5d40 musicPlayerHead=0x10c02b8
+[001866] input newKeys=0x0008 heldKeys=0x0008 callback2=CB2_TitleScreenRun
+[001981] callback2 -> CB2_InitMainMenu (0x5fb2f0)
+[001982] callback2 -> CB2_MainMenu (0x5faa20)
+[000209] callback2 -> CB2_MainMenu (0x5faa20) gpu DISPCNT=0x3140 BG0=0x1E00 BG1=0x0000 BG2=0x0000 BG3=0x1C0F BLDCNT=0x00FF BLDALPHA=0x0000 BLDY=0x0007 WININ=0x0001 WINOUT=0x0021
+[000209] callback2 -> CB2_MainMenu (0x5faa20) scroll BG0=(0,0) BG1=(0,0) BG2=(0,0) PLTT[0..3]=7F18,7FFF,5272,5AB5 nonZeroWords pltt=256 vram=2812 oam=256
+host_audio: frame=2100 nonZeroFrames=228 activeChannelFrames=221 ident=0x68736D53 maxChans=5 pcmDmaCounter=1 pcmDmaPeriod=7 samplesPerVBlank=224 MPlayMainHead=0x6f5d40 musicPlayerHead=0x10c02b8
+host_audio: frame=2400 nonZeroFrames=0 activeChannelFrames=0 ident=0x68736D53 maxChans=5 pcmDmaCounter=2 pcmDmaPeriod=7 samplesPerVBlank=224 MPlayMainHead=0x6f5d40 musicPlayerHead=0x10c02b8
+host_audio: frame=2700 nonZeroFrames=0 activeChannelFrames=0 ident=0x68736D53 maxChans=5 pcmDmaCounter=3 pcmDmaPeriod=7 samplesPerVBlank=224 MPlayMainHead=0x6f5d40 musicPlayerHead=0x10c02b8
+host_audio: frame=3000 nonZeroFrames=0 activeChannelFrames=0 ident=0x68736D53 maxChans=5 pcmDmaCounter=4 pcmDmaPeriod=7 samplesPerVBlank=224 MPlayMainHead=0x6f5d40 musicPlayerHead=0x10c02b8
+host_audio: frame=3300 nonZeroFrames=0 activeChannelFrames=0 ident=0x68736D53 maxChans=5 pcmDmaCounter=5 pcmDmaPeriod=7 samplesPerVBlank=224 MPlayMainHead=0x6f5d40 musicPlayerHead=0x10c02b8
+host_audio: frame=3600 nonZeroFrames=0 activeChannelFrames=0 ident=0x68736D53 maxChans=5 pcmDmaCounter=6 pcmDmaPeriod=7 samplesPerVBlank=224 MPlayMainHead=0x6f5d40 musicPlayerHead=0x10c02b8
+[003818] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_MainMenu
+[003822] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_MainMenu
+[003826] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_MainMenu
+[003830] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_MainMenu
+[003834] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_MainMenu
+[003838] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_MainMenu
+[003841] callback2 -> CB2_ContinueSavedGame (0x7ebc10)
+[003842] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_ReturnToFieldLocal
+[003842] callback1 -> CB1_Overworld (0x7e6fd0)
+[003842] callback2 -> CB2_ReturnToFieldLocal (0x7e92b0)
+[pokefirered-native] MoveSaveBlocks_ResetHeap: encKey=0x0ABAD6D5 money=65078
+  bag[items][0] = id=85 qty=12
+  bag[items][1] = id=35 qty=2
+  bag[items][2] = id=68 qty=3
+  bag[items][3] = id=23 qty=18
+  bag[items][4] = id=20 qty=1
+  bag[items][5] = id=19 qty=11
+  bag[items][6] = id=24 qty=7
+  bag[items][7] = id=70 qty=1
+  bag[items][8] = id=37 qty=3
+  bag[items][9] = id=83 qty=11
+  bag[items][10] = id=218 qty=1
+  bag[items][11] = id=110 qty=2
+  bag[items][12] = id=222 qty=1
+  bag[items][13] = id=187 qty=1
+  bag[items][14] = id=25 qty=1
+  bag[key][0] = id=361 qty=1
+  bag[key][1] = id=366 qty=1
+  bag[key][2] = id=364 qty=1
+  bag[key][3] = id=351 qty=1
+  bag[key][4] = id=363 qty=1
+  bag[key][5] = id=265 qty=1
+  bag[key][6] = id=262 qty=1
+  bag[key][7] = id=365 qty=1
+  bag[key][8] = id=260 qty=1
+  bag[key][9] = id=356 qty=1
+  bag[key][10] = id=359 qty=1
+  bag[key][11] = id=350 qty=1
+  bag[key][12] = id=264 qty=1
+  bag[key][13] = id=355 qty=1
+  bag[key][14] = id=263 qty=1
+  bag[key][15] = id=368 qty=1
+  bag[key][16] = id=360 qty=1
+  bag[balls][0] = id=3 qty=3
+  bag[balls][1] = id=11 qty=1
+  bag[balls][2] = id=2 qty=21
+[003846] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_ReturnToFieldLocal
+[003847] callback2 -> CB2_Overworld (0x7e75e0)
+[000325] callback2 -> CB2_Overworld (0x7e75e0) gpu DISPCNT=0x7F60 BG0=0x1F08 BG1=0x1D41 BG2=0x1C42 BG3=0x1E43 BLDCNT=0x1E40 BLDALPHA=0x0010 BLDY=0x0007 WININ=0x1F1F WINOUT=0x0101
+[000325] callback2 -> CB2_Overworld (0x7e75e0) scroll BG0=(0,65532) BG1=(0,40) BG2=(0,40) PLTT[0..3]=0000,0862,0462,0040 nonZeroWords pltt=216 vram=7199 oam=256
+[003850] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[003854] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[003858] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[003862] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[003866] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[003870] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[003874] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[003878] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[003882] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[003886] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[003890] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[003894] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[003898] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+host_audio: frame=3900 nonZeroFrames=55 activeChannelFrames=48 ident=0x68736D53 maxChans=5 pcmDmaCounter=7 pcmDmaPeriod=7 samplesPerVBlank=224 MPlayMainHead=0x6f5d40 musicPlayerHead=0x10c02b8
+[003902] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[003906] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[003910] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+host_audio: frame=4200 nonZeroFrames=300 activeChannelFrames=300 ident=0x68736D53 maxChans=5 pcmDmaCounter=1 pcmDmaPeriod=7 samplesPerVBlank=224 MPlayMainHead=0x6f5d40 musicPlayerHead=0x10c02b8
+[004442] input newKeys=0x0040 heldKeys=0x0040 callback2=CB2_Overworld
+host_audio: frame=4500 nonZeroFrames=300 activeChannelFrames=300 ident=0x68736D53 maxChans=5 pcmDmaCounter=2 pcmDmaPeriod=7 samplesPerVBlank=224 MPlayMainHead=0x6f5d40 musicPlayerHead=0x10c02b8
+host_audio: frame=4800 nonZeroFrames=300 activeChannelFrames=300 ident=0x68736D53 maxChans=5 pcmDmaCounter=3 pcmDmaPeriod=7 samplesPerVBlank=224 MPlayMainHead=0x6f5d40 musicPlayerHead=0x10c02b8
+[004810] input newKeys=0x0020 heldKeys=0x0020 callback2=CB2_Overworld
+host_audio: frame=5100 nonZeroFrames=300 activeChannelFrames=300 ident=0x68736D53 maxChans=5 pcmDmaCounter=4 pcmDmaPeriod=7 samplesPerVBlank=224 MPlayMainHead=0x6f5d40 musicPlayerHead=0x10c02b8
+[005226] input newKeys=0x0040 heldKeys=0x0040 callback2=CB2_Overworld
+host_audio: frame=5400 nonZeroFrames=300 activeChannelFrames=300 ident=0x68736D53 maxChans=5 pcmDmaCounter=5 pcmDmaPeriod=7 samplesPerVBlank=224 MPlayMainHead=0x6f5d40 musicPlayerHead=0x10c02b8
+[005536] input newKeys=0x0040 heldKeys=0x0040 callback2=CB2_Overworld
+host_audio: frame=5700 nonZeroFrames=300 activeChannelFrames=300 ident=0x68736D53 maxChans=5 pcmDmaCounter=6 pcmDmaPeriod=7 samplesPerVBlank=224 MPlayMainHead=0x6f5d40 musicPlayerHead=0x10c02b8
+host_audio: frame=6000 nonZeroFrames=300 activeChannelFrames=300 ident=0x68736D53 maxChans=5 pcmDmaCounter=7 pcmDmaPeriod=7 samplesPerVBlank=224 MPlayMainHead=0x6f5d40 musicPlayerHead=0x10c02b8
+[006176] input newKeys=0x0040 heldKeys=0x0040 callback2=CB2_Overworld
+host_audio: frame=6300 nonZeroFrames=300 activeChannelFrames=300 ident=0x68736D53 maxChans=5 pcmDmaCounter=1 pcmDmaPeriod=7 samplesPerVBlank=224 MPlayMainHead=0x6f5d40 musicPlayerHead=0x10c02b8
+host_audio: frame=6600 nonZeroFrames=300 activeChannelFrames=300 ident=0x68736D53 maxChans=5 pcmDmaCounter=2 pcmDmaPeriod=7 samplesPerVBlank=224 MPlayMainHead=0x6f5d40 musicPlayerHead=0x10c02b8
+[006816] input newKeys=0x0040 heldKeys=0x0040 callback2=CB2_Overworld
+host_audio: frame=6900 nonZeroFrames=300 activeChannelFrames=300 ident=0x68736D53 maxChans=5 pcmDmaCounter=3 pcmDmaPeriod=7 samplesPerVBlank=224 MPlayMainHead=0x6f5d40 musicPlayerHead=0x10c02b8
+host_audio: frame=7200 nonZeroFrames=300 activeChannelFrames=300 ident=0x68736D53 maxChans=5 pcmDmaCounter=4 pcmDmaPeriod=7 samplesPerVBlank=224 MPlayMainHead=0x6f5d40 musicPlayerHead=0x10c02b8
+host_audio: frame=7500 nonZeroFrames=300 activeChannelFrames=300 ident=0x68736D53 maxChans=5 pcmDmaCounter=5 pcmDmaPeriod=7 samplesPerVBlank=224 MPlayMainHead=0x6f5d40 musicPlayerHead=0x10c02b8
+[007728] input newKeys=0x0040 heldKeys=0x0040 callback2=CB2_Overworld
+host_audio: frame=7800 nonZeroFrames=300 activeChannelFrames=300 ident=0x68736D53 maxChans=5 pcmDmaCounter=6 pcmDmaPeriod=7 samplesPerVBlank=224 MPlayMainHead=0x6f5d40 musicPlayerHead=0x10c02b8
+host_audio: frame=8100 nonZeroFrames=300 activeChannelFrames=300 ident=0x68736D53 maxChans=5 pcmDmaCounter=7 pcmDmaPeriod=7 samplesPerVBlank=224 MPlayMainHead=0x6f5d40 musicPlayerHead=0x10c02b8
+[008128] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[008129] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[008133] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[008137] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[008141] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[008145] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[008149] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[008153] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[008157] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[008161] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[008165] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[008169] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[008173] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[008177] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[008181] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[008185] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[008189] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[008193] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[008197] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[008201] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[008205] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[008209] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[008213] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[008217] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[008221] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[008225] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[008229] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[008233] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+[008237] input newKeys=0x0001 heldKeys=0x0001 callback2=CB2_Overworld
+host_audio: frame=8400 nonZeroFrames=300 activeChannelFrames=300 ident=0x68736D53 maxChans=5 pcmDmaCounter=1 pcmDmaPeriod=7 samplesPerVBlank=224 MPlayMainHead=0x6f5d40 musicPlayerHead=0x10c02b8
+host_audio: frame=8700 nonZeroFrames=300 activeChannelFrames=300 ident=0x68736D53 maxChans=5 pcmDmaCounter=2 pcmDmaPeriod=7 samplesPerVBlank=224 MPlayMainHead=0x6f5d40 musicPlayerHead=0x10c02b8
+[008720] input newKeys=0x0002 heldKeys=0x0002 callback2=CB2_Overworld
+[008724] input newKeys=0x0002 heldKeys=0x0002 callback2=CB2_Overworld
+[008728] input newKeys=0x0002 heldKeys=0x0002 callback2=CB2_Overworld
+[008732] input newKeys=0x0002 heldKeys=0x0002 callback2=CB2_Overworld
+[008736] input newKeys=0x0002 heldKeys=0x0002 callback2=CB2_Overworld
+[008740] input newKeys=0x0002 heldKeys=0x0002 callback2=CB2_Overworld
+[008744] input newKeys=0x0002 heldKeys=0x0002 callback2=CB2_Overworld
+[008748] input newKeys=0x0002 heldKeys=0x0002 callback2=CB2_Overworld
+[008752] input newKeys=0x0002 heldKeys=0x0002 callback2=CB2_Overworld
+[008756] input newKeys=0x0002 heldKeys=0x0002 callback2=CB2_Overworld
+[008760] input newKeys=0x0002 heldKeys=0x0002 callback2=CB2_Overworld
+[008764] input newKeys=0x0002 heldKeys=0x0002 callback2=CB2_Overworld
+[008768] input newKeys=0x0002 heldKeys=0x0002 callback2=CB2_Overworld
+[008772] input newKeys=0x0002 heldKeys=0x0002 callback2=CB2_Overworld
+[008776] input newKeys=0x0002 heldKeys=0x0002 callback2=CB2_Overworld
+
+=== CRASH: signal 11 ===
+./build/pfr_play[0x5f0044]
+linux-vdso.so.1(__kernel_rt_sigreturn+0x0)[0xf1c136468968]
+./build/pfr_play(ScrCmd_compare_var_to_value+0x20)[0x7fdeb0]
+./build/pfr_play(RunScriptCommand+0xa4)[0x801444]
+./build/pfr_play(ScriptContext_RunScript+0x34)[0x8017d4]
+./build/pfr_play[0x7e75fc]
+./build/pfr_play[0x5f2094]
+./build/pfr_play(HostFrameStepRunFast+0x84)[0x6ef4d4]
+./build/pfr_play(main+0x1fd8)[0x5ee458]
+/lib/aarch64-linux-gnu/libc.so.6(+0x284c4)[0xf1c135fe84c4]
+/lib/aarch64-linux-gnu/libc.so.6(__libc_start_main+0x98)[0xf1c135fe8598]
+./build/pfr_play(_start+0x30)[0x5ef970]

@@ -1,0 +1,270 @@
+#!/usr/bin/env python3
+"""
+gen_item_data.py -- Parse pokefirered decomp item data, emit pfr_item_tables.h
+
+Reads item definitions from the decomp's items.json and item ID constants
+from include/constants/items.h, then generates a single C header with
+static const tables for item names, prices, pockets, and effect parameters.
+
+Usage:
+    python3 tools/gen_item_data.py \
+        --decomp third_party/pokefirered \
+        --output src/pfr_item_tables.h
+"""
+
+import argparse
+import json
+import os
+import re
+import sys
+
+
+# ---------------------------------------------------------------------------
+# Constants
+# ---------------------------------------------------------------------------
+
+# Pocket name -> numeric ID mapping
+POCKET_IDS = {
+    "POCKET_ITEMS":       1,
+    "POCKET_KEY_ITEMS":   2,
+    "POCKET_POKE_BALLS":  3,
+    "POCKET_TM_CASE":     4,
+    "POCKET_BERRY_POUCH": 5,
+}
+
+
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+
+def eprint(*args, **kwargs):
+    """Print to stderr."""
+    print(*args, file=sys.stderr, **kwargs)
+
+
+def read_file(path, required=True):
+    """Read a file, returning its contents. Warn and return '' if missing."""
+    try:
+        with open(path, 'r', encoding='utf-8', errors='replace') as f:
+            return f.read()
+    except FileNotFoundError:
+        if required:
+            eprint(f"  WARNING: file not found: {path}")
+        return ''
+
+
+def parse_defines(text, prefix):
+    """
+    Parse #define lines with a given prefix, returning {name: int_value}.
+    e.g. prefix='ITEM_' matches '#define ITEM_MASTER_BALL 1'
+    Skips alias defines (where value references another ITEM_*).
+    """
+    result = {}
+    for m in re.finditer(
+        r'#define\s+(' + re.escape(prefix) + r'\w+)\s+(\d+)', text
+    ):
+        result[m.group(1)] = int(m.group(2))
+    return result
+
+
+# ---------------------------------------------------------------------------
+# Parsers
+# ---------------------------------------------------------------------------
+
+def parse_item_constants(decomp):
+    """Parse include/constants/items.h -> {name: id} and ITEMS_COUNT."""
+    path = os.path.join(decomp, 'include', 'constants', 'items.h')
+    text = read_file(path)
+    item_map = parse_defines(text, 'ITEM_')
+
+    # Extract ITEMS_COUNT
+    m = re.search(r'#define\s+ITEMS_COUNT\s+(\d+)', text)
+    items_count = int(m.group(1)) if m else 0
+
+    return item_map, items_count
+
+
+def parse_items_json(decomp):
+    """
+    Parse src/data/items.json -> list of item dicts.
+    Each dict: {itemId, english, price, pocket, holdEffectParam, battleUsage, ...}
+    """
+    path = os.path.join(decomp, 'src', 'data', 'items.json')
+    raw = read_file(path)
+    if not raw:
+        return []
+
+    try:
+        data = json.loads(raw)
+    except json.JSONDecodeError as e:
+        eprint(f"  WARNING: JSON parse error: {e}")
+        return []
+
+    return data.get('items', [])
+
+
+# ---------------------------------------------------------------------------
+# Code generation
+# ---------------------------------------------------------------------------
+
+def item_display_name(raw_name):
+    """
+    Clean up an item's English name for C string use.
+    Escape quotes and backslashes, replace special chars.
+    """
+    name = raw_name.replace('\\', '\\\\').replace('"', '\\"')
+    # Replace non-ASCII chars with ASCII approximations
+    name = name.replace('\u00e9', 'e')  # e-acute in "POKe BALL"
+    return name
+
+
+def generate_header(items_json, item_map, items_count):
+    """Generate the complete pfr_item_tables.h content."""
+    lines = []
+
+    def w(s=''):
+        lines.append(s)
+
+    # Build reverse map: item_id_symbol -> json entry
+    json_by_symbol = {}
+    for entry in items_json:
+        symbol = entry.get('itemId', '')
+        json_by_symbol[symbol] = entry
+
+    # Build complete item data indexed by numeric ID
+    item_data = [None] * items_count
+    for symbol, num_id in item_map.items():
+        if num_id < 0 or num_id >= items_count:
+            continue
+        entry = json_by_symbol.get(symbol)
+        if entry is None:
+            continue
+
+        pocket_str = entry.get('pocket', 'POCKET_ITEMS')
+        pocket_id = POCKET_IDS.get(pocket_str, 1)
+
+        item_data[num_id] = {
+            'name': item_display_name(entry.get('english', '????????')),
+            'price': entry.get('price', 0),
+            'pocket': pocket_id,
+            'effect': entry.get('holdEffectParam', 0),
+        }
+
+    # Count how many we resolved
+    resolved = sum(1 for d in item_data if d is not None)
+
+    # Fill in defaults for missing entries
+    for i in range(items_count):
+        if item_data[i] is None:
+            item_data[i] = {
+                'name': '????????',
+                'price': 0,
+                'pocket': 1,
+                'effect': 0,
+            }
+
+    # --- Header guard ---
+    w("/* Auto-generated by tools/gen_item_data.py -- DO NOT EDIT */")
+    w("#ifndef PFR_ITEM_TABLES_H")
+    w("#define PFR_ITEM_TABLES_H")
+    w()
+    w("#include <stdint.h>")
+    w()
+    w(f"#define PFR_NUM_ITEMS {items_count}")
+    w()
+
+    # --- Pocket enum comment ---
+    w("/* Pocket IDs: 1=Items, 2=Key Items, 3=Poke Balls, 4=TMs/HMs, 5=Berries */")
+    w()
+
+    # --- Item data struct ---
+    w("typedef struct {")
+    w("    uint16_t price;")
+    w("    uint8_t  pocket;    /* 1=Items, 2=Key Items, 3=Poke Balls, 4=TMs/HMs, 5=Berries */")
+    w("    uint8_t  effect;    /* heal amount, catch rate modifier, stat boost, etc. */")
+    w("} PfrItemData;")
+    w()
+
+    # --- Item names ---
+    w("/* ---- Item names ---- */")
+    w("static const char *const PFR_ITEM_NAMES[PFR_NUM_ITEMS] = {")
+    for i in range(items_count):
+        d = item_data[i]
+        w(f'    [{i}] = "{d["name"]}",')
+    w("};")
+    w()
+
+    # --- Item data table ---
+    w("/* ---- Item data ---- */")
+    w("/* PfrItemData: {price, pocket, effect} */")
+    w("static const PfrItemData PFR_ITEMS[PFR_NUM_ITEMS] = {")
+    for i in range(items_count):
+        d = item_data[i]
+        name_comment = d['name']
+        if len(name_comment) > 20:
+            name_comment = name_comment[:20]
+        w(f"    [{i}] = {{{d['price']}, {d['pocket']}, {d['effect']}}}, "
+          f"/* {name_comment} */")
+    w("};")
+    w()
+
+    w("#endif /* PFR_ITEM_TABLES_H */")
+
+    return '\n'.join(lines) + '\n', resolved
+
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Generate pfr_item_tables.h from pokefirered decomp"
+    )
+    parser.add_argument(
+        '--decomp', required=True,
+        help='Path to pokefirered decomp root (e.g. third_party/pokefirered)'
+    )
+    parser.add_argument(
+        '--output', required=True,
+        help='Output header file path (e.g. src/pfr_item_tables.h)'
+    )
+    args = parser.parse_args()
+
+    decomp = os.path.abspath(args.decomp)
+    output = os.path.abspath(args.output)
+
+    eprint(f"gen_item_data.py")
+    eprint(f"  decomp:  {decomp}")
+    eprint(f"  output:  {output}")
+    eprint()
+
+    # --- Parse constants ---
+    eprint("[1/3] Parsing item constants...")
+    item_map, items_count = parse_item_constants(decomp)
+    eprint(f"    -> {len(item_map)} ITEM_* defines, ITEMS_COUNT={items_count}")
+
+    # --- Parse items.json ---
+    eprint("[2/3] Parsing items.json...")
+    items_json = parse_items_json(decomp)
+    eprint(f"    -> {len(items_json)} items in JSON")
+
+    # --- Generate output ---
+    eprint("[3/3] Generating header...")
+    header, resolved = generate_header(items_json, item_map, items_count)
+    eprint(f"    -> {resolved} items resolved out of {items_count}")
+
+    # Ensure output directory exists
+    os.makedirs(os.path.dirname(output), exist_ok=True)
+    with open(output, 'w', encoding='utf-8') as f:
+        f.write(header)
+
+    # Summary
+    total_lines = header.count('\n')
+    total_bytes = len(header.encode('utf-8'))
+    eprint(f"  Wrote {output} ({total_lines} lines, {total_bytes:,} bytes)")
+    eprint("Done.")
+
+
+if __name__ == '__main__':
+    main()

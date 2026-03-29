@@ -1,0 +1,94 @@
+================================================================================
+PFRN TRAINING ASSESSMENT REPORT
+Generated: 2026-03-15 by Assessment Agent B
+================================================================================
+
+1. WAS TRAINING EVER RUN?
+   YES -- extensively. There are 35 separate training run directories under:
+   /home/spark-advantage/worktrees/pokemon_firered_native_puffer/experiments/pokemon_firered_native_puffer/
+
+   Training was run using the custom script:
+   python3 -m pokemon_firered_native_puffer.train --backend-mode worker ...
+
+   History shows both small smoke-test runs and larger multi-thousand-update runs.
+
+2. DID IT WORK?
+   PARTIALLY -- training runs mechanically, models are produced, but results are poor:
+
+   - The env pipeline works: worker backend, observation space, reward signals all function.
+   - The training loop completes and saves checkpoints correctly.
+   - SPS (steps per second) ranged from ~135 (1-agent smoke) to ~17,000 (32-agent runs).
+   
+   However, learning outcomes are NOT meaningful:
+   - ALL runs show 0 badges, 0 pokemon captures, 0 pokedex entries.
+   - Episode returns are consistently small negative values (-0.01 to -4.1).
+   - unique_maps stays at 1, unique_bins at 1 -- the agent is not exploring.
+   - party_level remains at 5 (starter Bulbasaur, no leveling).
+   - reached_pewter = 0%, goal_reached = 0% across all runs.
+   - Entropy collapses to 0.0 in longer runs (policy collapse).
+   - losses/approx_kl = 0.0 and losses/clipfrac = 0.0 suggests the policy 
+     is not actually updating meaningfully.
+
+   Longest runs:
+   - Run 1773389595551: 5,600 updates, 28 model checkpoints (Mar 13, ~2 min)
+   - Run 1773389369635: 4,200 updates, 21 model checkpoints (Mar 13)
+   - Run 1773389215567: 3,400 updates, 17 model checkpoints (Mar 13)
+   - Run 1773389480044: 521 epochs, still 0 badges/captures
+
+   Most recent runs (Mar 15): very small smoke tests (2-8 updates only).
+
+3. WANDB LINKS
+   NO WANDB LINKS EXIST FOR POKEFIRERED TRAINING.
+   
+   The pokefirered training script (train.py) does NOT include --wandb support.
+   It builds its own argument parser that omits the wandb flags entirely.
+   The PufferLib Logger supports wandb (args[wandb]=True triggers wandb.init),
+   but the pokefirered train.py never sets this flag.
+
+   The wandb runs visible in /home/spark-advantage/pufferlib-4.0/wandb/ are ALL
+   for other projects:
+   - Latest run (i1riv599, Mar 15 06:35): puffer_chess selfplay-2phase-masked
+   - Run sxs9d9p1 (Mar 14 23:42): chess-selfplay via train_selfplay.py
+   - All ~130 wandb run directories are for chess or other pufferlib envs.
+   
+   NONE are pokefirered.
+
+4. TRAINING CONFIGURATION
+   Config file: /home/spark-advantage/worktrees/pokemon_firered_native_puffer/configs/train.ini
+   - 32 agents, 20 threads, 1 buffer
+   - horizon=8, minibatch_size=128
+   - total_timesteps=10,000,000 (but no run reached this target)
+   - learning_rate=0.015
+   - hidden_size=128, num_layers=4
+   - kernels=on, cudagraphs=off
+   - episode_step_limit=4096
+   - device=cuda (NVIDIA GB10 Blackwell)
+
+5. CURRENTLY RUNNING?
+   NO pokefirered training is currently running.
+   A puffer_chess training IS running (PID 226559, started at 06:34).
+   One stale pokefirered worker process exists (PID 191938).
+
+6. KEY ISSUES OBSERVED
+   a) No wandb integration: training metrics are only logged to local JSON files
+      under experiments/logs/pokemon_firered_native_puffer/.
+   b) Policy collapse: entropy drops to 0.0, KL divergence stays at 0.0.
+   c) No exploration: the agent never leaves the starting area.
+   d) All runs are short duration (~2-15 seconds wall time) despite thousands of 
+      updates -- this suggests very small agent counts or fast but ineffective 
+      training.
+   e) The 10M timestep target has never been reached in any run.
+
+7. DATA LOCATIONS
+   - Checkpoints: .../experiments/pokemon_firered_native_puffer/<run_id>/
+   - Training logs: .../experiments/logs/pokemon_firered_native_puffer/<run_id>.json
+   - Progress JSONL: .../experiments/training_progress.jsonl (last run only)
+   - Eval summary: .../experiments/exploration_eval/summary.json
+   - Training script: .../pokemon_firered_native_puffer/train.py
+   - Config: .../configs/train.ini
+
+================================================================================
+SUMMARY: Training was run many times and runs mechanically. It does NOT produce
+meaningful RL results (zero exploration, zero badges, policy collapse). There are
+NO wandb links because the training script lacks wandb integration entirely.
+================================================================================

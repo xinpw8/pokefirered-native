@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/pfr_smoke.dir/src/host_agbmain.c.o"
   "CMakeFiles/pfr_smoke.dir/src/host_agbmain.c.o.d"
+  "CMakeFiles/pfr_smoke.dir/src/host_savestate.c.o"
+  "CMakeFiles/pfr_smoke.dir/src/host_savestate.c.o.d"
   "CMakeFiles/pfr_smoke.dir/tests/smoke.c.o"
   "CMakeFiles/pfr_smoke.dir/tests/smoke.c.o.d"
   "pfr_smoke"

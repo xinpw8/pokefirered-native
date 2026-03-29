@@ -1,0 +1,2 @@
+# RL Action Boundary Instrumentation
+# Play the game normally. Each line logs a player_ready() transition.

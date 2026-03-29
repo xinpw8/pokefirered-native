@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/spark-advantage/pokefirered-native/src/host_agbmain.c" "CMakeFiles/pfr_smoke.dir/src/host_agbmain.c.o" "gcc" "CMakeFiles/pfr_smoke.dir/src/host_agbmain.c.o.d"
+  "/home/spark-advantage/pokefirered-native/src/host_savestate.c" "CMakeFiles/pfr_smoke.dir/src/host_savestate.c.o" "gcc" "CMakeFiles/pfr_smoke.dir/src/host_savestate.c.o.d"
   "/home/spark-advantage/pokefirered-native/tests/smoke.c" "CMakeFiles/pfr_smoke.dir/tests/smoke.c.o" "gcc" "CMakeFiles/pfr_smoke.dir/tests/smoke.c.o.d"
   )
 

@@ -97,32 +97,204 @@ CMakeFiles/pfr_render_test.dir/src/host_agbmain.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_render_test.dir/src/host_agbmain.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/src/host_agbmain.c -o CMakeFiles/pfr_render_test.dir/src/host_agbmain.c.s
 
+CMakeFiles/pfr_render_test.dir/src/host_savestate.c.o: CMakeFiles/pfr_render_test.dir/flags.make
+CMakeFiles/pfr_render_test.dir/src/host_savestate.c.o: /home/spark-advantage/pokefirered-native/src/host_savestate.c
+CMakeFiles/pfr_render_test.dir/src/host_savestate.c.o: CMakeFiles/pfr_render_test.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/pfr_render_test.dir/src/host_savestate.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_render_test.dir/src/host_savestate.c.o -MF CMakeFiles/pfr_render_test.dir/src/host_savestate.c.o.d -o CMakeFiles/pfr_render_test.dir/src/host_savestate.c.o -c /home/spark-advantage/pokefirered-native/src/host_savestate.c
+
+CMakeFiles/pfr_render_test.dir/src/host_savestate.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_render_test.dir/src/host_savestate.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/src/host_savestate.c > CMakeFiles/pfr_render_test.dir/src/host_savestate.c.i
+
+CMakeFiles/pfr_render_test.dir/src/host_savestate.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_render_test.dir/src/host_savestate.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/src/host_savestate.c -o CMakeFiles/pfr_render_test.dir/src/host_savestate.c.s
+
 # Object files for target pfr_render_test
 pfr_render_test_OBJECTS = \
 "CMakeFiles/pfr_render_test.dir/tests/render_test.c.o" \
-"CMakeFiles/pfr_render_test.dir/src/host_agbmain.c.o"
+"CMakeFiles/pfr_render_test.dir/src/host_agbmain.c.o" \
+"CMakeFiles/pfr_render_test.dir/src/host_savestate.c.o"
 
 # External object files for target pfr_render_test
 pfr_render_test_EXTERNAL_OBJECTS = \
 "/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_intro.dir/gen/intro.c.o" \
 "/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_title.dir/gen/title_screen.c.o" \
-"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_clear_save.dir/home/spark-advantage/pokefirered/src/clear_save_data_screen.c.o" \
-"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_berry_fix.dir/home/spark-advantage/pokefirered/src/berry_fix_program.c.o" \
-"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_main_menu.dir/home/spark-advantage/pokefirered/src/main_menu.c.o" \
-"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_runtime.dir/home/spark-advantage/pokefirered/src/main.c.o"
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_main_menu.dir/gen/main_menu.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_oak_speech.dir/gen/oak_speech.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_text_window_graphics.dir/gen/text_window_graphics.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_text.dir/gen/text.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_new_menu_helpers.dir/gen/new_menu_helpers.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_graphics.dir/gen/graphics.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_bag.dir/gen/bag.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_battle_anim_effects_3.dir/gen/battle_anim_effects_3.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_battle_anim_flying.dir/gen/battle_anim_flying.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_battle_anim_water.dir/gen/battle_anim_water.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_battle_bg.dir/gen/battle_bg.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_battle_interface.dir/gen/battle_interface.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_battle_records.dir/gen/battle_records.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_battle_script_commands.dir/gen/battle_script_commands.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_battle_transition.dir/gen/battle_transition.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_berry_crush.dir/gen/berry_crush.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_braille_text.dir/gen/braille_text.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_credits.dir/gen/credits.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_daycare.dir/gen/daycare.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_digit_obj_util.dir/gen/digit_obj_util.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_diploma.dir/gen/diploma.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_dodrio_berry_picking.dir/gen/dodrio_berry_picking.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_easy_chat.dir/gen/easy_chat.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_easy_chat_2.dir/gen/easy_chat_2.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_easy_chat_3.dir/gen/easy_chat_3.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_evolution_graphics.dir/gen/evolution_graphics.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_evolution_scene.dir/gen/evolution_scene.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_fame_checker.dir/gen/fame_checker.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_field_door.dir/gen/field_door.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_field_effect.dir/gen/field_effect.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_field_specials.dir/gen/field_specials.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_field_weather.dir/gen/field_weather.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_fldeff_flash.dir/gen/fldeff_flash.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_hall_of_fame.dir/gen/hall_of_fame.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_help_message.dir/gen/help_message.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_help_system.dir/gen/help_system.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_help_system_util.dir/gen/help_system_util.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_item_menu.dir/gen/item_menu.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_itemfinder.dir/gen/itemfinder.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_learn_move.dir/gen/learn_move.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_link.dir/gen/link.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_link_rfu_3.dir/gen/link_rfu_3.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_map_preview_screen.dir/gen/map_preview_screen.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_menu_indicators.dir/gen/menu_indicators.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_minigame_countdown.dir/gen/minigame_countdown.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_mon_markings.dir/gen/mon_markings.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_mystery_gift_menu.dir/gen/mystery_gift_menu.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_mystery_gift_show_card.dir/gen/mystery_gift_show_card.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_mystery_gift_show_news.dir/gen/mystery_gift_show_news.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_naming_screen.dir/gen/naming_screen.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_option_menu.dir/gen/option_menu.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_pokedex_area_markers.dir/gen/pokedex_area_markers.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_pokedex_screen.dir/gen/pokedex_screen.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_pokemon.dir/gen/pokemon.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_pokemon_icon.dir/gen/pokemon_icon.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_pokemon_jump.dir/gen/pokemon_jump.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_pokemon_special_anim_scene.dir/gen/pokemon_special_anim_scene.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_pokemon_storage_system_data.dir/gen/pokemon_storage_system_data.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_pokemon_storage_system_graphics.dir/gen/pokemon_storage_system_graphics.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_pokemon_storage_system_menu.dir/gen/pokemon_storage_system_menu.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_pokemon_storage_system_misc.dir/gen/pokemon_storage_system_misc.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_pokemon_storage_system_tasks.dir/gen/pokemon_storage_system_tasks.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_pokemon_summary_screen.dir/gen/pokemon_summary_screen.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_quest_log.dir/gen/quest_log.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_region_map.dir/gen/region_map.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_save_failed_screen.dir/gen/save_failed_screen.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_script_menu.dir/gen/script_menu.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_seagallop.dir/gen/seagallop.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_slot_machine.dir/gen/slot_machine.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_ss_anne.dir/gen/ss_anne.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_tileset_anims.dir/gen/tileset_anims.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_trade.dir/gen/trade.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_trade_scene.dir/gen/trade_scene.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_trainer_card.dir/gen/trainer_card.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_trainer_see.dir/gen/trainer_see.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_union_room_chat_display.dir/gen/union_room_chat_display.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_union_room_chat_objects.dir/gen/union_room_chat_objects.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_util.dir/gen/util.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_wireless_communication_status_screen.dir/gen/wireless_communication_status_screen.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_tilesets.dir/gen/tilesets.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_event_object_movement.dir/gen/event_object_movement.c.o" \
+"/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles/pfr_upstream_party_menu.dir/gen/party_menu.c.o"
 
 pfr_render_test: CMakeFiles/pfr_render_test.dir/tests/render_test.c.o
 pfr_render_test: CMakeFiles/pfr_render_test.dir/src/host_agbmain.c.o
+pfr_render_test: CMakeFiles/pfr_render_test.dir/src/host_savestate.c.o
 pfr_render_test: CMakeFiles/pfr_upstream_intro.dir/gen/intro.c.o
 pfr_render_test: CMakeFiles/pfr_upstream_title.dir/gen/title_screen.c.o
-pfr_render_test: CMakeFiles/pfr_upstream_clear_save.dir/home/spark-advantage/pokefirered/src/clear_save_data_screen.c.o
-pfr_render_test: CMakeFiles/pfr_upstream_berry_fix.dir/home/spark-advantage/pokefirered/src/berry_fix_program.c.o
-pfr_render_test: CMakeFiles/pfr_upstream_main_menu.dir/home/spark-advantage/pokefirered/src/main_menu.c.o
-pfr_render_test: CMakeFiles/pfr_upstream_runtime.dir/home/spark-advantage/pokefirered/src/main.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_main_menu.dir/gen/main_menu.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_oak_speech.dir/gen/oak_speech.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_text_window_graphics.dir/gen/text_window_graphics.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_text.dir/gen/text.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_new_menu_helpers.dir/gen/new_menu_helpers.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_graphics.dir/gen/graphics.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_bag.dir/gen/bag.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_battle_anim_effects_3.dir/gen/battle_anim_effects_3.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_battle_anim_flying.dir/gen/battle_anim_flying.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_battle_anim_water.dir/gen/battle_anim_water.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_battle_bg.dir/gen/battle_bg.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_battle_interface.dir/gen/battle_interface.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_battle_records.dir/gen/battle_records.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_battle_script_commands.dir/gen/battle_script_commands.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_battle_transition.dir/gen/battle_transition.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_berry_crush.dir/gen/berry_crush.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_braille_text.dir/gen/braille_text.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_credits.dir/gen/credits.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_daycare.dir/gen/daycare.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_digit_obj_util.dir/gen/digit_obj_util.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_diploma.dir/gen/diploma.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_dodrio_berry_picking.dir/gen/dodrio_berry_picking.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_easy_chat.dir/gen/easy_chat.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_easy_chat_2.dir/gen/easy_chat_2.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_easy_chat_3.dir/gen/easy_chat_3.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_evolution_graphics.dir/gen/evolution_graphics.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_evolution_scene.dir/gen/evolution_scene.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_fame_checker.dir/gen/fame_checker.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_field_door.dir/gen/field_door.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_field_effect.dir/gen/field_effect.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_field_specials.dir/gen/field_specials.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_field_weather.dir/gen/field_weather.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_fldeff_flash.dir/gen/fldeff_flash.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_hall_of_fame.dir/gen/hall_of_fame.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_help_message.dir/gen/help_message.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_help_system.dir/gen/help_system.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_help_system_util.dir/gen/help_system_util.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_item_menu.dir/gen/item_menu.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_itemfinder.dir/gen/itemfinder.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_learn_move.dir/gen/learn_move.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_link.dir/gen/link.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_link_rfu_3.dir/gen/link_rfu_3.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_map_preview_screen.dir/gen/map_preview_screen.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_menu_indicators.dir/gen/menu_indicators.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_minigame_countdown.dir/gen/minigame_countdown.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_mon_markings.dir/gen/mon_markings.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_mystery_gift_menu.dir/gen/mystery_gift_menu.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_mystery_gift_show_card.dir/gen/mystery_gift_show_card.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_mystery_gift_show_news.dir/gen/mystery_gift_show_news.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_naming_screen.dir/gen/naming_screen.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_option_menu.dir/gen/option_menu.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_pokedex_area_markers.dir/gen/pokedex_area_markers.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_pokedex_screen.dir/gen/pokedex_screen.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_pokemon.dir/gen/pokemon.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_pokemon_icon.dir/gen/pokemon_icon.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_pokemon_jump.dir/gen/pokemon_jump.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_pokemon_special_anim_scene.dir/gen/pokemon_special_anim_scene.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_pokemon_storage_system_data.dir/gen/pokemon_storage_system_data.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_pokemon_storage_system_graphics.dir/gen/pokemon_storage_system_graphics.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_pokemon_storage_system_menu.dir/gen/pokemon_storage_system_menu.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_pokemon_storage_system_misc.dir/gen/pokemon_storage_system_misc.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_pokemon_storage_system_tasks.dir/gen/pokemon_storage_system_tasks.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_pokemon_summary_screen.dir/gen/pokemon_summary_screen.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_quest_log.dir/gen/quest_log.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_region_map.dir/gen/region_map.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_save_failed_screen.dir/gen/save_failed_screen.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_script_menu.dir/gen/script_menu.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_seagallop.dir/gen/seagallop.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_slot_machine.dir/gen/slot_machine.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_ss_anne.dir/gen/ss_anne.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_tileset_anims.dir/gen/tileset_anims.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_trade.dir/gen/trade.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_trade_scene.dir/gen/trade_scene.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_trainer_card.dir/gen/trainer_card.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_trainer_see.dir/gen/trainer_see.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_union_room_chat_display.dir/gen/union_room_chat_display.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_union_room_chat_objects.dir/gen/union_room_chat_objects.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_util.dir/gen/util.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_wireless_communication_status_screen.dir/gen/wireless_communication_status_screen.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_tilesets.dir/gen/tilesets.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_event_object_movement.dir/gen/event_object_movement.c.o
+pfr_render_test: CMakeFiles/pfr_upstream_party_menu.dir/gen/party_menu.c.o
 pfr_render_test: CMakeFiles/pfr_render_test.dir/build.make
 pfr_render_test: libpfr_upstream_core.a
 pfr_render_test: CMakeFiles/pfr_render_test.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable pfr_render_test"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable pfr_render_test"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/pfr_render_test.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

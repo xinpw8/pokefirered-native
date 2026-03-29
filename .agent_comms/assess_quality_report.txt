@@ -1,0 +1,296 @@
+================================================================================
+PFRN vs NMMO3 QUALITY ASSESSMENT REPORT
+Assessment Agent C
+================================================================================
+
+EXECUTIVE SUMMARY
+-----------------
+PFRN PufferLib integration is structurally correct and follows the same
+env_binding.h API pattern as NMMO3. The binding code compiles against the
+same template. However, PFRN has a fundamental architectural problem that
+NMMO3 does not share: all game state lives in C globals, making multi-env
+vectorization impossible without process isolation. This is the core SPS
+bottleneck and the defining quality gap.
+
+================================================================================
+1. PER-INSTANCE STATE MANAGEMENT
+================================================================================
+
+NMMO3 (Gold Standard):
+  - ALL game state lives in the MMO* struct (heap-allocated per env instance)
+  - Fields: terrain, rendered, players[], enemies[], pids[], items[], counts[],
+    observations, rewards, terminals, actions, market, respawn_buffers, etc.
+  - Total: ~20 pointer fields + ~15 scalar config fields, all per-instance
+  - Zero globals. Every function takes MMO* env as first argument.
+  - c_step(env), c_reset(env), init(env) all operate on the env pointer.
+  - Result: vec_step() can run N envs via OMP parallel for:
+      #pragma omp parallel for schedule(dynamic)
+      for (int i = 0; i < vec->num_envs; i++) {
+          c_step(vec->envs[i]);
+      }
+  - Each thread operates on completely independent memory.
+
+PFRN (Current):
+  - PfrEnv struct contains: observations*, actions*, rewards*, terminals*,
+    reward_state, max_steps, frames_per_step, savestate_path
+  - BUT the actual game state lives in 43+ global variable references:
+      gSaveBlock1Ptr, gObjectEvents[], gPlayerAvatar, gMain,
+      gBattleOutcome, gPlayerParty[], FlagGet(), MapGridGetMetatileBehaviorAt(),
+      REG_KEYINPUT, KEYS_MASK, HostFrameStepRunFast()
+  - These globals are the pokefirered emulation state: a single GBA console.
+  - Result: you can only have ONE active game instance per process.
+  - vec_init() with num_envs>1 would create multiple PfrEnv structs that
+    all read/write the same global game state. This is data corruption.
+
+VERDICT: CRITICAL architectural difference. NMMO3 is fully vectorizable.
+         PFRN is limited to 1 env per process. This is the number 1 quality gap.
+
+================================================================================
+2. OBSERVATION STRUCTURE
+================================================================================
+
+NMMO3:
+  - OBS_SIZE = 1707 bytes (unsigned char)
+  - Layout: [map 11x15x10=1650] [player_discrete 47] [reward_history 10]
+  - Map: 10 categorical features per tile in an 11x15 window
+    (terrain, items, entity type/element/combat_level/hp/anim/dir)
+  - Player: 47 discrete features (type, comb_lvl, element, dir, anim, hp,
+    hp_max, prof_lvl, ui_mode, market_tier, sell_idx, gold, in_combat,
+    equipment[5], inventory[12], is_equipped[12], wander_range, ranged,
+    goal, equipment_attack, equipment_defense)
+  - Reward history: 10 floats encoded as uint8 (death, pioneer, levels, market)
+  - Total: 1707 bytes per agent, 1024 agents per env = approx 1.7MB per env
+
+PFRN:
+  - OBS_SIZE = 226 bytes (unsigned char)
+  - Layout: [scalars 55] [NPCs 15x6=90] [tiles 9x9=81]
+  - Scalars: player_xy (4B), map_id (3B), player_state (4B), battle (2B),
+    party[6]x{species:u16, level:u8, hp_pct:u8, status:u8, type1:u8} (36B),
+    badges (1B), money (2B), weather (1B), step_counter (2B)
+  - NPCs: 15 slots x {dx:i8, dy:i8, graphics_id:u8, direction:u8, active:u8,
+    movement_type:u8}
+  - Tiles: 9x9 grid of metatile behavior bytes (raw, not factored)
+  - Total: 226 bytes per agent
+
+COMPARISON:
+  - NMMO3: 1707 bytes, information-dense with factored categoricals
+  - PFRN: 226 bytes, compact but includes multi-byte packed values
+  - PFRN obs is 7.5x smaller; reasonable for single-agent Pokemon
+  - PFRN uses packed structs with int16/uint16, which requires careful
+    byte-level reconstruction in the policy network (which it does correctly)
+  - NMMO3 uses single-byte categoricals exclusively (no multi-byte packing)
+    making policy parsing simpler
+
+VERDICT: Both are reasonable for their domains. PFRN packed format is
+         more complex to parse but 7.5x smaller is fine for 1-agent env.
+
+================================================================================
+3. ACTION SPACE
+================================================================================
+
+NMMO3: Discrete(26) - move 4-dir, noop, attack, UI, number keys, buy/sell, shift-move
+PFRN:  Discrete(10) - none, up, down, left, right, A, B, start, select, L+R
+
+COMPARISON: Both use simple discrete action spaces. PFRN 10 actions map to
+GBA buttons, which is appropriate. Both are reasonable.
+
+================================================================================
+4. REWARD STRUCTURE
+================================================================================
+
+NMMO3:
+  - Multi-component reward with configurable weights:
+    reward = w_combat * combat_level_gain + w_prof * prof_level_gain
+           + w_item * item_level_gain + w_market * market_profit + w_death * death_penalty
+  - Reward weights are per-env configuration (reward_combat_level, etc.)
+  - Reward components tracked in Reward struct per agent
+  - Cumulative returns tracked in env->returns[] for logging
+
+PFRN:
+  - Exploration reward: 0.02 per new unique tile visited (hash-set tracked)
+  - Badge progression: 10.0 per new badge
+  - Party level gains: 0.1 per level gained across party
+  - New party member: 1.0 per new pokemon caught
+  - Time penalty: -0.0001 per step
+  - Total tracked via PfrRewardState (visit_hash, prev_badges, etc.)
+
+COMPARISON: Both have well-structured shaped rewards. PFRN reward is
+reasonable for Pokemon progression. NMMO3 has configurable weights (better
+for hyperparameter tuning). PFRN hardcodes reward weights (minor issue).
+
+================================================================================
+5. ENV_BINDING.H INTEGRATION
+================================================================================
+
+NMMO3 binding (binding.h):
+  - Uses NEWER static binding API (Dict*, dict_get, dict_set)
+  - Located at pufferlib/extensions/env_binding.h
+  - Defines: OBS_SIZE=1707, NUM_ATNS=1, ACT_SIZES={26}, OBS_TYPE=UNSIGNED_CHAR,
+    ACT_TYPE=DOUBLE
+  - define Env MMO, then include env_binding.h
+  - my_init(): reads all 19 config params via dict_get(), calls init(env)
+  - my_log(): writes 16 log fields via dict_set()
+  - Built as static library linked into pufferlib.cpp via ocean.cpp
+
+PFRN binding (pfr_env_binding.c):
+  - Uses OLDER ocean binding API (PyObject*, unpack(), assign_to_dict())
+  - Located at pufferlib/ocean/env_binding.h
+  - define Env PfrEnv, define Log PfrLog
+  - include ../pufferlib/ocean/env_binding.h
+  - my_init(): reads frames_per_step, max_steps, savestate_path
+  - my_log(): writes 5 log fields
+  - Does NOT define OBS_SIZE/NUM_ATNS/ACT_SIZES/OBS_TYPE/ACT_TYPE macros
+  - Built as standalone Python C extension module
+
+CRITICAL ISSUE: PFRN binding uses the OLDER ocean/env_binding.h which
+operates at the Python C API level. NMMO3 uses the NEWER extensions/env_binding.h
+which is the static binding path that PufferLib 4.0 prefers. These are two
+different APIs. PFRN approach works but is the legacy path.
+
+BINDING CORRECTNESS CHECK:
+  - vec_init() correctly slices numpy arrays by stride for each env
+  - Each PfrEnv gets its own obs/actions/rewards/terminals pointer
+  - vec_step() calls c_step() in OMP parallel for each env
+  - vec_log() aggregates Log structs across envs and averages by n
+  - PfrEnv.log IS the first field in the struct (confirmed)
+  - PfrLog ends with float n (CORRECT: required by vec_log aggregation)
+  - my_init/my_log function signatures match env_binding.h expectations (CORRECT)
+
+HOWEVER: vec_step() parallelization is BROKEN for PFRN because all envs
+share the same global game state. This is not a binding bug: it is the
+fundamental architecture problem from section 1.
+
+================================================================================
+6. POLICY NETWORK COMPARISON
+================================================================================
+
+NMMO3 Policy (ocean.cpp NMMO3Encoder):
+  - Conv2d(59, 128, 5, stride=3) -> ReLU -> Conv2d(128, 128, 3, stride=1)
+    on multi-hot encoded 11x15x10 map -> 256 features
+  - Embedding(128, 32) on 47 player discrete features -> 1504 features
+  - 47 continuous player features (same values as float)
+  - 10 reward history features
+  - Linear(1817, hidden) -> ReLU -> MinGRU -> LayerNorm -> fused actor+value
+  - Multi-hot encoding: 10 factors with cumulative offsets -> 59 channels
+  - Uses LibTorch C++ for GPU execution
+  - Decoder: LayerNorm -> Linear(hidden, 26+1) -> split logits/value
+
+PFRN Policy (pfr_policy.py PfrPolicy):
+  - Scalar branch: byte-level int16 reconstruction, embeddings for species/map/
+    direction/weather, bitmask unpacking, one-hot encoding -> MLP(scalar_total, 256, 128)
+  - NPC branch: per-NPC embeddings + MLP(npc_input, 32, 32) * active mask -> max-pool
+  - Tile branch: 8 bit-planes from byte unpacking -> Conv2d(8,32,3)x3 -> AdaptiveAvgPool2d(1)
+  - Fusion: concat(128+32+32=192) -> Linear(192, 256) -> ReLU
+  - LSTM(256, 256) for episode memory
+  - Policy head: Linear(256, 10)
+  - Value head: Linear(256, 1)
+  - Uses PyTorch Python for GPU execution
+
+COMPARISON:
+  - Both use CNN for spatial features, embeddings for categoricals, RNN for memory
+  - NMMO3 uses MinGRU (simpler, faster), PFRN uses LSTM (more expressive but slower)
+  - NMMO3 processes everything in C++ (LibTorch), PFRN in Python PyTorch
+  - NMMO3 multi-hot encoding is elegant and fast (scatter_ op)
+  - PFRN byte-level reconstruction is correct but involves more Python-side work
+  - PFRN triple-branch architecture (scalar/NPC/tile) is well-designed
+  - PFRN per-NPC MLP + max-pool is a good pattern for variable-count entities
+
+VERDICT: PFRN policy is well-designed and arguably more thoughtful than
+NMMO3 for its specific domain. The architecture is sound. The Python
+implementation is the main speed concern. A C++/LibTorch port would help.
+
+================================================================================
+7. SPS GAP ROOT CAUSES (Architectural)
+================================================================================
+
+Cause 1: SINGLE GAME INSTANCE (CRITICAL)
+  - NMMO3: N envs run in parallel via OMP, each with independent state
+  - PFRN: Only 1 env can run per process (global game state)
+  - Impact: Linear scaling impossible. N processes = N envs (expensive)
+
+Cause 2: GBA FRAME STEPPING (SIGNIFICANT)
+  - NMMO3: c_step() is pure C math (tile movement, combat, inventory)
+  - PFRN: c_step() calls HostFrameStepRunFast() which runs the entire
+    GBA emulation pipeline for frames_per_step=4 frames
+  - Each GBA frame involves: CPU emulation, PPU rendering, audio mixing,
+    DMA, timer ticks, thousands of instructions per frame
+  - A single PFRN step is orders of magnitude more expensive than NMMO3
+
+Cause 3: OBSERVATION EXTRACTION COST (MODERATE)
+  - NMMO3: Obs extraction reads directly from env->players[], env->terrain[]
+    all local to the MMO struct, cache-friendly
+  - PFRN: Obs extraction reads from scattered globals: gSaveBlock1Ptr,
+    gObjectEvents[], gPlayerAvatar, gPlayerParty[], MapGridGetMetatileBehaviorAt()
+  - These are scattered across the emulated GBA memory space
+
+Cause 4: POLICY EXECUTION LANGUAGE (MODERATE)
+  - NMMO3: C++ LibTorch policy with MinGRU, compiled, optimized
+  - PFRN: Python PyTorch policy with LSTM, interpreter overhead, LSTM slower
+
+Cause 5: ACTION REPEAT (MINOR)
+  - PFRN: frames_per_step=4 means 4 GBA frames per RL step
+  - This is standard and appropriate, but it means 4x emulation cost per step
+
+================================================================================
+8. BINDING CORRECTNESS SUMMARY
+================================================================================
+
+PfrEnv struct has these required fields (checked against env_binding.h):
+  [YES] unsigned char* observations   set by env_binding.h from numpy slice
+  [YES] int* actions                  set by env_binding.h from numpy slice
+  [YES] float* rewards                set by env_binding.h from numpy slice
+  [YES] unsigned char* terminals      set by env_binding.h from numpy slice
+  [YES] PfrLog log                    aggregated by vec_log()
+
+PfrLog struct requirements:
+  [YES] All float fields              required for vec_log() aggregate loop
+  [YES] float n as last field         required for averaging denominator
+  [YES] n is accumulated in c_step()  incremented on episode terminal
+
+my_init() requirements:
+  [YES] Receives PyObject* kwargs     correct for ocean/env_binding.h API
+  [YES] Returns int                   correct
+  [YES] Does not call allocate/init   correct (PFRN game state is globals)
+
+my_log() requirements:
+  [YES] Receives PyObject* dict Log*  correct
+  [YES] Uses assign_to_dict()         correct
+  [YES] Returns int                   correct
+
+MISSING DEFINES (compared to NMMO3 binding.h):
+  [N/A] OBS_SIZE not defined          not required by ocean/env_binding.h
+  [N/A] NUM_ATNS not defined          same
+  [N/A] ACT_SIZES not defined         same
+  [N/A] OBS_TYPE not defined          same
+  [N/A] ACT_TYPE not defined          same
+  These are only required for the extensions/env_binding.h static path.
+
+OVERALL BINDING VERDICT: CORRECT for the ocean/env_binding.h API.
+The binding will work for num_envs=1. For num_envs>1, it will compile
+and appear to work but produce corrupt results due to shared globals.
+
+================================================================================
+9. KEY RECOMMENDATIONS
+================================================================================
+
+P0 (Blocking):
+  - PFRN CANNOT vectorize within a process. The entire pokefirered game
+    engine uses global state. To run N envs, you need N processes.
+  - Options: (a) fork N processes (subprocess/multiprocessing), or
+    (b) refactor pokefirered to be instanceable (massive effort), or
+    (c) use PufferLib multi-process vectorization (if supported)
+
+P1 (Performance):
+  - Port policy to C++ LibTorch (match NMMO3 pattern)
+  - Consider using the extensions/env_binding.h static path for tighter
+    integration with PufferLib 4.0 vectorization pipeline
+
+P2 (Quality):
+  - Make reward weights configurable (like NMMO3 reward_combat_level etc.)
+  - Add score/perf metrics to Log struct for standardized reporting
+  - Consider adding reward component breakdown to observations (like NMMO3
+    10-byte reward history) to help the agent track its own progress
+
+================================================================================
+END OF REPORT
+================================================================================

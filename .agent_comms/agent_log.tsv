@@ -1,0 +1,28 @@
+TIMESTAMP	AGENT_ID	STATUS	MESSAGE
+2026-03-15T16:49:46.552Z	test_agent_0	START	testing pipeline
+2026-03-15T16:50:09.179Z	agent_1	START	checking git log
+2026-03-15T16:50:15.531Z	agent_1	DONE	5ab28ac fix: save system, savestate stability, and fly map crash | a6f40a7 feat: add live savestates and turbo controls | ea80f8d fix: init gPokemonStoragePtr + wire up save file persistence
+2026-03-15T16:50:32.218Z	agent_2	START	checking disk space
+2026-03-15T16:50:38.885Z	agent_2	DONE	3.7T total, 1.6T used, 2.0T avail, 45% used
+2026-03-15T16:50:49.463Z	agent_3	START	checking cpu info
+2026-03-15T16:50:56.958Z	agent_3	DONE	aarch64 ARM Cortex-X925, 20 CPUs (10 cores x 1 thread), 1 socket, max 4004MHz, min 1378MHz, 64-bit little-endian
+2026-03-15T16:51:13.681Z	agent_4	START	checking memory
+2026-03-15T16:51:29.697Z	agent_4	DONE	Mem: 119Gi total, 31Gi used, 3.7Gi free, 87Gi available | Swap: 15Gi total, 1.9Gi used, 14Gi free (NOTE: typo path pokefireed-native failed, used correct path)
+2026-03-15T16:51:50.141Z	agent_5	START	checking pufferlib
+2026-03-15T16:52:10.928Z	agent_5	DONE	pufferlib v3.0.0 (setup.py version), NOT pip-installed, local source at /home/spark-advantage/pufferlib-4.0/ (__version__=3.0)
+2026-03-15T16:52:59.475Z	assess_impl	START	examining env implementation
+2026-03-15T16:53:17.263Z	assess_training	START	checking training history
+2026-03-15T16:53:39.120Z	assess_quality	START	comparing PFRN vs NMMO3
+2026-03-15T16:57:10.417Z	assess_training	DONE	Training ran 35 times (Mar 13-15), mechanically works (checkpoints saved), but NO learning (0 badges, 0 captures, entropy collapse). NO wandb links exist - train.py lacks wandb flag. All wandb runs in pufferlib-4.0/wandb/ are chess runs. Longest run: 5600 updates, still 0 progress.
+2026-03-15T16:59:56.975Z	assess_impl	DONE	Found 2 CRITICAL, 3 HIGH, 4 MEDIUM, 3 LOW issues. Key: pfr_env.c passes NULL logicFn so game never advances; direct mon->status reads encrypted garbage; no PostSavestateRestore or boot sequence; truncation-terminal conflation. pfr_game_api.c has correct implementations but binding uses broken pfr_env.c. Report written to assess_impl_report.txt
+2026-03-15T17:00:20.232Z	assess_quality	DONE	Report written. PFRN binding correct for 1-env. Core gap: 43+ global refs prevent vectorization. NMMO3 has zero globals. PFRN uses legacy ocean/env_binding.h not extensions/ static path. Policy design is sound. SPS gap from globals+GBA-emu cost.
+2026-03-15T17:09:31.299Z	capacity	START	analyzing capacity limits
+2026-03-15T17:09:50.242Z	step_trace	START	tracing c_step execution
+2026-03-15T17:10:05.859Z	wandb_check	START	investigating wandb integration
+2026-03-15T17:10:25.975Z	fix_logicfn	START	fixing NULL logicFn
+2026-03-15T17:10:32.782Z	capacity	DONE	UNIFIED_MEM=128GB(120GB_GPU_visible) CPU=20cores(10xX925+10xA725) GPU=GB10_Blackwell_48SM RAM_avail=~88GB VRAM_in_use=~18.7GB_by_others LIMITING_FACTOR=CPU_not_memory MAX_envs_by_RAM=35200 MAX_envs_by_VRAM=not_limiting(unified) REC_test=64 REC_prod=1024
+2026-03-15T17:10:54.607Z	refactor_plan	START	planning refactor and validation
+2026-03-15T17:11:25.451Z	step_trace	DONE	ROOT CAUSE: pfr_env.c passes NULL logicFn to HostFrameStepRunFast - no ReadKeys, no callbacks. Game never advances.
+2026-03-15T17:11:51.850Z	wandb_check	DONE	Root cause: train.py builds its own argparse parser that omits --wandb/--wandb-project/--wandb-group/--tag/--no-model-upload. However _load_default_config calls pufferl.process_config which internally calls make_parser() adding those args, but with sys.argv faked to [argv0] so they always get defaults (wandb=False). Fix: add --wandb, --wandb-project, --wandb-group, --tag, --no-model-upload args to train.py parser and propagate them into the config dict in _build_train_args. wandb auth is OK (api key present in .netrc).
+2026-03-15T17:13:18.337Z	fix_logicfn	DONE	4 fixes: (1) NULL logicFn - use pfr_game_step_frames() instead of HostFrameStepRunFast(NULL,NULL), (2) mon->status direct access replaced with GetMonData(MON_DATA_STATUS), (3) savestate load uses pfr_game_load_state/pfr_game_restore_hot which call PostSavestateRestore, (4) added pfr_game_api.h include. Fixed file at /tmp/pfr_env_fixed.c
+2026-03-15T17:19:01.310Z	refactor_plan	DONE	Plan complete: RECOMMEND dlmopen(D)+savestate-swap(C) hybrid. 2.2MB mutable state per SO instance, 17701 globals, dlmopen already designed in. 12 validation tests defined. 4 phases, est 8-13 days total.

@@ -1,0 +1,6254 @@
+{
+  "regions": [
+    {
+      "id": -1,
+      "name": "Kanto",
+      "coordinates": [
+        0,
+        0
+      ],
+      "tileSize": [
+        408,
+        400
+      ]
+    },
+    {
+      "id": 256,
+      "map_group": 1,
+      "map_num": 0,
+      "name": "ViridianForest",
+      "region_map_section": "MAPSEC_VIRIDIAN_FOREST",
+      "coordinates": [
+        72,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 257,
+      "map_group": 1,
+      "map_num": 1,
+      "name": "MtMoon_1F",
+      "region_map_section": "MAPSEC_MT_MOON",
+      "coordinates": [
+        210,
+        60
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 258,
+      "map_group": 1,
+      "map_num": 2,
+      "name": "MtMoon_B1F",
+      "region_map_section": "MAPSEC_MT_MOON",
+      "coordinates": [
+        210,
+        60
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 259,
+      "map_group": 1,
+      "map_num": 3,
+      "name": "MtMoon_B2F",
+      "region_map_section": "MAPSEC_MT_MOON",
+      "coordinates": [
+        210,
+        60
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 260,
+      "map_group": 1,
+      "map_num": 4,
+      "name": "SSAnne_Exterior",
+      "region_map_section": "MAPSEC_S_S_ANNE",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 261,
+      "map_group": 1,
+      "map_num": 5,
+      "name": "SSAnne_1F_Corridor",
+      "region_map_section": "MAPSEC_S_S_ANNE",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 262,
+      "map_group": 1,
+      "map_num": 6,
+      "name": "SSAnne_2F_Corridor",
+      "region_map_section": "MAPSEC_S_S_ANNE",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 263,
+      "map_group": 1,
+      "map_num": 7,
+      "name": "SSAnne_3F_Corridor",
+      "region_map_section": "MAPSEC_S_S_ANNE",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 264,
+      "map_group": 1,
+      "map_num": 8,
+      "name": "SSAnne_B1F_Corridor",
+      "region_map_section": "MAPSEC_S_S_ANNE",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 265,
+      "map_group": 1,
+      "map_num": 9,
+      "name": "SSAnne_Deck",
+      "region_map_section": "MAPSEC_S_S_ANNE",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 266,
+      "map_group": 1,
+      "map_num": 10,
+      "name": "SSAnne_Kitchen",
+      "region_map_section": "MAPSEC_S_S_ANNE",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 267,
+      "map_group": 1,
+      "map_num": 11,
+      "name": "SSAnne_CaptainsOffice",
+      "region_map_section": "MAPSEC_S_S_ANNE",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 268,
+      "map_group": 1,
+      "map_num": 12,
+      "name": "SSAnne_1F_Room1",
+      "region_map_section": "MAPSEC_S_S_ANNE",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 269,
+      "map_group": 1,
+      "map_num": 13,
+      "name": "SSAnne_1F_Room2",
+      "region_map_section": "MAPSEC_S_S_ANNE",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 270,
+      "map_group": 1,
+      "map_num": 14,
+      "name": "SSAnne_1F_Room3",
+      "region_map_section": "MAPSEC_S_S_ANNE",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 271,
+      "map_group": 1,
+      "map_num": 15,
+      "name": "SSAnne_1F_Room4",
+      "region_map_section": "MAPSEC_S_S_ANNE",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 272,
+      "map_group": 1,
+      "map_num": 16,
+      "name": "SSAnne_1F_Room5",
+      "region_map_section": "MAPSEC_S_S_ANNE",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 273,
+      "map_group": 1,
+      "map_num": 17,
+      "name": "SSAnne_1F_Room7",
+      "region_map_section": "MAPSEC_S_S_ANNE",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 274,
+      "map_group": 1,
+      "map_num": 18,
+      "name": "SSAnne_2F_Room1",
+      "region_map_section": "MAPSEC_S_S_ANNE",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 275,
+      "map_group": 1,
+      "map_num": 19,
+      "name": "SSAnne_2F_Room2",
+      "region_map_section": "MAPSEC_S_S_ANNE",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 276,
+      "map_group": 1,
+      "map_num": 20,
+      "name": "SSAnne_2F_Room3",
+      "region_map_section": "MAPSEC_S_S_ANNE",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 277,
+      "map_group": 1,
+      "map_num": 21,
+      "name": "SSAnne_2F_Room4",
+      "region_map_section": "MAPSEC_S_S_ANNE",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 278,
+      "map_group": 1,
+      "map_num": 22,
+      "name": "SSAnne_2F_Room5",
+      "region_map_section": "MAPSEC_S_S_ANNE",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 279,
+      "map_group": 1,
+      "map_num": 23,
+      "name": "SSAnne_2F_Room6",
+      "region_map_section": "MAPSEC_S_S_ANNE",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 280,
+      "map_group": 1,
+      "map_num": 24,
+      "name": "SSAnne_B1F_Room1",
+      "region_map_section": "MAPSEC_S_S_ANNE",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 281,
+      "map_group": 1,
+      "map_num": 25,
+      "name": "SSAnne_B1F_Room2",
+      "region_map_section": "MAPSEC_S_S_ANNE",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 282,
+      "map_group": 1,
+      "map_num": 26,
+      "name": "SSAnne_B1F_Room3",
+      "region_map_section": "MAPSEC_S_S_ANNE",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 283,
+      "map_group": 1,
+      "map_num": 27,
+      "name": "SSAnne_B1F_Room4",
+      "region_map_section": "MAPSEC_S_S_ANNE",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 284,
+      "map_group": 1,
+      "map_num": 28,
+      "name": "SSAnne_B1F_Room5",
+      "region_map_section": "MAPSEC_S_S_ANNE",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 285,
+      "map_group": 1,
+      "map_num": 29,
+      "name": "SSAnne_1F_Room6",
+      "region_map_section": "MAPSEC_S_S_ANNE",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 286,
+      "map_group": 1,
+      "map_num": 30,
+      "name": "UndergroundPath_NorthEntrance",
+      "region_map_section": "MAPSEC_UNDERGROUND_PATH",
+      "coordinates": [
+        288,
+        100
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 287,
+      "map_group": 1,
+      "map_num": 31,
+      "name": "UndergroundPath_NorthSouthTunnel",
+      "region_map_section": "MAPSEC_UNDERGROUND_PATH",
+      "coordinates": [
+        288,
+        100
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 288,
+      "map_group": 1,
+      "map_num": 32,
+      "name": "UndergroundPath_SouthEntrance",
+      "region_map_section": "MAPSEC_UNDERGROUND_PATH",
+      "coordinates": [
+        288,
+        100
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 289,
+      "map_group": 1,
+      "map_num": 33,
+      "name": "UndergroundPath_WestEntrance",
+      "region_map_section": "MAPSEC_UNDERGROUND_PATH_2",
+      "coordinates": [
+        252,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 290,
+      "map_group": 1,
+      "map_num": 34,
+      "name": "UndergroundPath_EastWestTunnel",
+      "region_map_section": "MAPSEC_UNDERGROUND_PATH_2",
+      "coordinates": [
+        252,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 291,
+      "map_group": 1,
+      "map_num": 35,
+      "name": "UndergroundPath_EastEntrance",
+      "region_map_section": "MAPSEC_UNDERGROUND_PATH_2",
+      "coordinates": [
+        252,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 292,
+      "map_group": 1,
+      "map_num": 36,
+      "name": "DiglettsCave_NorthEntrance",
+      "region_map_section": "MAPSEC_DIGLETTS_CAVE",
+      "coordinates": [
+        72,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 293,
+      "map_group": 1,
+      "map_num": 37,
+      "name": "DiglettsCave_B1F",
+      "region_map_section": "MAPSEC_DIGLETTS_CAVE",
+      "coordinates": [
+        72,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 294,
+      "map_group": 1,
+      "map_num": 38,
+      "name": "DiglettsCave_SouthEntrance",
+      "region_map_section": "MAPSEC_DIGLETTS_CAVE",
+      "coordinates": [
+        72,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 295,
+      "map_group": 1,
+      "map_num": 39,
+      "name": "VictoryRoad_1F",
+      "region_map_section": "MAPSEC_KANTO_VICTORY_ROAD",
+      "coordinates": [
+        12,
+        110
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 296,
+      "map_group": 1,
+      "map_num": 40,
+      "name": "VictoryRoad_2F",
+      "region_map_section": "MAPSEC_KANTO_VICTORY_ROAD",
+      "coordinates": [
+        12,
+        110
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 297,
+      "map_group": 1,
+      "map_num": 41,
+      "name": "VictoryRoad_3F",
+      "region_map_section": "MAPSEC_KANTO_VICTORY_ROAD",
+      "coordinates": [
+        12,
+        110
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 298,
+      "map_group": 1,
+      "map_num": 42,
+      "name": "RocketHideout_B1F",
+      "region_map_section": "MAPSEC_ROCKET_HIDEOUT",
+      "coordinates": [
+        210,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 299,
+      "map_group": 1,
+      "map_num": 43,
+      "name": "RocketHideout_B2F",
+      "region_map_section": "MAPSEC_ROCKET_HIDEOUT",
+      "coordinates": [
+        210,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 300,
+      "map_group": 1,
+      "map_num": 44,
+      "name": "RocketHideout_B3F",
+      "region_map_section": "MAPSEC_ROCKET_HIDEOUT",
+      "coordinates": [
+        210,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 301,
+      "map_group": 1,
+      "map_num": 45,
+      "name": "RocketHideout_B4F",
+      "region_map_section": "MAPSEC_ROCKET_HIDEOUT",
+      "coordinates": [
+        210,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 302,
+      "map_group": 1,
+      "map_num": 46,
+      "name": "RocketHideout_Elevator",
+      "region_map_section": "MAPSEC_ROCKET_HIDEOUT",
+      "coordinates": [
+        210,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 303,
+      "map_group": 1,
+      "map_num": 47,
+      "name": "SilphCo_1F",
+      "region_map_section": "MAPSEC_SILPH_CO",
+      "coordinates": [
+        288,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 304,
+      "map_group": 1,
+      "map_num": 48,
+      "name": "SilphCo_2F",
+      "region_map_section": "MAPSEC_SILPH_CO",
+      "coordinates": [
+        288,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 305,
+      "map_group": 1,
+      "map_num": 49,
+      "name": "SilphCo_3F",
+      "region_map_section": "MAPSEC_SILPH_CO",
+      "coordinates": [
+        288,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 306,
+      "map_group": 1,
+      "map_num": 50,
+      "name": "SilphCo_4F",
+      "region_map_section": "MAPSEC_SILPH_CO",
+      "coordinates": [
+        288,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 307,
+      "map_group": 1,
+      "map_num": 51,
+      "name": "SilphCo_5F",
+      "region_map_section": "MAPSEC_SILPH_CO",
+      "coordinates": [
+        288,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 308,
+      "map_group": 1,
+      "map_num": 52,
+      "name": "SilphCo_6F",
+      "region_map_section": "MAPSEC_SILPH_CO",
+      "coordinates": [
+        288,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 309,
+      "map_group": 1,
+      "map_num": 53,
+      "name": "SilphCo_7F",
+      "region_map_section": "MAPSEC_SILPH_CO",
+      "coordinates": [
+        288,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 310,
+      "map_group": 1,
+      "map_num": 54,
+      "name": "SilphCo_8F",
+      "region_map_section": "MAPSEC_SILPH_CO",
+      "coordinates": [
+        288,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 311,
+      "map_group": 1,
+      "map_num": 55,
+      "name": "SilphCo_9F",
+      "region_map_section": "MAPSEC_SILPH_CO",
+      "coordinates": [
+        288,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 312,
+      "map_group": 1,
+      "map_num": 56,
+      "name": "SilphCo_10F",
+      "region_map_section": "MAPSEC_SILPH_CO",
+      "coordinates": [
+        288,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 313,
+      "map_group": 1,
+      "map_num": 57,
+      "name": "SilphCo_11F",
+      "region_map_section": "MAPSEC_SILPH_CO",
+      "coordinates": [
+        288,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 314,
+      "map_group": 1,
+      "map_num": 58,
+      "name": "SilphCo_Elevator",
+      "region_map_section": "MAPSEC_SILPH_CO",
+      "coordinates": [
+        288,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 315,
+      "map_group": 1,
+      "map_num": 59,
+      "name": "PokemonMansion_1F",
+      "region_map_section": "MAPSEC_POKEMON_MANSION",
+      "coordinates": [
+        72,
+        390
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 316,
+      "map_group": 1,
+      "map_num": 60,
+      "name": "PokemonMansion_2F",
+      "region_map_section": "MAPSEC_POKEMON_MANSION",
+      "coordinates": [
+        72,
+        390
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 317,
+      "map_group": 1,
+      "map_num": 61,
+      "name": "PokemonMansion_3F",
+      "region_map_section": "MAPSEC_POKEMON_MANSION",
+      "coordinates": [
+        72,
+        390
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 318,
+      "map_group": 1,
+      "map_num": 62,
+      "name": "PokemonMansion_B1F",
+      "region_map_section": "MAPSEC_POKEMON_MANSION",
+      "coordinates": [
+        72,
+        390
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 319,
+      "map_group": 1,
+      "map_num": 63,
+      "name": "SafariZone_Center",
+      "region_map_section": "MAPSEC_KANTO_SAFARI_ZONE",
+      "coordinates": [
+        216,
+        320
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 320,
+      "map_group": 1,
+      "map_num": 64,
+      "name": "SafariZone_East",
+      "region_map_section": "MAPSEC_KANTO_SAFARI_ZONE",
+      "coordinates": [
+        216,
+        320
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 321,
+      "map_group": 1,
+      "map_num": 65,
+      "name": "SafariZone_North",
+      "region_map_section": "MAPSEC_KANTO_SAFARI_ZONE",
+      "coordinates": [
+        216,
+        320
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 322,
+      "map_group": 1,
+      "map_num": 66,
+      "name": "SafariZone_West",
+      "region_map_section": "MAPSEC_KANTO_SAFARI_ZONE",
+      "coordinates": [
+        216,
+        320
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 323,
+      "map_group": 1,
+      "map_num": 67,
+      "name": "SafariZone_Center_RestHouse",
+      "region_map_section": "MAPSEC_KANTO_SAFARI_ZONE",
+      "coordinates": [
+        216,
+        320
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 324,
+      "map_group": 1,
+      "map_num": 68,
+      "name": "SafariZone_East_RestHouse",
+      "region_map_section": "MAPSEC_KANTO_SAFARI_ZONE",
+      "coordinates": [
+        216,
+        320
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 325,
+      "map_group": 1,
+      "map_num": 69,
+      "name": "SafariZone_North_RestHouse",
+      "region_map_section": "MAPSEC_KANTO_SAFARI_ZONE",
+      "coordinates": [
+        216,
+        320
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 326,
+      "map_group": 1,
+      "map_num": 70,
+      "name": "SafariZone_West_RestHouse",
+      "region_map_section": "MAPSEC_KANTO_SAFARI_ZONE",
+      "coordinates": [
+        216,
+        320
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 327,
+      "map_group": 1,
+      "map_num": 71,
+      "name": "SafariZone_SecretHouse",
+      "region_map_section": "MAPSEC_KANTO_SAFARI_ZONE",
+      "coordinates": [
+        216,
+        320
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 328,
+      "map_group": 1,
+      "map_num": 72,
+      "name": "CeruleanCave_1F",
+      "region_map_section": "MAPSEC_CERULEAN_CAVE",
+      "coordinates": [
+        288,
+        60
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 329,
+      "map_group": 1,
+      "map_num": 73,
+      "name": "CeruleanCave_2F",
+      "region_map_section": "MAPSEC_CERULEAN_CAVE",
+      "coordinates": [
+        288,
+        60
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 330,
+      "map_group": 1,
+      "map_num": 74,
+      "name": "CeruleanCave_B1F",
+      "region_map_section": "MAPSEC_CERULEAN_CAVE",
+      "coordinates": [
+        288,
+        60
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 331,
+      "map_group": 1,
+      "map_num": 75,
+      "name": "PokemonLeague_LoreleisRoom",
+      "region_map_section": "MAPSEC_POKEMON_LEAGUE",
+      "coordinates": [
+        12,
+        20
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 332,
+      "map_group": 1,
+      "map_num": 76,
+      "name": "PokemonLeague_BrunosRoom",
+      "region_map_section": "MAPSEC_POKEMON_LEAGUE",
+      "coordinates": [
+        12,
+        20
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 333,
+      "map_group": 1,
+      "map_num": 77,
+      "name": "PokemonLeague_AgathasRoom",
+      "region_map_section": "MAPSEC_POKEMON_LEAGUE",
+      "coordinates": [
+        12,
+        20
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 334,
+      "map_group": 1,
+      "map_num": 78,
+      "name": "PokemonLeague_LancesRoom",
+      "region_map_section": "MAPSEC_POKEMON_LEAGUE",
+      "coordinates": [
+        12,
+        20
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 335,
+      "map_group": 1,
+      "map_num": 79,
+      "name": "PokemonLeague_ChampionsRoom",
+      "region_map_section": "MAPSEC_POKEMON_LEAGUE",
+      "coordinates": [
+        12,
+        20
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 336,
+      "map_group": 1,
+      "map_num": 80,
+      "name": "PokemonLeague_HallOfFame",
+      "region_map_section": "MAPSEC_POKEMON_LEAGUE",
+      "coordinates": [
+        12,
+        20
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 337,
+      "map_group": 1,
+      "map_num": 81,
+      "name": "RockTunnel_1F",
+      "region_map_section": "MAPSEC_ROCK_TUNNEL",
+      "coordinates": [
+        396,
+        90
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 338,
+      "map_group": 1,
+      "map_num": 82,
+      "name": "RockTunnel_B1F",
+      "region_map_section": "MAPSEC_ROCK_TUNNEL",
+      "coordinates": [
+        396,
+        90
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 339,
+      "map_group": 1,
+      "map_num": 83,
+      "name": "SeafoamIslands_1F",
+      "region_map_section": "MAPSEC_SEAFOAM_ISLANDS",
+      "coordinates": [
+        144,
+        390
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 340,
+      "map_group": 1,
+      "map_num": 84,
+      "name": "SeafoamIslands_B1F",
+      "region_map_section": "MAPSEC_SEAFOAM_ISLANDS",
+      "coordinates": [
+        144,
+        390
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 341,
+      "map_group": 1,
+      "map_num": 85,
+      "name": "SeafoamIslands_B2F",
+      "region_map_section": "MAPSEC_SEAFOAM_ISLANDS",
+      "coordinates": [
+        144,
+        390
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 342,
+      "map_group": 1,
+      "map_num": 86,
+      "name": "SeafoamIslands_B3F",
+      "region_map_section": "MAPSEC_SEAFOAM_ISLANDS",
+      "coordinates": [
+        144,
+        390
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 343,
+      "map_group": 1,
+      "map_num": 87,
+      "name": "SeafoamIslands_B4F",
+      "region_map_section": "MAPSEC_SEAFOAM_ISLANDS",
+      "coordinates": [
+        144,
+        390
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 344,
+      "map_group": 1,
+      "map_num": 88,
+      "name": "PokemonTower_1F",
+      "region_map_section": "MAPSEC_POKEMON_TOWER",
+      "coordinates": [
+        396,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 345,
+      "map_group": 1,
+      "map_num": 89,
+      "name": "PokemonTower_2F",
+      "region_map_section": "MAPSEC_POKEMON_TOWER",
+      "coordinates": [
+        396,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 346,
+      "map_group": 1,
+      "map_num": 90,
+      "name": "PokemonTower_3F",
+      "region_map_section": "MAPSEC_POKEMON_TOWER",
+      "coordinates": [
+        396,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 347,
+      "map_group": 1,
+      "map_num": 91,
+      "name": "PokemonTower_4F",
+      "region_map_section": "MAPSEC_POKEMON_TOWER",
+      "coordinates": [
+        396,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 348,
+      "map_group": 1,
+      "map_num": 92,
+      "name": "PokemonTower_5F",
+      "region_map_section": "MAPSEC_POKEMON_TOWER",
+      "coordinates": [
+        396,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 349,
+      "map_group": 1,
+      "map_num": 93,
+      "name": "PokemonTower_6F",
+      "region_map_section": "MAPSEC_POKEMON_TOWER",
+      "coordinates": [
+        396,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 350,
+      "map_group": 1,
+      "map_num": 94,
+      "name": "PokemonTower_7F",
+      "region_map_section": "MAPSEC_POKEMON_TOWER",
+      "coordinates": [
+        396,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 351,
+      "map_group": 1,
+      "map_num": 95,
+      "name": "PowerPlant",
+      "region_map_section": "MAPSEC_POWER_PLANT",
+      "coordinates": [
+        396,
+        90
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 352,
+      "map_group": 1,
+      "map_num": 96,
+      "name": "MtEmber_RubyPath_B4F",
+      "region_map_section": "MAPSEC_MT_EMBER",
+      "coordinates": [
+        50,
+        540
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 353,
+      "map_group": 1,
+      "map_num": 97,
+      "name": "MtEmber_Exterior",
+      "region_map_section": "MAPSEC_MT_EMBER",
+      "coordinates": [
+        50,
+        540
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 354,
+      "map_group": 1,
+      "map_num": 98,
+      "name": "MtEmber_SummitPath_1F",
+      "region_map_section": "MAPSEC_MT_EMBER",
+      "coordinates": [
+        50,
+        540
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 355,
+      "map_group": 1,
+      "map_num": 99,
+      "name": "MtEmber_SummitPath_2F",
+      "region_map_section": "MAPSEC_MT_EMBER",
+      "coordinates": [
+        50,
+        540
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 356,
+      "map_group": 1,
+      "map_num": 100,
+      "name": "MtEmber_SummitPath_3F",
+      "region_map_section": "MAPSEC_MT_EMBER",
+      "coordinates": [
+        50,
+        540
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 357,
+      "map_group": 1,
+      "map_num": 101,
+      "name": "MtEmber_Summit",
+      "region_map_section": "MAPSEC_MT_EMBER",
+      "coordinates": [
+        50,
+        540
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 358,
+      "map_group": 1,
+      "map_num": 102,
+      "name": "MtEmber_RubyPath_B5F",
+      "region_map_section": "MAPSEC_MT_EMBER",
+      "coordinates": [
+        50,
+        540
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 359,
+      "map_group": 1,
+      "map_num": 103,
+      "name": "MtEmber_RubyPath_1F",
+      "region_map_section": "MAPSEC_MT_EMBER",
+      "coordinates": [
+        50,
+        540
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 360,
+      "map_group": 1,
+      "map_num": 104,
+      "name": "MtEmber_RubyPath_B1F",
+      "region_map_section": "MAPSEC_MT_EMBER",
+      "coordinates": [
+        50,
+        540
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 361,
+      "map_group": 1,
+      "map_num": 105,
+      "name": "MtEmber_RubyPath_B2F",
+      "region_map_section": "MAPSEC_MT_EMBER",
+      "coordinates": [
+        50,
+        540
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 362,
+      "map_group": 1,
+      "map_num": 106,
+      "name": "MtEmber_RubyPath_B3F",
+      "region_map_section": "MAPSEC_MT_EMBER",
+      "coordinates": [
+        50,
+        540
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 363,
+      "map_group": 1,
+      "map_num": 107,
+      "name": "MtEmber_RubyPath_B1F_Stairs",
+      "region_map_section": "MAPSEC_MT_EMBER",
+      "coordinates": [
+        50,
+        540
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 364,
+      "map_group": 1,
+      "map_num": 108,
+      "name": "MtEmber_RubyPath_B2F_Stairs",
+      "region_map_section": "MAPSEC_MT_EMBER",
+      "coordinates": [
+        50,
+        540
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 365,
+      "map_group": 1,
+      "map_num": 109,
+      "name": "ThreeIsland_BerryForest",
+      "region_map_section": "MAPSEC_BERRY_FOREST",
+      "coordinates": [
+        300,
+        670
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 366,
+      "map_group": 1,
+      "map_num": 110,
+      "name": "FourIsland_IcefallCave_Entrance",
+      "region_map_section": "MAPSEC_ICEFALL_CAVE",
+      "coordinates": [
+        290,
+        510
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 367,
+      "map_group": 1,
+      "map_num": 111,
+      "name": "FourIsland_IcefallCave_1F",
+      "region_map_section": "MAPSEC_ICEFALL_CAVE",
+      "coordinates": [
+        290,
+        510
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 368,
+      "map_group": 1,
+      "map_num": 112,
+      "name": "FourIsland_IcefallCave_B1F",
+      "region_map_section": "MAPSEC_ICEFALL_CAVE",
+      "coordinates": [
+        290,
+        510
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 369,
+      "map_group": 1,
+      "map_num": 113,
+      "name": "FourIsland_IcefallCave_Back",
+      "region_map_section": "MAPSEC_ICEFALL_CAVE",
+      "coordinates": [
+        290,
+        510
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 370,
+      "map_group": 1,
+      "map_num": 114,
+      "name": "FiveIsland_RocketWarehouse",
+      "region_map_section": "MAPSEC_ROCKET_WAREHOUSE",
+      "coordinates": [
+        550,
+        650
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 371,
+      "map_group": 1,
+      "map_num": 115,
+      "name": "SixIsland_DottedHole_1F",
+      "region_map_section": "MAPSEC_DOTTED_HOLE",
+      "coordinates": [
+        340,
+        900
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 372,
+      "map_group": 1,
+      "map_num": 116,
+      "name": "SixIsland_DottedHole_B1F",
+      "region_map_section": "MAPSEC_DOTTED_HOLE",
+      "coordinates": [
+        340,
+        900
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 373,
+      "map_group": 1,
+      "map_num": 117,
+      "name": "SixIsland_DottedHole_B2F",
+      "region_map_section": "MAPSEC_DOTTED_HOLE",
+      "coordinates": [
+        340,
+        900
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 374,
+      "map_group": 1,
+      "map_num": 118,
+      "name": "SixIsland_DottedHole_B3F",
+      "region_map_section": "MAPSEC_DOTTED_HOLE",
+      "coordinates": [
+        340,
+        900
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 375,
+      "map_group": 1,
+      "map_num": 119,
+      "name": "SixIsland_DottedHole_B4F",
+      "region_map_section": "MAPSEC_DOTTED_HOLE",
+      "coordinates": [
+        340,
+        900
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 376,
+      "map_group": 1,
+      "map_num": 120,
+      "name": "SixIsland_DottedHole_SapphireRoom",
+      "region_map_section": "MAPSEC_DOTTED_HOLE",
+      "coordinates": [
+        340,
+        900
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 377,
+      "map_group": 1,
+      "map_num": 121,
+      "name": "SixIsland_PatternBush",
+      "region_map_section": "MAPSEC_PATTERN_BUSH",
+      "coordinates": [
+        340,
+        900
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 378,
+      "map_group": 1,
+      "map_num": 122,
+      "name": "SixIsland_AlteringCave",
+      "region_map_section": "MAPSEC_ALTERING_CAVE",
+      "coordinates": [
+        350,
+        850
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 512,
+      "map_group": 2,
+      "map_num": 0,
+      "name": "NavelRock_Exterior",
+      "region_map_section": "MAPSEC_NAVEL_ROCK",
+      "coordinates": [
+        210,
+        910
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 513,
+      "map_group": 2,
+      "map_num": 1,
+      "name": "TrainerTower_1F",
+      "region_map_section": "MAPSEC_TRAINER_TOWER_2",
+      "coordinates": [
+        110,
+        880
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 514,
+      "map_group": 2,
+      "map_num": 2,
+      "name": "TrainerTower_2F",
+      "region_map_section": "MAPSEC_TRAINER_TOWER_2",
+      "coordinates": [
+        110,
+        880
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 515,
+      "map_group": 2,
+      "map_num": 3,
+      "name": "TrainerTower_3F",
+      "region_map_section": "MAPSEC_TRAINER_TOWER_2",
+      "coordinates": [
+        110,
+        880
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 516,
+      "map_group": 2,
+      "map_num": 4,
+      "name": "TrainerTower_4F",
+      "region_map_section": "MAPSEC_TRAINER_TOWER_2",
+      "coordinates": [
+        110,
+        880
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 517,
+      "map_group": 2,
+      "map_num": 5,
+      "name": "TrainerTower_5F",
+      "region_map_section": "MAPSEC_TRAINER_TOWER_2",
+      "coordinates": [
+        110,
+        880
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 518,
+      "map_group": 2,
+      "map_num": 6,
+      "name": "TrainerTower_6F",
+      "region_map_section": "MAPSEC_TRAINER_TOWER_2",
+      "coordinates": [
+        110,
+        880
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 519,
+      "map_group": 2,
+      "map_num": 7,
+      "name": "TrainerTower_7F",
+      "region_map_section": "MAPSEC_TRAINER_TOWER_2",
+      "coordinates": [
+        110,
+        880
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 520,
+      "map_group": 2,
+      "map_num": 8,
+      "name": "TrainerTower_8F",
+      "region_map_section": "MAPSEC_TRAINER_TOWER_2",
+      "coordinates": [
+        110,
+        880
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 521,
+      "map_group": 2,
+      "map_num": 9,
+      "name": "TrainerTower_Roof",
+      "region_map_section": "MAPSEC_TRAINER_TOWER_2",
+      "coordinates": [
+        110,
+        880
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 522,
+      "map_group": 2,
+      "map_num": 10,
+      "name": "TrainerTower_Lobby",
+      "region_map_section": "MAPSEC_TRAINER_TOWER_2",
+      "coordinates": [
+        110,
+        880
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 523,
+      "map_group": 2,
+      "map_num": 11,
+      "name": "TrainerTower_Elevator",
+      "region_map_section": "MAPSEC_TRAINER_TOWER_2",
+      "coordinates": [
+        110,
+        880
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 524,
+      "map_group": 2,
+      "map_num": 12,
+      "name": "FiveIsland_LostCave_Entrance",
+      "region_map_section": "MAPSEC_LOST_CAVE",
+      "coordinates": [
+        570,
+        650
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 525,
+      "map_group": 2,
+      "map_num": 13,
+      "name": "FiveIsland_LostCave_Room1",
+      "region_map_section": "MAPSEC_LOST_CAVE",
+      "coordinates": [
+        570,
+        650
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 526,
+      "map_group": 2,
+      "map_num": 14,
+      "name": "FiveIsland_LostCave_Room2",
+      "region_map_section": "MAPSEC_LOST_CAVE",
+      "coordinates": [
+        570,
+        650
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 527,
+      "map_group": 2,
+      "map_num": 15,
+      "name": "FiveIsland_LostCave_Room3",
+      "region_map_section": "MAPSEC_LOST_CAVE",
+      "coordinates": [
+        570,
+        650
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 528,
+      "map_group": 2,
+      "map_num": 16,
+      "name": "FiveIsland_LostCave_Room4",
+      "region_map_section": "MAPSEC_LOST_CAVE",
+      "coordinates": [
+        570,
+        650
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 529,
+      "map_group": 2,
+      "map_num": 17,
+      "name": "FiveIsland_LostCave_Room5",
+      "region_map_section": "MAPSEC_LOST_CAVE",
+      "coordinates": [
+        570,
+        650
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 530,
+      "map_group": 2,
+      "map_num": 18,
+      "name": "FiveIsland_LostCave_Room6",
+      "region_map_section": "MAPSEC_LOST_CAVE",
+      "coordinates": [
+        570,
+        650
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 531,
+      "map_group": 2,
+      "map_num": 19,
+      "name": "FiveIsland_LostCave_Room7",
+      "region_map_section": "MAPSEC_LOST_CAVE",
+      "coordinates": [
+        570,
+        650
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 532,
+      "map_group": 2,
+      "map_num": 20,
+      "name": "FiveIsland_LostCave_Room8",
+      "region_map_section": "MAPSEC_LOST_CAVE",
+      "coordinates": [
+        570,
+        650
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 533,
+      "map_group": 2,
+      "map_num": 21,
+      "name": "FiveIsland_LostCave_Room9",
+      "region_map_section": "MAPSEC_LOST_CAVE",
+      "coordinates": [
+        570,
+        650
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 534,
+      "map_group": 2,
+      "map_num": 22,
+      "name": "FiveIsland_LostCave_Room10",
+      "region_map_section": "MAPSEC_LOST_CAVE",
+      "coordinates": [
+        570,
+        650
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 535,
+      "map_group": 2,
+      "map_num": 23,
+      "name": "FiveIsland_LostCave_Room11",
+      "region_map_section": "MAPSEC_LOST_CAVE",
+      "coordinates": [
+        570,
+        650
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 536,
+      "map_group": 2,
+      "map_num": 24,
+      "name": "FiveIsland_LostCave_Room12",
+      "region_map_section": "MAPSEC_LOST_CAVE",
+      "coordinates": [
+        570,
+        650
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 537,
+      "map_group": 2,
+      "map_num": 25,
+      "name": "FiveIsland_LostCave_Room13",
+      "region_map_section": "MAPSEC_LOST_CAVE",
+      "coordinates": [
+        570,
+        650
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 538,
+      "map_group": 2,
+      "map_num": 26,
+      "name": "FiveIsland_LostCave_Room14",
+      "region_map_section": "MAPSEC_LOST_CAVE",
+      "coordinates": [
+        570,
+        650
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 539,
+      "map_group": 2,
+      "map_num": 27,
+      "name": "SevenIsland_TanobyRuins_MoneanChamber",
+      "region_map_section": "MAPSEC_MONEAN_CHAMBER",
+      "coordinates": [
+        130,
+        990
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 540,
+      "map_group": 2,
+      "map_num": 28,
+      "name": "SevenIsland_TanobyRuins_LiptooChamber",
+      "region_map_section": "MAPSEC_LIPTOO_CHAMBER",
+      "coordinates": [
+        130,
+        990
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 541,
+      "map_group": 2,
+      "map_num": 29,
+      "name": "SevenIsland_TanobyRuins_WeepthChamber",
+      "region_map_section": "MAPSEC_WEEPTH_CHAMBER",
+      "coordinates": [
+        130,
+        990
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 542,
+      "map_group": 2,
+      "map_num": 30,
+      "name": "SevenIsland_TanobyRuins_DilfordChamber",
+      "region_map_section": "MAPSEC_DILFORD_CHAMBER",
+      "coordinates": [
+        130,
+        990
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 543,
+      "map_group": 2,
+      "map_num": 31,
+      "name": "SevenIsland_TanobyRuins_ScufibChamber",
+      "region_map_section": "MAPSEC_SCUFIB_CHAMBER",
+      "coordinates": [
+        130,
+        990
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 544,
+      "map_group": 2,
+      "map_num": 32,
+      "name": "SevenIsland_TanobyRuins_RixyChamber",
+      "region_map_section": "MAPSEC_RIXY_CHAMBER",
+      "coordinates": [
+        130,
+        990
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 545,
+      "map_group": 2,
+      "map_num": 33,
+      "name": "SevenIsland_TanobyRuins_ViapoisChamber",
+      "region_map_section": "MAPSEC_VIAPOIS_CHAMBER",
+      "coordinates": [
+        130,
+        990
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 546,
+      "map_group": 2,
+      "map_num": 34,
+      "name": "ThreeIsland_DunsparceTunnel",
+      "region_map_section": "MAPSEC_THREE_ISLE_PATH",
+      "coordinates": [
+        300,
+        670
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 547,
+      "map_group": 2,
+      "map_num": 35,
+      "name": "SevenIsland_SevaultCanyon_TanobyKey",
+      "region_map_section": "MAPSEC_TANOBY_KEY",
+      "coordinates": [
+        130,
+        950
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 548,
+      "map_group": 2,
+      "map_num": 36,
+      "name": "NavelRock_1F",
+      "region_map_section": "MAPSEC_NAVEL_ROCK",
+      "coordinates": [
+        210,
+        910
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 549,
+      "map_group": 2,
+      "map_num": 37,
+      "name": "NavelRock_Summit",
+      "region_map_section": "MAPSEC_NAVEL_ROCK",
+      "coordinates": [
+        210,
+        910
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 550,
+      "map_group": 2,
+      "map_num": 38,
+      "name": "NavelRock_Base",
+      "region_map_section": "MAPSEC_NAVEL_ROCK",
+      "coordinates": [
+        210,
+        910
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 551,
+      "map_group": 2,
+      "map_num": 39,
+      "name": "NavelRock_SummitPath_2F",
+      "region_map_section": "MAPSEC_NAVEL_ROCK",
+      "coordinates": [
+        210,
+        910
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 552,
+      "map_group": 2,
+      "map_num": 40,
+      "name": "NavelRock_SummitPath_3F",
+      "region_map_section": "MAPSEC_NAVEL_ROCK",
+      "coordinates": [
+        210,
+        910
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 553,
+      "map_group": 2,
+      "map_num": 41,
+      "name": "NavelRock_SummitPath_4F",
+      "region_map_section": "MAPSEC_NAVEL_ROCK",
+      "coordinates": [
+        210,
+        910
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 554,
+      "map_group": 2,
+      "map_num": 42,
+      "name": "NavelRock_SummitPath_5F",
+      "region_map_section": "MAPSEC_NAVEL_ROCK",
+      "coordinates": [
+        210,
+        910
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 555,
+      "map_group": 2,
+      "map_num": 43,
+      "name": "NavelRock_BasePath_B1F",
+      "region_map_section": "MAPSEC_NAVEL_ROCK",
+      "coordinates": [
+        210,
+        910
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 556,
+      "map_group": 2,
+      "map_num": 44,
+      "name": "NavelRock_BasePath_B2F",
+      "region_map_section": "MAPSEC_NAVEL_ROCK",
+      "coordinates": [
+        210,
+        910
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 557,
+      "map_group": 2,
+      "map_num": 45,
+      "name": "NavelRock_BasePath_B3F",
+      "region_map_section": "MAPSEC_NAVEL_ROCK",
+      "coordinates": [
+        210,
+        910
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 558,
+      "map_group": 2,
+      "map_num": 46,
+      "name": "NavelRock_BasePath_B4F",
+      "region_map_section": "MAPSEC_NAVEL_ROCK",
+      "coordinates": [
+        210,
+        910
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 559,
+      "map_group": 2,
+      "map_num": 47,
+      "name": "NavelRock_BasePath_B5F",
+      "region_map_section": "MAPSEC_NAVEL_ROCK",
+      "coordinates": [
+        210,
+        910
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 560,
+      "map_group": 2,
+      "map_num": 48,
+      "name": "NavelRock_BasePath_B6F",
+      "region_map_section": "MAPSEC_NAVEL_ROCK",
+      "coordinates": [
+        210,
+        910
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 561,
+      "map_group": 2,
+      "map_num": 49,
+      "name": "NavelRock_BasePath_B7F",
+      "region_map_section": "MAPSEC_NAVEL_ROCK",
+      "coordinates": [
+        210,
+        910
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 562,
+      "map_group": 2,
+      "map_num": 50,
+      "name": "NavelRock_BasePath_B8F",
+      "region_map_section": "MAPSEC_NAVEL_ROCK",
+      "coordinates": [
+        210,
+        910
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 563,
+      "map_group": 2,
+      "map_num": 51,
+      "name": "NavelRock_BasePath_B9F",
+      "region_map_section": "MAPSEC_NAVEL_ROCK",
+      "coordinates": [
+        210,
+        910
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 564,
+      "map_group": 2,
+      "map_num": 52,
+      "name": "NavelRock_BasePath_B10F",
+      "region_map_section": "MAPSEC_NAVEL_ROCK",
+      "coordinates": [
+        210,
+        910
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 565,
+      "map_group": 2,
+      "map_num": 53,
+      "name": "NavelRock_BasePath_B11F",
+      "region_map_section": "MAPSEC_NAVEL_ROCK",
+      "coordinates": [
+        210,
+        910
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 566,
+      "map_group": 2,
+      "map_num": 54,
+      "name": "NavelRock_B1F",
+      "region_map_section": "MAPSEC_NAVEL_ROCK",
+      "coordinates": [
+        210,
+        910
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 567,
+      "map_group": 2,
+      "map_num": 55,
+      "name": "NavelRock_Fork",
+      "region_map_section": "MAPSEC_NAVEL_ROCK",
+      "coordinates": [
+        210,
+        910
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 568,
+      "map_group": 2,
+      "map_num": 56,
+      "name": "BirthIsland_Exterior",
+      "region_map_section": "MAPSEC_BIRTH_ISLAND",
+      "coordinates": [
+        370,
+        1010
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 569,
+      "map_group": 2,
+      "map_num": 57,
+      "name": "OneIsland_KindleRoad_EmberSpa",
+      "region_map_section": "MAPSEC_EMBER_SPA",
+      "coordinates": [
+        50,
+        540
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 570,
+      "map_group": 2,
+      "map_num": 58,
+      "name": "BirthIsland_Harbor",
+      "region_map_section": "MAPSEC_BIRTH_ISLAND",
+      "coordinates": [
+        370,
+        1010
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 571,
+      "map_group": 2,
+      "map_num": 59,
+      "name": "NavelRock_Harbor",
+      "region_map_section": "MAPSEC_NAVEL_ROCK",
+      "coordinates": [
+        210,
+        910
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 768,
+      "map_group": 3,
+      "map_num": 0,
+      "name": "PalletTown",
+      "coordinates": [
+        60,
+        260
+      ],
+      "tileSize": [
+        24,
+        20
+      ]
+    },
+    {
+      "id": 769,
+      "map_group": 3,
+      "map_num": 1,
+      "name": "ViridianCity",
+      "coordinates": [
+        48,
+        180
+      ],
+      "tileSize": [
+        48,
+        40
+      ]
+    },
+    {
+      "id": 770,
+      "map_group": 3,
+      "map_num": 2,
+      "name": "PewterCity",
+      "coordinates": [
+        48,
+        60
+      ],
+      "tileSize": [
+        48,
+        40
+      ]
+    },
+    {
+      "id": 771,
+      "map_group": 3,
+      "map_num": 3,
+      "name": "CeruleanCity",
+      "coordinates": [
+        264,
+        40
+      ],
+      "tileSize": [
+        48,
+        40
+      ]
+    },
+    {
+      "id": 772,
+      "map_group": 3,
+      "map_num": 4,
+      "name": "LavenderTown",
+      "coordinates": [
+        384,
+        130
+      ],
+      "tileSize": [
+        24,
+        20
+      ]
+    },
+    {
+      "id": 773,
+      "map_group": 3,
+      "map_num": 5,
+      "name": "VermilionCity",
+      "coordinates": [
+        264,
+        200
+      ],
+      "tileSize": [
+        48,
+        40
+      ]
+    },
+    {
+      "id": 774,
+      "map_group": 3,
+      "map_num": 6,
+      "name": "CeladonCity",
+      "coordinates": [
+        180,
+        120
+      ],
+      "tileSize": [
+        60,
+        40
+      ]
+    },
+    {
+      "id": 775,
+      "map_group": 3,
+      "map_num": 7,
+      "name": "FuchsiaCity",
+      "coordinates": [
+        192,
+        300
+      ],
+      "tileSize": [
+        48,
+        40
+      ]
+    },
+    {
+      "id": 776,
+      "map_group": 3,
+      "map_num": 8,
+      "name": "CinnabarIsland",
+      "coordinates": [
+        60,
+        380
+      ],
+      "tileSize": [
+        24,
+        20
+      ]
+    },
+    {
+      "id": 777,
+      "map_group": 3,
+      "map_num": 9,
+      "name": "IndigoPlateau_Exterior",
+      "coordinates": [
+        0,
+        10
+      ],
+      "tileSize": [
+        24,
+        20
+      ]
+    },
+    {
+      "id": 778,
+      "map_group": 3,
+      "map_num": 10,
+      "name": "SaffronCity",
+      "coordinates": [
+        264,
+        120
+      ],
+      "tileSize": [
+        48,
+        40
+      ]
+    },
+    {
+      "id": 779,
+      "map_group": 3,
+      "map_num": 11,
+      "name": "SaffronCity_Connection",
+      "coordinates": [
+        264,
+        120
+      ],
+      "tileSize": [
+        48,
+        40
+      ]
+    },
+    {
+      "id": 780,
+      "map_group": 3,
+      "map_num": 12,
+      "name": "OneIsland",
+      "coordinates": [
+        20,
+        580
+      ],
+      "tileSize": [
+        20,
+        20
+      ]
+    },
+    {
+      "id": 781,
+      "map_group": 3,
+      "map_num": 13,
+      "name": "TwoIsland",
+      "coordinates": [
+        180,
+        600
+      ],
+      "tileSize": [
+        20,
+        20
+      ]
+    },
+    {
+      "id": 782,
+      "map_group": 3,
+      "map_num": 14,
+      "name": "ThreeIsland",
+      "coordinates": [
+        360,
+        660
+      ],
+      "tileSize": [
+        20,
+        20
+      ]
+    },
+    {
+      "id": 783,
+      "map_group": 3,
+      "map_num": 15,
+      "name": "FourIsland",
+      "coordinates": [
+        280,
+        500
+      ],
+      "tileSize": [
+        20,
+        20
+      ]
+    },
+    {
+      "id": 784,
+      "map_group": 3,
+      "map_num": 16,
+      "name": "FiveIsland",
+      "coordinates": [
+        540,
+        640
+      ],
+      "tileSize": [
+        20,
+        20
+      ]
+    },
+    {
+      "id": 785,
+      "map_group": 3,
+      "map_num": 17,
+      "name": "SevenIsland",
+      "coordinates": [
+        100,
+        900
+      ],
+      "tileSize": [
+        20,
+        20
+      ]
+    },
+    {
+      "id": 786,
+      "map_group": 3,
+      "map_num": 18,
+      "name": "SixIsland",
+      "coordinates": [
+        340,
+        840
+      ],
+      "tileSize": [
+        20,
+        20
+      ]
+    },
+    {
+      "id": 787,
+      "map_group": 3,
+      "map_num": 19,
+      "name": "Route1",
+      "coordinates": [
+        60,
+        220
+      ],
+      "tileSize": [
+        24,
+        40
+      ]
+    },
+    {
+      "id": 788,
+      "map_group": 3,
+      "map_num": 20,
+      "name": "Route2",
+      "coordinates": [
+        60,
+        100
+      ],
+      "tileSize": [
+        24,
+        80
+      ]
+    },
+    {
+      "id": 789,
+      "map_group": 3,
+      "map_num": 21,
+      "name": "Route3",
+      "coordinates": [
+        96,
+        70
+      ],
+      "tileSize": [
+        84,
+        20
+      ]
+    },
+    {
+      "id": 790,
+      "map_group": 3,
+      "map_num": 22,
+      "name": "Route4",
+      "coordinates": [
+        156,
+        50
+      ],
+      "tileSize": [
+        108,
+        20
+      ]
+    },
+    {
+      "id": 791,
+      "map_group": 3,
+      "map_num": 23,
+      "name": "Route5",
+      "coordinates": [
+        264,
+        80
+      ],
+      "tileSize": [
+        48,
+        40
+      ]
+    },
+    {
+      "id": 792,
+      "map_group": 3,
+      "map_num": 24,
+      "name": "Route6",
+      "coordinates": [
+        276,
+        160
+      ],
+      "tileSize": [
+        24,
+        40
+      ]
+    },
+    {
+      "id": 793,
+      "map_group": 3,
+      "map_num": 25,
+      "name": "Route7",
+      "coordinates": [
+        240,
+        130
+      ],
+      "tileSize": [
+        24,
+        20
+      ]
+    },
+    {
+      "id": 794,
+      "map_group": 3,
+      "map_num": 26,
+      "name": "Route8",
+      "coordinates": [
+        312,
+        130
+      ],
+      "tileSize": [
+        72,
+        20
+      ]
+    },
+    {
+      "id": 795,
+      "map_group": 3,
+      "map_num": 27,
+      "name": "Route9",
+      "coordinates": [
+        312,
+        50
+      ],
+      "tileSize": [
+        72,
+        20
+      ]
+    },
+    {
+      "id": 796,
+      "map_group": 3,
+      "map_num": 28,
+      "name": "Route10",
+      "coordinates": [
+        384,
+        50
+      ],
+      "tileSize": [
+        24,
+        80
+      ]
+    },
+    {
+      "id": 797,
+      "map_group": 3,
+      "map_num": 29,
+      "name": "Route11",
+      "coordinates": [
+        312,
+        210
+      ],
+      "tileSize": [
+        72,
+        20
+      ]
+    },
+    {
+      "id": 798,
+      "map_group": 3,
+      "map_num": 30,
+      "name": "Route12",
+      "coordinates": [
+        384,
+        150
+      ],
+      "tileSize": [
+        24,
+        120
+      ]
+    },
+    {
+      "id": 799,
+      "map_group": 3,
+      "map_num": 31,
+      "name": "Route13",
+      "coordinates": [
+        336,
+        270
+      ],
+      "tileSize": [
+        72,
+        20
+      ]
+    },
+    {
+      "id": 800,
+      "map_group": 3,
+      "map_num": 32,
+      "name": "Route14",
+      "coordinates": [
+        312,
+        270
+      ],
+      "tileSize": [
+        24,
+        60
+      ]
+    },
+    {
+      "id": 801,
+      "map_group": 3,
+      "map_num": 33,
+      "name": "Route15",
+      "coordinates": [
+        240,
+        310
+      ],
+      "tileSize": [
+        72,
+        20
+      ]
+    },
+    {
+      "id": 802,
+      "map_group": 3,
+      "map_num": 34,
+      "name": "Route16",
+      "coordinates": [
+        132,
+        130
+      ],
+      "tileSize": [
+        48,
+        20
+      ]
+    },
+    {
+      "id": 803,
+      "map_group": 3,
+      "map_num": 35,
+      "name": "Route17",
+      "coordinates": [
+        132,
+        150
+      ],
+      "tileSize": [
+        24,
+        160
+      ]
+    },
+    {
+      "id": 804,
+      "map_group": 3,
+      "map_num": 36,
+      "name": "Route18",
+      "coordinates": [
+        132,
+        310
+      ],
+      "tileSize": [
+        60,
+        20
+      ]
+    },
+    {
+      "id": 805,
+      "map_group": 3,
+      "map_num": 37,
+      "name": "Route19",
+      "coordinates": [
+        204,
+        340
+      ],
+      "tileSize": [
+        24,
+        60
+      ]
+    },
+    {
+      "id": 806,
+      "map_group": 3,
+      "map_num": 38,
+      "name": "Route20",
+      "coordinates": [
+        84,
+        380
+      ],
+      "tileSize": [
+        120,
+        20
+      ]
+    },
+    {
+      "id": 807,
+      "map_group": 3,
+      "map_num": 39,
+      "name": "Route21_North",
+      "coordinates": [
+        60,
+        280
+      ],
+      "tileSize": [
+        24,
+        50
+      ]
+    },
+    {
+      "id": 808,
+      "map_group": 3,
+      "map_num": 40,
+      "name": "Route21_South",
+      "coordinates": [
+        60,
+        330
+      ],
+      "tileSize": [
+        24,
+        50
+      ]
+    },
+    {
+      "id": 809,
+      "map_group": 3,
+      "map_num": 41,
+      "name": "Route22",
+      "coordinates": [
+        0,
+        190
+      ],
+      "tileSize": [
+        48,
+        24
+      ]
+    },
+    {
+      "id": 810,
+      "map_group": 3,
+      "map_num": 42,
+      "name": "Route23",
+      "coordinates": [
+        0,
+        30
+      ],
+      "tileSize": [
+        24,
+        160
+      ]
+    },
+    {
+      "id": 811,
+      "map_group": 3,
+      "map_num": 43,
+      "name": "Route24",
+      "coordinates": [
+        276,
+        0
+      ],
+      "tileSize": [
+        24,
+        40
+      ]
+    },
+    {
+      "id": 812,
+      "map_group": 3,
+      "map_num": 44,
+      "name": "Route25",
+      "coordinates": [
+        300,
+        0
+      ],
+      "tileSize": [
+        72,
+        20
+      ]
+    },
+    {
+      "id": 813,
+      "map_group": 3,
+      "map_num": 45,
+      "name": "OneIsland_KindleRoad",
+      "coordinates": [
+        40,
+        480
+      ],
+      "tileSize": [
+        20,
+        120
+      ]
+    },
+    {
+      "id": 814,
+      "map_group": 3,
+      "map_num": 46,
+      "name": "OneIsland_TreasureBeach",
+      "coordinates": [
+        20,
+        600
+      ],
+      "tileSize": [
+        20,
+        40
+      ]
+    },
+    {
+      "id": 815,
+      "map_group": 3,
+      "map_num": 47,
+      "name": "TwoIsland_CapeBrink",
+      "coordinates": [
+        180,
+        560
+      ],
+      "tileSize": [
+        20,
+        40
+      ]
+    },
+    {
+      "id": 816,
+      "map_group": 3,
+      "map_num": 48,
+      "name": "ThreeIsland_BondBridge",
+      "coordinates": [
+        260,
+        660
+      ],
+      "tileSize": [
+        80,
+        20
+      ]
+    },
+    {
+      "id": 817,
+      "map_group": 3,
+      "map_num": 49,
+      "name": "ThreeIsland_Port",
+      "coordinates": [
+        360,
+        680
+      ],
+      "tileSize": [
+        40,
+        20
+      ]
+    },
+    {
+      "id": 818,
+      "map_group": 3,
+      "map_num": 50,
+      "name": "Prototype_SeviiIsle_6",
+      "coordinates": [
+        300,
+        480
+      ],
+      "tileSize": [
+        20,
+        20
+      ]
+    },
+    {
+      "id": 819,
+      "map_group": 3,
+      "map_num": 51,
+      "name": "Prototype_SeviiIsle_7",
+      "coordinates": [
+        320,
+        500
+      ],
+      "tileSize": [
+        20,
+        20
+      ]
+    },
+    {
+      "id": 820,
+      "map_group": 3,
+      "map_num": 52,
+      "name": "Prototype_SeviiIsle_8",
+      "coordinates": [
+        240,
+        500
+      ],
+      "tileSize": [
+        60,
+        20
+      ]
+    },
+    {
+      "id": 821,
+      "map_group": 3,
+      "map_num": 53,
+      "name": "Prototype_SeviiIsle_9",
+      "coordinates": [
+        300,
+        520
+      ],
+      "tileSize": [
+        20,
+        40
+      ]
+    },
+    {
+      "id": 822,
+      "map_group": 3,
+      "map_num": 54,
+      "name": "FiveIsland_ResortGorgeous",
+      "coordinates": [
+        540,
+        600
+      ],
+      "tileSize": [
+        60,
+        20
+      ]
+    },
+    {
+      "id": 823,
+      "map_group": 3,
+      "map_num": 55,
+      "name": "FiveIsland_WaterLabyrinth",
+      "coordinates": [
+        500,
+        620
+      ],
+      "tileSize": [
+        60,
+        20
+      ]
+    },
+    {
+      "id": 824,
+      "map_group": 3,
+      "map_num": 56,
+      "name": "FiveIsland_Meadow",
+      "coordinates": [
+        560,
+        620
+      ],
+      "tileSize": [
+        20,
+        60
+      ]
+    },
+    {
+      "id": 825,
+      "map_group": 3,
+      "map_num": 57,
+      "name": "FiveIsland_MemorialPillar",
+      "coordinates": [
+        580,
+        660
+      ],
+      "tileSize": [
+        20,
+        60
+      ]
+    },
+    {
+      "id": 826,
+      "map_group": 3,
+      "map_num": 58,
+      "name": "SixIsland_OutcastIsland",
+      "coordinates": [
+        300,
+        740
+      ],
+      "tileSize": [
+        20,
+        60
+      ]
+    },
+    {
+      "id": 827,
+      "map_group": 3,
+      "map_num": 59,
+      "name": "SixIsland_GreenPath",
+      "coordinates": [
+        300,
+        800
+      ],
+      "tileSize": [
+        60,
+        20
+      ]
+    },
+    {
+      "id": 828,
+      "map_group": 3,
+      "map_num": 60,
+      "name": "SixIsland_WaterPath",
+      "coordinates": [
+        360,
+        800
+      ],
+      "tileSize": [
+        20,
+        100
+      ]
+    },
+    {
+      "id": 829,
+      "map_group": 3,
+      "map_num": 61,
+      "name": "SixIsland_RuinValley",
+      "coordinates": [
+        320,
+        880
+      ],
+      "tileSize": [
+        40,
+        40
+      ]
+    },
+    {
+      "id": 830,
+      "map_group": 3,
+      "map_num": 62,
+      "name": "SevenIsland_TrainerTower",
+      "coordinates": [
+        100,
+        860
+      ],
+      "tileSize": [
+        20,
+        40
+      ]
+    },
+    {
+      "id": 831,
+      "map_group": 3,
+      "map_num": 63,
+      "name": "SevenIsland_SevaultCanyon_Entrance",
+      "coordinates": [
+        100,
+        920
+      ],
+      "tileSize": [
+        20,
+        20
+      ]
+    },
+    {
+      "id": 832,
+      "map_group": 3,
+      "map_num": 64,
+      "name": "SevenIsland_SevaultCanyon",
+      "coordinates": [
+        120,
+        920
+      ],
+      "tileSize": [
+        20,
+        60
+      ]
+    },
+    {
+      "id": 833,
+      "map_group": 3,
+      "map_num": 65,
+      "name": "SevenIsland_TanobyRuins",
+      "coordinates": [
+        60,
+        980
+      ],
+      "tileSize": [
+        140,
+        20
+      ]
+    },
+    {
+      "id": 1024,
+      "map_group": 4,
+      "map_num": 0,
+      "name": "PalletTown_PlayersHouse_1F",
+      "region_map_section": "MAPSEC_PALLET_TOWN",
+      "coordinates": [
+        72,
+        270
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 1025,
+      "map_group": 4,
+      "map_num": 1,
+      "name": "PalletTown_PlayersHouse_2F",
+      "region_map_section": "MAPSEC_PALLET_TOWN",
+      "coordinates": [
+        72,
+        270
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 1026,
+      "map_group": 4,
+      "map_num": 2,
+      "name": "PalletTown_RivalsHouse",
+      "region_map_section": "MAPSEC_PALLET_TOWN",
+      "coordinates": [
+        72,
+        270
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 1027,
+      "map_group": 4,
+      "map_num": 3,
+      "name": "PalletTown_ProfessorOaksLab",
+      "region_map_section": "MAPSEC_PALLET_TOWN",
+      "coordinates": [
+        72,
+        270
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 1280,
+      "map_group": 5,
+      "map_num": 0,
+      "name": "ViridianCity_House",
+      "region_map_section": "MAPSEC_VIRIDIAN_CITY",
+      "coordinates": [
+        72,
+        200
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 1281,
+      "map_group": 5,
+      "map_num": 1,
+      "name": "ViridianCity_Gym",
+      "region_map_section": "MAPSEC_VIRIDIAN_CITY",
+      "coordinates": [
+        72,
+        200
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 1282,
+      "map_group": 5,
+      "map_num": 2,
+      "name": "ViridianCity_School",
+      "region_map_section": "MAPSEC_VIRIDIAN_CITY",
+      "coordinates": [
+        72,
+        200
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 1283,
+      "map_group": 5,
+      "map_num": 3,
+      "name": "ViridianCity_Mart",
+      "region_map_section": "MAPSEC_VIRIDIAN_CITY",
+      "coordinates": [
+        72,
+        200
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 1284,
+      "map_group": 5,
+      "map_num": 4,
+      "name": "ViridianCity_PokemonCenter_1F",
+      "region_map_section": "MAPSEC_VIRIDIAN_CITY",
+      "coordinates": [
+        72,
+        200
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 1285,
+      "map_group": 5,
+      "map_num": 5,
+      "name": "ViridianCity_PokemonCenter_2F",
+      "region_map_section": "MAPSEC_VIRIDIAN_CITY",
+      "coordinates": [
+        72,
+        200
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 1536,
+      "map_group": 6,
+      "map_num": 0,
+      "name": "PewterCity_Museum_1F",
+      "region_map_section": "MAPSEC_PEWTER_CITY",
+      "coordinates": [
+        72,
+        80
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 1537,
+      "map_group": 6,
+      "map_num": 1,
+      "name": "PewterCity_Museum_2F",
+      "region_map_section": "MAPSEC_PEWTER_CITY",
+      "coordinates": [
+        72,
+        80
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 1538,
+      "map_group": 6,
+      "map_num": 2,
+      "name": "PewterCity_Gym",
+      "region_map_section": "MAPSEC_PEWTER_CITY",
+      "coordinates": [
+        72,
+        80
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 1539,
+      "map_group": 6,
+      "map_num": 3,
+      "name": "PewterCity_Mart",
+      "region_map_section": "MAPSEC_PEWTER_CITY",
+      "coordinates": [
+        72,
+        80
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 1540,
+      "map_group": 6,
+      "map_num": 4,
+      "name": "PewterCity_House1",
+      "region_map_section": "MAPSEC_PEWTER_CITY",
+      "coordinates": [
+        72,
+        80
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 1541,
+      "map_group": 6,
+      "map_num": 5,
+      "name": "PewterCity_PokemonCenter_1F",
+      "region_map_section": "MAPSEC_PEWTER_CITY",
+      "coordinates": [
+        72,
+        80
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 1542,
+      "map_group": 6,
+      "map_num": 6,
+      "name": "PewterCity_PokemonCenter_2F",
+      "region_map_section": "MAPSEC_PEWTER_CITY",
+      "coordinates": [
+        72,
+        80
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 1543,
+      "map_group": 6,
+      "map_num": 7,
+      "name": "PewterCity_House2",
+      "region_map_section": "MAPSEC_PEWTER_CITY",
+      "coordinates": [
+        72,
+        80
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 1792,
+      "map_group": 7,
+      "map_num": 0,
+      "name": "CeruleanCity_House1",
+      "region_map_section": "MAPSEC_CERULEAN_CITY",
+      "coordinates": [
+        288,
+        60
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 1793,
+      "map_group": 7,
+      "map_num": 1,
+      "name": "CeruleanCity_House2",
+      "region_map_section": "MAPSEC_CERULEAN_CITY",
+      "coordinates": [
+        288,
+        60
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 1794,
+      "map_group": 7,
+      "map_num": 2,
+      "name": "CeruleanCity_House3",
+      "region_map_section": "MAPSEC_CERULEAN_CITY",
+      "coordinates": [
+        288,
+        60
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 1795,
+      "map_group": 7,
+      "map_num": 3,
+      "name": "CeruleanCity_PokemonCenter_1F",
+      "region_map_section": "MAPSEC_CERULEAN_CITY",
+      "coordinates": [
+        288,
+        60
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 1796,
+      "map_group": 7,
+      "map_num": 4,
+      "name": "CeruleanCity_PokemonCenter_2F",
+      "region_map_section": "MAPSEC_CERULEAN_CITY",
+      "coordinates": [
+        288,
+        60
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 1797,
+      "map_group": 7,
+      "map_num": 5,
+      "name": "CeruleanCity_Gym",
+      "region_map_section": "MAPSEC_CERULEAN_CITY",
+      "coordinates": [
+        288,
+        60
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 1798,
+      "map_group": 7,
+      "map_num": 6,
+      "name": "CeruleanCity_BikeShop",
+      "region_map_section": "MAPSEC_CERULEAN_CITY",
+      "coordinates": [
+        288,
+        60
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 1799,
+      "map_group": 7,
+      "map_num": 7,
+      "name": "CeruleanCity_Mart",
+      "region_map_section": "MAPSEC_CERULEAN_CITY",
+      "coordinates": [
+        288,
+        60
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 1800,
+      "map_group": 7,
+      "map_num": 8,
+      "name": "CeruleanCity_House4",
+      "region_map_section": "MAPSEC_CERULEAN_CITY",
+      "coordinates": [
+        288,
+        60
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 1801,
+      "map_group": 7,
+      "map_num": 9,
+      "name": "CeruleanCity_House5",
+      "region_map_section": "MAPSEC_CERULEAN_CITY",
+      "coordinates": [
+        288,
+        60
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2048,
+      "map_group": 8,
+      "map_num": 0,
+      "name": "LavenderTown_PokemonCenter_1F",
+      "region_map_section": "MAPSEC_LAVENDER_TOWN",
+      "coordinates": [
+        396,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2049,
+      "map_group": 8,
+      "map_num": 1,
+      "name": "LavenderTown_PokemonCenter_2F",
+      "region_map_section": "MAPSEC_LAVENDER_TOWN",
+      "coordinates": [
+        396,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2050,
+      "map_group": 8,
+      "map_num": 2,
+      "name": "LavenderTown_VolunteerPokemonHouse",
+      "region_map_section": "MAPSEC_LAVENDER_TOWN",
+      "coordinates": [
+        396,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2051,
+      "map_group": 8,
+      "map_num": 3,
+      "name": "LavenderTown_House1",
+      "region_map_section": "MAPSEC_LAVENDER_TOWN",
+      "coordinates": [
+        396,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2052,
+      "map_group": 8,
+      "map_num": 4,
+      "name": "LavenderTown_House2",
+      "region_map_section": "MAPSEC_LAVENDER_TOWN",
+      "coordinates": [
+        396,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2053,
+      "map_group": 8,
+      "map_num": 5,
+      "name": "LavenderTown_Mart",
+      "region_map_section": "MAPSEC_LAVENDER_TOWN",
+      "coordinates": [
+        396,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2304,
+      "map_group": 9,
+      "map_num": 0,
+      "name": "VermilionCity_House1",
+      "region_map_section": "MAPSEC_VERMILION_CITY",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2305,
+      "map_group": 9,
+      "map_num": 1,
+      "name": "VermilionCity_PokemonCenter_1F",
+      "region_map_section": "MAPSEC_VERMILION_CITY",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2306,
+      "map_group": 9,
+      "map_num": 2,
+      "name": "VermilionCity_PokemonCenter_2F",
+      "region_map_section": "MAPSEC_VERMILION_CITY",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2307,
+      "map_group": 9,
+      "map_num": 3,
+      "name": "VermilionCity_PokemonFanClub",
+      "region_map_section": "MAPSEC_VERMILION_CITY",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2308,
+      "map_group": 9,
+      "map_num": 4,
+      "name": "VermilionCity_House2",
+      "region_map_section": "MAPSEC_VERMILION_CITY",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2309,
+      "map_group": 9,
+      "map_num": 5,
+      "name": "VermilionCity_Mart",
+      "region_map_section": "MAPSEC_VERMILION_CITY",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2310,
+      "map_group": 9,
+      "map_num": 6,
+      "name": "VermilionCity_Gym",
+      "region_map_section": "MAPSEC_VERMILION_CITY",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2311,
+      "map_group": 9,
+      "map_num": 7,
+      "name": "VermilionCity_House3",
+      "region_map_section": "MAPSEC_VERMILION_CITY",
+      "coordinates": [
+        288,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2560,
+      "map_group": 10,
+      "map_num": 0,
+      "name": "CeladonCity_DepartmentStore_1F",
+      "region_map_section": "MAPSEC_CELADON_CITY",
+      "coordinates": [
+        210,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2561,
+      "map_group": 10,
+      "map_num": 1,
+      "name": "CeladonCity_DepartmentStore_2F",
+      "region_map_section": "MAPSEC_CELADON_CITY",
+      "coordinates": [
+        210,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2562,
+      "map_group": 10,
+      "map_num": 2,
+      "name": "CeladonCity_DepartmentStore_3F",
+      "region_map_section": "MAPSEC_CELADON_CITY",
+      "coordinates": [
+        210,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2563,
+      "map_group": 10,
+      "map_num": 3,
+      "name": "CeladonCity_DepartmentStore_4F",
+      "region_map_section": "MAPSEC_CELADON_CITY",
+      "coordinates": [
+        210,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2564,
+      "map_group": 10,
+      "map_num": 4,
+      "name": "CeladonCity_DepartmentStore_5F",
+      "region_map_section": "MAPSEC_CELADON_CITY",
+      "coordinates": [
+        210,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2565,
+      "map_group": 10,
+      "map_num": 5,
+      "name": "CeladonCity_DepartmentStore_Roof",
+      "region_map_section": "MAPSEC_CELADON_CITY",
+      "coordinates": [
+        210,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2566,
+      "map_group": 10,
+      "map_num": 6,
+      "name": "CeladonCity_DepartmentStore_Elevator",
+      "region_map_section": "MAPSEC_CELADON_CITY",
+      "coordinates": [
+        210,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2567,
+      "map_group": 10,
+      "map_num": 7,
+      "name": "CeladonCity_Condominiums_1F",
+      "region_map_section": "MAPSEC_CELADON_CITY",
+      "coordinates": [
+        210,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2568,
+      "map_group": 10,
+      "map_num": 8,
+      "name": "CeladonCity_Condominiums_2F",
+      "region_map_section": "MAPSEC_CELADON_CITY",
+      "coordinates": [
+        210,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2569,
+      "map_group": 10,
+      "map_num": 9,
+      "name": "CeladonCity_Condominiums_3F",
+      "region_map_section": "MAPSEC_CELADON_CITY",
+      "coordinates": [
+        210,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2570,
+      "map_group": 10,
+      "map_num": 10,
+      "name": "CeladonCity_Condominiums_Roof",
+      "region_map_section": "MAPSEC_CELADON_CITY",
+      "coordinates": [
+        210,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2571,
+      "map_group": 10,
+      "map_num": 11,
+      "name": "CeladonCity_Condominiums_RoofRoom",
+      "region_map_section": "MAPSEC_CELADON_CITY",
+      "coordinates": [
+        210,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2572,
+      "map_group": 10,
+      "map_num": 12,
+      "name": "CeladonCity_PokemonCenter_1F",
+      "region_map_section": "MAPSEC_CELADON_CITY",
+      "coordinates": [
+        210,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2573,
+      "map_group": 10,
+      "map_num": 13,
+      "name": "CeladonCity_PokemonCenter_2F",
+      "region_map_section": "MAPSEC_CELADON_CITY",
+      "coordinates": [
+        210,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2574,
+      "map_group": 10,
+      "map_num": 14,
+      "name": "CeladonCity_GameCorner",
+      "region_map_section": "MAPSEC_CELADON_CITY",
+      "coordinates": [
+        210,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2575,
+      "map_group": 10,
+      "map_num": 15,
+      "name": "CeladonCity_GameCorner_PrizeRoom",
+      "region_map_section": "MAPSEC_CELADON_CITY",
+      "coordinates": [
+        210,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2576,
+      "map_group": 10,
+      "map_num": 16,
+      "name": "CeladonCity_Gym",
+      "region_map_section": "MAPSEC_CELADON_CITY",
+      "coordinates": [
+        210,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2577,
+      "map_group": 10,
+      "map_num": 17,
+      "name": "CeladonCity_Restaurant",
+      "region_map_section": "MAPSEC_CELADON_CITY",
+      "coordinates": [
+        210,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2578,
+      "map_group": 10,
+      "map_num": 18,
+      "name": "CeladonCity_House1",
+      "region_map_section": "MAPSEC_CELADON_CITY",
+      "coordinates": [
+        210,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2579,
+      "map_group": 10,
+      "map_num": 19,
+      "name": "CeladonCity_Hotel",
+      "region_map_section": "MAPSEC_CELADON_CITY",
+      "coordinates": [
+        210,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2816,
+      "map_group": 11,
+      "map_num": 0,
+      "name": "FuchsiaCity_SafariZone_Entrance",
+      "region_map_section": "MAPSEC_FUCHSIA_CITY",
+      "coordinates": [
+        216,
+        320
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2817,
+      "map_group": 11,
+      "map_num": 1,
+      "name": "FuchsiaCity_Mart",
+      "region_map_section": "MAPSEC_FUCHSIA_CITY",
+      "coordinates": [
+        216,
+        320
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2818,
+      "map_group": 11,
+      "map_num": 2,
+      "name": "FuchsiaCity_SafariZone_Office",
+      "region_map_section": "MAPSEC_FUCHSIA_CITY",
+      "coordinates": [
+        216,
+        320
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2819,
+      "map_group": 11,
+      "map_num": 3,
+      "name": "FuchsiaCity_Gym",
+      "region_map_section": "MAPSEC_FUCHSIA_CITY",
+      "coordinates": [
+        216,
+        320
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2820,
+      "map_group": 11,
+      "map_num": 4,
+      "name": "FuchsiaCity_House1",
+      "region_map_section": "MAPSEC_FUCHSIA_CITY",
+      "coordinates": [
+        216,
+        320
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2821,
+      "map_group": 11,
+      "map_num": 5,
+      "name": "FuchsiaCity_PokemonCenter_1F",
+      "region_map_section": "MAPSEC_FUCHSIA_CITY",
+      "coordinates": [
+        216,
+        320
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2822,
+      "map_group": 11,
+      "map_num": 6,
+      "name": "FuchsiaCity_PokemonCenter_2F",
+      "region_map_section": "MAPSEC_FUCHSIA_CITY",
+      "coordinates": [
+        216,
+        320
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2823,
+      "map_group": 11,
+      "map_num": 7,
+      "name": "FuchsiaCity_WardensHouse",
+      "region_map_section": "MAPSEC_FUCHSIA_CITY",
+      "coordinates": [
+        216,
+        320
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2824,
+      "map_group": 11,
+      "map_num": 8,
+      "name": "FuchsiaCity_House2",
+      "region_map_section": "MAPSEC_FUCHSIA_CITY",
+      "coordinates": [
+        216,
+        320
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 2825,
+      "map_group": 11,
+      "map_num": 9,
+      "name": "FuchsiaCity_House3",
+      "region_map_section": "MAPSEC_FUCHSIA_CITY",
+      "coordinates": [
+        216,
+        320
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 3072,
+      "map_group": 12,
+      "map_num": 0,
+      "name": "CinnabarIsland_Gym",
+      "region_map_section": "MAPSEC_CINNABAR_ISLAND",
+      "coordinates": [
+        72,
+        390
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 3073,
+      "map_group": 12,
+      "map_num": 1,
+      "name": "CinnabarIsland_PokemonLab_Entrance",
+      "region_map_section": "MAPSEC_CINNABAR_ISLAND",
+      "coordinates": [
+        72,
+        390
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 3074,
+      "map_group": 12,
+      "map_num": 2,
+      "name": "CinnabarIsland_PokemonLab_Lounge",
+      "region_map_section": "MAPSEC_CINNABAR_ISLAND",
+      "coordinates": [
+        72,
+        390
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 3075,
+      "map_group": 12,
+      "map_num": 3,
+      "name": "CinnabarIsland_PokemonLab_ResearchRoom",
+      "region_map_section": "MAPSEC_CINNABAR_ISLAND",
+      "coordinates": [
+        72,
+        390
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 3076,
+      "map_group": 12,
+      "map_num": 4,
+      "name": "CinnabarIsland_PokemonLab_ExperimentRoom",
+      "region_map_section": "MAPSEC_CINNABAR_ISLAND",
+      "coordinates": [
+        72,
+        390
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 3077,
+      "map_group": 12,
+      "map_num": 5,
+      "name": "CinnabarIsland_PokemonCenter_1F",
+      "region_map_section": "MAPSEC_CINNABAR_ISLAND",
+      "coordinates": [
+        72,
+        390
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 3078,
+      "map_group": 12,
+      "map_num": 6,
+      "name": "CinnabarIsland_PokemonCenter_2F",
+      "region_map_section": "MAPSEC_CINNABAR_ISLAND",
+      "coordinates": [
+        72,
+        390
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 3079,
+      "map_group": 12,
+      "map_num": 7,
+      "name": "CinnabarIsland_Mart",
+      "region_map_section": "MAPSEC_CINNABAR_ISLAND",
+      "coordinates": [
+        72,
+        390
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 3328,
+      "map_group": 13,
+      "map_num": 0,
+      "name": "IndigoPlateau_PokemonCenter_1F",
+      "region_map_section": "MAPSEC_INDIGO_PLATEAU",
+      "coordinates": [
+        12,
+        20
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 3329,
+      "map_group": 13,
+      "map_num": 1,
+      "name": "IndigoPlateau_PokemonCenter_2F",
+      "region_map_section": "MAPSEC_INDIGO_PLATEAU",
+      "coordinates": [
+        12,
+        20
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 3584,
+      "map_group": 14,
+      "map_num": 0,
+      "name": "SaffronCity_CopycatsHouse_1F",
+      "region_map_section": "MAPSEC_SAFFRON_CITY",
+      "coordinates": [
+        288,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 3585,
+      "map_group": 14,
+      "map_num": 1,
+      "name": "SaffronCity_CopycatsHouse_2F",
+      "region_map_section": "MAPSEC_SAFFRON_CITY",
+      "coordinates": [
+        288,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 3586,
+      "map_group": 14,
+      "map_num": 2,
+      "name": "SaffronCity_Dojo",
+      "region_map_section": "MAPSEC_SAFFRON_CITY",
+      "coordinates": [
+        288,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 3587,
+      "map_group": 14,
+      "map_num": 3,
+      "name": "SaffronCity_Gym",
+      "region_map_section": "MAPSEC_SAFFRON_CITY",
+      "coordinates": [
+        288,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 3588,
+      "map_group": 14,
+      "map_num": 4,
+      "name": "SaffronCity_House",
+      "region_map_section": "MAPSEC_SAFFRON_CITY",
+      "coordinates": [
+        288,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 3589,
+      "map_group": 14,
+      "map_num": 5,
+      "name": "SaffronCity_Mart",
+      "region_map_section": "MAPSEC_SAFFRON_CITY",
+      "coordinates": [
+        288,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 3590,
+      "map_group": 14,
+      "map_num": 6,
+      "name": "SaffronCity_PokemonCenter_1F",
+      "region_map_section": "MAPSEC_SAFFRON_CITY",
+      "coordinates": [
+        288,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 3591,
+      "map_group": 14,
+      "map_num": 7,
+      "name": "SaffronCity_PokemonCenter_2F",
+      "region_map_section": "MAPSEC_SAFFRON_CITY",
+      "coordinates": [
+        288,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 3592,
+      "map_group": 14,
+      "map_num": 8,
+      "name": "SaffronCity_MrPsychicsHouse",
+      "region_map_section": "MAPSEC_SAFFRON_CITY",
+      "coordinates": [
+        288,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 3593,
+      "map_group": 14,
+      "map_num": 9,
+      "name": "SaffronCity_PokemonTrainerFanClub",
+      "region_map_section": "MAPSEC_SAFFRON_CITY",
+      "coordinates": [
+        288,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 3840,
+      "map_group": 15,
+      "map_num": 0,
+      "name": "Route2_ViridianForest_SouthEntrance",
+      "region_map_section": "MAPSEC_ROUTE_2",
+      "coordinates": [
+        72,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 3841,
+      "map_group": 15,
+      "map_num": 1,
+      "name": "Route2_House",
+      "region_map_section": "MAPSEC_ROUTE_2",
+      "coordinates": [
+        72,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 3842,
+      "map_group": 15,
+      "map_num": 2,
+      "name": "Route2_EastBuilding",
+      "region_map_section": "MAPSEC_ROUTE_2",
+      "coordinates": [
+        72,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 3843,
+      "map_group": 15,
+      "map_num": 3,
+      "name": "Route2_ViridianForest_NorthEntrance",
+      "region_map_section": "MAPSEC_ROUTE_2",
+      "coordinates": [
+        72,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 4096,
+      "map_group": 16,
+      "map_num": 0,
+      "name": "Route4_PokemonCenter_1F",
+      "region_map_section": "MAPSEC_ROUTE_4",
+      "coordinates": [
+        210,
+        60
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 4097,
+      "map_group": 16,
+      "map_num": 1,
+      "name": "Route4_PokemonCenter_2F",
+      "region_map_section": "MAPSEC_ROUTE_4",
+      "coordinates": [
+        210,
+        60
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 4352,
+      "map_group": 17,
+      "map_num": 0,
+      "name": "Route5_PokemonDayCare",
+      "region_map_section": "MAPSEC_ROUTE_5",
+      "coordinates": [
+        288,
+        100
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 4353,
+      "map_group": 17,
+      "map_num": 1,
+      "name": "Route5_SouthEntrance",
+      "region_map_section": "MAPSEC_ROUTE_5",
+      "coordinates": [
+        288,
+        100
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 4608,
+      "map_group": 18,
+      "map_num": 0,
+      "name": "Route6_NorthEntrance",
+      "region_map_section": "MAPSEC_ROUTE_6",
+      "coordinates": [
+        288,
+        180
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 4609,
+      "map_group": 18,
+      "map_num": 1,
+      "name": "Route6_UnusedHouse",
+      "region_map_section": "MAPSEC_ROUTE_6",
+      "coordinates": [
+        288,
+        180
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 4864,
+      "map_group": 19,
+      "map_num": 0,
+      "name": "Route7_EastEntrance",
+      "region_map_section": "MAPSEC_ROUTE_7",
+      "coordinates": [
+        252,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 5120,
+      "map_group": 20,
+      "map_num": 0,
+      "name": "Route8_WestEntrance",
+      "region_map_section": "MAPSEC_ROUTE_8",
+      "coordinates": [
+        348,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 5376,
+      "map_group": 21,
+      "map_num": 0,
+      "name": "Route10_PokemonCenter_1F",
+      "region_map_section": "MAPSEC_ROUTE_10",
+      "coordinates": [
+        396,
+        90
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 5377,
+      "map_group": 21,
+      "map_num": 1,
+      "name": "Route10_PokemonCenter_2F",
+      "region_map_section": "MAPSEC_ROUTE_10",
+      "coordinates": [
+        396,
+        90
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 5632,
+      "map_group": 22,
+      "map_num": 0,
+      "name": "Route11_EastEntrance_1F",
+      "region_map_section": "MAPSEC_ROUTE_11",
+      "coordinates": [
+        348,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 5633,
+      "map_group": 22,
+      "map_num": 1,
+      "name": "Route11_EastEntrance_2F",
+      "region_map_section": "MAPSEC_ROUTE_11",
+      "coordinates": [
+        348,
+        220
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 5888,
+      "map_group": 23,
+      "map_num": 0,
+      "name": "Route12_NorthEntrance_1F",
+      "region_map_section": "MAPSEC_ROUTE_12",
+      "coordinates": [
+        396,
+        210
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 5889,
+      "map_group": 23,
+      "map_num": 1,
+      "name": "Route12_NorthEntrance_2F",
+      "region_map_section": "MAPSEC_ROUTE_12",
+      "coordinates": [
+        396,
+        210
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 5890,
+      "map_group": 23,
+      "map_num": 2,
+      "name": "Route12_FishingHouse",
+      "region_map_section": "MAPSEC_ROUTE_12",
+      "coordinates": [
+        396,
+        210
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 6144,
+      "map_group": 24,
+      "map_num": 0,
+      "name": "Route15_WestEntrance_1F",
+      "region_map_section": "MAPSEC_ROUTE_15",
+      "coordinates": [
+        276,
+        320
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 6145,
+      "map_group": 24,
+      "map_num": 1,
+      "name": "Route15_WestEntrance_2F",
+      "region_map_section": "MAPSEC_ROUTE_15",
+      "coordinates": [
+        276,
+        320
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 6400,
+      "map_group": 25,
+      "map_num": 0,
+      "name": "Route16_House",
+      "region_map_section": "MAPSEC_ROUTE_16",
+      "coordinates": [
+        156,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 6401,
+      "map_group": 25,
+      "map_num": 1,
+      "name": "Route16_NorthEntrance_1F",
+      "region_map_section": "MAPSEC_ROUTE_16",
+      "coordinates": [
+        156,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 6402,
+      "map_group": 25,
+      "map_num": 2,
+      "name": "Route16_NorthEntrance_2F",
+      "region_map_section": "MAPSEC_ROUTE_16",
+      "coordinates": [
+        156,
+        140
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 6656,
+      "map_group": 26,
+      "map_num": 0,
+      "name": "Route18_EastEntrance_1F",
+      "region_map_section": "MAPSEC_ROUTE_18",
+      "coordinates": [
+        162,
+        320
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 6657,
+      "map_group": 26,
+      "map_num": 1,
+      "name": "Route18_EastEntrance_2F",
+      "region_map_section": "MAPSEC_ROUTE_18",
+      "coordinates": [
+        162,
+        320
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 6912,
+      "map_group": 27,
+      "map_num": 0,
+      "name": "Route19_UnusedHouse",
+      "region_map_section": "MAPSEC_ROUTE_19",
+      "coordinates": [
+        216,
+        370
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 7168,
+      "map_group": 28,
+      "map_num": 0,
+      "name": "Route22_NorthEntrance",
+      "region_map_section": "MAPSEC_ROUTE_22",
+      "coordinates": [
+        24,
+        202
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 7424,
+      "map_group": 29,
+      "map_num": 0,
+      "name": "Route23_UnusedHouse",
+      "region_map_section": "MAPSEC_ROUTE_23",
+      "coordinates": [
+        12,
+        110
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 7680,
+      "map_group": 30,
+      "map_num": 0,
+      "name": "Route25_SeaCottage",
+      "region_map_section": "MAPSEC_ROUTE_25",
+      "coordinates": [
+        336,
+        10
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 7936,
+      "map_group": 31,
+      "map_num": 0,
+      "name": "SevenIsland_House_Room1",
+      "region_map_section": "MAPSEC_SEVEN_ISLAND",
+      "coordinates": [
+        110,
+        910
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 7937,
+      "map_group": 31,
+      "map_num": 1,
+      "name": "SevenIsland_House_Room2",
+      "region_map_section": "MAPSEC_SEVEN_ISLAND",
+      "coordinates": [
+        110,
+        910
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 7938,
+      "map_group": 31,
+      "map_num": 2,
+      "name": "SevenIsland_Mart",
+      "region_map_section": "MAPSEC_SEVEN_ISLAND",
+      "coordinates": [
+        110,
+        910
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 7939,
+      "map_group": 31,
+      "map_num": 3,
+      "name": "SevenIsland_PokemonCenter_1F",
+      "region_map_section": "MAPSEC_SEVEN_ISLAND",
+      "coordinates": [
+        110,
+        910
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 7940,
+      "map_group": 31,
+      "map_num": 4,
+      "name": "SevenIsland_PokemonCenter_2F",
+      "region_map_section": "MAPSEC_SEVEN_ISLAND",
+      "coordinates": [
+        110,
+        910
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 7941,
+      "map_group": 31,
+      "map_num": 5,
+      "name": "SevenIsland_UnusedHouse",
+      "region_map_section": "MAPSEC_SEVEN_ISLAND",
+      "coordinates": [
+        110,
+        910
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 7942,
+      "map_group": 31,
+      "map_num": 6,
+      "name": "SevenIsland_Harbor",
+      "region_map_section": "MAPSEC_SEVEN_ISLAND",
+      "coordinates": [
+        110,
+        910
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 8192,
+      "map_group": 32,
+      "map_num": 0,
+      "name": "OneIsland_PokemonCenter_1F",
+      "region_map_section": "MAPSEC_ONE_ISLAND",
+      "coordinates": [
+        30,
+        590
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 8193,
+      "map_group": 32,
+      "map_num": 1,
+      "name": "OneIsland_PokemonCenter_2F",
+      "region_map_section": "MAPSEC_ONE_ISLAND",
+      "coordinates": [
+        30,
+        590
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 8194,
+      "map_group": 32,
+      "map_num": 2,
+      "name": "OneIsland_House1",
+      "region_map_section": "MAPSEC_ONE_ISLAND",
+      "coordinates": [
+        30,
+        590
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 8195,
+      "map_group": 32,
+      "map_num": 3,
+      "name": "OneIsland_House2",
+      "region_map_section": "MAPSEC_ONE_ISLAND",
+      "coordinates": [
+        30,
+        590
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 8196,
+      "map_group": 32,
+      "map_num": 4,
+      "name": "OneIsland_Harbor",
+      "region_map_section": "MAPSEC_ONE_ISLAND",
+      "coordinates": [
+        30,
+        590
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 8448,
+      "map_group": 33,
+      "map_num": 0,
+      "name": "TwoIsland_JoyfulGameCorner",
+      "region_map_section": "MAPSEC_TWO_ISLAND",
+      "coordinates": [
+        190,
+        610
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 8449,
+      "map_group": 33,
+      "map_num": 1,
+      "name": "TwoIsland_House",
+      "region_map_section": "MAPSEC_TWO_ISLAND",
+      "coordinates": [
+        190,
+        610
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 8450,
+      "map_group": 33,
+      "map_num": 2,
+      "name": "TwoIsland_PokemonCenter_1F",
+      "region_map_section": "MAPSEC_TWO_ISLAND",
+      "coordinates": [
+        190,
+        610
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 8451,
+      "map_group": 33,
+      "map_num": 3,
+      "name": "TwoIsland_PokemonCenter_2F",
+      "region_map_section": "MAPSEC_TWO_ISLAND",
+      "coordinates": [
+        190,
+        610
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 8452,
+      "map_group": 33,
+      "map_num": 4,
+      "name": "TwoIsland_Harbor",
+      "region_map_section": "MAPSEC_TWO_ISLAND",
+      "coordinates": [
+        190,
+        610
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 8704,
+      "map_group": 34,
+      "map_num": 0,
+      "name": "ThreeIsland_House1",
+      "region_map_section": "MAPSEC_THREE_ISLAND",
+      "coordinates": [
+        370,
+        670
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 8705,
+      "map_group": 34,
+      "map_num": 1,
+      "name": "ThreeIsland_PokemonCenter_1F",
+      "region_map_section": "MAPSEC_THREE_ISLAND",
+      "coordinates": [
+        370,
+        670
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 8706,
+      "map_group": 34,
+      "map_num": 2,
+      "name": "ThreeIsland_PokemonCenter_2F",
+      "region_map_section": "MAPSEC_THREE_ISLAND",
+      "coordinates": [
+        370,
+        670
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 8707,
+      "map_group": 34,
+      "map_num": 3,
+      "name": "ThreeIsland_Mart",
+      "region_map_section": "MAPSEC_THREE_ISLAND",
+      "coordinates": [
+        370,
+        670
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 8708,
+      "map_group": 34,
+      "map_num": 4,
+      "name": "ThreeIsland_House2",
+      "region_map_section": "MAPSEC_THREE_ISLAND",
+      "coordinates": [
+        370,
+        670
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 8709,
+      "map_group": 34,
+      "map_num": 5,
+      "name": "ThreeIsland_House3",
+      "region_map_section": "MAPSEC_THREE_ISLAND",
+      "coordinates": [
+        370,
+        670
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 8710,
+      "map_group": 34,
+      "map_num": 6,
+      "name": "ThreeIsland_House4",
+      "region_map_section": "MAPSEC_THREE_ISLAND",
+      "coordinates": [
+        370,
+        670
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 8711,
+      "map_group": 34,
+      "map_num": 7,
+      "name": "ThreeIsland_House5",
+      "region_map_section": "MAPSEC_THREE_ISLAND",
+      "coordinates": [
+        370,
+        670
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 8960,
+      "map_group": 35,
+      "map_num": 0,
+      "name": "FourIsland_PokemonDayCare",
+      "region_map_section": "MAPSEC_FOUR_ISLAND",
+      "coordinates": [
+        290,
+        510
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 8961,
+      "map_group": 35,
+      "map_num": 1,
+      "name": "FourIsland_PokemonCenter_1F",
+      "region_map_section": "MAPSEC_FOUR_ISLAND",
+      "coordinates": [
+        290,
+        510
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 8962,
+      "map_group": 35,
+      "map_num": 2,
+      "name": "FourIsland_PokemonCenter_2F",
+      "region_map_section": "MAPSEC_FOUR_ISLAND",
+      "coordinates": [
+        290,
+        510
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 8963,
+      "map_group": 35,
+      "map_num": 3,
+      "name": "FourIsland_House1",
+      "region_map_section": "MAPSEC_FOUR_ISLAND",
+      "coordinates": [
+        290,
+        510
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 8964,
+      "map_group": 35,
+      "map_num": 4,
+      "name": "FourIsland_LoreleisHouse",
+      "region_map_section": "MAPSEC_FOUR_ISLAND",
+      "coordinates": [
+        290,
+        510
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 8965,
+      "map_group": 35,
+      "map_num": 5,
+      "name": "FourIsland_Harbor",
+      "region_map_section": "MAPSEC_FOUR_ISLAND",
+      "coordinates": [
+        290,
+        510
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 8966,
+      "map_group": 35,
+      "map_num": 6,
+      "name": "FourIsland_House2",
+      "region_map_section": "MAPSEC_FOUR_ISLAND",
+      "coordinates": [
+        290,
+        510
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 8967,
+      "map_group": 35,
+      "map_num": 7,
+      "name": "FourIsland_Mart",
+      "region_map_section": "MAPSEC_FOUR_ISLAND",
+      "coordinates": [
+        290,
+        510
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 9216,
+      "map_group": 36,
+      "map_num": 0,
+      "name": "FiveIsland_PokemonCenter_1F",
+      "region_map_section": "MAPSEC_FIVE_ISLAND",
+      "coordinates": [
+        550,
+        650
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 9217,
+      "map_group": 36,
+      "map_num": 1,
+      "name": "FiveIsland_PokemonCenter_2F",
+      "region_map_section": "MAPSEC_FIVE_ISLAND",
+      "coordinates": [
+        550,
+        650
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 9218,
+      "map_group": 36,
+      "map_num": 2,
+      "name": "FiveIsland_Harbor",
+      "region_map_section": "MAPSEC_FIVE_ISLAND",
+      "coordinates": [
+        550,
+        650
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 9219,
+      "map_group": 36,
+      "map_num": 3,
+      "name": "FiveIsland_House1",
+      "region_map_section": "MAPSEC_FIVE_ISLAND",
+      "coordinates": [
+        550,
+        650
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 9220,
+      "map_group": 36,
+      "map_num": 4,
+      "name": "FiveIsland_House2",
+      "region_map_section": "MAPSEC_FIVE_ISLAND",
+      "coordinates": [
+        550,
+        650
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 9472,
+      "map_group": 37,
+      "map_num": 0,
+      "name": "SixIsland_PokemonCenter_1F",
+      "region_map_section": "MAPSEC_SIX_ISLAND",
+      "coordinates": [
+        350,
+        850
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 9473,
+      "map_group": 37,
+      "map_num": 1,
+      "name": "SixIsland_PokemonCenter_2F",
+      "region_map_section": "MAPSEC_SIX_ISLAND",
+      "coordinates": [
+        350,
+        850
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 9474,
+      "map_group": 37,
+      "map_num": 2,
+      "name": "SixIsland_Harbor",
+      "region_map_section": "MAPSEC_SIX_ISLAND",
+      "coordinates": [
+        350,
+        850
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 9475,
+      "map_group": 37,
+      "map_num": 3,
+      "name": "SixIsland_House",
+      "region_map_section": "MAPSEC_SIX_ISLAND",
+      "coordinates": [
+        350,
+        850
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 9476,
+      "map_group": 37,
+      "map_num": 4,
+      "name": "SixIsland_Mart",
+      "region_map_section": "MAPSEC_SIX_ISLAND",
+      "coordinates": [
+        350,
+        850
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 9728,
+      "map_group": 38,
+      "map_num": 0,
+      "name": "ThreeIsland_Harbor",
+      "region_map_section": "MAPSEC_THREE_ISLE_PORT",
+      "coordinates": [
+        380,
+        690
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 9984,
+      "map_group": 39,
+      "map_num": 0,
+      "name": "FiveIsland_ResortGorgeous_House",
+      "region_map_section": "MAPSEC_RESORT_GORGEOUS",
+      "coordinates": [
+        570,
+        610
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 10240,
+      "map_group": 40,
+      "map_num": 0,
+      "name": "TwoIsland_CapeBrink_House",
+      "region_map_section": "MAPSEC_CAPE_BRINK",
+      "coordinates": [
+        190,
+        580
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 10496,
+      "map_group": 41,
+      "map_num": 0,
+      "name": "SixIsland_WaterPath_House1",
+      "region_map_section": "MAPSEC_WATER_PATH",
+      "coordinates": [
+        370,
+        850
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 10497,
+      "map_group": 41,
+      "map_num": 1,
+      "name": "SixIsland_WaterPath_House2",
+      "region_map_section": "MAPSEC_WATER_PATH",
+      "coordinates": [
+        370,
+        850
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": 10752,
+      "map_group": 42,
+      "map_num": 0,
+      "name": "SevenIsland_SevaultCanyon_House",
+      "region_map_section": "MAPSEC_SEVAULT_CANYON",
+      "coordinates": [
+        130,
+        950
+      ],
+      "tileSize": [
+        1,
+        1
+      ]
+    }
+  ],
+  "global_map_shape": [
+    1031,
+    620
+  ]
+}

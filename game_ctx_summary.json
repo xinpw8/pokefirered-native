@@ -1,0 +1,107 @@
+{
+  "anonymous_struct_fields": 10,
+  "duplicate_nonstatic_globals": {},
+  "excluded_globals": [
+    {
+      "name": "head",
+      "source_file": "malloc.c"
+    },
+    {
+      "name": "pos",
+      "source_file": "malloc.c"
+    },
+    {
+      "name": "splitBlock",
+      "source_file": "malloc.c"
+    }
+  ],
+  "final_file_scope_fields": 587,
+  "final_function_scope_fields": 5,
+  "final_game_ctx_fields": 592,
+  "function_pointer_fields": 4,
+  "non_static_fields": 251,
+  "pointer_to_array_fields": 7,
+  "raw_ewram_file_scope_uses": 590,
+  "raw_ewram_function_scope_uses": 5,
+  "raw_ewram_uses": 595,
+  "renamed_fields": 29,
+  "section_macros": {
+    "COMMON_DATA": {
+      "file_scope_uses": 169,
+      "files": 42,
+      "function_scope_uses": 0,
+      "uses": 169
+    },
+    "EWRAM_DATA": {
+      "file_scope_uses": 590,
+      "files": 136,
+      "function_scope_uses": 5,
+      "uses": 595
+    },
+    "IWRAM_CODE": {
+      "file_scope_uses": 0,
+      "files": 0,
+      "function_scope_uses": 0,
+      "uses": 0
+    },
+    "IWRAM_DATA": {
+      "file_scope_uses": 0,
+      "files": 0,
+      "function_scope_uses": 0,
+      "uses": 0
+    }
+  },
+  "source_files_with_ewram": 136,
+  "static_fields": 341,
+  "static_name_collisions": {
+    "sBg1TilemapBuffer": [
+      "fame_checker.c",
+      "item_pc.c"
+    ],
+    "sBg3TilemapBuffer": [
+      "fame_checker.c",
+      "seagallop.c"
+    ],
+    "sGame": [
+      "berry_crush.c",
+      "dodrio_berry_picking.c"
+    ],
+    "sListMenuItems": [
+      "berry_pouch.c",
+      "fame_checker.c",
+      "field_specials.c",
+      "item_menu.c",
+      "item_pc.c",
+      "mailbox_pc.c"
+    ],
+    "sMenu": [
+      "menu.c",
+      "mon_markings.c"
+    ],
+    "sMovementScripts": [
+      "quest_log.c",
+      "script_movement.c"
+    ],
+    "sResources": [
+      "berry_pouch.c",
+      "teachy_tv.c"
+    ],
+    "sUnused": [
+      "battle_anim_mons.c",
+      "battle_controllers.c",
+      "save_failed_screen.c",
+      "trainer_tower.c",
+      "union_room.c"
+    ],
+    "sWindowIds": [
+      "mailbox_pc.c",
+      "quest_log.c"
+    ],
+    "sWork": [
+      "union_room_battle.c",
+      "union_room_chat.c",
+      "union_room_chat_display.c",
+      "union_room_chat_objects.c"
+    ]
+  }
+}

@@ -117,6 +117,32 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named pfr_generated_headers
+
+# Build rule for target.
+pfr_generated_headers: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_generated_headers
+.PHONY : pfr_generated_headers
+
+# fast build rule for target.
+pfr_generated_headers/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_generated_headers.dir/build.make CMakeFiles/pfr_generated_headers.dir/build
+.PHONY : pfr_generated_headers/fast
+
+#=============================================================================
+# Target rules for targets named pfr_generated_upstream_native_data
+
+# Build rule for target.
+pfr_generated_upstream_native_data: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_generated_upstream_native_data
+.PHONY : pfr_generated_upstream_native_data
+
+# fast build rule for target.
+pfr_generated_upstream_native_data/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_generated_upstream_native_data.dir/build.make CMakeFiles/pfr_generated_upstream_native_data.dir/build
+.PHONY : pfr_generated_upstream_native_data/fast
+
+#=============================================================================
 # Target rules for targets named pfr_upstream_core
 
 # Build rule for target.
@@ -128,19 +154,6 @@ pfr_upstream_core: cmake_check_build_system
 pfr_upstream_core/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/build
 .PHONY : pfr_upstream_core/fast
-
-#=============================================================================
-# Target rules for targets named pfr_upstream_runtime
-
-# Build rule for target.
-pfr_upstream_runtime: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_runtime
-.PHONY : pfr_upstream_runtime
-
-# fast build rule for target.
-pfr_upstream_runtime/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_runtime.dir/build.make CMakeFiles/pfr_upstream_runtime.dir/build
-.PHONY : pfr_upstream_runtime/fast
 
 #=============================================================================
 # Target rules for targets named pfr_upstream_intro
@@ -169,30 +182,17 @@ pfr_upstream_title/fast:
 .PHONY : pfr_upstream_title/fast
 
 #=============================================================================
-# Target rules for targets named pfr_upstream_clear_save
+# Target rules for targets named pfr_upstream_oak_speech
 
 # Build rule for target.
-pfr_upstream_clear_save: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_clear_save
-.PHONY : pfr_upstream_clear_save
+pfr_upstream_oak_speech: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_oak_speech
+.PHONY : pfr_upstream_oak_speech
 
 # fast build rule for target.
-pfr_upstream_clear_save/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_clear_save.dir/build.make CMakeFiles/pfr_upstream_clear_save.dir/build
-.PHONY : pfr_upstream_clear_save/fast
-
-#=============================================================================
-# Target rules for targets named pfr_upstream_berry_fix
-
-# Build rule for target.
-pfr_upstream_berry_fix: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_berry_fix
-.PHONY : pfr_upstream_berry_fix
-
-# fast build rule for target.
-pfr_upstream_berry_fix/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_berry_fix.dir/build.make CMakeFiles/pfr_upstream_berry_fix.dir/build
-.PHONY : pfr_upstream_berry_fix/fast
+pfr_upstream_oak_speech/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_oak_speech.dir/build.make CMakeFiles/pfr_upstream_oak_speech.dir/build
+.PHONY : pfr_upstream_oak_speech/fast
 
 #=============================================================================
 # Target rules for targets named pfr_upstream_main_menu
@@ -208,17 +208,1044 @@ pfr_upstream_main_menu/fast:
 .PHONY : pfr_upstream_main_menu/fast
 
 #=============================================================================
-# Target rules for targets named pfr_upstream_oak_speech
+# Target rules for targets named pfr_upstream_text_window_graphics
 
 # Build rule for target.
-pfr_upstream_oak_speech: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_oak_speech
-.PHONY : pfr_upstream_oak_speech
+pfr_upstream_text_window_graphics: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_text_window_graphics
+.PHONY : pfr_upstream_text_window_graphics
 
 # fast build rule for target.
-pfr_upstream_oak_speech/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_oak_speech.dir/build.make CMakeFiles/pfr_upstream_oak_speech.dir/build
-.PHONY : pfr_upstream_oak_speech/fast
+pfr_upstream_text_window_graphics/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_text_window_graphics.dir/build.make CMakeFiles/pfr_upstream_text_window_graphics.dir/build
+.PHONY : pfr_upstream_text_window_graphics/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_text
+
+# Build rule for target.
+pfr_upstream_text: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_text
+.PHONY : pfr_upstream_text
+
+# fast build rule for target.
+pfr_upstream_text/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_text.dir/build.make CMakeFiles/pfr_upstream_text.dir/build
+.PHONY : pfr_upstream_text/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_new_menu_helpers
+
+# Build rule for target.
+pfr_upstream_new_menu_helpers: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_new_menu_helpers
+.PHONY : pfr_upstream_new_menu_helpers
+
+# fast build rule for target.
+pfr_upstream_new_menu_helpers/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_new_menu_helpers.dir/build.make CMakeFiles/pfr_upstream_new_menu_helpers.dir/build
+.PHONY : pfr_upstream_new_menu_helpers/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_graphics
+
+# Build rule for target.
+pfr_upstream_graphics: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_graphics
+.PHONY : pfr_upstream_graphics
+
+# fast build rule for target.
+pfr_upstream_graphics/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_graphics.dir/build.make CMakeFiles/pfr_upstream_graphics.dir/build
+.PHONY : pfr_upstream_graphics/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_bag
+
+# Build rule for target.
+pfr_upstream_bag: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_bag
+.PHONY : pfr_upstream_bag
+
+# fast build rule for target.
+pfr_upstream_bag/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_bag.dir/build.make CMakeFiles/pfr_upstream_bag.dir/build
+.PHONY : pfr_upstream_bag/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_battle_anim_effects_3
+
+# Build rule for target.
+pfr_upstream_battle_anim_effects_3: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_battle_anim_effects_3
+.PHONY : pfr_upstream_battle_anim_effects_3
+
+# fast build rule for target.
+pfr_upstream_battle_anim_effects_3/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_battle_anim_effects_3.dir/build.make CMakeFiles/pfr_upstream_battle_anim_effects_3.dir/build
+.PHONY : pfr_upstream_battle_anim_effects_3/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_battle_anim_flying
+
+# Build rule for target.
+pfr_upstream_battle_anim_flying: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_battle_anim_flying
+.PHONY : pfr_upstream_battle_anim_flying
+
+# fast build rule for target.
+pfr_upstream_battle_anim_flying/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_battle_anim_flying.dir/build.make CMakeFiles/pfr_upstream_battle_anim_flying.dir/build
+.PHONY : pfr_upstream_battle_anim_flying/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_battle_anim_water
+
+# Build rule for target.
+pfr_upstream_battle_anim_water: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_battle_anim_water
+.PHONY : pfr_upstream_battle_anim_water
+
+# fast build rule for target.
+pfr_upstream_battle_anim_water/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_battle_anim_water.dir/build.make CMakeFiles/pfr_upstream_battle_anim_water.dir/build
+.PHONY : pfr_upstream_battle_anim_water/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_battle_bg
+
+# Build rule for target.
+pfr_upstream_battle_bg: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_battle_bg
+.PHONY : pfr_upstream_battle_bg
+
+# fast build rule for target.
+pfr_upstream_battle_bg/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_battle_bg.dir/build.make CMakeFiles/pfr_upstream_battle_bg.dir/build
+.PHONY : pfr_upstream_battle_bg/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_battle_interface
+
+# Build rule for target.
+pfr_upstream_battle_interface: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_battle_interface
+.PHONY : pfr_upstream_battle_interface
+
+# fast build rule for target.
+pfr_upstream_battle_interface/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_battle_interface.dir/build.make CMakeFiles/pfr_upstream_battle_interface.dir/build
+.PHONY : pfr_upstream_battle_interface/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_battle_records
+
+# Build rule for target.
+pfr_upstream_battle_records: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_battle_records
+.PHONY : pfr_upstream_battle_records
+
+# fast build rule for target.
+pfr_upstream_battle_records/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_battle_records.dir/build.make CMakeFiles/pfr_upstream_battle_records.dir/build
+.PHONY : pfr_upstream_battle_records/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_battle_script_commands
+
+# Build rule for target.
+pfr_upstream_battle_script_commands: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_battle_script_commands
+.PHONY : pfr_upstream_battle_script_commands
+
+# fast build rule for target.
+pfr_upstream_battle_script_commands/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_battle_script_commands.dir/build.make CMakeFiles/pfr_upstream_battle_script_commands.dir/build
+.PHONY : pfr_upstream_battle_script_commands/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_battle_transition
+
+# Build rule for target.
+pfr_upstream_battle_transition: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_battle_transition
+.PHONY : pfr_upstream_battle_transition
+
+# fast build rule for target.
+pfr_upstream_battle_transition/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_battle_transition.dir/build.make CMakeFiles/pfr_upstream_battle_transition.dir/build
+.PHONY : pfr_upstream_battle_transition/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_berry_crush
+
+# Build rule for target.
+pfr_upstream_berry_crush: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_berry_crush
+.PHONY : pfr_upstream_berry_crush
+
+# fast build rule for target.
+pfr_upstream_berry_crush/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_berry_crush.dir/build.make CMakeFiles/pfr_upstream_berry_crush.dir/build
+.PHONY : pfr_upstream_berry_crush/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_braille_text
+
+# Build rule for target.
+pfr_upstream_braille_text: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_braille_text
+.PHONY : pfr_upstream_braille_text
+
+# fast build rule for target.
+pfr_upstream_braille_text/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_braille_text.dir/build.make CMakeFiles/pfr_upstream_braille_text.dir/build
+.PHONY : pfr_upstream_braille_text/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_credits
+
+# Build rule for target.
+pfr_upstream_credits: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_credits
+.PHONY : pfr_upstream_credits
+
+# fast build rule for target.
+pfr_upstream_credits/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_credits.dir/build.make CMakeFiles/pfr_upstream_credits.dir/build
+.PHONY : pfr_upstream_credits/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_daycare
+
+# Build rule for target.
+pfr_upstream_daycare: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_daycare
+.PHONY : pfr_upstream_daycare
+
+# fast build rule for target.
+pfr_upstream_daycare/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_daycare.dir/build.make CMakeFiles/pfr_upstream_daycare.dir/build
+.PHONY : pfr_upstream_daycare/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_digit_obj_util
+
+# Build rule for target.
+pfr_upstream_digit_obj_util: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_digit_obj_util
+.PHONY : pfr_upstream_digit_obj_util
+
+# fast build rule for target.
+pfr_upstream_digit_obj_util/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_digit_obj_util.dir/build.make CMakeFiles/pfr_upstream_digit_obj_util.dir/build
+.PHONY : pfr_upstream_digit_obj_util/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_diploma
+
+# Build rule for target.
+pfr_upstream_diploma: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_diploma
+.PHONY : pfr_upstream_diploma
+
+# fast build rule for target.
+pfr_upstream_diploma/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_diploma.dir/build.make CMakeFiles/pfr_upstream_diploma.dir/build
+.PHONY : pfr_upstream_diploma/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_dodrio_berry_picking
+
+# Build rule for target.
+pfr_upstream_dodrio_berry_picking: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_dodrio_berry_picking
+.PHONY : pfr_upstream_dodrio_berry_picking
+
+# fast build rule for target.
+pfr_upstream_dodrio_berry_picking/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_dodrio_berry_picking.dir/build.make CMakeFiles/pfr_upstream_dodrio_berry_picking.dir/build
+.PHONY : pfr_upstream_dodrio_berry_picking/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_easy_chat
+
+# Build rule for target.
+pfr_upstream_easy_chat: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_easy_chat
+.PHONY : pfr_upstream_easy_chat
+
+# fast build rule for target.
+pfr_upstream_easy_chat/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_easy_chat.dir/build.make CMakeFiles/pfr_upstream_easy_chat.dir/build
+.PHONY : pfr_upstream_easy_chat/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_easy_chat_2
+
+# Build rule for target.
+pfr_upstream_easy_chat_2: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_easy_chat_2
+.PHONY : pfr_upstream_easy_chat_2
+
+# fast build rule for target.
+pfr_upstream_easy_chat_2/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_easy_chat_2.dir/build.make CMakeFiles/pfr_upstream_easy_chat_2.dir/build
+.PHONY : pfr_upstream_easy_chat_2/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_easy_chat_3
+
+# Build rule for target.
+pfr_upstream_easy_chat_3: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_easy_chat_3
+.PHONY : pfr_upstream_easy_chat_3
+
+# fast build rule for target.
+pfr_upstream_easy_chat_3/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_easy_chat_3.dir/build.make CMakeFiles/pfr_upstream_easy_chat_3.dir/build
+.PHONY : pfr_upstream_easy_chat_3/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_evolution_graphics
+
+# Build rule for target.
+pfr_upstream_evolution_graphics: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_evolution_graphics
+.PHONY : pfr_upstream_evolution_graphics
+
+# fast build rule for target.
+pfr_upstream_evolution_graphics/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_evolution_graphics.dir/build.make CMakeFiles/pfr_upstream_evolution_graphics.dir/build
+.PHONY : pfr_upstream_evolution_graphics/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_evolution_scene
+
+# Build rule for target.
+pfr_upstream_evolution_scene: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_evolution_scene
+.PHONY : pfr_upstream_evolution_scene
+
+# fast build rule for target.
+pfr_upstream_evolution_scene/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_evolution_scene.dir/build.make CMakeFiles/pfr_upstream_evolution_scene.dir/build
+.PHONY : pfr_upstream_evolution_scene/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_fame_checker
+
+# Build rule for target.
+pfr_upstream_fame_checker: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_fame_checker
+.PHONY : pfr_upstream_fame_checker
+
+# fast build rule for target.
+pfr_upstream_fame_checker/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_fame_checker.dir/build.make CMakeFiles/pfr_upstream_fame_checker.dir/build
+.PHONY : pfr_upstream_fame_checker/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_field_door
+
+# Build rule for target.
+pfr_upstream_field_door: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_field_door
+.PHONY : pfr_upstream_field_door
+
+# fast build rule for target.
+pfr_upstream_field_door/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_field_door.dir/build.make CMakeFiles/pfr_upstream_field_door.dir/build
+.PHONY : pfr_upstream_field_door/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_field_effect
+
+# Build rule for target.
+pfr_upstream_field_effect: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_field_effect
+.PHONY : pfr_upstream_field_effect
+
+# fast build rule for target.
+pfr_upstream_field_effect/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_field_effect.dir/build.make CMakeFiles/pfr_upstream_field_effect.dir/build
+.PHONY : pfr_upstream_field_effect/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_field_specials
+
+# Build rule for target.
+pfr_upstream_field_specials: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_field_specials
+.PHONY : pfr_upstream_field_specials
+
+# fast build rule for target.
+pfr_upstream_field_specials/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_field_specials.dir/build.make CMakeFiles/pfr_upstream_field_specials.dir/build
+.PHONY : pfr_upstream_field_specials/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_field_weather
+
+# Build rule for target.
+pfr_upstream_field_weather: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_field_weather
+.PHONY : pfr_upstream_field_weather
+
+# fast build rule for target.
+pfr_upstream_field_weather/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_field_weather.dir/build.make CMakeFiles/pfr_upstream_field_weather.dir/build
+.PHONY : pfr_upstream_field_weather/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_fldeff_flash
+
+# Build rule for target.
+pfr_upstream_fldeff_flash: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_fldeff_flash
+.PHONY : pfr_upstream_fldeff_flash
+
+# fast build rule for target.
+pfr_upstream_fldeff_flash/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_fldeff_flash.dir/build.make CMakeFiles/pfr_upstream_fldeff_flash.dir/build
+.PHONY : pfr_upstream_fldeff_flash/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_hall_of_fame
+
+# Build rule for target.
+pfr_upstream_hall_of_fame: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_hall_of_fame
+.PHONY : pfr_upstream_hall_of_fame
+
+# fast build rule for target.
+pfr_upstream_hall_of_fame/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_hall_of_fame.dir/build.make CMakeFiles/pfr_upstream_hall_of_fame.dir/build
+.PHONY : pfr_upstream_hall_of_fame/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_help_message
+
+# Build rule for target.
+pfr_upstream_help_message: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_help_message
+.PHONY : pfr_upstream_help_message
+
+# fast build rule for target.
+pfr_upstream_help_message/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_help_message.dir/build.make CMakeFiles/pfr_upstream_help_message.dir/build
+.PHONY : pfr_upstream_help_message/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_help_system
+
+# Build rule for target.
+pfr_upstream_help_system: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_help_system
+.PHONY : pfr_upstream_help_system
+
+# fast build rule for target.
+pfr_upstream_help_system/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_help_system.dir/build.make CMakeFiles/pfr_upstream_help_system.dir/build
+.PHONY : pfr_upstream_help_system/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_help_system_util
+
+# Build rule for target.
+pfr_upstream_help_system_util: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_help_system_util
+.PHONY : pfr_upstream_help_system_util
+
+# fast build rule for target.
+pfr_upstream_help_system_util/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_help_system_util.dir/build.make CMakeFiles/pfr_upstream_help_system_util.dir/build
+.PHONY : pfr_upstream_help_system_util/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_item_menu
+
+# Build rule for target.
+pfr_upstream_item_menu: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_item_menu
+.PHONY : pfr_upstream_item_menu
+
+# fast build rule for target.
+pfr_upstream_item_menu/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_item_menu.dir/build.make CMakeFiles/pfr_upstream_item_menu.dir/build
+.PHONY : pfr_upstream_item_menu/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_itemfinder
+
+# Build rule for target.
+pfr_upstream_itemfinder: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_itemfinder
+.PHONY : pfr_upstream_itemfinder
+
+# fast build rule for target.
+pfr_upstream_itemfinder/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_itemfinder.dir/build.make CMakeFiles/pfr_upstream_itemfinder.dir/build
+.PHONY : pfr_upstream_itemfinder/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_learn_move
+
+# Build rule for target.
+pfr_upstream_learn_move: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_learn_move
+.PHONY : pfr_upstream_learn_move
+
+# fast build rule for target.
+pfr_upstream_learn_move/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_learn_move.dir/build.make CMakeFiles/pfr_upstream_learn_move.dir/build
+.PHONY : pfr_upstream_learn_move/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_link
+
+# Build rule for target.
+pfr_upstream_link: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_link
+.PHONY : pfr_upstream_link
+
+# fast build rule for target.
+pfr_upstream_link/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_link.dir/build.make CMakeFiles/pfr_upstream_link.dir/build
+.PHONY : pfr_upstream_link/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_link_rfu_3
+
+# Build rule for target.
+pfr_upstream_link_rfu_3: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_link_rfu_3
+.PHONY : pfr_upstream_link_rfu_3
+
+# fast build rule for target.
+pfr_upstream_link_rfu_3/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_link_rfu_3.dir/build.make CMakeFiles/pfr_upstream_link_rfu_3.dir/build
+.PHONY : pfr_upstream_link_rfu_3/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_map_preview_screen
+
+# Build rule for target.
+pfr_upstream_map_preview_screen: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_map_preview_screen
+.PHONY : pfr_upstream_map_preview_screen
+
+# fast build rule for target.
+pfr_upstream_map_preview_screen/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_map_preview_screen.dir/build.make CMakeFiles/pfr_upstream_map_preview_screen.dir/build
+.PHONY : pfr_upstream_map_preview_screen/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_menu_indicators
+
+# Build rule for target.
+pfr_upstream_menu_indicators: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_menu_indicators
+.PHONY : pfr_upstream_menu_indicators
+
+# fast build rule for target.
+pfr_upstream_menu_indicators/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_menu_indicators.dir/build.make CMakeFiles/pfr_upstream_menu_indicators.dir/build
+.PHONY : pfr_upstream_menu_indicators/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_minigame_countdown
+
+# Build rule for target.
+pfr_upstream_minigame_countdown: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_minigame_countdown
+.PHONY : pfr_upstream_minigame_countdown
+
+# fast build rule for target.
+pfr_upstream_minigame_countdown/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_minigame_countdown.dir/build.make CMakeFiles/pfr_upstream_minigame_countdown.dir/build
+.PHONY : pfr_upstream_minigame_countdown/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_mon_markings
+
+# Build rule for target.
+pfr_upstream_mon_markings: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_mon_markings
+.PHONY : pfr_upstream_mon_markings
+
+# fast build rule for target.
+pfr_upstream_mon_markings/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_mon_markings.dir/build.make CMakeFiles/pfr_upstream_mon_markings.dir/build
+.PHONY : pfr_upstream_mon_markings/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_mystery_gift_menu
+
+# Build rule for target.
+pfr_upstream_mystery_gift_menu: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_mystery_gift_menu
+.PHONY : pfr_upstream_mystery_gift_menu
+
+# fast build rule for target.
+pfr_upstream_mystery_gift_menu/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_mystery_gift_menu.dir/build.make CMakeFiles/pfr_upstream_mystery_gift_menu.dir/build
+.PHONY : pfr_upstream_mystery_gift_menu/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_mystery_gift_show_card
+
+# Build rule for target.
+pfr_upstream_mystery_gift_show_card: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_mystery_gift_show_card
+.PHONY : pfr_upstream_mystery_gift_show_card
+
+# fast build rule for target.
+pfr_upstream_mystery_gift_show_card/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_mystery_gift_show_card.dir/build.make CMakeFiles/pfr_upstream_mystery_gift_show_card.dir/build
+.PHONY : pfr_upstream_mystery_gift_show_card/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_mystery_gift_show_news
+
+# Build rule for target.
+pfr_upstream_mystery_gift_show_news: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_mystery_gift_show_news
+.PHONY : pfr_upstream_mystery_gift_show_news
+
+# fast build rule for target.
+pfr_upstream_mystery_gift_show_news/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_mystery_gift_show_news.dir/build.make CMakeFiles/pfr_upstream_mystery_gift_show_news.dir/build
+.PHONY : pfr_upstream_mystery_gift_show_news/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_naming_screen
+
+# Build rule for target.
+pfr_upstream_naming_screen: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_naming_screen
+.PHONY : pfr_upstream_naming_screen
+
+# fast build rule for target.
+pfr_upstream_naming_screen/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_naming_screen.dir/build.make CMakeFiles/pfr_upstream_naming_screen.dir/build
+.PHONY : pfr_upstream_naming_screen/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_option_menu
+
+# Build rule for target.
+pfr_upstream_option_menu: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_option_menu
+.PHONY : pfr_upstream_option_menu
+
+# fast build rule for target.
+pfr_upstream_option_menu/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_option_menu.dir/build.make CMakeFiles/pfr_upstream_option_menu.dir/build
+.PHONY : pfr_upstream_option_menu/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_pokedex_area_markers
+
+# Build rule for target.
+pfr_upstream_pokedex_area_markers: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_pokedex_area_markers
+.PHONY : pfr_upstream_pokedex_area_markers
+
+# fast build rule for target.
+pfr_upstream_pokedex_area_markers/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokedex_area_markers.dir/build.make CMakeFiles/pfr_upstream_pokedex_area_markers.dir/build
+.PHONY : pfr_upstream_pokedex_area_markers/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_pokedex_screen
+
+# Build rule for target.
+pfr_upstream_pokedex_screen: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_pokedex_screen
+.PHONY : pfr_upstream_pokedex_screen
+
+# fast build rule for target.
+pfr_upstream_pokedex_screen/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokedex_screen.dir/build.make CMakeFiles/pfr_upstream_pokedex_screen.dir/build
+.PHONY : pfr_upstream_pokedex_screen/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_pokemon
+
+# Build rule for target.
+pfr_upstream_pokemon: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_pokemon
+.PHONY : pfr_upstream_pokemon
+
+# fast build rule for target.
+pfr_upstream_pokemon/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon.dir/build.make CMakeFiles/pfr_upstream_pokemon.dir/build
+.PHONY : pfr_upstream_pokemon/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_pokemon_icon
+
+# Build rule for target.
+pfr_upstream_pokemon_icon: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_pokemon_icon
+.PHONY : pfr_upstream_pokemon_icon
+
+# fast build rule for target.
+pfr_upstream_pokemon_icon/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_icon.dir/build.make CMakeFiles/pfr_upstream_pokemon_icon.dir/build
+.PHONY : pfr_upstream_pokemon_icon/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_pokemon_jump
+
+# Build rule for target.
+pfr_upstream_pokemon_jump: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_pokemon_jump
+.PHONY : pfr_upstream_pokemon_jump
+
+# fast build rule for target.
+pfr_upstream_pokemon_jump/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_jump.dir/build.make CMakeFiles/pfr_upstream_pokemon_jump.dir/build
+.PHONY : pfr_upstream_pokemon_jump/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_pokemon_special_anim_scene
+
+# Build rule for target.
+pfr_upstream_pokemon_special_anim_scene: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_pokemon_special_anim_scene
+.PHONY : pfr_upstream_pokemon_special_anim_scene
+
+# fast build rule for target.
+pfr_upstream_pokemon_special_anim_scene/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_special_anim_scene.dir/build.make CMakeFiles/pfr_upstream_pokemon_special_anim_scene.dir/build
+.PHONY : pfr_upstream_pokemon_special_anim_scene/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_pokemon_storage_system_data
+
+# Build rule for target.
+pfr_upstream_pokemon_storage_system_data: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_pokemon_storage_system_data
+.PHONY : pfr_upstream_pokemon_storage_system_data
+
+# fast build rule for target.
+pfr_upstream_pokemon_storage_system_data/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_storage_system_data.dir/build.make CMakeFiles/pfr_upstream_pokemon_storage_system_data.dir/build
+.PHONY : pfr_upstream_pokemon_storage_system_data/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_pokemon_storage_system_graphics
+
+# Build rule for target.
+pfr_upstream_pokemon_storage_system_graphics: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_pokemon_storage_system_graphics
+.PHONY : pfr_upstream_pokemon_storage_system_graphics
+
+# fast build rule for target.
+pfr_upstream_pokemon_storage_system_graphics/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_storage_system_graphics.dir/build.make CMakeFiles/pfr_upstream_pokemon_storage_system_graphics.dir/build
+.PHONY : pfr_upstream_pokemon_storage_system_graphics/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_pokemon_storage_system_menu
+
+# Build rule for target.
+pfr_upstream_pokemon_storage_system_menu: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_pokemon_storage_system_menu
+.PHONY : pfr_upstream_pokemon_storage_system_menu
+
+# fast build rule for target.
+pfr_upstream_pokemon_storage_system_menu/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_storage_system_menu.dir/build.make CMakeFiles/pfr_upstream_pokemon_storage_system_menu.dir/build
+.PHONY : pfr_upstream_pokemon_storage_system_menu/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_pokemon_storage_system_misc
+
+# Build rule for target.
+pfr_upstream_pokemon_storage_system_misc: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_pokemon_storage_system_misc
+.PHONY : pfr_upstream_pokemon_storage_system_misc
+
+# fast build rule for target.
+pfr_upstream_pokemon_storage_system_misc/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_storage_system_misc.dir/build.make CMakeFiles/pfr_upstream_pokemon_storage_system_misc.dir/build
+.PHONY : pfr_upstream_pokemon_storage_system_misc/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_pokemon_storage_system_tasks
+
+# Build rule for target.
+pfr_upstream_pokemon_storage_system_tasks: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_pokemon_storage_system_tasks
+.PHONY : pfr_upstream_pokemon_storage_system_tasks
+
+# fast build rule for target.
+pfr_upstream_pokemon_storage_system_tasks/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_storage_system_tasks.dir/build.make CMakeFiles/pfr_upstream_pokemon_storage_system_tasks.dir/build
+.PHONY : pfr_upstream_pokemon_storage_system_tasks/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_pokemon_summary_screen
+
+# Build rule for target.
+pfr_upstream_pokemon_summary_screen: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_pokemon_summary_screen
+.PHONY : pfr_upstream_pokemon_summary_screen
+
+# fast build rule for target.
+pfr_upstream_pokemon_summary_screen/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_summary_screen.dir/build.make CMakeFiles/pfr_upstream_pokemon_summary_screen.dir/build
+.PHONY : pfr_upstream_pokemon_summary_screen/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_quest_log
+
+# Build rule for target.
+pfr_upstream_quest_log: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_quest_log
+.PHONY : pfr_upstream_quest_log
+
+# fast build rule for target.
+pfr_upstream_quest_log/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_quest_log.dir/build.make CMakeFiles/pfr_upstream_quest_log.dir/build
+.PHONY : pfr_upstream_quest_log/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_region_map
+
+# Build rule for target.
+pfr_upstream_region_map: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_region_map
+.PHONY : pfr_upstream_region_map
+
+# fast build rule for target.
+pfr_upstream_region_map/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_region_map.dir/build.make CMakeFiles/pfr_upstream_region_map.dir/build
+.PHONY : pfr_upstream_region_map/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_save_failed_screen
+
+# Build rule for target.
+pfr_upstream_save_failed_screen: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_save_failed_screen
+.PHONY : pfr_upstream_save_failed_screen
+
+# fast build rule for target.
+pfr_upstream_save_failed_screen/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_save_failed_screen.dir/build.make CMakeFiles/pfr_upstream_save_failed_screen.dir/build
+.PHONY : pfr_upstream_save_failed_screen/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_script_menu
+
+# Build rule for target.
+pfr_upstream_script_menu: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_script_menu
+.PHONY : pfr_upstream_script_menu
+
+# fast build rule for target.
+pfr_upstream_script_menu/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_script_menu.dir/build.make CMakeFiles/pfr_upstream_script_menu.dir/build
+.PHONY : pfr_upstream_script_menu/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_seagallop
+
+# Build rule for target.
+pfr_upstream_seagallop: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_seagallop
+.PHONY : pfr_upstream_seagallop
+
+# fast build rule for target.
+pfr_upstream_seagallop/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_seagallop.dir/build.make CMakeFiles/pfr_upstream_seagallop.dir/build
+.PHONY : pfr_upstream_seagallop/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_slot_machine
+
+# Build rule for target.
+pfr_upstream_slot_machine: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_slot_machine
+.PHONY : pfr_upstream_slot_machine
+
+# fast build rule for target.
+pfr_upstream_slot_machine/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_slot_machine.dir/build.make CMakeFiles/pfr_upstream_slot_machine.dir/build
+.PHONY : pfr_upstream_slot_machine/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_ss_anne
+
+# Build rule for target.
+pfr_upstream_ss_anne: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_ss_anne
+.PHONY : pfr_upstream_ss_anne
+
+# fast build rule for target.
+pfr_upstream_ss_anne/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_ss_anne.dir/build.make CMakeFiles/pfr_upstream_ss_anne.dir/build
+.PHONY : pfr_upstream_ss_anne/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_tileset_anims
+
+# Build rule for target.
+pfr_upstream_tileset_anims: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_tileset_anims
+.PHONY : pfr_upstream_tileset_anims
+
+# fast build rule for target.
+pfr_upstream_tileset_anims/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_tileset_anims.dir/build.make CMakeFiles/pfr_upstream_tileset_anims.dir/build
+.PHONY : pfr_upstream_tileset_anims/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_trade
+
+# Build rule for target.
+pfr_upstream_trade: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_trade
+.PHONY : pfr_upstream_trade
+
+# fast build rule for target.
+pfr_upstream_trade/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_trade.dir/build.make CMakeFiles/pfr_upstream_trade.dir/build
+.PHONY : pfr_upstream_trade/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_trade_scene
+
+# Build rule for target.
+pfr_upstream_trade_scene: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_trade_scene
+.PHONY : pfr_upstream_trade_scene
+
+# fast build rule for target.
+pfr_upstream_trade_scene/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_trade_scene.dir/build.make CMakeFiles/pfr_upstream_trade_scene.dir/build
+.PHONY : pfr_upstream_trade_scene/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_trainer_card
+
+# Build rule for target.
+pfr_upstream_trainer_card: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_trainer_card
+.PHONY : pfr_upstream_trainer_card
+
+# fast build rule for target.
+pfr_upstream_trainer_card/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_trainer_card.dir/build.make CMakeFiles/pfr_upstream_trainer_card.dir/build
+.PHONY : pfr_upstream_trainer_card/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_trainer_see
+
+# Build rule for target.
+pfr_upstream_trainer_see: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_trainer_see
+.PHONY : pfr_upstream_trainer_see
+
+# fast build rule for target.
+pfr_upstream_trainer_see/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_trainer_see.dir/build.make CMakeFiles/pfr_upstream_trainer_see.dir/build
+.PHONY : pfr_upstream_trainer_see/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_union_room_chat_display
+
+# Build rule for target.
+pfr_upstream_union_room_chat_display: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_union_room_chat_display
+.PHONY : pfr_upstream_union_room_chat_display
+
+# fast build rule for target.
+pfr_upstream_union_room_chat_display/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_union_room_chat_display.dir/build.make CMakeFiles/pfr_upstream_union_room_chat_display.dir/build
+.PHONY : pfr_upstream_union_room_chat_display/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_union_room_chat_objects
+
+# Build rule for target.
+pfr_upstream_union_room_chat_objects: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_union_room_chat_objects
+.PHONY : pfr_upstream_union_room_chat_objects
+
+# fast build rule for target.
+pfr_upstream_union_room_chat_objects/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_union_room_chat_objects.dir/build.make CMakeFiles/pfr_upstream_union_room_chat_objects.dir/build
+.PHONY : pfr_upstream_union_room_chat_objects/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_util
+
+# Build rule for target.
+pfr_upstream_util: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_util
+.PHONY : pfr_upstream_util
+
+# fast build rule for target.
+pfr_upstream_util/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_util.dir/build.make CMakeFiles/pfr_upstream_util.dir/build
+.PHONY : pfr_upstream_util/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_wireless_communication_status_screen
+
+# Build rule for target.
+pfr_upstream_wireless_communication_status_screen: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_wireless_communication_status_screen
+.PHONY : pfr_upstream_wireless_communication_status_screen
+
+# fast build rule for target.
+pfr_upstream_wireless_communication_status_screen/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_wireless_communication_status_screen.dir/build.make CMakeFiles/pfr_upstream_wireless_communication_status_screen.dir/build
+.PHONY : pfr_upstream_wireless_communication_status_screen/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_tilesets
+
+# Build rule for target.
+pfr_upstream_tilesets: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_tilesets
+.PHONY : pfr_upstream_tilesets
+
+# fast build rule for target.
+pfr_upstream_tilesets/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_tilesets.dir/build.make CMakeFiles/pfr_upstream_tilesets.dir/build
+.PHONY : pfr_upstream_tilesets/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_event_object_movement
+
+# Build rule for target.
+pfr_upstream_event_object_movement: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_event_object_movement
+.PHONY : pfr_upstream_event_object_movement
+
+# fast build rule for target.
+pfr_upstream_event_object_movement/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_event_object_movement.dir/build.make CMakeFiles/pfr_upstream_event_object_movement.dir/build
+.PHONY : pfr_upstream_event_object_movement/fast
+
+#=============================================================================
+# Target rules for targets named pfr_upstream_party_menu
+
+# Build rule for target.
+pfr_upstream_party_menu: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_upstream_party_menu
+.PHONY : pfr_upstream_party_menu
+
+# fast build rule for target.
+pfr_upstream_party_menu/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_party_menu.dir/build.make CMakeFiles/pfr_upstream_party_menu.dir/build
+.PHONY : pfr_upstream_party_menu/fast
 
 #=============================================================================
 # Target rules for targets named pfr_smoke
@@ -232,6 +1259,19 @@ pfr_smoke: cmake_check_build_system
 pfr_smoke/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_smoke.dir/build.make CMakeFiles/pfr_smoke.dir/build
 .PHONY : pfr_smoke/fast
+
+#=============================================================================
+# Target rules for targets named pfr_env_smoke
+
+# Build rule for target.
+pfr_env_smoke: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_env_smoke
+.PHONY : pfr_env_smoke
+
+# fast build rule for target.
+pfr_env_smoke/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_env_smoke.dir/build.make CMakeFiles/pfr_env_smoke.dir/build
+.PHONY : pfr_env_smoke/fast
 
 #=============================================================================
 # Target rules for targets named pfr_lz77
@@ -273,6 +1313,97 @@ pfr_play/fast:
 .PHONY : pfr_play/fast
 
 #=============================================================================
+# Target rules for targets named pfr_game
+
+# Build rule for target.
+pfr_game: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_game
+.PHONY : pfr_game
+
+# fast build rule for target.
+pfr_game/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_game.dir/build.make CMakeFiles/pfr_game.dir/build
+.PHONY : pfr_game/fast
+
+#=============================================================================
+# Target rules for targets named pfr_frame_diff
+
+# Build rule for target.
+pfr_frame_diff: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_frame_diff
+.PHONY : pfr_frame_diff
+
+# fast build rule for target.
+pfr_frame_diff/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_frame_diff.dir/build.make CMakeFiles/pfr_frame_diff.dir/build
+.PHONY : pfr_frame_diff/fast
+
+#=============================================================================
+# Target rules for targets named pfr_reference_rom
+
+# Build rule for target.
+pfr_reference_rom: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_reference_rom
+.PHONY : pfr_reference_rom
+
+# fast build rule for target.
+pfr_reference_rom/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_reference_rom.dir/build.make CMakeFiles/pfr_reference_rom.dir/build
+.PHONY : pfr_reference_rom/fast
+
+#=============================================================================
+# Target rules for targets named pfr_mgba_external
+
+# Build rule for target.
+pfr_mgba_external: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_mgba_external
+.PHONY : pfr_mgba_external
+
+# fast build rule for target.
+pfr_mgba_external/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_mgba_external.dir/build.make CMakeFiles/pfr_mgba_external.dir/build
+.PHONY : pfr_mgba_external/fast
+
+#=============================================================================
+# Target rules for targets named mgba_capture
+
+# Build rule for target.
+mgba_capture: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mgba_capture
+.PHONY : mgba_capture
+
+# fast build rule for target.
+mgba_capture/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mgba_capture.dir/build.make CMakeFiles/mgba_capture.dir/build
+.PHONY : mgba_capture/fast
+
+#=============================================================================
+# Target rules for targets named mgba_bench
+
+# Build rule for target.
+mgba_bench: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mgba_bench
+.PHONY : mgba_bench
+
+# fast build rule for target.
+mgba_bench/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mgba_bench.dir/build.make CMakeFiles/mgba_bench.dir/build
+.PHONY : mgba_bench/fast
+
+#=============================================================================
+# Target rules for targets named pfr_refresh_goldens
+
+# Build rule for target.
+pfr_refresh_goldens: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_refresh_goldens
+.PHONY : pfr_refresh_goldens
+
+# fast build rule for target.
+pfr_refresh_goldens/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_refresh_goldens.dir/build.make CMakeFiles/pfr_refresh_goldens.dir/build
+.PHONY : pfr_refresh_goldens/fast
+
+#=============================================================================
 # Target rules for targets named pfr_assets
 
 # Build rule for target.
@@ -284,6 +1415,3210 @@ pfr_assets: cmake_check_build_system
 pfr_assets/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_assets.dir/build.make CMakeFiles/pfr_assets.dir/build
 .PHONY : pfr_assets/fast
+
+#=============================================================================
+# Target rules for targets named pfr_libpng_external
+
+# Build rule for target.
+pfr_libpng_external: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_libpng_external
+.PHONY : pfr_libpng_external
+
+# fast build rule for target.
+pfr_libpng_external/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_libpng_external.dir/build.make CMakeFiles/pfr_libpng_external.dir/build
+.PHONY : pfr_libpng_external/fast
+
+#=============================================================================
+# Target rules for targets named pfr_gbagfx_tool
+
+# Build rule for target.
+pfr_gbagfx_tool: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_gbagfx_tool
+.PHONY : pfr_gbagfx_tool
+
+# fast build rule for target.
+pfr_gbagfx_tool/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_gbagfx_tool.dir/build.make CMakeFiles/pfr_gbagfx_tool.dir/build
+.PHONY : pfr_gbagfx_tool/fast
+
+#=============================================================================
+# Target rules for targets named pfr_verify_asset_manifests
+
+# Build rule for target.
+pfr_verify_asset_manifests: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_verify_asset_manifests
+.PHONY : pfr_verify_asset_manifests
+
+# fast build rule for target.
+pfr_verify_asset_manifests/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_verify_asset_manifests.dir/build.make CMakeFiles/pfr_verify_asset_manifests.dir/build
+.PHONY : pfr_verify_asset_manifests/fast
+
+#=============================================================================
+# Target rules for targets named pfr_asset_pipeline
+
+# Build rule for target.
+pfr_asset_pipeline: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_asset_pipeline
+.PHONY : pfr_asset_pipeline
+
+# fast build rule for target.
+pfr_asset_pipeline/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_asset_pipeline.dir/build.make CMakeFiles/pfr_asset_pipeline.dir/build
+.PHONY : pfr_asset_pipeline/fast
+
+#=============================================================================
+# Target rules for targets named pfr_golden_check
+
+# Build rule for target.
+pfr_golden_check: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_golden_check
+.PHONY : pfr_golden_check
+
+# fast build rule for target.
+pfr_golden_check/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_golden_check.dir/build.make CMakeFiles/pfr_golden_check.dir/build
+.PHONY : pfr_golden_check/fast
+
+#=============================================================================
+# Target rules for targets named pfr_battle_test
+
+# Build rule for target.
+pfr_battle_test: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_battle_test
+.PHONY : pfr_battle_test
+
+# fast build rule for target.
+pfr_battle_test/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_battle_test.dir/build.make CMakeFiles/pfr_battle_test.dir/build
+.PHONY : pfr_battle_test/fast
+
+#=============================================================================
+# Target rules for targets named pfr_native_generated_data
+
+# Build rule for target.
+pfr_native_generated_data: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_native_generated_data
+.PHONY : pfr_native_generated_data
+
+# fast build rule for target.
+pfr_native_generated_data/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_native_generated_data.dir/build.make CMakeFiles/pfr_native_generated_data.dir/build
+.PHONY : pfr_native_generated_data/fast
+
+#=============================================================================
+# Target rules for targets named pfr_native_core
+
+# Build rule for target.
+pfr_native_core: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_native_core
+.PHONY : pfr_native_core
+
+# fast build rule for target.
+pfr_native_core/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_native_core.dir/build.make CMakeFiles/pfr_native_core.dir/build
+.PHONY : pfr_native_core/fast
+
+#=============================================================================
+# Target rules for targets named pfr_native_smoke
+
+# Build rule for target.
+pfr_native_smoke: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_native_smoke
+.PHONY : pfr_native_smoke
+
+# fast build rule for target.
+pfr_native_smoke/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_native_smoke.dir/build.make CMakeFiles/pfr_native_smoke.dir/build
+.PHONY : pfr_native_smoke/fast
+
+#=============================================================================
+# Target rules for targets named pfrn_binding
+
+# Build rule for target.
+pfrn_binding: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfrn_binding
+.PHONY : pfrn_binding
+
+# fast build rule for target.
+pfrn_binding/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfrn_binding.dir/build.make CMakeFiles/pfrn_binding.dir/build
+.PHONY : pfrn_binding/fast
+
+#=============================================================================
+# Target rules for targets named pfr_env_binding_native
+
+# Build rule for target.
+pfr_env_binding_native: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_env_binding_native
+.PHONY : pfr_env_binding_native
+
+# fast build rule for target.
+pfr_env_binding_native/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_env_binding_native.dir/build.make CMakeFiles/pfr_env_binding_native.dir/build
+.PHONY : pfr_env_binding_native/fast
+
+#=============================================================================
+# Target rules for targets named pfr_game_static
+
+# Build rule for target.
+pfr_game_static: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pfr_game_static
+.PHONY : pfr_game_static
+
+# fast build rule for target.
+pfr_game_static/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_game_static.dir/build.make CMakeFiles/pfr_game_static.dir/build
+.PHONY : pfr_game_static/fast
+
+gen/AgbRfu_LinkManager.o: gen/AgbRfu_LinkManager.c.o
+.PHONY : gen/AgbRfu_LinkManager.o
+
+# target to build an object file
+gen/AgbRfu_LinkManager.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/AgbRfu_LinkManager.c.o
+.PHONY : gen/AgbRfu_LinkManager.c.o
+
+gen/AgbRfu_LinkManager.i: gen/AgbRfu_LinkManager.c.i
+.PHONY : gen/AgbRfu_LinkManager.i
+
+# target to preprocess a source file
+gen/AgbRfu_LinkManager.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/AgbRfu_LinkManager.c.i
+.PHONY : gen/AgbRfu_LinkManager.c.i
+
+gen/AgbRfu_LinkManager.s: gen/AgbRfu_LinkManager.c.s
+.PHONY : gen/AgbRfu_LinkManager.s
+
+# target to generate assembly for a file
+gen/AgbRfu_LinkManager.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/AgbRfu_LinkManager.c.s
+.PHONY : gen/AgbRfu_LinkManager.c.s
+
+gen/bag.o: gen/bag.c.o
+.PHONY : gen/bag.o
+
+# target to build an object file
+gen/bag.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_bag.dir/build.make CMakeFiles/pfr_upstream_bag.dir/gen/bag.c.o
+.PHONY : gen/bag.c.o
+
+gen/bag.i: gen/bag.c.i
+.PHONY : gen/bag.i
+
+# target to preprocess a source file
+gen/bag.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_bag.dir/build.make CMakeFiles/pfr_upstream_bag.dir/gen/bag.c.i
+.PHONY : gen/bag.c.i
+
+gen/bag.s: gen/bag.c.s
+.PHONY : gen/bag.s
+
+# target to generate assembly for a file
+gen/bag.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_bag.dir/build.make CMakeFiles/pfr_upstream_bag.dir/gen/bag.c.s
+.PHONY : gen/bag.c.s
+
+gen/battle_ai_script_commands.o: gen/battle_ai_script_commands.c.o
+.PHONY : gen/battle_ai_script_commands.o
+
+# target to build an object file
+gen/battle_ai_script_commands.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_script_commands.c.o
+.PHONY : gen/battle_ai_script_commands.c.o
+
+gen/battle_ai_script_commands.i: gen/battle_ai_script_commands.c.i
+.PHONY : gen/battle_ai_script_commands.i
+
+# target to preprocess a source file
+gen/battle_ai_script_commands.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_script_commands.c.i
+.PHONY : gen/battle_ai_script_commands.c.i
+
+gen/battle_ai_script_commands.s: gen/battle_ai_script_commands.c.s
+.PHONY : gen/battle_ai_script_commands.s
+
+# target to generate assembly for a file
+gen/battle_ai_script_commands.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_script_commands.c.s
+.PHONY : gen/battle_ai_script_commands.c.s
+
+gen/battle_ai_switch_items.o: gen/battle_ai_switch_items.c.o
+.PHONY : gen/battle_ai_switch_items.o
+
+# target to build an object file
+gen/battle_ai_switch_items.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_switch_items.c.o
+.PHONY : gen/battle_ai_switch_items.c.o
+
+gen/battle_ai_switch_items.i: gen/battle_ai_switch_items.c.i
+.PHONY : gen/battle_ai_switch_items.i
+
+# target to preprocess a source file
+gen/battle_ai_switch_items.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_switch_items.c.i
+.PHONY : gen/battle_ai_switch_items.c.i
+
+gen/battle_ai_switch_items.s: gen/battle_ai_switch_items.c.s
+.PHONY : gen/battle_ai_switch_items.s
+
+# target to generate assembly for a file
+gen/battle_ai_switch_items.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_switch_items.c.s
+.PHONY : gen/battle_ai_switch_items.c.s
+
+gen/battle_anim.o: gen/battle_anim.c.o
+.PHONY : gen/battle_anim.o
+
+# target to build an object file
+gen/battle_anim.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim.c.o
+.PHONY : gen/battle_anim.c.o
+
+gen/battle_anim.i: gen/battle_anim.c.i
+.PHONY : gen/battle_anim.i
+
+# target to preprocess a source file
+gen/battle_anim.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim.c.i
+.PHONY : gen/battle_anim.c.i
+
+gen/battle_anim.s: gen/battle_anim.c.s
+.PHONY : gen/battle_anim.s
+
+# target to generate assembly for a file
+gen/battle_anim.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim.c.s
+.PHONY : gen/battle_anim.c.s
+
+gen/battle_anim_bug.o: gen/battle_anim_bug.c.o
+.PHONY : gen/battle_anim_bug.o
+
+# target to build an object file
+gen/battle_anim_bug.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_bug.c.o
+.PHONY : gen/battle_anim_bug.c.o
+
+gen/battle_anim_bug.i: gen/battle_anim_bug.c.i
+.PHONY : gen/battle_anim_bug.i
+
+# target to preprocess a source file
+gen/battle_anim_bug.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_bug.c.i
+.PHONY : gen/battle_anim_bug.c.i
+
+gen/battle_anim_bug.s: gen/battle_anim_bug.c.s
+.PHONY : gen/battle_anim_bug.s
+
+# target to generate assembly for a file
+gen/battle_anim_bug.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_bug.c.s
+.PHONY : gen/battle_anim_bug.c.s
+
+gen/battle_anim_dark.o: gen/battle_anim_dark.c.o
+.PHONY : gen/battle_anim_dark.o
+
+# target to build an object file
+gen/battle_anim_dark.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dark.c.o
+.PHONY : gen/battle_anim_dark.c.o
+
+gen/battle_anim_dark.i: gen/battle_anim_dark.c.i
+.PHONY : gen/battle_anim_dark.i
+
+# target to preprocess a source file
+gen/battle_anim_dark.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dark.c.i
+.PHONY : gen/battle_anim_dark.c.i
+
+gen/battle_anim_dark.s: gen/battle_anim_dark.c.s
+.PHONY : gen/battle_anim_dark.s
+
+# target to generate assembly for a file
+gen/battle_anim_dark.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dark.c.s
+.PHONY : gen/battle_anim_dark.c.s
+
+gen/battle_anim_dragon.o: gen/battle_anim_dragon.c.o
+.PHONY : gen/battle_anim_dragon.o
+
+# target to build an object file
+gen/battle_anim_dragon.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dragon.c.o
+.PHONY : gen/battle_anim_dragon.c.o
+
+gen/battle_anim_dragon.i: gen/battle_anim_dragon.c.i
+.PHONY : gen/battle_anim_dragon.i
+
+# target to preprocess a source file
+gen/battle_anim_dragon.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dragon.c.i
+.PHONY : gen/battle_anim_dragon.c.i
+
+gen/battle_anim_dragon.s: gen/battle_anim_dragon.c.s
+.PHONY : gen/battle_anim_dragon.s
+
+# target to generate assembly for a file
+gen/battle_anim_dragon.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dragon.c.s
+.PHONY : gen/battle_anim_dragon.c.s
+
+gen/battle_anim_effects_1.o: gen/battle_anim_effects_1.c.o
+.PHONY : gen/battle_anim_effects_1.o
+
+# target to build an object file
+gen/battle_anim_effects_1.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_1.c.o
+.PHONY : gen/battle_anim_effects_1.c.o
+
+gen/battle_anim_effects_1.i: gen/battle_anim_effects_1.c.i
+.PHONY : gen/battle_anim_effects_1.i
+
+# target to preprocess a source file
+gen/battle_anim_effects_1.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_1.c.i
+.PHONY : gen/battle_anim_effects_1.c.i
+
+gen/battle_anim_effects_1.s: gen/battle_anim_effects_1.c.s
+.PHONY : gen/battle_anim_effects_1.s
+
+# target to generate assembly for a file
+gen/battle_anim_effects_1.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_1.c.s
+.PHONY : gen/battle_anim_effects_1.c.s
+
+gen/battle_anim_effects_2.o: gen/battle_anim_effects_2.c.o
+.PHONY : gen/battle_anim_effects_2.o
+
+# target to build an object file
+gen/battle_anim_effects_2.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_2.c.o
+.PHONY : gen/battle_anim_effects_2.c.o
+
+gen/battle_anim_effects_2.i: gen/battle_anim_effects_2.c.i
+.PHONY : gen/battle_anim_effects_2.i
+
+# target to preprocess a source file
+gen/battle_anim_effects_2.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_2.c.i
+.PHONY : gen/battle_anim_effects_2.c.i
+
+gen/battle_anim_effects_2.s: gen/battle_anim_effects_2.c.s
+.PHONY : gen/battle_anim_effects_2.s
+
+# target to generate assembly for a file
+gen/battle_anim_effects_2.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_2.c.s
+.PHONY : gen/battle_anim_effects_2.c.s
+
+gen/battle_anim_effects_3.o: gen/battle_anim_effects_3.c.o
+.PHONY : gen/battle_anim_effects_3.o
+
+# target to build an object file
+gen/battle_anim_effects_3.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_battle_anim_effects_3.dir/build.make CMakeFiles/pfr_upstream_battle_anim_effects_3.dir/gen/battle_anim_effects_3.c.o
+.PHONY : gen/battle_anim_effects_3.c.o
+
+gen/battle_anim_effects_3.i: gen/battle_anim_effects_3.c.i
+.PHONY : gen/battle_anim_effects_3.i
+
+# target to preprocess a source file
+gen/battle_anim_effects_3.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_battle_anim_effects_3.dir/build.make CMakeFiles/pfr_upstream_battle_anim_effects_3.dir/gen/battle_anim_effects_3.c.i
+.PHONY : gen/battle_anim_effects_3.c.i
+
+gen/battle_anim_effects_3.s: gen/battle_anim_effects_3.c.s
+.PHONY : gen/battle_anim_effects_3.s
+
+# target to generate assembly for a file
+gen/battle_anim_effects_3.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_battle_anim_effects_3.dir/build.make CMakeFiles/pfr_upstream_battle_anim_effects_3.dir/gen/battle_anim_effects_3.c.s
+.PHONY : gen/battle_anim_effects_3.c.s
+
+gen/battle_anim_electric.o: gen/battle_anim_electric.c.o
+.PHONY : gen/battle_anim_electric.o
+
+# target to build an object file
+gen/battle_anim_electric.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_electric.c.o
+.PHONY : gen/battle_anim_electric.c.o
+
+gen/battle_anim_electric.i: gen/battle_anim_electric.c.i
+.PHONY : gen/battle_anim_electric.i
+
+# target to preprocess a source file
+gen/battle_anim_electric.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_electric.c.i
+.PHONY : gen/battle_anim_electric.c.i
+
+gen/battle_anim_electric.s: gen/battle_anim_electric.c.s
+.PHONY : gen/battle_anim_electric.s
+
+# target to generate assembly for a file
+gen/battle_anim_electric.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_electric.c.s
+.PHONY : gen/battle_anim_electric.c.s
+
+gen/battle_anim_fight.o: gen/battle_anim_fight.c.o
+.PHONY : gen/battle_anim_fight.o
+
+# target to build an object file
+gen/battle_anim_fight.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fight.c.o
+.PHONY : gen/battle_anim_fight.c.o
+
+gen/battle_anim_fight.i: gen/battle_anim_fight.c.i
+.PHONY : gen/battle_anim_fight.i
+
+# target to preprocess a source file
+gen/battle_anim_fight.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fight.c.i
+.PHONY : gen/battle_anim_fight.c.i
+
+gen/battle_anim_fight.s: gen/battle_anim_fight.c.s
+.PHONY : gen/battle_anim_fight.s
+
+# target to generate assembly for a file
+gen/battle_anim_fight.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fight.c.s
+.PHONY : gen/battle_anim_fight.c.s
+
+gen/battle_anim_fire.o: gen/battle_anim_fire.c.o
+.PHONY : gen/battle_anim_fire.o
+
+# target to build an object file
+gen/battle_anim_fire.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fire.c.o
+.PHONY : gen/battle_anim_fire.c.o
+
+gen/battle_anim_fire.i: gen/battle_anim_fire.c.i
+.PHONY : gen/battle_anim_fire.i
+
+# target to preprocess a source file
+gen/battle_anim_fire.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fire.c.i
+.PHONY : gen/battle_anim_fire.c.i
+
+gen/battle_anim_fire.s: gen/battle_anim_fire.c.s
+.PHONY : gen/battle_anim_fire.s
+
+# target to generate assembly for a file
+gen/battle_anim_fire.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fire.c.s
+.PHONY : gen/battle_anim_fire.c.s
+
+gen/battle_anim_flying.o: gen/battle_anim_flying.c.o
+.PHONY : gen/battle_anim_flying.o
+
+# target to build an object file
+gen/battle_anim_flying.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_battle_anim_flying.dir/build.make CMakeFiles/pfr_upstream_battle_anim_flying.dir/gen/battle_anim_flying.c.o
+.PHONY : gen/battle_anim_flying.c.o
+
+gen/battle_anim_flying.i: gen/battle_anim_flying.c.i
+.PHONY : gen/battle_anim_flying.i
+
+# target to preprocess a source file
+gen/battle_anim_flying.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_battle_anim_flying.dir/build.make CMakeFiles/pfr_upstream_battle_anim_flying.dir/gen/battle_anim_flying.c.i
+.PHONY : gen/battle_anim_flying.c.i
+
+gen/battle_anim_flying.s: gen/battle_anim_flying.c.s
+.PHONY : gen/battle_anim_flying.s
+
+# target to generate assembly for a file
+gen/battle_anim_flying.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_battle_anim_flying.dir/build.make CMakeFiles/pfr_upstream_battle_anim_flying.dir/gen/battle_anim_flying.c.s
+.PHONY : gen/battle_anim_flying.c.s
+
+gen/battle_anim_ghost.o: gen/battle_anim_ghost.c.o
+.PHONY : gen/battle_anim_ghost.o
+
+# target to build an object file
+gen/battle_anim_ghost.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ghost.c.o
+.PHONY : gen/battle_anim_ghost.c.o
+
+gen/battle_anim_ghost.i: gen/battle_anim_ghost.c.i
+.PHONY : gen/battle_anim_ghost.i
+
+# target to preprocess a source file
+gen/battle_anim_ghost.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ghost.c.i
+.PHONY : gen/battle_anim_ghost.c.i
+
+gen/battle_anim_ghost.s: gen/battle_anim_ghost.c.s
+.PHONY : gen/battle_anim_ghost.s
+
+# target to generate assembly for a file
+gen/battle_anim_ghost.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ghost.c.s
+.PHONY : gen/battle_anim_ghost.c.s
+
+gen/battle_anim_ground.o: gen/battle_anim_ground.c.o
+.PHONY : gen/battle_anim_ground.o
+
+# target to build an object file
+gen/battle_anim_ground.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ground.c.o
+.PHONY : gen/battle_anim_ground.c.o
+
+gen/battle_anim_ground.i: gen/battle_anim_ground.c.i
+.PHONY : gen/battle_anim_ground.i
+
+# target to preprocess a source file
+gen/battle_anim_ground.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ground.c.i
+.PHONY : gen/battle_anim_ground.c.i
+
+gen/battle_anim_ground.s: gen/battle_anim_ground.c.s
+.PHONY : gen/battle_anim_ground.s
+
+# target to generate assembly for a file
+gen/battle_anim_ground.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ground.c.s
+.PHONY : gen/battle_anim_ground.c.s
+
+gen/battle_anim_ice.o: gen/battle_anim_ice.c.o
+.PHONY : gen/battle_anim_ice.o
+
+# target to build an object file
+gen/battle_anim_ice.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ice.c.o
+.PHONY : gen/battle_anim_ice.c.o
+
+gen/battle_anim_ice.i: gen/battle_anim_ice.c.i
+.PHONY : gen/battle_anim_ice.i
+
+# target to preprocess a source file
+gen/battle_anim_ice.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ice.c.i
+.PHONY : gen/battle_anim_ice.c.i
+
+gen/battle_anim_ice.s: gen/battle_anim_ice.c.s
+.PHONY : gen/battle_anim_ice.s
+
+# target to generate assembly for a file
+gen/battle_anim_ice.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ice.c.s
+.PHONY : gen/battle_anim_ice.c.s
+
+gen/battle_anim_mon_movement.o: gen/battle_anim_mon_movement.c.o
+.PHONY : gen/battle_anim_mon_movement.o
+
+# target to build an object file
+gen/battle_anim_mon_movement.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mon_movement.c.o
+.PHONY : gen/battle_anim_mon_movement.c.o
+
+gen/battle_anim_mon_movement.i: gen/battle_anim_mon_movement.c.i
+.PHONY : gen/battle_anim_mon_movement.i
+
+# target to preprocess a source file
+gen/battle_anim_mon_movement.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mon_movement.c.i
+.PHONY : gen/battle_anim_mon_movement.c.i
+
+gen/battle_anim_mon_movement.s: gen/battle_anim_mon_movement.c.s
+.PHONY : gen/battle_anim_mon_movement.s
+
+# target to generate assembly for a file
+gen/battle_anim_mon_movement.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mon_movement.c.s
+.PHONY : gen/battle_anim_mon_movement.c.s
+
+gen/battle_anim_mons.o: gen/battle_anim_mons.c.o
+.PHONY : gen/battle_anim_mons.o
+
+# target to build an object file
+gen/battle_anim_mons.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mons.c.o
+.PHONY : gen/battle_anim_mons.c.o
+
+gen/battle_anim_mons.i: gen/battle_anim_mons.c.i
+.PHONY : gen/battle_anim_mons.i
+
+# target to preprocess a source file
+gen/battle_anim_mons.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mons.c.i
+.PHONY : gen/battle_anim_mons.c.i
+
+gen/battle_anim_mons.s: gen/battle_anim_mons.c.s
+.PHONY : gen/battle_anim_mons.s
+
+# target to generate assembly for a file
+gen/battle_anim_mons.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mons.c.s
+.PHONY : gen/battle_anim_mons.c.s
+
+gen/battle_anim_normal.o: gen/battle_anim_normal.c.o
+.PHONY : gen/battle_anim_normal.o
+
+# target to build an object file
+gen/battle_anim_normal.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_normal.c.o
+.PHONY : gen/battle_anim_normal.c.o
+
+gen/battle_anim_normal.i: gen/battle_anim_normal.c.i
+.PHONY : gen/battle_anim_normal.i
+
+# target to preprocess a source file
+gen/battle_anim_normal.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_normal.c.i
+.PHONY : gen/battle_anim_normal.c.i
+
+gen/battle_anim_normal.s: gen/battle_anim_normal.c.s
+.PHONY : gen/battle_anim_normal.s
+
+# target to generate assembly for a file
+gen/battle_anim_normal.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_normal.c.s
+.PHONY : gen/battle_anim_normal.c.s
+
+gen/battle_anim_poison.o: gen/battle_anim_poison.c.o
+.PHONY : gen/battle_anim_poison.o
+
+# target to build an object file
+gen/battle_anim_poison.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_poison.c.o
+.PHONY : gen/battle_anim_poison.c.o
+
+gen/battle_anim_poison.i: gen/battle_anim_poison.c.i
+.PHONY : gen/battle_anim_poison.i
+
+# target to preprocess a source file
+gen/battle_anim_poison.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_poison.c.i
+.PHONY : gen/battle_anim_poison.c.i
+
+gen/battle_anim_poison.s: gen/battle_anim_poison.c.s
+.PHONY : gen/battle_anim_poison.s
+
+# target to generate assembly for a file
+gen/battle_anim_poison.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_poison.c.s
+.PHONY : gen/battle_anim_poison.c.s
+
+gen/battle_anim_psychic.o: gen/battle_anim_psychic.c.o
+.PHONY : gen/battle_anim_psychic.o
+
+# target to build an object file
+gen/battle_anim_psychic.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_psychic.c.o
+.PHONY : gen/battle_anim_psychic.c.o
+
+gen/battle_anim_psychic.i: gen/battle_anim_psychic.c.i
+.PHONY : gen/battle_anim_psychic.i
+
+# target to preprocess a source file
+gen/battle_anim_psychic.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_psychic.c.i
+.PHONY : gen/battle_anim_psychic.c.i
+
+gen/battle_anim_psychic.s: gen/battle_anim_psychic.c.s
+.PHONY : gen/battle_anim_psychic.s
+
+# target to generate assembly for a file
+gen/battle_anim_psychic.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_psychic.c.s
+.PHONY : gen/battle_anim_psychic.c.s
+
+gen/battle_anim_rock.o: gen/battle_anim_rock.c.o
+.PHONY : gen/battle_anim_rock.o
+
+# target to build an object file
+gen/battle_anim_rock.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_rock.c.o
+.PHONY : gen/battle_anim_rock.c.o
+
+gen/battle_anim_rock.i: gen/battle_anim_rock.c.i
+.PHONY : gen/battle_anim_rock.i
+
+# target to preprocess a source file
+gen/battle_anim_rock.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_rock.c.i
+.PHONY : gen/battle_anim_rock.c.i
+
+gen/battle_anim_rock.s: gen/battle_anim_rock.c.s
+.PHONY : gen/battle_anim_rock.s
+
+# target to generate assembly for a file
+gen/battle_anim_rock.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_rock.c.s
+.PHONY : gen/battle_anim_rock.c.s
+
+gen/battle_anim_smokescreen.o: gen/battle_anim_smokescreen.c.o
+.PHONY : gen/battle_anim_smokescreen.o
+
+# target to build an object file
+gen/battle_anim_smokescreen.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_smokescreen.c.o
+.PHONY : gen/battle_anim_smokescreen.c.o
+
+gen/battle_anim_smokescreen.i: gen/battle_anim_smokescreen.c.i
+.PHONY : gen/battle_anim_smokescreen.i
+
+# target to preprocess a source file
+gen/battle_anim_smokescreen.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_smokescreen.c.i
+.PHONY : gen/battle_anim_smokescreen.c.i
+
+gen/battle_anim_smokescreen.s: gen/battle_anim_smokescreen.c.s
+.PHONY : gen/battle_anim_smokescreen.s
+
+# target to generate assembly for a file
+gen/battle_anim_smokescreen.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_smokescreen.c.s
+.PHONY : gen/battle_anim_smokescreen.c.s
+
+gen/battle_anim_sound_tasks.o: gen/battle_anim_sound_tasks.c.o
+.PHONY : gen/battle_anim_sound_tasks.o
+
+# target to build an object file
+gen/battle_anim_sound_tasks.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_sound_tasks.c.o
+.PHONY : gen/battle_anim_sound_tasks.c.o
+
+gen/battle_anim_sound_tasks.i: gen/battle_anim_sound_tasks.c.i
+.PHONY : gen/battle_anim_sound_tasks.i
+
+# target to preprocess a source file
+gen/battle_anim_sound_tasks.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_sound_tasks.c.i
+.PHONY : gen/battle_anim_sound_tasks.c.i
+
+gen/battle_anim_sound_tasks.s: gen/battle_anim_sound_tasks.c.s
+.PHONY : gen/battle_anim_sound_tasks.s
+
+# target to generate assembly for a file
+gen/battle_anim_sound_tasks.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_sound_tasks.c.s
+.PHONY : gen/battle_anim_sound_tasks.c.s
+
+gen/battle_anim_special.o: gen/battle_anim_special.c.o
+.PHONY : gen/battle_anim_special.o
+
+# target to build an object file
+gen/battle_anim_special.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_special.c.o
+.PHONY : gen/battle_anim_special.c.o
+
+gen/battle_anim_special.i: gen/battle_anim_special.c.i
+.PHONY : gen/battle_anim_special.i
+
+# target to preprocess a source file
+gen/battle_anim_special.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_special.c.i
+.PHONY : gen/battle_anim_special.c.i
+
+gen/battle_anim_special.s: gen/battle_anim_special.c.s
+.PHONY : gen/battle_anim_special.s
+
+# target to generate assembly for a file
+gen/battle_anim_special.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_special.c.s
+.PHONY : gen/battle_anim_special.c.s
+
+gen/battle_anim_status_effects.o: gen/battle_anim_status_effects.c.o
+.PHONY : gen/battle_anim_status_effects.o
+
+# target to build an object file
+gen/battle_anim_status_effects.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_status_effects.c.o
+.PHONY : gen/battle_anim_status_effects.c.o
+
+gen/battle_anim_status_effects.i: gen/battle_anim_status_effects.c.i
+.PHONY : gen/battle_anim_status_effects.i
+
+# target to preprocess a source file
+gen/battle_anim_status_effects.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_status_effects.c.i
+.PHONY : gen/battle_anim_status_effects.c.i
+
+gen/battle_anim_status_effects.s: gen/battle_anim_status_effects.c.s
+.PHONY : gen/battle_anim_status_effects.s
+
+# target to generate assembly for a file
+gen/battle_anim_status_effects.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_status_effects.c.s
+.PHONY : gen/battle_anim_status_effects.c.s
+
+gen/battle_anim_utility_funcs.o: gen/battle_anim_utility_funcs.c.o
+.PHONY : gen/battle_anim_utility_funcs.o
+
+# target to build an object file
+gen/battle_anim_utility_funcs.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_utility_funcs.c.o
+.PHONY : gen/battle_anim_utility_funcs.c.o
+
+gen/battle_anim_utility_funcs.i: gen/battle_anim_utility_funcs.c.i
+.PHONY : gen/battle_anim_utility_funcs.i
+
+# target to preprocess a source file
+gen/battle_anim_utility_funcs.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_utility_funcs.c.i
+.PHONY : gen/battle_anim_utility_funcs.c.i
+
+gen/battle_anim_utility_funcs.s: gen/battle_anim_utility_funcs.c.s
+.PHONY : gen/battle_anim_utility_funcs.s
+
+# target to generate assembly for a file
+gen/battle_anim_utility_funcs.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_utility_funcs.c.s
+.PHONY : gen/battle_anim_utility_funcs.c.s
+
+gen/battle_anim_water.o: gen/battle_anim_water.c.o
+.PHONY : gen/battle_anim_water.o
+
+# target to build an object file
+gen/battle_anim_water.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_battle_anim_water.dir/build.make CMakeFiles/pfr_upstream_battle_anim_water.dir/gen/battle_anim_water.c.o
+.PHONY : gen/battle_anim_water.c.o
+
+gen/battle_anim_water.i: gen/battle_anim_water.c.i
+.PHONY : gen/battle_anim_water.i
+
+# target to preprocess a source file
+gen/battle_anim_water.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_battle_anim_water.dir/build.make CMakeFiles/pfr_upstream_battle_anim_water.dir/gen/battle_anim_water.c.i
+.PHONY : gen/battle_anim_water.c.i
+
+gen/battle_anim_water.s: gen/battle_anim_water.c.s
+.PHONY : gen/battle_anim_water.s
+
+# target to generate assembly for a file
+gen/battle_anim_water.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_battle_anim_water.dir/build.make CMakeFiles/pfr_upstream_battle_anim_water.dir/gen/battle_anim_water.c.s
+.PHONY : gen/battle_anim_water.c.s
+
+gen/battle_bg.o: gen/battle_bg.c.o
+.PHONY : gen/battle_bg.o
+
+# target to build an object file
+gen/battle_bg.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_battle_bg.dir/build.make CMakeFiles/pfr_upstream_battle_bg.dir/gen/battle_bg.c.o
+.PHONY : gen/battle_bg.c.o
+
+gen/battle_bg.i: gen/battle_bg.c.i
+.PHONY : gen/battle_bg.i
+
+# target to preprocess a source file
+gen/battle_bg.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_battle_bg.dir/build.make CMakeFiles/pfr_upstream_battle_bg.dir/gen/battle_bg.c.i
+.PHONY : gen/battle_bg.c.i
+
+gen/battle_bg.s: gen/battle_bg.c.s
+.PHONY : gen/battle_bg.s
+
+# target to generate assembly for a file
+gen/battle_bg.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_battle_bg.dir/build.make CMakeFiles/pfr_upstream_battle_bg.dir/gen/battle_bg.c.s
+.PHONY : gen/battle_bg.c.s
+
+gen/battle_controller_link_opponent.o: gen/battle_controller_link_opponent.c.o
+.PHONY : gen/battle_controller_link_opponent.o
+
+# target to build an object file
+gen/battle_controller_link_opponent.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_opponent.c.o
+.PHONY : gen/battle_controller_link_opponent.c.o
+
+gen/battle_controller_link_opponent.i: gen/battle_controller_link_opponent.c.i
+.PHONY : gen/battle_controller_link_opponent.i
+
+# target to preprocess a source file
+gen/battle_controller_link_opponent.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_opponent.c.i
+.PHONY : gen/battle_controller_link_opponent.c.i
+
+gen/battle_controller_link_opponent.s: gen/battle_controller_link_opponent.c.s
+.PHONY : gen/battle_controller_link_opponent.s
+
+# target to generate assembly for a file
+gen/battle_controller_link_opponent.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_opponent.c.s
+.PHONY : gen/battle_controller_link_opponent.c.s
+
+gen/battle_controller_link_partner.o: gen/battle_controller_link_partner.c.o
+.PHONY : gen/battle_controller_link_partner.o
+
+# target to build an object file
+gen/battle_controller_link_partner.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_partner.c.o
+.PHONY : gen/battle_controller_link_partner.c.o
+
+gen/battle_controller_link_partner.i: gen/battle_controller_link_partner.c.i
+.PHONY : gen/battle_controller_link_partner.i
+
+# target to preprocess a source file
+gen/battle_controller_link_partner.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_partner.c.i
+.PHONY : gen/battle_controller_link_partner.c.i
+
+gen/battle_controller_link_partner.s: gen/battle_controller_link_partner.c.s
+.PHONY : gen/battle_controller_link_partner.s
+
+# target to generate assembly for a file
+gen/battle_controller_link_partner.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_partner.c.s
+.PHONY : gen/battle_controller_link_partner.c.s
+
+gen/battle_controller_oak_old_man.o: gen/battle_controller_oak_old_man.c.o
+.PHONY : gen/battle_controller_oak_old_man.o
+
+# target to build an object file
+gen/battle_controller_oak_old_man.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_oak_old_man.c.o
+.PHONY : gen/battle_controller_oak_old_man.c.o
+
+gen/battle_controller_oak_old_man.i: gen/battle_controller_oak_old_man.c.i
+.PHONY : gen/battle_controller_oak_old_man.i
+
+# target to preprocess a source file
+gen/battle_controller_oak_old_man.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_oak_old_man.c.i
+.PHONY : gen/battle_controller_oak_old_man.c.i
+
+gen/battle_controller_oak_old_man.s: gen/battle_controller_oak_old_man.c.s
+.PHONY : gen/battle_controller_oak_old_man.s
+
+# target to generate assembly for a file
+gen/battle_controller_oak_old_man.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_oak_old_man.c.s
+.PHONY : gen/battle_controller_oak_old_man.c.s
+
+gen/battle_controller_opponent.o: gen/battle_controller_opponent.c.o
+.PHONY : gen/battle_controller_opponent.o
+
+# target to build an object file
+gen/battle_controller_opponent.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_opponent.c.o
+.PHONY : gen/battle_controller_opponent.c.o
+
+gen/battle_controller_opponent.i: gen/battle_controller_opponent.c.i
+.PHONY : gen/battle_controller_opponent.i
+
+# target to preprocess a source file
+gen/battle_controller_opponent.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_opponent.c.i
+.PHONY : gen/battle_controller_opponent.c.i
+
+gen/battle_controller_opponent.s: gen/battle_controller_opponent.c.s
+.PHONY : gen/battle_controller_opponent.s
+
+# target to generate assembly for a file
+gen/battle_controller_opponent.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_opponent.c.s
+.PHONY : gen/battle_controller_opponent.c.s
+
+gen/battle_controller_player.o: gen/battle_controller_player.c.o
+.PHONY : gen/battle_controller_player.o
+
+# target to build an object file
+gen/battle_controller_player.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_player.c.o
+.PHONY : gen/battle_controller_player.c.o
+
+gen/battle_controller_player.i: gen/battle_controller_player.c.i
+.PHONY : gen/battle_controller_player.i
+
+# target to preprocess a source file
+gen/battle_controller_player.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_player.c.i
+.PHONY : gen/battle_controller_player.c.i
+
+gen/battle_controller_player.s: gen/battle_controller_player.c.s
+.PHONY : gen/battle_controller_player.s
+
+# target to generate assembly for a file
+gen/battle_controller_player.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_player.c.s
+.PHONY : gen/battle_controller_player.c.s
+
+gen/battle_controller_pokedude.o: gen/battle_controller_pokedude.c.o
+.PHONY : gen/battle_controller_pokedude.o
+
+# target to build an object file
+gen/battle_controller_pokedude.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_pokedude.c.o
+.PHONY : gen/battle_controller_pokedude.c.o
+
+gen/battle_controller_pokedude.i: gen/battle_controller_pokedude.c.i
+.PHONY : gen/battle_controller_pokedude.i
+
+# target to preprocess a source file
+gen/battle_controller_pokedude.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_pokedude.c.i
+.PHONY : gen/battle_controller_pokedude.c.i
+
+gen/battle_controller_pokedude.s: gen/battle_controller_pokedude.c.s
+.PHONY : gen/battle_controller_pokedude.s
+
+# target to generate assembly for a file
+gen/battle_controller_pokedude.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_pokedude.c.s
+.PHONY : gen/battle_controller_pokedude.c.s
+
+gen/battle_controller_safari.o: gen/battle_controller_safari.c.o
+.PHONY : gen/battle_controller_safari.o
+
+# target to build an object file
+gen/battle_controller_safari.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_safari.c.o
+.PHONY : gen/battle_controller_safari.c.o
+
+gen/battle_controller_safari.i: gen/battle_controller_safari.c.i
+.PHONY : gen/battle_controller_safari.i
+
+# target to preprocess a source file
+gen/battle_controller_safari.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_safari.c.i
+.PHONY : gen/battle_controller_safari.c.i
+
+gen/battle_controller_safari.s: gen/battle_controller_safari.c.s
+.PHONY : gen/battle_controller_safari.s
+
+# target to generate assembly for a file
+gen/battle_controller_safari.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_safari.c.s
+.PHONY : gen/battle_controller_safari.c.s
+
+gen/battle_controllers.o: gen/battle_controllers.c.o
+.PHONY : gen/battle_controllers.o
+
+# target to build an object file
+gen/battle_controllers.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_controllers.c.o
+.PHONY : gen/battle_controllers.c.o
+
+gen/battle_controllers.i: gen/battle_controllers.c.i
+.PHONY : gen/battle_controllers.i
+
+# target to preprocess a source file
+gen/battle_controllers.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_controllers.c.i
+.PHONY : gen/battle_controllers.c.i
+
+gen/battle_controllers.s: gen/battle_controllers.c.s
+.PHONY : gen/battle_controllers.s
+
+# target to generate assembly for a file
+gen/battle_controllers.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_controllers.c.s
+.PHONY : gen/battle_controllers.c.s
+
+gen/battle_gfx_sfx_util.o: gen/battle_gfx_sfx_util.c.o
+.PHONY : gen/battle_gfx_sfx_util.o
+
+# target to build an object file
+gen/battle_gfx_sfx_util.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_gfx_sfx_util.c.o
+.PHONY : gen/battle_gfx_sfx_util.c.o
+
+gen/battle_gfx_sfx_util.i: gen/battle_gfx_sfx_util.c.i
+.PHONY : gen/battle_gfx_sfx_util.i
+
+# target to preprocess a source file
+gen/battle_gfx_sfx_util.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_gfx_sfx_util.c.i
+.PHONY : gen/battle_gfx_sfx_util.c.i
+
+gen/battle_gfx_sfx_util.s: gen/battle_gfx_sfx_util.c.s
+.PHONY : gen/battle_gfx_sfx_util.s
+
+# target to generate assembly for a file
+gen/battle_gfx_sfx_util.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_gfx_sfx_util.c.s
+.PHONY : gen/battle_gfx_sfx_util.c.s
+
+gen/battle_interface.o: gen/battle_interface.c.o
+.PHONY : gen/battle_interface.o
+
+# target to build an object file
+gen/battle_interface.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_battle_interface.dir/build.make CMakeFiles/pfr_upstream_battle_interface.dir/gen/battle_interface.c.o
+.PHONY : gen/battle_interface.c.o
+
+gen/battle_interface.i: gen/battle_interface.c.i
+.PHONY : gen/battle_interface.i
+
+# target to preprocess a source file
+gen/battle_interface.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_battle_interface.dir/build.make CMakeFiles/pfr_upstream_battle_interface.dir/gen/battle_interface.c.i
+.PHONY : gen/battle_interface.c.i
+
+gen/battle_interface.s: gen/battle_interface.c.s
+.PHONY : gen/battle_interface.s
+
+# target to generate assembly for a file
+gen/battle_interface.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_battle_interface.dir/build.make CMakeFiles/pfr_upstream_battle_interface.dir/gen/battle_interface.c.s
+.PHONY : gen/battle_interface.c.s
+
+gen/battle_intro.o: gen/battle_intro.c.o
+.PHONY : gen/battle_intro.o
+
+# target to build an object file
+gen/battle_intro.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_intro.c.o
+.PHONY : gen/battle_intro.c.o
+
+gen/battle_intro.i: gen/battle_intro.c.i
+.PHONY : gen/battle_intro.i
+
+# target to preprocess a source file
+gen/battle_intro.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_intro.c.i
+.PHONY : gen/battle_intro.c.i
+
+gen/battle_intro.s: gen/battle_intro.c.s
+.PHONY : gen/battle_intro.s
+
+# target to generate assembly for a file
+gen/battle_intro.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_intro.c.s
+.PHONY : gen/battle_intro.c.s
+
+gen/battle_main.o: gen/battle_main.c.o
+.PHONY : gen/battle_main.o
+
+# target to build an object file
+gen/battle_main.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_main.c.o
+.PHONY : gen/battle_main.c.o
+
+gen/battle_main.i: gen/battle_main.c.i
+.PHONY : gen/battle_main.i
+
+# target to preprocess a source file
+gen/battle_main.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_main.c.i
+.PHONY : gen/battle_main.c.i
+
+gen/battle_main.s: gen/battle_main.c.s
+.PHONY : gen/battle_main.s
+
+# target to generate assembly for a file
+gen/battle_main.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_main.c.s
+.PHONY : gen/battle_main.c.s
+
+gen/battle_message.o: gen/battle_message.c.o
+.PHONY : gen/battle_message.o
+
+# target to build an object file
+gen/battle_message.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_message.c.o
+.PHONY : gen/battle_message.c.o
+
+gen/battle_message.i: gen/battle_message.c.i
+.PHONY : gen/battle_message.i
+
+# target to preprocess a source file
+gen/battle_message.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_message.c.i
+.PHONY : gen/battle_message.c.i
+
+gen/battle_message.s: gen/battle_message.c.s
+.PHONY : gen/battle_message.s
+
+# target to generate assembly for a file
+gen/battle_message.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_message.c.s
+.PHONY : gen/battle_message.c.s
+
+gen/battle_records.o: gen/battle_records.c.o
+.PHONY : gen/battle_records.o
+
+# target to build an object file
+gen/battle_records.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_battle_records.dir/build.make CMakeFiles/pfr_upstream_battle_records.dir/gen/battle_records.c.o
+.PHONY : gen/battle_records.c.o
+
+gen/battle_records.i: gen/battle_records.c.i
+.PHONY : gen/battle_records.i
+
+# target to preprocess a source file
+gen/battle_records.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_battle_records.dir/build.make CMakeFiles/pfr_upstream_battle_records.dir/gen/battle_records.c.i
+.PHONY : gen/battle_records.c.i
+
+gen/battle_records.s: gen/battle_records.c.s
+.PHONY : gen/battle_records.s
+
+# target to generate assembly for a file
+gen/battle_records.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_battle_records.dir/build.make CMakeFiles/pfr_upstream_battle_records.dir/gen/battle_records.c.s
+.PHONY : gen/battle_records.c.s
+
+gen/battle_script_commands.o: gen/battle_script_commands.c.o
+.PHONY : gen/battle_script_commands.o
+
+# target to build an object file
+gen/battle_script_commands.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_battle_script_commands.dir/build.make CMakeFiles/pfr_upstream_battle_script_commands.dir/gen/battle_script_commands.c.o
+.PHONY : gen/battle_script_commands.c.o
+
+gen/battle_script_commands.i: gen/battle_script_commands.c.i
+.PHONY : gen/battle_script_commands.i
+
+# target to preprocess a source file
+gen/battle_script_commands.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_battle_script_commands.dir/build.make CMakeFiles/pfr_upstream_battle_script_commands.dir/gen/battle_script_commands.c.i
+.PHONY : gen/battle_script_commands.c.i
+
+gen/battle_script_commands.s: gen/battle_script_commands.c.s
+.PHONY : gen/battle_script_commands.s
+
+# target to generate assembly for a file
+gen/battle_script_commands.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_battle_script_commands.dir/build.make CMakeFiles/pfr_upstream_battle_script_commands.dir/gen/battle_script_commands.c.s
+.PHONY : gen/battle_script_commands.c.s
+
+gen/battle_setup.o: gen/battle_setup.c.o
+.PHONY : gen/battle_setup.o
+
+# target to build an object file
+gen/battle_setup.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_setup.c.o
+.PHONY : gen/battle_setup.c.o
+
+gen/battle_setup.i: gen/battle_setup.c.i
+.PHONY : gen/battle_setup.i
+
+# target to preprocess a source file
+gen/battle_setup.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_setup.c.i
+.PHONY : gen/battle_setup.c.i
+
+gen/battle_setup.s: gen/battle_setup.c.s
+.PHONY : gen/battle_setup.s
+
+# target to generate assembly for a file
+gen/battle_setup.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_setup.c.s
+.PHONY : gen/battle_setup.c.s
+
+gen/battle_tower.o: gen/battle_tower.c.o
+.PHONY : gen/battle_tower.o
+
+# target to build an object file
+gen/battle_tower.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_tower.c.o
+.PHONY : gen/battle_tower.c.o
+
+gen/battle_tower.i: gen/battle_tower.c.i
+.PHONY : gen/battle_tower.i
+
+# target to preprocess a source file
+gen/battle_tower.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_tower.c.i
+.PHONY : gen/battle_tower.c.i
+
+gen/battle_tower.s: gen/battle_tower.c.s
+.PHONY : gen/battle_tower.s
+
+# target to generate assembly for a file
+gen/battle_tower.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_tower.c.s
+.PHONY : gen/battle_tower.c.s
+
+gen/battle_transition.o: gen/battle_transition.c.o
+.PHONY : gen/battle_transition.o
+
+# target to build an object file
+gen/battle_transition.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_battle_transition.dir/build.make CMakeFiles/pfr_upstream_battle_transition.dir/gen/battle_transition.c.o
+.PHONY : gen/battle_transition.c.o
+
+gen/battle_transition.i: gen/battle_transition.c.i
+.PHONY : gen/battle_transition.i
+
+# target to preprocess a source file
+gen/battle_transition.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_battle_transition.dir/build.make CMakeFiles/pfr_upstream_battle_transition.dir/gen/battle_transition.c.i
+.PHONY : gen/battle_transition.c.i
+
+gen/battle_transition.s: gen/battle_transition.c.s
+.PHONY : gen/battle_transition.s
+
+# target to generate assembly for a file
+gen/battle_transition.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_battle_transition.dir/build.make CMakeFiles/pfr_upstream_battle_transition.dir/gen/battle_transition.c.s
+.PHONY : gen/battle_transition.c.s
+
+gen/battle_util.o: gen/battle_util.c.o
+.PHONY : gen/battle_util.o
+
+# target to build an object file
+gen/battle_util.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_util.c.o
+.PHONY : gen/battle_util.c.o
+
+gen/battle_util.i: gen/battle_util.c.i
+.PHONY : gen/battle_util.i
+
+# target to preprocess a source file
+gen/battle_util.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_util.c.i
+.PHONY : gen/battle_util.c.i
+
+gen/battle_util.s: gen/battle_util.c.s
+.PHONY : gen/battle_util.s
+
+# target to generate assembly for a file
+gen/battle_util.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_util.c.s
+.PHONY : gen/battle_util.c.s
+
+gen/battle_util2.o: gen/battle_util2.c.o
+.PHONY : gen/battle_util2.o
+
+# target to build an object file
+gen/battle_util2.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_util2.c.o
+.PHONY : gen/battle_util2.c.o
+
+gen/battle_util2.i: gen/battle_util2.c.i
+.PHONY : gen/battle_util2.i
+
+# target to preprocess a source file
+gen/battle_util2.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_util2.c.i
+.PHONY : gen/battle_util2.c.i
+
+gen/battle_util2.s: gen/battle_util2.c.s
+.PHONY : gen/battle_util2.s
+
+# target to generate assembly for a file
+gen/battle_util2.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/battle_util2.c.s
+.PHONY : gen/battle_util2.c.s
+
+gen/berry.o: gen/berry.c.o
+.PHONY : gen/berry.o
+
+# target to build an object file
+gen/berry.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/berry.c.o
+.PHONY : gen/berry.c.o
+
+gen/berry.i: gen/berry.c.i
+.PHONY : gen/berry.i
+
+# target to preprocess a source file
+gen/berry.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/berry.c.i
+.PHONY : gen/berry.c.i
+
+gen/berry.s: gen/berry.c.s
+.PHONY : gen/berry.s
+
+# target to generate assembly for a file
+gen/berry.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/berry.c.s
+.PHONY : gen/berry.c.s
+
+gen/berry_crush.o: gen/berry_crush.c.o
+.PHONY : gen/berry_crush.o
+
+# target to build an object file
+gen/berry_crush.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_berry_crush.dir/build.make CMakeFiles/pfr_upstream_berry_crush.dir/gen/berry_crush.c.o
+.PHONY : gen/berry_crush.c.o
+
+gen/berry_crush.i: gen/berry_crush.c.i
+.PHONY : gen/berry_crush.i
+
+# target to preprocess a source file
+gen/berry_crush.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_berry_crush.dir/build.make CMakeFiles/pfr_upstream_berry_crush.dir/gen/berry_crush.c.i
+.PHONY : gen/berry_crush.c.i
+
+gen/berry_crush.s: gen/berry_crush.c.s
+.PHONY : gen/berry_crush.s
+
+# target to generate assembly for a file
+gen/berry_crush.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_berry_crush.dir/build.make CMakeFiles/pfr_upstream_berry_crush.dir/gen/berry_crush.c.s
+.PHONY : gen/berry_crush.c.s
+
+gen/berry_fix_program.o: gen/berry_fix_program.c.o
+.PHONY : gen/berry_fix_program.o
+
+# target to build an object file
+gen/berry_fix_program.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/berry_fix_program.c.o
+.PHONY : gen/berry_fix_program.c.o
+
+gen/berry_fix_program.i: gen/berry_fix_program.c.i
+.PHONY : gen/berry_fix_program.i
+
+# target to preprocess a source file
+gen/berry_fix_program.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/berry_fix_program.c.i
+.PHONY : gen/berry_fix_program.c.i
+
+gen/berry_fix_program.s: gen/berry_fix_program.c.s
+.PHONY : gen/berry_fix_program.s
+
+# target to generate assembly for a file
+gen/berry_fix_program.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/berry_fix_program.c.s
+.PHONY : gen/berry_fix_program.c.s
+
+gen/berry_pouch.o: gen/berry_pouch.c.o
+.PHONY : gen/berry_pouch.o
+
+# target to build an object file
+gen/berry_pouch.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/berry_pouch.c.o
+.PHONY : gen/berry_pouch.c.o
+
+gen/berry_pouch.i: gen/berry_pouch.c.i
+.PHONY : gen/berry_pouch.i
+
+# target to preprocess a source file
+gen/berry_pouch.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/berry_pouch.c.i
+.PHONY : gen/berry_pouch.c.i
+
+gen/berry_pouch.s: gen/berry_pouch.c.s
+.PHONY : gen/berry_pouch.s
+
+# target to generate assembly for a file
+gen/berry_pouch.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/berry_pouch.c.s
+.PHONY : gen/berry_pouch.c.s
+
+gen/berry_powder.o: gen/berry_powder.c.o
+.PHONY : gen/berry_powder.o
+
+# target to build an object file
+gen/berry_powder.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/berry_powder.c.o
+.PHONY : gen/berry_powder.c.o
+
+gen/berry_powder.i: gen/berry_powder.c.i
+.PHONY : gen/berry_powder.i
+
+# target to preprocess a source file
+gen/berry_powder.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/berry_powder.c.i
+.PHONY : gen/berry_powder.c.i
+
+gen/berry_powder.s: gen/berry_powder.c.s
+.PHONY : gen/berry_powder.s
+
+# target to generate assembly for a file
+gen/berry_powder.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/berry_powder.c.s
+.PHONY : gen/berry_powder.c.s
+
+gen/bg.o: gen/bg.c.o
+.PHONY : gen/bg.o
+
+# target to build an object file
+gen/bg.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/bg.c.o
+.PHONY : gen/bg.c.o
+
+gen/bg.i: gen/bg.c.i
+.PHONY : gen/bg.i
+
+# target to preprocess a source file
+gen/bg.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/bg.c.i
+.PHONY : gen/bg.c.i
+
+gen/bg.s: gen/bg.c.s
+.PHONY : gen/bg.s
+
+# target to generate assembly for a file
+gen/bg.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/bg.c.s
+.PHONY : gen/bg.c.s
+
+gen/bike.o: gen/bike.c.o
+.PHONY : gen/bike.o
+
+# target to build an object file
+gen/bike.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/bike.c.o
+.PHONY : gen/bike.c.o
+
+gen/bike.i: gen/bike.c.i
+.PHONY : gen/bike.i
+
+# target to preprocess a source file
+gen/bike.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/bike.c.i
+.PHONY : gen/bike.c.i
+
+gen/bike.s: gen/bike.c.s
+.PHONY : gen/bike.s
+
+# target to generate assembly for a file
+gen/bike.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/bike.c.s
+.PHONY : gen/bike.c.s
+
+gen/blend_palette.o: gen/blend_palette.c.o
+.PHONY : gen/blend_palette.o
+
+# target to build an object file
+gen/blend_palette.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/blend_palette.c.o
+.PHONY : gen/blend_palette.c.o
+
+gen/blend_palette.i: gen/blend_palette.c.i
+.PHONY : gen/blend_palette.i
+
+# target to preprocess a source file
+gen/blend_palette.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/blend_palette.c.i
+.PHONY : gen/blend_palette.c.i
+
+gen/blend_palette.s: gen/blend_palette.c.s
+.PHONY : gen/blend_palette.s
+
+# target to generate assembly for a file
+gen/blend_palette.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/blend_palette.c.s
+.PHONY : gen/blend_palette.c.s
+
+gen/blit.o: gen/blit.c.o
+.PHONY : gen/blit.o
+
+# target to build an object file
+gen/blit.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/blit.c.o
+.PHONY : gen/blit.c.o
+
+gen/blit.i: gen/blit.c.i
+.PHONY : gen/blit.i
+
+# target to preprocess a source file
+gen/blit.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/blit.c.i
+.PHONY : gen/blit.c.i
+
+gen/blit.s: gen/blit.c.s
+.PHONY : gen/blit.s
+
+# target to generate assembly for a file
+gen/blit.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/blit.c.s
+.PHONY : gen/blit.c.s
+
+gen/braille_text.o: gen/braille_text.c.o
+.PHONY : gen/braille_text.o
+
+# target to build an object file
+gen/braille_text.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_braille_text.dir/build.make CMakeFiles/pfr_upstream_braille_text.dir/gen/braille_text.c.o
+.PHONY : gen/braille_text.c.o
+
+gen/braille_text.i: gen/braille_text.c.i
+.PHONY : gen/braille_text.i
+
+# target to preprocess a source file
+gen/braille_text.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_braille_text.dir/build.make CMakeFiles/pfr_upstream_braille_text.dir/gen/braille_text.c.i
+.PHONY : gen/braille_text.c.i
+
+gen/braille_text.s: gen/braille_text.c.s
+.PHONY : gen/braille_text.s
+
+# target to generate assembly for a file
+gen/braille_text.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_braille_text.dir/build.make CMakeFiles/pfr_upstream_braille_text.dir/gen/braille_text.c.s
+.PHONY : gen/braille_text.c.s
+
+gen/buy_menu_helpers.o: gen/buy_menu_helpers.c.o
+.PHONY : gen/buy_menu_helpers.o
+
+# target to build an object file
+gen/buy_menu_helpers.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/buy_menu_helpers.c.o
+.PHONY : gen/buy_menu_helpers.c.o
+
+gen/buy_menu_helpers.i: gen/buy_menu_helpers.c.i
+.PHONY : gen/buy_menu_helpers.i
+
+# target to preprocess a source file
+gen/buy_menu_helpers.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/buy_menu_helpers.c.i
+.PHONY : gen/buy_menu_helpers.c.i
+
+gen/buy_menu_helpers.s: gen/buy_menu_helpers.c.s
+.PHONY : gen/buy_menu_helpers.s
+
+# target to generate assembly for a file
+gen/buy_menu_helpers.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/buy_menu_helpers.c.s
+.PHONY : gen/buy_menu_helpers.c.s
+
+gen/cable_car_util.o: gen/cable_car_util.c.o
+.PHONY : gen/cable_car_util.o
+
+# target to build an object file
+gen/cable_car_util.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/cable_car_util.c.o
+.PHONY : gen/cable_car_util.c.o
+
+gen/cable_car_util.i: gen/cable_car_util.c.i
+.PHONY : gen/cable_car_util.i
+
+# target to preprocess a source file
+gen/cable_car_util.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/cable_car_util.c.i
+.PHONY : gen/cable_car_util.c.i
+
+gen/cable_car_util.s: gen/cable_car_util.c.s
+.PHONY : gen/cable_car_util.s
+
+# target to generate assembly for a file
+gen/cable_car_util.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/cable_car_util.c.s
+.PHONY : gen/cable_car_util.c.s
+
+gen/cable_club.o: gen/cable_club.c.o
+.PHONY : gen/cable_club.o
+
+# target to build an object file
+gen/cable_club.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/cable_club.c.o
+.PHONY : gen/cable_club.c.o
+
+gen/cable_club.i: gen/cable_club.c.i
+.PHONY : gen/cable_club.i
+
+# target to preprocess a source file
+gen/cable_club.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/cable_club.c.i
+.PHONY : gen/cable_club.c.i
+
+gen/cable_club.s: gen/cable_club.c.s
+.PHONY : gen/cable_club.s
+
+# target to generate assembly for a file
+gen/cable_club.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/cable_club.c.s
+.PHONY : gen/cable_club.c.s
+
+gen/cereader_tool.o: gen/cereader_tool.c.o
+.PHONY : gen/cereader_tool.o
+
+# target to build an object file
+gen/cereader_tool.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/cereader_tool.c.o
+.PHONY : gen/cereader_tool.c.o
+
+gen/cereader_tool.i: gen/cereader_tool.c.i
+.PHONY : gen/cereader_tool.i
+
+# target to preprocess a source file
+gen/cereader_tool.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/cereader_tool.c.i
+.PHONY : gen/cereader_tool.c.i
+
+gen/cereader_tool.s: gen/cereader_tool.c.s
+.PHONY : gen/cereader_tool.s
+
+# target to generate assembly for a file
+gen/cereader_tool.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/cereader_tool.c.s
+.PHONY : gen/cereader_tool.c.s
+
+gen/clear_save_data_screen.o: gen/clear_save_data_screen.c.o
+.PHONY : gen/clear_save_data_screen.o
+
+# target to build an object file
+gen/clear_save_data_screen.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/clear_save_data_screen.c.o
+.PHONY : gen/clear_save_data_screen.c.o
+
+gen/clear_save_data_screen.i: gen/clear_save_data_screen.c.i
+.PHONY : gen/clear_save_data_screen.i
+
+# target to preprocess a source file
+gen/clear_save_data_screen.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/clear_save_data_screen.c.i
+.PHONY : gen/clear_save_data_screen.c.i
+
+gen/clear_save_data_screen.s: gen/clear_save_data_screen.c.s
+.PHONY : gen/clear_save_data_screen.s
+
+# target to generate assembly for a file
+gen/clear_save_data_screen.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/clear_save_data_screen.c.s
+.PHONY : gen/clear_save_data_screen.c.s
+
+gen/coins.o: gen/coins.c.o
+.PHONY : gen/coins.o
+
+# target to build an object file
+gen/coins.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/coins.c.o
+.PHONY : gen/coins.c.o
+
+gen/coins.i: gen/coins.c.i
+.PHONY : gen/coins.i
+
+# target to preprocess a source file
+gen/coins.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/coins.c.i
+.PHONY : gen/coins.c.i
+
+gen/coins.s: gen/coins.c.s
+.PHONY : gen/coins.s
+
+# target to generate assembly for a file
+gen/coins.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/coins.c.s
+.PHONY : gen/coins.c.s
+
+gen/coord_event_weather.o: gen/coord_event_weather.c.o
+.PHONY : gen/coord_event_weather.o
+
+# target to build an object file
+gen/coord_event_weather.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/coord_event_weather.c.o
+.PHONY : gen/coord_event_weather.c.o
+
+gen/coord_event_weather.i: gen/coord_event_weather.c.i
+.PHONY : gen/coord_event_weather.i
+
+# target to preprocess a source file
+gen/coord_event_weather.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/coord_event_weather.c.i
+.PHONY : gen/coord_event_weather.c.i
+
+gen/coord_event_weather.s: gen/coord_event_weather.c.s
+.PHONY : gen/coord_event_weather.s
+
+# target to generate assembly for a file
+gen/coord_event_weather.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/coord_event_weather.c.s
+.PHONY : gen/coord_event_weather.c.s
+
+gen/credits.o: gen/credits.c.o
+.PHONY : gen/credits.o
+
+# target to build an object file
+gen/credits.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_credits.dir/build.make CMakeFiles/pfr_upstream_credits.dir/gen/credits.c.o
+.PHONY : gen/credits.c.o
+
+gen/credits.i: gen/credits.c.i
+.PHONY : gen/credits.i
+
+# target to preprocess a source file
+gen/credits.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_credits.dir/build.make CMakeFiles/pfr_upstream_credits.dir/gen/credits.c.i
+.PHONY : gen/credits.c.i
+
+gen/credits.s: gen/credits.c.s
+.PHONY : gen/credits.s
+
+# target to generate assembly for a file
+gen/credits.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_credits.dir/build.make CMakeFiles/pfr_upstream_credits.dir/gen/credits.c.s
+.PHONY : gen/credits.c.s
+
+gen/data.o: gen/data.c.o
+.PHONY : gen/data.o
+
+# target to build an object file
+gen/data.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/data.c.o
+.PHONY : gen/data.c.o
+
+gen/data.i: gen/data.c.i
+.PHONY : gen/data.i
+
+# target to preprocess a source file
+gen/data.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/data.c.i
+.PHONY : gen/data.c.i
+
+gen/data.s: gen/data.c.s
+.PHONY : gen/data.s
+
+# target to generate assembly for a file
+gen/data.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/data.c.s
+.PHONY : gen/data.c.s
+
+gen/daycare.o: gen/daycare.c.o
+.PHONY : gen/daycare.o
+
+# target to build an object file
+gen/daycare.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_daycare.dir/build.make CMakeFiles/pfr_upstream_daycare.dir/gen/daycare.c.o
+.PHONY : gen/daycare.c.o
+
+gen/daycare.i: gen/daycare.c.i
+.PHONY : gen/daycare.i
+
+# target to preprocess a source file
+gen/daycare.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_daycare.dir/build.make CMakeFiles/pfr_upstream_daycare.dir/gen/daycare.c.i
+.PHONY : gen/daycare.c.i
+
+gen/daycare.s: gen/daycare.c.s
+.PHONY : gen/daycare.s
+
+# target to generate assembly for a file
+gen/daycare.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_daycare.dir/build.make CMakeFiles/pfr_upstream_daycare.dir/gen/daycare.c.s
+.PHONY : gen/daycare.c.s
+
+gen/decompress.o: gen/decompress.c.o
+.PHONY : gen/decompress.o
+
+# target to build an object file
+gen/decompress.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/decompress.c.o
+.PHONY : gen/decompress.c.o
+
+gen/decompress.i: gen/decompress.c.i
+.PHONY : gen/decompress.i
+
+# target to preprocess a source file
+gen/decompress.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/decompress.c.i
+.PHONY : gen/decompress.c.i
+
+gen/decompress.s: gen/decompress.c.s
+.PHONY : gen/decompress.s
+
+# target to generate assembly for a file
+gen/decompress.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/decompress.c.s
+.PHONY : gen/decompress.c.s
+
+gen/decoration.o: gen/decoration.c.o
+.PHONY : gen/decoration.o
+
+# target to build an object file
+gen/decoration.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/decoration.c.o
+.PHONY : gen/decoration.c.o
+
+gen/decoration.i: gen/decoration.c.i
+.PHONY : gen/decoration.i
+
+# target to preprocess a source file
+gen/decoration.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/decoration.c.i
+.PHONY : gen/decoration.c.i
+
+gen/decoration.s: gen/decoration.c.s
+.PHONY : gen/decoration.s
+
+# target to generate assembly for a file
+gen/decoration.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/decoration.c.s
+.PHONY : gen/decoration.c.s
+
+gen/digit_obj_util.o: gen/digit_obj_util.c.o
+.PHONY : gen/digit_obj_util.o
+
+# target to build an object file
+gen/digit_obj_util.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_digit_obj_util.dir/build.make CMakeFiles/pfr_upstream_digit_obj_util.dir/gen/digit_obj_util.c.o
+.PHONY : gen/digit_obj_util.c.o
+
+gen/digit_obj_util.i: gen/digit_obj_util.c.i
+.PHONY : gen/digit_obj_util.i
+
+# target to preprocess a source file
+gen/digit_obj_util.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_digit_obj_util.dir/build.make CMakeFiles/pfr_upstream_digit_obj_util.dir/gen/digit_obj_util.c.i
+.PHONY : gen/digit_obj_util.c.i
+
+gen/digit_obj_util.s: gen/digit_obj_util.c.s
+.PHONY : gen/digit_obj_util.s
+
+# target to generate assembly for a file
+gen/digit_obj_util.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_digit_obj_util.dir/build.make CMakeFiles/pfr_upstream_digit_obj_util.dir/gen/digit_obj_util.c.s
+.PHONY : gen/digit_obj_util.c.s
+
+gen/diploma.o: gen/diploma.c.o
+.PHONY : gen/diploma.o
+
+# target to build an object file
+gen/diploma.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_diploma.dir/build.make CMakeFiles/pfr_upstream_diploma.dir/gen/diploma.c.o
+.PHONY : gen/diploma.c.o
+
+gen/diploma.i: gen/diploma.c.i
+.PHONY : gen/diploma.i
+
+# target to preprocess a source file
+gen/diploma.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_diploma.dir/build.make CMakeFiles/pfr_upstream_diploma.dir/gen/diploma.c.i
+.PHONY : gen/diploma.c.i
+
+gen/diploma.s: gen/diploma.c.s
+.PHONY : gen/diploma.s
+
+# target to generate assembly for a file
+gen/diploma.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_diploma.dir/build.make CMakeFiles/pfr_upstream_diploma.dir/gen/diploma.c.s
+.PHONY : gen/diploma.c.s
+
+gen/dma3_manager.o: gen/dma3_manager.c.o
+.PHONY : gen/dma3_manager.o
+
+# target to build an object file
+gen/dma3_manager.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/dma3_manager.c.o
+.PHONY : gen/dma3_manager.c.o
+
+gen/dma3_manager.i: gen/dma3_manager.c.i
+.PHONY : gen/dma3_manager.i
+
+# target to preprocess a source file
+gen/dma3_manager.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/dma3_manager.c.i
+.PHONY : gen/dma3_manager.c.i
+
+gen/dma3_manager.s: gen/dma3_manager.c.s
+.PHONY : gen/dma3_manager.s
+
+# target to generate assembly for a file
+gen/dma3_manager.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/dma3_manager.c.s
+.PHONY : gen/dma3_manager.c.s
+
+gen/dodrio_berry_picking.o: gen/dodrio_berry_picking.c.o
+.PHONY : gen/dodrio_berry_picking.o
+
+# target to build an object file
+gen/dodrio_berry_picking.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_dodrio_berry_picking.dir/build.make CMakeFiles/pfr_upstream_dodrio_berry_picking.dir/gen/dodrio_berry_picking.c.o
+.PHONY : gen/dodrio_berry_picking.c.o
+
+gen/dodrio_berry_picking.i: gen/dodrio_berry_picking.c.i
+.PHONY : gen/dodrio_berry_picking.i
+
+# target to preprocess a source file
+gen/dodrio_berry_picking.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_dodrio_berry_picking.dir/build.make CMakeFiles/pfr_upstream_dodrio_berry_picking.dir/gen/dodrio_berry_picking.c.i
+.PHONY : gen/dodrio_berry_picking.c.i
+
+gen/dodrio_berry_picking.s: gen/dodrio_berry_picking.c.s
+.PHONY : gen/dodrio_berry_picking.s
+
+# target to generate assembly for a file
+gen/dodrio_berry_picking.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_dodrio_berry_picking.dir/build.make CMakeFiles/pfr_upstream_dodrio_berry_picking.dir/gen/dodrio_berry_picking.c.s
+.PHONY : gen/dodrio_berry_picking.c.s
+
+gen/dodrio_berry_picking_comm.o: gen/dodrio_berry_picking_comm.c.o
+.PHONY : gen/dodrio_berry_picking_comm.o
+
+# target to build an object file
+gen/dodrio_berry_picking_comm.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/dodrio_berry_picking_comm.c.o
+.PHONY : gen/dodrio_berry_picking_comm.c.o
+
+gen/dodrio_berry_picking_comm.i: gen/dodrio_berry_picking_comm.c.i
+.PHONY : gen/dodrio_berry_picking_comm.i
+
+# target to preprocess a source file
+gen/dodrio_berry_picking_comm.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/dodrio_berry_picking_comm.c.i
+.PHONY : gen/dodrio_berry_picking_comm.c.i
+
+gen/dodrio_berry_picking_comm.s: gen/dodrio_berry_picking_comm.c.s
+.PHONY : gen/dodrio_berry_picking_comm.s
+
+# target to generate assembly for a file
+gen/dodrio_berry_picking_comm.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/dodrio_berry_picking_comm.c.s
+.PHONY : gen/dodrio_berry_picking_comm.c.s
+
+gen/dynamic_placeholder_text_util.o: gen/dynamic_placeholder_text_util.c.o
+.PHONY : gen/dynamic_placeholder_text_util.o
+
+# target to build an object file
+gen/dynamic_placeholder_text_util.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/dynamic_placeholder_text_util.c.o
+.PHONY : gen/dynamic_placeholder_text_util.c.o
+
+gen/dynamic_placeholder_text_util.i: gen/dynamic_placeholder_text_util.c.i
+.PHONY : gen/dynamic_placeholder_text_util.i
+
+# target to preprocess a source file
+gen/dynamic_placeholder_text_util.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/dynamic_placeholder_text_util.c.i
+.PHONY : gen/dynamic_placeholder_text_util.c.i
+
+gen/dynamic_placeholder_text_util.s: gen/dynamic_placeholder_text_util.c.s
+.PHONY : gen/dynamic_placeholder_text_util.s
+
+# target to generate assembly for a file
+gen/dynamic_placeholder_text_util.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/dynamic_placeholder_text_util.c.s
+.PHONY : gen/dynamic_placeholder_text_util.c.s
+
+gen/easy_chat.o: gen/easy_chat.c.o
+.PHONY : gen/easy_chat.o
+
+# target to build an object file
+gen/easy_chat.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_easy_chat.dir/build.make CMakeFiles/pfr_upstream_easy_chat.dir/gen/easy_chat.c.o
+.PHONY : gen/easy_chat.c.o
+
+gen/easy_chat.i: gen/easy_chat.c.i
+.PHONY : gen/easy_chat.i
+
+# target to preprocess a source file
+gen/easy_chat.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_easy_chat.dir/build.make CMakeFiles/pfr_upstream_easy_chat.dir/gen/easy_chat.c.i
+.PHONY : gen/easy_chat.c.i
+
+gen/easy_chat.s: gen/easy_chat.c.s
+.PHONY : gen/easy_chat.s
+
+# target to generate assembly for a file
+gen/easy_chat.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_easy_chat.dir/build.make CMakeFiles/pfr_upstream_easy_chat.dir/gen/easy_chat.c.s
+.PHONY : gen/easy_chat.c.s
+
+gen/easy_chat_2.o: gen/easy_chat_2.c.o
+.PHONY : gen/easy_chat_2.o
+
+# target to build an object file
+gen/easy_chat_2.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_easy_chat_2.dir/build.make CMakeFiles/pfr_upstream_easy_chat_2.dir/gen/easy_chat_2.c.o
+.PHONY : gen/easy_chat_2.c.o
+
+gen/easy_chat_2.i: gen/easy_chat_2.c.i
+.PHONY : gen/easy_chat_2.i
+
+# target to preprocess a source file
+gen/easy_chat_2.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_easy_chat_2.dir/build.make CMakeFiles/pfr_upstream_easy_chat_2.dir/gen/easy_chat_2.c.i
+.PHONY : gen/easy_chat_2.c.i
+
+gen/easy_chat_2.s: gen/easy_chat_2.c.s
+.PHONY : gen/easy_chat_2.s
+
+# target to generate assembly for a file
+gen/easy_chat_2.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_easy_chat_2.dir/build.make CMakeFiles/pfr_upstream_easy_chat_2.dir/gen/easy_chat_2.c.s
+.PHONY : gen/easy_chat_2.c.s
+
+gen/easy_chat_3.o: gen/easy_chat_3.c.o
+.PHONY : gen/easy_chat_3.o
+
+# target to build an object file
+gen/easy_chat_3.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_easy_chat_3.dir/build.make CMakeFiles/pfr_upstream_easy_chat_3.dir/gen/easy_chat_3.c.o
+.PHONY : gen/easy_chat_3.c.o
+
+gen/easy_chat_3.i: gen/easy_chat_3.c.i
+.PHONY : gen/easy_chat_3.i
+
+# target to preprocess a source file
+gen/easy_chat_3.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_easy_chat_3.dir/build.make CMakeFiles/pfr_upstream_easy_chat_3.dir/gen/easy_chat_3.c.i
+.PHONY : gen/easy_chat_3.c.i
+
+gen/easy_chat_3.s: gen/easy_chat_3.c.s
+.PHONY : gen/easy_chat_3.s
+
+# target to generate assembly for a file
+gen/easy_chat_3.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_easy_chat_3.dir/build.make CMakeFiles/pfr_upstream_easy_chat_3.dir/gen/easy_chat_3.c.s
+.PHONY : gen/easy_chat_3.c.s
+
+gen/ereader_helpers.o: gen/ereader_helpers.c.o
+.PHONY : gen/ereader_helpers.o
+
+# target to build an object file
+gen/ereader_helpers.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/ereader_helpers.c.o
+.PHONY : gen/ereader_helpers.c.o
+
+gen/ereader_helpers.i: gen/ereader_helpers.c.i
+.PHONY : gen/ereader_helpers.i
+
+# target to preprocess a source file
+gen/ereader_helpers.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/ereader_helpers.c.i
+.PHONY : gen/ereader_helpers.c.i
+
+gen/ereader_helpers.s: gen/ereader_helpers.c.s
+.PHONY : gen/ereader_helpers.s
+
+# target to generate assembly for a file
+gen/ereader_helpers.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/ereader_helpers.c.s
+.PHONY : gen/ereader_helpers.c.s
+
+gen/ereader_screen.o: gen/ereader_screen.c.o
+.PHONY : gen/ereader_screen.o
+
+# target to build an object file
+gen/ereader_screen.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/ereader_screen.c.o
+.PHONY : gen/ereader_screen.c.o
+
+gen/ereader_screen.i: gen/ereader_screen.c.i
+.PHONY : gen/ereader_screen.i
+
+# target to preprocess a source file
+gen/ereader_screen.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/ereader_screen.c.i
+.PHONY : gen/ereader_screen.c.i
+
+gen/ereader_screen.s: gen/ereader_screen.c.s
+.PHONY : gen/ereader_screen.s
+
+# target to generate assembly for a file
+gen/ereader_screen.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/ereader_screen.c.s
+.PHONY : gen/ereader_screen.c.s
+
+gen/event_data.o: gen/event_data.c.o
+.PHONY : gen/event_data.o
+
+# target to build an object file
+gen/event_data.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/event_data.c.o
+.PHONY : gen/event_data.c.o
+
+gen/event_data.i: gen/event_data.c.i
+.PHONY : gen/event_data.i
+
+# target to preprocess a source file
+gen/event_data.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/event_data.c.i
+.PHONY : gen/event_data.c.i
+
+gen/event_data.s: gen/event_data.c.s
+.PHONY : gen/event_data.s
+
+# target to generate assembly for a file
+gen/event_data.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/event_data.c.s
+.PHONY : gen/event_data.c.s
+
+gen/event_object_lock.o: gen/event_object_lock.c.o
+.PHONY : gen/event_object_lock.o
+
+# target to build an object file
+gen/event_object_lock.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/event_object_lock.c.o
+.PHONY : gen/event_object_lock.c.o
+
+gen/event_object_lock.i: gen/event_object_lock.c.i
+.PHONY : gen/event_object_lock.i
+
+# target to preprocess a source file
+gen/event_object_lock.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/event_object_lock.c.i
+.PHONY : gen/event_object_lock.c.i
+
+gen/event_object_lock.s: gen/event_object_lock.c.s
+.PHONY : gen/event_object_lock.s
+
+# target to generate assembly for a file
+gen/event_object_lock.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/event_object_lock.c.s
+.PHONY : gen/event_object_lock.c.s
+
+gen/event_object_movement.o: gen/event_object_movement.c.o
+.PHONY : gen/event_object_movement.o
+
+# target to build an object file
+gen/event_object_movement.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_event_object_movement.dir/build.make CMakeFiles/pfr_upstream_event_object_movement.dir/gen/event_object_movement.c.o
+.PHONY : gen/event_object_movement.c.o
+
+gen/event_object_movement.i: gen/event_object_movement.c.i
+.PHONY : gen/event_object_movement.i
+
+# target to preprocess a source file
+gen/event_object_movement.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_event_object_movement.dir/build.make CMakeFiles/pfr_upstream_event_object_movement.dir/gen/event_object_movement.c.i
+.PHONY : gen/event_object_movement.c.i
+
+gen/event_object_movement.s: gen/event_object_movement.c.s
+.PHONY : gen/event_object_movement.s
+
+# target to generate assembly for a file
+gen/event_object_movement.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_event_object_movement.dir/build.make CMakeFiles/pfr_upstream_event_object_movement.dir/gen/event_object_movement.c.s
+.PHONY : gen/event_object_movement.c.s
+
+gen/evolution_graphics.o: gen/evolution_graphics.c.o
+.PHONY : gen/evolution_graphics.o
+
+# target to build an object file
+gen/evolution_graphics.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_evolution_graphics.dir/build.make CMakeFiles/pfr_upstream_evolution_graphics.dir/gen/evolution_graphics.c.o
+.PHONY : gen/evolution_graphics.c.o
+
+gen/evolution_graphics.i: gen/evolution_graphics.c.i
+.PHONY : gen/evolution_graphics.i
+
+# target to preprocess a source file
+gen/evolution_graphics.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_evolution_graphics.dir/build.make CMakeFiles/pfr_upstream_evolution_graphics.dir/gen/evolution_graphics.c.i
+.PHONY : gen/evolution_graphics.c.i
+
+gen/evolution_graphics.s: gen/evolution_graphics.c.s
+.PHONY : gen/evolution_graphics.s
+
+# target to generate assembly for a file
+gen/evolution_graphics.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_evolution_graphics.dir/build.make CMakeFiles/pfr_upstream_evolution_graphics.dir/gen/evolution_graphics.c.s
+.PHONY : gen/evolution_graphics.c.s
+
+gen/evolution_scene.o: gen/evolution_scene.c.o
+.PHONY : gen/evolution_scene.o
+
+# target to build an object file
+gen/evolution_scene.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_evolution_scene.dir/build.make CMakeFiles/pfr_upstream_evolution_scene.dir/gen/evolution_scene.c.o
+.PHONY : gen/evolution_scene.c.o
+
+gen/evolution_scene.i: gen/evolution_scene.c.i
+.PHONY : gen/evolution_scene.i
+
+# target to preprocess a source file
+gen/evolution_scene.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_evolution_scene.dir/build.make CMakeFiles/pfr_upstream_evolution_scene.dir/gen/evolution_scene.c.i
+.PHONY : gen/evolution_scene.c.i
+
+gen/evolution_scene.s: gen/evolution_scene.c.s
+.PHONY : gen/evolution_scene.s
+
+# target to generate assembly for a file
+gen/evolution_scene.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_evolution_scene.dir/build.make CMakeFiles/pfr_upstream_evolution_scene.dir/gen/evolution_scene.c.s
+.PHONY : gen/evolution_scene.c.s
+
+gen/fame_checker.o: gen/fame_checker.c.o
+.PHONY : gen/fame_checker.o
+
+# target to build an object file
+gen/fame_checker.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_fame_checker.dir/build.make CMakeFiles/pfr_upstream_fame_checker.dir/gen/fame_checker.c.o
+.PHONY : gen/fame_checker.c.o
+
+gen/fame_checker.i: gen/fame_checker.c.i
+.PHONY : gen/fame_checker.i
+
+# target to preprocess a source file
+gen/fame_checker.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_fame_checker.dir/build.make CMakeFiles/pfr_upstream_fame_checker.dir/gen/fame_checker.c.i
+.PHONY : gen/fame_checker.c.i
+
+gen/fame_checker.s: gen/fame_checker.c.s
+.PHONY : gen/fame_checker.s
+
+# target to generate assembly for a file
+gen/fame_checker.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_fame_checker.dir/build.make CMakeFiles/pfr_upstream_fame_checker.dir/gen/fame_checker.c.s
+.PHONY : gen/fame_checker.c.s
+
+gen/field_camera.o: gen/field_camera.c.o
+.PHONY : gen/field_camera.o
+
+# target to build an object file
+gen/field_camera.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_camera.c.o
+.PHONY : gen/field_camera.c.o
+
+gen/field_camera.i: gen/field_camera.c.i
+.PHONY : gen/field_camera.i
+
+# target to preprocess a source file
+gen/field_camera.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_camera.c.i
+.PHONY : gen/field_camera.c.i
+
+gen/field_camera.s: gen/field_camera.c.s
+.PHONY : gen/field_camera.s
+
+# target to generate assembly for a file
+gen/field_camera.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_camera.c.s
+.PHONY : gen/field_camera.c.s
+
+gen/field_control_avatar.o: gen/field_control_avatar.c.o
+.PHONY : gen/field_control_avatar.o
+
+# target to build an object file
+gen/field_control_avatar.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_control_avatar.c.o
+.PHONY : gen/field_control_avatar.c.o
+
+gen/field_control_avatar.i: gen/field_control_avatar.c.i
+.PHONY : gen/field_control_avatar.i
+
+# target to preprocess a source file
+gen/field_control_avatar.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_control_avatar.c.i
+.PHONY : gen/field_control_avatar.c.i
+
+gen/field_control_avatar.s: gen/field_control_avatar.c.s
+.PHONY : gen/field_control_avatar.s
+
+# target to generate assembly for a file
+gen/field_control_avatar.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_control_avatar.c.s
+.PHONY : gen/field_control_avatar.c.s
+
+gen/field_door.o: gen/field_door.c.o
+.PHONY : gen/field_door.o
+
+# target to build an object file
+gen/field_door.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_field_door.dir/build.make CMakeFiles/pfr_upstream_field_door.dir/gen/field_door.c.o
+.PHONY : gen/field_door.c.o
+
+gen/field_door.i: gen/field_door.c.i
+.PHONY : gen/field_door.i
+
+# target to preprocess a source file
+gen/field_door.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_field_door.dir/build.make CMakeFiles/pfr_upstream_field_door.dir/gen/field_door.c.i
+.PHONY : gen/field_door.c.i
+
+gen/field_door.s: gen/field_door.c.s
+.PHONY : gen/field_door.s
+
+# target to generate assembly for a file
+gen/field_door.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_field_door.dir/build.make CMakeFiles/pfr_upstream_field_door.dir/gen/field_door.c.s
+.PHONY : gen/field_door.c.s
+
+gen/field_effect.o: gen/field_effect.c.o
+.PHONY : gen/field_effect.o
+
+# target to build an object file
+gen/field_effect.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_field_effect.dir/build.make CMakeFiles/pfr_upstream_field_effect.dir/gen/field_effect.c.o
+.PHONY : gen/field_effect.c.o
+
+gen/field_effect.i: gen/field_effect.c.i
+.PHONY : gen/field_effect.i
+
+# target to preprocess a source file
+gen/field_effect.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_field_effect.dir/build.make CMakeFiles/pfr_upstream_field_effect.dir/gen/field_effect.c.i
+.PHONY : gen/field_effect.c.i
+
+gen/field_effect.s: gen/field_effect.c.s
+.PHONY : gen/field_effect.s
+
+# target to generate assembly for a file
+gen/field_effect.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_field_effect.dir/build.make CMakeFiles/pfr_upstream_field_effect.dir/gen/field_effect.c.s
+.PHONY : gen/field_effect.c.s
+
+gen/field_effect_helpers.o: gen/field_effect_helpers.c.o
+.PHONY : gen/field_effect_helpers.o
+
+# target to build an object file
+gen/field_effect_helpers.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_effect_helpers.c.o
+.PHONY : gen/field_effect_helpers.c.o
+
+gen/field_effect_helpers.i: gen/field_effect_helpers.c.i
+.PHONY : gen/field_effect_helpers.i
+
+# target to preprocess a source file
+gen/field_effect_helpers.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_effect_helpers.c.i
+.PHONY : gen/field_effect_helpers.c.i
+
+gen/field_effect_helpers.s: gen/field_effect_helpers.c.s
+.PHONY : gen/field_effect_helpers.s
+
+# target to generate assembly for a file
+gen/field_effect_helpers.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_effect_helpers.c.s
+.PHONY : gen/field_effect_helpers.c.s
+
+gen/field_fadetransition.o: gen/field_fadetransition.c.o
+.PHONY : gen/field_fadetransition.o
+
+# target to build an object file
+gen/field_fadetransition.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_fadetransition.c.o
+.PHONY : gen/field_fadetransition.c.o
+
+gen/field_fadetransition.i: gen/field_fadetransition.c.i
+.PHONY : gen/field_fadetransition.i
+
+# target to preprocess a source file
+gen/field_fadetransition.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_fadetransition.c.i
+.PHONY : gen/field_fadetransition.c.i
+
+gen/field_fadetransition.s: gen/field_fadetransition.c.s
+.PHONY : gen/field_fadetransition.s
+
+# target to generate assembly for a file
+gen/field_fadetransition.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_fadetransition.c.s
+.PHONY : gen/field_fadetransition.c.s
+
+gen/field_message_box.o: gen/field_message_box.c.o
+.PHONY : gen/field_message_box.o
+
+# target to build an object file
+gen/field_message_box.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_message_box.c.o
+.PHONY : gen/field_message_box.c.o
+
+gen/field_message_box.i: gen/field_message_box.c.i
+.PHONY : gen/field_message_box.i
+
+# target to preprocess a source file
+gen/field_message_box.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_message_box.c.i
+.PHONY : gen/field_message_box.c.i
+
+gen/field_message_box.s: gen/field_message_box.c.s
+.PHONY : gen/field_message_box.s
+
+# target to generate assembly for a file
+gen/field_message_box.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_message_box.c.s
+.PHONY : gen/field_message_box.c.s
+
+gen/field_player_avatar.o: gen/field_player_avatar.c.o
+.PHONY : gen/field_player_avatar.o
+
+# target to build an object file
+gen/field_player_avatar.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_player_avatar.c.o
+.PHONY : gen/field_player_avatar.c.o
+
+gen/field_player_avatar.i: gen/field_player_avatar.c.i
+.PHONY : gen/field_player_avatar.i
+
+# target to preprocess a source file
+gen/field_player_avatar.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_player_avatar.c.i
+.PHONY : gen/field_player_avatar.c.i
+
+gen/field_player_avatar.s: gen/field_player_avatar.c.s
+.PHONY : gen/field_player_avatar.s
+
+# target to generate assembly for a file
+gen/field_player_avatar.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_player_avatar.c.s
+.PHONY : gen/field_player_avatar.c.s
+
+gen/field_poison.o: gen/field_poison.c.o
+.PHONY : gen/field_poison.o
+
+# target to build an object file
+gen/field_poison.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_poison.c.o
+.PHONY : gen/field_poison.c.o
+
+gen/field_poison.i: gen/field_poison.c.i
+.PHONY : gen/field_poison.i
+
+# target to preprocess a source file
+gen/field_poison.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_poison.c.i
+.PHONY : gen/field_poison.c.i
+
+gen/field_poison.s: gen/field_poison.c.s
+.PHONY : gen/field_poison.s
+
+# target to generate assembly for a file
+gen/field_poison.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_poison.c.s
+.PHONY : gen/field_poison.c.s
+
+gen/field_screen_effect.o: gen/field_screen_effect.c.o
+.PHONY : gen/field_screen_effect.o
+
+# target to build an object file
+gen/field_screen_effect.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_screen_effect.c.o
+.PHONY : gen/field_screen_effect.c.o
+
+gen/field_screen_effect.i: gen/field_screen_effect.c.i
+.PHONY : gen/field_screen_effect.i
+
+# target to preprocess a source file
+gen/field_screen_effect.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_screen_effect.c.i
+.PHONY : gen/field_screen_effect.c.i
+
+gen/field_screen_effect.s: gen/field_screen_effect.c.s
+.PHONY : gen/field_screen_effect.s
+
+# target to generate assembly for a file
+gen/field_screen_effect.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_screen_effect.c.s
+.PHONY : gen/field_screen_effect.c.s
+
+gen/field_special_scene.o: gen/field_special_scene.c.o
+.PHONY : gen/field_special_scene.o
+
+# target to build an object file
+gen/field_special_scene.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_special_scene.c.o
+.PHONY : gen/field_special_scene.c.o
+
+gen/field_special_scene.i: gen/field_special_scene.c.i
+.PHONY : gen/field_special_scene.i
+
+# target to preprocess a source file
+gen/field_special_scene.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_special_scene.c.i
+.PHONY : gen/field_special_scene.c.i
+
+gen/field_special_scene.s: gen/field_special_scene.c.s
+.PHONY : gen/field_special_scene.s
+
+# target to generate assembly for a file
+gen/field_special_scene.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_special_scene.c.s
+.PHONY : gen/field_special_scene.c.s
+
+gen/field_specials.o: gen/field_specials.c.o
+.PHONY : gen/field_specials.o
+
+# target to build an object file
+gen/field_specials.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_field_specials.dir/build.make CMakeFiles/pfr_upstream_field_specials.dir/gen/field_specials.c.o
+.PHONY : gen/field_specials.c.o
+
+gen/field_specials.i: gen/field_specials.c.i
+.PHONY : gen/field_specials.i
+
+# target to preprocess a source file
+gen/field_specials.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_field_specials.dir/build.make CMakeFiles/pfr_upstream_field_specials.dir/gen/field_specials.c.i
+.PHONY : gen/field_specials.c.i
+
+gen/field_specials.s: gen/field_specials.c.s
+.PHONY : gen/field_specials.s
+
+# target to generate assembly for a file
+gen/field_specials.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_field_specials.dir/build.make CMakeFiles/pfr_upstream_field_specials.dir/gen/field_specials.c.s
+.PHONY : gen/field_specials.c.s
+
+gen/field_tasks.o: gen/field_tasks.c.o
+.PHONY : gen/field_tasks.o
+
+# target to build an object file
+gen/field_tasks.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_tasks.c.o
+.PHONY : gen/field_tasks.c.o
+
+gen/field_tasks.i: gen/field_tasks.c.i
+.PHONY : gen/field_tasks.i
+
+# target to preprocess a source file
+gen/field_tasks.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_tasks.c.i
+.PHONY : gen/field_tasks.c.i
+
+gen/field_tasks.s: gen/field_tasks.c.s
+.PHONY : gen/field_tasks.s
+
+# target to generate assembly for a file
+gen/field_tasks.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_tasks.c.s
+.PHONY : gen/field_tasks.c.s
+
+gen/field_weather.o: gen/field_weather.c.o
+.PHONY : gen/field_weather.o
+
+# target to build an object file
+gen/field_weather.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_field_weather.dir/build.make CMakeFiles/pfr_upstream_field_weather.dir/gen/field_weather.c.o
+.PHONY : gen/field_weather.c.o
+
+gen/field_weather.i: gen/field_weather.c.i
+.PHONY : gen/field_weather.i
+
+# target to preprocess a source file
+gen/field_weather.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_field_weather.dir/build.make CMakeFiles/pfr_upstream_field_weather.dir/gen/field_weather.c.i
+.PHONY : gen/field_weather.c.i
+
+gen/field_weather.s: gen/field_weather.c.s
+.PHONY : gen/field_weather.s
+
+# target to generate assembly for a file
+gen/field_weather.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_field_weather.dir/build.make CMakeFiles/pfr_upstream_field_weather.dir/gen/field_weather.c.s
+.PHONY : gen/field_weather.c.s
+
+gen/field_weather_effects.o: gen/field_weather_effects.c.o
+.PHONY : gen/field_weather_effects.o
+
+# target to build an object file
+gen/field_weather_effects.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_weather_effects.c.o
+.PHONY : gen/field_weather_effects.c.o
+
+gen/field_weather_effects.i: gen/field_weather_effects.c.i
+.PHONY : gen/field_weather_effects.i
+
+# target to preprocess a source file
+gen/field_weather_effects.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_weather_effects.c.i
+.PHONY : gen/field_weather_effects.c.i
+
+gen/field_weather_effects.s: gen/field_weather_effects.c.s
+.PHONY : gen/field_weather_effects.s
+
+# target to generate assembly for a file
+gen/field_weather_effects.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_weather_effects.c.s
+.PHONY : gen/field_weather_effects.c.s
+
+gen/field_weather_util.o: gen/field_weather_util.c.o
+.PHONY : gen/field_weather_util.o
+
+# target to build an object file
+gen/field_weather_util.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_weather_util.c.o
+.PHONY : gen/field_weather_util.c.o
+
+gen/field_weather_util.i: gen/field_weather_util.c.i
+.PHONY : gen/field_weather_util.i
+
+# target to preprocess a source file
+gen/field_weather_util.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_weather_util.c.i
+.PHONY : gen/field_weather_util.c.i
+
+gen/field_weather_util.s: gen/field_weather_util.c.s
+.PHONY : gen/field_weather_util.s
+
+# target to generate assembly for a file
+gen/field_weather_util.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/field_weather_util.c.s
+.PHONY : gen/field_weather_util.c.s
+
+gen/fieldmap.o: gen/fieldmap.c.o
+.PHONY : gen/fieldmap.o
+
+# target to build an object file
+gen/fieldmap.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/fieldmap.c.o
+.PHONY : gen/fieldmap.c.o
+
+gen/fieldmap.i: gen/fieldmap.c.i
+.PHONY : gen/fieldmap.i
+
+# target to preprocess a source file
+gen/fieldmap.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/fieldmap.c.i
+.PHONY : gen/fieldmap.c.i
+
+gen/fieldmap.s: gen/fieldmap.c.s
+.PHONY : gen/fieldmap.s
+
+# target to generate assembly for a file
+gen/fieldmap.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/fieldmap.c.s
+.PHONY : gen/fieldmap.c.s
+
+gen/fldeff_berrytree.o: gen/fldeff_berrytree.c.o
+.PHONY : gen/fldeff_berrytree.o
+
+# target to build an object file
+gen/fldeff_berrytree.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/fldeff_berrytree.c.o
+.PHONY : gen/fldeff_berrytree.c.o
+
+gen/fldeff_berrytree.i: gen/fldeff_berrytree.c.i
+.PHONY : gen/fldeff_berrytree.i
+
+# target to preprocess a source file
+gen/fldeff_berrytree.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/fldeff_berrytree.c.i
+.PHONY : gen/fldeff_berrytree.c.i
+
+gen/fldeff_berrytree.s: gen/fldeff_berrytree.c.s
+.PHONY : gen/fldeff_berrytree.s
+
+# target to generate assembly for a file
+gen/fldeff_berrytree.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/fldeff_berrytree.c.s
+.PHONY : gen/fldeff_berrytree.c.s
+
+gen/fldeff_cut.o: gen/fldeff_cut.c.o
+.PHONY : gen/fldeff_cut.o
+
+# target to build an object file
+gen/fldeff_cut.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/fldeff_cut.c.o
+.PHONY : gen/fldeff_cut.c.o
+
+gen/fldeff_cut.i: gen/fldeff_cut.c.i
+.PHONY : gen/fldeff_cut.i
+
+# target to preprocess a source file
+gen/fldeff_cut.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/fldeff_cut.c.i
+.PHONY : gen/fldeff_cut.c.i
+
+gen/fldeff_cut.s: gen/fldeff_cut.c.s
+.PHONY : gen/fldeff_cut.s
+
+# target to generate assembly for a file
+gen/fldeff_cut.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/fldeff_cut.c.s
+.PHONY : gen/fldeff_cut.c.s
+
+gen/fldeff_dig.o: gen/fldeff_dig.c.o
+.PHONY : gen/fldeff_dig.o
+
+# target to build an object file
+gen/fldeff_dig.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/fldeff_dig.c.o
+.PHONY : gen/fldeff_dig.c.o
+
+gen/fldeff_dig.i: gen/fldeff_dig.c.i
+.PHONY : gen/fldeff_dig.i
+
+# target to preprocess a source file
+gen/fldeff_dig.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/fldeff_dig.c.i
+.PHONY : gen/fldeff_dig.c.i
+
+gen/fldeff_dig.s: gen/fldeff_dig.c.s
+.PHONY : gen/fldeff_dig.s
+
+# target to generate assembly for a file
+gen/fldeff_dig.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/fldeff_dig.c.s
+.PHONY : gen/fldeff_dig.c.s
+
+gen/fldeff_flash.o: gen/fldeff_flash.c.o
+.PHONY : gen/fldeff_flash.o
+
+# target to build an object file
+gen/fldeff_flash.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_fldeff_flash.dir/build.make CMakeFiles/pfr_upstream_fldeff_flash.dir/gen/fldeff_flash.c.o
+.PHONY : gen/fldeff_flash.c.o
+
+gen/fldeff_flash.i: gen/fldeff_flash.c.i
+.PHONY : gen/fldeff_flash.i
+
+# target to preprocess a source file
+gen/fldeff_flash.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_fldeff_flash.dir/build.make CMakeFiles/pfr_upstream_fldeff_flash.dir/gen/fldeff_flash.c.i
+.PHONY : gen/fldeff_flash.c.i
+
+gen/fldeff_flash.s: gen/fldeff_flash.c.s
+.PHONY : gen/fldeff_flash.s
+
+# target to generate assembly for a file
+gen/fldeff_flash.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_fldeff_flash.dir/build.make CMakeFiles/pfr_upstream_fldeff_flash.dir/gen/fldeff_flash.c.s
+.PHONY : gen/fldeff_flash.c.s
+
+gen/fldeff_poison.o: gen/fldeff_poison.c.o
+.PHONY : gen/fldeff_poison.o
+
+# target to build an object file
+gen/fldeff_poison.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/fldeff_poison.c.o
+.PHONY : gen/fldeff_poison.c.o
+
+gen/fldeff_poison.i: gen/fldeff_poison.c.i
+.PHONY : gen/fldeff_poison.i
+
+# target to preprocess a source file
+gen/fldeff_poison.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/fldeff_poison.c.i
+.PHONY : gen/fldeff_poison.c.i
+
+gen/fldeff_poison.s: gen/fldeff_poison.c.s
+.PHONY : gen/fldeff_poison.s
+
+# target to generate assembly for a file
+gen/fldeff_poison.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/fldeff_poison.c.s
+.PHONY : gen/fldeff_poison.c.s
+
+gen/fldeff_rocksmash.o: gen/fldeff_rocksmash.c.o
+.PHONY : gen/fldeff_rocksmash.o
+
+# target to build an object file
+gen/fldeff_rocksmash.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/fldeff_rocksmash.c.o
+.PHONY : gen/fldeff_rocksmash.c.o
+
+gen/fldeff_rocksmash.i: gen/fldeff_rocksmash.c.i
+.PHONY : gen/fldeff_rocksmash.i
+
+# target to preprocess a source file
+gen/fldeff_rocksmash.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/fldeff_rocksmash.c.i
+.PHONY : gen/fldeff_rocksmash.c.i
+
+gen/fldeff_rocksmash.s: gen/fldeff_rocksmash.c.s
+.PHONY : gen/fldeff_rocksmash.s
+
+# target to generate assembly for a file
+gen/fldeff_rocksmash.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/fldeff_rocksmash.c.s
+.PHONY : gen/fldeff_rocksmash.c.s
+
+gen/fldeff_softboiled.o: gen/fldeff_softboiled.c.o
+.PHONY : gen/fldeff_softboiled.o
+
+# target to build an object file
+gen/fldeff_softboiled.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/fldeff_softboiled.c.o
+.PHONY : gen/fldeff_softboiled.c.o
+
+gen/fldeff_softboiled.i: gen/fldeff_softboiled.c.i
+.PHONY : gen/fldeff_softboiled.i
+
+# target to preprocess a source file
+gen/fldeff_softboiled.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/fldeff_softboiled.c.i
+.PHONY : gen/fldeff_softboiled.c.i
+
+gen/fldeff_softboiled.s: gen/fldeff_softboiled.c.s
+.PHONY : gen/fldeff_softboiled.s
+
+# target to generate assembly for a file
+gen/fldeff_softboiled.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/fldeff_softboiled.c.s
+.PHONY : gen/fldeff_softboiled.c.s
+
+gen/fldeff_strength.o: gen/fldeff_strength.c.o
+.PHONY : gen/fldeff_strength.o
+
+# target to build an object file
+gen/fldeff_strength.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/fldeff_strength.c.o
+.PHONY : gen/fldeff_strength.c.o
+
+gen/fldeff_strength.i: gen/fldeff_strength.c.i
+.PHONY : gen/fldeff_strength.i
+
+# target to preprocess a source file
+gen/fldeff_strength.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/fldeff_strength.c.i
+.PHONY : gen/fldeff_strength.c.i
+
+gen/fldeff_strength.s: gen/fldeff_strength.c.s
+.PHONY : gen/fldeff_strength.s
+
+# target to generate assembly for a file
+gen/fldeff_strength.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/fldeff_strength.c.s
+.PHONY : gen/fldeff_strength.c.s
+
+gen/fldeff_sweetscent.o: gen/fldeff_sweetscent.c.o
+.PHONY : gen/fldeff_sweetscent.o
+
+# target to build an object file
+gen/fldeff_sweetscent.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/fldeff_sweetscent.c.o
+.PHONY : gen/fldeff_sweetscent.c.o
+
+gen/fldeff_sweetscent.i: gen/fldeff_sweetscent.c.i
+.PHONY : gen/fldeff_sweetscent.i
+
+# target to preprocess a source file
+gen/fldeff_sweetscent.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/fldeff_sweetscent.c.i
+.PHONY : gen/fldeff_sweetscent.c.i
+
+gen/fldeff_sweetscent.s: gen/fldeff_sweetscent.c.s
+.PHONY : gen/fldeff_sweetscent.s
+
+# target to generate assembly for a file
+gen/fldeff_sweetscent.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/fldeff_sweetscent.c.s
+.PHONY : gen/fldeff_sweetscent.c.s
+
+gen/fldeff_teleport.o: gen/fldeff_teleport.c.o
+.PHONY : gen/fldeff_teleport.o
+
+# target to build an object file
+gen/fldeff_teleport.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/fldeff_teleport.c.o
+.PHONY : gen/fldeff_teleport.c.o
+
+gen/fldeff_teleport.i: gen/fldeff_teleport.c.i
+.PHONY : gen/fldeff_teleport.i
+
+# target to preprocess a source file
+gen/fldeff_teleport.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/fldeff_teleport.c.i
+.PHONY : gen/fldeff_teleport.c.i
+
+gen/fldeff_teleport.s: gen/fldeff_teleport.c.s
+.PHONY : gen/fldeff_teleport.s
+
+# target to generate assembly for a file
+gen/fldeff_teleport.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/fldeff_teleport.c.s
+.PHONY : gen/fldeff_teleport.c.s
+
+gen/game_ctx_stubs.o: gen/game_ctx_stubs.c.o
+.PHONY : gen/game_ctx_stubs.o
+
+# target to build an object file
+gen/game_ctx_stubs.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/game_ctx_stubs.c.o
+.PHONY : gen/game_ctx_stubs.c.o
+
+gen/game_ctx_stubs.i: gen/game_ctx_stubs.c.i
+.PHONY : gen/game_ctx_stubs.i
+
+# target to preprocess a source file
+gen/game_ctx_stubs.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/game_ctx_stubs.c.i
+.PHONY : gen/game_ctx_stubs.c.i
+
+gen/game_ctx_stubs.s: gen/game_ctx_stubs.c.s
+.PHONY : gen/game_ctx_stubs.s
+
+# target to generate assembly for a file
+gen/game_ctx_stubs.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/game_ctx_stubs.c.s
+.PHONY : gen/game_ctx_stubs.c.s
+
+gen/gpu_regs.o: gen/gpu_regs.c.o
+.PHONY : gen/gpu_regs.o
+
+# target to build an object file
+gen/gpu_regs.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/gpu_regs.c.o
+.PHONY : gen/gpu_regs.c.o
+
+gen/gpu_regs.i: gen/gpu_regs.c.i
+.PHONY : gen/gpu_regs.i
+
+# target to preprocess a source file
+gen/gpu_regs.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/gpu_regs.c.i
+.PHONY : gen/gpu_regs.c.i
+
+gen/gpu_regs.s: gen/gpu_regs.c.s
+.PHONY : gen/gpu_regs.s
+
+# target to generate assembly for a file
+gen/gpu_regs.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/gpu_regs.c.s
+.PHONY : gen/gpu_regs.c.s
+
+gen/graphics.o: gen/graphics.c.o
+.PHONY : gen/graphics.o
+
+# target to build an object file
+gen/graphics.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_graphics.dir/build.make CMakeFiles/pfr_upstream_graphics.dir/gen/graphics.c.o
+.PHONY : gen/graphics.c.o
+
+gen/graphics.i: gen/graphics.c.i
+.PHONY : gen/graphics.i
+
+# target to preprocess a source file
+gen/graphics.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_graphics.dir/build.make CMakeFiles/pfr_upstream_graphics.dir/gen/graphics.c.i
+.PHONY : gen/graphics.c.i
+
+gen/graphics.s: gen/graphics.c.s
+.PHONY : gen/graphics.s
+
+# target to generate assembly for a file
+gen/graphics.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_graphics.dir/build.make CMakeFiles/pfr_upstream_graphics.dir/gen/graphics.c.s
+.PHONY : gen/graphics.c.s
+
+gen/hall_of_fame.o: gen/hall_of_fame.c.o
+.PHONY : gen/hall_of_fame.o
+
+# target to build an object file
+gen/hall_of_fame.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_hall_of_fame.dir/build.make CMakeFiles/pfr_upstream_hall_of_fame.dir/gen/hall_of_fame.c.o
+.PHONY : gen/hall_of_fame.c.o
+
+gen/hall_of_fame.i: gen/hall_of_fame.c.i
+.PHONY : gen/hall_of_fame.i
+
+# target to preprocess a source file
+gen/hall_of_fame.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_hall_of_fame.dir/build.make CMakeFiles/pfr_upstream_hall_of_fame.dir/gen/hall_of_fame.c.i
+.PHONY : gen/hall_of_fame.c.i
+
+gen/hall_of_fame.s: gen/hall_of_fame.c.s
+.PHONY : gen/hall_of_fame.s
+
+# target to generate assembly for a file
+gen/hall_of_fame.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_hall_of_fame.dir/build.make CMakeFiles/pfr_upstream_hall_of_fame.dir/gen/hall_of_fame.c.s
+.PHONY : gen/hall_of_fame.c.s
+
+gen/heal_location.o: gen/heal_location.c.o
+.PHONY : gen/heal_location.o
+
+# target to build an object file
+gen/heal_location.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/heal_location.c.o
+.PHONY : gen/heal_location.c.o
+
+gen/heal_location.i: gen/heal_location.c.i
+.PHONY : gen/heal_location.i
+
+# target to preprocess a source file
+gen/heal_location.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/heal_location.c.i
+.PHONY : gen/heal_location.c.i
+
+gen/heal_location.s: gen/heal_location.c.s
+.PHONY : gen/heal_location.s
+
+# target to generate assembly for a file
+gen/heal_location.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/heal_location.c.s
+.PHONY : gen/heal_location.c.s
+
+gen/help_message.o: gen/help_message.c.o
+.PHONY : gen/help_message.o
+
+# target to build an object file
+gen/help_message.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_help_message.dir/build.make CMakeFiles/pfr_upstream_help_message.dir/gen/help_message.c.o
+.PHONY : gen/help_message.c.o
+
+gen/help_message.i: gen/help_message.c.i
+.PHONY : gen/help_message.i
+
+# target to preprocess a source file
+gen/help_message.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_help_message.dir/build.make CMakeFiles/pfr_upstream_help_message.dir/gen/help_message.c.i
+.PHONY : gen/help_message.c.i
+
+gen/help_message.s: gen/help_message.c.s
+.PHONY : gen/help_message.s
+
+# target to generate assembly for a file
+gen/help_message.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_help_message.dir/build.make CMakeFiles/pfr_upstream_help_message.dir/gen/help_message.c.s
+.PHONY : gen/help_message.c.s
+
+gen/help_system.o: gen/help_system.c.o
+.PHONY : gen/help_system.o
+
+# target to build an object file
+gen/help_system.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_help_system.dir/build.make CMakeFiles/pfr_upstream_help_system.dir/gen/help_system.c.o
+.PHONY : gen/help_system.c.o
+
+gen/help_system.i: gen/help_system.c.i
+.PHONY : gen/help_system.i
+
+# target to preprocess a source file
+gen/help_system.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_help_system.dir/build.make CMakeFiles/pfr_upstream_help_system.dir/gen/help_system.c.i
+.PHONY : gen/help_system.c.i
+
+gen/help_system.s: gen/help_system.c.s
+.PHONY : gen/help_system.s
+
+# target to generate assembly for a file
+gen/help_system.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_help_system.dir/build.make CMakeFiles/pfr_upstream_help_system.dir/gen/help_system.c.s
+.PHONY : gen/help_system.c.s
+
+gen/help_system_util.o: gen/help_system_util.c.o
+.PHONY : gen/help_system_util.o
+
+# target to build an object file
+gen/help_system_util.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_help_system_util.dir/build.make CMakeFiles/pfr_upstream_help_system_util.dir/gen/help_system_util.c.o
+.PHONY : gen/help_system_util.c.o
+
+gen/help_system_util.i: gen/help_system_util.c.i
+.PHONY : gen/help_system_util.i
+
+# target to preprocess a source file
+gen/help_system_util.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_help_system_util.dir/build.make CMakeFiles/pfr_upstream_help_system_util.dir/gen/help_system_util.c.i
+.PHONY : gen/help_system_util.c.i
+
+gen/help_system_util.s: gen/help_system_util.c.s
+.PHONY : gen/help_system_util.s
+
+# target to generate assembly for a file
+gen/help_system_util.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_help_system_util.dir/build.make CMakeFiles/pfr_upstream_help_system_util.dir/gen/help_system_util.c.s
+.PHONY : gen/help_system_util.c.s
+
+gen/hof_pc.o: gen/hof_pc.c.o
+.PHONY : gen/hof_pc.o
+
+# target to build an object file
+gen/hof_pc.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/hof_pc.c.o
+.PHONY : gen/hof_pc.c.o
+
+gen/hof_pc.i: gen/hof_pc.c.i
+.PHONY : gen/hof_pc.i
+
+# target to preprocess a source file
+gen/hof_pc.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/hof_pc.c.i
+.PHONY : gen/hof_pc.c.i
+
+gen/hof_pc.s: gen/hof_pc.c.s
+.PHONY : gen/hof_pc.s
+
+# target to generate assembly for a file
+gen/hof_pc.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/hof_pc.c.s
+.PHONY : gen/hof_pc.c.s
+
+gen/image_processing_effects.o: gen/image_processing_effects.c.o
+.PHONY : gen/image_processing_effects.o
+
+# target to build an object file
+gen/image_processing_effects.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/image_processing_effects.c.o
+.PHONY : gen/image_processing_effects.c.o
+
+gen/image_processing_effects.i: gen/image_processing_effects.c.i
+.PHONY : gen/image_processing_effects.i
+
+# target to preprocess a source file
+gen/image_processing_effects.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/image_processing_effects.c.i
+.PHONY : gen/image_processing_effects.c.i
+
+gen/image_processing_effects.s: gen/image_processing_effects.c.s
+.PHONY : gen/image_processing_effects.s
+
+# target to generate assembly for a file
+gen/image_processing_effects.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/image_processing_effects.c.s
+.PHONY : gen/image_processing_effects.c.s
 
 gen/intro.o: gen/intro.c.o
 .PHONY : gen/intro.o
@@ -309,6 +4644,2934 @@ gen/intro.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_intro.dir/build.make CMakeFiles/pfr_upstream_intro.dir/gen/intro.c.s
 .PHONY : gen/intro.c.s
 
+gen/item.o: gen/item.c.o
+.PHONY : gen/item.o
+
+# target to build an object file
+gen/item.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/item.c.o
+.PHONY : gen/item.c.o
+
+gen/item.i: gen/item.c.i
+.PHONY : gen/item.i
+
+# target to preprocess a source file
+gen/item.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/item.c.i
+.PHONY : gen/item.c.i
+
+gen/item.s: gen/item.c.s
+.PHONY : gen/item.s
+
+# target to generate assembly for a file
+gen/item.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/item.c.s
+.PHONY : gen/item.c.s
+
+gen/item_menu.o: gen/item_menu.c.o
+.PHONY : gen/item_menu.o
+
+# target to build an object file
+gen/item_menu.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_item_menu.dir/build.make CMakeFiles/pfr_upstream_item_menu.dir/gen/item_menu.c.o
+.PHONY : gen/item_menu.c.o
+
+gen/item_menu.i: gen/item_menu.c.i
+.PHONY : gen/item_menu.i
+
+# target to preprocess a source file
+gen/item_menu.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_item_menu.dir/build.make CMakeFiles/pfr_upstream_item_menu.dir/gen/item_menu.c.i
+.PHONY : gen/item_menu.c.i
+
+gen/item_menu.s: gen/item_menu.c.s
+.PHONY : gen/item_menu.s
+
+# target to generate assembly for a file
+gen/item_menu.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_item_menu.dir/build.make CMakeFiles/pfr_upstream_item_menu.dir/gen/item_menu.c.s
+.PHONY : gen/item_menu.c.s
+
+gen/item_menu_icons.o: gen/item_menu_icons.c.o
+.PHONY : gen/item_menu_icons.o
+
+# target to build an object file
+gen/item_menu_icons.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/item_menu_icons.c.o
+.PHONY : gen/item_menu_icons.c.o
+
+gen/item_menu_icons.i: gen/item_menu_icons.c.i
+.PHONY : gen/item_menu_icons.i
+
+# target to preprocess a source file
+gen/item_menu_icons.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/item_menu_icons.c.i
+.PHONY : gen/item_menu_icons.c.i
+
+gen/item_menu_icons.s: gen/item_menu_icons.c.s
+.PHONY : gen/item_menu_icons.s
+
+# target to generate assembly for a file
+gen/item_menu_icons.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/item_menu_icons.c.s
+.PHONY : gen/item_menu_icons.c.s
+
+gen/item_pc.o: gen/item_pc.c.o
+.PHONY : gen/item_pc.o
+
+# target to build an object file
+gen/item_pc.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/item_pc.c.o
+.PHONY : gen/item_pc.c.o
+
+gen/item_pc.i: gen/item_pc.c.i
+.PHONY : gen/item_pc.i
+
+# target to preprocess a source file
+gen/item_pc.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/item_pc.c.i
+.PHONY : gen/item_pc.c.i
+
+gen/item_pc.s: gen/item_pc.c.s
+.PHONY : gen/item_pc.s
+
+# target to generate assembly for a file
+gen/item_pc.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/item_pc.c.s
+.PHONY : gen/item_pc.c.s
+
+gen/item_use.o: gen/item_use.c.o
+.PHONY : gen/item_use.o
+
+# target to build an object file
+gen/item_use.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/item_use.c.o
+.PHONY : gen/item_use.c.o
+
+gen/item_use.i: gen/item_use.c.i
+.PHONY : gen/item_use.i
+
+# target to preprocess a source file
+gen/item_use.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/item_use.c.i
+.PHONY : gen/item_use.c.i
+
+gen/item_use.s: gen/item_use.c.s
+.PHONY : gen/item_use.s
+
+# target to generate assembly for a file
+gen/item_use.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/item_use.c.s
+.PHONY : gen/item_use.c.s
+
+gen/itemfinder.o: gen/itemfinder.c.o
+.PHONY : gen/itemfinder.o
+
+# target to build an object file
+gen/itemfinder.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_itemfinder.dir/build.make CMakeFiles/pfr_upstream_itemfinder.dir/gen/itemfinder.c.o
+.PHONY : gen/itemfinder.c.o
+
+gen/itemfinder.i: gen/itemfinder.c.i
+.PHONY : gen/itemfinder.i
+
+# target to preprocess a source file
+gen/itemfinder.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_itemfinder.dir/build.make CMakeFiles/pfr_upstream_itemfinder.dir/gen/itemfinder.c.i
+.PHONY : gen/itemfinder.c.i
+
+gen/itemfinder.s: gen/itemfinder.c.s
+.PHONY : gen/itemfinder.s
+
+# target to generate assembly for a file
+gen/itemfinder.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_itemfinder.dir/build.make CMakeFiles/pfr_upstream_itemfinder.dir/gen/itemfinder.c.s
+.PHONY : gen/itemfinder.c.s
+
+gen/keyboard_text.o: gen/keyboard_text.c.o
+.PHONY : gen/keyboard_text.o
+
+# target to build an object file
+gen/keyboard_text.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/keyboard_text.c.o
+.PHONY : gen/keyboard_text.c.o
+
+gen/keyboard_text.i: gen/keyboard_text.c.i
+.PHONY : gen/keyboard_text.i
+
+# target to preprocess a source file
+gen/keyboard_text.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/keyboard_text.c.i
+.PHONY : gen/keyboard_text.c.i
+
+gen/keyboard_text.s: gen/keyboard_text.c.s
+.PHONY : gen/keyboard_text.s
+
+# target to generate assembly for a file
+gen/keyboard_text.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/keyboard_text.c.s
+.PHONY : gen/keyboard_text.c.s
+
+gen/learn_move.o: gen/learn_move.c.o
+.PHONY : gen/learn_move.o
+
+# target to build an object file
+gen/learn_move.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_learn_move.dir/build.make CMakeFiles/pfr_upstream_learn_move.dir/gen/learn_move.c.o
+.PHONY : gen/learn_move.c.o
+
+gen/learn_move.i: gen/learn_move.c.i
+.PHONY : gen/learn_move.i
+
+# target to preprocess a source file
+gen/learn_move.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_learn_move.dir/build.make CMakeFiles/pfr_upstream_learn_move.dir/gen/learn_move.c.i
+.PHONY : gen/learn_move.c.i
+
+gen/learn_move.s: gen/learn_move.c.s
+.PHONY : gen/learn_move.s
+
+# target to generate assembly for a file
+gen/learn_move.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_learn_move.dir/build.make CMakeFiles/pfr_upstream_learn_move.dir/gen/learn_move.c.s
+.PHONY : gen/learn_move.c.s
+
+gen/librfu_intr.o: gen/librfu_intr.c.o
+.PHONY : gen/librfu_intr.o
+
+# target to build an object file
+gen/librfu_intr.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/librfu_intr.c.o
+.PHONY : gen/librfu_intr.c.o
+
+gen/librfu_intr.i: gen/librfu_intr.c.i
+.PHONY : gen/librfu_intr.i
+
+# target to preprocess a source file
+gen/librfu_intr.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/librfu_intr.c.i
+.PHONY : gen/librfu_intr.c.i
+
+gen/librfu_intr.s: gen/librfu_intr.c.s
+.PHONY : gen/librfu_intr.s
+
+# target to generate assembly for a file
+gen/librfu_intr.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/librfu_intr.c.s
+.PHONY : gen/librfu_intr.c.s
+
+gen/librfu_rfu.o: gen/librfu_rfu.c.o
+.PHONY : gen/librfu_rfu.o
+
+# target to build an object file
+gen/librfu_rfu.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/librfu_rfu.c.o
+.PHONY : gen/librfu_rfu.c.o
+
+gen/librfu_rfu.i: gen/librfu_rfu.c.i
+.PHONY : gen/librfu_rfu.i
+
+# target to preprocess a source file
+gen/librfu_rfu.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/librfu_rfu.c.i
+.PHONY : gen/librfu_rfu.c.i
+
+gen/librfu_rfu.s: gen/librfu_rfu.c.s
+.PHONY : gen/librfu_rfu.s
+
+# target to generate assembly for a file
+gen/librfu_rfu.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/librfu_rfu.c.s
+.PHONY : gen/librfu_rfu.c.s
+
+gen/librfu_sio32id.o: gen/librfu_sio32id.c.o
+.PHONY : gen/librfu_sio32id.o
+
+# target to build an object file
+gen/librfu_sio32id.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/librfu_sio32id.c.o
+.PHONY : gen/librfu_sio32id.c.o
+
+gen/librfu_sio32id.i: gen/librfu_sio32id.c.i
+.PHONY : gen/librfu_sio32id.i
+
+# target to preprocess a source file
+gen/librfu_sio32id.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/librfu_sio32id.c.i
+.PHONY : gen/librfu_sio32id.c.i
+
+gen/librfu_sio32id.s: gen/librfu_sio32id.c.s
+.PHONY : gen/librfu_sio32id.s
+
+# target to generate assembly for a file
+gen/librfu_sio32id.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/librfu_sio32id.c.s
+.PHONY : gen/librfu_sio32id.c.s
+
+gen/librfu_stwi.o: gen/librfu_stwi.c.o
+.PHONY : gen/librfu_stwi.o
+
+# target to build an object file
+gen/librfu_stwi.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/librfu_stwi.c.o
+.PHONY : gen/librfu_stwi.c.o
+
+gen/librfu_stwi.i: gen/librfu_stwi.c.i
+.PHONY : gen/librfu_stwi.i
+
+# target to preprocess a source file
+gen/librfu_stwi.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/librfu_stwi.c.i
+.PHONY : gen/librfu_stwi.c.i
+
+gen/librfu_stwi.s: gen/librfu_stwi.c.s
+.PHONY : gen/librfu_stwi.s
+
+# target to generate assembly for a file
+gen/librfu_stwi.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/librfu_stwi.c.s
+.PHONY : gen/librfu_stwi.c.s
+
+gen/link.o: gen/link.c.o
+.PHONY : gen/link.o
+
+# target to build an object file
+gen/link.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_link.dir/build.make CMakeFiles/pfr_upstream_link.dir/gen/link.c.o
+.PHONY : gen/link.c.o
+
+gen/link.i: gen/link.c.i
+.PHONY : gen/link.i
+
+# target to preprocess a source file
+gen/link.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_link.dir/build.make CMakeFiles/pfr_upstream_link.dir/gen/link.c.i
+.PHONY : gen/link.c.i
+
+gen/link.s: gen/link.c.s
+.PHONY : gen/link.s
+
+# target to generate assembly for a file
+gen/link.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_link.dir/build.make CMakeFiles/pfr_upstream_link.dir/gen/link.c.s
+.PHONY : gen/link.c.s
+
+gen/link_rfu_2.o: gen/link_rfu_2.c.o
+.PHONY : gen/link_rfu_2.o
+
+# target to build an object file
+gen/link_rfu_2.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/link_rfu_2.c.o
+.PHONY : gen/link_rfu_2.c.o
+
+gen/link_rfu_2.i: gen/link_rfu_2.c.i
+.PHONY : gen/link_rfu_2.i
+
+# target to preprocess a source file
+gen/link_rfu_2.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/link_rfu_2.c.i
+.PHONY : gen/link_rfu_2.c.i
+
+gen/link_rfu_2.s: gen/link_rfu_2.c.s
+.PHONY : gen/link_rfu_2.s
+
+# target to generate assembly for a file
+gen/link_rfu_2.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/link_rfu_2.c.s
+.PHONY : gen/link_rfu_2.c.s
+
+gen/link_rfu_3.o: gen/link_rfu_3.c.o
+.PHONY : gen/link_rfu_3.o
+
+# target to build an object file
+gen/link_rfu_3.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_link_rfu_3.dir/build.make CMakeFiles/pfr_upstream_link_rfu_3.dir/gen/link_rfu_3.c.o
+.PHONY : gen/link_rfu_3.c.o
+
+gen/link_rfu_3.i: gen/link_rfu_3.c.i
+.PHONY : gen/link_rfu_3.i
+
+# target to preprocess a source file
+gen/link_rfu_3.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_link_rfu_3.dir/build.make CMakeFiles/pfr_upstream_link_rfu_3.dir/gen/link_rfu_3.c.i
+.PHONY : gen/link_rfu_3.c.i
+
+gen/link_rfu_3.s: gen/link_rfu_3.c.s
+.PHONY : gen/link_rfu_3.s
+
+# target to generate assembly for a file
+gen/link_rfu_3.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_link_rfu_3.dir/build.make CMakeFiles/pfr_upstream_link_rfu_3.dir/gen/link_rfu_3.c.s
+.PHONY : gen/link_rfu_3.c.s
+
+gen/list_menu.o: gen/list_menu.c.o
+.PHONY : gen/list_menu.o
+
+# target to build an object file
+gen/list_menu.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/list_menu.c.o
+.PHONY : gen/list_menu.c.o
+
+gen/list_menu.i: gen/list_menu.c.i
+.PHONY : gen/list_menu.i
+
+# target to preprocess a source file
+gen/list_menu.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/list_menu.c.i
+.PHONY : gen/list_menu.c.i
+
+gen/list_menu.s: gen/list_menu.c.s
+.PHONY : gen/list_menu.s
+
+# target to generate assembly for a file
+gen/list_menu.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/list_menu.c.s
+.PHONY : gen/list_menu.c.s
+
+gen/load_save.o: gen/load_save.c.o
+.PHONY : gen/load_save.o
+
+# target to build an object file
+gen/load_save.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/load_save.c.o
+.PHONY : gen/load_save.c.o
+
+gen/load_save.i: gen/load_save.c.i
+.PHONY : gen/load_save.i
+
+# target to preprocess a source file
+gen/load_save.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/load_save.c.i
+.PHONY : gen/load_save.c.i
+
+gen/load_save.s: gen/load_save.c.s
+.PHONY : gen/load_save.s
+
+# target to generate assembly for a file
+gen/load_save.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/load_save.c.s
+.PHONY : gen/load_save.c.s
+
+gen/m4a.o: gen/m4a.c.o
+.PHONY : gen/m4a.o
+
+# target to build an object file
+gen/m4a.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/m4a.c.o
+.PHONY : gen/m4a.c.o
+
+gen/m4a.i: gen/m4a.c.i
+.PHONY : gen/m4a.i
+
+# target to preprocess a source file
+gen/m4a.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/m4a.c.i
+.PHONY : gen/m4a.c.i
+
+gen/m4a.s: gen/m4a.c.s
+.PHONY : gen/m4a.s
+
+# target to generate assembly for a file
+gen/m4a.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/m4a.c.s
+.PHONY : gen/m4a.c.s
+
+gen/m4a_tables.o: gen/m4a_tables.c.o
+.PHONY : gen/m4a_tables.o
+
+# target to build an object file
+gen/m4a_tables.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/m4a_tables.c.o
+.PHONY : gen/m4a_tables.c.o
+
+gen/m4a_tables.i: gen/m4a_tables.c.i
+.PHONY : gen/m4a_tables.i
+
+# target to preprocess a source file
+gen/m4a_tables.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/m4a_tables.c.i
+.PHONY : gen/m4a_tables.c.i
+
+gen/m4a_tables.s: gen/m4a_tables.c.s
+.PHONY : gen/m4a_tables.s
+
+# target to generate assembly for a file
+gen/m4a_tables.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/m4a_tables.c.s
+.PHONY : gen/m4a_tables.c.s
+
+gen/mail.o: gen/mail.c.o
+.PHONY : gen/mail.o
+
+# target to build an object file
+gen/mail.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/mail.c.o
+.PHONY : gen/mail.c.o
+
+gen/mail.i: gen/mail.c.i
+.PHONY : gen/mail.i
+
+# target to preprocess a source file
+gen/mail.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/mail.c.i
+.PHONY : gen/mail.c.i
+
+gen/mail.s: gen/mail.c.s
+.PHONY : gen/mail.s
+
+# target to generate assembly for a file
+gen/mail.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/mail.c.s
+.PHONY : gen/mail.c.s
+
+gen/mail_data.o: gen/mail_data.c.o
+.PHONY : gen/mail_data.o
+
+# target to build an object file
+gen/mail_data.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/mail_data.c.o
+.PHONY : gen/mail_data.c.o
+
+gen/mail_data.i: gen/mail_data.c.i
+.PHONY : gen/mail_data.i
+
+# target to preprocess a source file
+gen/mail_data.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/mail_data.c.i
+.PHONY : gen/mail_data.c.i
+
+gen/mail_data.s: gen/mail_data.c.s
+.PHONY : gen/mail_data.s
+
+# target to generate assembly for a file
+gen/mail_data.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/mail_data.c.s
+.PHONY : gen/mail_data.c.s
+
+gen/mailbox_pc.o: gen/mailbox_pc.c.o
+.PHONY : gen/mailbox_pc.o
+
+# target to build an object file
+gen/mailbox_pc.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/mailbox_pc.c.o
+.PHONY : gen/mailbox_pc.c.o
+
+gen/mailbox_pc.i: gen/mailbox_pc.c.i
+.PHONY : gen/mailbox_pc.i
+
+# target to preprocess a source file
+gen/mailbox_pc.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/mailbox_pc.c.i
+.PHONY : gen/mailbox_pc.c.i
+
+gen/mailbox_pc.s: gen/mailbox_pc.c.s
+.PHONY : gen/mailbox_pc.s
+
+# target to generate assembly for a file
+gen/mailbox_pc.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/mailbox_pc.c.s
+.PHONY : gen/mailbox_pc.c.s
+
+gen/main.o: gen/main.c.o
+.PHONY : gen/main.o
+
+# target to build an object file
+gen/main.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/main.c.o
+.PHONY : gen/main.c.o
+
+gen/main.i: gen/main.c.i
+.PHONY : gen/main.i
+
+# target to preprocess a source file
+gen/main.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/main.c.i
+.PHONY : gen/main.c.i
+
+gen/main.s: gen/main.c.s
+.PHONY : gen/main.s
+
+# target to generate assembly for a file
+gen/main.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/main.c.s
+.PHONY : gen/main.c.s
+
+gen/main_menu.o: gen/main_menu.c.o
+.PHONY : gen/main_menu.o
+
+# target to build an object file
+gen/main_menu.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_main_menu.dir/build.make CMakeFiles/pfr_upstream_main_menu.dir/gen/main_menu.c.o
+.PHONY : gen/main_menu.c.o
+
+gen/main_menu.i: gen/main_menu.c.i
+.PHONY : gen/main_menu.i
+
+# target to preprocess a source file
+gen/main_menu.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_main_menu.dir/build.make CMakeFiles/pfr_upstream_main_menu.dir/gen/main_menu.c.i
+.PHONY : gen/main_menu.c.i
+
+gen/main_menu.s: gen/main_menu.c.s
+.PHONY : gen/main_menu.s
+
+# target to generate assembly for a file
+gen/main_menu.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_main_menu.dir/build.make CMakeFiles/pfr_upstream_main_menu.dir/gen/main_menu.c.s
+.PHONY : gen/main_menu.c.s
+
+gen/malloc.o: gen/malloc.c.o
+.PHONY : gen/malloc.o
+
+# target to build an object file
+gen/malloc.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/malloc.c.o
+.PHONY : gen/malloc.c.o
+
+gen/malloc.i: gen/malloc.c.i
+.PHONY : gen/malloc.i
+
+# target to preprocess a source file
+gen/malloc.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/malloc.c.i
+.PHONY : gen/malloc.c.i
+
+gen/malloc.s: gen/malloc.c.s
+.PHONY : gen/malloc.s
+
+# target to generate assembly for a file
+gen/malloc.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/malloc.c.s
+.PHONY : gen/malloc.c.s
+
+gen/map_name_popup.o: gen/map_name_popup.c.o
+.PHONY : gen/map_name_popup.o
+
+# target to build an object file
+gen/map_name_popup.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/map_name_popup.c.o
+.PHONY : gen/map_name_popup.c.o
+
+gen/map_name_popup.i: gen/map_name_popup.c.i
+.PHONY : gen/map_name_popup.i
+
+# target to preprocess a source file
+gen/map_name_popup.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/map_name_popup.c.i
+.PHONY : gen/map_name_popup.c.i
+
+gen/map_name_popup.s: gen/map_name_popup.c.s
+.PHONY : gen/map_name_popup.s
+
+# target to generate assembly for a file
+gen/map_name_popup.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/map_name_popup.c.s
+.PHONY : gen/map_name_popup.c.s
+
+gen/map_preview_screen.o: gen/map_preview_screen.c.o
+.PHONY : gen/map_preview_screen.o
+
+# target to build an object file
+gen/map_preview_screen.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_map_preview_screen.dir/build.make CMakeFiles/pfr_upstream_map_preview_screen.dir/gen/map_preview_screen.c.o
+.PHONY : gen/map_preview_screen.c.o
+
+gen/map_preview_screen.i: gen/map_preview_screen.c.i
+.PHONY : gen/map_preview_screen.i
+
+# target to preprocess a source file
+gen/map_preview_screen.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_map_preview_screen.dir/build.make CMakeFiles/pfr_upstream_map_preview_screen.dir/gen/map_preview_screen.c.i
+.PHONY : gen/map_preview_screen.c.i
+
+gen/map_preview_screen.s: gen/map_preview_screen.c.s
+.PHONY : gen/map_preview_screen.s
+
+# target to generate assembly for a file
+gen/map_preview_screen.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_map_preview_screen.dir/build.make CMakeFiles/pfr_upstream_map_preview_screen.dir/gen/map_preview_screen.c.s
+.PHONY : gen/map_preview_screen.c.s
+
+gen/math_util.o: gen/math_util.c.o
+.PHONY : gen/math_util.o
+
+# target to build an object file
+gen/math_util.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/math_util.c.o
+.PHONY : gen/math_util.c.o
+
+gen/math_util.i: gen/math_util.c.i
+.PHONY : gen/math_util.i
+
+# target to preprocess a source file
+gen/math_util.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/math_util.c.i
+.PHONY : gen/math_util.c.i
+
+gen/math_util.s: gen/math_util.c.s
+.PHONY : gen/math_util.s
+
+# target to generate assembly for a file
+gen/math_util.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/math_util.c.s
+.PHONY : gen/math_util.c.s
+
+gen/menu.o: gen/menu.c.o
+.PHONY : gen/menu.o
+
+# target to build an object file
+gen/menu.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/menu.c.o
+.PHONY : gen/menu.c.o
+
+gen/menu.i: gen/menu.c.i
+.PHONY : gen/menu.i
+
+# target to preprocess a source file
+gen/menu.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/menu.c.i
+.PHONY : gen/menu.c.i
+
+gen/menu.s: gen/menu.c.s
+.PHONY : gen/menu.s
+
+# target to generate assembly for a file
+gen/menu.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/menu.c.s
+.PHONY : gen/menu.c.s
+
+gen/menu2.o: gen/menu2.c.o
+.PHONY : gen/menu2.o
+
+# target to build an object file
+gen/menu2.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/menu2.c.o
+.PHONY : gen/menu2.c.o
+
+gen/menu2.i: gen/menu2.c.i
+.PHONY : gen/menu2.i
+
+# target to preprocess a source file
+gen/menu2.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/menu2.c.i
+.PHONY : gen/menu2.c.i
+
+gen/menu2.s: gen/menu2.c.s
+.PHONY : gen/menu2.s
+
+# target to generate assembly for a file
+gen/menu2.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/menu2.c.s
+.PHONY : gen/menu2.c.s
+
+gen/menu_helpers.o: gen/menu_helpers.c.o
+.PHONY : gen/menu_helpers.o
+
+# target to build an object file
+gen/menu_helpers.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/menu_helpers.c.o
+.PHONY : gen/menu_helpers.c.o
+
+gen/menu_helpers.i: gen/menu_helpers.c.i
+.PHONY : gen/menu_helpers.i
+
+# target to preprocess a source file
+gen/menu_helpers.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/menu_helpers.c.i
+.PHONY : gen/menu_helpers.c.i
+
+gen/menu_helpers.s: gen/menu_helpers.c.s
+.PHONY : gen/menu_helpers.s
+
+# target to generate assembly for a file
+gen/menu_helpers.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/menu_helpers.c.s
+.PHONY : gen/menu_helpers.c.s
+
+gen/menu_indicators.o: gen/menu_indicators.c.o
+.PHONY : gen/menu_indicators.o
+
+# target to build an object file
+gen/menu_indicators.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_menu_indicators.dir/build.make CMakeFiles/pfr_upstream_menu_indicators.dir/gen/menu_indicators.c.o
+.PHONY : gen/menu_indicators.c.o
+
+gen/menu_indicators.i: gen/menu_indicators.c.i
+.PHONY : gen/menu_indicators.i
+
+# target to preprocess a source file
+gen/menu_indicators.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_menu_indicators.dir/build.make CMakeFiles/pfr_upstream_menu_indicators.dir/gen/menu_indicators.c.i
+.PHONY : gen/menu_indicators.c.i
+
+gen/menu_indicators.s: gen/menu_indicators.c.s
+.PHONY : gen/menu_indicators.s
+
+# target to generate assembly for a file
+gen/menu_indicators.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_menu_indicators.dir/build.make CMakeFiles/pfr_upstream_menu_indicators.dir/gen/menu_indicators.c.s
+.PHONY : gen/menu_indicators.c.s
+
+gen/metatile_behavior.o: gen/metatile_behavior.c.o
+.PHONY : gen/metatile_behavior.o
+
+# target to build an object file
+gen/metatile_behavior.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/metatile_behavior.c.o
+.PHONY : gen/metatile_behavior.c.o
+
+gen/metatile_behavior.i: gen/metatile_behavior.c.i
+.PHONY : gen/metatile_behavior.i
+
+# target to preprocess a source file
+gen/metatile_behavior.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/metatile_behavior.c.i
+.PHONY : gen/metatile_behavior.c.i
+
+gen/metatile_behavior.s: gen/metatile_behavior.c.s
+.PHONY : gen/metatile_behavior.s
+
+# target to generate assembly for a file
+gen/metatile_behavior.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/metatile_behavior.c.s
+.PHONY : gen/metatile_behavior.c.s
+
+gen/mini_printf.o: gen/mini_printf.c.o
+.PHONY : gen/mini_printf.o
+
+# target to build an object file
+gen/mini_printf.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/mini_printf.c.o
+.PHONY : gen/mini_printf.c.o
+
+gen/mini_printf.i: gen/mini_printf.c.i
+.PHONY : gen/mini_printf.i
+
+# target to preprocess a source file
+gen/mini_printf.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/mini_printf.c.i
+.PHONY : gen/mini_printf.c.i
+
+gen/mini_printf.s: gen/mini_printf.c.s
+.PHONY : gen/mini_printf.s
+
+# target to generate assembly for a file
+gen/mini_printf.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/mini_printf.c.s
+.PHONY : gen/mini_printf.c.s
+
+gen/minigame_countdown.o: gen/minigame_countdown.c.o
+.PHONY : gen/minigame_countdown.o
+
+# target to build an object file
+gen/minigame_countdown.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_minigame_countdown.dir/build.make CMakeFiles/pfr_upstream_minigame_countdown.dir/gen/minigame_countdown.c.o
+.PHONY : gen/minigame_countdown.c.o
+
+gen/minigame_countdown.i: gen/minigame_countdown.c.i
+.PHONY : gen/minigame_countdown.i
+
+# target to preprocess a source file
+gen/minigame_countdown.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_minigame_countdown.dir/build.make CMakeFiles/pfr_upstream_minigame_countdown.dir/gen/minigame_countdown.c.i
+.PHONY : gen/minigame_countdown.c.i
+
+gen/minigame_countdown.s: gen/minigame_countdown.c.s
+.PHONY : gen/minigame_countdown.s
+
+# target to generate assembly for a file
+gen/minigame_countdown.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_minigame_countdown.dir/build.make CMakeFiles/pfr_upstream_minigame_countdown.dir/gen/minigame_countdown.c.s
+.PHONY : gen/minigame_countdown.c.s
+
+gen/mon_markings.o: gen/mon_markings.c.o
+.PHONY : gen/mon_markings.o
+
+# target to build an object file
+gen/mon_markings.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_mon_markings.dir/build.make CMakeFiles/pfr_upstream_mon_markings.dir/gen/mon_markings.c.o
+.PHONY : gen/mon_markings.c.o
+
+gen/mon_markings.i: gen/mon_markings.c.i
+.PHONY : gen/mon_markings.i
+
+# target to preprocess a source file
+gen/mon_markings.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_mon_markings.dir/build.make CMakeFiles/pfr_upstream_mon_markings.dir/gen/mon_markings.c.i
+.PHONY : gen/mon_markings.c.i
+
+gen/mon_markings.s: gen/mon_markings.c.s
+.PHONY : gen/mon_markings.s
+
+# target to generate assembly for a file
+gen/mon_markings.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_mon_markings.dir/build.make CMakeFiles/pfr_upstream_mon_markings.dir/gen/mon_markings.c.s
+.PHONY : gen/mon_markings.c.s
+
+gen/money.o: gen/money.c.o
+.PHONY : gen/money.o
+
+# target to build an object file
+gen/money.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/money.c.o
+.PHONY : gen/money.c.o
+
+gen/money.i: gen/money.c.i
+.PHONY : gen/money.i
+
+# target to preprocess a source file
+gen/money.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/money.c.i
+.PHONY : gen/money.c.i
+
+gen/money.s: gen/money.c.s
+.PHONY : gen/money.s
+
+# target to generate assembly for a file
+gen/money.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/money.c.s
+.PHONY : gen/money.c.s
+
+gen/move_descriptions.o: gen/move_descriptions.c.o
+.PHONY : gen/move_descriptions.o
+
+# target to build an object file
+gen/move_descriptions.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/move_descriptions.c.o
+.PHONY : gen/move_descriptions.c.o
+
+gen/move_descriptions.i: gen/move_descriptions.c.i
+.PHONY : gen/move_descriptions.i
+
+# target to preprocess a source file
+gen/move_descriptions.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/move_descriptions.c.i
+.PHONY : gen/move_descriptions.c.i
+
+gen/move_descriptions.s: gen/move_descriptions.c.s
+.PHONY : gen/move_descriptions.s
+
+# target to generate assembly for a file
+gen/move_descriptions.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/move_descriptions.c.s
+.PHONY : gen/move_descriptions.c.s
+
+gen/mystery_event_msg.o: gen/mystery_event_msg.c.o
+.PHONY : gen/mystery_event_msg.o
+
+# target to build an object file
+gen/mystery_event_msg.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_msg.c.o
+.PHONY : gen/mystery_event_msg.c.o
+
+gen/mystery_event_msg.i: gen/mystery_event_msg.c.i
+.PHONY : gen/mystery_event_msg.i
+
+# target to preprocess a source file
+gen/mystery_event_msg.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_msg.c.i
+.PHONY : gen/mystery_event_msg.c.i
+
+gen/mystery_event_msg.s: gen/mystery_event_msg.c.s
+.PHONY : gen/mystery_event_msg.s
+
+# target to generate assembly for a file
+gen/mystery_event_msg.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_msg.c.s
+.PHONY : gen/mystery_event_msg.c.s
+
+gen/mystery_event_script.o: gen/mystery_event_script.c.o
+.PHONY : gen/mystery_event_script.o
+
+# target to build an object file
+gen/mystery_event_script.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_script.c.o
+.PHONY : gen/mystery_event_script.c.o
+
+gen/mystery_event_script.i: gen/mystery_event_script.c.i
+.PHONY : gen/mystery_event_script.i
+
+# target to preprocess a source file
+gen/mystery_event_script.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_script.c.i
+.PHONY : gen/mystery_event_script.c.i
+
+gen/mystery_event_script.s: gen/mystery_event_script.c.s
+.PHONY : gen/mystery_event_script.s
+
+# target to generate assembly for a file
+gen/mystery_event_script.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_script.c.s
+.PHONY : gen/mystery_event_script.c.s
+
+gen/mystery_gift.o: gen/mystery_gift.c.o
+.PHONY : gen/mystery_gift.o
+
+# target to build an object file
+gen/mystery_gift.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift.c.o
+.PHONY : gen/mystery_gift.c.o
+
+gen/mystery_gift.i: gen/mystery_gift.c.i
+.PHONY : gen/mystery_gift.i
+
+# target to preprocess a source file
+gen/mystery_gift.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift.c.i
+.PHONY : gen/mystery_gift.c.i
+
+gen/mystery_gift.s: gen/mystery_gift.c.s
+.PHONY : gen/mystery_gift.s
+
+# target to generate assembly for a file
+gen/mystery_gift.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift.c.s
+.PHONY : gen/mystery_gift.c.s
+
+gen/mystery_gift_client.o: gen/mystery_gift_client.c.o
+.PHONY : gen/mystery_gift_client.o
+
+# target to build an object file
+gen/mystery_gift_client.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_client.c.o
+.PHONY : gen/mystery_gift_client.c.o
+
+gen/mystery_gift_client.i: gen/mystery_gift_client.c.i
+.PHONY : gen/mystery_gift_client.i
+
+# target to preprocess a source file
+gen/mystery_gift_client.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_client.c.i
+.PHONY : gen/mystery_gift_client.c.i
+
+gen/mystery_gift_client.s: gen/mystery_gift_client.c.s
+.PHONY : gen/mystery_gift_client.s
+
+# target to generate assembly for a file
+gen/mystery_gift_client.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_client.c.s
+.PHONY : gen/mystery_gift_client.c.s
+
+gen/mystery_gift_link.o: gen/mystery_gift_link.c.o
+.PHONY : gen/mystery_gift_link.o
+
+# target to build an object file
+gen/mystery_gift_link.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_link.c.o
+.PHONY : gen/mystery_gift_link.c.o
+
+gen/mystery_gift_link.i: gen/mystery_gift_link.c.i
+.PHONY : gen/mystery_gift_link.i
+
+# target to preprocess a source file
+gen/mystery_gift_link.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_link.c.i
+.PHONY : gen/mystery_gift_link.c.i
+
+gen/mystery_gift_link.s: gen/mystery_gift_link.c.s
+.PHONY : gen/mystery_gift_link.s
+
+# target to generate assembly for a file
+gen/mystery_gift_link.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_link.c.s
+.PHONY : gen/mystery_gift_link.c.s
+
+gen/mystery_gift_menu.o: gen/mystery_gift_menu.c.o
+.PHONY : gen/mystery_gift_menu.o
+
+# target to build an object file
+gen/mystery_gift_menu.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_mystery_gift_menu.dir/build.make CMakeFiles/pfr_upstream_mystery_gift_menu.dir/gen/mystery_gift_menu.c.o
+.PHONY : gen/mystery_gift_menu.c.o
+
+gen/mystery_gift_menu.i: gen/mystery_gift_menu.c.i
+.PHONY : gen/mystery_gift_menu.i
+
+# target to preprocess a source file
+gen/mystery_gift_menu.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_mystery_gift_menu.dir/build.make CMakeFiles/pfr_upstream_mystery_gift_menu.dir/gen/mystery_gift_menu.c.i
+.PHONY : gen/mystery_gift_menu.c.i
+
+gen/mystery_gift_menu.s: gen/mystery_gift_menu.c.s
+.PHONY : gen/mystery_gift_menu.s
+
+# target to generate assembly for a file
+gen/mystery_gift_menu.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_mystery_gift_menu.dir/build.make CMakeFiles/pfr_upstream_mystery_gift_menu.dir/gen/mystery_gift_menu.c.s
+.PHONY : gen/mystery_gift_menu.c.s
+
+gen/mystery_gift_scripts.o: gen/mystery_gift_scripts.c.o
+.PHONY : gen/mystery_gift_scripts.o
+
+# target to build an object file
+gen/mystery_gift_scripts.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_scripts.c.o
+.PHONY : gen/mystery_gift_scripts.c.o
+
+gen/mystery_gift_scripts.i: gen/mystery_gift_scripts.c.i
+.PHONY : gen/mystery_gift_scripts.i
+
+# target to preprocess a source file
+gen/mystery_gift_scripts.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_scripts.c.i
+.PHONY : gen/mystery_gift_scripts.c.i
+
+gen/mystery_gift_scripts.s: gen/mystery_gift_scripts.c.s
+.PHONY : gen/mystery_gift_scripts.s
+
+# target to generate assembly for a file
+gen/mystery_gift_scripts.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_scripts.c.s
+.PHONY : gen/mystery_gift_scripts.c.s
+
+gen/mystery_gift_server.o: gen/mystery_gift_server.c.o
+.PHONY : gen/mystery_gift_server.o
+
+# target to build an object file
+gen/mystery_gift_server.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_server.c.o
+.PHONY : gen/mystery_gift_server.c.o
+
+gen/mystery_gift_server.i: gen/mystery_gift_server.c.i
+.PHONY : gen/mystery_gift_server.i
+
+# target to preprocess a source file
+gen/mystery_gift_server.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_server.c.i
+.PHONY : gen/mystery_gift_server.c.i
+
+gen/mystery_gift_server.s: gen/mystery_gift_server.c.s
+.PHONY : gen/mystery_gift_server.s
+
+# target to generate assembly for a file
+gen/mystery_gift_server.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_server.c.s
+.PHONY : gen/mystery_gift_server.c.s
+
+gen/mystery_gift_show_card.o: gen/mystery_gift_show_card.c.o
+.PHONY : gen/mystery_gift_show_card.o
+
+# target to build an object file
+gen/mystery_gift_show_card.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_mystery_gift_show_card.dir/build.make CMakeFiles/pfr_upstream_mystery_gift_show_card.dir/gen/mystery_gift_show_card.c.o
+.PHONY : gen/mystery_gift_show_card.c.o
+
+gen/mystery_gift_show_card.i: gen/mystery_gift_show_card.c.i
+.PHONY : gen/mystery_gift_show_card.i
+
+# target to preprocess a source file
+gen/mystery_gift_show_card.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_mystery_gift_show_card.dir/build.make CMakeFiles/pfr_upstream_mystery_gift_show_card.dir/gen/mystery_gift_show_card.c.i
+.PHONY : gen/mystery_gift_show_card.c.i
+
+gen/mystery_gift_show_card.s: gen/mystery_gift_show_card.c.s
+.PHONY : gen/mystery_gift_show_card.s
+
+# target to generate assembly for a file
+gen/mystery_gift_show_card.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_mystery_gift_show_card.dir/build.make CMakeFiles/pfr_upstream_mystery_gift_show_card.dir/gen/mystery_gift_show_card.c.s
+.PHONY : gen/mystery_gift_show_card.c.s
+
+gen/mystery_gift_show_news.o: gen/mystery_gift_show_news.c.o
+.PHONY : gen/mystery_gift_show_news.o
+
+# target to build an object file
+gen/mystery_gift_show_news.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_mystery_gift_show_news.dir/build.make CMakeFiles/pfr_upstream_mystery_gift_show_news.dir/gen/mystery_gift_show_news.c.o
+.PHONY : gen/mystery_gift_show_news.c.o
+
+gen/mystery_gift_show_news.i: gen/mystery_gift_show_news.c.i
+.PHONY : gen/mystery_gift_show_news.i
+
+# target to preprocess a source file
+gen/mystery_gift_show_news.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_mystery_gift_show_news.dir/build.make CMakeFiles/pfr_upstream_mystery_gift_show_news.dir/gen/mystery_gift_show_news.c.i
+.PHONY : gen/mystery_gift_show_news.c.i
+
+gen/mystery_gift_show_news.s: gen/mystery_gift_show_news.c.s
+.PHONY : gen/mystery_gift_show_news.s
+
+# target to generate assembly for a file
+gen/mystery_gift_show_news.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_mystery_gift_show_news.dir/build.make CMakeFiles/pfr_upstream_mystery_gift_show_news.dir/gen/mystery_gift_show_news.c.s
+.PHONY : gen/mystery_gift_show_news.c.s
+
+gen/naming_screen.o: gen/naming_screen.c.o
+.PHONY : gen/naming_screen.o
+
+# target to build an object file
+gen/naming_screen.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_naming_screen.dir/build.make CMakeFiles/pfr_upstream_naming_screen.dir/gen/naming_screen.c.o
+.PHONY : gen/naming_screen.c.o
+
+gen/naming_screen.i: gen/naming_screen.c.i
+.PHONY : gen/naming_screen.i
+
+# target to preprocess a source file
+gen/naming_screen.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_naming_screen.dir/build.make CMakeFiles/pfr_upstream_naming_screen.dir/gen/naming_screen.c.i
+.PHONY : gen/naming_screen.c.i
+
+gen/naming_screen.s: gen/naming_screen.c.s
+.PHONY : gen/naming_screen.s
+
+# target to generate assembly for a file
+gen/naming_screen.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_naming_screen.dir/build.make CMakeFiles/pfr_upstream_naming_screen.dir/gen/naming_screen.c.s
+.PHONY : gen/naming_screen.c.s
+
+gen/new_game.o: gen/new_game.c.o
+.PHONY : gen/new_game.o
+
+# target to build an object file
+gen/new_game.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/new_game.c.o
+.PHONY : gen/new_game.c.o
+
+gen/new_game.i: gen/new_game.c.i
+.PHONY : gen/new_game.i
+
+# target to preprocess a source file
+gen/new_game.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/new_game.c.i
+.PHONY : gen/new_game.c.i
+
+gen/new_game.s: gen/new_game.c.s
+.PHONY : gen/new_game.s
+
+# target to generate assembly for a file
+gen/new_game.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/new_game.c.s
+.PHONY : gen/new_game.c.s
+
+gen/new_menu_helpers.o: gen/new_menu_helpers.c.o
+.PHONY : gen/new_menu_helpers.o
+
+# target to build an object file
+gen/new_menu_helpers.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_new_menu_helpers.dir/build.make CMakeFiles/pfr_upstream_new_menu_helpers.dir/gen/new_menu_helpers.c.o
+.PHONY : gen/new_menu_helpers.c.o
+
+gen/new_menu_helpers.i: gen/new_menu_helpers.c.i
+.PHONY : gen/new_menu_helpers.i
+
+# target to preprocess a source file
+gen/new_menu_helpers.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_new_menu_helpers.dir/build.make CMakeFiles/pfr_upstream_new_menu_helpers.dir/gen/new_menu_helpers.c.i
+.PHONY : gen/new_menu_helpers.c.i
+
+gen/new_menu_helpers.s: gen/new_menu_helpers.c.s
+.PHONY : gen/new_menu_helpers.s
+
+# target to generate assembly for a file
+gen/new_menu_helpers.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_new_menu_helpers.dir/build.make CMakeFiles/pfr_upstream_new_menu_helpers.dir/gen/new_menu_helpers.c.s
+.PHONY : gen/new_menu_helpers.c.s
+
+gen/oak_speech.o: gen/oak_speech.c.o
+.PHONY : gen/oak_speech.o
+
+# target to build an object file
+gen/oak_speech.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_oak_speech.dir/build.make CMakeFiles/pfr_upstream_oak_speech.dir/gen/oak_speech.c.o
+.PHONY : gen/oak_speech.c.o
+
+gen/oak_speech.i: gen/oak_speech.c.i
+.PHONY : gen/oak_speech.i
+
+# target to preprocess a source file
+gen/oak_speech.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_oak_speech.dir/build.make CMakeFiles/pfr_upstream_oak_speech.dir/gen/oak_speech.c.i
+.PHONY : gen/oak_speech.c.i
+
+gen/oak_speech.s: gen/oak_speech.c.s
+.PHONY : gen/oak_speech.s
+
+# target to generate assembly for a file
+gen/oak_speech.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_oak_speech.dir/build.make CMakeFiles/pfr_upstream_oak_speech.dir/gen/oak_speech.c.s
+.PHONY : gen/oak_speech.c.s
+
+gen/option_menu.o: gen/option_menu.c.o
+.PHONY : gen/option_menu.o
+
+# target to build an object file
+gen/option_menu.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_option_menu.dir/build.make CMakeFiles/pfr_upstream_option_menu.dir/gen/option_menu.c.o
+.PHONY : gen/option_menu.c.o
+
+gen/option_menu.i: gen/option_menu.c.i
+.PHONY : gen/option_menu.i
+
+# target to preprocess a source file
+gen/option_menu.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_option_menu.dir/build.make CMakeFiles/pfr_upstream_option_menu.dir/gen/option_menu.c.i
+.PHONY : gen/option_menu.c.i
+
+gen/option_menu.s: gen/option_menu.c.s
+.PHONY : gen/option_menu.s
+
+# target to generate assembly for a file
+gen/option_menu.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_option_menu.dir/build.make CMakeFiles/pfr_upstream_option_menu.dir/gen/option_menu.c.s
+.PHONY : gen/option_menu.c.s
+
+gen/overworld.o: gen/overworld.c.o
+.PHONY : gen/overworld.o
+
+# target to build an object file
+gen/overworld.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/overworld.c.o
+.PHONY : gen/overworld.c.o
+
+gen/overworld.i: gen/overworld.c.i
+.PHONY : gen/overworld.i
+
+# target to preprocess a source file
+gen/overworld.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/overworld.c.i
+.PHONY : gen/overworld.c.i
+
+gen/overworld.s: gen/overworld.c.s
+.PHONY : gen/overworld.s
+
+# target to generate assembly for a file
+gen/overworld.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/overworld.c.s
+.PHONY : gen/overworld.c.s
+
+gen/palette.o: gen/palette.c.o
+.PHONY : gen/palette.o
+
+# target to build an object file
+gen/palette.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/palette.c.o
+.PHONY : gen/palette.c.o
+
+gen/palette.i: gen/palette.c.i
+.PHONY : gen/palette.i
+
+# target to preprocess a source file
+gen/palette.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/palette.c.i
+.PHONY : gen/palette.c.i
+
+gen/palette.s: gen/palette.c.s
+.PHONY : gen/palette.s
+
+# target to generate assembly for a file
+gen/palette.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/palette.c.s
+.PHONY : gen/palette.c.s
+
+gen/palette_util.o: gen/palette_util.c.o
+.PHONY : gen/palette_util.o
+
+# target to build an object file
+gen/palette_util.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/palette_util.c.o
+.PHONY : gen/palette_util.c.o
+
+gen/palette_util.i: gen/palette_util.c.i
+.PHONY : gen/palette_util.i
+
+# target to preprocess a source file
+gen/palette_util.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/palette_util.c.i
+.PHONY : gen/palette_util.c.i
+
+gen/palette_util.s: gen/palette_util.c.s
+.PHONY : gen/palette_util.s
+
+# target to generate assembly for a file
+gen/palette_util.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/palette_util.c.s
+.PHONY : gen/palette_util.c.s
+
+gen/party_menu.o: gen/party_menu.c.o
+.PHONY : gen/party_menu.o
+
+# target to build an object file
+gen/party_menu.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_party_menu.dir/build.make CMakeFiles/pfr_upstream_party_menu.dir/gen/party_menu.c.o
+.PHONY : gen/party_menu.c.o
+
+gen/party_menu.i: gen/party_menu.c.i
+.PHONY : gen/party_menu.i
+
+# target to preprocess a source file
+gen/party_menu.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_party_menu.dir/build.make CMakeFiles/pfr_upstream_party_menu.dir/gen/party_menu.c.i
+.PHONY : gen/party_menu.c.i
+
+gen/party_menu.s: gen/party_menu.c.s
+.PHONY : gen/party_menu.s
+
+# target to generate assembly for a file
+gen/party_menu.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_party_menu.dir/build.make CMakeFiles/pfr_upstream_party_menu.dir/gen/party_menu.c.s
+.PHONY : gen/party_menu.c.s
+
+gen/party_menu_specials.o: gen/party_menu_specials.c.o
+.PHONY : gen/party_menu_specials.o
+
+# target to build an object file
+gen/party_menu_specials.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/party_menu_specials.c.o
+.PHONY : gen/party_menu_specials.c.o
+
+gen/party_menu_specials.i: gen/party_menu_specials.c.i
+.PHONY : gen/party_menu_specials.i
+
+# target to preprocess a source file
+gen/party_menu_specials.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/party_menu_specials.c.i
+.PHONY : gen/party_menu_specials.c.i
+
+gen/party_menu_specials.s: gen/party_menu_specials.c.s
+.PHONY : gen/party_menu_specials.s
+
+# target to generate assembly for a file
+gen/party_menu_specials.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/party_menu_specials.c.s
+.PHONY : gen/party_menu_specials.c.s
+
+gen/pc_screen_effect.o: gen/pc_screen_effect.c.o
+.PHONY : gen/pc_screen_effect.o
+
+# target to build an object file
+gen/pc_screen_effect.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/pc_screen_effect.c.o
+.PHONY : gen/pc_screen_effect.c.o
+
+gen/pc_screen_effect.i: gen/pc_screen_effect.c.i
+.PHONY : gen/pc_screen_effect.i
+
+# target to preprocess a source file
+gen/pc_screen_effect.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/pc_screen_effect.c.i
+.PHONY : gen/pc_screen_effect.c.i
+
+gen/pc_screen_effect.s: gen/pc_screen_effect.c.s
+.PHONY : gen/pc_screen_effect.s
+
+# target to generate assembly for a file
+gen/pc_screen_effect.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/pc_screen_effect.c.s
+.PHONY : gen/pc_screen_effect.c.s
+
+gen/play_time.o: gen/play_time.c.o
+.PHONY : gen/play_time.o
+
+# target to build an object file
+gen/play_time.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/play_time.c.o
+.PHONY : gen/play_time.c.o
+
+gen/play_time.i: gen/play_time.c.i
+.PHONY : gen/play_time.i
+
+# target to preprocess a source file
+gen/play_time.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/play_time.c.i
+.PHONY : gen/play_time.c.i
+
+gen/play_time.s: gen/play_time.c.s
+.PHONY : gen/play_time.s
+
+# target to generate assembly for a file
+gen/play_time.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/play_time.c.s
+.PHONY : gen/play_time.c.s
+
+gen/player_pc.o: gen/player_pc.c.o
+.PHONY : gen/player_pc.o
+
+# target to build an object file
+gen/player_pc.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/player_pc.c.o
+.PHONY : gen/player_pc.c.o
+
+gen/player_pc.i: gen/player_pc.c.i
+.PHONY : gen/player_pc.i
+
+# target to preprocess a source file
+gen/player_pc.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/player_pc.c.i
+.PHONY : gen/player_pc.c.i
+
+gen/player_pc.s: gen/player_pc.c.s
+.PHONY : gen/player_pc.s
+
+# target to generate assembly for a file
+gen/player_pc.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/player_pc.c.s
+.PHONY : gen/player_pc.c.s
+
+gen/pokeball.o: gen/pokeball.c.o
+.PHONY : gen/pokeball.o
+
+# target to build an object file
+gen/pokeball.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/pokeball.c.o
+.PHONY : gen/pokeball.c.o
+
+gen/pokeball.i: gen/pokeball.c.i
+.PHONY : gen/pokeball.i
+
+# target to preprocess a source file
+gen/pokeball.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/pokeball.c.i
+.PHONY : gen/pokeball.c.i
+
+gen/pokeball.s: gen/pokeball.c.s
+.PHONY : gen/pokeball.s
+
+# target to generate assembly for a file
+gen/pokeball.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/pokeball.c.s
+.PHONY : gen/pokeball.c.s
+
+gen/pokedex.o: gen/pokedex.c.o
+.PHONY : gen/pokedex.o
+
+# target to build an object file
+gen/pokedex.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/pokedex.c.o
+.PHONY : gen/pokedex.c.o
+
+gen/pokedex.i: gen/pokedex.c.i
+.PHONY : gen/pokedex.i
+
+# target to preprocess a source file
+gen/pokedex.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/pokedex.c.i
+.PHONY : gen/pokedex.c.i
+
+gen/pokedex.s: gen/pokedex.c.s
+.PHONY : gen/pokedex.s
+
+# target to generate assembly for a file
+gen/pokedex.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/pokedex.c.s
+.PHONY : gen/pokedex.c.s
+
+gen/pokedex_area_markers.o: gen/pokedex_area_markers.c.o
+.PHONY : gen/pokedex_area_markers.o
+
+# target to build an object file
+gen/pokedex_area_markers.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokedex_area_markers.dir/build.make CMakeFiles/pfr_upstream_pokedex_area_markers.dir/gen/pokedex_area_markers.c.o
+.PHONY : gen/pokedex_area_markers.c.o
+
+gen/pokedex_area_markers.i: gen/pokedex_area_markers.c.i
+.PHONY : gen/pokedex_area_markers.i
+
+# target to preprocess a source file
+gen/pokedex_area_markers.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokedex_area_markers.dir/build.make CMakeFiles/pfr_upstream_pokedex_area_markers.dir/gen/pokedex_area_markers.c.i
+.PHONY : gen/pokedex_area_markers.c.i
+
+gen/pokedex_area_markers.s: gen/pokedex_area_markers.c.s
+.PHONY : gen/pokedex_area_markers.s
+
+# target to generate assembly for a file
+gen/pokedex_area_markers.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokedex_area_markers.dir/build.make CMakeFiles/pfr_upstream_pokedex_area_markers.dir/gen/pokedex_area_markers.c.s
+.PHONY : gen/pokedex_area_markers.c.s
+
+gen/pokedex_screen.o: gen/pokedex_screen.c.o
+.PHONY : gen/pokedex_screen.o
+
+# target to build an object file
+gen/pokedex_screen.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokedex_screen.dir/build.make CMakeFiles/pfr_upstream_pokedex_screen.dir/gen/pokedex_screen.c.o
+.PHONY : gen/pokedex_screen.c.o
+
+gen/pokedex_screen.i: gen/pokedex_screen.c.i
+.PHONY : gen/pokedex_screen.i
+
+# target to preprocess a source file
+gen/pokedex_screen.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokedex_screen.dir/build.make CMakeFiles/pfr_upstream_pokedex_screen.dir/gen/pokedex_screen.c.i
+.PHONY : gen/pokedex_screen.c.i
+
+gen/pokedex_screen.s: gen/pokedex_screen.c.s
+.PHONY : gen/pokedex_screen.s
+
+# target to generate assembly for a file
+gen/pokedex_screen.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokedex_screen.dir/build.make CMakeFiles/pfr_upstream_pokedex_screen.dir/gen/pokedex_screen.c.s
+.PHONY : gen/pokedex_screen.c.s
+
+gen/pokemon.o: gen/pokemon.c.o
+.PHONY : gen/pokemon.o
+
+# target to build an object file
+gen/pokemon.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon.dir/build.make CMakeFiles/pfr_upstream_pokemon.dir/gen/pokemon.c.o
+.PHONY : gen/pokemon.c.o
+
+gen/pokemon.i: gen/pokemon.c.i
+.PHONY : gen/pokemon.i
+
+# target to preprocess a source file
+gen/pokemon.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon.dir/build.make CMakeFiles/pfr_upstream_pokemon.dir/gen/pokemon.c.i
+.PHONY : gen/pokemon.c.i
+
+gen/pokemon.s: gen/pokemon.c.s
+.PHONY : gen/pokemon.s
+
+# target to generate assembly for a file
+gen/pokemon.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon.dir/build.make CMakeFiles/pfr_upstream_pokemon.dir/gen/pokemon.c.s
+.PHONY : gen/pokemon.c.s
+
+gen/pokemon_icon.o: gen/pokemon_icon.c.o
+.PHONY : gen/pokemon_icon.o
+
+# target to build an object file
+gen/pokemon_icon.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_icon.dir/build.make CMakeFiles/pfr_upstream_pokemon_icon.dir/gen/pokemon_icon.c.o
+.PHONY : gen/pokemon_icon.c.o
+
+gen/pokemon_icon.i: gen/pokemon_icon.c.i
+.PHONY : gen/pokemon_icon.i
+
+# target to preprocess a source file
+gen/pokemon_icon.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_icon.dir/build.make CMakeFiles/pfr_upstream_pokemon_icon.dir/gen/pokemon_icon.c.i
+.PHONY : gen/pokemon_icon.c.i
+
+gen/pokemon_icon.s: gen/pokemon_icon.c.s
+.PHONY : gen/pokemon_icon.s
+
+# target to generate assembly for a file
+gen/pokemon_icon.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_icon.dir/build.make CMakeFiles/pfr_upstream_pokemon_icon.dir/gen/pokemon_icon.c.s
+.PHONY : gen/pokemon_icon.c.s
+
+gen/pokemon_jump.o: gen/pokemon_jump.c.o
+.PHONY : gen/pokemon_jump.o
+
+# target to build an object file
+gen/pokemon_jump.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_jump.dir/build.make CMakeFiles/pfr_upstream_pokemon_jump.dir/gen/pokemon_jump.c.o
+.PHONY : gen/pokemon_jump.c.o
+
+gen/pokemon_jump.i: gen/pokemon_jump.c.i
+.PHONY : gen/pokemon_jump.i
+
+# target to preprocess a source file
+gen/pokemon_jump.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_jump.dir/build.make CMakeFiles/pfr_upstream_pokemon_jump.dir/gen/pokemon_jump.c.i
+.PHONY : gen/pokemon_jump.c.i
+
+gen/pokemon_jump.s: gen/pokemon_jump.c.s
+.PHONY : gen/pokemon_jump.s
+
+# target to generate assembly for a file
+gen/pokemon_jump.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_jump.dir/build.make CMakeFiles/pfr_upstream_pokemon_jump.dir/gen/pokemon_jump.c.s
+.PHONY : gen/pokemon_jump.c.s
+
+gen/pokemon_size_record.o: gen/pokemon_size_record.c.o
+.PHONY : gen/pokemon_size_record.o
+
+# target to build an object file
+gen/pokemon_size_record.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/pokemon_size_record.c.o
+.PHONY : gen/pokemon_size_record.c.o
+
+gen/pokemon_size_record.i: gen/pokemon_size_record.c.i
+.PHONY : gen/pokemon_size_record.i
+
+# target to preprocess a source file
+gen/pokemon_size_record.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/pokemon_size_record.c.i
+.PHONY : gen/pokemon_size_record.c.i
+
+gen/pokemon_size_record.s: gen/pokemon_size_record.c.s
+.PHONY : gen/pokemon_size_record.s
+
+# target to generate assembly for a file
+gen/pokemon_size_record.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/pokemon_size_record.c.s
+.PHONY : gen/pokemon_size_record.c.s
+
+gen/pokemon_special_anim.o: gen/pokemon_special_anim.c.o
+.PHONY : gen/pokemon_special_anim.o
+
+# target to build an object file
+gen/pokemon_special_anim.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/pokemon_special_anim.c.o
+.PHONY : gen/pokemon_special_anim.c.o
+
+gen/pokemon_special_anim.i: gen/pokemon_special_anim.c.i
+.PHONY : gen/pokemon_special_anim.i
+
+# target to preprocess a source file
+gen/pokemon_special_anim.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/pokemon_special_anim.c.i
+.PHONY : gen/pokemon_special_anim.c.i
+
+gen/pokemon_special_anim.s: gen/pokemon_special_anim.c.s
+.PHONY : gen/pokemon_special_anim.s
+
+# target to generate assembly for a file
+gen/pokemon_special_anim.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/pokemon_special_anim.c.s
+.PHONY : gen/pokemon_special_anim.c.s
+
+gen/pokemon_special_anim_scene.o: gen/pokemon_special_anim_scene.c.o
+.PHONY : gen/pokemon_special_anim_scene.o
+
+# target to build an object file
+gen/pokemon_special_anim_scene.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_special_anim_scene.dir/build.make CMakeFiles/pfr_upstream_pokemon_special_anim_scene.dir/gen/pokemon_special_anim_scene.c.o
+.PHONY : gen/pokemon_special_anim_scene.c.o
+
+gen/pokemon_special_anim_scene.i: gen/pokemon_special_anim_scene.c.i
+.PHONY : gen/pokemon_special_anim_scene.i
+
+# target to preprocess a source file
+gen/pokemon_special_anim_scene.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_special_anim_scene.dir/build.make CMakeFiles/pfr_upstream_pokemon_special_anim_scene.dir/gen/pokemon_special_anim_scene.c.i
+.PHONY : gen/pokemon_special_anim_scene.c.i
+
+gen/pokemon_special_anim_scene.s: gen/pokemon_special_anim_scene.c.s
+.PHONY : gen/pokemon_special_anim_scene.s
+
+# target to generate assembly for a file
+gen/pokemon_special_anim_scene.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_special_anim_scene.dir/build.make CMakeFiles/pfr_upstream_pokemon_special_anim_scene.dir/gen/pokemon_special_anim_scene.c.s
+.PHONY : gen/pokemon_special_anim_scene.c.s
+
+gen/pokemon_storage_system.o: gen/pokemon_storage_system.c.o
+.PHONY : gen/pokemon_storage_system.o
+
+# target to build an object file
+gen/pokemon_storage_system.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/pokemon_storage_system.c.o
+.PHONY : gen/pokemon_storage_system.c.o
+
+gen/pokemon_storage_system.i: gen/pokemon_storage_system.c.i
+.PHONY : gen/pokemon_storage_system.i
+
+# target to preprocess a source file
+gen/pokemon_storage_system.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/pokemon_storage_system.c.i
+.PHONY : gen/pokemon_storage_system.c.i
+
+gen/pokemon_storage_system.s: gen/pokemon_storage_system.c.s
+.PHONY : gen/pokemon_storage_system.s
+
+# target to generate assembly for a file
+gen/pokemon_storage_system.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/pokemon_storage_system.c.s
+.PHONY : gen/pokemon_storage_system.c.s
+
+gen/pokemon_storage_system_data.o: gen/pokemon_storage_system_data.c.o
+.PHONY : gen/pokemon_storage_system_data.o
+
+# target to build an object file
+gen/pokemon_storage_system_data.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_storage_system_data.dir/build.make CMakeFiles/pfr_upstream_pokemon_storage_system_data.dir/gen/pokemon_storage_system_data.c.o
+.PHONY : gen/pokemon_storage_system_data.c.o
+
+gen/pokemon_storage_system_data.i: gen/pokemon_storage_system_data.c.i
+.PHONY : gen/pokemon_storage_system_data.i
+
+# target to preprocess a source file
+gen/pokemon_storage_system_data.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_storage_system_data.dir/build.make CMakeFiles/pfr_upstream_pokemon_storage_system_data.dir/gen/pokemon_storage_system_data.c.i
+.PHONY : gen/pokemon_storage_system_data.c.i
+
+gen/pokemon_storage_system_data.s: gen/pokemon_storage_system_data.c.s
+.PHONY : gen/pokemon_storage_system_data.s
+
+# target to generate assembly for a file
+gen/pokemon_storage_system_data.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_storage_system_data.dir/build.make CMakeFiles/pfr_upstream_pokemon_storage_system_data.dir/gen/pokemon_storage_system_data.c.s
+.PHONY : gen/pokemon_storage_system_data.c.s
+
+gen/pokemon_storage_system_graphics.o: gen/pokemon_storage_system_graphics.c.o
+.PHONY : gen/pokemon_storage_system_graphics.o
+
+# target to build an object file
+gen/pokemon_storage_system_graphics.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_storage_system_graphics.dir/build.make CMakeFiles/pfr_upstream_pokemon_storage_system_graphics.dir/gen/pokemon_storage_system_graphics.c.o
+.PHONY : gen/pokemon_storage_system_graphics.c.o
+
+gen/pokemon_storage_system_graphics.i: gen/pokemon_storage_system_graphics.c.i
+.PHONY : gen/pokemon_storage_system_graphics.i
+
+# target to preprocess a source file
+gen/pokemon_storage_system_graphics.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_storage_system_graphics.dir/build.make CMakeFiles/pfr_upstream_pokemon_storage_system_graphics.dir/gen/pokemon_storage_system_graphics.c.i
+.PHONY : gen/pokemon_storage_system_graphics.c.i
+
+gen/pokemon_storage_system_graphics.s: gen/pokemon_storage_system_graphics.c.s
+.PHONY : gen/pokemon_storage_system_graphics.s
+
+# target to generate assembly for a file
+gen/pokemon_storage_system_graphics.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_storage_system_graphics.dir/build.make CMakeFiles/pfr_upstream_pokemon_storage_system_graphics.dir/gen/pokemon_storage_system_graphics.c.s
+.PHONY : gen/pokemon_storage_system_graphics.c.s
+
+gen/pokemon_storage_system_menu.o: gen/pokemon_storage_system_menu.c.o
+.PHONY : gen/pokemon_storage_system_menu.o
+
+# target to build an object file
+gen/pokemon_storage_system_menu.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_storage_system_menu.dir/build.make CMakeFiles/pfr_upstream_pokemon_storage_system_menu.dir/gen/pokemon_storage_system_menu.c.o
+.PHONY : gen/pokemon_storage_system_menu.c.o
+
+gen/pokemon_storage_system_menu.i: gen/pokemon_storage_system_menu.c.i
+.PHONY : gen/pokemon_storage_system_menu.i
+
+# target to preprocess a source file
+gen/pokemon_storage_system_menu.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_storage_system_menu.dir/build.make CMakeFiles/pfr_upstream_pokemon_storage_system_menu.dir/gen/pokemon_storage_system_menu.c.i
+.PHONY : gen/pokemon_storage_system_menu.c.i
+
+gen/pokemon_storage_system_menu.s: gen/pokemon_storage_system_menu.c.s
+.PHONY : gen/pokemon_storage_system_menu.s
+
+# target to generate assembly for a file
+gen/pokemon_storage_system_menu.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_storage_system_menu.dir/build.make CMakeFiles/pfr_upstream_pokemon_storage_system_menu.dir/gen/pokemon_storage_system_menu.c.s
+.PHONY : gen/pokemon_storage_system_menu.c.s
+
+gen/pokemon_storage_system_misc.o: gen/pokemon_storage_system_misc.c.o
+.PHONY : gen/pokemon_storage_system_misc.o
+
+# target to build an object file
+gen/pokemon_storage_system_misc.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_storage_system_misc.dir/build.make CMakeFiles/pfr_upstream_pokemon_storage_system_misc.dir/gen/pokemon_storage_system_misc.c.o
+.PHONY : gen/pokemon_storage_system_misc.c.o
+
+gen/pokemon_storage_system_misc.i: gen/pokemon_storage_system_misc.c.i
+.PHONY : gen/pokemon_storage_system_misc.i
+
+# target to preprocess a source file
+gen/pokemon_storage_system_misc.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_storage_system_misc.dir/build.make CMakeFiles/pfr_upstream_pokemon_storage_system_misc.dir/gen/pokemon_storage_system_misc.c.i
+.PHONY : gen/pokemon_storage_system_misc.c.i
+
+gen/pokemon_storage_system_misc.s: gen/pokemon_storage_system_misc.c.s
+.PHONY : gen/pokemon_storage_system_misc.s
+
+# target to generate assembly for a file
+gen/pokemon_storage_system_misc.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_storage_system_misc.dir/build.make CMakeFiles/pfr_upstream_pokemon_storage_system_misc.dir/gen/pokemon_storage_system_misc.c.s
+.PHONY : gen/pokemon_storage_system_misc.c.s
+
+gen/pokemon_storage_system_tasks.o: gen/pokemon_storage_system_tasks.c.o
+.PHONY : gen/pokemon_storage_system_tasks.o
+
+# target to build an object file
+gen/pokemon_storage_system_tasks.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_storage_system_tasks.dir/build.make CMakeFiles/pfr_upstream_pokemon_storage_system_tasks.dir/gen/pokemon_storage_system_tasks.c.o
+.PHONY : gen/pokemon_storage_system_tasks.c.o
+
+gen/pokemon_storage_system_tasks.i: gen/pokemon_storage_system_tasks.c.i
+.PHONY : gen/pokemon_storage_system_tasks.i
+
+# target to preprocess a source file
+gen/pokemon_storage_system_tasks.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_storage_system_tasks.dir/build.make CMakeFiles/pfr_upstream_pokemon_storage_system_tasks.dir/gen/pokemon_storage_system_tasks.c.i
+.PHONY : gen/pokemon_storage_system_tasks.c.i
+
+gen/pokemon_storage_system_tasks.s: gen/pokemon_storage_system_tasks.c.s
+.PHONY : gen/pokemon_storage_system_tasks.s
+
+# target to generate assembly for a file
+gen/pokemon_storage_system_tasks.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_storage_system_tasks.dir/build.make CMakeFiles/pfr_upstream_pokemon_storage_system_tasks.dir/gen/pokemon_storage_system_tasks.c.s
+.PHONY : gen/pokemon_storage_system_tasks.c.s
+
+gen/pokemon_summary_screen.o: gen/pokemon_summary_screen.c.o
+.PHONY : gen/pokemon_summary_screen.o
+
+# target to build an object file
+gen/pokemon_summary_screen.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_summary_screen.dir/build.make CMakeFiles/pfr_upstream_pokemon_summary_screen.dir/gen/pokemon_summary_screen.c.o
+.PHONY : gen/pokemon_summary_screen.c.o
+
+gen/pokemon_summary_screen.i: gen/pokemon_summary_screen.c.i
+.PHONY : gen/pokemon_summary_screen.i
+
+# target to preprocess a source file
+gen/pokemon_summary_screen.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_summary_screen.dir/build.make CMakeFiles/pfr_upstream_pokemon_summary_screen.dir/gen/pokemon_summary_screen.c.i
+.PHONY : gen/pokemon_summary_screen.c.i
+
+gen/pokemon_summary_screen.s: gen/pokemon_summary_screen.c.s
+.PHONY : gen/pokemon_summary_screen.s
+
+# target to generate assembly for a file
+gen/pokemon_summary_screen.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_pokemon_summary_screen.dir/build.make CMakeFiles/pfr_upstream_pokemon_summary_screen.dir/gen/pokemon_summary_screen.c.s
+.PHONY : gen/pokemon_summary_screen.c.s
+
+gen/post_battle_event_funcs.o: gen/post_battle_event_funcs.c.o
+.PHONY : gen/post_battle_event_funcs.o
+
+# target to build an object file
+gen/post_battle_event_funcs.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/post_battle_event_funcs.c.o
+.PHONY : gen/post_battle_event_funcs.c.o
+
+gen/post_battle_event_funcs.i: gen/post_battle_event_funcs.c.i
+.PHONY : gen/post_battle_event_funcs.i
+
+# target to preprocess a source file
+gen/post_battle_event_funcs.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/post_battle_event_funcs.c.i
+.PHONY : gen/post_battle_event_funcs.c.i
+
+gen/post_battle_event_funcs.s: gen/post_battle_event_funcs.c.s
+.PHONY : gen/post_battle_event_funcs.s
+
+# target to generate assembly for a file
+gen/post_battle_event_funcs.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/post_battle_event_funcs.c.s
+.PHONY : gen/post_battle_event_funcs.c.s
+
+gen/prof_pc.o: gen/prof_pc.c.o
+.PHONY : gen/prof_pc.o
+
+# target to build an object file
+gen/prof_pc.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/prof_pc.c.o
+.PHONY : gen/prof_pc.c.o
+
+gen/prof_pc.i: gen/prof_pc.c.i
+.PHONY : gen/prof_pc.i
+
+# target to preprocess a source file
+gen/prof_pc.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/prof_pc.c.i
+.PHONY : gen/prof_pc.c.i
+
+gen/prof_pc.s: gen/prof_pc.c.s
+.PHONY : gen/prof_pc.s
+
+# target to generate assembly for a file
+gen/prof_pc.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/prof_pc.c.s
+.PHONY : gen/prof_pc.c.s
+
+gen/quest_log.o: gen/quest_log.c.o
+.PHONY : gen/quest_log.o
+
+# target to build an object file
+gen/quest_log.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_quest_log.dir/build.make CMakeFiles/pfr_upstream_quest_log.dir/gen/quest_log.c.o
+.PHONY : gen/quest_log.c.o
+
+gen/quest_log.i: gen/quest_log.c.i
+.PHONY : gen/quest_log.i
+
+# target to preprocess a source file
+gen/quest_log.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_quest_log.dir/build.make CMakeFiles/pfr_upstream_quest_log.dir/gen/quest_log.c.i
+.PHONY : gen/quest_log.c.i
+
+gen/quest_log.s: gen/quest_log.c.s
+.PHONY : gen/quest_log.s
+
+# target to generate assembly for a file
+gen/quest_log.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_quest_log.dir/build.make CMakeFiles/pfr_upstream_quest_log.dir/gen/quest_log.c.s
+.PHONY : gen/quest_log.c.s
+
+gen/quest_log_battle.o: gen/quest_log_battle.c.o
+.PHONY : gen/quest_log_battle.o
+
+# target to build an object file
+gen/quest_log_battle.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/quest_log_battle.c.o
+.PHONY : gen/quest_log_battle.c.o
+
+gen/quest_log_battle.i: gen/quest_log_battle.c.i
+.PHONY : gen/quest_log_battle.i
+
+# target to preprocess a source file
+gen/quest_log_battle.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/quest_log_battle.c.i
+.PHONY : gen/quest_log_battle.c.i
+
+gen/quest_log_battle.s: gen/quest_log_battle.c.s
+.PHONY : gen/quest_log_battle.s
+
+# target to generate assembly for a file
+gen/quest_log_battle.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/quest_log_battle.c.s
+.PHONY : gen/quest_log_battle.c.s
+
+gen/quest_log_events.o: gen/quest_log_events.c.o
+.PHONY : gen/quest_log_events.o
+
+# target to build an object file
+gen/quest_log_events.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/quest_log_events.c.o
+.PHONY : gen/quest_log_events.c.o
+
+gen/quest_log_events.i: gen/quest_log_events.c.i
+.PHONY : gen/quest_log_events.i
+
+# target to preprocess a source file
+gen/quest_log_events.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/quest_log_events.c.i
+.PHONY : gen/quest_log_events.c.i
+
+gen/quest_log_events.s: gen/quest_log_events.c.s
+.PHONY : gen/quest_log_events.s
+
+# target to generate assembly for a file
+gen/quest_log_events.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/quest_log_events.c.s
+.PHONY : gen/quest_log_events.c.s
+
+gen/quest_log_objects.o: gen/quest_log_objects.c.o
+.PHONY : gen/quest_log_objects.o
+
+# target to build an object file
+gen/quest_log_objects.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/quest_log_objects.c.o
+.PHONY : gen/quest_log_objects.c.o
+
+gen/quest_log_objects.i: gen/quest_log_objects.c.i
+.PHONY : gen/quest_log_objects.i
+
+# target to preprocess a source file
+gen/quest_log_objects.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/quest_log_objects.c.i
+.PHONY : gen/quest_log_objects.c.i
+
+gen/quest_log_objects.s: gen/quest_log_objects.c.s
+.PHONY : gen/quest_log_objects.s
+
+# target to generate assembly for a file
+gen/quest_log_objects.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/quest_log_objects.c.s
+.PHONY : gen/quest_log_objects.c.s
+
+gen/quest_log_player.o: gen/quest_log_player.c.o
+.PHONY : gen/quest_log_player.o
+
+# target to build an object file
+gen/quest_log_player.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/quest_log_player.c.o
+.PHONY : gen/quest_log_player.c.o
+
+gen/quest_log_player.i: gen/quest_log_player.c.i
+.PHONY : gen/quest_log_player.i
+
+# target to preprocess a source file
+gen/quest_log_player.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/quest_log_player.c.i
+.PHONY : gen/quest_log_player.c.i
+
+gen/quest_log_player.s: gen/quest_log_player.c.s
+.PHONY : gen/quest_log_player.s
+
+# target to generate assembly for a file
+gen/quest_log_player.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/quest_log_player.c.s
+.PHONY : gen/quest_log_player.c.s
+
+gen/random.o: gen/random.c.o
+.PHONY : gen/random.o
+
+# target to build an object file
+gen/random.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/random.c.o
+.PHONY : gen/random.c.o
+
+gen/random.i: gen/random.c.i
+.PHONY : gen/random.i
+
+# target to preprocess a source file
+gen/random.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/random.c.i
+.PHONY : gen/random.c.i
+
+gen/random.s: gen/random.c.s
+.PHONY : gen/random.s
+
+# target to generate assembly for a file
+gen/random.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/random.c.s
+.PHONY : gen/random.c.s
+
+gen/region_map.o: gen/region_map.c.o
+.PHONY : gen/region_map.o
+
+# target to build an object file
+gen/region_map.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_region_map.dir/build.make CMakeFiles/pfr_upstream_region_map.dir/gen/region_map.c.o
+.PHONY : gen/region_map.c.o
+
+gen/region_map.i: gen/region_map.c.i
+.PHONY : gen/region_map.i
+
+# target to preprocess a source file
+gen/region_map.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_region_map.dir/build.make CMakeFiles/pfr_upstream_region_map.dir/gen/region_map.c.i
+.PHONY : gen/region_map.c.i
+
+gen/region_map.s: gen/region_map.c.s
+.PHONY : gen/region_map.s
+
+# target to generate assembly for a file
+gen/region_map.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_region_map.dir/build.make CMakeFiles/pfr_upstream_region_map.dir/gen/region_map.c.s
+.PHONY : gen/region_map.c.s
+
+gen/renewable_hidden_items.o: gen/renewable_hidden_items.c.o
+.PHONY : gen/renewable_hidden_items.o
+
+# target to build an object file
+gen/renewable_hidden_items.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/renewable_hidden_items.c.o
+.PHONY : gen/renewable_hidden_items.c.o
+
+gen/renewable_hidden_items.i: gen/renewable_hidden_items.c.i
+.PHONY : gen/renewable_hidden_items.i
+
+# target to preprocess a source file
+gen/renewable_hidden_items.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/renewable_hidden_items.c.i
+.PHONY : gen/renewable_hidden_items.c.i
+
+gen/renewable_hidden_items.s: gen/renewable_hidden_items.c.s
+.PHONY : gen/renewable_hidden_items.s
+
+# target to generate assembly for a file
+gen/renewable_hidden_items.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/renewable_hidden_items.c.s
+.PHONY : gen/renewable_hidden_items.c.s
+
+gen/reset_save_heap.o: gen/reset_save_heap.c.o
+.PHONY : gen/reset_save_heap.o
+
+# target to build an object file
+gen/reset_save_heap.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/reset_save_heap.c.o
+.PHONY : gen/reset_save_heap.c.o
+
+gen/reset_save_heap.i: gen/reset_save_heap.c.i
+.PHONY : gen/reset_save_heap.i
+
+# target to preprocess a source file
+gen/reset_save_heap.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/reset_save_heap.c.i
+.PHONY : gen/reset_save_heap.c.i
+
+gen/reset_save_heap.s: gen/reset_save_heap.c.s
+.PHONY : gen/reset_save_heap.s
+
+# target to generate assembly for a file
+gen/reset_save_heap.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/reset_save_heap.c.s
+.PHONY : gen/reset_save_heap.c.s
+
+gen/reshow_battle_screen.o: gen/reshow_battle_screen.c.o
+.PHONY : gen/reshow_battle_screen.o
+
+# target to build an object file
+gen/reshow_battle_screen.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/reshow_battle_screen.c.o
+.PHONY : gen/reshow_battle_screen.c.o
+
+gen/reshow_battle_screen.i: gen/reshow_battle_screen.c.i
+.PHONY : gen/reshow_battle_screen.i
+
+# target to preprocess a source file
+gen/reshow_battle_screen.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/reshow_battle_screen.c.i
+.PHONY : gen/reshow_battle_screen.c.i
+
+gen/reshow_battle_screen.s: gen/reshow_battle_screen.c.s
+.PHONY : gen/reshow_battle_screen.s
+
+# target to generate assembly for a file
+gen/reshow_battle_screen.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/reshow_battle_screen.c.s
+.PHONY : gen/reshow_battle_screen.c.s
+
+gen/roamer.o: gen/roamer.c.o
+.PHONY : gen/roamer.o
+
+# target to build an object file
+gen/roamer.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/roamer.c.o
+.PHONY : gen/roamer.c.o
+
+gen/roamer.i: gen/roamer.c.i
+.PHONY : gen/roamer.i
+
+# target to preprocess a source file
+gen/roamer.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/roamer.c.i
+.PHONY : gen/roamer.c.i
+
+gen/roamer.s: gen/roamer.c.s
+.PHONY : gen/roamer.s
+
+# target to generate assembly for a file
+gen/roamer.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/roamer.c.s
+.PHONY : gen/roamer.c.s
+
+gen/rom_header_gf.o: gen/rom_header_gf.c.o
+.PHONY : gen/rom_header_gf.o
+
+# target to build an object file
+gen/rom_header_gf.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/rom_header_gf.c.o
+.PHONY : gen/rom_header_gf.c.o
+
+gen/rom_header_gf.i: gen/rom_header_gf.c.i
+.PHONY : gen/rom_header_gf.i
+
+# target to preprocess a source file
+gen/rom_header_gf.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/rom_header_gf.c.i
+.PHONY : gen/rom_header_gf.c.i
+
+gen/rom_header_gf.s: gen/rom_header_gf.c.s
+.PHONY : gen/rom_header_gf.s
+
+# target to generate assembly for a file
+gen/rom_header_gf.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/rom_header_gf.c.s
+.PHONY : gen/rom_header_gf.c.s
+
+gen/safari_zone.o: gen/safari_zone.c.o
+.PHONY : gen/safari_zone.o
+
+# target to build an object file
+gen/safari_zone.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/safari_zone.c.o
+.PHONY : gen/safari_zone.c.o
+
+gen/safari_zone.i: gen/safari_zone.c.i
+.PHONY : gen/safari_zone.i
+
+# target to preprocess a source file
+gen/safari_zone.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/safari_zone.c.i
+.PHONY : gen/safari_zone.c.i
+
+gen/safari_zone.s: gen/safari_zone.c.s
+.PHONY : gen/safari_zone.s
+
+# target to generate assembly for a file
+gen/safari_zone.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/safari_zone.c.s
+.PHONY : gen/safari_zone.c.s
+
+gen/save.o: gen/save.c.o
+.PHONY : gen/save.o
+
+# target to build an object file
+gen/save.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/save.c.o
+.PHONY : gen/save.c.o
+
+gen/save.i: gen/save.c.i
+.PHONY : gen/save.i
+
+# target to preprocess a source file
+gen/save.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/save.c.i
+.PHONY : gen/save.c.i
+
+gen/save.s: gen/save.c.s
+.PHONY : gen/save.s
+
+# target to generate assembly for a file
+gen/save.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/save.c.s
+.PHONY : gen/save.c.s
+
+gen/save_failed_screen.o: gen/save_failed_screen.c.o
+.PHONY : gen/save_failed_screen.o
+
+# target to build an object file
+gen/save_failed_screen.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_save_failed_screen.dir/build.make CMakeFiles/pfr_upstream_save_failed_screen.dir/gen/save_failed_screen.c.o
+.PHONY : gen/save_failed_screen.c.o
+
+gen/save_failed_screen.i: gen/save_failed_screen.c.i
+.PHONY : gen/save_failed_screen.i
+
+# target to preprocess a source file
+gen/save_failed_screen.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_save_failed_screen.dir/build.make CMakeFiles/pfr_upstream_save_failed_screen.dir/gen/save_failed_screen.c.i
+.PHONY : gen/save_failed_screen.c.i
+
+gen/save_failed_screen.s: gen/save_failed_screen.c.s
+.PHONY : gen/save_failed_screen.s
+
+# target to generate assembly for a file
+gen/save_failed_screen.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_save_failed_screen.dir/build.make CMakeFiles/pfr_upstream_save_failed_screen.dir/gen/save_failed_screen.c.s
+.PHONY : gen/save_failed_screen.c.s
+
+gen/save_location.o: gen/save_location.c.o
+.PHONY : gen/save_location.o
+
+# target to build an object file
+gen/save_location.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/save_location.c.o
+.PHONY : gen/save_location.c.o
+
+gen/save_location.i: gen/save_location.c.i
+.PHONY : gen/save_location.i
+
+# target to preprocess a source file
+gen/save_location.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/save_location.c.i
+.PHONY : gen/save_location.c.i
+
+gen/save_location.s: gen/save_location.c.s
+.PHONY : gen/save_location.s
+
+# target to generate assembly for a file
+gen/save_location.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/save_location.c.s
+.PHONY : gen/save_location.c.s
+
+gen/save_menu_util.o: gen/save_menu_util.c.o
+.PHONY : gen/save_menu_util.o
+
+# target to build an object file
+gen/save_menu_util.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/save_menu_util.c.o
+.PHONY : gen/save_menu_util.c.o
+
+gen/save_menu_util.i: gen/save_menu_util.c.i
+.PHONY : gen/save_menu_util.i
+
+# target to preprocess a source file
+gen/save_menu_util.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/save_menu_util.c.i
+.PHONY : gen/save_menu_util.c.i
+
+gen/save_menu_util.s: gen/save_menu_util.c.s
+.PHONY : gen/save_menu_util.s
+
+# target to generate assembly for a file
+gen/save_menu_util.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/save_menu_util.c.s
+.PHONY : gen/save_menu_util.c.s
+
+gen/scanline_effect.o: gen/scanline_effect.c.o
+.PHONY : gen/scanline_effect.o
+
+# target to build an object file
+gen/scanline_effect.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/scanline_effect.c.o
+.PHONY : gen/scanline_effect.c.o
+
+gen/scanline_effect.i: gen/scanline_effect.c.i
+.PHONY : gen/scanline_effect.i
+
+# target to preprocess a source file
+gen/scanline_effect.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/scanline_effect.c.i
+.PHONY : gen/scanline_effect.c.i
+
+gen/scanline_effect.s: gen/scanline_effect.c.s
+.PHONY : gen/scanline_effect.s
+
+# target to generate assembly for a file
+gen/scanline_effect.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/scanline_effect.c.s
+.PHONY : gen/scanline_effect.c.s
+
+gen/scrcmd.o: gen/scrcmd.c.o
+.PHONY : gen/scrcmd.o
+
+# target to build an object file
+gen/scrcmd.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/scrcmd.c.o
+.PHONY : gen/scrcmd.c.o
+
+gen/scrcmd.i: gen/scrcmd.c.i
+.PHONY : gen/scrcmd.i
+
+# target to preprocess a source file
+gen/scrcmd.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/scrcmd.c.i
+.PHONY : gen/scrcmd.c.i
+
+gen/scrcmd.s: gen/scrcmd.c.s
+.PHONY : gen/scrcmd.s
+
+# target to generate assembly for a file
+gen/scrcmd.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/scrcmd.c.s
+.PHONY : gen/scrcmd.c.s
+
+gen/script.o: gen/script.c.o
+.PHONY : gen/script.o
+
+# target to build an object file
+gen/script.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/script.c.o
+.PHONY : gen/script.c.o
+
+gen/script.i: gen/script.c.i
+.PHONY : gen/script.i
+
+# target to preprocess a source file
+gen/script.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/script.c.i
+.PHONY : gen/script.c.i
+
+gen/script.s: gen/script.c.s
+.PHONY : gen/script.s
+
+# target to generate assembly for a file
+gen/script.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/script.c.s
+.PHONY : gen/script.c.s
+
+gen/script_menu.o: gen/script_menu.c.o
+.PHONY : gen/script_menu.o
+
+# target to build an object file
+gen/script_menu.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_script_menu.dir/build.make CMakeFiles/pfr_upstream_script_menu.dir/gen/script_menu.c.o
+.PHONY : gen/script_menu.c.o
+
+gen/script_menu.i: gen/script_menu.c.i
+.PHONY : gen/script_menu.i
+
+# target to preprocess a source file
+gen/script_menu.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_script_menu.dir/build.make CMakeFiles/pfr_upstream_script_menu.dir/gen/script_menu.c.i
+.PHONY : gen/script_menu.c.i
+
+gen/script_menu.s: gen/script_menu.c.s
+.PHONY : gen/script_menu.s
+
+# target to generate assembly for a file
+gen/script_menu.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_script_menu.dir/build.make CMakeFiles/pfr_upstream_script_menu.dir/gen/script_menu.c.s
+.PHONY : gen/script_menu.c.s
+
+gen/script_movement.o: gen/script_movement.c.o
+.PHONY : gen/script_movement.o
+
+# target to build an object file
+gen/script_movement.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/script_movement.c.o
+.PHONY : gen/script_movement.c.o
+
+gen/script_movement.i: gen/script_movement.c.i
+.PHONY : gen/script_movement.i
+
+# target to preprocess a source file
+gen/script_movement.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/script_movement.c.i
+.PHONY : gen/script_movement.c.i
+
+gen/script_movement.s: gen/script_movement.c.s
+.PHONY : gen/script_movement.s
+
+# target to generate assembly for a file
+gen/script_movement.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/script_movement.c.s
+.PHONY : gen/script_movement.c.s
+
+gen/script_pokemon_util.o: gen/script_pokemon_util.c.o
+.PHONY : gen/script_pokemon_util.o
+
+# target to build an object file
+gen/script_pokemon_util.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/script_pokemon_util.c.o
+.PHONY : gen/script_pokemon_util.c.o
+
+gen/script_pokemon_util.i: gen/script_pokemon_util.c.i
+.PHONY : gen/script_pokemon_util.i
+
+# target to preprocess a source file
+gen/script_pokemon_util.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/script_pokemon_util.c.i
+.PHONY : gen/script_pokemon_util.c.i
+
+gen/script_pokemon_util.s: gen/script_pokemon_util.c.s
+.PHONY : gen/script_pokemon_util.s
+
+# target to generate assembly for a file
+gen/script_pokemon_util.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/script_pokemon_util.c.s
+.PHONY : gen/script_pokemon_util.c.s
+
+gen/seagallop.o: gen/seagallop.c.o
+.PHONY : gen/seagallop.o
+
+# target to build an object file
+gen/seagallop.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_seagallop.dir/build.make CMakeFiles/pfr_upstream_seagallop.dir/gen/seagallop.c.o
+.PHONY : gen/seagallop.c.o
+
+gen/seagallop.i: gen/seagallop.c.i
+.PHONY : gen/seagallop.i
+
+# target to preprocess a source file
+gen/seagallop.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_seagallop.dir/build.make CMakeFiles/pfr_upstream_seagallop.dir/gen/seagallop.c.i
+.PHONY : gen/seagallop.c.i
+
+gen/seagallop.s: gen/seagallop.c.s
+.PHONY : gen/seagallop.s
+
+# target to generate assembly for a file
+gen/seagallop.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_seagallop.dir/build.make CMakeFiles/pfr_upstream_seagallop.dir/gen/seagallop.c.s
+.PHONY : gen/seagallop.c.s
+
+gen/shop.o: gen/shop.c.o
+.PHONY : gen/shop.o
+
+# target to build an object file
+gen/shop.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/shop.c.o
+.PHONY : gen/shop.c.o
+
+gen/shop.i: gen/shop.c.i
+.PHONY : gen/shop.i
+
+# target to preprocess a source file
+gen/shop.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/shop.c.i
+.PHONY : gen/shop.c.i
+
+gen/shop.s: gen/shop.c.s
+.PHONY : gen/shop.s
+
+# target to generate assembly for a file
+gen/shop.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/shop.c.s
+.PHONY : gen/shop.c.s
+
+gen/slot_machine.o: gen/slot_machine.c.o
+.PHONY : gen/slot_machine.o
+
+# target to build an object file
+gen/slot_machine.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_slot_machine.dir/build.make CMakeFiles/pfr_upstream_slot_machine.dir/gen/slot_machine.c.o
+.PHONY : gen/slot_machine.c.o
+
+gen/slot_machine.i: gen/slot_machine.c.i
+.PHONY : gen/slot_machine.i
+
+# target to preprocess a source file
+gen/slot_machine.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_slot_machine.dir/build.make CMakeFiles/pfr_upstream_slot_machine.dir/gen/slot_machine.c.i
+.PHONY : gen/slot_machine.c.i
+
+gen/slot_machine.s: gen/slot_machine.c.s
+.PHONY : gen/slot_machine.s
+
+# target to generate assembly for a file
+gen/slot_machine.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_slot_machine.dir/build.make CMakeFiles/pfr_upstream_slot_machine.dir/gen/slot_machine.c.s
+.PHONY : gen/slot_machine.c.s
+
+gen/sound.o: gen/sound.c.o
+.PHONY : gen/sound.o
+
+# target to build an object file
+gen/sound.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/sound.c.o
+.PHONY : gen/sound.c.o
+
+gen/sound.i: gen/sound.c.i
+.PHONY : gen/sound.i
+
+# target to preprocess a source file
+gen/sound.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/sound.c.i
+.PHONY : gen/sound.c.i
+
+gen/sound.s: gen/sound.c.s
+.PHONY : gen/sound.s
+
+# target to generate assembly for a file
+gen/sound.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/sound.c.s
+.PHONY : gen/sound.c.s
+
+gen/special_field_anim.o: gen/special_field_anim.c.o
+.PHONY : gen/special_field_anim.o
+
+# target to build an object file
+gen/special_field_anim.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/special_field_anim.c.o
+.PHONY : gen/special_field_anim.c.o
+
+gen/special_field_anim.i: gen/special_field_anim.c.i
+.PHONY : gen/special_field_anim.i
+
+# target to preprocess a source file
+gen/special_field_anim.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/special_field_anim.c.i
+.PHONY : gen/special_field_anim.c.i
+
+gen/special_field_anim.s: gen/special_field_anim.c.s
+.PHONY : gen/special_field_anim.s
+
+# target to generate assembly for a file
+gen/special_field_anim.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/special_field_anim.c.s
+.PHONY : gen/special_field_anim.c.s
+
+gen/sprite.o: gen/sprite.c.o
+.PHONY : gen/sprite.o
+
+# target to build an object file
+gen/sprite.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/sprite.c.o
+.PHONY : gen/sprite.c.o
+
+gen/sprite.i: gen/sprite.c.i
+.PHONY : gen/sprite.i
+
+# target to preprocess a source file
+gen/sprite.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/sprite.c.i
+.PHONY : gen/sprite.c.i
+
+gen/sprite.s: gen/sprite.c.s
+.PHONY : gen/sprite.s
+
+# target to generate assembly for a file
+gen/sprite.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/sprite.c.s
+.PHONY : gen/sprite.c.s
+
+gen/ss_anne.o: gen/ss_anne.c.o
+.PHONY : gen/ss_anne.o
+
+# target to build an object file
+gen/ss_anne.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_ss_anne.dir/build.make CMakeFiles/pfr_upstream_ss_anne.dir/gen/ss_anne.c.o
+.PHONY : gen/ss_anne.c.o
+
+gen/ss_anne.i: gen/ss_anne.c.i
+.PHONY : gen/ss_anne.i
+
+# target to preprocess a source file
+gen/ss_anne.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_ss_anne.dir/build.make CMakeFiles/pfr_upstream_ss_anne.dir/gen/ss_anne.c.i
+.PHONY : gen/ss_anne.c.i
+
+gen/ss_anne.s: gen/ss_anne.c.s
+.PHONY : gen/ss_anne.s
+
+# target to generate assembly for a file
+gen/ss_anne.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_ss_anne.dir/build.make CMakeFiles/pfr_upstream_ss_anne.dir/gen/ss_anne.c.s
+.PHONY : gen/ss_anne.c.s
+
+gen/start_menu.o: gen/start_menu.c.o
+.PHONY : gen/start_menu.o
+
+# target to build an object file
+gen/start_menu.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/start_menu.c.o
+.PHONY : gen/start_menu.c.o
+
+gen/start_menu.i: gen/start_menu.c.i
+.PHONY : gen/start_menu.i
+
+# target to preprocess a source file
+gen/start_menu.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/start_menu.c.i
+.PHONY : gen/start_menu.c.i
+
+gen/start_menu.s: gen/start_menu.c.s
+.PHONY : gen/start_menu.s
+
+# target to generate assembly for a file
+gen/start_menu.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/start_menu.c.s
+.PHONY : gen/start_menu.c.s
+
+gen/string_util.o: gen/string_util.c.o
+.PHONY : gen/string_util.o
+
+# target to build an object file
+gen/string_util.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/string_util.c.o
+.PHONY : gen/string_util.c.o
+
+gen/string_util.i: gen/string_util.c.i
+.PHONY : gen/string_util.i
+
+# target to preprocess a source file
+gen/string_util.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/string_util.c.i
+.PHONY : gen/string_util.c.i
+
+gen/string_util.s: gen/string_util.c.s
+.PHONY : gen/string_util.s
+
+# target to generate assembly for a file
+gen/string_util.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/string_util.c.s
+.PHONY : gen/string_util.c.s
+
+gen/strings.o: gen/strings.c.o
+.PHONY : gen/strings.o
+
+# target to build an object file
+gen/strings.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/strings.c.o
+.PHONY : gen/strings.c.o
+
+gen/strings.i: gen/strings.c.i
+.PHONY : gen/strings.i
+
+# target to preprocess a source file
+gen/strings.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/strings.c.i
+.PHONY : gen/strings.c.i
+
+gen/strings.s: gen/strings.c.s
+.PHONY : gen/strings.s
+
+# target to generate assembly for a file
+gen/strings.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/strings.c.s
+.PHONY : gen/strings.c.s
+
+gen/task.o: gen/task.c.o
+.PHONY : gen/task.o
+
+# target to build an object file
+gen/task.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/task.c.o
+.PHONY : gen/task.c.o
+
+gen/task.i: gen/task.c.i
+.PHONY : gen/task.i
+
+# target to preprocess a source file
+gen/task.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/task.c.i
+.PHONY : gen/task.c.i
+
+gen/task.s: gen/task.c.s
+.PHONY : gen/task.s
+
+# target to generate assembly for a file
+gen/task.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/task.c.s
+.PHONY : gen/task.c.s
+
+gen/teachy_tv.o: gen/teachy_tv.c.o
+.PHONY : gen/teachy_tv.o
+
+# target to build an object file
+gen/teachy_tv.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/teachy_tv.c.o
+.PHONY : gen/teachy_tv.c.o
+
+gen/teachy_tv.i: gen/teachy_tv.c.i
+.PHONY : gen/teachy_tv.i
+
+# target to preprocess a source file
+gen/teachy_tv.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/teachy_tv.c.i
+.PHONY : gen/teachy_tv.c.i
+
+gen/teachy_tv.s: gen/teachy_tv.c.s
+.PHONY : gen/teachy_tv.s
+
+# target to generate assembly for a file
+gen/teachy_tv.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/teachy_tv.c.s
+.PHONY : gen/teachy_tv.c.s
+
+gen/text.o: gen/text.c.o
+.PHONY : gen/text.o
+
+# target to build an object file
+gen/text.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_text.dir/build.make CMakeFiles/pfr_upstream_text.dir/gen/text.c.o
+.PHONY : gen/text.c.o
+
+gen/text.i: gen/text.c.i
+.PHONY : gen/text.i
+
+# target to preprocess a source file
+gen/text.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_text.dir/build.make CMakeFiles/pfr_upstream_text.dir/gen/text.c.i
+.PHONY : gen/text.c.i
+
+gen/text.s: gen/text.c.s
+.PHONY : gen/text.s
+
+# target to generate assembly for a file
+gen/text.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_text.dir/build.make CMakeFiles/pfr_upstream_text.dir/gen/text.c.s
+.PHONY : gen/text.c.s
+
+gen/text_printer.o: gen/text_printer.c.o
+.PHONY : gen/text_printer.o
+
+# target to build an object file
+gen/text_printer.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/text_printer.c.o
+.PHONY : gen/text_printer.c.o
+
+gen/text_printer.i: gen/text_printer.c.i
+.PHONY : gen/text_printer.i
+
+# target to preprocess a source file
+gen/text_printer.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/text_printer.c.i
+.PHONY : gen/text_printer.c.i
+
+gen/text_printer.s: gen/text_printer.c.s
+.PHONY : gen/text_printer.s
+
+# target to generate assembly for a file
+gen/text_printer.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/text_printer.c.s
+.PHONY : gen/text_printer.c.s
+
+gen/text_window.o: gen/text_window.c.o
+.PHONY : gen/text_window.o
+
+# target to build an object file
+gen/text_window.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/text_window.c.o
+.PHONY : gen/text_window.c.o
+
+gen/text_window.i: gen/text_window.c.i
+.PHONY : gen/text_window.i
+
+# target to preprocess a source file
+gen/text_window.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/text_window.c.i
+.PHONY : gen/text_window.c.i
+
+gen/text_window.s: gen/text_window.c.s
+.PHONY : gen/text_window.s
+
+# target to generate assembly for a file
+gen/text_window.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/text_window.c.s
+.PHONY : gen/text_window.c.s
+
+gen/text_window_graphics.o: gen/text_window_graphics.c.o
+.PHONY : gen/text_window_graphics.o
+
+# target to build an object file
+gen/text_window_graphics.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_text_window_graphics.dir/build.make CMakeFiles/pfr_upstream_text_window_graphics.dir/gen/text_window_graphics.c.o
+.PHONY : gen/text_window_graphics.c.o
+
+gen/text_window_graphics.i: gen/text_window_graphics.c.i
+.PHONY : gen/text_window_graphics.i
+
+# target to preprocess a source file
+gen/text_window_graphics.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_text_window_graphics.dir/build.make CMakeFiles/pfr_upstream_text_window_graphics.dir/gen/text_window_graphics.c.i
+.PHONY : gen/text_window_graphics.c.i
+
+gen/text_window_graphics.s: gen/text_window_graphics.c.s
+.PHONY : gen/text_window_graphics.s
+
+# target to generate assembly for a file
+gen/text_window_graphics.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_text_window_graphics.dir/build.make CMakeFiles/pfr_upstream_text_window_graphics.dir/gen/text_window_graphics.c.s
+.PHONY : gen/text_window_graphics.c.s
+
+gen/tilemap_util.o: gen/tilemap_util.c.o
+.PHONY : gen/tilemap_util.o
+
+# target to build an object file
+gen/tilemap_util.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/tilemap_util.c.o
+.PHONY : gen/tilemap_util.c.o
+
+gen/tilemap_util.i: gen/tilemap_util.c.i
+.PHONY : gen/tilemap_util.i
+
+# target to preprocess a source file
+gen/tilemap_util.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/tilemap_util.c.i
+.PHONY : gen/tilemap_util.c.i
+
+gen/tilemap_util.s: gen/tilemap_util.c.s
+.PHONY : gen/tilemap_util.s
+
+# target to generate assembly for a file
+gen/tilemap_util.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/tilemap_util.c.s
+.PHONY : gen/tilemap_util.c.s
+
+gen/tileset_anims.o: gen/tileset_anims.c.o
+.PHONY : gen/tileset_anims.o
+
+# target to build an object file
+gen/tileset_anims.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_tileset_anims.dir/build.make CMakeFiles/pfr_upstream_tileset_anims.dir/gen/tileset_anims.c.o
+.PHONY : gen/tileset_anims.c.o
+
+gen/tileset_anims.i: gen/tileset_anims.c.i
+.PHONY : gen/tileset_anims.i
+
+# target to preprocess a source file
+gen/tileset_anims.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_tileset_anims.dir/build.make CMakeFiles/pfr_upstream_tileset_anims.dir/gen/tileset_anims.c.i
+.PHONY : gen/tileset_anims.c.i
+
+gen/tileset_anims.s: gen/tileset_anims.c.s
+.PHONY : gen/tileset_anims.s
+
+# target to generate assembly for a file
+gen/tileset_anims.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_tileset_anims.dir/build.make CMakeFiles/pfr_upstream_tileset_anims.dir/gen/tileset_anims.c.s
+.PHONY : gen/tileset_anims.c.s
+
+gen/tilesets.o: gen/tilesets.c.o
+.PHONY : gen/tilesets.o
+
+# target to build an object file
+gen/tilesets.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_tilesets.dir/build.make CMakeFiles/pfr_upstream_tilesets.dir/gen/tilesets.c.o
+.PHONY : gen/tilesets.c.o
+
+gen/tilesets.i: gen/tilesets.c.i
+.PHONY : gen/tilesets.i
+
+# target to preprocess a source file
+gen/tilesets.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_tilesets.dir/build.make CMakeFiles/pfr_upstream_tilesets.dir/gen/tilesets.c.i
+.PHONY : gen/tilesets.c.i
+
+gen/tilesets.s: gen/tilesets.c.s
+.PHONY : gen/tilesets.s
+
+# target to generate assembly for a file
+gen/tilesets.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_tilesets.dir/build.make CMakeFiles/pfr_upstream_tilesets.dir/gen/tilesets.c.s
+.PHONY : gen/tilesets.c.s
+
 gen/title_screen.o: gen/title_screen.c.o
 .PHONY : gen/title_screen.o
 
@@ -333,413 +7596,869 @@ gen/title_screen.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_title.dir/build.make CMakeFiles/pfr_upstream_title.dir/gen/title_screen.c.s
 .PHONY : gen/title_screen.c.s
 
-home/spark-advantage/pokefirered/src/berry_fix_program.o: home/spark-advantage/pokefirered/src/berry_fix_program.c.o
-.PHONY : home/spark-advantage/pokefirered/src/berry_fix_program.o
+gen/tm_case.o: gen/tm_case.c.o
+.PHONY : gen/tm_case.o
 
 # target to build an object file
-home/spark-advantage/pokefirered/src/berry_fix_program.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_berry_fix.dir/build.make CMakeFiles/pfr_upstream_berry_fix.dir/home/spark-advantage/pokefirered/src/berry_fix_program.c.o
-.PHONY : home/spark-advantage/pokefirered/src/berry_fix_program.c.o
+gen/tm_case.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/tm_case.c.o
+.PHONY : gen/tm_case.c.o
 
-home/spark-advantage/pokefirered/src/berry_fix_program.i: home/spark-advantage/pokefirered/src/berry_fix_program.c.i
-.PHONY : home/spark-advantage/pokefirered/src/berry_fix_program.i
+gen/tm_case.i: gen/tm_case.c.i
+.PHONY : gen/tm_case.i
 
 # target to preprocess a source file
-home/spark-advantage/pokefirered/src/berry_fix_program.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_berry_fix.dir/build.make CMakeFiles/pfr_upstream_berry_fix.dir/home/spark-advantage/pokefirered/src/berry_fix_program.c.i
-.PHONY : home/spark-advantage/pokefirered/src/berry_fix_program.c.i
+gen/tm_case.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/tm_case.c.i
+.PHONY : gen/tm_case.c.i
 
-home/spark-advantage/pokefirered/src/berry_fix_program.s: home/spark-advantage/pokefirered/src/berry_fix_program.c.s
-.PHONY : home/spark-advantage/pokefirered/src/berry_fix_program.s
+gen/tm_case.s: gen/tm_case.c.s
+.PHONY : gen/tm_case.s
 
 # target to generate assembly for a file
-home/spark-advantage/pokefirered/src/berry_fix_program.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_berry_fix.dir/build.make CMakeFiles/pfr_upstream_berry_fix.dir/home/spark-advantage/pokefirered/src/berry_fix_program.c.s
-.PHONY : home/spark-advantage/pokefirered/src/berry_fix_program.c.s
+gen/tm_case.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/tm_case.c.s
+.PHONY : gen/tm_case.c.s
 
-home/spark-advantage/pokefirered/src/bg.o: home/spark-advantage/pokefirered/src/bg.c.o
-.PHONY : home/spark-advantage/pokefirered/src/bg.o
+gen/trade.o: gen/trade.c.o
+.PHONY : gen/trade.o
 
 # target to build an object file
-home/spark-advantage/pokefirered/src/bg.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/bg.c.o
-.PHONY : home/spark-advantage/pokefirered/src/bg.c.o
+gen/trade.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_trade.dir/build.make CMakeFiles/pfr_upstream_trade.dir/gen/trade.c.o
+.PHONY : gen/trade.c.o
 
-home/spark-advantage/pokefirered/src/bg.i: home/spark-advantage/pokefirered/src/bg.c.i
-.PHONY : home/spark-advantage/pokefirered/src/bg.i
+gen/trade.i: gen/trade.c.i
+.PHONY : gen/trade.i
 
 # target to preprocess a source file
-home/spark-advantage/pokefirered/src/bg.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/bg.c.i
-.PHONY : home/spark-advantage/pokefirered/src/bg.c.i
+gen/trade.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_trade.dir/build.make CMakeFiles/pfr_upstream_trade.dir/gen/trade.c.i
+.PHONY : gen/trade.c.i
 
-home/spark-advantage/pokefirered/src/bg.s: home/spark-advantage/pokefirered/src/bg.c.s
-.PHONY : home/spark-advantage/pokefirered/src/bg.s
+gen/trade.s: gen/trade.c.s
+.PHONY : gen/trade.s
 
 # target to generate assembly for a file
-home/spark-advantage/pokefirered/src/bg.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/bg.c.s
-.PHONY : home/spark-advantage/pokefirered/src/bg.c.s
+gen/trade.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_trade.dir/build.make CMakeFiles/pfr_upstream_trade.dir/gen/trade.c.s
+.PHONY : gen/trade.c.s
 
-home/spark-advantage/pokefirered/src/blend_palette.o: home/spark-advantage/pokefirered/src/blend_palette.c.o
-.PHONY : home/spark-advantage/pokefirered/src/blend_palette.o
+gen/trade_scene.o: gen/trade_scene.c.o
+.PHONY : gen/trade_scene.o
 
 # target to build an object file
-home/spark-advantage/pokefirered/src/blend_palette.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/blend_palette.c.o
-.PHONY : home/spark-advantage/pokefirered/src/blend_palette.c.o
+gen/trade_scene.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_trade_scene.dir/build.make CMakeFiles/pfr_upstream_trade_scene.dir/gen/trade_scene.c.o
+.PHONY : gen/trade_scene.c.o
 
-home/spark-advantage/pokefirered/src/blend_palette.i: home/spark-advantage/pokefirered/src/blend_palette.c.i
-.PHONY : home/spark-advantage/pokefirered/src/blend_palette.i
+gen/trade_scene.i: gen/trade_scene.c.i
+.PHONY : gen/trade_scene.i
 
 # target to preprocess a source file
-home/spark-advantage/pokefirered/src/blend_palette.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/blend_palette.c.i
-.PHONY : home/spark-advantage/pokefirered/src/blend_palette.c.i
+gen/trade_scene.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_trade_scene.dir/build.make CMakeFiles/pfr_upstream_trade_scene.dir/gen/trade_scene.c.i
+.PHONY : gen/trade_scene.c.i
 
-home/spark-advantage/pokefirered/src/blend_palette.s: home/spark-advantage/pokefirered/src/blend_palette.c.s
-.PHONY : home/spark-advantage/pokefirered/src/blend_palette.s
+gen/trade_scene.s: gen/trade_scene.c.s
+.PHONY : gen/trade_scene.s
 
 # target to generate assembly for a file
-home/spark-advantage/pokefirered/src/blend_palette.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/blend_palette.c.s
-.PHONY : home/spark-advantage/pokefirered/src/blend_palette.c.s
+gen/trade_scene.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_trade_scene.dir/build.make CMakeFiles/pfr_upstream_trade_scene.dir/gen/trade_scene.c.s
+.PHONY : gen/trade_scene.c.s
 
-home/spark-advantage/pokefirered/src/clear_save_data_screen.o: home/spark-advantage/pokefirered/src/clear_save_data_screen.c.o
-.PHONY : home/spark-advantage/pokefirered/src/clear_save_data_screen.o
+gen/trainer_card.o: gen/trainer_card.c.o
+.PHONY : gen/trainer_card.o
 
 # target to build an object file
-home/spark-advantage/pokefirered/src/clear_save_data_screen.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_clear_save.dir/build.make CMakeFiles/pfr_upstream_clear_save.dir/home/spark-advantage/pokefirered/src/clear_save_data_screen.c.o
-.PHONY : home/spark-advantage/pokefirered/src/clear_save_data_screen.c.o
+gen/trainer_card.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_trainer_card.dir/build.make CMakeFiles/pfr_upstream_trainer_card.dir/gen/trainer_card.c.o
+.PHONY : gen/trainer_card.c.o
 
-home/spark-advantage/pokefirered/src/clear_save_data_screen.i: home/spark-advantage/pokefirered/src/clear_save_data_screen.c.i
-.PHONY : home/spark-advantage/pokefirered/src/clear_save_data_screen.i
+gen/trainer_card.i: gen/trainer_card.c.i
+.PHONY : gen/trainer_card.i
 
 # target to preprocess a source file
-home/spark-advantage/pokefirered/src/clear_save_data_screen.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_clear_save.dir/build.make CMakeFiles/pfr_upstream_clear_save.dir/home/spark-advantage/pokefirered/src/clear_save_data_screen.c.i
-.PHONY : home/spark-advantage/pokefirered/src/clear_save_data_screen.c.i
+gen/trainer_card.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_trainer_card.dir/build.make CMakeFiles/pfr_upstream_trainer_card.dir/gen/trainer_card.c.i
+.PHONY : gen/trainer_card.c.i
 
-home/spark-advantage/pokefirered/src/clear_save_data_screen.s: home/spark-advantage/pokefirered/src/clear_save_data_screen.c.s
-.PHONY : home/spark-advantage/pokefirered/src/clear_save_data_screen.s
+gen/trainer_card.s: gen/trainer_card.c.s
+.PHONY : gen/trainer_card.s
 
 # target to generate assembly for a file
-home/spark-advantage/pokefirered/src/clear_save_data_screen.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_clear_save.dir/build.make CMakeFiles/pfr_upstream_clear_save.dir/home/spark-advantage/pokefirered/src/clear_save_data_screen.c.s
-.PHONY : home/spark-advantage/pokefirered/src/clear_save_data_screen.c.s
+gen/trainer_card.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_trainer_card.dir/build.make CMakeFiles/pfr_upstream_trainer_card.dir/gen/trainer_card.c.s
+.PHONY : gen/trainer_card.c.s
 
-home/spark-advantage/pokefirered/src/decompress.o: home/spark-advantage/pokefirered/src/decompress.c.o
-.PHONY : home/spark-advantage/pokefirered/src/decompress.o
+gen/trainer_fan_club.o: gen/trainer_fan_club.c.o
+.PHONY : gen/trainer_fan_club.o
 
 # target to build an object file
-home/spark-advantage/pokefirered/src/decompress.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/decompress.c.o
-.PHONY : home/spark-advantage/pokefirered/src/decompress.c.o
+gen/trainer_fan_club.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/trainer_fan_club.c.o
+.PHONY : gen/trainer_fan_club.c.o
 
-home/spark-advantage/pokefirered/src/decompress.i: home/spark-advantage/pokefirered/src/decompress.c.i
-.PHONY : home/spark-advantage/pokefirered/src/decompress.i
+gen/trainer_fan_club.i: gen/trainer_fan_club.c.i
+.PHONY : gen/trainer_fan_club.i
 
 # target to preprocess a source file
-home/spark-advantage/pokefirered/src/decompress.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/decompress.c.i
-.PHONY : home/spark-advantage/pokefirered/src/decompress.c.i
+gen/trainer_fan_club.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/trainer_fan_club.c.i
+.PHONY : gen/trainer_fan_club.c.i
 
-home/spark-advantage/pokefirered/src/decompress.s: home/spark-advantage/pokefirered/src/decompress.c.s
-.PHONY : home/spark-advantage/pokefirered/src/decompress.s
+gen/trainer_fan_club.s: gen/trainer_fan_club.c.s
+.PHONY : gen/trainer_fan_club.s
 
 # target to generate assembly for a file
-home/spark-advantage/pokefirered/src/decompress.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/decompress.c.s
-.PHONY : home/spark-advantage/pokefirered/src/decompress.c.s
+gen/trainer_fan_club.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/trainer_fan_club.c.s
+.PHONY : gen/trainer_fan_club.c.s
 
-home/spark-advantage/pokefirered/src/dma3_manager.o: home/spark-advantage/pokefirered/src/dma3_manager.c.o
-.PHONY : home/spark-advantage/pokefirered/src/dma3_manager.o
+gen/trainer_pokemon_sprites.o: gen/trainer_pokemon_sprites.c.o
+.PHONY : gen/trainer_pokemon_sprites.o
 
 # target to build an object file
-home/spark-advantage/pokefirered/src/dma3_manager.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/dma3_manager.c.o
-.PHONY : home/spark-advantage/pokefirered/src/dma3_manager.c.o
+gen/trainer_pokemon_sprites.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/trainer_pokemon_sprites.c.o
+.PHONY : gen/trainer_pokemon_sprites.c.o
 
-home/spark-advantage/pokefirered/src/dma3_manager.i: home/spark-advantage/pokefirered/src/dma3_manager.c.i
-.PHONY : home/spark-advantage/pokefirered/src/dma3_manager.i
+gen/trainer_pokemon_sprites.i: gen/trainer_pokemon_sprites.c.i
+.PHONY : gen/trainer_pokemon_sprites.i
 
 # target to preprocess a source file
-home/spark-advantage/pokefirered/src/dma3_manager.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/dma3_manager.c.i
-.PHONY : home/spark-advantage/pokefirered/src/dma3_manager.c.i
+gen/trainer_pokemon_sprites.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/trainer_pokemon_sprites.c.i
+.PHONY : gen/trainer_pokemon_sprites.c.i
 
-home/spark-advantage/pokefirered/src/dma3_manager.s: home/spark-advantage/pokefirered/src/dma3_manager.c.s
-.PHONY : home/spark-advantage/pokefirered/src/dma3_manager.s
+gen/trainer_pokemon_sprites.s: gen/trainer_pokemon_sprites.c.s
+.PHONY : gen/trainer_pokemon_sprites.s
 
 # target to generate assembly for a file
-home/spark-advantage/pokefirered/src/dma3_manager.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/dma3_manager.c.s
-.PHONY : home/spark-advantage/pokefirered/src/dma3_manager.c.s
+gen/trainer_pokemon_sprites.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/trainer_pokemon_sprites.c.s
+.PHONY : gen/trainer_pokemon_sprites.c.s
 
-home/spark-advantage/pokefirered/src/gpu_regs.o: home/spark-advantage/pokefirered/src/gpu_regs.c.o
-.PHONY : home/spark-advantage/pokefirered/src/gpu_regs.o
+gen/trainer_see.o: gen/trainer_see.c.o
+.PHONY : gen/trainer_see.o
 
 # target to build an object file
-home/spark-advantage/pokefirered/src/gpu_regs.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/gpu_regs.c.o
-.PHONY : home/spark-advantage/pokefirered/src/gpu_regs.c.o
+gen/trainer_see.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_trainer_see.dir/build.make CMakeFiles/pfr_upstream_trainer_see.dir/gen/trainer_see.c.o
+.PHONY : gen/trainer_see.c.o
 
-home/spark-advantage/pokefirered/src/gpu_regs.i: home/spark-advantage/pokefirered/src/gpu_regs.c.i
-.PHONY : home/spark-advantage/pokefirered/src/gpu_regs.i
+gen/trainer_see.i: gen/trainer_see.c.i
+.PHONY : gen/trainer_see.i
 
 # target to preprocess a source file
-home/spark-advantage/pokefirered/src/gpu_regs.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/gpu_regs.c.i
-.PHONY : home/spark-advantage/pokefirered/src/gpu_regs.c.i
+gen/trainer_see.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_trainer_see.dir/build.make CMakeFiles/pfr_upstream_trainer_see.dir/gen/trainer_see.c.i
+.PHONY : gen/trainer_see.c.i
 
-home/spark-advantage/pokefirered/src/gpu_regs.s: home/spark-advantage/pokefirered/src/gpu_regs.c.s
-.PHONY : home/spark-advantage/pokefirered/src/gpu_regs.s
+gen/trainer_see.s: gen/trainer_see.c.s
+.PHONY : gen/trainer_see.s
 
 # target to generate assembly for a file
-home/spark-advantage/pokefirered/src/gpu_regs.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/gpu_regs.c.s
-.PHONY : home/spark-advantage/pokefirered/src/gpu_regs.c.s
+gen/trainer_see.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_trainer_see.dir/build.make CMakeFiles/pfr_upstream_trainer_see.dir/gen/trainer_see.c.s
+.PHONY : gen/trainer_see.c.s
 
-home/spark-advantage/pokefirered/src/main.o: home/spark-advantage/pokefirered/src/main.c.o
-.PHONY : home/spark-advantage/pokefirered/src/main.o
+gen/trainer_tower.o: gen/trainer_tower.c.o
+.PHONY : gen/trainer_tower.o
 
 # target to build an object file
-home/spark-advantage/pokefirered/src/main.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_runtime.dir/build.make CMakeFiles/pfr_upstream_runtime.dir/home/spark-advantage/pokefirered/src/main.c.o
-.PHONY : home/spark-advantage/pokefirered/src/main.c.o
+gen/trainer_tower.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower.c.o
+.PHONY : gen/trainer_tower.c.o
 
-home/spark-advantage/pokefirered/src/main.i: home/spark-advantage/pokefirered/src/main.c.i
-.PHONY : home/spark-advantage/pokefirered/src/main.i
+gen/trainer_tower.i: gen/trainer_tower.c.i
+.PHONY : gen/trainer_tower.i
 
 # target to preprocess a source file
-home/spark-advantage/pokefirered/src/main.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_runtime.dir/build.make CMakeFiles/pfr_upstream_runtime.dir/home/spark-advantage/pokefirered/src/main.c.i
-.PHONY : home/spark-advantage/pokefirered/src/main.c.i
+gen/trainer_tower.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower.c.i
+.PHONY : gen/trainer_tower.c.i
 
-home/spark-advantage/pokefirered/src/main.s: home/spark-advantage/pokefirered/src/main.c.s
-.PHONY : home/spark-advantage/pokefirered/src/main.s
+gen/trainer_tower.s: gen/trainer_tower.c.s
+.PHONY : gen/trainer_tower.s
 
 # target to generate assembly for a file
-home/spark-advantage/pokefirered/src/main.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_runtime.dir/build.make CMakeFiles/pfr_upstream_runtime.dir/home/spark-advantage/pokefirered/src/main.c.s
-.PHONY : home/spark-advantage/pokefirered/src/main.c.s
+gen/trainer_tower.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower.c.s
+.PHONY : gen/trainer_tower.c.s
 
-home/spark-advantage/pokefirered/src/main_menu.o: home/spark-advantage/pokefirered/src/main_menu.c.o
-.PHONY : home/spark-advantage/pokefirered/src/main_menu.o
+gen/trainer_tower_sets.o: gen/trainer_tower_sets.c.o
+.PHONY : gen/trainer_tower_sets.o
 
 # target to build an object file
-home/spark-advantage/pokefirered/src/main_menu.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_main_menu.dir/build.make CMakeFiles/pfr_upstream_main_menu.dir/home/spark-advantage/pokefirered/src/main_menu.c.o
-.PHONY : home/spark-advantage/pokefirered/src/main_menu.c.o
+gen/trainer_tower_sets.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower_sets.c.o
+.PHONY : gen/trainer_tower_sets.c.o
 
-home/spark-advantage/pokefirered/src/main_menu.i: home/spark-advantage/pokefirered/src/main_menu.c.i
-.PHONY : home/spark-advantage/pokefirered/src/main_menu.i
+gen/trainer_tower_sets.i: gen/trainer_tower_sets.c.i
+.PHONY : gen/trainer_tower_sets.i
 
 # target to preprocess a source file
-home/spark-advantage/pokefirered/src/main_menu.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_main_menu.dir/build.make CMakeFiles/pfr_upstream_main_menu.dir/home/spark-advantage/pokefirered/src/main_menu.c.i
-.PHONY : home/spark-advantage/pokefirered/src/main_menu.c.i
+gen/trainer_tower_sets.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower_sets.c.i
+.PHONY : gen/trainer_tower_sets.c.i
 
-home/spark-advantage/pokefirered/src/main_menu.s: home/spark-advantage/pokefirered/src/main_menu.c.s
-.PHONY : home/spark-advantage/pokefirered/src/main_menu.s
+gen/trainer_tower_sets.s: gen/trainer_tower_sets.c.s
+.PHONY : gen/trainer_tower_sets.s
 
 # target to generate assembly for a file
-home/spark-advantage/pokefirered/src/main_menu.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_main_menu.dir/build.make CMakeFiles/pfr_upstream_main_menu.dir/home/spark-advantage/pokefirered/src/main_menu.c.s
-.PHONY : home/spark-advantage/pokefirered/src/main_menu.c.s
+gen/trainer_tower_sets.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower_sets.c.s
+.PHONY : gen/trainer_tower_sets.c.s
 
-home/spark-advantage/pokefirered/src/malloc.o: home/spark-advantage/pokefirered/src/malloc.c.o
-.PHONY : home/spark-advantage/pokefirered/src/malloc.o
+gen/trig.o: gen/trig.c.o
+.PHONY : gen/trig.o
 
 # target to build an object file
-home/spark-advantage/pokefirered/src/malloc.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/malloc.c.o
-.PHONY : home/spark-advantage/pokefirered/src/malloc.c.o
+gen/trig.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/trig.c.o
+.PHONY : gen/trig.c.o
 
-home/spark-advantage/pokefirered/src/malloc.i: home/spark-advantage/pokefirered/src/malloc.c.i
-.PHONY : home/spark-advantage/pokefirered/src/malloc.i
+gen/trig.i: gen/trig.c.i
+.PHONY : gen/trig.i
 
 # target to preprocess a source file
-home/spark-advantage/pokefirered/src/malloc.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/malloc.c.i
-.PHONY : home/spark-advantage/pokefirered/src/malloc.c.i
+gen/trig.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/trig.c.i
+.PHONY : gen/trig.c.i
 
-home/spark-advantage/pokefirered/src/malloc.s: home/spark-advantage/pokefirered/src/malloc.c.s
-.PHONY : home/spark-advantage/pokefirered/src/malloc.s
+gen/trig.s: gen/trig.c.s
+.PHONY : gen/trig.s
 
 # target to generate assembly for a file
-home/spark-advantage/pokefirered/src/malloc.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/malloc.c.s
-.PHONY : home/spark-advantage/pokefirered/src/malloc.c.s
+gen/trig.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/trig.c.s
+.PHONY : gen/trig.c.s
 
-home/spark-advantage/pokefirered/src/oak_speech.o: home/spark-advantage/pokefirered/src/oak_speech.c.o
-.PHONY : home/spark-advantage/pokefirered/src/oak_speech.o
+gen/union_room.o: gen/union_room.c.o
+.PHONY : gen/union_room.o
 
 # target to build an object file
-home/spark-advantage/pokefirered/src/oak_speech.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_oak_speech.dir/build.make CMakeFiles/pfr_upstream_oak_speech.dir/home/spark-advantage/pokefirered/src/oak_speech.c.o
-.PHONY : home/spark-advantage/pokefirered/src/oak_speech.c.o
+gen/union_room.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/union_room.c.o
+.PHONY : gen/union_room.c.o
 
-home/spark-advantage/pokefirered/src/oak_speech.i: home/spark-advantage/pokefirered/src/oak_speech.c.i
-.PHONY : home/spark-advantage/pokefirered/src/oak_speech.i
+gen/union_room.i: gen/union_room.c.i
+.PHONY : gen/union_room.i
 
 # target to preprocess a source file
-home/spark-advantage/pokefirered/src/oak_speech.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_oak_speech.dir/build.make CMakeFiles/pfr_upstream_oak_speech.dir/home/spark-advantage/pokefirered/src/oak_speech.c.i
-.PHONY : home/spark-advantage/pokefirered/src/oak_speech.c.i
+gen/union_room.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/union_room.c.i
+.PHONY : gen/union_room.c.i
 
-home/spark-advantage/pokefirered/src/oak_speech.s: home/spark-advantage/pokefirered/src/oak_speech.c.s
-.PHONY : home/spark-advantage/pokefirered/src/oak_speech.s
+gen/union_room.s: gen/union_room.c.s
+.PHONY : gen/union_room.s
 
 # target to generate assembly for a file
-home/spark-advantage/pokefirered/src/oak_speech.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_oak_speech.dir/build.make CMakeFiles/pfr_upstream_oak_speech.dir/home/spark-advantage/pokefirered/src/oak_speech.c.s
-.PHONY : home/spark-advantage/pokefirered/src/oak_speech.c.s
+gen/union_room.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/union_room.c.s
+.PHONY : gen/union_room.c.s
 
-home/spark-advantage/pokefirered/src/palette.o: home/spark-advantage/pokefirered/src/palette.c.o
-.PHONY : home/spark-advantage/pokefirered/src/palette.o
+gen/union_room_battle.o: gen/union_room_battle.c.o
+.PHONY : gen/union_room_battle.o
 
 # target to build an object file
-home/spark-advantage/pokefirered/src/palette.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/palette.c.o
-.PHONY : home/spark-advantage/pokefirered/src/palette.c.o
+gen/union_room_battle.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/union_room_battle.c.o
+.PHONY : gen/union_room_battle.c.o
 
-home/spark-advantage/pokefirered/src/palette.i: home/spark-advantage/pokefirered/src/palette.c.i
-.PHONY : home/spark-advantage/pokefirered/src/palette.i
+gen/union_room_battle.i: gen/union_room_battle.c.i
+.PHONY : gen/union_room_battle.i
 
 # target to preprocess a source file
-home/spark-advantage/pokefirered/src/palette.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/palette.c.i
-.PHONY : home/spark-advantage/pokefirered/src/palette.c.i
+gen/union_room_battle.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/union_room_battle.c.i
+.PHONY : gen/union_room_battle.c.i
 
-home/spark-advantage/pokefirered/src/palette.s: home/spark-advantage/pokefirered/src/palette.c.s
-.PHONY : home/spark-advantage/pokefirered/src/palette.s
+gen/union_room_battle.s: gen/union_room_battle.c.s
+.PHONY : gen/union_room_battle.s
 
 # target to generate assembly for a file
-home/spark-advantage/pokefirered/src/palette.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/palette.c.s
-.PHONY : home/spark-advantage/pokefirered/src/palette.c.s
+gen/union_room_battle.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/union_room_battle.c.s
+.PHONY : gen/union_room_battle.c.s
 
-home/spark-advantage/pokefirered/src/random.o: home/spark-advantage/pokefirered/src/random.c.o
-.PHONY : home/spark-advantage/pokefirered/src/random.o
+gen/union_room_chat.o: gen/union_room_chat.c.o
+.PHONY : gen/union_room_chat.o
 
 # target to build an object file
-home/spark-advantage/pokefirered/src/random.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/random.c.o
-.PHONY : home/spark-advantage/pokefirered/src/random.c.o
+gen/union_room_chat.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/union_room_chat.c.o
+.PHONY : gen/union_room_chat.c.o
 
-home/spark-advantage/pokefirered/src/random.i: home/spark-advantage/pokefirered/src/random.c.i
-.PHONY : home/spark-advantage/pokefirered/src/random.i
+gen/union_room_chat.i: gen/union_room_chat.c.i
+.PHONY : gen/union_room_chat.i
 
 # target to preprocess a source file
-home/spark-advantage/pokefirered/src/random.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/random.c.i
-.PHONY : home/spark-advantage/pokefirered/src/random.c.i
+gen/union_room_chat.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/union_room_chat.c.i
+.PHONY : gen/union_room_chat.c.i
 
-home/spark-advantage/pokefirered/src/random.s: home/spark-advantage/pokefirered/src/random.c.s
-.PHONY : home/spark-advantage/pokefirered/src/random.s
+gen/union_room_chat.s: gen/union_room_chat.c.s
+.PHONY : gen/union_room_chat.s
 
 # target to generate assembly for a file
-home/spark-advantage/pokefirered/src/random.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/random.c.s
-.PHONY : home/spark-advantage/pokefirered/src/random.c.s
+gen/union_room_chat.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/union_room_chat.c.s
+.PHONY : gen/union_room_chat.c.s
 
-home/spark-advantage/pokefirered/src/scanline_effect.o: home/spark-advantage/pokefirered/src/scanline_effect.c.o
-.PHONY : home/spark-advantage/pokefirered/src/scanline_effect.o
+gen/union_room_chat_display.o: gen/union_room_chat_display.c.o
+.PHONY : gen/union_room_chat_display.o
 
 # target to build an object file
-home/spark-advantage/pokefirered/src/scanline_effect.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/scanline_effect.c.o
-.PHONY : home/spark-advantage/pokefirered/src/scanline_effect.c.o
+gen/union_room_chat_display.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_union_room_chat_display.dir/build.make CMakeFiles/pfr_upstream_union_room_chat_display.dir/gen/union_room_chat_display.c.o
+.PHONY : gen/union_room_chat_display.c.o
 
-home/spark-advantage/pokefirered/src/scanline_effect.i: home/spark-advantage/pokefirered/src/scanline_effect.c.i
-.PHONY : home/spark-advantage/pokefirered/src/scanline_effect.i
+gen/union_room_chat_display.i: gen/union_room_chat_display.c.i
+.PHONY : gen/union_room_chat_display.i
 
 # target to preprocess a source file
-home/spark-advantage/pokefirered/src/scanline_effect.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/scanline_effect.c.i
-.PHONY : home/spark-advantage/pokefirered/src/scanline_effect.c.i
+gen/union_room_chat_display.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_union_room_chat_display.dir/build.make CMakeFiles/pfr_upstream_union_room_chat_display.dir/gen/union_room_chat_display.c.i
+.PHONY : gen/union_room_chat_display.c.i
 
-home/spark-advantage/pokefirered/src/scanline_effect.s: home/spark-advantage/pokefirered/src/scanline_effect.c.s
-.PHONY : home/spark-advantage/pokefirered/src/scanline_effect.s
+gen/union_room_chat_display.s: gen/union_room_chat_display.c.s
+.PHONY : gen/union_room_chat_display.s
 
 # target to generate assembly for a file
-home/spark-advantage/pokefirered/src/scanline_effect.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/scanline_effect.c.s
-.PHONY : home/spark-advantage/pokefirered/src/scanline_effect.c.s
+gen/union_room_chat_display.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_union_room_chat_display.dir/build.make CMakeFiles/pfr_upstream_union_room_chat_display.dir/gen/union_room_chat_display.c.s
+.PHONY : gen/union_room_chat_display.c.s
 
-home/spark-advantage/pokefirered/src/sprite.o: home/spark-advantage/pokefirered/src/sprite.c.o
-.PHONY : home/spark-advantage/pokefirered/src/sprite.o
+gen/union_room_chat_objects.o: gen/union_room_chat_objects.c.o
+.PHONY : gen/union_room_chat_objects.o
 
 # target to build an object file
-home/spark-advantage/pokefirered/src/sprite.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/sprite.c.o
-.PHONY : home/spark-advantage/pokefirered/src/sprite.c.o
+gen/union_room_chat_objects.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_union_room_chat_objects.dir/build.make CMakeFiles/pfr_upstream_union_room_chat_objects.dir/gen/union_room_chat_objects.c.o
+.PHONY : gen/union_room_chat_objects.c.o
 
-home/spark-advantage/pokefirered/src/sprite.i: home/spark-advantage/pokefirered/src/sprite.c.i
-.PHONY : home/spark-advantage/pokefirered/src/sprite.i
+gen/union_room_chat_objects.i: gen/union_room_chat_objects.c.i
+.PHONY : gen/union_room_chat_objects.i
 
 # target to preprocess a source file
-home/spark-advantage/pokefirered/src/sprite.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/sprite.c.i
-.PHONY : home/spark-advantage/pokefirered/src/sprite.c.i
+gen/union_room_chat_objects.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_union_room_chat_objects.dir/build.make CMakeFiles/pfr_upstream_union_room_chat_objects.dir/gen/union_room_chat_objects.c.i
+.PHONY : gen/union_room_chat_objects.c.i
 
-home/spark-advantage/pokefirered/src/sprite.s: home/spark-advantage/pokefirered/src/sprite.c.s
-.PHONY : home/spark-advantage/pokefirered/src/sprite.s
+gen/union_room_chat_objects.s: gen/union_room_chat_objects.c.s
+.PHONY : gen/union_room_chat_objects.s
 
 # target to generate assembly for a file
-home/spark-advantage/pokefirered/src/sprite.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/sprite.c.s
-.PHONY : home/spark-advantage/pokefirered/src/sprite.c.s
+gen/union_room_chat_objects.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_union_room_chat_objects.dir/build.make CMakeFiles/pfr_upstream_union_room_chat_objects.dir/gen/union_room_chat_objects.c.s
+.PHONY : gen/union_room_chat_objects.c.s
 
-home/spark-advantage/pokefirered/src/task.o: home/spark-advantage/pokefirered/src/task.c.o
-.PHONY : home/spark-advantage/pokefirered/src/task.o
+gen/union_room_message.o: gen/union_room_message.c.o
+.PHONY : gen/union_room_message.o
 
 # target to build an object file
-home/spark-advantage/pokefirered/src/task.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/task.c.o
-.PHONY : home/spark-advantage/pokefirered/src/task.c.o
+gen/union_room_message.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/union_room_message.c.o
+.PHONY : gen/union_room_message.c.o
 
-home/spark-advantage/pokefirered/src/task.i: home/spark-advantage/pokefirered/src/task.c.i
-.PHONY : home/spark-advantage/pokefirered/src/task.i
+gen/union_room_message.i: gen/union_room_message.c.i
+.PHONY : gen/union_room_message.i
 
 # target to preprocess a source file
-home/spark-advantage/pokefirered/src/task.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/task.c.i
-.PHONY : home/spark-advantage/pokefirered/src/task.c.i
+gen/union_room_message.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/union_room_message.c.i
+.PHONY : gen/union_room_message.c.i
 
-home/spark-advantage/pokefirered/src/task.s: home/spark-advantage/pokefirered/src/task.c.s
-.PHONY : home/spark-advantage/pokefirered/src/task.s
+gen/union_room_message.s: gen/union_room_message.c.s
+.PHONY : gen/union_room_message.s
 
 # target to generate assembly for a file
-home/spark-advantage/pokefirered/src/task.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/task.c.s
-.PHONY : home/spark-advantage/pokefirered/src/task.c.s
+gen/union_room_message.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/union_room_message.c.s
+.PHONY : gen/union_room_message.c.s
 
-home/spark-advantage/pokefirered/src/trig.o: home/spark-advantage/pokefirered/src/trig.c.o
-.PHONY : home/spark-advantage/pokefirered/src/trig.o
+gen/union_room_player_avatar.o: gen/union_room_player_avatar.c.o
+.PHONY : gen/union_room_player_avatar.o
 
 # target to build an object file
-home/spark-advantage/pokefirered/src/trig.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/trig.c.o
-.PHONY : home/spark-advantage/pokefirered/src/trig.c.o
+gen/union_room_player_avatar.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/union_room_player_avatar.c.o
+.PHONY : gen/union_room_player_avatar.c.o
 
-home/spark-advantage/pokefirered/src/trig.i: home/spark-advantage/pokefirered/src/trig.c.i
-.PHONY : home/spark-advantage/pokefirered/src/trig.i
+gen/union_room_player_avatar.i: gen/union_room_player_avatar.c.i
+.PHONY : gen/union_room_player_avatar.i
 
 # target to preprocess a source file
-home/spark-advantage/pokefirered/src/trig.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/trig.c.i
-.PHONY : home/spark-advantage/pokefirered/src/trig.c.i
+gen/union_room_player_avatar.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/union_room_player_avatar.c.i
+.PHONY : gen/union_room_player_avatar.c.i
 
-home/spark-advantage/pokefirered/src/trig.s: home/spark-advantage/pokefirered/src/trig.c.s
-.PHONY : home/spark-advantage/pokefirered/src/trig.s
+gen/union_room_player_avatar.s: gen/union_room_player_avatar.c.s
+.PHONY : gen/union_room_player_avatar.s
 
 # target to generate assembly for a file
-home/spark-advantage/pokefirered/src/trig.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/trig.c.s
-.PHONY : home/spark-advantage/pokefirered/src/trig.c.s
+gen/union_room_player_avatar.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/union_room_player_avatar.c.s
+.PHONY : gen/union_room_player_avatar.c.s
+
+gen/upstream_battle_ai_scripts.o: gen/upstream_battle_ai_scripts.c.o
+.PHONY : gen/upstream_battle_ai_scripts.o
+
+# target to build an object file
+gen/upstream_battle_ai_scripts.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_ai_scripts.c.o
+.PHONY : gen/upstream_battle_ai_scripts.c.o
+
+gen/upstream_battle_ai_scripts.i: gen/upstream_battle_ai_scripts.c.i
+.PHONY : gen/upstream_battle_ai_scripts.i
+
+# target to preprocess a source file
+gen/upstream_battle_ai_scripts.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_ai_scripts.c.i
+.PHONY : gen/upstream_battle_ai_scripts.c.i
+
+gen/upstream_battle_ai_scripts.s: gen/upstream_battle_ai_scripts.c.s
+.PHONY : gen/upstream_battle_ai_scripts.s
+
+# target to generate assembly for a file
+gen/upstream_battle_ai_scripts.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_ai_scripts.c.s
+.PHONY : gen/upstream_battle_ai_scripts.c.s
+
+gen/upstream_battle_anim_scripts.o: gen/upstream_battle_anim_scripts.c.o
+.PHONY : gen/upstream_battle_anim_scripts.o
+
+# target to build an object file
+gen/upstream_battle_anim_scripts.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_scripts.c.o
+.PHONY : gen/upstream_battle_anim_scripts.c.o
+
+gen/upstream_battle_anim_scripts.i: gen/upstream_battle_anim_scripts.c.i
+.PHONY : gen/upstream_battle_anim_scripts.i
+
+# target to preprocess a source file
+gen/upstream_battle_anim_scripts.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_scripts.c.i
+.PHONY : gen/upstream_battle_anim_scripts.c.i
+
+gen/upstream_battle_anim_scripts.s: gen/upstream_battle_anim_scripts.c.s
+.PHONY : gen/upstream_battle_anim_scripts.s
+
+# target to generate assembly for a file
+gen/upstream_battle_anim_scripts.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_scripts.c.s
+.PHONY : gen/upstream_battle_anim_scripts.c.s
+
+gen/upstream_battle_anim_tables.o: gen/upstream_battle_anim_tables.c.o
+.PHONY : gen/upstream_battle_anim_tables.o
+
+# target to build an object file
+gen/upstream_battle_anim_tables.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_tables.c.o
+.PHONY : gen/upstream_battle_anim_tables.c.o
+
+gen/upstream_battle_anim_tables.i: gen/upstream_battle_anim_tables.c.i
+.PHONY : gen/upstream_battle_anim_tables.i
+
+# target to preprocess a source file
+gen/upstream_battle_anim_tables.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_tables.c.i
+.PHONY : gen/upstream_battle_anim_tables.c.i
+
+gen/upstream_battle_anim_tables.s: gen/upstream_battle_anim_tables.c.s
+.PHONY : gen/upstream_battle_anim_tables.s
+
+# target to generate assembly for a file
+gen/upstream_battle_anim_tables.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_tables.c.s
+.PHONY : gen/upstream_battle_anim_tables.c.s
+
+gen/upstream_field_effect_scripts.o: gen/upstream_field_effect_scripts.c.o
+.PHONY : gen/upstream_field_effect_scripts.o
+
+# target to build an object file
+gen/upstream_field_effect_scripts.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/upstream_field_effect_scripts.c.o
+.PHONY : gen/upstream_field_effect_scripts.c.o
+
+gen/upstream_field_effect_scripts.i: gen/upstream_field_effect_scripts.c.i
+.PHONY : gen/upstream_field_effect_scripts.i
+
+# target to preprocess a source file
+gen/upstream_field_effect_scripts.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/upstream_field_effect_scripts.c.i
+.PHONY : gen/upstream_field_effect_scripts.c.i
+
+gen/upstream_field_effect_scripts.s: gen/upstream_field_effect_scripts.c.s
+.PHONY : gen/upstream_field_effect_scripts.s
+
+# target to generate assembly for a file
+gen/upstream_field_effect_scripts.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/upstream_field_effect_scripts.c.s
+.PHONY : gen/upstream_field_effect_scripts.c.s
+
+gen/upstream_map_data.o: gen/upstream_map_data.c.o
+.PHONY : gen/upstream_map_data.o
+
+# target to build an object file
+gen/upstream_map_data.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/upstream_map_data.c.o
+.PHONY : gen/upstream_map_data.c.o
+
+gen/upstream_map_data.i: gen/upstream_map_data.c.i
+.PHONY : gen/upstream_map_data.i
+
+# target to preprocess a source file
+gen/upstream_map_data.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/upstream_map_data.c.i
+.PHONY : gen/upstream_map_data.c.i
+
+gen/upstream_map_data.s: gen/upstream_map_data.c.s
+.PHONY : gen/upstream_map_data.s
+
+# target to generate assembly for a file
+gen/upstream_map_data.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/upstream_map_data.c.s
+.PHONY : gen/upstream_map_data.c.s
+
+gen/upstream_specials_table.o: gen/upstream_specials_table.c.o
+.PHONY : gen/upstream_specials_table.o
+
+# target to build an object file
+gen/upstream_specials_table.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/upstream_specials_table.c.o
+.PHONY : gen/upstream_specials_table.c.o
+
+gen/upstream_specials_table.i: gen/upstream_specials_table.c.i
+.PHONY : gen/upstream_specials_table.i
+
+# target to preprocess a source file
+gen/upstream_specials_table.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/upstream_specials_table.c.i
+.PHONY : gen/upstream_specials_table.c.i
+
+gen/upstream_specials_table.s: gen/upstream_specials_table.c.s
+.PHONY : gen/upstream_specials_table.s
+
+# target to generate assembly for a file
+gen/upstream_specials_table.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/upstream_specials_table.c.s
+.PHONY : gen/upstream_specials_table.c.s
+
+gen/upstream_stubs.o: gen/upstream_stubs.c.o
+.PHONY : gen/upstream_stubs.o
+
+# target to build an object file
+gen/upstream_stubs.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/upstream_stubs.c.o
+.PHONY : gen/upstream_stubs.c.o
+
+gen/upstream_stubs.i: gen/upstream_stubs.c.i
+.PHONY : gen/upstream_stubs.i
+
+# target to preprocess a source file
+gen/upstream_stubs.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/upstream_stubs.c.i
+.PHONY : gen/upstream_stubs.c.i
+
+gen/upstream_stubs.s: gen/upstream_stubs.c.s
+.PHONY : gen/upstream_stubs.s
+
+# target to generate assembly for a file
+gen/upstream_stubs.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/upstream_stubs.c.s
+.PHONY : gen/upstream_stubs.c.s
+
+gen/util.o: gen/util.c.o
+.PHONY : gen/util.o
+
+# target to build an object file
+gen/util.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_util.dir/build.make CMakeFiles/pfr_upstream_util.dir/gen/util.c.o
+.PHONY : gen/util.c.o
+
+gen/util.i: gen/util.c.i
+.PHONY : gen/util.i
+
+# target to preprocess a source file
+gen/util.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_util.dir/build.make CMakeFiles/pfr_upstream_util.dir/gen/util.c.i
+.PHONY : gen/util.c.i
+
+gen/util.s: gen/util.c.s
+.PHONY : gen/util.s
+
+# target to generate assembly for a file
+gen/util.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_util.dir/build.make CMakeFiles/pfr_upstream_util.dir/gen/util.c.s
+.PHONY : gen/util.c.s
+
+gen/vs_seeker.o: gen/vs_seeker.c.o
+.PHONY : gen/vs_seeker.o
+
+# target to build an object file
+gen/vs_seeker.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/vs_seeker.c.o
+.PHONY : gen/vs_seeker.c.o
+
+gen/vs_seeker.i: gen/vs_seeker.c.i
+.PHONY : gen/vs_seeker.i
+
+# target to preprocess a source file
+gen/vs_seeker.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/vs_seeker.c.i
+.PHONY : gen/vs_seeker.c.i
+
+gen/vs_seeker.s: gen/vs_seeker.c.s
+.PHONY : gen/vs_seeker.s
+
+# target to generate assembly for a file
+gen/vs_seeker.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/vs_seeker.c.s
+.PHONY : gen/vs_seeker.c.s
+
+gen/wild_encounter.o: gen/wild_encounter.c.o
+.PHONY : gen/wild_encounter.o
+
+# target to build an object file
+gen/wild_encounter.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/wild_encounter.c.o
+.PHONY : gen/wild_encounter.c.o
+
+gen/wild_encounter.i: gen/wild_encounter.c.i
+.PHONY : gen/wild_encounter.i
+
+# target to preprocess a source file
+gen/wild_encounter.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/wild_encounter.c.i
+.PHONY : gen/wild_encounter.c.i
+
+gen/wild_encounter.s: gen/wild_encounter.c.s
+.PHONY : gen/wild_encounter.s
+
+# target to generate assembly for a file
+gen/wild_encounter.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/wild_encounter.c.s
+.PHONY : gen/wild_encounter.c.s
+
+gen/wild_pokemon_area.o: gen/wild_pokemon_area.c.o
+.PHONY : gen/wild_pokemon_area.o
+
+# target to build an object file
+gen/wild_pokemon_area.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/wild_pokemon_area.c.o
+.PHONY : gen/wild_pokemon_area.c.o
+
+gen/wild_pokemon_area.i: gen/wild_pokemon_area.c.i
+.PHONY : gen/wild_pokemon_area.i
+
+# target to preprocess a source file
+gen/wild_pokemon_area.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/wild_pokemon_area.c.i
+.PHONY : gen/wild_pokemon_area.c.i
+
+gen/wild_pokemon_area.s: gen/wild_pokemon_area.c.s
+.PHONY : gen/wild_pokemon_area.s
+
+# target to generate assembly for a file
+gen/wild_pokemon_area.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/wild_pokemon_area.c.s
+.PHONY : gen/wild_pokemon_area.c.s
+
+gen/window.o: gen/window.c.o
+.PHONY : gen/window.o
+
+# target to build an object file
+gen/window.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/window.c.o
+.PHONY : gen/window.c.o
+
+gen/window.i: gen/window.c.i
+.PHONY : gen/window.i
+
+# target to preprocess a source file
+gen/window.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/window.c.i
+.PHONY : gen/window.c.i
+
+gen/window.s: gen/window.c.s
+.PHONY : gen/window.s
+
+# target to generate assembly for a file
+gen/window.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/window.c.s
+.PHONY : gen/window.c.s
+
+gen/window_8bpp.o: gen/window_8bpp.c.o
+.PHONY : gen/window_8bpp.o
+
+# target to build an object file
+gen/window_8bpp.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/window_8bpp.c.o
+.PHONY : gen/window_8bpp.c.o
+
+gen/window_8bpp.i: gen/window_8bpp.c.i
+.PHONY : gen/window_8bpp.i
+
+# target to preprocess a source file
+gen/window_8bpp.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/window_8bpp.c.i
+.PHONY : gen/window_8bpp.c.i
+
+gen/window_8bpp.s: gen/window_8bpp.c.s
+.PHONY : gen/window_8bpp.s
+
+# target to generate assembly for a file
+gen/window_8bpp.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/window_8bpp.c.s
+.PHONY : gen/window_8bpp.c.s
+
+gen/wireless_communication_status_screen.o: gen/wireless_communication_status_screen.c.o
+.PHONY : gen/wireless_communication_status_screen.o
+
+# target to build an object file
+gen/wireless_communication_status_screen.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_wireless_communication_status_screen.dir/build.make CMakeFiles/pfr_upstream_wireless_communication_status_screen.dir/gen/wireless_communication_status_screen.c.o
+.PHONY : gen/wireless_communication_status_screen.c.o
+
+gen/wireless_communication_status_screen.i: gen/wireless_communication_status_screen.c.i
+.PHONY : gen/wireless_communication_status_screen.i
+
+# target to preprocess a source file
+gen/wireless_communication_status_screen.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_wireless_communication_status_screen.dir/build.make CMakeFiles/pfr_upstream_wireless_communication_status_screen.dir/gen/wireless_communication_status_screen.c.i
+.PHONY : gen/wireless_communication_status_screen.c.i
+
+gen/wireless_communication_status_screen.s: gen/wireless_communication_status_screen.c.s
+.PHONY : gen/wireless_communication_status_screen.s
+
+# target to generate assembly for a file
+gen/wireless_communication_status_screen.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_wireless_communication_status_screen.dir/build.make CMakeFiles/pfr_upstream_wireless_communication_status_screen.dir/gen/wireless_communication_status_screen.c.s
+.PHONY : gen/wireless_communication_status_screen.c.s
+
+gen/wonder_news.o: gen/wonder_news.c.o
+.PHONY : gen/wonder_news.o
+
+# target to build an object file
+gen/wonder_news.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/wonder_news.c.o
+.PHONY : gen/wonder_news.c.o
+
+gen/wonder_news.i: gen/wonder_news.c.i
+.PHONY : gen/wonder_news.i
+
+# target to preprocess a source file
+gen/wonder_news.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/wonder_news.c.i
+.PHONY : gen/wonder_news.c.i
+
+gen/wonder_news.s: gen/wonder_news.c.s
+.PHONY : gen/wonder_news.s
+
+# target to generate assembly for a file
+gen/wonder_news.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/gen/wonder_news.c.s
+.PHONY : gen/wonder_news.c.s
+
+generated_native/pfr_native_data.o: generated_native/pfr_native_data.c.o
+.PHONY : generated_native/pfr_native_data.o
+
+# target to build an object file
+generated_native/pfr_native_data.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_native_core.dir/build.make CMakeFiles/pfr_native_core.dir/generated_native/pfr_native_data.c.o
+.PHONY : generated_native/pfr_native_data.c.o
+
+generated_native/pfr_native_data.i: generated_native/pfr_native_data.c.i
+.PHONY : generated_native/pfr_native_data.i
+
+# target to preprocess a source file
+generated_native/pfr_native_data.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_native_core.dir/build.make CMakeFiles/pfr_native_core.dir/generated_native/pfr_native_data.c.i
+.PHONY : generated_native/pfr_native_data.c.i
+
+generated_native/pfr_native_data.s: generated_native/pfr_native_data.c.s
+.PHONY : generated_native/pfr_native_data.s
+
+# target to generate assembly for a file
+generated_native/pfr_native_data.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_native_core.dir/build.make CMakeFiles/pfr_native_core.dir/generated_native/pfr_native_data.c.s
+.PHONY : generated_native/pfr_native_data.c.s
+
+scripts/mgba_bench.o: scripts/mgba_bench.c.o
+.PHONY : scripts/mgba_bench.o
+
+# target to build an object file
+scripts/mgba_bench.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mgba_bench.dir/build.make CMakeFiles/mgba_bench.dir/scripts/mgba_bench.c.o
+.PHONY : scripts/mgba_bench.c.o
+
+scripts/mgba_bench.i: scripts/mgba_bench.c.i
+.PHONY : scripts/mgba_bench.i
+
+# target to preprocess a source file
+scripts/mgba_bench.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mgba_bench.dir/build.make CMakeFiles/mgba_bench.dir/scripts/mgba_bench.c.i
+.PHONY : scripts/mgba_bench.c.i
+
+scripts/mgba_bench.s: scripts/mgba_bench.c.s
+.PHONY : scripts/mgba_bench.s
+
+# target to generate assembly for a file
+scripts/mgba_bench.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mgba_bench.dir/build.make CMakeFiles/mgba_bench.dir/scripts/mgba_bench.c.s
+.PHONY : scripts/mgba_bench.c.s
+
+scripts/mgba_capture.o: scripts/mgba_capture.c.o
+.PHONY : scripts/mgba_capture.o
+
+# target to build an object file
+scripts/mgba_capture.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mgba_capture.dir/build.make CMakeFiles/mgba_capture.dir/scripts/mgba_capture.c.o
+.PHONY : scripts/mgba_capture.c.o
+
+scripts/mgba_capture.i: scripts/mgba_capture.c.i
+.PHONY : scripts/mgba_capture.i
+
+# target to preprocess a source file
+scripts/mgba_capture.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mgba_capture.dir/build.make CMakeFiles/mgba_capture.dir/scripts/mgba_capture.c.i
+.PHONY : scripts/mgba_capture.c.i
+
+scripts/mgba_capture.s: scripts/mgba_capture.c.s
+.PHONY : scripts/mgba_capture.s
+
+# target to generate assembly for a file
+scripts/mgba_capture.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mgba_capture.dir/build.make CMakeFiles/mgba_capture.dir/scripts/mgba_capture.c.s
+.PHONY : scripts/mgba_capture.c.s
+
+src/game_ctx.o: src/game_ctx.c.o
+.PHONY : src/game_ctx.o
+
+# target to build an object file
+src/game_ctx.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/game_ctx.c.o
+.PHONY : src/game_ctx.c.o
+
+src/game_ctx.i: src/game_ctx.c.i
+.PHONY : src/game_ctx.i
+
+# target to preprocess a source file
+src/game_ctx.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/game_ctx.c.i
+.PHONY : src/game_ctx.c.i
+
+src/game_ctx.s: src/game_ctx.c.s
+.PHONY : src/game_ctx.s
+
+# target to generate assembly for a file
+src/game_ctx.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/game_ctx.c.s
+.PHONY : src/game_ctx.c.s
 
 src/host_agbmain.o: src/host_agbmain.c.o
 .PHONY : src/host_agbmain.o
@@ -747,8 +8466,12 @@ src/host_agbmain.o: src/host_agbmain.c.o
 # target to build an object file
 src/host_agbmain.c.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_smoke.dir/build.make CMakeFiles/pfr_smoke.dir/src/host_agbmain.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_env_smoke.dir/build.make CMakeFiles/pfr_env_smoke.dir/src/host_agbmain.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_render_test.dir/build.make CMakeFiles/pfr_render_test.dir/src/host_agbmain.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_play.dir/build.make CMakeFiles/pfr_play.dir/src/host_agbmain.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_game.dir/build.make CMakeFiles/pfr_game.dir/src/host_agbmain.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_battle_test.dir/build.make CMakeFiles/pfr_battle_test.dir/src/host_agbmain.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_game_static.dir/build.make CMakeFiles/pfr_game_static.dir/src/host_agbmain.c.o
 .PHONY : src/host_agbmain.c.o
 
 src/host_agbmain.i: src/host_agbmain.c.i
@@ -757,8 +8480,12 @@ src/host_agbmain.i: src/host_agbmain.c.i
 # target to preprocess a source file
 src/host_agbmain.c.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_smoke.dir/build.make CMakeFiles/pfr_smoke.dir/src/host_agbmain.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_env_smoke.dir/build.make CMakeFiles/pfr_env_smoke.dir/src/host_agbmain.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_render_test.dir/build.make CMakeFiles/pfr_render_test.dir/src/host_agbmain.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_play.dir/build.make CMakeFiles/pfr_play.dir/src/host_agbmain.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_game.dir/build.make CMakeFiles/pfr_game.dir/src/host_agbmain.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_battle_test.dir/build.make CMakeFiles/pfr_battle_test.dir/src/host_agbmain.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_game_static.dir/build.make CMakeFiles/pfr_game_static.dir/src/host_agbmain.c.i
 .PHONY : src/host_agbmain.c.i
 
 src/host_agbmain.s: src/host_agbmain.c.s
@@ -767,9 +8494,61 @@ src/host_agbmain.s: src/host_agbmain.c.s
 # target to generate assembly for a file
 src/host_agbmain.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_smoke.dir/build.make CMakeFiles/pfr_smoke.dir/src/host_agbmain.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_env_smoke.dir/build.make CMakeFiles/pfr_env_smoke.dir/src/host_agbmain.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_render_test.dir/build.make CMakeFiles/pfr_render_test.dir/src/host_agbmain.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_play.dir/build.make CMakeFiles/pfr_play.dir/src/host_agbmain.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_game.dir/build.make CMakeFiles/pfr_game.dir/src/host_agbmain.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_battle_test.dir/build.make CMakeFiles/pfr_battle_test.dir/src/host_agbmain.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_game_static.dir/build.make CMakeFiles/pfr_game_static.dir/src/host_agbmain.c.s
 .PHONY : src/host_agbmain.c.s
+
+src/host_audio.o: src/host_audio.c.o
+.PHONY : src/host_audio.o
+
+# target to build an object file
+src/host_audio.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_play.dir/build.make CMakeFiles/pfr_play.dir/src/host_audio.c.o
+.PHONY : src/host_audio.c.o
+
+src/host_audio.i: src/host_audio.c.i
+.PHONY : src/host_audio.i
+
+# target to preprocess a source file
+src/host_audio.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_play.dir/build.make CMakeFiles/pfr_play.dir/src/host_audio.c.i
+.PHONY : src/host_audio.c.i
+
+src/host_audio.s: src/host_audio.c.s
+.PHONY : src/host_audio.s
+
+# target to generate assembly for a file
+src/host_audio.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_play.dir/build.make CMakeFiles/pfr_play.dir/src/host_audio.c.s
+.PHONY : src/host_audio.c.s
+
+src/host_bg_regs.o: src/host_bg_regs.c.o
+.PHONY : src/host_bg_regs.o
+
+# target to build an object file
+src/host_bg_regs.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_bg_regs.c.o
+.PHONY : src/host_bg_regs.c.o
+
+src/host_bg_regs.i: src/host_bg_regs.c.i
+.PHONY : src/host_bg_regs.i
+
+# target to preprocess a source file
+src/host_bg_regs.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_bg_regs.c.i
+.PHONY : src/host_bg_regs.c.i
+
+src/host_bg_regs.s: src/host_bg_regs.c.s
+.PHONY : src/host_bg_regs.s
+
+# target to generate assembly for a file
+src/host_bg_regs.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_bg_regs.c.s
+.PHONY : src/host_bg_regs.c.s
 
 src/host_bios.o: src/host_bios.c.o
 .PHONY : src/host_bios.o
@@ -794,6 +8573,33 @@ src/host_bios.s: src/host_bios.c.s
 src/host_bios.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_bios.c.s
 .PHONY : src/host_bios.c.s
+
+src/host_capture_manifest.o: src/host_capture_manifest.c.o
+.PHONY : src/host_capture_manifest.o
+
+# target to build an object file
+src/host_capture_manifest.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_capture_manifest.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mgba_capture.dir/build.make CMakeFiles/mgba_capture.dir/src/host_capture_manifest.c.o
+.PHONY : src/host_capture_manifest.c.o
+
+src/host_capture_manifest.i: src/host_capture_manifest.c.i
+.PHONY : src/host_capture_manifest.i
+
+# target to preprocess a source file
+src/host_capture_manifest.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_capture_manifest.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mgba_capture.dir/build.make CMakeFiles/mgba_capture.dir/src/host_capture_manifest.c.i
+.PHONY : src/host_capture_manifest.c.i
+
+src/host_capture_manifest.s: src/host_capture_manifest.c.s
+.PHONY : src/host_capture_manifest.s
+
+# target to generate assembly for a file
+src/host_capture_manifest.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_capture_manifest.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mgba_capture.dir/build.make CMakeFiles/mgba_capture.dir/src/host_capture_manifest.c.s
+.PHONY : src/host_capture_manifest.c.s
 
 src/host_crt0.o: src/host_crt0.c.o
 .PHONY : src/host_crt0.o
@@ -891,6 +8697,54 @@ src/host_dma.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_dma.c.s
 .PHONY : src/host_dma.c.s
 
+src/host_flash.o: src/host_flash.c.o
+.PHONY : src/host_flash.o
+
+# target to build an object file
+src/host_flash.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_flash.c.o
+.PHONY : src/host_flash.c.o
+
+src/host_flash.i: src/host_flash.c.i
+.PHONY : src/host_flash.i
+
+# target to preprocess a source file
+src/host_flash.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_flash.c.i
+.PHONY : src/host_flash.c.i
+
+src/host_flash.s: src/host_flash.c.s
+.PHONY : src/host_flash.s
+
+# target to generate assembly for a file
+src/host_flash.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_flash.c.s
+.PHONY : src/host_flash.c.s
+
+src/host_frame_step.o: src/host_frame_step.c.o
+.PHONY : src/host_frame_step.o
+
+# target to build an object file
+src/host_frame_step.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_frame_step.c.o
+.PHONY : src/host_frame_step.c.o
+
+src/host_frame_step.i: src/host_frame_step.c.i
+.PHONY : src/host_frame_step.i
+
+# target to preprocess a source file
+src/host_frame_step.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_frame_step.c.i
+.PHONY : src/host_frame_step.c.i
+
+src/host_frame_step.s: src/host_frame_step.c.s
+.PHONY : src/host_frame_step.s
+
+# target to generate assembly for a file
+src/host_frame_step.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_frame_step.c.s
+.PHONY : src/host_frame_step.c.s
+
 src/host_intro_stubs.o: src/host_intro_stubs.c.o
 .PHONY : src/host_intro_stubs.o
 
@@ -914,6 +8768,30 @@ src/host_intro_stubs.s: src/host_intro_stubs.c.s
 src/host_intro_stubs.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_intro_stubs.c.s
 .PHONY : src/host_intro_stubs.c.s
+
+src/host_log.o: src/host_log.c.o
+.PHONY : src/host_log.o
+
+# target to build an object file
+src/host_log.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_log.c.o
+.PHONY : src/host_log.c.o
+
+src/host_log.i: src/host_log.c.i
+.PHONY : src/host_log.i
+
+# target to preprocess a source file
+src/host_log.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_log.c.i
+.PHONY : src/host_log.c.i
+
+src/host_log.s: src/host_log.c.s
+.PHONY : src/host_log.s
+
+# target to generate assembly for a file
+src/host_log.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_log.c.s
+.PHONY : src/host_log.c.s
 
 src/host_memory.o: src/host_memory.c.o
 .PHONY : src/host_memory.o
@@ -939,6 +8817,30 @@ src/host_memory.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_memory.c.s
 .PHONY : src/host_memory.c.s
 
+src/host_new_game_stubs.o: src/host_new_game_stubs.c.o
+.PHONY : src/host_new_game_stubs.o
+
+# target to build an object file
+src/host_new_game_stubs.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_new_game_stubs.c.o
+.PHONY : src/host_new_game_stubs.c.o
+
+src/host_new_game_stubs.i: src/host_new_game_stubs.c.i
+.PHONY : src/host_new_game_stubs.i
+
+# target to preprocess a source file
+src/host_new_game_stubs.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_new_game_stubs.c.i
+.PHONY : src/host_new_game_stubs.c.i
+
+src/host_new_game_stubs.s: src/host_new_game_stubs.c.s
+.PHONY : src/host_new_game_stubs.s
+
+# target to generate assembly for a file
+src/host_new_game_stubs.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_new_game_stubs.c.s
+.PHONY : src/host_new_game_stubs.c.s
+
 src/host_oak_speech_stubs.o: src/host_oak_speech_stubs.c.o
 .PHONY : src/host_oak_speech_stubs.o
 
@@ -962,6 +8864,30 @@ src/host_oak_speech_stubs.s: src/host_oak_speech_stubs.c.s
 src/host_oak_speech_stubs.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_oak_speech_stubs.c.s
 .PHONY : src/host_oak_speech_stubs.c.s
+
+src/host_ptr_store.o: src/host_ptr_store.c.o
+.PHONY : src/host_ptr_store.o
+
+# target to build an object file
+src/host_ptr_store.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_ptr_store.c.o
+.PHONY : src/host_ptr_store.c.o
+
+src/host_ptr_store.i: src/host_ptr_store.c.i
+.PHONY : src/host_ptr_store.i
+
+# target to preprocess a source file
+src/host_ptr_store.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_ptr_store.c.i
+.PHONY : src/host_ptr_store.c.i
+
+src/host_ptr_store.s: src/host_ptr_store.c.s
+.PHONY : src/host_ptr_store.s
+
+# target to generate assembly for a file
+src/host_ptr_store.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_ptr_store.c.s
+.PHONY : src/host_ptr_store.c.s
 
 src/host_renderer.o: src/host_renderer.c.o
 .PHONY : src/host_renderer.o
@@ -987,6 +8913,144 @@ src/host_renderer.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_renderer.c.s
 .PHONY : src/host_renderer.c.s
 
+src/host_savestate.o: src/host_savestate.c.o
+.PHONY : src/host_savestate.o
+
+# target to build an object file
+src/host_savestate.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_smoke.dir/build.make CMakeFiles/pfr_smoke.dir/src/host_savestate.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_env_smoke.dir/build.make CMakeFiles/pfr_env_smoke.dir/src/host_savestate.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_render_test.dir/build.make CMakeFiles/pfr_render_test.dir/src/host_savestate.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_play.dir/build.make CMakeFiles/pfr_play.dir/src/host_savestate.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_game.dir/build.make CMakeFiles/pfr_game.dir/src/host_savestate.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_battle_test.dir/build.make CMakeFiles/pfr_battle_test.dir/src/host_savestate.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_game_static.dir/build.make CMakeFiles/pfr_game_static.dir/src/host_savestate.c.o
+.PHONY : src/host_savestate.c.o
+
+src/host_savestate.i: src/host_savestate.c.i
+.PHONY : src/host_savestate.i
+
+# target to preprocess a source file
+src/host_savestate.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_smoke.dir/build.make CMakeFiles/pfr_smoke.dir/src/host_savestate.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_env_smoke.dir/build.make CMakeFiles/pfr_env_smoke.dir/src/host_savestate.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_render_test.dir/build.make CMakeFiles/pfr_render_test.dir/src/host_savestate.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_play.dir/build.make CMakeFiles/pfr_play.dir/src/host_savestate.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_game.dir/build.make CMakeFiles/pfr_game.dir/src/host_savestate.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_battle_test.dir/build.make CMakeFiles/pfr_battle_test.dir/src/host_savestate.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_game_static.dir/build.make CMakeFiles/pfr_game_static.dir/src/host_savestate.c.i
+.PHONY : src/host_savestate.c.i
+
+src/host_savestate.s: src/host_savestate.c.s
+.PHONY : src/host_savestate.s
+
+# target to generate assembly for a file
+src/host_savestate.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_smoke.dir/build.make CMakeFiles/pfr_smoke.dir/src/host_savestate.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_env_smoke.dir/build.make CMakeFiles/pfr_env_smoke.dir/src/host_savestate.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_render_test.dir/build.make CMakeFiles/pfr_render_test.dir/src/host_savestate.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_play.dir/build.make CMakeFiles/pfr_play.dir/src/host_savestate.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_game.dir/build.make CMakeFiles/pfr_game.dir/src/host_savestate.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_battle_test.dir/build.make CMakeFiles/pfr_battle_test.dir/src/host_savestate.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_game_static.dir/build.make CMakeFiles/pfr_game_static.dir/src/host_savestate.c.s
+.PHONY : src/host_savestate.c.s
+
+src/host_script_ptrtab.o: src/host_script_ptrtab.c.o
+.PHONY : src/host_script_ptrtab.o
+
+# target to build an object file
+src/host_script_ptrtab.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_script_ptrtab.c.o
+.PHONY : src/host_script_ptrtab.c.o
+
+src/host_script_ptrtab.i: src/host_script_ptrtab.c.i
+.PHONY : src/host_script_ptrtab.i
+
+# target to preprocess a source file
+src/host_script_ptrtab.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_script_ptrtab.c.i
+.PHONY : src/host_script_ptrtab.c.i
+
+src/host_script_ptrtab.s: src/host_script_ptrtab.c.s
+.PHONY : src/host_script_ptrtab.s
+
+# target to generate assembly for a file
+src/host_script_ptrtab.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_script_ptrtab.c.s
+.PHONY : src/host_script_ptrtab.c.s
+
+src/host_sound_init.o: src/host_sound_init.c.o
+.PHONY : src/host_sound_init.o
+
+# target to build an object file
+src/host_sound_init.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_sound_init.c.o
+.PHONY : src/host_sound_init.c.o
+
+src/host_sound_init.i: src/host_sound_init.c.i
+.PHONY : src/host_sound_init.i
+
+# target to preprocess a source file
+src/host_sound_init.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_sound_init.c.i
+.PHONY : src/host_sound_init.c.i
+
+src/host_sound_init.s: src/host_sound_init.c.s
+.PHONY : src/host_sound_init.s
+
+# target to generate assembly for a file
+src/host_sound_init.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_sound_init.c.s
+.PHONY : src/host_sound_init.c.s
+
+src/host_sound_mixer.o: src/host_sound_mixer.c.o
+.PHONY : src/host_sound_mixer.o
+
+# target to build an object file
+src/host_sound_mixer.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_sound_mixer.c.o
+.PHONY : src/host_sound_mixer.c.o
+
+src/host_sound_mixer.i: src/host_sound_mixer.c.i
+.PHONY : src/host_sound_mixer.i
+
+# target to preprocess a source file
+src/host_sound_mixer.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_sound_mixer.c.i
+.PHONY : src/host_sound_mixer.c.i
+
+src/host_sound_mixer.s: src/host_sound_mixer.c.s
+.PHONY : src/host_sound_mixer.s
+
+# target to generate assembly for a file
+src/host_sound_mixer.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_sound_mixer.c.s
+.PHONY : src/host_sound_mixer.c.s
+
+src/host_timer.o: src/host_timer.c.o
+.PHONY : src/host_timer.o
+
+# target to build an object file
+src/host_timer.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_timer.c.o
+.PHONY : src/host_timer.c.o
+
+src/host_timer.i: src/host_timer.c.i
+.PHONY : src/host_timer.i
+
+# target to preprocess a source file
+src/host_timer.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_timer.c.i
+.PHONY : src/host_timer.c.i
+
+src/host_timer.s: src/host_timer.c.s
+.PHONY : src/host_timer.s
+
+# target to generate assembly for a file
+src/host_timer.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_timer.c.s
+.PHONY : src/host_timer.c.s
+
 src/host_title_screen_stubs.o: src/host_title_screen_stubs.c.o
 .PHONY : src/host_title_screen_stubs.o
 
@@ -1010,6 +9074,165 @@ src/host_title_screen_stubs.s: src/host_title_screen_stubs.c.s
 src/host_title_screen_stubs.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/host_title_screen_stubs.c.s
 .PHONY : src/host_title_screen_stubs.c.s
+
+src/pfr_env.o: src/pfr_env.c.o
+.PHONY : src/pfr_env.o
+
+# target to build an object file
+src/pfr_env.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_env_smoke.dir/build.make CMakeFiles/pfr_env_smoke.dir/src/pfr_env.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_env_binding_native.dir/build.make CMakeFiles/pfr_env_binding_native.dir/src/pfr_env.c.o
+.PHONY : src/pfr_env.c.o
+
+src/pfr_env.i: src/pfr_env.c.i
+.PHONY : src/pfr_env.i
+
+# target to preprocess a source file
+src/pfr_env.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_env_smoke.dir/build.make CMakeFiles/pfr_env_smoke.dir/src/pfr_env.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_env_binding_native.dir/build.make CMakeFiles/pfr_env_binding_native.dir/src/pfr_env.c.i
+.PHONY : src/pfr_env.c.i
+
+src/pfr_env.s: src/pfr_env.c.s
+.PHONY : src/pfr_env.s
+
+# target to generate assembly for a file
+src/pfr_env.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_env_smoke.dir/build.make CMakeFiles/pfr_env_smoke.dir/src/pfr_env.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_env_binding_native.dir/build.make CMakeFiles/pfr_env_binding_native.dir/src/pfr_env.c.s
+.PHONY : src/pfr_env.c.s
+
+src/pfr_env_binding.o: src/pfr_env_binding.c.o
+.PHONY : src/pfr_env_binding.o
+
+# target to build an object file
+src/pfr_env_binding.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_env_binding_native.dir/build.make CMakeFiles/pfr_env_binding_native.dir/src/pfr_env_binding.c.o
+.PHONY : src/pfr_env_binding.c.o
+
+src/pfr_env_binding.i: src/pfr_env_binding.c.i
+.PHONY : src/pfr_env_binding.i
+
+# target to preprocess a source file
+src/pfr_env_binding.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_env_binding_native.dir/build.make CMakeFiles/pfr_env_binding_native.dir/src/pfr_env_binding.c.i
+.PHONY : src/pfr_env_binding.c.i
+
+src/pfr_env_binding.s: src/pfr_env_binding.c.s
+.PHONY : src/pfr_env_binding.s
+
+# target to generate assembly for a file
+src/pfr_env_binding.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_env_binding_native.dir/build.make CMakeFiles/pfr_env_binding_native.dir/src/pfr_env_binding.c.s
+.PHONY : src/pfr_env_binding.c.s
+
+src/pfr_game_api.o: src/pfr_game_api.c.o
+.PHONY : src/pfr_game_api.o
+
+# target to build an object file
+src/pfr_game_api.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_env_smoke.dir/build.make CMakeFiles/pfr_env_smoke.dir/src/pfr_game_api.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_game.dir/build.make CMakeFiles/pfr_game.dir/src/pfr_game_api.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_game_static.dir/build.make CMakeFiles/pfr_game_static.dir/src/pfr_game_api.c.o
+.PHONY : src/pfr_game_api.c.o
+
+src/pfr_game_api.i: src/pfr_game_api.c.i
+.PHONY : src/pfr_game_api.i
+
+# target to preprocess a source file
+src/pfr_game_api.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_env_smoke.dir/build.make CMakeFiles/pfr_env_smoke.dir/src/pfr_game_api.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_game.dir/build.make CMakeFiles/pfr_game.dir/src/pfr_game_api.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_game_static.dir/build.make CMakeFiles/pfr_game_static.dir/src/pfr_game_api.c.i
+.PHONY : src/pfr_game_api.c.i
+
+src/pfr_game_api.s: src/pfr_game_api.c.s
+.PHONY : src/pfr_game_api.s
+
+# target to generate assembly for a file
+src/pfr_game_api.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_env_smoke.dir/build.make CMakeFiles/pfr_env_smoke.dir/src/pfr_game_api.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_game.dir/build.make CMakeFiles/pfr_game.dir/src/pfr_game_api.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_game_static.dir/build.make CMakeFiles/pfr_game_static.dir/src/pfr_game_api.c.s
+.PHONY : src/pfr_game_api.c.s
+
+src/pfr_native.o: src/pfr_native.c.o
+.PHONY : src/pfr_native.o
+
+# target to build an object file
+src/pfr_native.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_native_core.dir/build.make CMakeFiles/pfr_native_core.dir/src/pfr_native.c.o
+.PHONY : src/pfr_native.c.o
+
+src/pfr_native.i: src/pfr_native.c.i
+.PHONY : src/pfr_native.i
+
+# target to preprocess a source file
+src/pfr_native.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_native_core.dir/build.make CMakeFiles/pfr_native_core.dir/src/pfr_native.c.i
+.PHONY : src/pfr_native.c.i
+
+src/pfr_native.s: src/pfr_native.c.s
+.PHONY : src/pfr_native.s
+
+# target to generate assembly for a file
+src/pfr_native.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_native_core.dir/build.make CMakeFiles/pfr_native_core.dir/src/pfr_native.c.s
+.PHONY : src/pfr_native.c.s
+
+src/pfr_obs_adapter.o: src/pfr_obs_adapter.c.o
+.PHONY : src/pfr_obs_adapter.o
+
+# target to build an object file
+src/pfr_obs_adapter.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_game.dir/build.make CMakeFiles/pfr_game.dir/src/pfr_obs_adapter.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_game_static.dir/build.make CMakeFiles/pfr_game_static.dir/src/pfr_obs_adapter.c.o
+.PHONY : src/pfr_obs_adapter.c.o
+
+src/pfr_obs_adapter.i: src/pfr_obs_adapter.c.i
+.PHONY : src/pfr_obs_adapter.i
+
+# target to preprocess a source file
+src/pfr_obs_adapter.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_game.dir/build.make CMakeFiles/pfr_game.dir/src/pfr_obs_adapter.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_game_static.dir/build.make CMakeFiles/pfr_game_static.dir/src/pfr_obs_adapter.c.i
+.PHONY : src/pfr_obs_adapter.c.i
+
+src/pfr_obs_adapter.s: src/pfr_obs_adapter.c.s
+.PHONY : src/pfr_obs_adapter.s
+
+# target to generate assembly for a file
+src/pfr_obs_adapter.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_game.dir/build.make CMakeFiles/pfr_game.dir/src/pfr_obs_adapter.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_game_static.dir/build.make CMakeFiles/pfr_game_static.dir/src/pfr_obs_adapter.c.s
+.PHONY : src/pfr_obs_adapter.c.s
+
+src/pfr_obs_full.o: src/pfr_obs_full.c.o
+.PHONY : src/pfr_obs_full.o
+
+# target to build an object file
+src/pfr_obs_full.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_game.dir/build.make CMakeFiles/pfr_game.dir/src/pfr_obs_full.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_game_static.dir/build.make CMakeFiles/pfr_game_static.dir/src/pfr_obs_full.c.o
+.PHONY : src/pfr_obs_full.c.o
+
+src/pfr_obs_full.i: src/pfr_obs_full.c.i
+.PHONY : src/pfr_obs_full.i
+
+# target to preprocess a source file
+src/pfr_obs_full.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_game.dir/build.make CMakeFiles/pfr_game.dir/src/pfr_obs_full.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_game_static.dir/build.make CMakeFiles/pfr_game_static.dir/src/pfr_obs_full.c.i
+.PHONY : src/pfr_obs_full.c.i
+
+src/pfr_obs_full.s: src/pfr_obs_full.c.s
+.PHONY : src/pfr_obs_full.s
+
+# target to generate assembly for a file
+src/pfr_obs_full.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_game.dir/build.make CMakeFiles/pfr_game.dir/src/pfr_obs_full.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_game_static.dir/build.make CMakeFiles/pfr_game_static.dir/src/pfr_obs_full.c.s
+.PHONY : src/pfr_obs_full.c.s
 
 src/pfr_play.o: src/pfr_play.c.o
 .PHONY : src/pfr_play.o
@@ -1035,29 +9258,229 @@ src/pfr_play.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_play.dir/build.make CMakeFiles/pfr_play.dir/src/pfr_play.c.s
 .PHONY : src/pfr_play.c.s
 
-src/upstream_stubs.o: src/upstream_stubs.c.o
-.PHONY : src/upstream_stubs.o
+src/pfr_so_instance.o: src/pfr_so_instance.c.o
+.PHONY : src/pfr_so_instance.o
 
 # target to build an object file
-src/upstream_stubs.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/upstream_stubs.c.o
-.PHONY : src/upstream_stubs.c.o
+src/pfr_so_instance.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfrn_binding.dir/build.make CMakeFiles/pfrn_binding.dir/src/pfr_so_instance.c.o
+.PHONY : src/pfr_so_instance.c.o
 
-src/upstream_stubs.i: src/upstream_stubs.c.i
-.PHONY : src/upstream_stubs.i
+src/pfr_so_instance.i: src/pfr_so_instance.c.i
+.PHONY : src/pfr_so_instance.i
 
 # target to preprocess a source file
-src/upstream_stubs.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/upstream_stubs.c.i
-.PHONY : src/upstream_stubs.c.i
+src/pfr_so_instance.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfrn_binding.dir/build.make CMakeFiles/pfrn_binding.dir/src/pfr_so_instance.c.i
+.PHONY : src/pfr_so_instance.c.i
 
-src/upstream_stubs.s: src/upstream_stubs.c.s
-.PHONY : src/upstream_stubs.s
+src/pfr_so_instance.s: src/pfr_so_instance.c.s
+.PHONY : src/pfr_so_instance.s
 
 # target to generate assembly for a file
-src/upstream_stubs.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/upstream_stubs.c.s
-.PHONY : src/upstream_stubs.c.s
+src/pfr_so_instance.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfrn_binding.dir/build.make CMakeFiles/pfrn_binding.dir/src/pfr_so_instance.c.s
+.PHONY : src/pfr_so_instance.c.s
+
+src/pfrn_binding_module.o: src/pfrn_binding_module.c.o
+.PHONY : src/pfrn_binding_module.o
+
+# target to build an object file
+src/pfrn_binding_module.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfrn_binding.dir/build.make CMakeFiles/pfrn_binding.dir/src/pfrn_binding_module.c.o
+.PHONY : src/pfrn_binding_module.c.o
+
+src/pfrn_binding_module.i: src/pfrn_binding_module.c.i
+.PHONY : src/pfrn_binding_module.i
+
+# target to preprocess a source file
+src/pfrn_binding_module.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfrn_binding.dir/build.make CMakeFiles/pfrn_binding.dir/src/pfrn_binding_module.c.i
+.PHONY : src/pfrn_binding_module.c.i
+
+src/pfrn_binding_module.s: src/pfrn_binding_module.c.s
+.PHONY : src/pfrn_binding_module.s
+
+# target to generate assembly for a file
+src/pfrn_binding_module.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfrn_binding.dir/build.make CMakeFiles/pfrn_binding.dir/src/pfrn_binding_module.c.s
+.PHONY : src/pfrn_binding_module.c.s
+
+src/upstream_asm_data.o: src/upstream_asm_data.c.o
+.PHONY : src/upstream_asm_data.o
+
+# target to build an object file
+src/upstream_asm_data.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/upstream_asm_data.c.o
+.PHONY : src/upstream_asm_data.c.o
+
+src/upstream_asm_data.i: src/upstream_asm_data.c.i
+.PHONY : src/upstream_asm_data.i
+
+# target to preprocess a source file
+src/upstream_asm_data.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/upstream_asm_data.c.i
+.PHONY : src/upstream_asm_data.c.i
+
+src/upstream_asm_data.s: src/upstream_asm_data.c.s
+.PHONY : src/upstream_asm_data.s
+
+# target to generate assembly for a file
+src/upstream_asm_data.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/upstream_asm_data.c.s
+.PHONY : src/upstream_asm_data.c.s
+
+src/upstream_battle_scripts.o: src/upstream_battle_scripts.c.o
+.PHONY : src/upstream_battle_scripts.o
+
+# target to build an object file
+src/upstream_battle_scripts.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/upstream_battle_scripts.c.o
+.PHONY : src/upstream_battle_scripts.c.o
+
+src/upstream_battle_scripts.i: src/upstream_battle_scripts.c.i
+.PHONY : src/upstream_battle_scripts.i
+
+# target to preprocess a source file
+src/upstream_battle_scripts.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/upstream_battle_scripts.c.i
+.PHONY : src/upstream_battle_scripts.c.i
+
+src/upstream_battle_scripts.s: src/upstream_battle_scripts.c.s
+.PHONY : src/upstream_battle_scripts.s
+
+# target to generate assembly for a file
+src/upstream_battle_scripts.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/upstream_battle_scripts.c.s
+.PHONY : src/upstream_battle_scripts.c.s
+
+src/upstream_event_scripts.o: src/upstream_event_scripts.c.o
+.PHONY : src/upstream_event_scripts.o
+
+# target to build an object file
+src/upstream_event_scripts.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/upstream_event_scripts.c.o
+.PHONY : src/upstream_event_scripts.c.o
+
+src/upstream_event_scripts.i: src/upstream_event_scripts.c.i
+.PHONY : src/upstream_event_scripts.i
+
+# target to preprocess a source file
+src/upstream_event_scripts.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/upstream_event_scripts.c.i
+.PHONY : src/upstream_event_scripts.c.i
+
+src/upstream_event_scripts.s: src/upstream_event_scripts.c.s
+.PHONY : src/upstream_event_scripts.s
+
+# target to generate assembly for a file
+src/upstream_event_scripts.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/upstream_event_scripts.c.s
+.PHONY : src/upstream_event_scripts.c.s
+
+src/upstream_sound_data.o: src/upstream_sound_data.c.o
+.PHONY : src/upstream_sound_data.o
+
+# target to build an object file
+src/upstream_sound_data.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/upstream_sound_data.c.o
+.PHONY : src/upstream_sound_data.c.o
+
+src/upstream_sound_data.i: src/upstream_sound_data.c.i
+.PHONY : src/upstream_sound_data.i
+
+# target to preprocess a source file
+src/upstream_sound_data.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/upstream_sound_data.c.i
+.PHONY : src/upstream_sound_data.c.i
+
+src/upstream_sound_data.s: src/upstream_sound_data.c.s
+.PHONY : src/upstream_sound_data.s
+
+# target to generate assembly for a file
+src/upstream_sound_data.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/upstream_sound_data.c.s
+.PHONY : src/upstream_sound_data.c.s
+
+src/upstream_sound_samples.o: src/upstream_sound_samples.S.o
+.PHONY : src/upstream_sound_samples.o
+
+# target to build an object file
+src/upstream_sound_samples.S.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_upstream_core.dir/build.make CMakeFiles/pfr_upstream_core.dir/src/upstream_sound_samples.S.o
+.PHONY : src/upstream_sound_samples.S.o
+
+tests/battle_test.o: tests/battle_test.c.o
+.PHONY : tests/battle_test.o
+
+# target to build an object file
+tests/battle_test.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_battle_test.dir/build.make CMakeFiles/pfr_battle_test.dir/tests/battle_test.c.o
+.PHONY : tests/battle_test.c.o
+
+tests/battle_test.i: tests/battle_test.c.i
+.PHONY : tests/battle_test.i
+
+# target to preprocess a source file
+tests/battle_test.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_battle_test.dir/build.make CMakeFiles/pfr_battle_test.dir/tests/battle_test.c.i
+.PHONY : tests/battle_test.c.i
+
+tests/battle_test.s: tests/battle_test.c.s
+.PHONY : tests/battle_test.s
+
+# target to generate assembly for a file
+tests/battle_test.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_battle_test.dir/build.make CMakeFiles/pfr_battle_test.dir/tests/battle_test.c.s
+.PHONY : tests/battle_test.c.s
+
+tests/pfr_env_smoke.o: tests/pfr_env_smoke.c.o
+.PHONY : tests/pfr_env_smoke.o
+
+# target to build an object file
+tests/pfr_env_smoke.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_env_smoke.dir/build.make CMakeFiles/pfr_env_smoke.dir/tests/pfr_env_smoke.c.o
+.PHONY : tests/pfr_env_smoke.c.o
+
+tests/pfr_env_smoke.i: tests/pfr_env_smoke.c.i
+.PHONY : tests/pfr_env_smoke.i
+
+# target to preprocess a source file
+tests/pfr_env_smoke.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_env_smoke.dir/build.make CMakeFiles/pfr_env_smoke.dir/tests/pfr_env_smoke.c.i
+.PHONY : tests/pfr_env_smoke.c.i
+
+tests/pfr_env_smoke.s: tests/pfr_env_smoke.c.s
+.PHONY : tests/pfr_env_smoke.s
+
+# target to generate assembly for a file
+tests/pfr_env_smoke.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_env_smoke.dir/build.make CMakeFiles/pfr_env_smoke.dir/tests/pfr_env_smoke.c.s
+.PHONY : tests/pfr_env_smoke.c.s
+
+tests/pfr_native_smoke.o: tests/pfr_native_smoke.c.o
+.PHONY : tests/pfr_native_smoke.o
+
+# target to build an object file
+tests/pfr_native_smoke.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_native_smoke.dir/build.make CMakeFiles/pfr_native_smoke.dir/tests/pfr_native_smoke.c.o
+.PHONY : tests/pfr_native_smoke.c.o
+
+tests/pfr_native_smoke.i: tests/pfr_native_smoke.c.i
+.PHONY : tests/pfr_native_smoke.i
+
+# target to preprocess a source file
+tests/pfr_native_smoke.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_native_smoke.dir/build.make CMakeFiles/pfr_native_smoke.dir/tests/pfr_native_smoke.c.i
+.PHONY : tests/pfr_native_smoke.c.i
+
+tests/pfr_native_smoke.s: tests/pfr_native_smoke.c.s
+.PHONY : tests/pfr_native_smoke.s
+
+# target to generate assembly for a file
+tests/pfr_native_smoke.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_native_smoke.dir/build.make CMakeFiles/pfr_native_smoke.dir/tests/pfr_native_smoke.c.s
+.PHONY : tests/pfr_native_smoke.c.s
 
 tests/render_test.o: tests/render_test.c.o
 .PHONY : tests/render_test.o
@@ -1131,6 +9554,30 @@ tools/pfr_assets.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_assets.dir/build.make CMakeFiles/pfr_assets.dir/tools/pfr_assets.c.s
 .PHONY : tools/pfr_assets.c.s
 
+tools/pfr_frame_diff.o: tools/pfr_frame_diff.c.o
+.PHONY : tools/pfr_frame_diff.o
+
+# target to build an object file
+tools/pfr_frame_diff.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_frame_diff.dir/build.make CMakeFiles/pfr_frame_diff.dir/tools/pfr_frame_diff.c.o
+.PHONY : tools/pfr_frame_diff.c.o
+
+tools/pfr_frame_diff.i: tools/pfr_frame_diff.c.i
+.PHONY : tools/pfr_frame_diff.i
+
+# target to preprocess a source file
+tools/pfr_frame_diff.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_frame_diff.dir/build.make CMakeFiles/pfr_frame_diff.dir/tools/pfr_frame_diff.c.i
+.PHONY : tools/pfr_frame_diff.c.i
+
+tools/pfr_frame_diff.s: tools/pfr_frame_diff.c.s
+.PHONY : tools/pfr_frame_diff.s
+
+# target to generate assembly for a file
+tools/pfr_frame_diff.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pfr_frame_diff.dir/build.make CMakeFiles/pfr_frame_diff.dir/tools/pfr_frame_diff.c.s
+.PHONY : tools/pfr_frame_diff.c.s
+
 tools/pfr_lz77.o: tools/pfr_lz77.c.o
 .PHONY : tools/pfr_lz77.o
 
@@ -1163,82 +9610,994 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... pfr_asset_pipeline"
+	@echo "... pfr_gbagfx_tool"
+	@echo "... pfr_generated_headers"
+	@echo "... pfr_generated_upstream_native_data"
+	@echo "... pfr_golden_check"
+	@echo "... pfr_libpng_external"
+	@echo "... pfr_mgba_external"
+	@echo "... pfr_native_generated_data"
+	@echo "... pfr_reference_rom"
+	@echo "... pfr_refresh_goldens"
+	@echo "... pfr_verify_asset_manifests"
+	@echo "... mgba_bench"
+	@echo "... mgba_capture"
 	@echo "... pfr_assets"
+	@echo "... pfr_battle_test"
+	@echo "... pfr_env_binding_native"
+	@echo "... pfr_env_smoke"
+	@echo "... pfr_frame_diff"
+	@echo "... pfr_game"
+	@echo "... pfr_game_static"
 	@echo "... pfr_lz77"
+	@echo "... pfr_native_core"
+	@echo "... pfr_native_smoke"
 	@echo "... pfr_play"
 	@echo "... pfr_render_test"
 	@echo "... pfr_smoke"
-	@echo "... pfr_upstream_berry_fix"
-	@echo "... pfr_upstream_clear_save"
+	@echo "... pfr_upstream_bag"
+	@echo "... pfr_upstream_battle_anim_effects_3"
+	@echo "... pfr_upstream_battle_anim_flying"
+	@echo "... pfr_upstream_battle_anim_water"
+	@echo "... pfr_upstream_battle_bg"
+	@echo "... pfr_upstream_battle_interface"
+	@echo "... pfr_upstream_battle_records"
+	@echo "... pfr_upstream_battle_script_commands"
+	@echo "... pfr_upstream_battle_transition"
+	@echo "... pfr_upstream_berry_crush"
+	@echo "... pfr_upstream_braille_text"
 	@echo "... pfr_upstream_core"
+	@echo "... pfr_upstream_credits"
+	@echo "... pfr_upstream_daycare"
+	@echo "... pfr_upstream_digit_obj_util"
+	@echo "... pfr_upstream_diploma"
+	@echo "... pfr_upstream_dodrio_berry_picking"
+	@echo "... pfr_upstream_easy_chat"
+	@echo "... pfr_upstream_easy_chat_2"
+	@echo "... pfr_upstream_easy_chat_3"
+	@echo "... pfr_upstream_event_object_movement"
+	@echo "... pfr_upstream_evolution_graphics"
+	@echo "... pfr_upstream_evolution_scene"
+	@echo "... pfr_upstream_fame_checker"
+	@echo "... pfr_upstream_field_door"
+	@echo "... pfr_upstream_field_effect"
+	@echo "... pfr_upstream_field_specials"
+	@echo "... pfr_upstream_field_weather"
+	@echo "... pfr_upstream_fldeff_flash"
+	@echo "... pfr_upstream_graphics"
+	@echo "... pfr_upstream_hall_of_fame"
+	@echo "... pfr_upstream_help_message"
+	@echo "... pfr_upstream_help_system"
+	@echo "... pfr_upstream_help_system_util"
 	@echo "... pfr_upstream_intro"
+	@echo "... pfr_upstream_item_menu"
+	@echo "... pfr_upstream_itemfinder"
+	@echo "... pfr_upstream_learn_move"
+	@echo "... pfr_upstream_link"
+	@echo "... pfr_upstream_link_rfu_3"
 	@echo "... pfr_upstream_main_menu"
+	@echo "... pfr_upstream_map_preview_screen"
+	@echo "... pfr_upstream_menu_indicators"
+	@echo "... pfr_upstream_minigame_countdown"
+	@echo "... pfr_upstream_mon_markings"
+	@echo "... pfr_upstream_mystery_gift_menu"
+	@echo "... pfr_upstream_mystery_gift_show_card"
+	@echo "... pfr_upstream_mystery_gift_show_news"
+	@echo "... pfr_upstream_naming_screen"
+	@echo "... pfr_upstream_new_menu_helpers"
 	@echo "... pfr_upstream_oak_speech"
-	@echo "... pfr_upstream_runtime"
+	@echo "... pfr_upstream_option_menu"
+	@echo "... pfr_upstream_party_menu"
+	@echo "... pfr_upstream_pokedex_area_markers"
+	@echo "... pfr_upstream_pokedex_screen"
+	@echo "... pfr_upstream_pokemon"
+	@echo "... pfr_upstream_pokemon_icon"
+	@echo "... pfr_upstream_pokemon_jump"
+	@echo "... pfr_upstream_pokemon_special_anim_scene"
+	@echo "... pfr_upstream_pokemon_storage_system_data"
+	@echo "... pfr_upstream_pokemon_storage_system_graphics"
+	@echo "... pfr_upstream_pokemon_storage_system_menu"
+	@echo "... pfr_upstream_pokemon_storage_system_misc"
+	@echo "... pfr_upstream_pokemon_storage_system_tasks"
+	@echo "... pfr_upstream_pokemon_summary_screen"
+	@echo "... pfr_upstream_quest_log"
+	@echo "... pfr_upstream_region_map"
+	@echo "... pfr_upstream_save_failed_screen"
+	@echo "... pfr_upstream_script_menu"
+	@echo "... pfr_upstream_seagallop"
+	@echo "... pfr_upstream_slot_machine"
+	@echo "... pfr_upstream_ss_anne"
+	@echo "... pfr_upstream_text"
+	@echo "... pfr_upstream_text_window_graphics"
+	@echo "... pfr_upstream_tileset_anims"
+	@echo "... pfr_upstream_tilesets"
 	@echo "... pfr_upstream_title"
+	@echo "... pfr_upstream_trade"
+	@echo "... pfr_upstream_trade_scene"
+	@echo "... pfr_upstream_trainer_card"
+	@echo "... pfr_upstream_trainer_see"
+	@echo "... pfr_upstream_union_room_chat_display"
+	@echo "... pfr_upstream_union_room_chat_objects"
+	@echo "... pfr_upstream_util"
+	@echo "... pfr_upstream_wireless_communication_status_screen"
+	@echo "... pfrn_binding"
+	@echo "... gen/AgbRfu_LinkManager.o"
+	@echo "... gen/AgbRfu_LinkManager.i"
+	@echo "... gen/AgbRfu_LinkManager.s"
+	@echo "... gen/bag.o"
+	@echo "... gen/bag.i"
+	@echo "... gen/bag.s"
+	@echo "... gen/battle_ai_script_commands.o"
+	@echo "... gen/battle_ai_script_commands.i"
+	@echo "... gen/battle_ai_script_commands.s"
+	@echo "... gen/battle_ai_switch_items.o"
+	@echo "... gen/battle_ai_switch_items.i"
+	@echo "... gen/battle_ai_switch_items.s"
+	@echo "... gen/battle_anim.o"
+	@echo "... gen/battle_anim.i"
+	@echo "... gen/battle_anim.s"
+	@echo "... gen/battle_anim_bug.o"
+	@echo "... gen/battle_anim_bug.i"
+	@echo "... gen/battle_anim_bug.s"
+	@echo "... gen/battle_anim_dark.o"
+	@echo "... gen/battle_anim_dark.i"
+	@echo "... gen/battle_anim_dark.s"
+	@echo "... gen/battle_anim_dragon.o"
+	@echo "... gen/battle_anim_dragon.i"
+	@echo "... gen/battle_anim_dragon.s"
+	@echo "... gen/battle_anim_effects_1.o"
+	@echo "... gen/battle_anim_effects_1.i"
+	@echo "... gen/battle_anim_effects_1.s"
+	@echo "... gen/battle_anim_effects_2.o"
+	@echo "... gen/battle_anim_effects_2.i"
+	@echo "... gen/battle_anim_effects_2.s"
+	@echo "... gen/battle_anim_effects_3.o"
+	@echo "... gen/battle_anim_effects_3.i"
+	@echo "... gen/battle_anim_effects_3.s"
+	@echo "... gen/battle_anim_electric.o"
+	@echo "... gen/battle_anim_electric.i"
+	@echo "... gen/battle_anim_electric.s"
+	@echo "... gen/battle_anim_fight.o"
+	@echo "... gen/battle_anim_fight.i"
+	@echo "... gen/battle_anim_fight.s"
+	@echo "... gen/battle_anim_fire.o"
+	@echo "... gen/battle_anim_fire.i"
+	@echo "... gen/battle_anim_fire.s"
+	@echo "... gen/battle_anim_flying.o"
+	@echo "... gen/battle_anim_flying.i"
+	@echo "... gen/battle_anim_flying.s"
+	@echo "... gen/battle_anim_ghost.o"
+	@echo "... gen/battle_anim_ghost.i"
+	@echo "... gen/battle_anim_ghost.s"
+	@echo "... gen/battle_anim_ground.o"
+	@echo "... gen/battle_anim_ground.i"
+	@echo "... gen/battle_anim_ground.s"
+	@echo "... gen/battle_anim_ice.o"
+	@echo "... gen/battle_anim_ice.i"
+	@echo "... gen/battle_anim_ice.s"
+	@echo "... gen/battle_anim_mon_movement.o"
+	@echo "... gen/battle_anim_mon_movement.i"
+	@echo "... gen/battle_anim_mon_movement.s"
+	@echo "... gen/battle_anim_mons.o"
+	@echo "... gen/battle_anim_mons.i"
+	@echo "... gen/battle_anim_mons.s"
+	@echo "... gen/battle_anim_normal.o"
+	@echo "... gen/battle_anim_normal.i"
+	@echo "... gen/battle_anim_normal.s"
+	@echo "... gen/battle_anim_poison.o"
+	@echo "... gen/battle_anim_poison.i"
+	@echo "... gen/battle_anim_poison.s"
+	@echo "... gen/battle_anim_psychic.o"
+	@echo "... gen/battle_anim_psychic.i"
+	@echo "... gen/battle_anim_psychic.s"
+	@echo "... gen/battle_anim_rock.o"
+	@echo "... gen/battle_anim_rock.i"
+	@echo "... gen/battle_anim_rock.s"
+	@echo "... gen/battle_anim_smokescreen.o"
+	@echo "... gen/battle_anim_smokescreen.i"
+	@echo "... gen/battle_anim_smokescreen.s"
+	@echo "... gen/battle_anim_sound_tasks.o"
+	@echo "... gen/battle_anim_sound_tasks.i"
+	@echo "... gen/battle_anim_sound_tasks.s"
+	@echo "... gen/battle_anim_special.o"
+	@echo "... gen/battle_anim_special.i"
+	@echo "... gen/battle_anim_special.s"
+	@echo "... gen/battle_anim_status_effects.o"
+	@echo "... gen/battle_anim_status_effects.i"
+	@echo "... gen/battle_anim_status_effects.s"
+	@echo "... gen/battle_anim_utility_funcs.o"
+	@echo "... gen/battle_anim_utility_funcs.i"
+	@echo "... gen/battle_anim_utility_funcs.s"
+	@echo "... gen/battle_anim_water.o"
+	@echo "... gen/battle_anim_water.i"
+	@echo "... gen/battle_anim_water.s"
+	@echo "... gen/battle_bg.o"
+	@echo "... gen/battle_bg.i"
+	@echo "... gen/battle_bg.s"
+	@echo "... gen/battle_controller_link_opponent.o"
+	@echo "... gen/battle_controller_link_opponent.i"
+	@echo "... gen/battle_controller_link_opponent.s"
+	@echo "... gen/battle_controller_link_partner.o"
+	@echo "... gen/battle_controller_link_partner.i"
+	@echo "... gen/battle_controller_link_partner.s"
+	@echo "... gen/battle_controller_oak_old_man.o"
+	@echo "... gen/battle_controller_oak_old_man.i"
+	@echo "... gen/battle_controller_oak_old_man.s"
+	@echo "... gen/battle_controller_opponent.o"
+	@echo "... gen/battle_controller_opponent.i"
+	@echo "... gen/battle_controller_opponent.s"
+	@echo "... gen/battle_controller_player.o"
+	@echo "... gen/battle_controller_player.i"
+	@echo "... gen/battle_controller_player.s"
+	@echo "... gen/battle_controller_pokedude.o"
+	@echo "... gen/battle_controller_pokedude.i"
+	@echo "... gen/battle_controller_pokedude.s"
+	@echo "... gen/battle_controller_safari.o"
+	@echo "... gen/battle_controller_safari.i"
+	@echo "... gen/battle_controller_safari.s"
+	@echo "... gen/battle_controllers.o"
+	@echo "... gen/battle_controllers.i"
+	@echo "... gen/battle_controllers.s"
+	@echo "... gen/battle_gfx_sfx_util.o"
+	@echo "... gen/battle_gfx_sfx_util.i"
+	@echo "... gen/battle_gfx_sfx_util.s"
+	@echo "... gen/battle_interface.o"
+	@echo "... gen/battle_interface.i"
+	@echo "... gen/battle_interface.s"
+	@echo "... gen/battle_intro.o"
+	@echo "... gen/battle_intro.i"
+	@echo "... gen/battle_intro.s"
+	@echo "... gen/battle_main.o"
+	@echo "... gen/battle_main.i"
+	@echo "... gen/battle_main.s"
+	@echo "... gen/battle_message.o"
+	@echo "... gen/battle_message.i"
+	@echo "... gen/battle_message.s"
+	@echo "... gen/battle_records.o"
+	@echo "... gen/battle_records.i"
+	@echo "... gen/battle_records.s"
+	@echo "... gen/battle_script_commands.o"
+	@echo "... gen/battle_script_commands.i"
+	@echo "... gen/battle_script_commands.s"
+	@echo "... gen/battle_setup.o"
+	@echo "... gen/battle_setup.i"
+	@echo "... gen/battle_setup.s"
+	@echo "... gen/battle_tower.o"
+	@echo "... gen/battle_tower.i"
+	@echo "... gen/battle_tower.s"
+	@echo "... gen/battle_transition.o"
+	@echo "... gen/battle_transition.i"
+	@echo "... gen/battle_transition.s"
+	@echo "... gen/battle_util.o"
+	@echo "... gen/battle_util.i"
+	@echo "... gen/battle_util.s"
+	@echo "... gen/battle_util2.o"
+	@echo "... gen/battle_util2.i"
+	@echo "... gen/battle_util2.s"
+	@echo "... gen/berry.o"
+	@echo "... gen/berry.i"
+	@echo "... gen/berry.s"
+	@echo "... gen/berry_crush.o"
+	@echo "... gen/berry_crush.i"
+	@echo "... gen/berry_crush.s"
+	@echo "... gen/berry_fix_program.o"
+	@echo "... gen/berry_fix_program.i"
+	@echo "... gen/berry_fix_program.s"
+	@echo "... gen/berry_pouch.o"
+	@echo "... gen/berry_pouch.i"
+	@echo "... gen/berry_pouch.s"
+	@echo "... gen/berry_powder.o"
+	@echo "... gen/berry_powder.i"
+	@echo "... gen/berry_powder.s"
+	@echo "... gen/bg.o"
+	@echo "... gen/bg.i"
+	@echo "... gen/bg.s"
+	@echo "... gen/bike.o"
+	@echo "... gen/bike.i"
+	@echo "... gen/bike.s"
+	@echo "... gen/blend_palette.o"
+	@echo "... gen/blend_palette.i"
+	@echo "... gen/blend_palette.s"
+	@echo "... gen/blit.o"
+	@echo "... gen/blit.i"
+	@echo "... gen/blit.s"
+	@echo "... gen/braille_text.o"
+	@echo "... gen/braille_text.i"
+	@echo "... gen/braille_text.s"
+	@echo "... gen/buy_menu_helpers.o"
+	@echo "... gen/buy_menu_helpers.i"
+	@echo "... gen/buy_menu_helpers.s"
+	@echo "... gen/cable_car_util.o"
+	@echo "... gen/cable_car_util.i"
+	@echo "... gen/cable_car_util.s"
+	@echo "... gen/cable_club.o"
+	@echo "... gen/cable_club.i"
+	@echo "... gen/cable_club.s"
+	@echo "... gen/cereader_tool.o"
+	@echo "... gen/cereader_tool.i"
+	@echo "... gen/cereader_tool.s"
+	@echo "... gen/clear_save_data_screen.o"
+	@echo "... gen/clear_save_data_screen.i"
+	@echo "... gen/clear_save_data_screen.s"
+	@echo "... gen/coins.o"
+	@echo "... gen/coins.i"
+	@echo "... gen/coins.s"
+	@echo "... gen/coord_event_weather.o"
+	@echo "... gen/coord_event_weather.i"
+	@echo "... gen/coord_event_weather.s"
+	@echo "... gen/credits.o"
+	@echo "... gen/credits.i"
+	@echo "... gen/credits.s"
+	@echo "... gen/data.o"
+	@echo "... gen/data.i"
+	@echo "... gen/data.s"
+	@echo "... gen/daycare.o"
+	@echo "... gen/daycare.i"
+	@echo "... gen/daycare.s"
+	@echo "... gen/decompress.o"
+	@echo "... gen/decompress.i"
+	@echo "... gen/decompress.s"
+	@echo "... gen/decoration.o"
+	@echo "... gen/decoration.i"
+	@echo "... gen/decoration.s"
+	@echo "... gen/digit_obj_util.o"
+	@echo "... gen/digit_obj_util.i"
+	@echo "... gen/digit_obj_util.s"
+	@echo "... gen/diploma.o"
+	@echo "... gen/diploma.i"
+	@echo "... gen/diploma.s"
+	@echo "... gen/dma3_manager.o"
+	@echo "... gen/dma3_manager.i"
+	@echo "... gen/dma3_manager.s"
+	@echo "... gen/dodrio_berry_picking.o"
+	@echo "... gen/dodrio_berry_picking.i"
+	@echo "... gen/dodrio_berry_picking.s"
+	@echo "... gen/dodrio_berry_picking_comm.o"
+	@echo "... gen/dodrio_berry_picking_comm.i"
+	@echo "... gen/dodrio_berry_picking_comm.s"
+	@echo "... gen/dynamic_placeholder_text_util.o"
+	@echo "... gen/dynamic_placeholder_text_util.i"
+	@echo "... gen/dynamic_placeholder_text_util.s"
+	@echo "... gen/easy_chat.o"
+	@echo "... gen/easy_chat.i"
+	@echo "... gen/easy_chat.s"
+	@echo "... gen/easy_chat_2.o"
+	@echo "... gen/easy_chat_2.i"
+	@echo "... gen/easy_chat_2.s"
+	@echo "... gen/easy_chat_3.o"
+	@echo "... gen/easy_chat_3.i"
+	@echo "... gen/easy_chat_3.s"
+	@echo "... gen/ereader_helpers.o"
+	@echo "... gen/ereader_helpers.i"
+	@echo "... gen/ereader_helpers.s"
+	@echo "... gen/ereader_screen.o"
+	@echo "... gen/ereader_screen.i"
+	@echo "... gen/ereader_screen.s"
+	@echo "... gen/event_data.o"
+	@echo "... gen/event_data.i"
+	@echo "... gen/event_data.s"
+	@echo "... gen/event_object_lock.o"
+	@echo "... gen/event_object_lock.i"
+	@echo "... gen/event_object_lock.s"
+	@echo "... gen/event_object_movement.o"
+	@echo "... gen/event_object_movement.i"
+	@echo "... gen/event_object_movement.s"
+	@echo "... gen/evolution_graphics.o"
+	@echo "... gen/evolution_graphics.i"
+	@echo "... gen/evolution_graphics.s"
+	@echo "... gen/evolution_scene.o"
+	@echo "... gen/evolution_scene.i"
+	@echo "... gen/evolution_scene.s"
+	@echo "... gen/fame_checker.o"
+	@echo "... gen/fame_checker.i"
+	@echo "... gen/fame_checker.s"
+	@echo "... gen/field_camera.o"
+	@echo "... gen/field_camera.i"
+	@echo "... gen/field_camera.s"
+	@echo "... gen/field_control_avatar.o"
+	@echo "... gen/field_control_avatar.i"
+	@echo "... gen/field_control_avatar.s"
+	@echo "... gen/field_door.o"
+	@echo "... gen/field_door.i"
+	@echo "... gen/field_door.s"
+	@echo "... gen/field_effect.o"
+	@echo "... gen/field_effect.i"
+	@echo "... gen/field_effect.s"
+	@echo "... gen/field_effect_helpers.o"
+	@echo "... gen/field_effect_helpers.i"
+	@echo "... gen/field_effect_helpers.s"
+	@echo "... gen/field_fadetransition.o"
+	@echo "... gen/field_fadetransition.i"
+	@echo "... gen/field_fadetransition.s"
+	@echo "... gen/field_message_box.o"
+	@echo "... gen/field_message_box.i"
+	@echo "... gen/field_message_box.s"
+	@echo "... gen/field_player_avatar.o"
+	@echo "... gen/field_player_avatar.i"
+	@echo "... gen/field_player_avatar.s"
+	@echo "... gen/field_poison.o"
+	@echo "... gen/field_poison.i"
+	@echo "... gen/field_poison.s"
+	@echo "... gen/field_screen_effect.o"
+	@echo "... gen/field_screen_effect.i"
+	@echo "... gen/field_screen_effect.s"
+	@echo "... gen/field_special_scene.o"
+	@echo "... gen/field_special_scene.i"
+	@echo "... gen/field_special_scene.s"
+	@echo "... gen/field_specials.o"
+	@echo "... gen/field_specials.i"
+	@echo "... gen/field_specials.s"
+	@echo "... gen/field_tasks.o"
+	@echo "... gen/field_tasks.i"
+	@echo "... gen/field_tasks.s"
+	@echo "... gen/field_weather.o"
+	@echo "... gen/field_weather.i"
+	@echo "... gen/field_weather.s"
+	@echo "... gen/field_weather_effects.o"
+	@echo "... gen/field_weather_effects.i"
+	@echo "... gen/field_weather_effects.s"
+	@echo "... gen/field_weather_util.o"
+	@echo "... gen/field_weather_util.i"
+	@echo "... gen/field_weather_util.s"
+	@echo "... gen/fieldmap.o"
+	@echo "... gen/fieldmap.i"
+	@echo "... gen/fieldmap.s"
+	@echo "... gen/fldeff_berrytree.o"
+	@echo "... gen/fldeff_berrytree.i"
+	@echo "... gen/fldeff_berrytree.s"
+	@echo "... gen/fldeff_cut.o"
+	@echo "... gen/fldeff_cut.i"
+	@echo "... gen/fldeff_cut.s"
+	@echo "... gen/fldeff_dig.o"
+	@echo "... gen/fldeff_dig.i"
+	@echo "... gen/fldeff_dig.s"
+	@echo "... gen/fldeff_flash.o"
+	@echo "... gen/fldeff_flash.i"
+	@echo "... gen/fldeff_flash.s"
+	@echo "... gen/fldeff_poison.o"
+	@echo "... gen/fldeff_poison.i"
+	@echo "... gen/fldeff_poison.s"
+	@echo "... gen/fldeff_rocksmash.o"
+	@echo "... gen/fldeff_rocksmash.i"
+	@echo "... gen/fldeff_rocksmash.s"
+	@echo "... gen/fldeff_softboiled.o"
+	@echo "... gen/fldeff_softboiled.i"
+	@echo "... gen/fldeff_softboiled.s"
+	@echo "... gen/fldeff_strength.o"
+	@echo "... gen/fldeff_strength.i"
+	@echo "... gen/fldeff_strength.s"
+	@echo "... gen/fldeff_sweetscent.o"
+	@echo "... gen/fldeff_sweetscent.i"
+	@echo "... gen/fldeff_sweetscent.s"
+	@echo "... gen/fldeff_teleport.o"
+	@echo "... gen/fldeff_teleport.i"
+	@echo "... gen/fldeff_teleport.s"
+	@echo "... gen/game_ctx_stubs.o"
+	@echo "... gen/game_ctx_stubs.i"
+	@echo "... gen/game_ctx_stubs.s"
+	@echo "... gen/gpu_regs.o"
+	@echo "... gen/gpu_regs.i"
+	@echo "... gen/gpu_regs.s"
+	@echo "... gen/graphics.o"
+	@echo "... gen/graphics.i"
+	@echo "... gen/graphics.s"
+	@echo "... gen/hall_of_fame.o"
+	@echo "... gen/hall_of_fame.i"
+	@echo "... gen/hall_of_fame.s"
+	@echo "... gen/heal_location.o"
+	@echo "... gen/heal_location.i"
+	@echo "... gen/heal_location.s"
+	@echo "... gen/help_message.o"
+	@echo "... gen/help_message.i"
+	@echo "... gen/help_message.s"
+	@echo "... gen/help_system.o"
+	@echo "... gen/help_system.i"
+	@echo "... gen/help_system.s"
+	@echo "... gen/help_system_util.o"
+	@echo "... gen/help_system_util.i"
+	@echo "... gen/help_system_util.s"
+	@echo "... gen/hof_pc.o"
+	@echo "... gen/hof_pc.i"
+	@echo "... gen/hof_pc.s"
+	@echo "... gen/image_processing_effects.o"
+	@echo "... gen/image_processing_effects.i"
+	@echo "... gen/image_processing_effects.s"
 	@echo "... gen/intro.o"
 	@echo "... gen/intro.i"
 	@echo "... gen/intro.s"
+	@echo "... gen/item.o"
+	@echo "... gen/item.i"
+	@echo "... gen/item.s"
+	@echo "... gen/item_menu.o"
+	@echo "... gen/item_menu.i"
+	@echo "... gen/item_menu.s"
+	@echo "... gen/item_menu_icons.o"
+	@echo "... gen/item_menu_icons.i"
+	@echo "... gen/item_menu_icons.s"
+	@echo "... gen/item_pc.o"
+	@echo "... gen/item_pc.i"
+	@echo "... gen/item_pc.s"
+	@echo "... gen/item_use.o"
+	@echo "... gen/item_use.i"
+	@echo "... gen/item_use.s"
+	@echo "... gen/itemfinder.o"
+	@echo "... gen/itemfinder.i"
+	@echo "... gen/itemfinder.s"
+	@echo "... gen/keyboard_text.o"
+	@echo "... gen/keyboard_text.i"
+	@echo "... gen/keyboard_text.s"
+	@echo "... gen/learn_move.o"
+	@echo "... gen/learn_move.i"
+	@echo "... gen/learn_move.s"
+	@echo "... gen/librfu_intr.o"
+	@echo "... gen/librfu_intr.i"
+	@echo "... gen/librfu_intr.s"
+	@echo "... gen/librfu_rfu.o"
+	@echo "... gen/librfu_rfu.i"
+	@echo "... gen/librfu_rfu.s"
+	@echo "... gen/librfu_sio32id.o"
+	@echo "... gen/librfu_sio32id.i"
+	@echo "... gen/librfu_sio32id.s"
+	@echo "... gen/librfu_stwi.o"
+	@echo "... gen/librfu_stwi.i"
+	@echo "... gen/librfu_stwi.s"
+	@echo "... gen/link.o"
+	@echo "... gen/link.i"
+	@echo "... gen/link.s"
+	@echo "... gen/link_rfu_2.o"
+	@echo "... gen/link_rfu_2.i"
+	@echo "... gen/link_rfu_2.s"
+	@echo "... gen/link_rfu_3.o"
+	@echo "... gen/link_rfu_3.i"
+	@echo "... gen/link_rfu_3.s"
+	@echo "... gen/list_menu.o"
+	@echo "... gen/list_menu.i"
+	@echo "... gen/list_menu.s"
+	@echo "... gen/load_save.o"
+	@echo "... gen/load_save.i"
+	@echo "... gen/load_save.s"
+	@echo "... gen/m4a.o"
+	@echo "... gen/m4a.i"
+	@echo "... gen/m4a.s"
+	@echo "... gen/m4a_tables.o"
+	@echo "... gen/m4a_tables.i"
+	@echo "... gen/m4a_tables.s"
+	@echo "... gen/mail.o"
+	@echo "... gen/mail.i"
+	@echo "... gen/mail.s"
+	@echo "... gen/mail_data.o"
+	@echo "... gen/mail_data.i"
+	@echo "... gen/mail_data.s"
+	@echo "... gen/mailbox_pc.o"
+	@echo "... gen/mailbox_pc.i"
+	@echo "... gen/mailbox_pc.s"
+	@echo "... gen/main.o"
+	@echo "... gen/main.i"
+	@echo "... gen/main.s"
+	@echo "... gen/main_menu.o"
+	@echo "... gen/main_menu.i"
+	@echo "... gen/main_menu.s"
+	@echo "... gen/malloc.o"
+	@echo "... gen/malloc.i"
+	@echo "... gen/malloc.s"
+	@echo "... gen/map_name_popup.o"
+	@echo "... gen/map_name_popup.i"
+	@echo "... gen/map_name_popup.s"
+	@echo "... gen/map_preview_screen.o"
+	@echo "... gen/map_preview_screen.i"
+	@echo "... gen/map_preview_screen.s"
+	@echo "... gen/math_util.o"
+	@echo "... gen/math_util.i"
+	@echo "... gen/math_util.s"
+	@echo "... gen/menu.o"
+	@echo "... gen/menu.i"
+	@echo "... gen/menu.s"
+	@echo "... gen/menu2.o"
+	@echo "... gen/menu2.i"
+	@echo "... gen/menu2.s"
+	@echo "... gen/menu_helpers.o"
+	@echo "... gen/menu_helpers.i"
+	@echo "... gen/menu_helpers.s"
+	@echo "... gen/menu_indicators.o"
+	@echo "... gen/menu_indicators.i"
+	@echo "... gen/menu_indicators.s"
+	@echo "... gen/metatile_behavior.o"
+	@echo "... gen/metatile_behavior.i"
+	@echo "... gen/metatile_behavior.s"
+	@echo "... gen/mini_printf.o"
+	@echo "... gen/mini_printf.i"
+	@echo "... gen/mini_printf.s"
+	@echo "... gen/minigame_countdown.o"
+	@echo "... gen/minigame_countdown.i"
+	@echo "... gen/minigame_countdown.s"
+	@echo "... gen/mon_markings.o"
+	@echo "... gen/mon_markings.i"
+	@echo "... gen/mon_markings.s"
+	@echo "... gen/money.o"
+	@echo "... gen/money.i"
+	@echo "... gen/money.s"
+	@echo "... gen/move_descriptions.o"
+	@echo "... gen/move_descriptions.i"
+	@echo "... gen/move_descriptions.s"
+	@echo "... gen/mystery_event_msg.o"
+	@echo "... gen/mystery_event_msg.i"
+	@echo "... gen/mystery_event_msg.s"
+	@echo "... gen/mystery_event_script.o"
+	@echo "... gen/mystery_event_script.i"
+	@echo "... gen/mystery_event_script.s"
+	@echo "... gen/mystery_gift.o"
+	@echo "... gen/mystery_gift.i"
+	@echo "... gen/mystery_gift.s"
+	@echo "... gen/mystery_gift_client.o"
+	@echo "... gen/mystery_gift_client.i"
+	@echo "... gen/mystery_gift_client.s"
+	@echo "... gen/mystery_gift_link.o"
+	@echo "... gen/mystery_gift_link.i"
+	@echo "... gen/mystery_gift_link.s"
+	@echo "... gen/mystery_gift_menu.o"
+	@echo "... gen/mystery_gift_menu.i"
+	@echo "... gen/mystery_gift_menu.s"
+	@echo "... gen/mystery_gift_scripts.o"
+	@echo "... gen/mystery_gift_scripts.i"
+	@echo "... gen/mystery_gift_scripts.s"
+	@echo "... gen/mystery_gift_server.o"
+	@echo "... gen/mystery_gift_server.i"
+	@echo "... gen/mystery_gift_server.s"
+	@echo "... gen/mystery_gift_show_card.o"
+	@echo "... gen/mystery_gift_show_card.i"
+	@echo "... gen/mystery_gift_show_card.s"
+	@echo "... gen/mystery_gift_show_news.o"
+	@echo "... gen/mystery_gift_show_news.i"
+	@echo "... gen/mystery_gift_show_news.s"
+	@echo "... gen/naming_screen.o"
+	@echo "... gen/naming_screen.i"
+	@echo "... gen/naming_screen.s"
+	@echo "... gen/new_game.o"
+	@echo "... gen/new_game.i"
+	@echo "... gen/new_game.s"
+	@echo "... gen/new_menu_helpers.o"
+	@echo "... gen/new_menu_helpers.i"
+	@echo "... gen/new_menu_helpers.s"
+	@echo "... gen/oak_speech.o"
+	@echo "... gen/oak_speech.i"
+	@echo "... gen/oak_speech.s"
+	@echo "... gen/option_menu.o"
+	@echo "... gen/option_menu.i"
+	@echo "... gen/option_menu.s"
+	@echo "... gen/overworld.o"
+	@echo "... gen/overworld.i"
+	@echo "... gen/overworld.s"
+	@echo "... gen/palette.o"
+	@echo "... gen/palette.i"
+	@echo "... gen/palette.s"
+	@echo "... gen/palette_util.o"
+	@echo "... gen/palette_util.i"
+	@echo "... gen/palette_util.s"
+	@echo "... gen/party_menu.o"
+	@echo "... gen/party_menu.i"
+	@echo "... gen/party_menu.s"
+	@echo "... gen/party_menu_specials.o"
+	@echo "... gen/party_menu_specials.i"
+	@echo "... gen/party_menu_specials.s"
+	@echo "... gen/pc_screen_effect.o"
+	@echo "... gen/pc_screen_effect.i"
+	@echo "... gen/pc_screen_effect.s"
+	@echo "... gen/play_time.o"
+	@echo "... gen/play_time.i"
+	@echo "... gen/play_time.s"
+	@echo "... gen/player_pc.o"
+	@echo "... gen/player_pc.i"
+	@echo "... gen/player_pc.s"
+	@echo "... gen/pokeball.o"
+	@echo "... gen/pokeball.i"
+	@echo "... gen/pokeball.s"
+	@echo "... gen/pokedex.o"
+	@echo "... gen/pokedex.i"
+	@echo "... gen/pokedex.s"
+	@echo "... gen/pokedex_area_markers.o"
+	@echo "... gen/pokedex_area_markers.i"
+	@echo "... gen/pokedex_area_markers.s"
+	@echo "... gen/pokedex_screen.o"
+	@echo "... gen/pokedex_screen.i"
+	@echo "... gen/pokedex_screen.s"
+	@echo "... gen/pokemon.o"
+	@echo "... gen/pokemon.i"
+	@echo "... gen/pokemon.s"
+	@echo "... gen/pokemon_icon.o"
+	@echo "... gen/pokemon_icon.i"
+	@echo "... gen/pokemon_icon.s"
+	@echo "... gen/pokemon_jump.o"
+	@echo "... gen/pokemon_jump.i"
+	@echo "... gen/pokemon_jump.s"
+	@echo "... gen/pokemon_size_record.o"
+	@echo "... gen/pokemon_size_record.i"
+	@echo "... gen/pokemon_size_record.s"
+	@echo "... gen/pokemon_special_anim.o"
+	@echo "... gen/pokemon_special_anim.i"
+	@echo "... gen/pokemon_special_anim.s"
+	@echo "... gen/pokemon_special_anim_scene.o"
+	@echo "... gen/pokemon_special_anim_scene.i"
+	@echo "... gen/pokemon_special_anim_scene.s"
+	@echo "... gen/pokemon_storage_system.o"
+	@echo "... gen/pokemon_storage_system.i"
+	@echo "... gen/pokemon_storage_system.s"
+	@echo "... gen/pokemon_storage_system_data.o"
+	@echo "... gen/pokemon_storage_system_data.i"
+	@echo "... gen/pokemon_storage_system_data.s"
+	@echo "... gen/pokemon_storage_system_graphics.o"
+	@echo "... gen/pokemon_storage_system_graphics.i"
+	@echo "... gen/pokemon_storage_system_graphics.s"
+	@echo "... gen/pokemon_storage_system_menu.o"
+	@echo "... gen/pokemon_storage_system_menu.i"
+	@echo "... gen/pokemon_storage_system_menu.s"
+	@echo "... gen/pokemon_storage_system_misc.o"
+	@echo "... gen/pokemon_storage_system_misc.i"
+	@echo "... gen/pokemon_storage_system_misc.s"
+	@echo "... gen/pokemon_storage_system_tasks.o"
+	@echo "... gen/pokemon_storage_system_tasks.i"
+	@echo "... gen/pokemon_storage_system_tasks.s"
+	@echo "... gen/pokemon_summary_screen.o"
+	@echo "... gen/pokemon_summary_screen.i"
+	@echo "... gen/pokemon_summary_screen.s"
+	@echo "... gen/post_battle_event_funcs.o"
+	@echo "... gen/post_battle_event_funcs.i"
+	@echo "... gen/post_battle_event_funcs.s"
+	@echo "... gen/prof_pc.o"
+	@echo "... gen/prof_pc.i"
+	@echo "... gen/prof_pc.s"
+	@echo "... gen/quest_log.o"
+	@echo "... gen/quest_log.i"
+	@echo "... gen/quest_log.s"
+	@echo "... gen/quest_log_battle.o"
+	@echo "... gen/quest_log_battle.i"
+	@echo "... gen/quest_log_battle.s"
+	@echo "... gen/quest_log_events.o"
+	@echo "... gen/quest_log_events.i"
+	@echo "... gen/quest_log_events.s"
+	@echo "... gen/quest_log_objects.o"
+	@echo "... gen/quest_log_objects.i"
+	@echo "... gen/quest_log_objects.s"
+	@echo "... gen/quest_log_player.o"
+	@echo "... gen/quest_log_player.i"
+	@echo "... gen/quest_log_player.s"
+	@echo "... gen/random.o"
+	@echo "... gen/random.i"
+	@echo "... gen/random.s"
+	@echo "... gen/region_map.o"
+	@echo "... gen/region_map.i"
+	@echo "... gen/region_map.s"
+	@echo "... gen/renewable_hidden_items.o"
+	@echo "... gen/renewable_hidden_items.i"
+	@echo "... gen/renewable_hidden_items.s"
+	@echo "... gen/reset_save_heap.o"
+	@echo "... gen/reset_save_heap.i"
+	@echo "... gen/reset_save_heap.s"
+	@echo "... gen/reshow_battle_screen.o"
+	@echo "... gen/reshow_battle_screen.i"
+	@echo "... gen/reshow_battle_screen.s"
+	@echo "... gen/roamer.o"
+	@echo "... gen/roamer.i"
+	@echo "... gen/roamer.s"
+	@echo "... gen/rom_header_gf.o"
+	@echo "... gen/rom_header_gf.i"
+	@echo "... gen/rom_header_gf.s"
+	@echo "... gen/safari_zone.o"
+	@echo "... gen/safari_zone.i"
+	@echo "... gen/safari_zone.s"
+	@echo "... gen/save.o"
+	@echo "... gen/save.i"
+	@echo "... gen/save.s"
+	@echo "... gen/save_failed_screen.o"
+	@echo "... gen/save_failed_screen.i"
+	@echo "... gen/save_failed_screen.s"
+	@echo "... gen/save_location.o"
+	@echo "... gen/save_location.i"
+	@echo "... gen/save_location.s"
+	@echo "... gen/save_menu_util.o"
+	@echo "... gen/save_menu_util.i"
+	@echo "... gen/save_menu_util.s"
+	@echo "... gen/scanline_effect.o"
+	@echo "... gen/scanline_effect.i"
+	@echo "... gen/scanline_effect.s"
+	@echo "... gen/scrcmd.o"
+	@echo "... gen/scrcmd.i"
+	@echo "... gen/scrcmd.s"
+	@echo "... gen/script.o"
+	@echo "... gen/script.i"
+	@echo "... gen/script.s"
+	@echo "... gen/script_menu.o"
+	@echo "... gen/script_menu.i"
+	@echo "... gen/script_menu.s"
+	@echo "... gen/script_movement.o"
+	@echo "... gen/script_movement.i"
+	@echo "... gen/script_movement.s"
+	@echo "... gen/script_pokemon_util.o"
+	@echo "... gen/script_pokemon_util.i"
+	@echo "... gen/script_pokemon_util.s"
+	@echo "... gen/seagallop.o"
+	@echo "... gen/seagallop.i"
+	@echo "... gen/seagallop.s"
+	@echo "... gen/shop.o"
+	@echo "... gen/shop.i"
+	@echo "... gen/shop.s"
+	@echo "... gen/slot_machine.o"
+	@echo "... gen/slot_machine.i"
+	@echo "... gen/slot_machine.s"
+	@echo "... gen/sound.o"
+	@echo "... gen/sound.i"
+	@echo "... gen/sound.s"
+	@echo "... gen/special_field_anim.o"
+	@echo "... gen/special_field_anim.i"
+	@echo "... gen/special_field_anim.s"
+	@echo "... gen/sprite.o"
+	@echo "... gen/sprite.i"
+	@echo "... gen/sprite.s"
+	@echo "... gen/ss_anne.o"
+	@echo "... gen/ss_anne.i"
+	@echo "... gen/ss_anne.s"
+	@echo "... gen/start_menu.o"
+	@echo "... gen/start_menu.i"
+	@echo "... gen/start_menu.s"
+	@echo "... gen/string_util.o"
+	@echo "... gen/string_util.i"
+	@echo "... gen/string_util.s"
+	@echo "... gen/strings.o"
+	@echo "... gen/strings.i"
+	@echo "... gen/strings.s"
+	@echo "... gen/task.o"
+	@echo "... gen/task.i"
+	@echo "... gen/task.s"
+	@echo "... gen/teachy_tv.o"
+	@echo "... gen/teachy_tv.i"
+	@echo "... gen/teachy_tv.s"
+	@echo "... gen/text.o"
+	@echo "... gen/text.i"
+	@echo "... gen/text.s"
+	@echo "... gen/text_printer.o"
+	@echo "... gen/text_printer.i"
+	@echo "... gen/text_printer.s"
+	@echo "... gen/text_window.o"
+	@echo "... gen/text_window.i"
+	@echo "... gen/text_window.s"
+	@echo "... gen/text_window_graphics.o"
+	@echo "... gen/text_window_graphics.i"
+	@echo "... gen/text_window_graphics.s"
+	@echo "... gen/tilemap_util.o"
+	@echo "... gen/tilemap_util.i"
+	@echo "... gen/tilemap_util.s"
+	@echo "... gen/tileset_anims.o"
+	@echo "... gen/tileset_anims.i"
+	@echo "... gen/tileset_anims.s"
+	@echo "... gen/tilesets.o"
+	@echo "... gen/tilesets.i"
+	@echo "... gen/tilesets.s"
 	@echo "... gen/title_screen.o"
 	@echo "... gen/title_screen.i"
 	@echo "... gen/title_screen.s"
-	@echo "... home/spark-advantage/pokefirered/src/berry_fix_program.o"
-	@echo "... home/spark-advantage/pokefirered/src/berry_fix_program.i"
-	@echo "... home/spark-advantage/pokefirered/src/berry_fix_program.s"
-	@echo "... home/spark-advantage/pokefirered/src/bg.o"
-	@echo "... home/spark-advantage/pokefirered/src/bg.i"
-	@echo "... home/spark-advantage/pokefirered/src/bg.s"
-	@echo "... home/spark-advantage/pokefirered/src/blend_palette.o"
-	@echo "... home/spark-advantage/pokefirered/src/blend_palette.i"
-	@echo "... home/spark-advantage/pokefirered/src/blend_palette.s"
-	@echo "... home/spark-advantage/pokefirered/src/clear_save_data_screen.o"
-	@echo "... home/spark-advantage/pokefirered/src/clear_save_data_screen.i"
-	@echo "... home/spark-advantage/pokefirered/src/clear_save_data_screen.s"
-	@echo "... home/spark-advantage/pokefirered/src/decompress.o"
-	@echo "... home/spark-advantage/pokefirered/src/decompress.i"
-	@echo "... home/spark-advantage/pokefirered/src/decompress.s"
-	@echo "... home/spark-advantage/pokefirered/src/dma3_manager.o"
-	@echo "... home/spark-advantage/pokefirered/src/dma3_manager.i"
-	@echo "... home/spark-advantage/pokefirered/src/dma3_manager.s"
-	@echo "... home/spark-advantage/pokefirered/src/gpu_regs.o"
-	@echo "... home/spark-advantage/pokefirered/src/gpu_regs.i"
-	@echo "... home/spark-advantage/pokefirered/src/gpu_regs.s"
-	@echo "... home/spark-advantage/pokefirered/src/main.o"
-	@echo "... home/spark-advantage/pokefirered/src/main.i"
-	@echo "... home/spark-advantage/pokefirered/src/main.s"
-	@echo "... home/spark-advantage/pokefirered/src/main_menu.o"
-	@echo "... home/spark-advantage/pokefirered/src/main_menu.i"
-	@echo "... home/spark-advantage/pokefirered/src/main_menu.s"
-	@echo "... home/spark-advantage/pokefirered/src/malloc.o"
-	@echo "... home/spark-advantage/pokefirered/src/malloc.i"
-	@echo "... home/spark-advantage/pokefirered/src/malloc.s"
-	@echo "... home/spark-advantage/pokefirered/src/oak_speech.o"
-	@echo "... home/spark-advantage/pokefirered/src/oak_speech.i"
-	@echo "... home/spark-advantage/pokefirered/src/oak_speech.s"
-	@echo "... home/spark-advantage/pokefirered/src/palette.o"
-	@echo "... home/spark-advantage/pokefirered/src/palette.i"
-	@echo "... home/spark-advantage/pokefirered/src/palette.s"
-	@echo "... home/spark-advantage/pokefirered/src/random.o"
-	@echo "... home/spark-advantage/pokefirered/src/random.i"
-	@echo "... home/spark-advantage/pokefirered/src/random.s"
-	@echo "... home/spark-advantage/pokefirered/src/scanline_effect.o"
-	@echo "... home/spark-advantage/pokefirered/src/scanline_effect.i"
-	@echo "... home/spark-advantage/pokefirered/src/scanline_effect.s"
-	@echo "... home/spark-advantage/pokefirered/src/sprite.o"
-	@echo "... home/spark-advantage/pokefirered/src/sprite.i"
-	@echo "... home/spark-advantage/pokefirered/src/sprite.s"
-	@echo "... home/spark-advantage/pokefirered/src/task.o"
-	@echo "... home/spark-advantage/pokefirered/src/task.i"
-	@echo "... home/spark-advantage/pokefirered/src/task.s"
-	@echo "... home/spark-advantage/pokefirered/src/trig.o"
-	@echo "... home/spark-advantage/pokefirered/src/trig.i"
-	@echo "... home/spark-advantage/pokefirered/src/trig.s"
+	@echo "... gen/tm_case.o"
+	@echo "... gen/tm_case.i"
+	@echo "... gen/tm_case.s"
+	@echo "... gen/trade.o"
+	@echo "... gen/trade.i"
+	@echo "... gen/trade.s"
+	@echo "... gen/trade_scene.o"
+	@echo "... gen/trade_scene.i"
+	@echo "... gen/trade_scene.s"
+	@echo "... gen/trainer_card.o"
+	@echo "... gen/trainer_card.i"
+	@echo "... gen/trainer_card.s"
+	@echo "... gen/trainer_fan_club.o"
+	@echo "... gen/trainer_fan_club.i"
+	@echo "... gen/trainer_fan_club.s"
+	@echo "... gen/trainer_pokemon_sprites.o"
+	@echo "... gen/trainer_pokemon_sprites.i"
+	@echo "... gen/trainer_pokemon_sprites.s"
+	@echo "... gen/trainer_see.o"
+	@echo "... gen/trainer_see.i"
+	@echo "... gen/trainer_see.s"
+	@echo "... gen/trainer_tower.o"
+	@echo "... gen/trainer_tower.i"
+	@echo "... gen/trainer_tower.s"
+	@echo "... gen/trainer_tower_sets.o"
+	@echo "... gen/trainer_tower_sets.i"
+	@echo "... gen/trainer_tower_sets.s"
+	@echo "... gen/trig.o"
+	@echo "... gen/trig.i"
+	@echo "... gen/trig.s"
+	@echo "... gen/union_room.o"
+	@echo "... gen/union_room.i"
+	@echo "... gen/union_room.s"
+	@echo "... gen/union_room_battle.o"
+	@echo "... gen/union_room_battle.i"
+	@echo "... gen/union_room_battle.s"
+	@echo "... gen/union_room_chat.o"
+	@echo "... gen/union_room_chat.i"
+	@echo "... gen/union_room_chat.s"
+	@echo "... gen/union_room_chat_display.o"
+	@echo "... gen/union_room_chat_display.i"
+	@echo "... gen/union_room_chat_display.s"
+	@echo "... gen/union_room_chat_objects.o"
+	@echo "... gen/union_room_chat_objects.i"
+	@echo "... gen/union_room_chat_objects.s"
+	@echo "... gen/union_room_message.o"
+	@echo "... gen/union_room_message.i"
+	@echo "... gen/union_room_message.s"
+	@echo "... gen/union_room_player_avatar.o"
+	@echo "... gen/union_room_player_avatar.i"
+	@echo "... gen/union_room_player_avatar.s"
+	@echo "... gen/upstream_battle_ai_scripts.o"
+	@echo "... gen/upstream_battle_ai_scripts.i"
+	@echo "... gen/upstream_battle_ai_scripts.s"
+	@echo "... gen/upstream_battle_anim_scripts.o"
+	@echo "... gen/upstream_battle_anim_scripts.i"
+	@echo "... gen/upstream_battle_anim_scripts.s"
+	@echo "... gen/upstream_battle_anim_tables.o"
+	@echo "... gen/upstream_battle_anim_tables.i"
+	@echo "... gen/upstream_battle_anim_tables.s"
+	@echo "... gen/upstream_field_effect_scripts.o"
+	@echo "... gen/upstream_field_effect_scripts.i"
+	@echo "... gen/upstream_field_effect_scripts.s"
+	@echo "... gen/upstream_map_data.o"
+	@echo "... gen/upstream_map_data.i"
+	@echo "... gen/upstream_map_data.s"
+	@echo "... gen/upstream_specials_table.o"
+	@echo "... gen/upstream_specials_table.i"
+	@echo "... gen/upstream_specials_table.s"
+	@echo "... gen/upstream_stubs.o"
+	@echo "... gen/upstream_stubs.i"
+	@echo "... gen/upstream_stubs.s"
+	@echo "... gen/util.o"
+	@echo "... gen/util.i"
+	@echo "... gen/util.s"
+	@echo "... gen/vs_seeker.o"
+	@echo "... gen/vs_seeker.i"
+	@echo "... gen/vs_seeker.s"
+	@echo "... gen/wild_encounter.o"
+	@echo "... gen/wild_encounter.i"
+	@echo "... gen/wild_encounter.s"
+	@echo "... gen/wild_pokemon_area.o"
+	@echo "... gen/wild_pokemon_area.i"
+	@echo "... gen/wild_pokemon_area.s"
+	@echo "... gen/window.o"
+	@echo "... gen/window.i"
+	@echo "... gen/window.s"
+	@echo "... gen/window_8bpp.o"
+	@echo "... gen/window_8bpp.i"
+	@echo "... gen/window_8bpp.s"
+	@echo "... gen/wireless_communication_status_screen.o"
+	@echo "... gen/wireless_communication_status_screen.i"
+	@echo "... gen/wireless_communication_status_screen.s"
+	@echo "... gen/wonder_news.o"
+	@echo "... gen/wonder_news.i"
+	@echo "... gen/wonder_news.s"
+	@echo "... generated_native/pfr_native_data.o"
+	@echo "... generated_native/pfr_native_data.i"
+	@echo "... generated_native/pfr_native_data.s"
+	@echo "... scripts/mgba_bench.o"
+	@echo "... scripts/mgba_bench.i"
+	@echo "... scripts/mgba_bench.s"
+	@echo "... scripts/mgba_capture.o"
+	@echo "... scripts/mgba_capture.i"
+	@echo "... scripts/mgba_capture.s"
+	@echo "... src/game_ctx.o"
+	@echo "... src/game_ctx.i"
+	@echo "... src/game_ctx.s"
 	@echo "... src/host_agbmain.o"
 	@echo "... src/host_agbmain.i"
 	@echo "... src/host_agbmain.s"
+	@echo "... src/host_audio.o"
+	@echo "... src/host_audio.i"
+	@echo "... src/host_audio.s"
+	@echo "... src/host_bg_regs.o"
+	@echo "... src/host_bg_regs.i"
+	@echo "... src/host_bg_regs.s"
 	@echo "... src/host_bios.o"
 	@echo "... src/host_bios.i"
 	@echo "... src/host_bios.s"
+	@echo "... src/host_capture_manifest.o"
+	@echo "... src/host_capture_manifest.i"
+	@echo "... src/host_capture_manifest.s"
 	@echo "... src/host_crt0.o"
 	@echo "... src/host_crt0.i"
 	@echo "... src/host_crt0.s"
@@ -1251,27 +10610,100 @@ help:
 	@echo "... src/host_dma.o"
 	@echo "... src/host_dma.i"
 	@echo "... src/host_dma.s"
+	@echo "... src/host_flash.o"
+	@echo "... src/host_flash.i"
+	@echo "... src/host_flash.s"
+	@echo "... src/host_frame_step.o"
+	@echo "... src/host_frame_step.i"
+	@echo "... src/host_frame_step.s"
 	@echo "... src/host_intro_stubs.o"
 	@echo "... src/host_intro_stubs.i"
 	@echo "... src/host_intro_stubs.s"
+	@echo "... src/host_log.o"
+	@echo "... src/host_log.i"
+	@echo "... src/host_log.s"
 	@echo "... src/host_memory.o"
 	@echo "... src/host_memory.i"
 	@echo "... src/host_memory.s"
+	@echo "... src/host_new_game_stubs.o"
+	@echo "... src/host_new_game_stubs.i"
+	@echo "... src/host_new_game_stubs.s"
 	@echo "... src/host_oak_speech_stubs.o"
 	@echo "... src/host_oak_speech_stubs.i"
 	@echo "... src/host_oak_speech_stubs.s"
+	@echo "... src/host_ptr_store.o"
+	@echo "... src/host_ptr_store.i"
+	@echo "... src/host_ptr_store.s"
 	@echo "... src/host_renderer.o"
 	@echo "... src/host_renderer.i"
 	@echo "... src/host_renderer.s"
+	@echo "... src/host_savestate.o"
+	@echo "... src/host_savestate.i"
+	@echo "... src/host_savestate.s"
+	@echo "... src/host_script_ptrtab.o"
+	@echo "... src/host_script_ptrtab.i"
+	@echo "... src/host_script_ptrtab.s"
+	@echo "... src/host_sound_init.o"
+	@echo "... src/host_sound_init.i"
+	@echo "... src/host_sound_init.s"
+	@echo "... src/host_sound_mixer.o"
+	@echo "... src/host_sound_mixer.i"
+	@echo "... src/host_sound_mixer.s"
+	@echo "... src/host_timer.o"
+	@echo "... src/host_timer.i"
+	@echo "... src/host_timer.s"
 	@echo "... src/host_title_screen_stubs.o"
 	@echo "... src/host_title_screen_stubs.i"
 	@echo "... src/host_title_screen_stubs.s"
+	@echo "... src/pfr_env.o"
+	@echo "... src/pfr_env.i"
+	@echo "... src/pfr_env.s"
+	@echo "... src/pfr_env_binding.o"
+	@echo "... src/pfr_env_binding.i"
+	@echo "... src/pfr_env_binding.s"
+	@echo "... src/pfr_game_api.o"
+	@echo "... src/pfr_game_api.i"
+	@echo "... src/pfr_game_api.s"
+	@echo "... src/pfr_native.o"
+	@echo "... src/pfr_native.i"
+	@echo "... src/pfr_native.s"
+	@echo "... src/pfr_obs_adapter.o"
+	@echo "... src/pfr_obs_adapter.i"
+	@echo "... src/pfr_obs_adapter.s"
+	@echo "... src/pfr_obs_full.o"
+	@echo "... src/pfr_obs_full.i"
+	@echo "... src/pfr_obs_full.s"
 	@echo "... src/pfr_play.o"
 	@echo "... src/pfr_play.i"
 	@echo "... src/pfr_play.s"
-	@echo "... src/upstream_stubs.o"
-	@echo "... src/upstream_stubs.i"
-	@echo "... src/upstream_stubs.s"
+	@echo "... src/pfr_so_instance.o"
+	@echo "... src/pfr_so_instance.i"
+	@echo "... src/pfr_so_instance.s"
+	@echo "... src/pfrn_binding_module.o"
+	@echo "... src/pfrn_binding_module.i"
+	@echo "... src/pfrn_binding_module.s"
+	@echo "... src/upstream_asm_data.o"
+	@echo "... src/upstream_asm_data.i"
+	@echo "... src/upstream_asm_data.s"
+	@echo "... src/upstream_battle_scripts.o"
+	@echo "... src/upstream_battle_scripts.i"
+	@echo "... src/upstream_battle_scripts.s"
+	@echo "... src/upstream_event_scripts.o"
+	@echo "... src/upstream_event_scripts.i"
+	@echo "... src/upstream_event_scripts.s"
+	@echo "... src/upstream_sound_data.o"
+	@echo "... src/upstream_sound_data.i"
+	@echo "... src/upstream_sound_data.s"
+	@echo "... src/upstream_sound_samples.o"
+	@echo "... tests/battle_test.o"
+	@echo "... tests/battle_test.i"
+	@echo "... tests/battle_test.s"
+	@echo "... tests/pfr_env_smoke.o"
+	@echo "... tests/pfr_env_smoke.i"
+	@echo "... tests/pfr_env_smoke.s"
+	@echo "... tests/pfr_native_smoke.o"
+	@echo "... tests/pfr_native_smoke.i"
+	@echo "... tests/pfr_native_smoke.s"
 	@echo "... tests/render_test.o"
 	@echo "... tests/render_test.i"
 	@echo "... tests/render_test.s"
@@ -1281,6 +10713,9 @@ help:
 	@echo "... tools/pfr_assets.o"
 	@echo "... tools/pfr_assets.i"
 	@echo "... tools/pfr_assets.s"
+	@echo "... tools/pfr_frame_diff.o"
+	@echo "... tools/pfr_frame_diff.i"
+	@echo "... tools/pfr_frame_diff.s"
 	@echo "... tools/pfr_lz77.o"
 	@echo "... tools/pfr_lz77.i"
 	@echo "... tools/pfr_lz77.s"

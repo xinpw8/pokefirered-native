@@ -1,0 +1,35 @@
+POKEFIRERED-NATIVE: GLOBAL STATE REFACTOR PLAN + VALIDATION ROUTINE
+
+Generated: 2026-03-15
+Target: N parallel env instances via OpenMP (like NMMO3)
+
+PART 1: CURRENT STATE
+- libpfr_game.so: 2.20 MB mutable state (.data 805KB, ewram_data 266KB, common_data 21KB, .bss 605KB)
+- Plus 6 mmap'd GBA regions (~390KB): EWRAM 256KB, IWRAM 32KB, IO 4KB, PLTT 1KB, VRAM 96KB, OAM 1KB
+- Per-instance total: ~2.6 MB
+- Savestate system captures all segments (hot = memcpy, file = disk)
+
+PART 2: APPROACH EVALUATION
+- A (TLS GameCtx struct): REJECTED - 17,700 globals, 500+ files, 50K+ line changes
+- B (EWRAM_DATA macro): REJECTED - only 12% of state, partial isolation worse than none
+- C (savestate-swap): VIABLE FALLBACK - sequential only, ~50% overhead from 2x memcpy(2.6MB)
+- D (dlmopen per env): RECOMMENDED - already architected in codebase, zero per-step overhead
+
+RECOMMENDED: Hybrid D+C
+- dlmopen(LM_ID_NEWLM) per env for independent instances
+- pfr_game_api.h already designed for this
+- test_dlmopen_pfr.c already demonstrates 2 instances working
+- DL_NNS limit = 16 (glibc hardcoded) - need workaround for more
+- OpenMP parallel for over instances
+
+PART 3: VALIDATION
+- pfr_validate.c tool with 3 modes: PLAY+RECORD, REPLAY+VERIFY, HEADLESS STRESS
+- 12 test scenarios: movement, NPC, wild battle, trainer battle, items, menu, warps, determinism, hot savestate, multi-instance isolation, long-play stability, edge cases
+- Recording format: binary log per step (action, obs[226], reward, terminal)
+- Determinism verified by byte-for-byte obs comparison on replay
+
+PART 4: PHASES
+- Phase 1: Validate single-env works (PLAY mode, manual tests 1-7)
+- Phase 2: Record/replay determinism (tests 8-9)
+- Phase 3: dlmopen vec env (tests 10, benchmark)
+- Phase 4: PufferLib integration (tests 11-12, optimize)

@@ -1,0 +1,276 @@
+================================================================================
+  PFRN PufferLib Environment Implementation Assessment Report
+  Agent: assess_impl | Date: 2026-03-15
+================================================================================
+
+FILES EXAMINED:
+  1. src/pfr_env.h           - Observation structs, env struct, API declarations
+  2. src/pfr_env.c           - Core env reset/step implementation
+  3. src/pfr_env_binding.c   - PufferLib Python/C binding glue
+  4. pfr_env.py              - PufferEnv Python wrapper
+  5. pfr_policy.py           - Policy network (observation parser + NN)
+  6. src/pfr_game_api.h      - Standalone game API header (dlmopen model)
+  7. src/pfr_game_api.c      - Standalone game API implementation
+
+REFERENCE: pufferlib-4.0/pufferlib/ocean/nmmo3/ (env_binding.h pattern)
+
+================================================================================
+SEVERITY LEGEND:  [CRITICAL] = will crash or produce wrong results
+                  [HIGH]     = will cause major training issues
+                  [MEDIUM]   = suboptimal but functional
+                  [LOW]      = minor, cosmetic, or future concern
+================================================================================
+
+1. CRITICAL BUG: pfr_env.c passes NULL logicFn to HostFrameStepRunFast
+
+Location: pfr_env.c:252, pfr_run_frames()
+    HostFrameStepRunFast(NULL, NULL);
+
+HostFrameStepRunFast (host_frame_step.c:113) does:
+    if (logicFn \!= NULL) logicFn(userdata);
+
+With NULL logicFn, the entire game logic is SKIPPED:
+  - ReadKeys() never runs, so gMain.newKeys/heldKeys never get updated,
+    meaning the game ignores all button presses
+  - gMain.callback1() never runs, game main loop callback skipped
+  - gMain.callback2() never runs, game state machine never advances
+
+Result: The game will NEVER respond to inputs. Observations will be static.
+The RL agent will be training on a frozen frame.
+
+FIX: pfr_env.c must provide its own HeadlessFrameLogic function, exactly
+like pfr_game_api.c does at line 270-320. This function must:
+  1. Inline ReadKeys() from main.c (it is static, cannot be called directly)
+  2. Call gMain.callback1() if non-NULL
+  3. Call gMain.callback2() if non-NULL
+
+The pfr_game_api.c already has the correct implementation. Either:
+  (a) Factor HeadlessFrameLogic into a shared header, or
+  (b) Have pfr_env.c call pfr_game_api functions instead of duplicating.
+
+--------------------------------------------------------------------------------
+
+2. CRITICAL BUG: Direct pokemon struct field access (encrypted data)
+
+Location: pfr_env.c:122
+    scalar->party[i].status = (uint8_t)(mon->status & 0xFF);
+
+Pokemon FireRed uses encrypted/shuffled substruct storage. Direct field
+access on struct Pokemon members like mon->status reads raw encrypted
+data, not the actual status value. The correct approach (used in
+pfr_game_api.c:384) is:
+    scalar->party[i].status = (uint8_t)(GetMonData(mon, MON_DATA_STATUS) & 0xFF);
+
+This affects the party status observation -- the policy will see garbage
+instead of actual status conditions (poison, sleep, etc).
+
+FIX: Change to GetMonData(mon, MON_DATA_STATUS).
+
+--------------------------------------------------------------------------------
+
+3. HIGH: pfr_env.c has no PostSavestateRestore() call
+
+Location: pfr_env.c:262-273, pfr_env_reset()
+
+After loading a savestate, pfr_game_api.c calls PostSavestateRestore()
+which re-patches critical function pointer tables:
+  - gSaveBlock2Ptr/gSaveBlock1Ptr/gPokemonStoragePtr
+  - gIntrTable[] (interrupt dispatch)
+  - Script pointer tables (battle/event/field effect/AI/anim)
+  - BG register pointers
+  - gSTWIStatus nullification
+
+pfr_env.c just calls HostSavestateLoadFromFile() or HostSavestateRestoreHot()
+without any of these fixups. Since savestates overwrite ALL data/bss,
+function pointers from the original executable context will be stale,
+causing crashes or undefined behavior on the first frame after restore.
+
+FIX: Add PostSavestateRestore() call after every savestate load in
+pfr_env_reset(), or refactor to share the implementation from pfr_game_api.c.
+
+--------------------------------------------------------------------------------
+
+4. HIGH: No boot sequence in pfr_env.c -- game never initialized
+
+pfr_game_api.c has pfr_game_boot() (lines 109-185) which initializes:
+  - GBA memory regions (HostMemoryInit)
+  - CRT0 init
+  - GPU register manager
+  - Interrupt dispatch table
+  - Key input system
+  - Sound system
+  - Flash/save subsystem
+  - Savestate subsystem
+  - Game callbacks and subsystems
+  - Script pointer patches
+
+pfr_env.c has NO boot function. The c_reset/pfr_env_reset function
+assumes the game is already running and just loads a savestate. But if the
+env is loaded fresh (e.g., via dlmopen in the RL loop), none of these
+subsystems will be initialized, and the first savestate load will crash.
+
+The binding file (pfr_env_binding.c) my_init() only sets frames_per_step,
+max_steps, and savestate_path. It never calls any boot/init function.
+
+FIX: Either:
+  (a) Add a pfr_env_boot() call in my_init(), or
+  (b) Restructure so pfr_env.c delegates to pfr_game_api.c functions.
+
+--------------------------------------------------------------------------------
+
+5. HIGH: Truncation vs Termination conflation
+
+Location: pfr_env.c:330-335
+
+When max_steps is reached, the code sets:
+    env->terminals[0] = 1;
+
+But this is a TRUNCATION (time limit), not a true terminal (game over).
+PPO needs to distinguish these for correct value bootstrapping:
+  - True terminal: V(s_final) = 0
+  - Truncation: V(s_final) should be bootstrapped from the value head
+
+The env struct has no truncations pointer (env_binding.h comments it out).
+The Python env passes self.truncations to binding but C never writes to it.
+
+FIX: Add truncations buffer handling. On max_steps, set truncations[0]=1
+instead of terminals[0]=1.
+
+--------------------------------------------------------------------------------
+
+6. MEDIUM: Duplicate code between pfr_env.c and pfr_game_api.c
+
+pfr_env.c and pfr_game_api.c contain near-identical implementations of:
+  - pfr_extract_observations / pfr_game_extract_obs
+  - pfr_run_frames / pfr_game_step_frames
+  - clamp_s8 (duplicated)
+  - Observation extraction logic (party, NPCs, tiles)
+
+BUT they have diverged in critical ways (bugs #1, #2, #3 above).
+The pfr_game_api.c version is MORE correct, but the binding uses pfr_env.c.
+
+RECOMMENDATION: Unify. Have pfr_env.c call pfr_game_api functions for
+all game interaction, and only implement RL-specific logic (reward
+shaping, terminal conditions, logging) in pfr_env.c.
+
+--------------------------------------------------------------------------------
+
+7. MEDIUM: map_layout_id uses map_group as proxy
+
+Location: pfr_env.c:97, pfr_game_api.c:367
+
+    scalar->map_layout_id = (uint8_t)(gSaveBlock1Ptr->location.mapGroup);
+
+Comment says "mapLayoutId not in WarpData, use mapGroup as proxy".
+WarpData indeed does not contain mapLayoutId. However, the map layout ID
+is available from the MapHeader: gMapHeader.mapLayoutId.
+
+FIX: Either remove map_layout_id or use the actual map layout.
+
+--------------------------------------------------------------------------------
+
+8. MEDIUM: party[i].type1 is always 0 (TODO stub)
+
+Location: pfr_env.c:126, pfr_game_api.c:389
+    scalar->party[i].type1 = 0; /* TODO: lookup from species table */
+
+The type1 field is always zero. This wastes 6 bytes of observation space.
+FIX: Implement using gBaseStats[species].type1 or remove the field.
+
+--------------------------------------------------------------------------------
+
+9. MEDIUM: Exploration hash is too small / has high collision rate
+
+PFR_VISIT_HASH_SIZE = 4096 bits. With roughly 4000 visitable tiles in
+Kanto, the hash will be nearly saturated, causing many false positives
+(tiles reported as already visited when they were not). The hash function
+uses modulo, which has poor distribution properties.
+
+This means exploration reward will diminish much faster than intended.
+
+FIX: Increase to at least 65536 bits (8KB).
+
+--------------------------------------------------------------------------------
+
+10. LOW: env_binding.h path in pfr_env_binding.c
+
+Location: pfr_env_binding.c:9
+    #include "../pufferlib/ocean/env_binding.h"
+
+This is a relative path that assumes a specific directory layout.
+
+--------------------------------------------------------------------------------
+
+11. LOW: Python env missing log_interval throttling
+
+NMMO3 Python env calls vec_log only every log_interval steps.
+PFRN Python env calls vec_log EVERY step. This is slightly wasteful.
+
+--------------------------------------------------------------------------------
+
+12. LOW: No Makefile/setup.py for building the binding extension
+
+pfr_env_binding.c exists but CMakeLists.txt does not compile it.
+There is no setup.py or pyproject.toml for the Python extension module.
+
+--------------------------------------------------------------------------------
+
+DESIGN NOTE: Two-file architecture
+
+There are TWO separate implementations:
+
+  A) pfr_game_api.h/c -> Standalone shared library (libpfr_game.so)
+     - Has proper boot sequence (pfr_game_boot)
+     - Has proper PostSavestateRestore
+     - Has correct HeadlessFrameLogic with ReadKeys
+     - Has correct GetMonData usage
+     - Currently the ONLY thing compiled by CMakeLists.txt
+
+  B) pfr_env.h/c -> PufferLib env (pfr_env_binding.c)
+     - No boot sequence
+     - No PostSavestateRestore
+     - Passes NULL logicFn (game never advances)
+     - Direct mon->status access (encrypted garbage)
+     - NOT compiled by CMakeLists.txt
+
+The PufferLib binding points to the broken one (B).
+
+================================================================================
+WHAT IS CORRECT / WELL-DONE:
+================================================================================
+
+- Observation struct layout is well-designed and efficiently packed (226 bytes)
+- Byte offsets between C struct and Python policy parser match perfectly
+- Policy network architecture is reasonable (embeddings for categoricals,
+  Conv2d for tiles, LSTM for memory, proper max-pooling for NPCs)
+- Reward shaping covers key progression signals (exploration, badges,
+  levels, party size)
+- The pfr_game_api.c implementation is solid and correctly handles all
+  the subtleties of the pokefirered-native engine
+- PufferLib binding follows env_binding.h patterns correctly (my_init,
+  my_log signatures match)
+- Python PufferEnv follows PufferLib patterns (observation_space, action_space,
+  reset returns, step returns)
+
+================================================================================
+BLOCKING ISSUES (must fix before training):
+================================================================================
+
+1. [CRITICAL] pfr_env.c passes NULL logicFn -> game never advances
+2. [CRITICAL] Direct mon->status access -> encrypted garbage in obs
+3. [HIGH]     No PostSavestateRestore -> crashes after savestate load
+4. [HIGH]     No boot sequence in binding path -> uninitialized game
+5. [HIGH]     Truncation/terminal conflation -> incorrect PPO value bootstrap
+6. [MEDIUM]   No build target for PufferLib binding extension module
+
+================================================================================
+RECOMMENDED NEXT STEPS (priority order):
+================================================================================
+
+1. IMMEDIATE: Unify pfr_env.c to delegate game interaction to pfr_game_api.c
+   (this fixes bugs 1, 2, 3, 4 in one refactor)
+2. IMMEDIATE: Add boot sequence call in my_init
+3. SHORT-TERM: Add build target for Python extension module
+4. SHORT-TERM: Fix truncation vs termination handling
+5. NICE-TO-HAVE: Increase exploration hash size
+6. NICE-TO-HAVE: Implement party type1 lookup

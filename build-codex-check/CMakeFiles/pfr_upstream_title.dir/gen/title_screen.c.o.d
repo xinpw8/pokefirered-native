@@ -18,9 +18,6 @@ CMakeFiles/pfr_upstream_title.dir/gen/title_screen.c.o: \
  /usr/include/aarch64-linux-gnu/bits/types/locale_t.h \
  /usr/include/aarch64-linux-gnu/bits/types/__locale_t.h \
  /usr/include/strings.h \
- /home/spark-advantage/pokefirered-native/src/host_include/gba/../../../../pokefirered/include/gba/defines.h \
- /home/spark-advantage/pokefirered-native/src/host_include/gba/../../../../pokefirered/include/gba/io_reg.h \
- /home/spark-advantage/pokefirered-native/src/host_include/gba/../../../../pokefirered/include/gba/types.h \
  /usr/lib/gcc/aarch64-linux-gnu/13/include/stdint.h /usr/include/stdint.h \
  /usr/include/aarch64-linux-gnu/bits/types.h \
  /usr/include/aarch64-linux-gnu/bits/typesizes.h \
@@ -29,6 +26,9 @@ CMakeFiles/pfr_upstream_title.dir/gen/title_screen.c.o: \
  /usr/include/aarch64-linux-gnu/bits/stdint-intn.h \
  /usr/include/aarch64-linux-gnu/bits/stdint-uintn.h \
  /usr/include/aarch64-linux-gnu/bits/stdint-least.h \
+ /home/spark-advantage/pokefirered-native/src/host_include/gba/../../../../pokefirered/include/gba/defines.h \
+ /home/spark-advantage/pokefirered-native/src/host_include/gba/../../../../pokefirered/include/gba/io_reg.h \
+ /home/spark-advantage/pokefirered-native/src/host_include/gba/../../../../pokefirered/include/gba/types.h \
  /home/spark-advantage/pokefirered-native/src/host_include/gba/../../../../pokefirered/include/gba/multiboot.h \
  /home/spark-advantage/pokefirered-native/src/host_include/gba/../../../../pokefirered/include/gba/syscall.h \
  /home/spark-advantage/pokefirered-native/src/host_include/gba/macro.h \

@@ -1,6 +1,10 @@
 file(REMOVE_RECURSE
   "CMakeFiles/pfr_play.dir/src/host_agbmain.c.o"
   "CMakeFiles/pfr_play.dir/src/host_agbmain.c.o.d"
+  "CMakeFiles/pfr_play.dir/src/host_audio.c.o"
+  "CMakeFiles/pfr_play.dir/src/host_audio.c.o.d"
+  "CMakeFiles/pfr_play.dir/src/host_savestate.c.o"
+  "CMakeFiles/pfr_play.dir/src/host_savestate.c.o.d"
   "CMakeFiles/pfr_play.dir/src/pfr_play.c.o"
   "CMakeFiles/pfr_play.dir/src/pfr_play.c.o.d"
   "pfr_play"

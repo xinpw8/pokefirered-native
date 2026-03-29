@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/pfr_render_test.dir/src/host_agbmain.c.o"
   "CMakeFiles/pfr_render_test.dir/src/host_agbmain.c.o.d"
+  "CMakeFiles/pfr_render_test.dir/src/host_savestate.c.o"
+  "CMakeFiles/pfr_render_test.dir/src/host_savestate.c.o.d"
   "CMakeFiles/pfr_render_test.dir/tests/render_test.c.o"
   "CMakeFiles/pfr_render_test.dir/tests/render_test.c.o.d"
   "pfr_render_test"

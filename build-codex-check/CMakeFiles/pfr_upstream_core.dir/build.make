@@ -69,10 +69,38 @@ include CMakeFiles/pfr_upstream_core.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/pfr_upstream_core.dir/flags.make
 
+CMakeFiles/pfr_upstream_core.dir/src/host_bg_regs.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/src/host_bg_regs.c.o: /home/spark-advantage/pokefirered-native/src/host_bg_regs.c
+CMakeFiles/pfr_upstream_core.dir/src/host_bg_regs.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/pfr_upstream_core.dir/src/host_bg_regs.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/src/host_bg_regs.c.o -MF CMakeFiles/pfr_upstream_core.dir/src/host_bg_regs.c.o.d -o CMakeFiles/pfr_upstream_core.dir/src/host_bg_regs.c.o -c /home/spark-advantage/pokefirered-native/src/host_bg_regs.c
+
+CMakeFiles/pfr_upstream_core.dir/src/host_bg_regs.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/src/host_bg_regs.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/src/host_bg_regs.c > CMakeFiles/pfr_upstream_core.dir/src/host_bg_regs.c.i
+
+CMakeFiles/pfr_upstream_core.dir/src/host_bg_regs.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/src/host_bg_regs.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/src/host_bg_regs.c -o CMakeFiles/pfr_upstream_core.dir/src/host_bg_regs.c.s
+
+CMakeFiles/pfr_upstream_core.dir/src/host_script_ptrtab.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/src/host_script_ptrtab.c.o: /home/spark-advantage/pokefirered-native/src/host_script_ptrtab.c
+CMakeFiles/pfr_upstream_core.dir/src/host_script_ptrtab.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/pfr_upstream_core.dir/src/host_script_ptrtab.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/src/host_script_ptrtab.c.o -MF CMakeFiles/pfr_upstream_core.dir/src/host_script_ptrtab.c.o.d -o CMakeFiles/pfr_upstream_core.dir/src/host_script_ptrtab.c.o -c /home/spark-advantage/pokefirered-native/src/host_script_ptrtab.c
+
+CMakeFiles/pfr_upstream_core.dir/src/host_script_ptrtab.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/src/host_script_ptrtab.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/src/host_script_ptrtab.c > CMakeFiles/pfr_upstream_core.dir/src/host_script_ptrtab.c.i
+
+CMakeFiles/pfr_upstream_core.dir/src/host_script_ptrtab.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/src/host_script_ptrtab.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/src/host_script_ptrtab.c -o CMakeFiles/pfr_upstream_core.dir/src/host_script_ptrtab.c.s
+
 CMakeFiles/pfr_upstream_core.dir/src/host_crt0.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
 CMakeFiles/pfr_upstream_core.dir/src/host_crt0.c.o: /home/spark-advantage/pokefirered-native/src/host_crt0.c
 CMakeFiles/pfr_upstream_core.dir/src/host_crt0.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/pfr_upstream_core.dir/src/host_crt0.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/pfr_upstream_core.dir/src/host_crt0.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/src/host_crt0.c.o -MF CMakeFiles/pfr_upstream_core.dir/src/host_crt0.c.o.d -o CMakeFiles/pfr_upstream_core.dir/src/host_crt0.c.o -c /home/spark-advantage/pokefirered-native/src/host_crt0.c
 
 CMakeFiles/pfr_upstream_core.dir/src/host_crt0.c.i: cmake_force
@@ -83,10 +111,38 @@ CMakeFiles/pfr_upstream_core.dir/src/host_crt0.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/src/host_crt0.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/src/host_crt0.c -o CMakeFiles/pfr_upstream_core.dir/src/host_crt0.c.s
 
+CMakeFiles/pfr_upstream_core.dir/src/host_capture_manifest.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/src/host_capture_manifest.c.o: /home/spark-advantage/pokefirered-native/src/host_capture_manifest.c
+CMakeFiles/pfr_upstream_core.dir/src/host_capture_manifest.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/pfr_upstream_core.dir/src/host_capture_manifest.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/src/host_capture_manifest.c.o -MF CMakeFiles/pfr_upstream_core.dir/src/host_capture_manifest.c.o.d -o CMakeFiles/pfr_upstream_core.dir/src/host_capture_manifest.c.o -c /home/spark-advantage/pokefirered-native/src/host_capture_manifest.c
+
+CMakeFiles/pfr_upstream_core.dir/src/host_capture_manifest.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/src/host_capture_manifest.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/src/host_capture_manifest.c > CMakeFiles/pfr_upstream_core.dir/src/host_capture_manifest.c.i
+
+CMakeFiles/pfr_upstream_core.dir/src/host_capture_manifest.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/src/host_capture_manifest.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/src/host_capture_manifest.c -o CMakeFiles/pfr_upstream_core.dir/src/host_capture_manifest.c.s
+
+CMakeFiles/pfr_upstream_core.dir/src/host_frame_step.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/src/host_frame_step.c.o: /home/spark-advantage/pokefirered-native/src/host_frame_step.c
+CMakeFiles/pfr_upstream_core.dir/src/host_frame_step.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/pfr_upstream_core.dir/src/host_frame_step.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/src/host_frame_step.c.o -MF CMakeFiles/pfr_upstream_core.dir/src/host_frame_step.c.o.d -o CMakeFiles/pfr_upstream_core.dir/src/host_frame_step.c.o -c /home/spark-advantage/pokefirered-native/src/host_frame_step.c
+
+CMakeFiles/pfr_upstream_core.dir/src/host_frame_step.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/src/host_frame_step.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/src/host_frame_step.c > CMakeFiles/pfr_upstream_core.dir/src/host_frame_step.c.i
+
+CMakeFiles/pfr_upstream_core.dir/src/host_frame_step.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/src/host_frame_step.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/src/host_frame_step.c -o CMakeFiles/pfr_upstream_core.dir/src/host_frame_step.c.s
+
 CMakeFiles/pfr_upstream_core.dir/src/host_memory.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
 CMakeFiles/pfr_upstream_core.dir/src/host_memory.c.o: /home/spark-advantage/pokefirered-native/src/host_memory.c
 CMakeFiles/pfr_upstream_core.dir/src/host_memory.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/pfr_upstream_core.dir/src/host_memory.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/pfr_upstream_core.dir/src/host_memory.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/src/host_memory.c.o -MF CMakeFiles/pfr_upstream_core.dir/src/host_memory.c.o.d -o CMakeFiles/pfr_upstream_core.dir/src/host_memory.c.o -c /home/spark-advantage/pokefirered-native/src/host_memory.c
 
 CMakeFiles/pfr_upstream_core.dir/src/host_memory.c.i: cmake_force
@@ -100,7 +156,7 @@ CMakeFiles/pfr_upstream_core.dir/src/host_memory.c.s: cmake_force
 CMakeFiles/pfr_upstream_core.dir/src/host_dma.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
 CMakeFiles/pfr_upstream_core.dir/src/host_dma.c.o: /home/spark-advantage/pokefirered-native/src/host_dma.c
 CMakeFiles/pfr_upstream_core.dir/src/host_dma.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/pfr_upstream_core.dir/src/host_dma.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/pfr_upstream_core.dir/src/host_dma.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/src/host_dma.c.o -MF CMakeFiles/pfr_upstream_core.dir/src/host_dma.c.o.d -o CMakeFiles/pfr_upstream_core.dir/src/host_dma.c.o -c /home/spark-advantage/pokefirered-native/src/host_dma.c
 
 CMakeFiles/pfr_upstream_core.dir/src/host_dma.c.i: cmake_force
@@ -114,7 +170,7 @@ CMakeFiles/pfr_upstream_core.dir/src/host_dma.c.s: cmake_force
 CMakeFiles/pfr_upstream_core.dir/src/host_bios.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
 CMakeFiles/pfr_upstream_core.dir/src/host_bios.c.o: /home/spark-advantage/pokefirered-native/src/host_bios.c
 CMakeFiles/pfr_upstream_core.dir/src/host_bios.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/pfr_upstream_core.dir/src/host_bios.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/pfr_upstream_core.dir/src/host_bios.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/src/host_bios.c.o -MF CMakeFiles/pfr_upstream_core.dir/src/host_bios.c.o.d -o CMakeFiles/pfr_upstream_core.dir/src/host_bios.c.o -c /home/spark-advantage/pokefirered-native/src/host_bios.c
 
 CMakeFiles/pfr_upstream_core.dir/src/host_bios.c.i: cmake_force
@@ -128,7 +184,7 @@ CMakeFiles/pfr_upstream_core.dir/src/host_bios.c.s: cmake_force
 CMakeFiles/pfr_upstream_core.dir/src/host_debug.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
 CMakeFiles/pfr_upstream_core.dir/src/host_debug.c.o: /home/spark-advantage/pokefirered-native/src/host_debug.c
 CMakeFiles/pfr_upstream_core.dir/src/host_debug.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/pfr_upstream_core.dir/src/host_debug.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/pfr_upstream_core.dir/src/host_debug.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/src/host_debug.c.o -MF CMakeFiles/pfr_upstream_core.dir/src/host_debug.c.o.d -o CMakeFiles/pfr_upstream_core.dir/src/host_debug.c.o -c /home/spark-advantage/pokefirered-native/src/host_debug.c
 
 CMakeFiles/pfr_upstream_core.dir/src/host_debug.c.i: cmake_force
@@ -139,10 +195,24 @@ CMakeFiles/pfr_upstream_core.dir/src/host_debug.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/src/host_debug.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/src/host_debug.c -o CMakeFiles/pfr_upstream_core.dir/src/host_debug.c.s
 
+CMakeFiles/pfr_upstream_core.dir/src/host_log.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/src/host_log.c.o: /home/spark-advantage/pokefirered-native/src/host_log.c
+CMakeFiles/pfr_upstream_core.dir/src/host_log.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/pfr_upstream_core.dir/src/host_log.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/src/host_log.c.o -MF CMakeFiles/pfr_upstream_core.dir/src/host_log.c.o.d -o CMakeFiles/pfr_upstream_core.dir/src/host_log.c.o -c /home/spark-advantage/pokefirered-native/src/host_log.c
+
+CMakeFiles/pfr_upstream_core.dir/src/host_log.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/src/host_log.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/src/host_log.c > CMakeFiles/pfr_upstream_core.dir/src/host_log.c.i
+
+CMakeFiles/pfr_upstream_core.dir/src/host_log.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/src/host_log.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/src/host_log.c -o CMakeFiles/pfr_upstream_core.dir/src/host_log.c.s
+
 CMakeFiles/pfr_upstream_core.dir/src/host_renderer.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
 CMakeFiles/pfr_upstream_core.dir/src/host_renderer.c.o: /home/spark-advantage/pokefirered-native/src/host_renderer.c
 CMakeFiles/pfr_upstream_core.dir/src/host_renderer.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/pfr_upstream_core.dir/src/host_renderer.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/pfr_upstream_core.dir/src/host_renderer.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/src/host_renderer.c.o -MF CMakeFiles/pfr_upstream_core.dir/src/host_renderer.c.o.d -o CMakeFiles/pfr_upstream_core.dir/src/host_renderer.c.o -c /home/spark-advantage/pokefirered-native/src/host_renderer.c
 
 CMakeFiles/pfr_upstream_core.dir/src/host_renderer.c.i: cmake_force
@@ -156,7 +226,7 @@ CMakeFiles/pfr_upstream_core.dir/src/host_renderer.c.s: cmake_force
 CMakeFiles/pfr_upstream_core.dir/src/host_display.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
 CMakeFiles/pfr_upstream_core.dir/src/host_display.c.o: /home/spark-advantage/pokefirered-native/src/host_display.c
 CMakeFiles/pfr_upstream_core.dir/src/host_display.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/pfr_upstream_core.dir/src/host_display.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object CMakeFiles/pfr_upstream_core.dir/src/host_display.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/src/host_display.c.o -MF CMakeFiles/pfr_upstream_core.dir/src/host_display.c.o.d -o CMakeFiles/pfr_upstream_core.dir/src/host_display.c.o -c /home/spark-advantage/pokefirered-native/src/host_display.c
 
 CMakeFiles/pfr_upstream_core.dir/src/host_display.c.i: cmake_force
@@ -167,10 +237,80 @@ CMakeFiles/pfr_upstream_core.dir/src/host_display.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/src/host_display.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/src/host_display.c -o CMakeFiles/pfr_upstream_core.dir/src/host_display.c.s
 
+CMakeFiles/pfr_upstream_core.dir/src/host_sound_mixer.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/src/host_sound_mixer.c.o: /home/spark-advantage/pokefirered-native/src/host_sound_mixer.c
+CMakeFiles/pfr_upstream_core.dir/src/host_sound_mixer.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object CMakeFiles/pfr_upstream_core.dir/src/host_sound_mixer.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/src/host_sound_mixer.c.o -MF CMakeFiles/pfr_upstream_core.dir/src/host_sound_mixer.c.o.d -o CMakeFiles/pfr_upstream_core.dir/src/host_sound_mixer.c.o -c /home/spark-advantage/pokefirered-native/src/host_sound_mixer.c
+
+CMakeFiles/pfr_upstream_core.dir/src/host_sound_mixer.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/src/host_sound_mixer.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/src/host_sound_mixer.c > CMakeFiles/pfr_upstream_core.dir/src/host_sound_mixer.c.i
+
+CMakeFiles/pfr_upstream_core.dir/src/host_sound_mixer.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/src/host_sound_mixer.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/src/host_sound_mixer.c -o CMakeFiles/pfr_upstream_core.dir/src/host_sound_mixer.c.s
+
+CMakeFiles/pfr_upstream_core.dir/src/host_sound_init.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/src/host_sound_init.c.o: /home/spark-advantage/pokefirered-native/src/host_sound_init.c
+CMakeFiles/pfr_upstream_core.dir/src/host_sound_init.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object CMakeFiles/pfr_upstream_core.dir/src/host_sound_init.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/src/host_sound_init.c.o -MF CMakeFiles/pfr_upstream_core.dir/src/host_sound_init.c.o.d -o CMakeFiles/pfr_upstream_core.dir/src/host_sound_init.c.o -c /home/spark-advantage/pokefirered-native/src/host_sound_init.c
+
+CMakeFiles/pfr_upstream_core.dir/src/host_sound_init.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/src/host_sound_init.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/src/host_sound_init.c > CMakeFiles/pfr_upstream_core.dir/src/host_sound_init.c.i
+
+CMakeFiles/pfr_upstream_core.dir/src/host_sound_init.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/src/host_sound_init.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/src/host_sound_init.c -o CMakeFiles/pfr_upstream_core.dir/src/host_sound_init.c.s
+
+CMakeFiles/pfr_upstream_core.dir/src/host_flash.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/src/host_flash.c.o: /home/spark-advantage/pokefirered-native/src/host_flash.c
+CMakeFiles/pfr_upstream_core.dir/src/host_flash.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building C object CMakeFiles/pfr_upstream_core.dir/src/host_flash.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/src/host_flash.c.o -MF CMakeFiles/pfr_upstream_core.dir/src/host_flash.c.o.d -o CMakeFiles/pfr_upstream_core.dir/src/host_flash.c.o -c /home/spark-advantage/pokefirered-native/src/host_flash.c
+
+CMakeFiles/pfr_upstream_core.dir/src/host_flash.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/src/host_flash.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/src/host_flash.c > CMakeFiles/pfr_upstream_core.dir/src/host_flash.c.i
+
+CMakeFiles/pfr_upstream_core.dir/src/host_flash.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/src/host_flash.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/src/host_flash.c -o CMakeFiles/pfr_upstream_core.dir/src/host_flash.c.s
+
+CMakeFiles/pfr_upstream_core.dir/src/host_ptr_store.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/src/host_ptr_store.c.o: /home/spark-advantage/pokefirered-native/src/host_ptr_store.c
+CMakeFiles/pfr_upstream_core.dir/src/host_ptr_store.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building C object CMakeFiles/pfr_upstream_core.dir/src/host_ptr_store.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/src/host_ptr_store.c.o -MF CMakeFiles/pfr_upstream_core.dir/src/host_ptr_store.c.o.d -o CMakeFiles/pfr_upstream_core.dir/src/host_ptr_store.c.o -c /home/spark-advantage/pokefirered-native/src/host_ptr_store.c
+
+CMakeFiles/pfr_upstream_core.dir/src/host_ptr_store.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/src/host_ptr_store.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/src/host_ptr_store.c > CMakeFiles/pfr_upstream_core.dir/src/host_ptr_store.c.i
+
+CMakeFiles/pfr_upstream_core.dir/src/host_ptr_store.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/src/host_ptr_store.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/src/host_ptr_store.c -o CMakeFiles/pfr_upstream_core.dir/src/host_ptr_store.c.s
+
+CMakeFiles/pfr_upstream_core.dir/src/host_timer.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/src/host_timer.c.o: /home/spark-advantage/pokefirered-native/src/host_timer.c
+CMakeFiles/pfr_upstream_core.dir/src/host_timer.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building C object CMakeFiles/pfr_upstream_core.dir/src/host_timer.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/src/host_timer.c.o -MF CMakeFiles/pfr_upstream_core.dir/src/host_timer.c.o.d -o CMakeFiles/pfr_upstream_core.dir/src/host_timer.c.o -c /home/spark-advantage/pokefirered-native/src/host_timer.c
+
+CMakeFiles/pfr_upstream_core.dir/src/host_timer.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/src/host_timer.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/src/host_timer.c > CMakeFiles/pfr_upstream_core.dir/src/host_timer.c.i
+
+CMakeFiles/pfr_upstream_core.dir/src/host_timer.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/src/host_timer.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/src/host_timer.c -o CMakeFiles/pfr_upstream_core.dir/src/host_timer.c.s
+
 CMakeFiles/pfr_upstream_core.dir/src/host_intro_stubs.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
 CMakeFiles/pfr_upstream_core.dir/src/host_intro_stubs.c.o: /home/spark-advantage/pokefirered-native/src/host_intro_stubs.c
 CMakeFiles/pfr_upstream_core.dir/src/host_intro_stubs.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/pfr_upstream_core.dir/src/host_intro_stubs.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building C object CMakeFiles/pfr_upstream_core.dir/src/host_intro_stubs.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/src/host_intro_stubs.c.o -MF CMakeFiles/pfr_upstream_core.dir/src/host_intro_stubs.c.o.d -o CMakeFiles/pfr_upstream_core.dir/src/host_intro_stubs.c.o -c /home/spark-advantage/pokefirered-native/src/host_intro_stubs.c
 
 CMakeFiles/pfr_upstream_core.dir/src/host_intro_stubs.c.i: cmake_force
@@ -181,10 +321,24 @@ CMakeFiles/pfr_upstream_core.dir/src/host_intro_stubs.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/src/host_intro_stubs.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/src/host_intro_stubs.c -o CMakeFiles/pfr_upstream_core.dir/src/host_intro_stubs.c.s
 
+CMakeFiles/pfr_upstream_core.dir/src/host_new_game_stubs.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/src/host_new_game_stubs.c.o: /home/spark-advantage/pokefirered-native/src/host_new_game_stubs.c
+CMakeFiles/pfr_upstream_core.dir/src/host_new_game_stubs.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building C object CMakeFiles/pfr_upstream_core.dir/src/host_new_game_stubs.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/src/host_new_game_stubs.c.o -MF CMakeFiles/pfr_upstream_core.dir/src/host_new_game_stubs.c.o.d -o CMakeFiles/pfr_upstream_core.dir/src/host_new_game_stubs.c.o -c /home/spark-advantage/pokefirered-native/src/host_new_game_stubs.c
+
+CMakeFiles/pfr_upstream_core.dir/src/host_new_game_stubs.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/src/host_new_game_stubs.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/src/host_new_game_stubs.c > CMakeFiles/pfr_upstream_core.dir/src/host_new_game_stubs.c.i
+
+CMakeFiles/pfr_upstream_core.dir/src/host_new_game_stubs.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/src/host_new_game_stubs.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/src/host_new_game_stubs.c -o CMakeFiles/pfr_upstream_core.dir/src/host_new_game_stubs.c.s
+
 CMakeFiles/pfr_upstream_core.dir/src/host_oak_speech_stubs.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
 CMakeFiles/pfr_upstream_core.dir/src/host_oak_speech_stubs.c.o: /home/spark-advantage/pokefirered-native/src/host_oak_speech_stubs.c
 CMakeFiles/pfr_upstream_core.dir/src/host_oak_speech_stubs.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/pfr_upstream_core.dir/src/host_oak_speech_stubs.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building C object CMakeFiles/pfr_upstream_core.dir/src/host_oak_speech_stubs.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/src/host_oak_speech_stubs.c.o -MF CMakeFiles/pfr_upstream_core.dir/src/host_oak_speech_stubs.c.o.d -o CMakeFiles/pfr_upstream_core.dir/src/host_oak_speech_stubs.c.o -c /home/spark-advantage/pokefirered-native/src/host_oak_speech_stubs.c
 
 CMakeFiles/pfr_upstream_core.dir/src/host_oak_speech_stubs.c.i: cmake_force
@@ -198,7 +352,7 @@ CMakeFiles/pfr_upstream_core.dir/src/host_oak_speech_stubs.c.s: cmake_force
 CMakeFiles/pfr_upstream_core.dir/src/host_title_screen_stubs.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
 CMakeFiles/pfr_upstream_core.dir/src/host_title_screen_stubs.c.o: /home/spark-advantage/pokefirered-native/src/host_title_screen_stubs.c
 CMakeFiles/pfr_upstream_core.dir/src/host_title_screen_stubs.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/pfr_upstream_core.dir/src/host_title_screen_stubs.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building C object CMakeFiles/pfr_upstream_core.dir/src/host_title_screen_stubs.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/src/host_title_screen_stubs.c.o -MF CMakeFiles/pfr_upstream_core.dir/src/host_title_screen_stubs.c.o.d -o CMakeFiles/pfr_upstream_core.dir/src/host_title_screen_stubs.c.o -c /home/spark-advantage/pokefirered-native/src/host_title_screen_stubs.c
 
 CMakeFiles/pfr_upstream_core.dir/src/host_title_screen_stubs.c.i: cmake_force
@@ -209,243 +363,3336 @@ CMakeFiles/pfr_upstream_core.dir/src/host_title_screen_stubs.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/src/host_title_screen_stubs.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/src/host_title_screen_stubs.c -o CMakeFiles/pfr_upstream_core.dir/src/host_title_screen_stubs.c.s
 
-CMakeFiles/pfr_upstream_core.dir/src/upstream_stubs.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
-CMakeFiles/pfr_upstream_core.dir/src/upstream_stubs.c.o: /home/spark-advantage/pokefirered-native/src/upstream_stubs.c
-CMakeFiles/pfr_upstream_core.dir/src/upstream_stubs.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/pfr_upstream_core.dir/src/upstream_stubs.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/src/upstream_stubs.c.o -MF CMakeFiles/pfr_upstream_core.dir/src/upstream_stubs.c.o.d -o CMakeFiles/pfr_upstream_core.dir/src/upstream_stubs.c.o -c /home/spark-advantage/pokefirered-native/src/upstream_stubs.c
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_stubs.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_stubs.c.o: gen/upstream_stubs.c
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_stubs.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/upstream_stubs.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/upstream_stubs.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/upstream_stubs.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/upstream_stubs.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/upstream_stubs.c
 
-CMakeFiles/pfr_upstream_core.dir/src/upstream_stubs.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/src/upstream_stubs.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/src/upstream_stubs.c > CMakeFiles/pfr_upstream_core.dir/src/upstream_stubs.c.i
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_stubs.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/upstream_stubs.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/upstream_stubs.c > CMakeFiles/pfr_upstream_core.dir/gen/upstream_stubs.c.i
 
-CMakeFiles/pfr_upstream_core.dir/src/upstream_stubs.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/src/upstream_stubs.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/src/upstream_stubs.c -o CMakeFiles/pfr_upstream_core.dir/src/upstream_stubs.c.s
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_stubs.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/upstream_stubs.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/upstream_stubs.c -o CMakeFiles/pfr_upstream_core.dir/gen/upstream_stubs.c.s
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/random.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/random.c.o: /home/spark-advantage/pokefirered/src/random.c
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/random.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/random.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/random.c.o -MF CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/random.c.o.d -o CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/random.c.o -c /home/spark-advantage/pokefirered/src/random.c
+CMakeFiles/pfr_upstream_core.dir/src/game_ctx.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/src/game_ctx.c.o: /home/spark-advantage/pokefirered-native/src/game_ctx.c
+CMakeFiles/pfr_upstream_core.dir/src/game_ctx.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building C object CMakeFiles/pfr_upstream_core.dir/src/game_ctx.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/src/game_ctx.c.o -MF CMakeFiles/pfr_upstream_core.dir/src/game_ctx.c.o.d -o CMakeFiles/pfr_upstream_core.dir/src/game_ctx.c.o -c /home/spark-advantage/pokefirered-native/src/game_ctx.c
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/random.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/random.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered/src/random.c > CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/random.c.i
+CMakeFiles/pfr_upstream_core.dir/src/game_ctx.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/src/game_ctx.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/src/game_ctx.c > CMakeFiles/pfr_upstream_core.dir/src/game_ctx.c.i
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/random.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/random.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered/src/random.c -o CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/random.c.s
+CMakeFiles/pfr_upstream_core.dir/src/game_ctx.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/src/game_ctx.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/src/game_ctx.c -o CMakeFiles/pfr_upstream_core.dir/src/game_ctx.c.s
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/malloc.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/malloc.c.o: /home/spark-advantage/pokefirered/src/malloc.c
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/malloc.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/malloc.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/malloc.c.o -MF CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/malloc.c.o.d -o CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/malloc.c.o -c /home/spark-advantage/pokefirered/src/malloc.c
+CMakeFiles/pfr_upstream_core.dir/gen/game_ctx_stubs.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/game_ctx_stubs.c.o: gen/game_ctx_stubs.c
+CMakeFiles/pfr_upstream_core.dir/gen/game_ctx_stubs.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/game_ctx_stubs.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/game_ctx_stubs.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/game_ctx_stubs.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/game_ctx_stubs.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/game_ctx_stubs.c
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/malloc.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/malloc.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered/src/malloc.c > CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/malloc.c.i
+CMakeFiles/pfr_upstream_core.dir/gen/game_ctx_stubs.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/game_ctx_stubs.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/game_ctx_stubs.c > CMakeFiles/pfr_upstream_core.dir/gen/game_ctx_stubs.c.i
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/malloc.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/malloc.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered/src/malloc.c -o CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/malloc.c.s
+CMakeFiles/pfr_upstream_core.dir/gen/game_ctx_stubs.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/game_ctx_stubs.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/game_ctx_stubs.c -o CMakeFiles/pfr_upstream_core.dir/gen/game_ctx_stubs.c.s
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/decompress.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/decompress.c.o: /home/spark-advantage/pokefirered/src/decompress.c
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/decompress.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/decompress.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/decompress.c.o -MF CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/decompress.c.o.d -o CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/decompress.c.o -c /home/spark-advantage/pokefirered/src/decompress.c
+CMakeFiles/pfr_upstream_core.dir/src/upstream_asm_data.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/src/upstream_asm_data.c.o: /home/spark-advantage/pokefirered-native/src/upstream_asm_data.c
+CMakeFiles/pfr_upstream_core.dir/src/upstream_asm_data.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building C object CMakeFiles/pfr_upstream_core.dir/src/upstream_asm_data.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/src/upstream_asm_data.c.o -MF CMakeFiles/pfr_upstream_core.dir/src/upstream_asm_data.c.o.d -o CMakeFiles/pfr_upstream_core.dir/src/upstream_asm_data.c.o -c /home/spark-advantage/pokefirered-native/src/upstream_asm_data.c
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/decompress.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/decompress.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered/src/decompress.c > CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/decompress.c.i
+CMakeFiles/pfr_upstream_core.dir/src/upstream_asm_data.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/src/upstream_asm_data.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/src/upstream_asm_data.c > CMakeFiles/pfr_upstream_core.dir/src/upstream_asm_data.c.i
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/decompress.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/decompress.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered/src/decompress.c -o CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/decompress.c.s
+CMakeFiles/pfr_upstream_core.dir/src/upstream_asm_data.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/src/upstream_asm_data.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/src/upstream_asm_data.c -o CMakeFiles/pfr_upstream_core.dir/src/upstream_asm_data.c.s
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/gpu_regs.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/gpu_regs.c.o: /home/spark-advantage/pokefirered/src/gpu_regs.c
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/gpu_regs.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building C object CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/gpu_regs.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/gpu_regs.c.o -MF CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/gpu_regs.c.o.d -o CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/gpu_regs.c.o -c /home/spark-advantage/pokefirered/src/gpu_regs.c
+CMakeFiles/pfr_upstream_core.dir/src/upstream_sound_data.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/src/upstream_sound_data.c.o: /home/spark-advantage/pokefirered-native/src/upstream_sound_data.c
+CMakeFiles/pfr_upstream_core.dir/src/upstream_sound_data.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building C object CMakeFiles/pfr_upstream_core.dir/src/upstream_sound_data.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/src/upstream_sound_data.c.o -MF CMakeFiles/pfr_upstream_core.dir/src/upstream_sound_data.c.o.d -o CMakeFiles/pfr_upstream_core.dir/src/upstream_sound_data.c.o -c /home/spark-advantage/pokefirered-native/src/upstream_sound_data.c
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/gpu_regs.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/gpu_regs.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered/src/gpu_regs.c > CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/gpu_regs.c.i
+CMakeFiles/pfr_upstream_core.dir/src/upstream_sound_data.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/src/upstream_sound_data.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/src/upstream_sound_data.c > CMakeFiles/pfr_upstream_core.dir/src/upstream_sound_data.c.i
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/gpu_regs.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/gpu_regs.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered/src/gpu_regs.c -o CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/gpu_regs.c.s
+CMakeFiles/pfr_upstream_core.dir/src/upstream_sound_data.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/src/upstream_sound_data.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/src/upstream_sound_data.c -o CMakeFiles/pfr_upstream_core.dir/src/upstream_sound_data.c.s
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/dma3_manager.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/dma3_manager.c.o: /home/spark-advantage/pokefirered/src/dma3_manager.c
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/dma3_manager.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building C object CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/dma3_manager.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/dma3_manager.c.o -MF CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/dma3_manager.c.o.d -o CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/dma3_manager.c.o -c /home/spark-advantage/pokefirered/src/dma3_manager.c
+CMakeFiles/pfr_upstream_core.dir/src/upstream_sound_samples.S.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/src/upstream_sound_samples.S.o: /home/spark-advantage/pokefirered-native/src/upstream_sound_samples.S
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building ASM object CMakeFiles/pfr_upstream_core.dir/src/upstream_sound_samples.S.o"
+	/usr/bin/cc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -Wa,-I/home/spark-advantage/pokefirered-native -o CMakeFiles/pfr_upstream_core.dir/src/upstream_sound_samples.S.o -c /home/spark-advantage/pokefirered-native/src/upstream_sound_samples.S
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/dma3_manager.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/dma3_manager.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered/src/dma3_manager.c > CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/dma3_manager.c.i
+CMakeFiles/pfr_upstream_core.dir/src/upstream_sound_samples.S.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing ASM source to CMakeFiles/pfr_upstream_core.dir/src/upstream_sound_samples.S.i"
+	/usr/bin/cc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -Wa,-I/home/spark-advantage/pokefirered-native -E /home/spark-advantage/pokefirered-native/src/upstream_sound_samples.S > CMakeFiles/pfr_upstream_core.dir/src/upstream_sound_samples.S.i
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/dma3_manager.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/dma3_manager.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered/src/dma3_manager.c -o CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/dma3_manager.c.s
+CMakeFiles/pfr_upstream_core.dir/src/upstream_sound_samples.S.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling ASM source to assembly CMakeFiles/pfr_upstream_core.dir/src/upstream_sound_samples.S.s"
+	/usr/bin/cc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -Wa,-I/home/spark-advantage/pokefirered-native -S /home/spark-advantage/pokefirered-native/src/upstream_sound_samples.S -o CMakeFiles/pfr_upstream_core.dir/src/upstream_sound_samples.S.s
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/task.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/task.c.o: /home/spark-advantage/pokefirered/src/task.c
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/task.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building C object CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/task.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/task.c.o -MF CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/task.c.o.d -o CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/task.c.o -c /home/spark-advantage/pokefirered/src/task.c
+CMakeFiles/pfr_upstream_core.dir/src/upstream_battle_scripts.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/src/upstream_battle_scripts.c.o: /home/spark-advantage/pokefirered-native/src/upstream_battle_scripts.c
+CMakeFiles/pfr_upstream_core.dir/src/upstream_battle_scripts.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building C object CMakeFiles/pfr_upstream_core.dir/src/upstream_battle_scripts.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/src/upstream_battle_scripts.c.o -MF CMakeFiles/pfr_upstream_core.dir/src/upstream_battle_scripts.c.o.d -o CMakeFiles/pfr_upstream_core.dir/src/upstream_battle_scripts.c.o -c /home/spark-advantage/pokefirered-native/src/upstream_battle_scripts.c
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/task.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/task.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered/src/task.c > CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/task.c.i
+CMakeFiles/pfr_upstream_core.dir/src/upstream_battle_scripts.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/src/upstream_battle_scripts.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/src/upstream_battle_scripts.c > CMakeFiles/pfr_upstream_core.dir/src/upstream_battle_scripts.c.i
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/task.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/task.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered/src/task.c -o CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/task.c.s
+CMakeFiles/pfr_upstream_core.dir/src/upstream_battle_scripts.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/src/upstream_battle_scripts.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/src/upstream_battle_scripts.c -o CMakeFiles/pfr_upstream_core.dir/src/upstream_battle_scripts.c.s
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/trig.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/trig.c.o: /home/spark-advantage/pokefirered/src/trig.c
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/trig.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building C object CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/trig.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/trig.c.o -MF CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/trig.c.o.d -o CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/trig.c.o -c /home/spark-advantage/pokefirered/src/trig.c
+CMakeFiles/pfr_upstream_core.dir/src/upstream_event_scripts.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/src/upstream_event_scripts.c.o: /home/spark-advantage/pokefirered-native/src/upstream_event_scripts.c
+CMakeFiles/pfr_upstream_core.dir/src/upstream_event_scripts.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building C object CMakeFiles/pfr_upstream_core.dir/src/upstream_event_scripts.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/src/upstream_event_scripts.c.o -MF CMakeFiles/pfr_upstream_core.dir/src/upstream_event_scripts.c.o.d -o CMakeFiles/pfr_upstream_core.dir/src/upstream_event_scripts.c.o -c /home/spark-advantage/pokefirered-native/src/upstream_event_scripts.c
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/trig.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/trig.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered/src/trig.c > CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/trig.c.i
+CMakeFiles/pfr_upstream_core.dir/src/upstream_event_scripts.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/src/upstream_event_scripts.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/src/upstream_event_scripts.c > CMakeFiles/pfr_upstream_core.dir/src/upstream_event_scripts.c.i
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/trig.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/trig.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered/src/trig.c -o CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/trig.c.s
+CMakeFiles/pfr_upstream_core.dir/src/upstream_event_scripts.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/src/upstream_event_scripts.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/src/upstream_event_scripts.c -o CMakeFiles/pfr_upstream_core.dir/src/upstream_event_scripts.c.s
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/scanline_effect.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/scanline_effect.c.o: /home/spark-advantage/pokefirered/src/scanline_effect.c
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/scanline_effect.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building C object CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/scanline_effect.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/scanline_effect.c.o -MF CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/scanline_effect.c.o.d -o CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/scanline_effect.c.o -c /home/spark-advantage/pokefirered/src/scanline_effect.c
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_map_data.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_map_data.c.o: gen/upstream_map_data.c
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_map_data.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/upstream_map_data.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/upstream_map_data.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/upstream_map_data.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/upstream_map_data.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/upstream_map_data.c
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/scanline_effect.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/scanline_effect.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered/src/scanline_effect.c > CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/scanline_effect.c.i
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_map_data.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/upstream_map_data.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/upstream_map_data.c > CMakeFiles/pfr_upstream_core.dir/gen/upstream_map_data.c.i
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/scanline_effect.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/scanline_effect.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered/src/scanline_effect.c -o CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/scanline_effect.c.s
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_map_data.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/upstream_map_data.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/upstream_map_data.c -o CMakeFiles/pfr_upstream_core.dir/gen/upstream_map_data.c.s
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/palette.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/palette.c.o: /home/spark-advantage/pokefirered/src/palette.c
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/palette.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building C object CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/palette.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/palette.c.o -MF CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/palette.c.o.d -o CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/palette.c.o -c /home/spark-advantage/pokefirered/src/palette.c
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_field_effect_scripts.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_field_effect_scripts.c.o: gen/upstream_field_effect_scripts.c
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_field_effect_scripts.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/upstream_field_effect_scripts.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/upstream_field_effect_scripts.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/upstream_field_effect_scripts.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/upstream_field_effect_scripts.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/upstream_field_effect_scripts.c
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/palette.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/palette.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered/src/palette.c > CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/palette.c.i
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_field_effect_scripts.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/upstream_field_effect_scripts.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/upstream_field_effect_scripts.c > CMakeFiles/pfr_upstream_core.dir/gen/upstream_field_effect_scripts.c.i
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/palette.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/palette.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered/src/palette.c -o CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/palette.c.s
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_field_effect_scripts.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/upstream_field_effect_scripts.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/upstream_field_effect_scripts.c -o CMakeFiles/pfr_upstream_core.dir/gen/upstream_field_effect_scripts.c.s
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/blend_palette.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/blend_palette.c.o: /home/spark-advantage/pokefirered/src/blend_palette.c
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/blend_palette.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building C object CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/blend_palette.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/blend_palette.c.o -MF CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/blend_palette.c.o.d -o CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/blend_palette.c.o -c /home/spark-advantage/pokefirered/src/blend_palette.c
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_ai_scripts.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_ai_scripts.c.o: gen/upstream_battle_ai_scripts.c
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_ai_scripts.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_ai_scripts.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_ai_scripts.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_ai_scripts.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_ai_scripts.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/upstream_battle_ai_scripts.c
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/blend_palette.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/blend_palette.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered/src/blend_palette.c > CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/blend_palette.c.i
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_ai_scripts.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_ai_scripts.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/upstream_battle_ai_scripts.c > CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_ai_scripts.c.i
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/blend_palette.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/blend_palette.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered/src/blend_palette.c -o CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/blend_palette.c.s
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_ai_scripts.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_ai_scripts.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/upstream_battle_ai_scripts.c -o CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_ai_scripts.c.s
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/bg.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/bg.c.o: /home/spark-advantage/pokefirered/src/bg.c
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/bg.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building C object CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/bg.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/bg.c.o -MF CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/bg.c.o.d -o CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/bg.c.o -c /home/spark-advantage/pokefirered/src/bg.c
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_scripts.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_scripts.c.o: gen/upstream_battle_anim_scripts.c
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_scripts.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_scripts.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_scripts.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_scripts.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_scripts.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/upstream_battle_anim_scripts.c
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/bg.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/bg.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered/src/bg.c > CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/bg.c.i
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_scripts.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_scripts.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/upstream_battle_anim_scripts.c > CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_scripts.c.i
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/bg.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/bg.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered/src/bg.c -o CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/bg.c.s
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_scripts.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_scripts.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/upstream_battle_anim_scripts.c -o CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_scripts.c.s
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/sprite.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/sprite.c.o: /home/spark-advantage/pokefirered/src/sprite.c
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/sprite.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building C object CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/sprite.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/sprite.c.o -MF CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/sprite.c.o.d -o CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/sprite.c.o -c /home/spark-advantage/pokefirered/src/sprite.c
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_tables.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_tables.c.o: gen/upstream_battle_anim_tables.c
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_tables.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_tables.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_tables.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_tables.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_tables.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/upstream_battle_anim_tables.c
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/sprite.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/sprite.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered/src/sprite.c > CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/sprite.c.i
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_tables.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_tables.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/upstream_battle_anim_tables.c > CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_tables.c.i
 
-CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/sprite.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/sprite.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered/src/sprite.c -o CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/sprite.c.s
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_tables.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_tables.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/upstream_battle_anim_tables.c -o CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_tables.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_specials_table.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_specials_table.c.o: gen/upstream_specials_table.c
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_specials_table.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/upstream_specials_table.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/upstream_specials_table.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/upstream_specials_table.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/upstream_specials_table.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/upstream_specials_table.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_specials_table.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/upstream_specials_table.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/upstream_specials_table.c > CMakeFiles/pfr_upstream_core.dir/gen/upstream_specials_table.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/upstream_specials_table.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/upstream_specials_table.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/upstream_specials_table.c -o CMakeFiles/pfr_upstream_core.dir/gen/upstream_specials_table.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/AgbRfu_LinkManager.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/AgbRfu_LinkManager.c.o: gen/AgbRfu_LinkManager.c
+CMakeFiles/pfr_upstream_core.dir/gen/AgbRfu_LinkManager.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/AgbRfu_LinkManager.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/AgbRfu_LinkManager.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/AgbRfu_LinkManager.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/AgbRfu_LinkManager.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/AgbRfu_LinkManager.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/AgbRfu_LinkManager.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/AgbRfu_LinkManager.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/AgbRfu_LinkManager.c > CMakeFiles/pfr_upstream_core.dir/gen/AgbRfu_LinkManager.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/AgbRfu_LinkManager.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/AgbRfu_LinkManager.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/AgbRfu_LinkManager.c -o CMakeFiles/pfr_upstream_core.dir/gen/AgbRfu_LinkManager.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_script_commands.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_script_commands.c.o: gen/battle_ai_script_commands.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_script_commands.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_script_commands.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_script_commands.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_script_commands.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_script_commands.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_ai_script_commands.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_script_commands.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_script_commands.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_ai_script_commands.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_script_commands.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_script_commands.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_script_commands.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_ai_script_commands.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_script_commands.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_switch_items.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_switch_items.c.o: gen/battle_ai_switch_items.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_switch_items.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_switch_items.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_switch_items.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_switch_items.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_switch_items.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_ai_switch_items.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_switch_items.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_switch_items.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_ai_switch_items.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_switch_items.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_switch_items.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_switch_items.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_ai_switch_items.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_switch_items.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim.c.o: gen/battle_anim.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_anim.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_anim.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_anim.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_anim.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_anim.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_anim.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_bug.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_bug.c.o: gen/battle_anim_bug.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_bug.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_bug.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_bug.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_bug.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_bug.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_bug.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_bug.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_bug.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_bug.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_bug.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_bug.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_bug.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_bug.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_bug.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dark.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dark.c.o: gen/battle_anim_dark.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dark.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dark.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dark.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dark.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dark.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_dark.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dark.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dark.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_dark.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dark.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dark.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dark.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_dark.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dark.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dragon.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dragon.c.o: gen/battle_anim_dragon.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dragon.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dragon.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dragon.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dragon.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dragon.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_dragon.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dragon.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dragon.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_dragon.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dragon.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dragon.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dragon.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_dragon.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dragon.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_1.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_1.c.o: gen/battle_anim_effects_1.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_1.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_43) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_1.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_1.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_1.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_1.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_effects_1.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_1.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_1.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_effects_1.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_1.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_1.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_1.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_effects_1.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_1.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_2.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_2.c.o: gen/battle_anim_effects_2.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_2.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_44) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_2.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_2.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_2.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_2.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_effects_2.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_2.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_2.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_effects_2.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_2.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_2.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_2.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_effects_2.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_2.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_electric.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_electric.c.o: gen/battle_anim_electric.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_electric.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_45) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_electric.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_electric.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_electric.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_electric.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_electric.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_electric.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_electric.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_electric.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_electric.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_electric.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_electric.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_electric.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_electric.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fight.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fight.c.o: gen/battle_anim_fight.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fight.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_46) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fight.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fight.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fight.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fight.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_fight.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fight.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fight.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_fight.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fight.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fight.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fight.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_fight.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fight.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fire.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fire.c.o: gen/battle_anim_fire.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fire.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_47) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fire.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fire.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fire.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fire.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_fire.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fire.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fire.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_fire.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fire.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fire.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fire.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_fire.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fire.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ghost.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ghost.c.o: gen/battle_anim_ghost.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ghost.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_48) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ghost.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ghost.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ghost.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ghost.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_ghost.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ghost.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ghost.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_ghost.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ghost.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ghost.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ghost.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_ghost.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ghost.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ground.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ground.c.o: gen/battle_anim_ground.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ground.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_49) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ground.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ground.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ground.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ground.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_ground.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ground.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ground.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_ground.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ground.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ground.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ground.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_ground.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ground.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ice.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ice.c.o: gen/battle_anim_ice.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ice.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_50) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ice.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ice.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ice.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ice.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_ice.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ice.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ice.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_ice.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ice.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ice.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ice.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_ice.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ice.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mon_movement.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mon_movement.c.o: gen/battle_anim_mon_movement.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mon_movement.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_51) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mon_movement.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mon_movement.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mon_movement.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mon_movement.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_mon_movement.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mon_movement.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mon_movement.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_mon_movement.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mon_movement.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mon_movement.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mon_movement.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_mon_movement.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mon_movement.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mons.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mons.c.o: gen/battle_anim_mons.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mons.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_52) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mons.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mons.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mons.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mons.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_mons.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mons.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mons.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_mons.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mons.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mons.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mons.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_mons.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mons.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_normal.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_normal.c.o: gen/battle_anim_normal.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_normal.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_53) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_normal.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_normal.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_normal.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_normal.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_normal.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_normal.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_normal.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_normal.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_normal.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_normal.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_normal.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_normal.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_normal.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_poison.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_poison.c.o: gen/battle_anim_poison.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_poison.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_54) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_poison.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_poison.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_poison.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_poison.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_poison.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_poison.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_poison.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_poison.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_poison.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_poison.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_poison.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_poison.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_poison.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_psychic.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_psychic.c.o: gen/battle_anim_psychic.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_psychic.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_55) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_psychic.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_psychic.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_psychic.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_psychic.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_psychic.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_psychic.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_psychic.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_psychic.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_psychic.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_psychic.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_psychic.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_psychic.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_psychic.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_rock.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_rock.c.o: gen/battle_anim_rock.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_rock.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_56) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_rock.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_rock.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_rock.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_rock.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_rock.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_rock.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_rock.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_rock.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_rock.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_rock.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_rock.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_rock.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_rock.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_smokescreen.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_smokescreen.c.o: gen/battle_anim_smokescreen.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_smokescreen.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_57) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_smokescreen.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_smokescreen.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_smokescreen.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_smokescreen.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_smokescreen.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_smokescreen.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_smokescreen.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_smokescreen.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_smokescreen.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_smokescreen.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_smokescreen.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_smokescreen.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_smokescreen.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_sound_tasks.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_sound_tasks.c.o: gen/battle_anim_sound_tasks.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_sound_tasks.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_58) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_sound_tasks.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_sound_tasks.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_sound_tasks.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_sound_tasks.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_sound_tasks.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_sound_tasks.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_sound_tasks.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_sound_tasks.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_sound_tasks.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_sound_tasks.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_sound_tasks.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_sound_tasks.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_sound_tasks.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_special.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_special.c.o: gen/battle_anim_special.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_special.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_59) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_special.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_special.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_special.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_special.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_special.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_special.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_special.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_special.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_special.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_special.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_special.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_special.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_special.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_status_effects.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_status_effects.c.o: gen/battle_anim_status_effects.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_status_effects.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_60) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_status_effects.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_status_effects.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_status_effects.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_status_effects.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_status_effects.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_status_effects.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_status_effects.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_status_effects.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_status_effects.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_status_effects.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_status_effects.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_status_effects.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_status_effects.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_utility_funcs.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_utility_funcs.c.o: gen/battle_anim_utility_funcs.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_utility_funcs.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_61) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_utility_funcs.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_utility_funcs.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_utility_funcs.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_utility_funcs.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_utility_funcs.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_utility_funcs.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_utility_funcs.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_utility_funcs.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_utility_funcs.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_utility_funcs.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_utility_funcs.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_anim_utility_funcs.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_utility_funcs.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_opponent.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_opponent.c.o: gen/battle_controller_link_opponent.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_opponent.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_62) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_opponent.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_opponent.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_opponent.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_opponent.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_controller_link_opponent.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_opponent.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_opponent.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_controller_link_opponent.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_opponent.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_opponent.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_opponent.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_controller_link_opponent.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_opponent.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_partner.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_partner.c.o: gen/battle_controller_link_partner.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_partner.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_63) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_partner.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_partner.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_partner.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_partner.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_controller_link_partner.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_partner.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_partner.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_controller_link_partner.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_partner.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_partner.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_partner.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_controller_link_partner.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_partner.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_oak_old_man.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_oak_old_man.c.o: gen/battle_controller_oak_old_man.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_oak_old_man.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_64) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_oak_old_man.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_oak_old_man.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_oak_old_man.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_oak_old_man.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_controller_oak_old_man.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_oak_old_man.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_oak_old_man.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_controller_oak_old_man.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_oak_old_man.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_oak_old_man.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_oak_old_man.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_controller_oak_old_man.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_oak_old_man.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_opponent.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_opponent.c.o: gen/battle_controller_opponent.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_opponent.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_65) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_opponent.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_opponent.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_opponent.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_opponent.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_controller_opponent.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_opponent.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_opponent.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_controller_opponent.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_opponent.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_opponent.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_opponent.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_controller_opponent.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_opponent.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_player.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_player.c.o: gen/battle_controller_player.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_player.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_66) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_player.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_player.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_player.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_player.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_controller_player.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_player.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_player.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_controller_player.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_player.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_player.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_player.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_controller_player.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_player.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_pokedude.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_pokedude.c.o: gen/battle_controller_pokedude.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_pokedude.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_67) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_pokedude.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_pokedude.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_pokedude.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_pokedude.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_controller_pokedude.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_pokedude.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_pokedude.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_controller_pokedude.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_pokedude.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_pokedude.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_pokedude.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_controller_pokedude.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_pokedude.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_safari.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_safari.c.o: gen/battle_controller_safari.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_safari.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_68) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_safari.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_safari.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_safari.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_safari.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_controller_safari.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_safari.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_safari.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_controller_safari.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_safari.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_safari.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_safari.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_controller_safari.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_safari.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controllers.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controllers.c.o: gen/battle_controllers.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controllers.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_69) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_controllers.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_controllers.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_controllers.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_controllers.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_controllers.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controllers.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_controllers.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_controllers.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_controllers.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_controllers.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_controllers.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_controllers.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_controllers.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_gfx_sfx_util.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_gfx_sfx_util.c.o: gen/battle_gfx_sfx_util.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_gfx_sfx_util.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_70) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_gfx_sfx_util.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_gfx_sfx_util.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_gfx_sfx_util.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_gfx_sfx_util.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_gfx_sfx_util.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_gfx_sfx_util.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_gfx_sfx_util.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_gfx_sfx_util.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_gfx_sfx_util.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_gfx_sfx_util.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_gfx_sfx_util.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_gfx_sfx_util.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_gfx_sfx_util.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_intro.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_intro.c.o: gen/battle_intro.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_intro.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_71) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_intro.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_intro.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_intro.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_intro.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_intro.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_intro.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_intro.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_intro.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_intro.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_intro.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_intro.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_intro.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_intro.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_main.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_main.c.o: gen/battle_main.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_main.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_72) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_main.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_main.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_main.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_main.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_main.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_main.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_main.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_main.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_main.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_main.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_main.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_main.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_main.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_message.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_message.c.o: gen/battle_message.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_message.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_73) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_message.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_message.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_message.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_message.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_message.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_message.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_message.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_message.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_message.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_message.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_message.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_message.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_message.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_setup.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_setup.c.o: gen/battle_setup.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_setup.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_74) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_setup.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_setup.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_setup.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_setup.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_setup.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_setup.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_setup.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_setup.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_setup.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_setup.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_setup.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_setup.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_setup.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_tower.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_tower.c.o: gen/battle_tower.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_tower.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_75) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_tower.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_tower.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_tower.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_tower.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_tower.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_tower.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_tower.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_tower.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_tower.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_tower.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_tower.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_tower.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_tower.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_util.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_util.c.o: gen/battle_util.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_util.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_76) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_util.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_util.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_util.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_util.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_util.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_util.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_util.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_util.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_util.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_util.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_util.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_util.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_util.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_util2.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/battle_util2.c.o: gen/battle_util2.c
+CMakeFiles/pfr_upstream_core.dir/gen/battle_util2.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_77) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/battle_util2.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/battle_util2.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/battle_util2.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/battle_util2.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_util2.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_util2.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/battle_util2.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_util2.c > CMakeFiles/pfr_upstream_core.dir/gen/battle_util2.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/battle_util2.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/battle_util2.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/battle_util2.c -o CMakeFiles/pfr_upstream_core.dir/gen/battle_util2.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/berry.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/berry.c.o: gen/berry.c
+CMakeFiles/pfr_upstream_core.dir/gen/berry.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_78) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/berry.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/berry.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/berry.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/berry.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/berry.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/berry.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/berry.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/berry.c > CMakeFiles/pfr_upstream_core.dir/gen/berry.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/berry.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/berry.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/berry.c -o CMakeFiles/pfr_upstream_core.dir/gen/berry.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/berry_fix_program.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/berry_fix_program.c.o: gen/berry_fix_program.c
+CMakeFiles/pfr_upstream_core.dir/gen/berry_fix_program.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_79) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/berry_fix_program.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/berry_fix_program.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/berry_fix_program.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/berry_fix_program.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/berry_fix_program.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/berry_fix_program.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/berry_fix_program.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/berry_fix_program.c > CMakeFiles/pfr_upstream_core.dir/gen/berry_fix_program.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/berry_fix_program.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/berry_fix_program.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/berry_fix_program.c -o CMakeFiles/pfr_upstream_core.dir/gen/berry_fix_program.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/berry_pouch.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/berry_pouch.c.o: gen/berry_pouch.c
+CMakeFiles/pfr_upstream_core.dir/gen/berry_pouch.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_80) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/berry_pouch.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/berry_pouch.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/berry_pouch.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/berry_pouch.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/berry_pouch.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/berry_pouch.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/berry_pouch.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/berry_pouch.c > CMakeFiles/pfr_upstream_core.dir/gen/berry_pouch.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/berry_pouch.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/berry_pouch.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/berry_pouch.c -o CMakeFiles/pfr_upstream_core.dir/gen/berry_pouch.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/berry_powder.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/berry_powder.c.o: gen/berry_powder.c
+CMakeFiles/pfr_upstream_core.dir/gen/berry_powder.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_81) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/berry_powder.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/berry_powder.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/berry_powder.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/berry_powder.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/berry_powder.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/berry_powder.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/berry_powder.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/berry_powder.c > CMakeFiles/pfr_upstream_core.dir/gen/berry_powder.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/berry_powder.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/berry_powder.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/berry_powder.c -o CMakeFiles/pfr_upstream_core.dir/gen/berry_powder.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/bg.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/bg.c.o: gen/bg.c
+CMakeFiles/pfr_upstream_core.dir/gen/bg.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_82) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/bg.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/bg.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/bg.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/bg.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/bg.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/bg.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/bg.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/bg.c > CMakeFiles/pfr_upstream_core.dir/gen/bg.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/bg.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/bg.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/bg.c -o CMakeFiles/pfr_upstream_core.dir/gen/bg.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/bike.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/bike.c.o: gen/bike.c
+CMakeFiles/pfr_upstream_core.dir/gen/bike.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_83) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/bike.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/bike.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/bike.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/bike.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/bike.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/bike.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/bike.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/bike.c > CMakeFiles/pfr_upstream_core.dir/gen/bike.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/bike.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/bike.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/bike.c -o CMakeFiles/pfr_upstream_core.dir/gen/bike.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/blend_palette.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/blend_palette.c.o: gen/blend_palette.c
+CMakeFiles/pfr_upstream_core.dir/gen/blend_palette.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_84) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/blend_palette.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/blend_palette.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/blend_palette.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/blend_palette.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/blend_palette.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/blend_palette.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/blend_palette.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/blend_palette.c > CMakeFiles/pfr_upstream_core.dir/gen/blend_palette.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/blend_palette.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/blend_palette.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/blend_palette.c -o CMakeFiles/pfr_upstream_core.dir/gen/blend_palette.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/blit.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/blit.c.o: gen/blit.c
+CMakeFiles/pfr_upstream_core.dir/gen/blit.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_85) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/blit.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/blit.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/blit.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/blit.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/blit.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/blit.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/blit.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/blit.c > CMakeFiles/pfr_upstream_core.dir/gen/blit.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/blit.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/blit.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/blit.c -o CMakeFiles/pfr_upstream_core.dir/gen/blit.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/buy_menu_helpers.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/buy_menu_helpers.c.o: gen/buy_menu_helpers.c
+CMakeFiles/pfr_upstream_core.dir/gen/buy_menu_helpers.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_86) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/buy_menu_helpers.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/buy_menu_helpers.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/buy_menu_helpers.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/buy_menu_helpers.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/buy_menu_helpers.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/buy_menu_helpers.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/buy_menu_helpers.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/buy_menu_helpers.c > CMakeFiles/pfr_upstream_core.dir/gen/buy_menu_helpers.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/buy_menu_helpers.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/buy_menu_helpers.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/buy_menu_helpers.c -o CMakeFiles/pfr_upstream_core.dir/gen/buy_menu_helpers.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/cable_car_util.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/cable_car_util.c.o: gen/cable_car_util.c
+CMakeFiles/pfr_upstream_core.dir/gen/cable_car_util.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_87) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/cable_car_util.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/cable_car_util.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/cable_car_util.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/cable_car_util.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/cable_car_util.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/cable_car_util.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/cable_car_util.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/cable_car_util.c > CMakeFiles/pfr_upstream_core.dir/gen/cable_car_util.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/cable_car_util.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/cable_car_util.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/cable_car_util.c -o CMakeFiles/pfr_upstream_core.dir/gen/cable_car_util.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/cable_club.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/cable_club.c.o: gen/cable_club.c
+CMakeFiles/pfr_upstream_core.dir/gen/cable_club.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_88) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/cable_club.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/cable_club.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/cable_club.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/cable_club.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/cable_club.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/cable_club.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/cable_club.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/cable_club.c > CMakeFiles/pfr_upstream_core.dir/gen/cable_club.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/cable_club.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/cable_club.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/cable_club.c -o CMakeFiles/pfr_upstream_core.dir/gen/cable_club.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/cereader_tool.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/cereader_tool.c.o: gen/cereader_tool.c
+CMakeFiles/pfr_upstream_core.dir/gen/cereader_tool.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_89) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/cereader_tool.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/cereader_tool.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/cereader_tool.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/cereader_tool.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/cereader_tool.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/cereader_tool.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/cereader_tool.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/cereader_tool.c > CMakeFiles/pfr_upstream_core.dir/gen/cereader_tool.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/cereader_tool.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/cereader_tool.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/cereader_tool.c -o CMakeFiles/pfr_upstream_core.dir/gen/cereader_tool.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/clear_save_data_screen.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/clear_save_data_screen.c.o: gen/clear_save_data_screen.c
+CMakeFiles/pfr_upstream_core.dir/gen/clear_save_data_screen.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_90) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/clear_save_data_screen.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/clear_save_data_screen.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/clear_save_data_screen.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/clear_save_data_screen.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/clear_save_data_screen.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/clear_save_data_screen.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/clear_save_data_screen.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/clear_save_data_screen.c > CMakeFiles/pfr_upstream_core.dir/gen/clear_save_data_screen.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/clear_save_data_screen.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/clear_save_data_screen.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/clear_save_data_screen.c -o CMakeFiles/pfr_upstream_core.dir/gen/clear_save_data_screen.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/coins.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/coins.c.o: gen/coins.c
+CMakeFiles/pfr_upstream_core.dir/gen/coins.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_91) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/coins.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/coins.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/coins.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/coins.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/coins.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/coins.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/coins.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/coins.c > CMakeFiles/pfr_upstream_core.dir/gen/coins.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/coins.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/coins.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/coins.c -o CMakeFiles/pfr_upstream_core.dir/gen/coins.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/coord_event_weather.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/coord_event_weather.c.o: gen/coord_event_weather.c
+CMakeFiles/pfr_upstream_core.dir/gen/coord_event_weather.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_92) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/coord_event_weather.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/coord_event_weather.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/coord_event_weather.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/coord_event_weather.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/coord_event_weather.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/coord_event_weather.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/coord_event_weather.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/coord_event_weather.c > CMakeFiles/pfr_upstream_core.dir/gen/coord_event_weather.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/coord_event_weather.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/coord_event_weather.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/coord_event_weather.c -o CMakeFiles/pfr_upstream_core.dir/gen/coord_event_weather.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/data.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/data.c.o: gen/data.c
+CMakeFiles/pfr_upstream_core.dir/gen/data.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_93) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/data.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/data.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/data.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/data.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/data.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/data.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/data.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/data.c > CMakeFiles/pfr_upstream_core.dir/gen/data.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/data.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/data.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/data.c -o CMakeFiles/pfr_upstream_core.dir/gen/data.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/decompress.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/decompress.c.o: gen/decompress.c
+CMakeFiles/pfr_upstream_core.dir/gen/decompress.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_94) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/decompress.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/decompress.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/decompress.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/decompress.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/decompress.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/decompress.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/decompress.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/decompress.c > CMakeFiles/pfr_upstream_core.dir/gen/decompress.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/decompress.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/decompress.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/decompress.c -o CMakeFiles/pfr_upstream_core.dir/gen/decompress.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/decoration.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/decoration.c.o: gen/decoration.c
+CMakeFiles/pfr_upstream_core.dir/gen/decoration.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_95) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/decoration.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/decoration.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/decoration.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/decoration.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/decoration.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/decoration.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/decoration.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/decoration.c > CMakeFiles/pfr_upstream_core.dir/gen/decoration.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/decoration.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/decoration.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/decoration.c -o CMakeFiles/pfr_upstream_core.dir/gen/decoration.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/dma3_manager.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/dma3_manager.c.o: gen/dma3_manager.c
+CMakeFiles/pfr_upstream_core.dir/gen/dma3_manager.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_96) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/dma3_manager.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/dma3_manager.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/dma3_manager.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/dma3_manager.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/dma3_manager.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/dma3_manager.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/dma3_manager.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/dma3_manager.c > CMakeFiles/pfr_upstream_core.dir/gen/dma3_manager.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/dma3_manager.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/dma3_manager.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/dma3_manager.c -o CMakeFiles/pfr_upstream_core.dir/gen/dma3_manager.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/dodrio_berry_picking_comm.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/dodrio_berry_picking_comm.c.o: gen/dodrio_berry_picking_comm.c
+CMakeFiles/pfr_upstream_core.dir/gen/dodrio_berry_picking_comm.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_97) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/dodrio_berry_picking_comm.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/dodrio_berry_picking_comm.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/dodrio_berry_picking_comm.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/dodrio_berry_picking_comm.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/dodrio_berry_picking_comm.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/dodrio_berry_picking_comm.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/dodrio_berry_picking_comm.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/dodrio_berry_picking_comm.c > CMakeFiles/pfr_upstream_core.dir/gen/dodrio_berry_picking_comm.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/dodrio_berry_picking_comm.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/dodrio_berry_picking_comm.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/dodrio_berry_picking_comm.c -o CMakeFiles/pfr_upstream_core.dir/gen/dodrio_berry_picking_comm.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/dynamic_placeholder_text_util.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/dynamic_placeholder_text_util.c.o: gen/dynamic_placeholder_text_util.c
+CMakeFiles/pfr_upstream_core.dir/gen/dynamic_placeholder_text_util.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_98) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/dynamic_placeholder_text_util.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/dynamic_placeholder_text_util.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/dynamic_placeholder_text_util.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/dynamic_placeholder_text_util.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/dynamic_placeholder_text_util.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/dynamic_placeholder_text_util.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/dynamic_placeholder_text_util.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/dynamic_placeholder_text_util.c > CMakeFiles/pfr_upstream_core.dir/gen/dynamic_placeholder_text_util.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/dynamic_placeholder_text_util.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/dynamic_placeholder_text_util.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/dynamic_placeholder_text_util.c -o CMakeFiles/pfr_upstream_core.dir/gen/dynamic_placeholder_text_util.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/ereader_helpers.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/ereader_helpers.c.o: gen/ereader_helpers.c
+CMakeFiles/pfr_upstream_core.dir/gen/ereader_helpers.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_99) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/ereader_helpers.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/ereader_helpers.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/ereader_helpers.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/ereader_helpers.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/ereader_helpers.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/ereader_helpers.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/ereader_helpers.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/ereader_helpers.c > CMakeFiles/pfr_upstream_core.dir/gen/ereader_helpers.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/ereader_helpers.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/ereader_helpers.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/ereader_helpers.c -o CMakeFiles/pfr_upstream_core.dir/gen/ereader_helpers.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/ereader_screen.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/ereader_screen.c.o: gen/ereader_screen.c
+CMakeFiles/pfr_upstream_core.dir/gen/ereader_screen.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_100) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/ereader_screen.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/ereader_screen.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/ereader_screen.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/ereader_screen.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/ereader_screen.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/ereader_screen.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/ereader_screen.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/ereader_screen.c > CMakeFiles/pfr_upstream_core.dir/gen/ereader_screen.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/ereader_screen.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/ereader_screen.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/ereader_screen.c -o CMakeFiles/pfr_upstream_core.dir/gen/ereader_screen.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/event_data.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/event_data.c.o: gen/event_data.c
+CMakeFiles/pfr_upstream_core.dir/gen/event_data.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_101) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/event_data.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/event_data.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/event_data.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/event_data.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/event_data.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/event_data.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/event_data.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/event_data.c > CMakeFiles/pfr_upstream_core.dir/gen/event_data.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/event_data.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/event_data.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/event_data.c -o CMakeFiles/pfr_upstream_core.dir/gen/event_data.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/event_object_lock.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/event_object_lock.c.o: gen/event_object_lock.c
+CMakeFiles/pfr_upstream_core.dir/gen/event_object_lock.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_102) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/event_object_lock.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/event_object_lock.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/event_object_lock.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/event_object_lock.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/event_object_lock.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/event_object_lock.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/event_object_lock.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/event_object_lock.c > CMakeFiles/pfr_upstream_core.dir/gen/event_object_lock.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/event_object_lock.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/event_object_lock.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/event_object_lock.c -o CMakeFiles/pfr_upstream_core.dir/gen/event_object_lock.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_camera.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/field_camera.c.o: gen/field_camera.c
+CMakeFiles/pfr_upstream_core.dir/gen/field_camera.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_103) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/field_camera.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/field_camera.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/field_camera.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/field_camera.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_camera.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_camera.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/field_camera.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_camera.c > CMakeFiles/pfr_upstream_core.dir/gen/field_camera.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_camera.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/field_camera.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_camera.c -o CMakeFiles/pfr_upstream_core.dir/gen/field_camera.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_control_avatar.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/field_control_avatar.c.o: gen/field_control_avatar.c
+CMakeFiles/pfr_upstream_core.dir/gen/field_control_avatar.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_104) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/field_control_avatar.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/field_control_avatar.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/field_control_avatar.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/field_control_avatar.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_control_avatar.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_control_avatar.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/field_control_avatar.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_control_avatar.c > CMakeFiles/pfr_upstream_core.dir/gen/field_control_avatar.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_control_avatar.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/field_control_avatar.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_control_avatar.c -o CMakeFiles/pfr_upstream_core.dir/gen/field_control_avatar.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_effect_helpers.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/field_effect_helpers.c.o: gen/field_effect_helpers.c
+CMakeFiles/pfr_upstream_core.dir/gen/field_effect_helpers.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_105) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/field_effect_helpers.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/field_effect_helpers.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/field_effect_helpers.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/field_effect_helpers.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_effect_helpers.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_effect_helpers.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/field_effect_helpers.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_effect_helpers.c > CMakeFiles/pfr_upstream_core.dir/gen/field_effect_helpers.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_effect_helpers.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/field_effect_helpers.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_effect_helpers.c -o CMakeFiles/pfr_upstream_core.dir/gen/field_effect_helpers.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_fadetransition.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/field_fadetransition.c.o: gen/field_fadetransition.c
+CMakeFiles/pfr_upstream_core.dir/gen/field_fadetransition.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_106) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/field_fadetransition.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/field_fadetransition.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/field_fadetransition.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/field_fadetransition.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_fadetransition.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_fadetransition.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/field_fadetransition.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_fadetransition.c > CMakeFiles/pfr_upstream_core.dir/gen/field_fadetransition.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_fadetransition.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/field_fadetransition.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_fadetransition.c -o CMakeFiles/pfr_upstream_core.dir/gen/field_fadetransition.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_message_box.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/field_message_box.c.o: gen/field_message_box.c
+CMakeFiles/pfr_upstream_core.dir/gen/field_message_box.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_107) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/field_message_box.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/field_message_box.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/field_message_box.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/field_message_box.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_message_box.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_message_box.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/field_message_box.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_message_box.c > CMakeFiles/pfr_upstream_core.dir/gen/field_message_box.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_message_box.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/field_message_box.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_message_box.c -o CMakeFiles/pfr_upstream_core.dir/gen/field_message_box.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_player_avatar.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/field_player_avatar.c.o: gen/field_player_avatar.c
+CMakeFiles/pfr_upstream_core.dir/gen/field_player_avatar.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_108) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/field_player_avatar.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/field_player_avatar.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/field_player_avatar.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/field_player_avatar.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_player_avatar.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_player_avatar.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/field_player_avatar.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_player_avatar.c > CMakeFiles/pfr_upstream_core.dir/gen/field_player_avatar.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_player_avatar.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/field_player_avatar.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_player_avatar.c -o CMakeFiles/pfr_upstream_core.dir/gen/field_player_avatar.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_poison.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/field_poison.c.o: gen/field_poison.c
+CMakeFiles/pfr_upstream_core.dir/gen/field_poison.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_109) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/field_poison.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/field_poison.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/field_poison.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/field_poison.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_poison.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_poison.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/field_poison.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_poison.c > CMakeFiles/pfr_upstream_core.dir/gen/field_poison.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_poison.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/field_poison.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_poison.c -o CMakeFiles/pfr_upstream_core.dir/gen/field_poison.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_screen_effect.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/field_screen_effect.c.o: gen/field_screen_effect.c
+CMakeFiles/pfr_upstream_core.dir/gen/field_screen_effect.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_110) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/field_screen_effect.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/field_screen_effect.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/field_screen_effect.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/field_screen_effect.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_screen_effect.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_screen_effect.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/field_screen_effect.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_screen_effect.c > CMakeFiles/pfr_upstream_core.dir/gen/field_screen_effect.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_screen_effect.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/field_screen_effect.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_screen_effect.c -o CMakeFiles/pfr_upstream_core.dir/gen/field_screen_effect.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_special_scene.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/field_special_scene.c.o: gen/field_special_scene.c
+CMakeFiles/pfr_upstream_core.dir/gen/field_special_scene.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_111) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/field_special_scene.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/field_special_scene.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/field_special_scene.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/field_special_scene.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_special_scene.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_special_scene.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/field_special_scene.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_special_scene.c > CMakeFiles/pfr_upstream_core.dir/gen/field_special_scene.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_special_scene.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/field_special_scene.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_special_scene.c -o CMakeFiles/pfr_upstream_core.dir/gen/field_special_scene.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_tasks.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/field_tasks.c.o: gen/field_tasks.c
+CMakeFiles/pfr_upstream_core.dir/gen/field_tasks.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_112) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/field_tasks.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/field_tasks.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/field_tasks.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/field_tasks.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_tasks.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_tasks.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/field_tasks.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_tasks.c > CMakeFiles/pfr_upstream_core.dir/gen/field_tasks.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_tasks.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/field_tasks.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_tasks.c -o CMakeFiles/pfr_upstream_core.dir/gen/field_tasks.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_weather_effects.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/field_weather_effects.c.o: gen/field_weather_effects.c
+CMakeFiles/pfr_upstream_core.dir/gen/field_weather_effects.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_113) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/field_weather_effects.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/field_weather_effects.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/field_weather_effects.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/field_weather_effects.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_weather_effects.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_weather_effects.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/field_weather_effects.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_weather_effects.c > CMakeFiles/pfr_upstream_core.dir/gen/field_weather_effects.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_weather_effects.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/field_weather_effects.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_weather_effects.c -o CMakeFiles/pfr_upstream_core.dir/gen/field_weather_effects.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_weather_util.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/field_weather_util.c.o: gen/field_weather_util.c
+CMakeFiles/pfr_upstream_core.dir/gen/field_weather_util.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_114) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/field_weather_util.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/field_weather_util.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/field_weather_util.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/field_weather_util.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_weather_util.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_weather_util.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/field_weather_util.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_weather_util.c > CMakeFiles/pfr_upstream_core.dir/gen/field_weather_util.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/field_weather_util.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/field_weather_util.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/field_weather_util.c -o CMakeFiles/pfr_upstream_core.dir/gen/field_weather_util.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/fieldmap.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/fieldmap.c.o: gen/fieldmap.c
+CMakeFiles/pfr_upstream_core.dir/gen/fieldmap.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_115) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/fieldmap.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/fieldmap.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/fieldmap.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/fieldmap.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/fieldmap.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/fieldmap.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/fieldmap.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/fieldmap.c > CMakeFiles/pfr_upstream_core.dir/gen/fieldmap.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/fieldmap.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/fieldmap.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/fieldmap.c -o CMakeFiles/pfr_upstream_core.dir/gen/fieldmap.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_berrytree.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_berrytree.c.o: gen/fldeff_berrytree.c
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_berrytree.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_116) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/fldeff_berrytree.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/fldeff_berrytree.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/fldeff_berrytree.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/fldeff_berrytree.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/fldeff_berrytree.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_berrytree.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/fldeff_berrytree.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/fldeff_berrytree.c > CMakeFiles/pfr_upstream_core.dir/gen/fldeff_berrytree.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_berrytree.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/fldeff_berrytree.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/fldeff_berrytree.c -o CMakeFiles/pfr_upstream_core.dir/gen/fldeff_berrytree.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_cut.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_cut.c.o: gen/fldeff_cut.c
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_cut.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_117) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/fldeff_cut.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/fldeff_cut.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/fldeff_cut.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/fldeff_cut.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/fldeff_cut.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_cut.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/fldeff_cut.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/fldeff_cut.c > CMakeFiles/pfr_upstream_core.dir/gen/fldeff_cut.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_cut.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/fldeff_cut.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/fldeff_cut.c -o CMakeFiles/pfr_upstream_core.dir/gen/fldeff_cut.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_dig.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_dig.c.o: gen/fldeff_dig.c
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_dig.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_118) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/fldeff_dig.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/fldeff_dig.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/fldeff_dig.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/fldeff_dig.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/fldeff_dig.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_dig.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/fldeff_dig.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/fldeff_dig.c > CMakeFiles/pfr_upstream_core.dir/gen/fldeff_dig.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_dig.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/fldeff_dig.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/fldeff_dig.c -o CMakeFiles/pfr_upstream_core.dir/gen/fldeff_dig.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_poison.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_poison.c.o: gen/fldeff_poison.c
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_poison.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_119) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/fldeff_poison.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/fldeff_poison.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/fldeff_poison.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/fldeff_poison.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/fldeff_poison.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_poison.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/fldeff_poison.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/fldeff_poison.c > CMakeFiles/pfr_upstream_core.dir/gen/fldeff_poison.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_poison.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/fldeff_poison.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/fldeff_poison.c -o CMakeFiles/pfr_upstream_core.dir/gen/fldeff_poison.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_rocksmash.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_rocksmash.c.o: gen/fldeff_rocksmash.c
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_rocksmash.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_120) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/fldeff_rocksmash.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/fldeff_rocksmash.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/fldeff_rocksmash.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/fldeff_rocksmash.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/fldeff_rocksmash.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_rocksmash.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/fldeff_rocksmash.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/fldeff_rocksmash.c > CMakeFiles/pfr_upstream_core.dir/gen/fldeff_rocksmash.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_rocksmash.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/fldeff_rocksmash.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/fldeff_rocksmash.c -o CMakeFiles/pfr_upstream_core.dir/gen/fldeff_rocksmash.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_softboiled.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_softboiled.c.o: gen/fldeff_softboiled.c
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_softboiled.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_121) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/fldeff_softboiled.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/fldeff_softboiled.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/fldeff_softboiled.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/fldeff_softboiled.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/fldeff_softboiled.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_softboiled.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/fldeff_softboiled.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/fldeff_softboiled.c > CMakeFiles/pfr_upstream_core.dir/gen/fldeff_softboiled.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_softboiled.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/fldeff_softboiled.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/fldeff_softboiled.c -o CMakeFiles/pfr_upstream_core.dir/gen/fldeff_softboiled.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_strength.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_strength.c.o: gen/fldeff_strength.c
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_strength.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_122) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/fldeff_strength.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/fldeff_strength.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/fldeff_strength.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/fldeff_strength.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/fldeff_strength.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_strength.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/fldeff_strength.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/fldeff_strength.c > CMakeFiles/pfr_upstream_core.dir/gen/fldeff_strength.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_strength.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/fldeff_strength.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/fldeff_strength.c -o CMakeFiles/pfr_upstream_core.dir/gen/fldeff_strength.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_sweetscent.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_sweetscent.c.o: gen/fldeff_sweetscent.c
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_sweetscent.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_123) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/fldeff_sweetscent.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/fldeff_sweetscent.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/fldeff_sweetscent.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/fldeff_sweetscent.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/fldeff_sweetscent.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_sweetscent.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/fldeff_sweetscent.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/fldeff_sweetscent.c > CMakeFiles/pfr_upstream_core.dir/gen/fldeff_sweetscent.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_sweetscent.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/fldeff_sweetscent.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/fldeff_sweetscent.c -o CMakeFiles/pfr_upstream_core.dir/gen/fldeff_sweetscent.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_teleport.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_teleport.c.o: gen/fldeff_teleport.c
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_teleport.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_124) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/fldeff_teleport.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/fldeff_teleport.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/fldeff_teleport.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/fldeff_teleport.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/fldeff_teleport.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_teleport.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/fldeff_teleport.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/fldeff_teleport.c > CMakeFiles/pfr_upstream_core.dir/gen/fldeff_teleport.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/fldeff_teleport.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/fldeff_teleport.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/fldeff_teleport.c -o CMakeFiles/pfr_upstream_core.dir/gen/fldeff_teleport.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/gpu_regs.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/gpu_regs.c.o: gen/gpu_regs.c
+CMakeFiles/pfr_upstream_core.dir/gen/gpu_regs.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_125) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/gpu_regs.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/gpu_regs.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/gpu_regs.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/gpu_regs.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/gpu_regs.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/gpu_regs.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/gpu_regs.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/gpu_regs.c > CMakeFiles/pfr_upstream_core.dir/gen/gpu_regs.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/gpu_regs.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/gpu_regs.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/gpu_regs.c -o CMakeFiles/pfr_upstream_core.dir/gen/gpu_regs.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/heal_location.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/heal_location.c.o: gen/heal_location.c
+CMakeFiles/pfr_upstream_core.dir/gen/heal_location.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_126) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/heal_location.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/heal_location.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/heal_location.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/heal_location.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/heal_location.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/heal_location.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/heal_location.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/heal_location.c > CMakeFiles/pfr_upstream_core.dir/gen/heal_location.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/heal_location.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/heal_location.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/heal_location.c -o CMakeFiles/pfr_upstream_core.dir/gen/heal_location.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/hof_pc.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/hof_pc.c.o: gen/hof_pc.c
+CMakeFiles/pfr_upstream_core.dir/gen/hof_pc.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_127) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/hof_pc.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/hof_pc.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/hof_pc.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/hof_pc.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/hof_pc.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/hof_pc.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/hof_pc.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/hof_pc.c > CMakeFiles/pfr_upstream_core.dir/gen/hof_pc.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/hof_pc.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/hof_pc.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/hof_pc.c -o CMakeFiles/pfr_upstream_core.dir/gen/hof_pc.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/image_processing_effects.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/image_processing_effects.c.o: gen/image_processing_effects.c
+CMakeFiles/pfr_upstream_core.dir/gen/image_processing_effects.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_128) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/image_processing_effects.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/image_processing_effects.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/image_processing_effects.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/image_processing_effects.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/image_processing_effects.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/image_processing_effects.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/image_processing_effects.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/image_processing_effects.c > CMakeFiles/pfr_upstream_core.dir/gen/image_processing_effects.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/image_processing_effects.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/image_processing_effects.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/image_processing_effects.c -o CMakeFiles/pfr_upstream_core.dir/gen/image_processing_effects.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/item.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/item.c.o: gen/item.c
+CMakeFiles/pfr_upstream_core.dir/gen/item.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_129) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/item.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/item.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/item.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/item.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/item.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/item.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/item.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/item.c > CMakeFiles/pfr_upstream_core.dir/gen/item.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/item.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/item.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/item.c -o CMakeFiles/pfr_upstream_core.dir/gen/item.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/item_menu_icons.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/item_menu_icons.c.o: gen/item_menu_icons.c
+CMakeFiles/pfr_upstream_core.dir/gen/item_menu_icons.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_130) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/item_menu_icons.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/item_menu_icons.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/item_menu_icons.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/item_menu_icons.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/item_menu_icons.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/item_menu_icons.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/item_menu_icons.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/item_menu_icons.c > CMakeFiles/pfr_upstream_core.dir/gen/item_menu_icons.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/item_menu_icons.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/item_menu_icons.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/item_menu_icons.c -o CMakeFiles/pfr_upstream_core.dir/gen/item_menu_icons.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/item_pc.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/item_pc.c.o: gen/item_pc.c
+CMakeFiles/pfr_upstream_core.dir/gen/item_pc.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_131) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/item_pc.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/item_pc.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/item_pc.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/item_pc.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/item_pc.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/item_pc.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/item_pc.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/item_pc.c > CMakeFiles/pfr_upstream_core.dir/gen/item_pc.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/item_pc.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/item_pc.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/item_pc.c -o CMakeFiles/pfr_upstream_core.dir/gen/item_pc.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/item_use.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/item_use.c.o: gen/item_use.c
+CMakeFiles/pfr_upstream_core.dir/gen/item_use.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_132) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/item_use.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/item_use.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/item_use.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/item_use.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/item_use.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/item_use.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/item_use.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/item_use.c > CMakeFiles/pfr_upstream_core.dir/gen/item_use.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/item_use.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/item_use.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/item_use.c -o CMakeFiles/pfr_upstream_core.dir/gen/item_use.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/keyboard_text.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/keyboard_text.c.o: gen/keyboard_text.c
+CMakeFiles/pfr_upstream_core.dir/gen/keyboard_text.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_133) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/keyboard_text.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/keyboard_text.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/keyboard_text.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/keyboard_text.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/keyboard_text.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/keyboard_text.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/keyboard_text.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/keyboard_text.c > CMakeFiles/pfr_upstream_core.dir/gen/keyboard_text.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/keyboard_text.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/keyboard_text.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/keyboard_text.c -o CMakeFiles/pfr_upstream_core.dir/gen/keyboard_text.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/librfu_intr.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/librfu_intr.c.o: gen/librfu_intr.c
+CMakeFiles/pfr_upstream_core.dir/gen/librfu_intr.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_134) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/librfu_intr.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/librfu_intr.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/librfu_intr.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/librfu_intr.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/librfu_intr.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/librfu_intr.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/librfu_intr.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/librfu_intr.c > CMakeFiles/pfr_upstream_core.dir/gen/librfu_intr.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/librfu_intr.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/librfu_intr.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/librfu_intr.c -o CMakeFiles/pfr_upstream_core.dir/gen/librfu_intr.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/librfu_rfu.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/librfu_rfu.c.o: gen/librfu_rfu.c
+CMakeFiles/pfr_upstream_core.dir/gen/librfu_rfu.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_135) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/librfu_rfu.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/librfu_rfu.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/librfu_rfu.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/librfu_rfu.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/librfu_rfu.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/librfu_rfu.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/librfu_rfu.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/librfu_rfu.c > CMakeFiles/pfr_upstream_core.dir/gen/librfu_rfu.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/librfu_rfu.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/librfu_rfu.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/librfu_rfu.c -o CMakeFiles/pfr_upstream_core.dir/gen/librfu_rfu.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/librfu_sio32id.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/librfu_sio32id.c.o: gen/librfu_sio32id.c
+CMakeFiles/pfr_upstream_core.dir/gen/librfu_sio32id.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_136) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/librfu_sio32id.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/librfu_sio32id.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/librfu_sio32id.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/librfu_sio32id.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/librfu_sio32id.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/librfu_sio32id.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/librfu_sio32id.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/librfu_sio32id.c > CMakeFiles/pfr_upstream_core.dir/gen/librfu_sio32id.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/librfu_sio32id.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/librfu_sio32id.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/librfu_sio32id.c -o CMakeFiles/pfr_upstream_core.dir/gen/librfu_sio32id.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/librfu_stwi.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/librfu_stwi.c.o: gen/librfu_stwi.c
+CMakeFiles/pfr_upstream_core.dir/gen/librfu_stwi.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_137) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/librfu_stwi.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/librfu_stwi.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/librfu_stwi.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/librfu_stwi.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/librfu_stwi.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/librfu_stwi.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/librfu_stwi.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/librfu_stwi.c > CMakeFiles/pfr_upstream_core.dir/gen/librfu_stwi.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/librfu_stwi.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/librfu_stwi.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/librfu_stwi.c -o CMakeFiles/pfr_upstream_core.dir/gen/librfu_stwi.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/link_rfu_2.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/link_rfu_2.c.o: gen/link_rfu_2.c
+CMakeFiles/pfr_upstream_core.dir/gen/link_rfu_2.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_138) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/link_rfu_2.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/link_rfu_2.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/link_rfu_2.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/link_rfu_2.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/link_rfu_2.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/link_rfu_2.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/link_rfu_2.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/link_rfu_2.c > CMakeFiles/pfr_upstream_core.dir/gen/link_rfu_2.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/link_rfu_2.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/link_rfu_2.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/link_rfu_2.c -o CMakeFiles/pfr_upstream_core.dir/gen/link_rfu_2.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/list_menu.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/list_menu.c.o: gen/list_menu.c
+CMakeFiles/pfr_upstream_core.dir/gen/list_menu.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_139) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/list_menu.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/list_menu.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/list_menu.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/list_menu.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/list_menu.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/list_menu.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/list_menu.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/list_menu.c > CMakeFiles/pfr_upstream_core.dir/gen/list_menu.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/list_menu.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/list_menu.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/list_menu.c -o CMakeFiles/pfr_upstream_core.dir/gen/list_menu.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/load_save.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/load_save.c.o: gen/load_save.c
+CMakeFiles/pfr_upstream_core.dir/gen/load_save.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_140) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/load_save.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/load_save.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/load_save.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/load_save.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/load_save.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/load_save.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/load_save.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/load_save.c > CMakeFiles/pfr_upstream_core.dir/gen/load_save.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/load_save.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/load_save.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/load_save.c -o CMakeFiles/pfr_upstream_core.dir/gen/load_save.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/m4a.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/m4a.c.o: gen/m4a.c
+CMakeFiles/pfr_upstream_core.dir/gen/m4a.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_141) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/m4a.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/m4a.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/m4a.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/m4a.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/m4a.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/m4a.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/m4a.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/m4a.c > CMakeFiles/pfr_upstream_core.dir/gen/m4a.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/m4a.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/m4a.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/m4a.c -o CMakeFiles/pfr_upstream_core.dir/gen/m4a.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/m4a_tables.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/m4a_tables.c.o: gen/m4a_tables.c
+CMakeFiles/pfr_upstream_core.dir/gen/m4a_tables.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_142) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/m4a_tables.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/m4a_tables.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/m4a_tables.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/m4a_tables.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/m4a_tables.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/m4a_tables.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/m4a_tables.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/m4a_tables.c > CMakeFiles/pfr_upstream_core.dir/gen/m4a_tables.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/m4a_tables.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/m4a_tables.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/m4a_tables.c -o CMakeFiles/pfr_upstream_core.dir/gen/m4a_tables.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/mail.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/mail.c.o: gen/mail.c
+CMakeFiles/pfr_upstream_core.dir/gen/mail.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_143) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/mail.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/mail.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/mail.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/mail.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/mail.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/mail.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/mail.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/mail.c > CMakeFiles/pfr_upstream_core.dir/gen/mail.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/mail.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/mail.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/mail.c -o CMakeFiles/pfr_upstream_core.dir/gen/mail.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/mail_data.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/mail_data.c.o: gen/mail_data.c
+CMakeFiles/pfr_upstream_core.dir/gen/mail_data.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_144) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/mail_data.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/mail_data.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/mail_data.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/mail_data.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/mail_data.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/mail_data.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/mail_data.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/mail_data.c > CMakeFiles/pfr_upstream_core.dir/gen/mail_data.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/mail_data.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/mail_data.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/mail_data.c -o CMakeFiles/pfr_upstream_core.dir/gen/mail_data.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/mailbox_pc.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/mailbox_pc.c.o: gen/mailbox_pc.c
+CMakeFiles/pfr_upstream_core.dir/gen/mailbox_pc.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_145) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/mailbox_pc.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/mailbox_pc.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/mailbox_pc.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/mailbox_pc.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/mailbox_pc.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/mailbox_pc.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/mailbox_pc.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/mailbox_pc.c > CMakeFiles/pfr_upstream_core.dir/gen/mailbox_pc.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/mailbox_pc.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/mailbox_pc.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/mailbox_pc.c -o CMakeFiles/pfr_upstream_core.dir/gen/mailbox_pc.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/main.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/main.c.o: gen/main.c
+CMakeFiles/pfr_upstream_core.dir/gen/main.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_146) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/main.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/main.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/main.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/main.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/main.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/main.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/main.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/main.c > CMakeFiles/pfr_upstream_core.dir/gen/main.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/main.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/main.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/main.c -o CMakeFiles/pfr_upstream_core.dir/gen/main.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/malloc.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/malloc.c.o: gen/malloc.c
+CMakeFiles/pfr_upstream_core.dir/gen/malloc.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_147) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/malloc.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/malloc.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/malloc.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/malloc.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/malloc.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/malloc.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/malloc.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/malloc.c > CMakeFiles/pfr_upstream_core.dir/gen/malloc.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/malloc.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/malloc.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/malloc.c -o CMakeFiles/pfr_upstream_core.dir/gen/malloc.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/map_name_popup.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/map_name_popup.c.o: gen/map_name_popup.c
+CMakeFiles/pfr_upstream_core.dir/gen/map_name_popup.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_148) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/map_name_popup.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/map_name_popup.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/map_name_popup.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/map_name_popup.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/map_name_popup.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/map_name_popup.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/map_name_popup.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/map_name_popup.c > CMakeFiles/pfr_upstream_core.dir/gen/map_name_popup.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/map_name_popup.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/map_name_popup.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/map_name_popup.c -o CMakeFiles/pfr_upstream_core.dir/gen/map_name_popup.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/math_util.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/math_util.c.o: gen/math_util.c
+CMakeFiles/pfr_upstream_core.dir/gen/math_util.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_149) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/math_util.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/math_util.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/math_util.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/math_util.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/math_util.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/math_util.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/math_util.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/math_util.c > CMakeFiles/pfr_upstream_core.dir/gen/math_util.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/math_util.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/math_util.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/math_util.c -o CMakeFiles/pfr_upstream_core.dir/gen/math_util.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/menu.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/menu.c.o: gen/menu.c
+CMakeFiles/pfr_upstream_core.dir/gen/menu.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_150) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/menu.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/menu.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/menu.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/menu.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/menu.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/menu.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/menu.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/menu.c > CMakeFiles/pfr_upstream_core.dir/gen/menu.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/menu.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/menu.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/menu.c -o CMakeFiles/pfr_upstream_core.dir/gen/menu.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/menu2.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/menu2.c.o: gen/menu2.c
+CMakeFiles/pfr_upstream_core.dir/gen/menu2.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_151) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/menu2.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/menu2.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/menu2.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/menu2.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/menu2.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/menu2.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/menu2.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/menu2.c > CMakeFiles/pfr_upstream_core.dir/gen/menu2.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/menu2.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/menu2.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/menu2.c -o CMakeFiles/pfr_upstream_core.dir/gen/menu2.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/menu_helpers.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/menu_helpers.c.o: gen/menu_helpers.c
+CMakeFiles/pfr_upstream_core.dir/gen/menu_helpers.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_152) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/menu_helpers.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/menu_helpers.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/menu_helpers.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/menu_helpers.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/menu_helpers.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/menu_helpers.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/menu_helpers.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/menu_helpers.c > CMakeFiles/pfr_upstream_core.dir/gen/menu_helpers.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/menu_helpers.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/menu_helpers.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/menu_helpers.c -o CMakeFiles/pfr_upstream_core.dir/gen/menu_helpers.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/metatile_behavior.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/metatile_behavior.c.o: gen/metatile_behavior.c
+CMakeFiles/pfr_upstream_core.dir/gen/metatile_behavior.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_153) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/metatile_behavior.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/metatile_behavior.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/metatile_behavior.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/metatile_behavior.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/metatile_behavior.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/metatile_behavior.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/metatile_behavior.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/metatile_behavior.c > CMakeFiles/pfr_upstream_core.dir/gen/metatile_behavior.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/metatile_behavior.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/metatile_behavior.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/metatile_behavior.c -o CMakeFiles/pfr_upstream_core.dir/gen/metatile_behavior.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/mini_printf.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/mini_printf.c.o: gen/mini_printf.c
+CMakeFiles/pfr_upstream_core.dir/gen/mini_printf.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_154) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/mini_printf.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/mini_printf.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/mini_printf.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/mini_printf.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/mini_printf.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/mini_printf.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/mini_printf.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/mini_printf.c > CMakeFiles/pfr_upstream_core.dir/gen/mini_printf.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/mini_printf.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/mini_printf.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/mini_printf.c -o CMakeFiles/pfr_upstream_core.dir/gen/mini_printf.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/money.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/money.c.o: gen/money.c
+CMakeFiles/pfr_upstream_core.dir/gen/money.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_155) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/money.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/money.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/money.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/money.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/money.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/money.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/money.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/money.c > CMakeFiles/pfr_upstream_core.dir/gen/money.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/money.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/money.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/money.c -o CMakeFiles/pfr_upstream_core.dir/gen/money.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/move_descriptions.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/move_descriptions.c.o: gen/move_descriptions.c
+CMakeFiles/pfr_upstream_core.dir/gen/move_descriptions.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_156) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/move_descriptions.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/move_descriptions.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/move_descriptions.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/move_descriptions.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/move_descriptions.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/move_descriptions.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/move_descriptions.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/move_descriptions.c > CMakeFiles/pfr_upstream_core.dir/gen/move_descriptions.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/move_descriptions.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/move_descriptions.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/move_descriptions.c -o CMakeFiles/pfr_upstream_core.dir/gen/move_descriptions.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_msg.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_msg.c.o: gen/mystery_event_msg.c
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_msg.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_157) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_msg.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_msg.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_msg.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_msg.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/mystery_event_msg.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_msg.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_msg.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/mystery_event_msg.c > CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_msg.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_msg.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_msg.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/mystery_event_msg.c -o CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_msg.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_script.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_script.c.o: gen/mystery_event_script.c
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_script.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_158) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_script.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_script.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_script.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_script.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/mystery_event_script.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_script.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_script.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/mystery_event_script.c > CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_script.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_script.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_script.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/mystery_event_script.c -o CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_script.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift.c.o: gen/mystery_gift.c
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_159) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/mystery_gift.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/mystery_gift.c > CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/mystery_gift.c -o CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_client.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_client.c.o: gen/mystery_gift_client.c
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_client.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_160) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_client.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_client.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_client.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_client.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/mystery_gift_client.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_client.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_client.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/mystery_gift_client.c > CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_client.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_client.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_client.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/mystery_gift_client.c -o CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_client.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_link.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_link.c.o: gen/mystery_gift_link.c
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_link.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_161) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_link.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_link.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_link.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_link.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/mystery_gift_link.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_link.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_link.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/mystery_gift_link.c > CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_link.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_link.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_link.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/mystery_gift_link.c -o CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_link.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_scripts.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_scripts.c.o: gen/mystery_gift_scripts.c
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_scripts.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_162) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_scripts.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_scripts.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_scripts.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_scripts.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/mystery_gift_scripts.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_scripts.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_scripts.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/mystery_gift_scripts.c > CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_scripts.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_scripts.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_scripts.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/mystery_gift_scripts.c -o CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_scripts.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_server.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_server.c.o: gen/mystery_gift_server.c
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_server.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_163) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_server.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_server.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_server.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_server.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/mystery_gift_server.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_server.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_server.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/mystery_gift_server.c > CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_server.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_server.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_server.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/mystery_gift_server.c -o CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_server.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/new_game.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/new_game.c.o: gen/new_game.c
+CMakeFiles/pfr_upstream_core.dir/gen/new_game.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_164) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/new_game.c.o"
+	/usr/bin/cc $(C_DEFINES) -DResetMenuAndMonGlobals=UpstreamResetMenuAndMonGlobals -DSav2_ClearSetDefault=UpstreamSav2_ClearSetDefault $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/new_game.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/new_game.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/new_game.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/new_game.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/new_game.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/new_game.c.i"
+	/usr/bin/cc $(C_DEFINES) -DResetMenuAndMonGlobals=UpstreamResetMenuAndMonGlobals -DSav2_ClearSetDefault=UpstreamSav2_ClearSetDefault $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/new_game.c > CMakeFiles/pfr_upstream_core.dir/gen/new_game.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/new_game.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/new_game.c.s"
+	/usr/bin/cc $(C_DEFINES) -DResetMenuAndMonGlobals=UpstreamResetMenuAndMonGlobals -DSav2_ClearSetDefault=UpstreamSav2_ClearSetDefault $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/new_game.c -o CMakeFiles/pfr_upstream_core.dir/gen/new_game.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/overworld.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/overworld.c.o: gen/overworld.c
+CMakeFiles/pfr_upstream_core.dir/gen/overworld.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_165) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/overworld.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/overworld.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/overworld.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/overworld.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/overworld.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/overworld.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/overworld.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/overworld.c > CMakeFiles/pfr_upstream_core.dir/gen/overworld.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/overworld.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/overworld.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/overworld.c -o CMakeFiles/pfr_upstream_core.dir/gen/overworld.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/palette.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/palette.c.o: gen/palette.c
+CMakeFiles/pfr_upstream_core.dir/gen/palette.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_166) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/palette.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/palette.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/palette.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/palette.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/palette.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/palette.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/palette.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/palette.c > CMakeFiles/pfr_upstream_core.dir/gen/palette.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/palette.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/palette.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/palette.c -o CMakeFiles/pfr_upstream_core.dir/gen/palette.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/palette_util.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/palette_util.c.o: gen/palette_util.c
+CMakeFiles/pfr_upstream_core.dir/gen/palette_util.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_167) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/palette_util.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/palette_util.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/palette_util.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/palette_util.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/palette_util.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/palette_util.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/palette_util.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/palette_util.c > CMakeFiles/pfr_upstream_core.dir/gen/palette_util.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/palette_util.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/palette_util.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/palette_util.c -o CMakeFiles/pfr_upstream_core.dir/gen/palette_util.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/party_menu_specials.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/party_menu_specials.c.o: gen/party_menu_specials.c
+CMakeFiles/pfr_upstream_core.dir/gen/party_menu_specials.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_168) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/party_menu_specials.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/party_menu_specials.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/party_menu_specials.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/party_menu_specials.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/party_menu_specials.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/party_menu_specials.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/party_menu_specials.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/party_menu_specials.c > CMakeFiles/pfr_upstream_core.dir/gen/party_menu_specials.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/party_menu_specials.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/party_menu_specials.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/party_menu_specials.c -o CMakeFiles/pfr_upstream_core.dir/gen/party_menu_specials.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/pc_screen_effect.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/pc_screen_effect.c.o: gen/pc_screen_effect.c
+CMakeFiles/pfr_upstream_core.dir/gen/pc_screen_effect.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_169) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/pc_screen_effect.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/pc_screen_effect.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/pc_screen_effect.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/pc_screen_effect.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/pc_screen_effect.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/pc_screen_effect.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/pc_screen_effect.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/pc_screen_effect.c > CMakeFiles/pfr_upstream_core.dir/gen/pc_screen_effect.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/pc_screen_effect.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/pc_screen_effect.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/pc_screen_effect.c -o CMakeFiles/pfr_upstream_core.dir/gen/pc_screen_effect.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/play_time.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/play_time.c.o: gen/play_time.c
+CMakeFiles/pfr_upstream_core.dir/gen/play_time.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_170) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/play_time.c.o"
+	/usr/bin/cc $(C_DEFINES) -DPlayTimeCounter_Update=UpstreamPlayTimeCounter_Update $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/play_time.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/play_time.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/play_time.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/play_time.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/play_time.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/play_time.c.i"
+	/usr/bin/cc $(C_DEFINES) -DPlayTimeCounter_Update=UpstreamPlayTimeCounter_Update $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/play_time.c > CMakeFiles/pfr_upstream_core.dir/gen/play_time.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/play_time.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/play_time.c.s"
+	/usr/bin/cc $(C_DEFINES) -DPlayTimeCounter_Update=UpstreamPlayTimeCounter_Update $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/play_time.c -o CMakeFiles/pfr_upstream_core.dir/gen/play_time.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/player_pc.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/player_pc.c.o: gen/player_pc.c
+CMakeFiles/pfr_upstream_core.dir/gen/player_pc.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_171) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/player_pc.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/player_pc.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/player_pc.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/player_pc.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/player_pc.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/player_pc.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/player_pc.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/player_pc.c > CMakeFiles/pfr_upstream_core.dir/gen/player_pc.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/player_pc.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/player_pc.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/player_pc.c -o CMakeFiles/pfr_upstream_core.dir/gen/player_pc.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/pokeball.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/pokeball.c.o: gen/pokeball.c
+CMakeFiles/pfr_upstream_core.dir/gen/pokeball.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_172) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/pokeball.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/pokeball.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/pokeball.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/pokeball.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/pokeball.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/pokeball.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/pokeball.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/pokeball.c > CMakeFiles/pfr_upstream_core.dir/gen/pokeball.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/pokeball.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/pokeball.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/pokeball.c -o CMakeFiles/pfr_upstream_core.dir/gen/pokeball.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/pokedex.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/pokedex.c.o: gen/pokedex.c
+CMakeFiles/pfr_upstream_core.dir/gen/pokedex.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_173) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/pokedex.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/pokedex.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/pokedex.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/pokedex.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/pokedex.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/pokedex.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/pokedex.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/pokedex.c > CMakeFiles/pfr_upstream_core.dir/gen/pokedex.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/pokedex.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/pokedex.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/pokedex.c -o CMakeFiles/pfr_upstream_core.dir/gen/pokedex.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/pokemon_size_record.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/pokemon_size_record.c.o: gen/pokemon_size_record.c
+CMakeFiles/pfr_upstream_core.dir/gen/pokemon_size_record.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_174) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/pokemon_size_record.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/pokemon_size_record.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/pokemon_size_record.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/pokemon_size_record.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/pokemon_size_record.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/pokemon_size_record.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/pokemon_size_record.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/pokemon_size_record.c > CMakeFiles/pfr_upstream_core.dir/gen/pokemon_size_record.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/pokemon_size_record.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/pokemon_size_record.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/pokemon_size_record.c -o CMakeFiles/pfr_upstream_core.dir/gen/pokemon_size_record.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/pokemon_special_anim.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/pokemon_special_anim.c.o: gen/pokemon_special_anim.c
+CMakeFiles/pfr_upstream_core.dir/gen/pokemon_special_anim.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_175) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/pokemon_special_anim.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/pokemon_special_anim.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/pokemon_special_anim.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/pokemon_special_anim.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/pokemon_special_anim.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/pokemon_special_anim.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/pokemon_special_anim.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/pokemon_special_anim.c > CMakeFiles/pfr_upstream_core.dir/gen/pokemon_special_anim.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/pokemon_special_anim.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/pokemon_special_anim.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/pokemon_special_anim.c -o CMakeFiles/pfr_upstream_core.dir/gen/pokemon_special_anim.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/pokemon_storage_system.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/pokemon_storage_system.c.o: gen/pokemon_storage_system.c
+CMakeFiles/pfr_upstream_core.dir/gen/pokemon_storage_system.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_176) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/pokemon_storage_system.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/pokemon_storage_system.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/pokemon_storage_system.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/pokemon_storage_system.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/pokemon_storage_system.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/pokemon_storage_system.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/pokemon_storage_system.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/pokemon_storage_system.c > CMakeFiles/pfr_upstream_core.dir/gen/pokemon_storage_system.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/pokemon_storage_system.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/pokemon_storage_system.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/pokemon_storage_system.c -o CMakeFiles/pfr_upstream_core.dir/gen/pokemon_storage_system.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/post_battle_event_funcs.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/post_battle_event_funcs.c.o: gen/post_battle_event_funcs.c
+CMakeFiles/pfr_upstream_core.dir/gen/post_battle_event_funcs.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_177) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/post_battle_event_funcs.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/post_battle_event_funcs.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/post_battle_event_funcs.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/post_battle_event_funcs.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/post_battle_event_funcs.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/post_battle_event_funcs.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/post_battle_event_funcs.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/post_battle_event_funcs.c > CMakeFiles/pfr_upstream_core.dir/gen/post_battle_event_funcs.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/post_battle_event_funcs.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/post_battle_event_funcs.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/post_battle_event_funcs.c -o CMakeFiles/pfr_upstream_core.dir/gen/post_battle_event_funcs.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/prof_pc.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/prof_pc.c.o: gen/prof_pc.c
+CMakeFiles/pfr_upstream_core.dir/gen/prof_pc.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_178) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/prof_pc.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/prof_pc.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/prof_pc.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/prof_pc.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/prof_pc.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/prof_pc.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/prof_pc.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/prof_pc.c > CMakeFiles/pfr_upstream_core.dir/gen/prof_pc.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/prof_pc.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/prof_pc.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/prof_pc.c -o CMakeFiles/pfr_upstream_core.dir/gen/prof_pc.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/quest_log_battle.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/quest_log_battle.c.o: gen/quest_log_battle.c
+CMakeFiles/pfr_upstream_core.dir/gen/quest_log_battle.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_179) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/quest_log_battle.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/quest_log_battle.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/quest_log_battle.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/quest_log_battle.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/quest_log_battle.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/quest_log_battle.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/quest_log_battle.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/quest_log_battle.c > CMakeFiles/pfr_upstream_core.dir/gen/quest_log_battle.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/quest_log_battle.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/quest_log_battle.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/quest_log_battle.c -o CMakeFiles/pfr_upstream_core.dir/gen/quest_log_battle.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/quest_log_events.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/quest_log_events.c.o: gen/quest_log_events.c
+CMakeFiles/pfr_upstream_core.dir/gen/quest_log_events.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_180) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/quest_log_events.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/quest_log_events.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/quest_log_events.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/quest_log_events.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/quest_log_events.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/quest_log_events.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/quest_log_events.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/quest_log_events.c > CMakeFiles/pfr_upstream_core.dir/gen/quest_log_events.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/quest_log_events.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/quest_log_events.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/quest_log_events.c -o CMakeFiles/pfr_upstream_core.dir/gen/quest_log_events.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/quest_log_objects.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/quest_log_objects.c.o: gen/quest_log_objects.c
+CMakeFiles/pfr_upstream_core.dir/gen/quest_log_objects.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_181) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/quest_log_objects.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/quest_log_objects.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/quest_log_objects.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/quest_log_objects.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/quest_log_objects.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/quest_log_objects.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/quest_log_objects.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/quest_log_objects.c > CMakeFiles/pfr_upstream_core.dir/gen/quest_log_objects.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/quest_log_objects.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/quest_log_objects.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/quest_log_objects.c -o CMakeFiles/pfr_upstream_core.dir/gen/quest_log_objects.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/quest_log_player.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/quest_log_player.c.o: gen/quest_log_player.c
+CMakeFiles/pfr_upstream_core.dir/gen/quest_log_player.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_182) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/quest_log_player.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/quest_log_player.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/quest_log_player.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/quest_log_player.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/quest_log_player.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/quest_log_player.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/quest_log_player.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/quest_log_player.c > CMakeFiles/pfr_upstream_core.dir/gen/quest_log_player.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/quest_log_player.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/quest_log_player.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/quest_log_player.c -o CMakeFiles/pfr_upstream_core.dir/gen/quest_log_player.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/random.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/random.c.o: gen/random.c
+CMakeFiles/pfr_upstream_core.dir/gen/random.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_183) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/random.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/random.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/random.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/random.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/random.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/random.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/random.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/random.c > CMakeFiles/pfr_upstream_core.dir/gen/random.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/random.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/random.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/random.c -o CMakeFiles/pfr_upstream_core.dir/gen/random.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/renewable_hidden_items.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/renewable_hidden_items.c.o: gen/renewable_hidden_items.c
+CMakeFiles/pfr_upstream_core.dir/gen/renewable_hidden_items.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_184) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/renewable_hidden_items.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/renewable_hidden_items.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/renewable_hidden_items.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/renewable_hidden_items.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/renewable_hidden_items.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/renewable_hidden_items.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/renewable_hidden_items.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/renewable_hidden_items.c > CMakeFiles/pfr_upstream_core.dir/gen/renewable_hidden_items.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/renewable_hidden_items.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/renewable_hidden_items.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/renewable_hidden_items.c -o CMakeFiles/pfr_upstream_core.dir/gen/renewable_hidden_items.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/reset_save_heap.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/reset_save_heap.c.o: gen/reset_save_heap.c
+CMakeFiles/pfr_upstream_core.dir/gen/reset_save_heap.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_185) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/reset_save_heap.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/reset_save_heap.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/reset_save_heap.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/reset_save_heap.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/reset_save_heap.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/reset_save_heap.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/reset_save_heap.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/reset_save_heap.c > CMakeFiles/pfr_upstream_core.dir/gen/reset_save_heap.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/reset_save_heap.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/reset_save_heap.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/reset_save_heap.c -o CMakeFiles/pfr_upstream_core.dir/gen/reset_save_heap.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/reshow_battle_screen.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/reshow_battle_screen.c.o: gen/reshow_battle_screen.c
+CMakeFiles/pfr_upstream_core.dir/gen/reshow_battle_screen.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_186) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/reshow_battle_screen.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/reshow_battle_screen.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/reshow_battle_screen.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/reshow_battle_screen.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/reshow_battle_screen.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/reshow_battle_screen.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/reshow_battle_screen.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/reshow_battle_screen.c > CMakeFiles/pfr_upstream_core.dir/gen/reshow_battle_screen.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/reshow_battle_screen.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/reshow_battle_screen.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/reshow_battle_screen.c -o CMakeFiles/pfr_upstream_core.dir/gen/reshow_battle_screen.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/roamer.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/roamer.c.o: gen/roamer.c
+CMakeFiles/pfr_upstream_core.dir/gen/roamer.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_187) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/roamer.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/roamer.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/roamer.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/roamer.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/roamer.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/roamer.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/roamer.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/roamer.c > CMakeFiles/pfr_upstream_core.dir/gen/roamer.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/roamer.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/roamer.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/roamer.c -o CMakeFiles/pfr_upstream_core.dir/gen/roamer.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/rom_header_gf.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/rom_header_gf.c.o: gen/rom_header_gf.c
+CMakeFiles/pfr_upstream_core.dir/gen/rom_header_gf.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_188) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/rom_header_gf.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/rom_header_gf.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/rom_header_gf.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/rom_header_gf.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/rom_header_gf.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/rom_header_gf.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/rom_header_gf.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/rom_header_gf.c > CMakeFiles/pfr_upstream_core.dir/gen/rom_header_gf.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/rom_header_gf.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/rom_header_gf.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/rom_header_gf.c -o CMakeFiles/pfr_upstream_core.dir/gen/rom_header_gf.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/safari_zone.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/safari_zone.c.o: gen/safari_zone.c
+CMakeFiles/pfr_upstream_core.dir/gen/safari_zone.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_189) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/safari_zone.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/safari_zone.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/safari_zone.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/safari_zone.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/safari_zone.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/safari_zone.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/safari_zone.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/safari_zone.c > CMakeFiles/pfr_upstream_core.dir/gen/safari_zone.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/safari_zone.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/safari_zone.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/safari_zone.c -o CMakeFiles/pfr_upstream_core.dir/gen/safari_zone.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/save.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/save.c.o: gen/save.c
+CMakeFiles/pfr_upstream_core.dir/gen/save.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_190) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/save.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/save.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/save.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/save.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/save.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/save.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/save.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/save.c > CMakeFiles/pfr_upstream_core.dir/gen/save.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/save.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/save.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/save.c -o CMakeFiles/pfr_upstream_core.dir/gen/save.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/save_location.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/save_location.c.o: gen/save_location.c
+CMakeFiles/pfr_upstream_core.dir/gen/save_location.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_191) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/save_location.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/save_location.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/save_location.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/save_location.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/save_location.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/save_location.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/save_location.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/save_location.c > CMakeFiles/pfr_upstream_core.dir/gen/save_location.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/save_location.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/save_location.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/save_location.c -o CMakeFiles/pfr_upstream_core.dir/gen/save_location.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/save_menu_util.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/save_menu_util.c.o: gen/save_menu_util.c
+CMakeFiles/pfr_upstream_core.dir/gen/save_menu_util.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_192) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/save_menu_util.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/save_menu_util.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/save_menu_util.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/save_menu_util.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/save_menu_util.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/save_menu_util.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/save_menu_util.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/save_menu_util.c > CMakeFiles/pfr_upstream_core.dir/gen/save_menu_util.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/save_menu_util.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/save_menu_util.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/save_menu_util.c -o CMakeFiles/pfr_upstream_core.dir/gen/save_menu_util.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/scanline_effect.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/scanline_effect.c.o: gen/scanline_effect.c
+CMakeFiles/pfr_upstream_core.dir/gen/scanline_effect.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_193) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/scanline_effect.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/scanline_effect.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/scanline_effect.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/scanline_effect.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/scanline_effect.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/scanline_effect.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/scanline_effect.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/scanline_effect.c > CMakeFiles/pfr_upstream_core.dir/gen/scanline_effect.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/scanline_effect.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/scanline_effect.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/scanline_effect.c -o CMakeFiles/pfr_upstream_core.dir/gen/scanline_effect.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/scrcmd.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/scrcmd.c.o: gen/scrcmd.c
+CMakeFiles/pfr_upstream_core.dir/gen/scrcmd.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_194) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/scrcmd.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/scrcmd.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/scrcmd.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/scrcmd.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/scrcmd.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/scrcmd.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/scrcmd.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/scrcmd.c > CMakeFiles/pfr_upstream_core.dir/gen/scrcmd.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/scrcmd.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/scrcmd.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/scrcmd.c -o CMakeFiles/pfr_upstream_core.dir/gen/scrcmd.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/script.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/script.c.o: gen/script.c
+CMakeFiles/pfr_upstream_core.dir/gen/script.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_195) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/script.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/script.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/script.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/script.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/script.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/script.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/script.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/script.c > CMakeFiles/pfr_upstream_core.dir/gen/script.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/script.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/script.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/script.c -o CMakeFiles/pfr_upstream_core.dir/gen/script.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/script_movement.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/script_movement.c.o: gen/script_movement.c
+CMakeFiles/pfr_upstream_core.dir/gen/script_movement.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_196) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/script_movement.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/script_movement.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/script_movement.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/script_movement.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/script_movement.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/script_movement.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/script_movement.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/script_movement.c > CMakeFiles/pfr_upstream_core.dir/gen/script_movement.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/script_movement.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/script_movement.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/script_movement.c -o CMakeFiles/pfr_upstream_core.dir/gen/script_movement.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/script_pokemon_util.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/script_pokemon_util.c.o: gen/script_pokemon_util.c
+CMakeFiles/pfr_upstream_core.dir/gen/script_pokemon_util.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_197) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/script_pokemon_util.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/script_pokemon_util.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/script_pokemon_util.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/script_pokemon_util.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/script_pokemon_util.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/script_pokemon_util.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/script_pokemon_util.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/script_pokemon_util.c > CMakeFiles/pfr_upstream_core.dir/gen/script_pokemon_util.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/script_pokemon_util.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/script_pokemon_util.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/script_pokemon_util.c -o CMakeFiles/pfr_upstream_core.dir/gen/script_pokemon_util.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/shop.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/shop.c.o: gen/shop.c
+CMakeFiles/pfr_upstream_core.dir/gen/shop.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_198) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/shop.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/shop.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/shop.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/shop.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/shop.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/shop.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/shop.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/shop.c > CMakeFiles/pfr_upstream_core.dir/gen/shop.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/shop.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/shop.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/shop.c -o CMakeFiles/pfr_upstream_core.dir/gen/shop.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/sound.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/sound.c.o: gen/sound.c
+CMakeFiles/pfr_upstream_core.dir/gen/sound.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_199) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/sound.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/sound.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/sound.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/sound.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/sound.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/sound.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/sound.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/sound.c > CMakeFiles/pfr_upstream_core.dir/gen/sound.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/sound.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/sound.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/sound.c -o CMakeFiles/pfr_upstream_core.dir/gen/sound.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/special_field_anim.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/special_field_anim.c.o: gen/special_field_anim.c
+CMakeFiles/pfr_upstream_core.dir/gen/special_field_anim.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_200) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/special_field_anim.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/special_field_anim.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/special_field_anim.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/special_field_anim.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/special_field_anim.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/special_field_anim.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/special_field_anim.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/special_field_anim.c > CMakeFiles/pfr_upstream_core.dir/gen/special_field_anim.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/special_field_anim.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/special_field_anim.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/special_field_anim.c -o CMakeFiles/pfr_upstream_core.dir/gen/special_field_anim.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/sprite.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/sprite.c.o: gen/sprite.c
+CMakeFiles/pfr_upstream_core.dir/gen/sprite.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_201) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/sprite.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/sprite.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/sprite.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/sprite.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/sprite.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/sprite.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/sprite.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/sprite.c > CMakeFiles/pfr_upstream_core.dir/gen/sprite.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/sprite.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/sprite.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/sprite.c -o CMakeFiles/pfr_upstream_core.dir/gen/sprite.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/start_menu.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/start_menu.c.o: gen/start_menu.c
+CMakeFiles/pfr_upstream_core.dir/gen/start_menu.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_202) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/start_menu.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/start_menu.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/start_menu.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/start_menu.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/start_menu.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/start_menu.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/start_menu.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/start_menu.c > CMakeFiles/pfr_upstream_core.dir/gen/start_menu.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/start_menu.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/start_menu.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/start_menu.c -o CMakeFiles/pfr_upstream_core.dir/gen/start_menu.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/string_util.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/string_util.c.o: gen/string_util.c
+CMakeFiles/pfr_upstream_core.dir/gen/string_util.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_203) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/string_util.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/string_util.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/string_util.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/string_util.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/string_util.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/string_util.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/string_util.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/string_util.c > CMakeFiles/pfr_upstream_core.dir/gen/string_util.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/string_util.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/string_util.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/string_util.c -o CMakeFiles/pfr_upstream_core.dir/gen/string_util.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/strings.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/strings.c.o: gen/strings.c
+CMakeFiles/pfr_upstream_core.dir/gen/strings.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_204) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/strings.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/strings.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/strings.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/strings.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/strings.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/strings.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/strings.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/strings.c > CMakeFiles/pfr_upstream_core.dir/gen/strings.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/strings.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/strings.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/strings.c -o CMakeFiles/pfr_upstream_core.dir/gen/strings.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/task.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/task.c.o: gen/task.c
+CMakeFiles/pfr_upstream_core.dir/gen/task.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_205) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/task.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/task.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/task.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/task.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/task.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/task.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/task.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/task.c > CMakeFiles/pfr_upstream_core.dir/gen/task.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/task.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/task.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/task.c -o CMakeFiles/pfr_upstream_core.dir/gen/task.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/teachy_tv.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/teachy_tv.c.o: gen/teachy_tv.c
+CMakeFiles/pfr_upstream_core.dir/gen/teachy_tv.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_206) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/teachy_tv.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/teachy_tv.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/teachy_tv.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/teachy_tv.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/teachy_tv.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/teachy_tv.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/teachy_tv.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/teachy_tv.c > CMakeFiles/pfr_upstream_core.dir/gen/teachy_tv.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/teachy_tv.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/teachy_tv.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/teachy_tv.c -o CMakeFiles/pfr_upstream_core.dir/gen/teachy_tv.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/text_printer.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/text_printer.c.o: gen/text_printer.c
+CMakeFiles/pfr_upstream_core.dir/gen/text_printer.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_207) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/text_printer.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/text_printer.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/text_printer.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/text_printer.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/text_printer.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/text_printer.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/text_printer.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/text_printer.c > CMakeFiles/pfr_upstream_core.dir/gen/text_printer.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/text_printer.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/text_printer.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/text_printer.c -o CMakeFiles/pfr_upstream_core.dir/gen/text_printer.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/text_window.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/text_window.c.o: gen/text_window.c
+CMakeFiles/pfr_upstream_core.dir/gen/text_window.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_208) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/text_window.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/text_window.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/text_window.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/text_window.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/text_window.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/text_window.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/text_window.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/text_window.c > CMakeFiles/pfr_upstream_core.dir/gen/text_window.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/text_window.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/text_window.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/text_window.c -o CMakeFiles/pfr_upstream_core.dir/gen/text_window.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/tilemap_util.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/tilemap_util.c.o: gen/tilemap_util.c
+CMakeFiles/pfr_upstream_core.dir/gen/tilemap_util.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_209) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/tilemap_util.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/tilemap_util.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/tilemap_util.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/tilemap_util.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/tilemap_util.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/tilemap_util.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/tilemap_util.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/tilemap_util.c > CMakeFiles/pfr_upstream_core.dir/gen/tilemap_util.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/tilemap_util.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/tilemap_util.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/tilemap_util.c -o CMakeFiles/pfr_upstream_core.dir/gen/tilemap_util.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/tm_case.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/tm_case.c.o: gen/tm_case.c
+CMakeFiles/pfr_upstream_core.dir/gen/tm_case.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_210) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/tm_case.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/tm_case.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/tm_case.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/tm_case.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/tm_case.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/tm_case.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/tm_case.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/tm_case.c > CMakeFiles/pfr_upstream_core.dir/gen/tm_case.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/tm_case.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/tm_case.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/tm_case.c -o CMakeFiles/pfr_upstream_core.dir/gen/tm_case.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/trainer_fan_club.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/trainer_fan_club.c.o: gen/trainer_fan_club.c
+CMakeFiles/pfr_upstream_core.dir/gen/trainer_fan_club.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_211) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/trainer_fan_club.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/trainer_fan_club.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/trainer_fan_club.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/trainer_fan_club.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/trainer_fan_club.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/trainer_fan_club.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/trainer_fan_club.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/trainer_fan_club.c > CMakeFiles/pfr_upstream_core.dir/gen/trainer_fan_club.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/trainer_fan_club.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/trainer_fan_club.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/trainer_fan_club.c -o CMakeFiles/pfr_upstream_core.dir/gen/trainer_fan_club.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/trainer_pokemon_sprites.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/trainer_pokemon_sprites.c.o: gen/trainer_pokemon_sprites.c
+CMakeFiles/pfr_upstream_core.dir/gen/trainer_pokemon_sprites.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_212) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/trainer_pokemon_sprites.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/trainer_pokemon_sprites.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/trainer_pokemon_sprites.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/trainer_pokemon_sprites.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/trainer_pokemon_sprites.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/trainer_pokemon_sprites.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/trainer_pokemon_sprites.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/trainer_pokemon_sprites.c > CMakeFiles/pfr_upstream_core.dir/gen/trainer_pokemon_sprites.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/trainer_pokemon_sprites.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/trainer_pokemon_sprites.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/trainer_pokemon_sprites.c -o CMakeFiles/pfr_upstream_core.dir/gen/trainer_pokemon_sprites.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower.c.o: gen/trainer_tower.c
+CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_213) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/trainer_tower.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/trainer_tower.c > CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/trainer_tower.c -o CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower_sets.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower_sets.c.o: gen/trainer_tower_sets.c
+CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower_sets.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_214) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower_sets.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower_sets.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower_sets.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower_sets.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/trainer_tower_sets.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower_sets.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower_sets.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/trainer_tower_sets.c > CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower_sets.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower_sets.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower_sets.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/trainer_tower_sets.c -o CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower_sets.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/trig.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/trig.c.o: gen/trig.c
+CMakeFiles/pfr_upstream_core.dir/gen/trig.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_215) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/trig.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/trig.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/trig.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/trig.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/trig.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/trig.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/trig.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/trig.c > CMakeFiles/pfr_upstream_core.dir/gen/trig.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/trig.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/trig.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/trig.c -o CMakeFiles/pfr_upstream_core.dir/gen/trig.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/union_room.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/union_room.c.o: gen/union_room.c
+CMakeFiles/pfr_upstream_core.dir/gen/union_room.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_216) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/union_room.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/union_room.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/union_room.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/union_room.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/union_room.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/union_room.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/union_room.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/union_room.c > CMakeFiles/pfr_upstream_core.dir/gen/union_room.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/union_room.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/union_room.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/union_room.c -o CMakeFiles/pfr_upstream_core.dir/gen/union_room.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/union_room_battle.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/union_room_battle.c.o: gen/union_room_battle.c
+CMakeFiles/pfr_upstream_core.dir/gen/union_room_battle.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_217) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/union_room_battle.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/union_room_battle.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/union_room_battle.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/union_room_battle.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/union_room_battle.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/union_room_battle.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/union_room_battle.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/union_room_battle.c > CMakeFiles/pfr_upstream_core.dir/gen/union_room_battle.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/union_room_battle.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/union_room_battle.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/union_room_battle.c -o CMakeFiles/pfr_upstream_core.dir/gen/union_room_battle.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/union_room_chat.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/union_room_chat.c.o: gen/union_room_chat.c
+CMakeFiles/pfr_upstream_core.dir/gen/union_room_chat.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_218) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/union_room_chat.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/union_room_chat.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/union_room_chat.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/union_room_chat.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/union_room_chat.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/union_room_chat.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/union_room_chat.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/union_room_chat.c > CMakeFiles/pfr_upstream_core.dir/gen/union_room_chat.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/union_room_chat.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/union_room_chat.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/union_room_chat.c -o CMakeFiles/pfr_upstream_core.dir/gen/union_room_chat.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/union_room_message.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/union_room_message.c.o: gen/union_room_message.c
+CMakeFiles/pfr_upstream_core.dir/gen/union_room_message.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_219) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/union_room_message.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/union_room_message.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/union_room_message.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/union_room_message.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/union_room_message.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/union_room_message.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/union_room_message.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/union_room_message.c > CMakeFiles/pfr_upstream_core.dir/gen/union_room_message.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/union_room_message.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/union_room_message.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/union_room_message.c -o CMakeFiles/pfr_upstream_core.dir/gen/union_room_message.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/union_room_player_avatar.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/union_room_player_avatar.c.o: gen/union_room_player_avatar.c
+CMakeFiles/pfr_upstream_core.dir/gen/union_room_player_avatar.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_220) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/union_room_player_avatar.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/union_room_player_avatar.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/union_room_player_avatar.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/union_room_player_avatar.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/union_room_player_avatar.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/union_room_player_avatar.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/union_room_player_avatar.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/union_room_player_avatar.c > CMakeFiles/pfr_upstream_core.dir/gen/union_room_player_avatar.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/union_room_player_avatar.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/union_room_player_avatar.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/union_room_player_avatar.c -o CMakeFiles/pfr_upstream_core.dir/gen/union_room_player_avatar.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/vs_seeker.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/vs_seeker.c.o: gen/vs_seeker.c
+CMakeFiles/pfr_upstream_core.dir/gen/vs_seeker.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_221) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/vs_seeker.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/vs_seeker.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/vs_seeker.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/vs_seeker.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/vs_seeker.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/vs_seeker.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/vs_seeker.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/vs_seeker.c > CMakeFiles/pfr_upstream_core.dir/gen/vs_seeker.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/vs_seeker.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/vs_seeker.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/vs_seeker.c -o CMakeFiles/pfr_upstream_core.dir/gen/vs_seeker.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/wild_encounter.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/wild_encounter.c.o: gen/wild_encounter.c
+CMakeFiles/pfr_upstream_core.dir/gen/wild_encounter.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_222) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/wild_encounter.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/wild_encounter.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/wild_encounter.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/wild_encounter.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/wild_encounter.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/wild_encounter.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/wild_encounter.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/wild_encounter.c > CMakeFiles/pfr_upstream_core.dir/gen/wild_encounter.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/wild_encounter.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/wild_encounter.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/wild_encounter.c -o CMakeFiles/pfr_upstream_core.dir/gen/wild_encounter.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/wild_pokemon_area.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/wild_pokemon_area.c.o: gen/wild_pokemon_area.c
+CMakeFiles/pfr_upstream_core.dir/gen/wild_pokemon_area.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_223) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/wild_pokemon_area.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/wild_pokemon_area.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/wild_pokemon_area.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/wild_pokemon_area.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/wild_pokemon_area.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/wild_pokemon_area.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/wild_pokemon_area.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/wild_pokemon_area.c > CMakeFiles/pfr_upstream_core.dir/gen/wild_pokemon_area.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/wild_pokemon_area.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/wild_pokemon_area.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/wild_pokemon_area.c -o CMakeFiles/pfr_upstream_core.dir/gen/wild_pokemon_area.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/window.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/window.c.o: gen/window.c
+CMakeFiles/pfr_upstream_core.dir/gen/window.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_224) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/window.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/window.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/window.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/window.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/window.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/window.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/window.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/window.c > CMakeFiles/pfr_upstream_core.dir/gen/window.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/window.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/window.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/window.c -o CMakeFiles/pfr_upstream_core.dir/gen/window.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/window_8bpp.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/window_8bpp.c.o: gen/window_8bpp.c
+CMakeFiles/pfr_upstream_core.dir/gen/window_8bpp.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_225) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/window_8bpp.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/window_8bpp.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/window_8bpp.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/window_8bpp.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/window_8bpp.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/window_8bpp.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/window_8bpp.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/window_8bpp.c > CMakeFiles/pfr_upstream_core.dir/gen/window_8bpp.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/window_8bpp.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/window_8bpp.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/window_8bpp.c -o CMakeFiles/pfr_upstream_core.dir/gen/window_8bpp.c.s
+
+CMakeFiles/pfr_upstream_core.dir/gen/wonder_news.c.o: CMakeFiles/pfr_upstream_core.dir/flags.make
+CMakeFiles/pfr_upstream_core.dir/gen/wonder_news.c.o: gen/wonder_news.c
+CMakeFiles/pfr_upstream_core.dir/gen/wonder_news.c.o: CMakeFiles/pfr_upstream_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_226) "Building C object CMakeFiles/pfr_upstream_core.dir/gen/wonder_news.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/pfr_upstream_core.dir/gen/wonder_news.c.o -MF CMakeFiles/pfr_upstream_core.dir/gen/wonder_news.c.o.d -o CMakeFiles/pfr_upstream_core.dir/gen/wonder_news.c.o -c /home/spark-advantage/pokefirered-native/build-codex-check/gen/wonder_news.c
+
+CMakeFiles/pfr_upstream_core.dir/gen/wonder_news.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/pfr_upstream_core.dir/gen/wonder_news.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/spark-advantage/pokefirered-native/build-codex-check/gen/wonder_news.c > CMakeFiles/pfr_upstream_core.dir/gen/wonder_news.c.i
+
+CMakeFiles/pfr_upstream_core.dir/gen/wonder_news.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/pfr_upstream_core.dir/gen/wonder_news.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/spark-advantage/pokefirered-native/build-codex-check/gen/wonder_news.c -o CMakeFiles/pfr_upstream_core.dir/gen/wonder_news.c.s
 
 # Object files for target pfr_upstream_core
 pfr_upstream_core_OBJECTS = \
+"CMakeFiles/pfr_upstream_core.dir/src/host_bg_regs.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/src/host_script_ptrtab.c.o" \
 "CMakeFiles/pfr_upstream_core.dir/src/host_crt0.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/src/host_capture_manifest.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/src/host_frame_step.c.o" \
 "CMakeFiles/pfr_upstream_core.dir/src/host_memory.c.o" \
 "CMakeFiles/pfr_upstream_core.dir/src/host_dma.c.o" \
 "CMakeFiles/pfr_upstream_core.dir/src/host_bios.c.o" \
 "CMakeFiles/pfr_upstream_core.dir/src/host_debug.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/src/host_log.c.o" \
 "CMakeFiles/pfr_upstream_core.dir/src/host_renderer.c.o" \
 "CMakeFiles/pfr_upstream_core.dir/src/host_display.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/src/host_sound_mixer.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/src/host_sound_init.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/src/host_flash.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/src/host_ptr_store.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/src/host_timer.c.o" \
 "CMakeFiles/pfr_upstream_core.dir/src/host_intro_stubs.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/src/host_new_game_stubs.c.o" \
 "CMakeFiles/pfr_upstream_core.dir/src/host_oak_speech_stubs.c.o" \
 "CMakeFiles/pfr_upstream_core.dir/src/host_title_screen_stubs.c.o" \
-"CMakeFiles/pfr_upstream_core.dir/src/upstream_stubs.c.o" \
-"CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/random.c.o" \
-"CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/malloc.c.o" \
-"CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/decompress.c.o" \
-"CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/gpu_regs.c.o" \
-"CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/dma3_manager.c.o" \
-"CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/task.c.o" \
-"CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/trig.c.o" \
-"CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/scanline_effect.c.o" \
-"CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/palette.c.o" \
-"CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/blend_palette.c.o" \
-"CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/bg.c.o" \
-"CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/sprite.c.o"
+"CMakeFiles/pfr_upstream_core.dir/gen/upstream_stubs.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/src/game_ctx.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/game_ctx_stubs.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/src/upstream_asm_data.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/src/upstream_sound_data.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/src/upstream_sound_samples.S.o" \
+"CMakeFiles/pfr_upstream_core.dir/src/upstream_battle_scripts.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/src/upstream_event_scripts.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/upstream_map_data.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/upstream_field_effect_scripts.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_ai_scripts.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_scripts.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_tables.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/upstream_specials_table.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/AgbRfu_LinkManager.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_script_commands.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_switch_items.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_anim.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_bug.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dark.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dragon.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_1.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_2.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_electric.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fight.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fire.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ghost.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ground.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ice.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mon_movement.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mons.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_normal.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_poison.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_psychic.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_rock.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_smokescreen.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_sound_tasks.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_special.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_status_effects.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_utility_funcs.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_opponent.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_partner.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_oak_old_man.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_opponent.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_player.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_pokedude.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_safari.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_controllers.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_gfx_sfx_util.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_intro.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_main.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_message.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_setup.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_tower.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_util.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/battle_util2.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/berry.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/berry_fix_program.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/berry_pouch.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/berry_powder.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/bg.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/bike.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/blend_palette.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/blit.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/buy_menu_helpers.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/cable_car_util.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/cable_club.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/cereader_tool.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/clear_save_data_screen.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/coins.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/coord_event_weather.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/data.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/decompress.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/decoration.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/dma3_manager.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/dodrio_berry_picking_comm.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/dynamic_placeholder_text_util.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/ereader_helpers.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/ereader_screen.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/event_data.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/event_object_lock.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/field_camera.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/field_control_avatar.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/field_effect_helpers.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/field_fadetransition.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/field_message_box.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/field_player_avatar.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/field_poison.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/field_screen_effect.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/field_special_scene.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/field_tasks.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/field_weather_effects.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/field_weather_util.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/fieldmap.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/fldeff_berrytree.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/fldeff_cut.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/fldeff_dig.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/fldeff_poison.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/fldeff_rocksmash.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/fldeff_softboiled.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/fldeff_strength.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/fldeff_sweetscent.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/fldeff_teleport.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/gpu_regs.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/heal_location.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/hof_pc.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/image_processing_effects.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/item.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/item_menu_icons.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/item_pc.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/item_use.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/keyboard_text.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/librfu_intr.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/librfu_rfu.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/librfu_sio32id.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/librfu_stwi.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/link_rfu_2.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/list_menu.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/load_save.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/m4a.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/m4a_tables.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/mail.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/mail_data.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/mailbox_pc.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/main.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/malloc.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/map_name_popup.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/math_util.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/menu.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/menu2.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/menu_helpers.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/metatile_behavior.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/mini_printf.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/money.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/move_descriptions.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_msg.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_script.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_client.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_link.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_scripts.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_server.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/new_game.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/overworld.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/palette.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/palette_util.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/party_menu_specials.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/pc_screen_effect.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/play_time.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/player_pc.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/pokeball.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/pokedex.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/pokemon_size_record.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/pokemon_special_anim.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/pokemon_storage_system.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/post_battle_event_funcs.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/prof_pc.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/quest_log_battle.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/quest_log_events.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/quest_log_objects.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/quest_log_player.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/random.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/renewable_hidden_items.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/reset_save_heap.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/reshow_battle_screen.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/roamer.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/rom_header_gf.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/safari_zone.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/save.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/save_location.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/save_menu_util.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/scanline_effect.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/scrcmd.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/script.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/script_movement.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/script_pokemon_util.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/shop.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/sound.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/special_field_anim.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/sprite.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/start_menu.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/string_util.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/strings.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/task.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/teachy_tv.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/text_printer.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/text_window.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/tilemap_util.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/tm_case.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/trainer_fan_club.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/trainer_pokemon_sprites.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower_sets.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/trig.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/union_room.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/union_room_battle.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/union_room_chat.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/union_room_message.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/union_room_player_avatar.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/vs_seeker.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/wild_encounter.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/wild_pokemon_area.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/window.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/window_8bpp.c.o" \
+"CMakeFiles/pfr_upstream_core.dir/gen/wonder_news.c.o"
 
 # External object files for target pfr_upstream_core
 pfr_upstream_core_EXTERNAL_OBJECTS =
 
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/src/host_bg_regs.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/src/host_script_ptrtab.c.o
 libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/src/host_crt0.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/src/host_capture_manifest.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/src/host_frame_step.c.o
 libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/src/host_memory.c.o
 libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/src/host_dma.c.o
 libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/src/host_bios.c.o
 libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/src/host_debug.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/src/host_log.c.o
 libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/src/host_renderer.c.o
 libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/src/host_display.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/src/host_sound_mixer.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/src/host_sound_init.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/src/host_flash.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/src/host_ptr_store.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/src/host_timer.c.o
 libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/src/host_intro_stubs.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/src/host_new_game_stubs.c.o
 libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/src/host_oak_speech_stubs.c.o
 libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/src/host_title_screen_stubs.c.o
-libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/src/upstream_stubs.c.o
-libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/random.c.o
-libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/malloc.c.o
-libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/decompress.c.o
-libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/gpu_regs.c.o
-libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/dma3_manager.c.o
-libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/task.c.o
-libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/trig.c.o
-libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/scanline_effect.c.o
-libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/palette.c.o
-libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/blend_palette.c.o
-libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/bg.c.o
-libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/home/spark-advantage/pokefirered/src/sprite.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/upstream_stubs.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/src/game_ctx.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/game_ctx_stubs.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/src/upstream_asm_data.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/src/upstream_sound_data.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/src/upstream_sound_samples.S.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/src/upstream_battle_scripts.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/src/upstream_event_scripts.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/upstream_map_data.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/upstream_field_effect_scripts.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_ai_scripts.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_scripts.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/upstream_battle_anim_tables.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/upstream_specials_table.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/AgbRfu_LinkManager.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_script_commands.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_ai_switch_items.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_anim.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_bug.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dark.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_dragon.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_1.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_effects_2.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_electric.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fight.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_fire.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ghost.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ground.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_ice.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mon_movement.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_mons.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_normal.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_poison.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_psychic.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_rock.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_smokescreen.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_sound_tasks.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_special.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_status_effects.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_anim_utility_funcs.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_opponent.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_link_partner.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_oak_old_man.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_opponent.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_player.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_pokedude.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_controller_safari.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_controllers.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_gfx_sfx_util.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_intro.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_main.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_message.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_setup.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_tower.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_util.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/battle_util2.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/berry.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/berry_fix_program.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/berry_pouch.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/berry_powder.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/bg.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/bike.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/blend_palette.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/blit.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/buy_menu_helpers.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/cable_car_util.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/cable_club.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/cereader_tool.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/clear_save_data_screen.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/coins.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/coord_event_weather.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/data.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/decompress.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/decoration.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/dma3_manager.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/dodrio_berry_picking_comm.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/dynamic_placeholder_text_util.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/ereader_helpers.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/ereader_screen.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/event_data.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/event_object_lock.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/field_camera.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/field_control_avatar.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/field_effect_helpers.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/field_fadetransition.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/field_message_box.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/field_player_avatar.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/field_poison.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/field_screen_effect.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/field_special_scene.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/field_tasks.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/field_weather_effects.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/field_weather_util.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/fieldmap.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/fldeff_berrytree.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/fldeff_cut.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/fldeff_dig.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/fldeff_poison.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/fldeff_rocksmash.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/fldeff_softboiled.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/fldeff_strength.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/fldeff_sweetscent.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/fldeff_teleport.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/gpu_regs.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/heal_location.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/hof_pc.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/image_processing_effects.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/item.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/item_menu_icons.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/item_pc.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/item_use.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/keyboard_text.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/librfu_intr.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/librfu_rfu.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/librfu_sio32id.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/librfu_stwi.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/link_rfu_2.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/list_menu.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/load_save.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/m4a.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/m4a_tables.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/mail.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/mail_data.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/mailbox_pc.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/main.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/malloc.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/map_name_popup.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/math_util.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/menu.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/menu2.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/menu_helpers.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/metatile_behavior.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/mini_printf.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/money.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/move_descriptions.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_msg.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/mystery_event_script.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_client.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_link.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_scripts.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/mystery_gift_server.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/new_game.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/overworld.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/palette.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/palette_util.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/party_menu_specials.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/pc_screen_effect.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/play_time.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/player_pc.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/pokeball.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/pokedex.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/pokemon_size_record.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/pokemon_special_anim.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/pokemon_storage_system.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/post_battle_event_funcs.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/prof_pc.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/quest_log_battle.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/quest_log_events.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/quest_log_objects.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/quest_log_player.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/random.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/renewable_hidden_items.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/reset_save_heap.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/reshow_battle_screen.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/roamer.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/rom_header_gf.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/safari_zone.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/save.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/save_location.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/save_menu_util.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/scanline_effect.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/scrcmd.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/script.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/script_movement.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/script_pokemon_util.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/shop.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/sound.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/special_field_anim.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/sprite.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/start_menu.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/string_util.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/strings.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/task.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/teachy_tv.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/text_printer.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/text_window.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/tilemap_util.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/tm_case.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/trainer_fan_club.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/trainer_pokemon_sprites.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/trainer_tower_sets.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/trig.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/union_room.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/union_room_battle.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/union_room_chat.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/union_room_message.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/union_room_player_avatar.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/vs_seeker.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/wild_encounter.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/wild_pokemon_area.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/window.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/window_8bpp.c.o
+libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/gen/wonder_news.c.o
 libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/build.make
 libpfr_upstream_core.a: CMakeFiles/pfr_upstream_core.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Linking C static library libpfr_upstream_core.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/spark-advantage/pokefirered-native/build-codex-check/CMakeFiles --progress-num=$(CMAKE_PROGRESS_227) "Linking C static library libpfr_upstream_core.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/pfr_upstream_core.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/pfr_upstream_core.dir/link.txt --verbose=$(VERBOSE)
 
