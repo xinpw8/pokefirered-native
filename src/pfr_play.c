@@ -2967,11 +2967,11 @@ int main(int argc, char *argv[])
     /* Full native sound init: sets up SOUND_INFO_PTR, all SoundInfo fields,
      * music players, and cry players — without DMA/timer hardware writes. */
     HostNativeSoundInit();
-    if (!sDisableAudioEnabled)
+    if (0) /* audio disabled for web play */
         HostAudioInit();
     else
     {
-        TraceLog(0, "audio disabled by debug configuration");
+        TraceLog(0, "audio disabled (binding or debug)");
         gHostNoAudio = TRUE;
     }
 
