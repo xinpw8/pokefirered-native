@@ -709,15 +709,16 @@ bool8 HostSavestateLoadFromFile(const char *path)
      * since function pointers are almost certainly stale after rebuild. */
     if (header.version < 2)
     {
-        fprintf(stderr, "[WARN] v1 savestate (no fingerprint) — loading anyway\n");
-        /* Version check bypassed for testing */
+        SetError("savestate: v1 format rejected");
+        return FALSE;
     }
 
     if (header.buildFingerprint != ComputeBuildFingerprint())
     {
         fprintf(stderr, "[WARN] ignoring fingerprint mismatch (file=0x%08X vs build=0x%08X)\n",
                 header.buildFingerprint, ComputeBuildFingerprint());
-        /* Fingerprint check bypassed for testing */
+        SetError("savestate: build fingerprint mismatch");
+        return FALSE;
     }
 
     if (header.segmentCount != sRuntime->segmentCount)

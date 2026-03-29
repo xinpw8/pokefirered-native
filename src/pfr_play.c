@@ -1048,6 +1048,13 @@ static bool8 TryDegradedStateLoad(u32 frame, const char *path)
     gSaveBlock1Ptr = &gSaveBlock1;
     gPokemonStoragePtr = &gPokemonStorage;
 
+    /* Force-save the restored blocks to .sav so they persist */
+    {
+        extern u8 TrySavingData(u8 saveType);
+        u8 result = TrySavingData(0); /* SAVE_NORMAL = 0 */
+        fprintf(stderr, "savestate degraded: forced save to disk (result=%u)\n", result);
+    }
+
     /* Force title screen -- all execution state (tasks, sprites, callbacks)
      * stays from the current build, only game progress is restored. */
     SetMainCallback2(CB2_ContinueSavedGame);
