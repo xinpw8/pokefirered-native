@@ -719,73 +719,128 @@ bool8 HostSavestateLoadFromFile(const char *path)
                 header.buildFingerprint, ComputeBuildFingerprint());
     }
 
-    if (header.segmentCount != sRuntime->segmentCount)
+    /* Allow loading savestates with fewer segments than current runtime.
+     * This handles the common case where the build added a new segment
+     * (e.g. GameCtx) that the old savestate lacks.  Load only the
+     * min(fileCount, runtimeCount) segments that both sides share. */
     {
-        SetError("savestate: %s has a mismatched segment count", path);
-        fclose(file);
-        return FALSE;
-    }
+        u32 loadCount;
+        struct HostSavestateFileSegment *fileSegHeaders;
 
-    if (!EnsureHotBuffersAllocated())
-    {
-        fclose(file);
-        return FALSE;
-    }
-
-    for (i = 0; i < sRuntime->segmentCount; i++)
-    {
-        struct HostSavestateFileSegment segment;
-
-        if (fread(&segment, sizeof(segment), 1, file) != 1)
+        if (header.segmentCount != sRuntime->segmentCount)
         {
-            SetError("savestate: could not read segment table from %s", path);
+            fprintf(stderr, "[SAVESTATE] segment count mismatch: file=%u runtime=%u"
+                    " -- loading common segments\n",
+                    header.segmentCount, sRuntime->segmentCount);
+        }
+
+        loadCount = (header.segmentCount < sRuntime->segmentCount)
+                   ? header.segmentCount : sRuntime->segmentCount;
+
+        if (!EnsureHotBuffersAllocated())
+        {
             fclose(file);
             return FALSE;
         }
 
-        /* Tolerate size differences for .data/.bss (segments 0,1)
-         * and last segment (GameCtx). Middle GBA regions must match exactly. */
-        sRuntime->fileSavedSizes[i] = (size_t)segment.size;
-        if (i >= 2 && i < sRuntime->segmentCount - 1 && segment.size != sRuntime->segments[i].size)
+        /* Read ALL file segment headers first */
+        fileSegHeaders = calloc(header.segmentCount, sizeof(*fileSegHeaders));
+        if (fileSegHeaders == NULL)
         {
-            SetError("savestate: %s GBA region %u size mismatch (saved=%llu, current=%zu)",
-                     path, i, (unsigned long long)segment.size, sRuntime->segments[i].size);
+            SetError("savestate: could not allocate file segment headers");
             fclose(file);
             return FALSE;
         }
-        /* Warn (but allow) size mismatch on last segment (GameCtx) */
-        if (i == sRuntime->segmentCount - 1 && segment.size != sRuntime->segments[i].size)
+        for (i = 0; i < header.segmentCount; i++)
         {
-            fprintf(stderr, "savestate: WARNING: last segment (GameCtx) size mismatch (saved=%llu, current=%zu) — truncating\n",
-                     (unsigned long long)segment.size, sRuntime->segments[i].size);
-        }
-    }
-
-    for (i = 0; i < sRuntime->segmentCount; i++)
-    {
-        size_t savedSize = sRuntime->fileSavedSizes[i];
-        size_t currentSize = sRuntime->hotBuffers[i].size;
-        size_t copySize = (savedSize < currentSize) ? savedSize : currentSize;
-
-        /* Read the portion we'll use */
-        if (fread(sRuntime->hotBuffers[i].data, 1, copySize, file) != copySize)
-        {
-            SetError("savestate: could not read segment %u from %s", i, path);
-            fclose(file);
-            return FALSE;
-        }
-
-        /* Skip any extra bytes from a larger saved segment */
-        if (savedSize > currentSize)
-        {
-            if (fseek(file, (long)(savedSize - currentSize), SEEK_CUR) != 0)
+            if (fread(&fileSegHeaders[i], sizeof(fileSegHeaders[i]), 1, file) != 1)
             {
-                SetError("savestate: could not skip excess bytes in segment %u of %s", i, path);
+                SetError("savestate: could not read segment table from %s", path);
+                free(fileSegHeaders);
                 fclose(file);
                 return FALSE;
             }
         }
+
+        /* Validate the segments we will load */
+        for (i = 0; i < loadCount; i++)
+        {
+            sRuntime->fileSavedSizes[i] = (size_t)fileSegHeaders[i].size;
+
+            /* Tolerate size differences for .data/.bss (segments 0,1)
+             * and the last loaded segment.  Middle GBA regions must match. */
+            if (i >= 2 && i < loadCount - 1
+                && fileSegHeaders[i].size != sRuntime->segments[i].size)
+            {
+                SetError("savestate: %s GBA region %u size mismatch "
+                         "(saved=%llu, current=%zu)",
+                         path, i, (unsigned long long)fileSegHeaders[i].size,
+                         sRuntime->segments[i].size);
+                free(fileSegHeaders);
+                fclose(file);
+                return FALSE;
+            }
+            if (i == loadCount - 1
+                && fileSegHeaders[i].size != sRuntime->segments[i].size)
+            {
+                fprintf(stderr, "savestate: WARNING: segment %u size mismatch "
+                        "(saved=%llu, current=%zu) -- truncating\n",
+                        i, (unsigned long long)fileSegHeaders[i].size,
+                        sRuntime->segments[i].size);
+            }
+        }
+
+        /* Read segment data for the segments we load */
+        for (i = 0; i < loadCount; i++)
+        {
+            size_t savedSize = sRuntime->fileSavedSizes[i];
+            size_t currentSize = sRuntime->hotBuffers[i].size;
+            size_t copySize = (savedSize < currentSize) ? savedSize : currentSize;
+
+            if (fread(sRuntime->hotBuffers[i].data, 1, copySize, file) != copySize)
+            {
+                SetError("savestate: could not read segment %u from %s", i, path);
+                free(fileSegHeaders);
+                fclose(file);
+                return FALSE;
+            }
+
+            if (savedSize > currentSize)
+            {
+                if (fseek(file, (long)(savedSize - currentSize), SEEK_CUR) != 0)
+                {
+                    SetError("savestate: could not skip excess bytes in segment %u of %s",
+                             i, path);
+                    free(fileSegHeaders);
+                    fclose(file);
+                    return FALSE;
+                }
+            }
+        }
+
+        /* Skip data for any extra file segments we are not loading */
+        for (i = loadCount; i < header.segmentCount; i++)
+        {
+            if (fseek(file, (long)fileSegHeaders[i].size, SEEK_CUR) != 0)
+            {
+                fprintf(stderr, "savestate: WARNING: could not skip extra file segment %u\n", i);
+                break;
+            }
+        }
+
+        /* For segments beyond loadCount (only exist in current runtime),
+         * capture their current live state into hot buffers so that
+         * RestoreFromBuffers does not zero them. */
+        for (i = loadCount; i < sRuntime->segmentCount; i++)
+        {
+            memcpy(sRuntime->hotBuffers[i].data,
+                   (const void *)sRuntime->segments[i].base,
+                   sRuntime->segments[i].size);
+        }
+
+        free(fileSegHeaders);
     }
+
 
     fclose(file);
     sRuntime->hotValid = TRUE;

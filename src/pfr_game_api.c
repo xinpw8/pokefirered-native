@@ -468,7 +468,11 @@ static void PostSavestateRestore(void)
     int i;
 
 //     fprintf(stderr, "[PSR] 1: data ptrs\n");
-    /* Data pointers */
+    /* Re-seat save block pointers — after a cross-build state restore,
+     * these point to old addresses.  Fix them to current globals. */
+    gSaveBlock2Ptr = &gSaveBlock2;
+    gSaveBlock1Ptr = &gSaveBlock1;
+    gPokemonStoragePtr = &gPokemonStorage;
 
 //     fprintf(stderr, "[PSR] 2: intr table\n");
     /* Interrupt dispatch table */
