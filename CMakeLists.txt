@@ -2326,7 +2326,7 @@ target_link_libraries(pfr_play PRIVATE pfr_upstream_core Threads::Threads m dl $
 add_library(pfr_game SHARED
     src/pfr_game_api.c
     src/pfr_obs_adapter.c
-    # src/pfr_obs_full.c  # DISABLED: GameCtx struct mismatch
+    src/pfr_obs_full.c
     src/host_savestate.c
     src/host_agbmain.c
 )
@@ -2648,8 +2648,9 @@ add_custom_command(
     COMMAND $<TARGET_FILE:pfr_assets> batch
         "${POKEFIRERED_SOURCE_DIR}" "${PFR_ASSETS_DIR}" "${PFR_BOOT_ASSET_MANIFEST}"
     COMMAND $<TARGET_FILE:pfr_assets> geninc "${PFR_ASSETS_DIR}" "${PFR_INC_DIR}"
+    COMMAND bash "${CMAKE_CURRENT_SOURCE_DIR}/scripts/copy_plain_sources.sh" "${POKEFIRERED_SOURCE_DIR}" "${PFR_GEN_DIR}"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/intro.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/intro.c"
+        "${PFR_GEN_DIR}/intro.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/intro.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${PFR_GEN_DIR}/title_screen.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/title_screen.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
@@ -2736,7 +2737,7 @@ add_custom_command(
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${PFR_GEN_DIR}/learn_move.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/learn_move.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/link.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/link.c"
+        "${PFR_GEN_DIR}/link.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/link.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${PFR_GEN_DIR}/link_rfu_3.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/link_rfu_3.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
@@ -2782,9 +2783,9 @@ add_custom_command(
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${PFR_GEN_DIR}/pokemon_summary_screen.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/pokemon_summary_screen.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/quest_log.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/quest_log.c"
+        "${PFR_GEN_DIR}/quest_log.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/quest_log.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/region_map.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/region_map.c"
+        "${PFR_GEN_DIR}/region_map.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/region_map.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${PFR_GEN_DIR}/save_failed_screen.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/save_failed_screen.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
@@ -2792,7 +2793,7 @@ add_custom_command(
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${PFR_GEN_DIR}/seagallop.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/seagallop.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/slot_machine.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/slot_machine.c"
+        "${PFR_GEN_DIR}/slot_machine.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/slot_machine.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/ss_anne.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/ss_anne.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
@@ -2845,13 +2846,13 @@ add_custom_command(
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${PFR_GEN_DIR}/item.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/item.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/link_rfu_2.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/link_rfu_2.c"
+        "${PFR_GEN_DIR}/link_rfu_2.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/link_rfu_2.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${PFR_GEN_DIR}/mailbox_pc.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/mailbox_pc.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${POKEFIRERED_SOURCE_DIR}/src/mystery_gift_scripts.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/mystery_gift_scripts.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
-        "${POKEFIRERED_SOURCE_DIR}/src/scrcmd.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/scrcmd.c"
+        "${PFR_GEN_DIR}/scrcmd.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/scrcmd.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
         "${PFR_GEN_DIR}/string_util.c" "${PFR_INC_DIR}" "${PFR_GEN_DIR}/string_util.c"
     COMMAND $<TARGET_FILE:pfr_assets> preproc
@@ -2884,7 +2885,7 @@ add_custom_command(
         pfr_gbagfx_tool
         pfr_verify_asset_manifests
         "${PFR_BOOT_ASSET_MANIFEST}"
-        "${POKEFIRERED_SOURCE_DIR}/src/intro.c"
+        "${PFR_GEN_DIR}/intro.c"
         "${PFR_GEN_DIR}/title_screen.c"
         "${POKEFIRERED_SOURCE_DIR}/src/main_menu.c"
         "${PFR_GEN_DIR}/oak_speech.c"
@@ -2926,7 +2927,7 @@ add_custom_command(
         "${PFR_GEN_DIR}/item_menu.c"
         "${POKEFIRERED_SOURCE_DIR}/src/itemfinder.c"
         "${PFR_GEN_DIR}/learn_move.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/link.c"
+        "${PFR_GEN_DIR}/link.c"
         "${PFR_GEN_DIR}/link_rfu_3.c"
         "${PFR_GEN_DIR}/map_preview_screen.c"
         "${PFR_GEN_DIR}/menu_indicators.c"
@@ -2949,12 +2950,12 @@ add_custom_command(
         "${PFR_GEN_DIR}/pokemon_storage_system_misc.c"
         "${PFR_GEN_DIR}/pokemon_storage_system_tasks.c"
         "${PFR_GEN_DIR}/pokemon_summary_screen.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/quest_log.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/region_map.c"
+        "${PFR_GEN_DIR}/quest_log.c"
+        "${PFR_GEN_DIR}/region_map.c"
         "${PFR_GEN_DIR}/save_failed_screen.c"
         "${PFR_GEN_DIR}/script_menu.c"
         "${PFR_GEN_DIR}/seagallop.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/slot_machine.c"
+        "${PFR_GEN_DIR}/slot_machine.c"
         "${POKEFIRERED_SOURCE_DIR}/src/ss_anne.c"
         "${PFR_GEN_DIR}/tileset_anims.c"
         "${PFR_GEN_DIR}/trade.c"
@@ -2981,10 +2982,10 @@ add_custom_command(
         "${PFR_GEN_DIR}/berry_pouch.c"
         "${PFR_GEN_DIR}/field_player_avatar.c"
         "${PFR_GEN_DIR}/item.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/link_rfu_2.c"
+        "${PFR_GEN_DIR}/link_rfu_2.c"
         "${PFR_GEN_DIR}/mailbox_pc.c"
         "${POKEFIRERED_SOURCE_DIR}/src/mystery_gift_scripts.c"
-        "${POKEFIRERED_SOURCE_DIR}/src/scrcmd.c"
+        "${PFR_GEN_DIR}/scrcmd.c"
         "${PFR_GEN_DIR}/string_util.c"
         "${PFR_GEN_DIR}/tm_case.c"
         "${POKEFIRERED_SOURCE_DIR}/src/data.c"
@@ -3214,7 +3215,7 @@ set_target_properties(pfr_env_binding_native PROPERTIES
 add_library(pfr_game_static STATIC
     src/pfr_game_api.c
     src/pfr_obs_adapter.c
-    # src/pfr_obs_full.c  # DISABLED: GameCtx struct mismatch
+    src/pfr_obs_full.c
     src/host_savestate.c
     src/host_agbmain.c
 )
