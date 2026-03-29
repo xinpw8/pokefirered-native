@@ -2986,6 +2986,9 @@ int main(int argc, char *argv[])
     HostSavestateProtectRegion(&sSymTable, sizeof(sSymTable));
     HostSavestateProtectRegion(&sSymCount, sizeof(sSymCount));
     HostSavestateProtectRegion(&sProgramArgv, sizeof(sProgramArgv));
+    HostSavestateProtectRegion(&gSaveBlock1Ptr, sizeof(gSaveBlock1Ptr));
+    HostSavestateProtectRegion(&gSaveBlock2Ptr, sizeof(gSaveBlock2Ptr));
+    HostSavestateProtectRegion(&gPokemonStoragePtr, sizeof(gPokemonStoragePtr));
 
     /* InitMainCallbacks is static in main.c; replicate inline: */
     gMain.vblankCounter1 = 0;
