@@ -501,8 +501,35 @@ __asm__(
 
 u16 * gSpecialVars[21];  /* 21 entries, initialized at runtime */
 
+/* The gSpecialVars[] array stores pointers to the ACTUAL static EWRAM_DATA
+ * variables (used by the build/gen/ script engine code). We must undo the
+ * game_ctx_macros.h redirections so we take the address of the real symbols,
+ * not the GameCtx copies. */
+#undef gSpecialVar_0x8000
+#undef gSpecialVar_0x8001
+#undef gSpecialVar_0x8002
+#undef gSpecialVar_0x8003
+#undef gSpecialVar_0x8004
+#undef gSpecialVar_0x8005
+#undef gSpecialVar_0x8006
+#undef gSpecialVar_0x8007
+#undef gSpecialVar_0x8008
+#undef gSpecialVar_0x8009
+#undef gSpecialVar_0x800A
+#undef gSpecialVar_0x800B
+#undef gSpecialVar_Facing
+#undef gSpecialVar_Result
+#undef gSpecialVar_ItemId
+#undef gSpecialVar_LastTalked
+#undef gSpecialVar_MonBoxId
+#undef gSpecialVar_MonBoxPos
+#undef gSpecialVar_TextColor
+#undef gSpecialVar_PrevTextColor
+#undef gSpecialVar_0x8014
+
 void InitSpecialVars(void)
 {
+    fprintf(stderr, "[INITVARS] &gSpecialVar_Result=%p, gSpecialVars=%p\n", (void*)&gSpecialVar_Result, (void*)gSpecialVars);
     gSpecialVars[0]  = &gSpecialVar_0x8000;
     gSpecialVars[1]  = &gSpecialVar_0x8001;
     gSpecialVars[2]  = &gSpecialVar_0x8002;
