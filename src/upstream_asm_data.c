@@ -529,7 +529,6 @@ u16 * gSpecialVars[21];  /* 21 entries, initialized at runtime */
 
 void InitSpecialVars(void)
 {
-    fprintf(stderr, "[INITVARS] &gSpecialVar_Result=%p, gSpecialVars=%p\n", (void*)&gSpecialVar_Result, (void*)gSpecialVars);
     gSpecialVars[0]  = &gSpecialVar_0x8000;
     gSpecialVars[1]  = &gSpecialVar_0x8001;
     gSpecialVars[2]  = &gSpecialVar_0x8002;
