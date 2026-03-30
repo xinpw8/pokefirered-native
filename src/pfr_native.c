@@ -1205,6 +1205,11 @@ static void execute_action(PfrNativeState *state, const PfrNativeScriptAction *a
     switch (act->type) {
     case PFRN_ACT_SET_FLAG:
         state->flags = pfrn_flag_set(state->flags, act->param);
+        /* Sync badge flags to GBA flag array so save menu displays them */
+        if (act->param >= PFRN_FLAG_BADGE01_GET && act->param <= PFRN_FLAG_BADGE08_GET) {
+            extern bool8 FlagSet(u16 idx);
+            FlagSet(0x820 + (act->param - PFRN_FLAG_BADGE01_GET));  /* FLAG_BADGE01_GET = 0x820 */
+        }
         break;
     case PFRN_ACT_SET_VAR:
         if (act->param < PFR_NATIVE_MAX_VARS)
