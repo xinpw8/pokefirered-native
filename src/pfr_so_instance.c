@@ -89,6 +89,8 @@ static int resolve_symbols(PfrInstance *inst)
     RESOLVE(copy_framebuffer,  "pfr_game_copy_framebuffer");
     /* Try render_current_frame from game SO first */
     *(void **)(&inst->render_current_frame) = dlsym(inst->dl_handle, "pfr_game_render_current_frame");
+    *(void **)(&inst->get_state_json) = dlsym(inst->dl_handle, "pfr_game_get_state_json");
+    *(void **)(&inst->inject_test_items) = dlsym(inst->dl_handle, "pfr_game_inject_test_items");
 
     /* If not in game SO, load a per-instance copy of the render patch SO */
     if (!inst->render_current_frame && base_so_path_g) {
@@ -113,6 +115,8 @@ static int resolve_symbols(PfrInstance *inst)
                 if (set_fns && ri && rf) {
                     set_fns(ri, rf);
                     *(void **)(&inst->render_current_frame) = dlsym(patch_handle, "pfr_game_render_current_frame");
+                    *(void **)(&inst->get_state_json) = dlsym(patch_handle, "pfr_game_get_state_json");
+                    *(void **)(&inst->inject_test_items) = dlsym(patch_handle, "pfr_game_inject_test_items");
                 }
             }
         }

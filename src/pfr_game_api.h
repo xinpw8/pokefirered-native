@@ -128,3 +128,5 @@ void pfr_game_get_reward_info_full(PfrRewardInfoFull *info);
  * Called during episode reset to vary starting position each episode. */
 
 #endif /* PFR_GAME_API_H */
+int pfr_game_get_state_json(char *buf, int bufsize);
+void pfr_game_inject_test_items(void);

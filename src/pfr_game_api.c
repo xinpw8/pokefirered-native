@@ -1083,3 +1083,191 @@ void pfr_game_randomize_spawn(void) {
         pfr_game_load_state(paths[idx]);
     }
 }
+
+/* ── Test item/move/badge injection ── */
+
+void pfr_game_inject_test_items(void)
+{
+    extern bool8 AddBagItem(u16 itemId, u16 count);
+    extern void SetMonMoveSlot(struct Pokemon *mon, u16 move, u8 slot);
+
+    /* Bag items */
+    AddBagItem(85, 5);     /* ITEM_ESCAPE_ROPE x5 */
+    AddBagItem(21, 10);    /* ITEM_HYPER_POTION x10 */
+    AddBagItem(19, 5);     /* ITEM_FULL_RESTORE x5 */
+    AddBagItem(24, 5);     /* ITEM_REVIVE x5 */
+    AddBagItem(84, 10);    /* ITEM_MAX_REPEL x10 */
+    AddBagItem(68, 20);    /* ITEM_RARE_CANDY x20 */
+    AddBagItem(4, 20);     /* ITEM_POKE_BALL x20 */
+
+    /* HM03 Surf in TM/HM pocket */
+    AddBagItem(341, 1);    /* ITEM_HM03 */
+
+    /* Give Surf to party slot 0, replacing move slot 3 */
+    if (gPlayerPartyCount > 0) {
+        SetMonMoveSlot(&gPlayerParty[0], 57, 3);  /* MOVE_SURF = 57, slot 3 */
+    }
+
+    /* Set all 8 badges */
+    {
+        int i;
+        for (i = 0; i < 8; i++)
+            FlagSet(0x820 + i);
+    }
+
+    fprintf(stderr, "[PFR-INJECT] Test items/moves/badges injected\n");
+}
+
+/* ── Full game state as JSON ── */
+
+int pfr_game_get_state_json(char *buf, int bufsize)
+{
+    int n = 0;
+    int i;
+
+    #define JP(...) do { \
+        int _w = snprintf(buf + n, bufsize - n, __VA_ARGS__); \
+        if (_w > 0) n += _w; \
+        if (n >= bufsize - 1) return n; \
+    } while(0)
+
+    JP("{");
+
+    /* Position & Map */
+    JP("\"pos\":{\"x\":%d,\"y\":%d},",
+       (int)gSaveBlock1Ptr->pos.x, (int)gSaveBlock1Ptr->pos.y);
+    JP("\"map\":{\"group\":%d,\"num\":%d},",
+       (int)gSaveBlock1Ptr->location.mapGroup,
+       (int)gSaveBlock1Ptr->location.mapNum);
+
+    /* Player direction & state */
+    JP("\"direction\":%d,",
+       gObjectEvents[gPlayerAvatar.objectEventId].facingDirection & 0xF);
+    JP("\"avatar_flags\":%d,", gPlayerAvatar.flags);
+    JP("\"in_battle\":%s,", gMain.inBattle ? "true" : "false");
+
+    /* Money */
+    {
+        extern u32 GetMoney(u32 *moneyPtr);
+        u32 money = GetMoney(&gSaveBlock1Ptr->money);
+        JP("\"money\":%u,", (unsigned)money);
+    }
+
+    /* Badges */
+    {
+        int badges = 0;
+        for (i = 0; i < 8; i++)
+            if (FlagGet(0x820 + i)) badges |= (1 << i);
+        JP("\"badges\":%d,\"badge_count\":%d,", badges, __builtin_popcount(badges));
+    }
+
+    /* Party */
+    JP("\"party_count\":%d,", (int)gPlayerPartyCount);
+    JP("\"party\":[");
+    for (i = 0; i < 6; i++) {
+        struct Pokemon *mon = &gPlayerParty[i];
+        u16 species = (u16)GetMonData(mon, MON_DATA_SPECIES);
+        if (i > 0) JP(",");
+        if (species == 0) { JP("null"); continue; }
+        JP("{\"slot\":%d,\"species\":%d,\"level\":%d,",
+           i, (int)species, (int)GetMonData(mon, MON_DATA_LEVEL));
+        JP("\"hp\":%d,\"max_hp\":%d,",
+           (int)GetMonData(mon, MON_DATA_HP),
+           (int)GetMonData(mon, MON_DATA_MAX_HP));
+        JP("\"atk\":%d,\"def\":%d,\"speed\":%d,\"spatk\":%d,\"spdef\":%d,",
+           (int)GetMonData(mon, MON_DATA_ATK),
+           (int)GetMonData(mon, MON_DATA_DEF),
+           (int)GetMonData(mon, MON_DATA_SPEED),
+           (int)GetMonData(mon, MON_DATA_SPATK),
+           (int)GetMonData(mon, MON_DATA_SPDEF));
+        JP("\"status\":%u,", (unsigned)GetMonData(mon, MON_DATA_STATUS));
+        JP("\"moves\":[%d,%d,%d,%d],",
+           (int)GetMonData(mon, MON_DATA_MOVE1),
+           (int)GetMonData(mon, MON_DATA_MOVE2),
+           (int)GetMonData(mon, MON_DATA_MOVE3),
+           (int)GetMonData(mon, MON_DATA_MOVE4));
+        JP("\"pp\":[%d,%d,%d,%d]}",
+           (int)GetMonData(mon, MON_DATA_PP1),
+           (int)GetMonData(mon, MON_DATA_PP2),
+           (int)GetMonData(mon, MON_DATA_PP3),
+           (int)GetMonData(mon, MON_DATA_PP4));
+    }
+    JP("],");
+
+    /* Bag - Items pocket */
+    JP("\"bag_items\":[");
+    { int first = 1;
+      for (i = 0; i < BAG_ITEMS_COUNT; i++) {
+          u16 id = gSaveBlock1Ptr->bagPocket_Items[i].itemId;
+          u16 qty = gSaveBlock1Ptr->bagPocket_Items[i].quantity;
+          if (id == 0) continue;
+          if (!first) JP(",");
+          JP("{\"id\":%d,\"qty\":%d}", (int)id, (int)qty);
+          first = 0;
+      }
+    }
+    JP("],");
+
+    /* Bag - Key Items */
+    JP("\"bag_key_items\":[");
+    { int first = 1;
+      for (i = 0; i < BAG_KEYITEMS_COUNT; i++) {
+          u16 id = gSaveBlock1Ptr->bagPocket_KeyItems[i].itemId;
+          if (id == 0) continue;
+          if (!first) JP(",");
+          JP("{\"id\":%d}", (int)id);
+          first = 0;
+      }
+    }
+    JP("],");
+
+    /* Bag - PokeBalls */
+    JP("\"bag_pokeballs\":[");
+    { int first = 1;
+      for (i = 0; i < BAG_POKEBALLS_COUNT; i++) {
+          u16 id = gSaveBlock1Ptr->bagPocket_PokeBalls[i].itemId;
+          u16 qty = gSaveBlock1Ptr->bagPocket_PokeBalls[i].quantity;
+          if (id == 0) continue;
+          if (!first) JP(",");
+          JP("{\"id\":%d,\"qty\":%d}", (int)id, (int)qty);
+          first = 0;
+      }
+    }
+    JP("],");
+
+    /* Bag - TMs/HMs */
+    JP("\"bag_tmhm\":[");
+    { int first = 1;
+      for (i = 0; i < BAG_TMHM_COUNT; i++) {
+          u16 id = gSaveBlock1Ptr->bagPocket_TMHM[i].itemId;
+          u16 qty = gSaveBlock1Ptr->bagPocket_TMHM[i].quantity;
+          if (id == 0) continue;
+          if (!first) JP(",");
+          JP("{\"id\":%d,\"qty\":%d}", (int)id, (int)qty);
+          first = 0;
+      }
+    }
+    JP("],");
+
+    /* Menu state */
+    /* menu_cursor: not easily accessible (static in start_menu.c) */
+
+    /* Dialog/text — gStringVar4 uses GBA text encoding (0xFF = terminator) */
+    JP("\"text_raw\":[");
+    { int len = 0;
+      while (len < 200 && gStringVar4[len] != 0xFF && gStringVar4[len] != 0) len++;
+      for (i = 0; i < len; i++) {
+          if (i > 0) JP(",");
+          JP("%d", (int)gStringVar4[i]);
+      }
+    }
+    JP("],");
+
+    /* Callback addresses for mode detection */
+    JP("\"cb1\":\"%p\",", (void*)gMain.callback1);
+    JP("\"cb2\":\"%p\"", (void*)gMain.callback2);
+
+    JP("}");
+    #undef JP
+    return n;
+}

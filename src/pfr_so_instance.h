@@ -36,6 +36,8 @@ typedef void            (*pfr_step_frames_exact_fn)(uint16_t keys, int n);
 typedef const uint32_t *(*pfr_get_framebuffer_fn)(void);
 typedef void            (*pfr_copy_framebuffer_fn)(uint32_t *dst, int stride);
 typedef void            (*pfr_render_current_frame_fn)(void);
+typedef int             (*pfr_get_state_json_fn)(char *buf, int bufsize);
+typedef void            (*pfr_inject_test_items_fn)(void);
 
 typedef struct {
     void *dl_handle;                    /* dlopen handle */
@@ -59,6 +61,8 @@ typedef struct {
     pfr_get_framebuffer_fn   get_framebuffer;
     pfr_copy_framebuffer_fn  copy_framebuffer;
     pfr_render_current_frame_fn render_current_frame;
+    pfr_get_state_json_fn    get_state_json;
+    pfr_inject_test_items_fn inject_test_items;
 
 } PfrInstance;
 

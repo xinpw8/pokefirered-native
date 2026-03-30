@@ -42,6 +42,8 @@ static PyObject *py_destroy_instances(PyObject *self, PyObject *args);
 static PyObject *py_capture_frame(PyObject *self, PyObject *args);
 static PyObject *py_save_state(PyObject *self, PyObject *args);
 static PyObject *py_test_step(PyObject *self, PyObject *args);
+static PyObject *py_get_state_json(PyObject *self, PyObject *args);
+static PyObject *py_inject_test_items(PyObject *self, PyObject *args);
 
 #define MY_METHODS \
     {"init_instances", py_init_instances, METH_VARARGS, \
@@ -52,7 +54,11 @@ static PyObject *py_test_step(PyObject *self, PyObject *args);
      "Render current frame and return as numpy array (160,240,4) uint8"}, \
     {"save_state", py_save_state, METH_VARARGS, \
      "Save game state to file: save_state(idx, path)"}, \
-    {"test_step", py_test_step, METH_VARARGS, "Debug: test step directly"}
+    {"test_step", py_test_step, METH_VARARGS, "Debug: test step directly"}, \
+    {"get_state_json", py_get_state_json, METH_VARARGS, \
+     "Get full game state as JSON: get_state_json(idx)"}, \
+    {"inject_test_items", py_inject_test_items, METH_VARARGS, \
+     "Inject test items/moves/badges: inject_test_items(idx)"}
 
 #include "env_binding.h"
 
@@ -266,3 +272,39 @@ static PyObject *py_test_step(PyObject *self, PyObject *args) {
 }
 
 #endif /* PFRN_BINDING_H */
+
+static PyObject *py_get_state_json(PyObject *self, PyObject *args) {
+    int idx;
+    if (!PyArg_ParseTuple(args, "i", &idx))
+        return NULL;
+    if (idx < 0 || idx >= sNumInstances) {
+        PyErr_SetString(PyExc_IndexError, "Instance index out of range");
+        return NULL;
+    }
+    PfrInstance *inst = &sInstances[idx];
+    if (!inst->get_state_json) {
+        PyErr_SetString(PyExc_RuntimeError, "get_state_json not available in this build");
+        return NULL;
+    }
+    char buf[16384];
+    int len = inst->get_state_json(buf, sizeof(buf));
+    return PyUnicode_FromStringAndSize(buf, len);
+}
+
+static PyObject *py_inject_test_items(PyObject *self, PyObject *args) {
+    int idx;
+    if (!PyArg_ParseTuple(args, "i", &idx))
+        return NULL;
+    if (idx < 0 || idx >= sNumInstances) {
+        PyErr_SetString(PyExc_IndexError, "Instance index out of range");
+        return NULL;
+    }
+    PfrInstance *inst = &sInstances[idx];
+    if (!inst->inject_test_items) {
+        PyErr_SetString(PyExc_RuntimeError, "inject_test_items not available");
+        return NULL;
+    }
+    inst->inject_test_items();
+    Py_RETURN_NONE;
+}
+

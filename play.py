@@ -73,6 +73,27 @@ class WebHandler(BaseHTTPRequestHandler):
             self.send_header("Access-Control-Allow-Origin", "*")
             self.end_headers()
             self.wfile.write(json.dumps(info).encode())
+        elif self.path == "/gamestate":
+            try:
+                state_json = binding.get_state_json(0)
+            except Exception as e:
+                state_json = '{"error": "' + str(e).replace('"', '\\"') + '"}'
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.end_headers()
+            self.wfile.write(state_json.encode())
+        elif self.path == "/inject":
+            try:
+                binding.inject_test_items(0)
+                resp = '{"ok":true,"msg":"Items/moves/badges injected"}'
+            except Exception as e:
+                resp = '{"ok":false,"msg":"' + str(e).replace('"', '\\"') + '"}'
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.end_headers()
+            self.wfile.write(resp.encode())
         elif self.path.startswith("/action/"):
             try:
                 act = int(self.path.split("/")[-1])
