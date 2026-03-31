@@ -3392,7 +3392,9 @@ int main(int argc, char *argv[])
     HostSavestateProtectRegion(&gSaveBlock1Ptr, sizeof(gSaveBlock1Ptr));
     HostSavestateProtectRegion(&gSaveBlock2Ptr, sizeof(gSaveBlock2Ptr));
     HostSavestateProtectRegion(&gPokemonStoragePtr, sizeof(gPokemonStoragePtr));
-    { extern void HostScriptPtrTabProtect(void); HostScriptPtrTabProtect(); }
+    /* sScriptPtrTab is NOT protected here -- it's 256KB, which overflows
+     * the savestate backup buffer.  Instead, HostScriptPtrTabReset (called
+     * after every restore) memsets it to zero and re-patching repopulates. */
 
     /* InitMainCallbacks is static in main.c; replicate inline: */
     gMain.vblankCounter1 = 0;

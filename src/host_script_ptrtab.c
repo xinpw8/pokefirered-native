@@ -9,17 +9,9 @@
 #include "global.h"
 #include <stdio.h>
 
-extern void HostSavestateProtectRegion(void *addr, size_t size);
-
 #define HOST_SCRIPT_PTRTAB_MAX 32768
 static const u8 *sScriptPtrTab[HOST_SCRIPT_PTRTAB_MAX];
 static u32 sScriptPtrTabNext = 1; /* 0 = NULL */
-
-void HostScriptPtrTabProtect(void)
-{
-    HostSavestateProtectRegion(sScriptPtrTab, sizeof(sScriptPtrTab));
-    HostSavestateProtectRegion(&sScriptPtrTabNext, sizeof(sScriptPtrTabNext));
-}
 
 void HostScriptPtrTabReset(void)
 {
