@@ -83,6 +83,45 @@ class WebHandler(BaseHTTPRequestHandler):
             self.send_header("Access-Control-Allow-Origin", "*")
             self.end_headers()
             self.wfile.write(state_json.encode())
+        elif self.path == "/surf":
+            try:
+                binding.trigger_surf(0)
+                resp = '{"ok":true,"msg":"Surf triggered"}'
+            except Exception as e:
+                resp = '{"ok":false,"msg":"' + str(e).replace('"', '\\"') + '"}'
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.end_headers()
+            self.wfile.write(resp.encode())
+        elif self.path == "/escape_rope":
+            try:
+                binding.trigger_escape_rope(0)
+                resp = '{"ok":true,"msg":"Escape Rope triggered"}'
+            except Exception as e:
+                resp = '{"ok":false,"msg":"' + str(e).replace('"', '\\"') + '"}'
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.end_headers()
+            self.wfile.write(resp.encode())
+        elif self.path.startswith("/warp"):
+            from urllib.parse import urlparse, parse_qs
+            qs = parse_qs(urlparse(self.path).query)
+            try:
+                g = int(qs.get("group", [3])[0])
+                n = int(qs.get("num", [0])[0])
+                x = int(qs.get("x", [8])[0])
+                y = int(qs.get("y", [8])[0])
+                binding.warp_to(0, g, n, x, y)
+                resp = '{"ok":true,"msg":"Warping to map %d.%d at (%d,%d)"}' % (g, n, x, y)
+            except Exception as e:
+                resp = '{"ok":false,"msg":"' + str(e).replace('"', '\\"') + '"}'
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.end_headers()
+            self.wfile.write(resp.encode())
         elif self.path == "/inject":
             try:
                 binding.inject_test_items(0)

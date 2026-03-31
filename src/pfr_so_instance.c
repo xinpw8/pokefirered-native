@@ -91,6 +91,9 @@ static int resolve_symbols(PfrInstance *inst)
     *(void **)(&inst->render_current_frame) = dlsym(inst->dl_handle, "pfr_game_render_current_frame");
     *(void **)(&inst->get_state_json) = dlsym(inst->dl_handle, "pfr_game_get_state_json");
     *(void **)(&inst->inject_test_items) = dlsym(inst->dl_handle, "pfr_game_inject_test_items");
+    *(void **)(&inst->warp_to) = dlsym(inst->dl_handle, "pfr_game_warp_to");
+    *(void **)(&inst->trigger_surf) = dlsym(inst->dl_handle, "pfr_game_trigger_surf");
+    *(void **)(&inst->trigger_escape_rope) = dlsym(inst->dl_handle, "pfr_game_trigger_escape_rope");
 
     /* If not in game SO, load a per-instance copy of the render patch SO */
     if (!inst->render_current_frame && base_so_path_g) {
@@ -117,6 +120,9 @@ static int resolve_symbols(PfrInstance *inst)
                     *(void **)(&inst->render_current_frame) = dlsym(patch_handle, "pfr_game_render_current_frame");
                     *(void **)(&inst->get_state_json) = dlsym(patch_handle, "pfr_game_get_state_json");
                     *(void **)(&inst->inject_test_items) = dlsym(patch_handle, "pfr_game_inject_test_items");
+                    *(void **)(&inst->warp_to) = dlsym(patch_handle, "pfr_game_warp_to");
+                    *(void **)(&inst->trigger_surf) = dlsym(patch_handle, "pfr_game_trigger_surf");
+                    *(void **)(&inst->trigger_escape_rope) = dlsym(patch_handle, "pfr_game_trigger_escape_rope");
                 }
             }
         }

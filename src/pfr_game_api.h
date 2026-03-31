@@ -130,3 +130,6 @@ void pfr_game_get_reward_info_full(PfrRewardInfoFull *info);
 #endif /* PFR_GAME_API_H */
 int pfr_game_get_state_json(char *buf, int bufsize);
 void pfr_game_inject_test_items(void);
+void pfr_game_warp_to(int mapGroup, int mapNum, int x, int y);
+void pfr_game_trigger_surf(void);
+void pfr_game_trigger_escape_rope(void);

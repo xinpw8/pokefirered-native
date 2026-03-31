@@ -38,6 +38,9 @@ typedef void            (*pfr_copy_framebuffer_fn)(uint32_t *dst, int stride);
 typedef void            (*pfr_render_current_frame_fn)(void);
 typedef int             (*pfr_get_state_json_fn)(char *buf, int bufsize);
 typedef void            (*pfr_inject_test_items_fn)(void);
+typedef void            (*pfr_warp_to_fn)(int mapGroup, int mapNum, int x, int y);
+typedef void            (*pfr_trigger_surf_fn)(void);
+typedef void            (*pfr_trigger_escape_rope_fn)(void);
 
 typedef struct {
     void *dl_handle;                    /* dlopen handle */
@@ -63,6 +66,9 @@ typedef struct {
     pfr_render_current_frame_fn render_current_frame;
     pfr_get_state_json_fn    get_state_json;
     pfr_inject_test_items_fn inject_test_items;
+    pfr_warp_to_fn           warp_to;
+    pfr_trigger_surf_fn      trigger_surf;
+    pfr_trigger_escape_rope_fn trigger_escape_rope;
 
 } PfrInstance;
 

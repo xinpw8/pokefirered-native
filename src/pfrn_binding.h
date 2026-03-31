@@ -44,6 +44,9 @@ static PyObject *py_save_state(PyObject *self, PyObject *args);
 static PyObject *py_test_step(PyObject *self, PyObject *args);
 static PyObject *py_get_state_json(PyObject *self, PyObject *args);
 static PyObject *py_inject_test_items(PyObject *self, PyObject *args);
+static PyObject *py_warp_to(PyObject *self, PyObject *args);
+static PyObject *py_trigger_surf(PyObject *self, PyObject *args);
+static PyObject *py_trigger_escape_rope(PyObject *self, PyObject *args);
 
 #define MY_METHODS \
     {"init_instances", py_init_instances, METH_VARARGS, \
@@ -58,7 +61,13 @@ static PyObject *py_inject_test_items(PyObject *self, PyObject *args);
     {"get_state_json", py_get_state_json, METH_VARARGS, \
      "Get full game state as JSON: get_state_json(idx)"}, \
     {"inject_test_items", py_inject_test_items, METH_VARARGS, \
-     "Inject test items/moves/badges: inject_test_items(idx)"}
+     "Inject test items/moves/badges: inject_test_items(idx)"}, \
+    {"warp_to", py_warp_to, METH_VARARGS, \
+     "Warp player: warp_to(idx, group, num, x, y)"}, \
+    {"trigger_surf", py_trigger_surf, METH_VARARGS, \
+     "Trigger Surf: trigger_surf(idx)"}, \
+    {"trigger_escape_rope", py_trigger_escape_rope, METH_VARARGS, \
+     "Trigger Escape Rope: trigger_escape_rope(idx)"}
 
 #include "env_binding.h"
 
@@ -305,6 +314,57 @@ static PyObject *py_inject_test_items(PyObject *self, PyObject *args) {
         return NULL;
     }
     inst->inject_test_items();
+    Py_RETURN_NONE;
+}
+
+static PyObject *py_warp_to(PyObject *self, PyObject *args) {
+    int idx, group, num, x, y;
+    if (!PyArg_ParseTuple(args, "iiiii", &idx, &group, &num, &x, &y))
+        return NULL;
+    if (idx < 0 || idx >= sNumInstances) {
+        PyErr_SetString(PyExc_IndexError, "Instance index out of range");
+        return NULL;
+    }
+    PfrInstance *inst = &sInstances[idx];
+    if (!inst->warp_to) {
+        PyErr_SetString(PyExc_RuntimeError, "warp_to not available");
+        return NULL;
+    }
+    inst->warp_to(group, num, x, y);
+    Py_RETURN_NONE;
+}
+
+static PyObject *py_trigger_surf(PyObject *self, PyObject *args) {
+    int idx;
+    if (!PyArg_ParseTuple(args, "i", &idx))
+        return NULL;
+    if (idx < 0 || idx >= sNumInstances) {
+        PyErr_SetString(PyExc_IndexError, "Instance index out of range");
+        return NULL;
+    }
+    PfrInstance *inst = &sInstances[idx];
+    if (!inst->trigger_surf) {
+        PyErr_SetString(PyExc_RuntimeError, "trigger_surf not available");
+        return NULL;
+    }
+    inst->trigger_surf();
+    Py_RETURN_NONE;
+}
+
+static PyObject *py_trigger_escape_rope(PyObject *self, PyObject *args) {
+    int idx;
+    if (!PyArg_ParseTuple(args, "i", &idx))
+        return NULL;
+    if (idx < 0 || idx >= sNumInstances) {
+        PyErr_SetString(PyExc_IndexError, "Instance index out of range");
+        return NULL;
+    }
+    PfrInstance *inst = &sInstances[idx];
+    if (!inst->trigger_escape_rope) {
+        PyErr_SetString(PyExc_RuntimeError, "trigger_escape_rope not available");
+        return NULL;
+    }
+    inst->trigger_escape_rope();
     Py_RETURN_NONE;
 }
 

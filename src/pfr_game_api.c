@@ -1084,6 +1084,95 @@ void pfr_game_randomize_spawn(void) {
     }
 }
 
+/* ── Trigger Surf field effect directly ── */
+
+void pfr_game_trigger_surf(void)
+{
+    extern bool8 PartyHasMonWithSurf(void);
+    extern bool8 IsPlayerFacingSurfableFishableWater(void);
+    extern void ScriptContext_SetupScript(const u8 *script);
+    extern const u8 EventScript_UseSurf[];
+
+    int badge5 = FlagGet(0x824);
+    int hasSurf = PartyHasMonWithSurf();
+    int facingWater = IsPlayerFacingSurfableFishableWater();
+
+    fprintf(stderr, "[PFR-SURF] badge5=%d hasSurf=%d facingWater=%d\n",
+            badge5, hasSurf, facingWater);
+
+    if (!badge5) {
+        fprintf(stderr, "[PFR-SURF] ERROR: no badge 5\n");
+        return;
+    }
+    if (!hasSurf) {
+        fprintf(stderr, "[PFR-SURF] ERROR: no party member with Surf\n");
+        return;
+    }
+    if (!facingWater) {
+        fprintf(stderr, "[PFR-SURF] ERROR: not facing surfable water\n");
+        return;
+    }
+
+    /* Directly trigger the Surf script */
+    ScriptContext_SetupScript(EventScript_UseSurf);
+    fprintf(stderr, "[PFR-SURF] Script triggered!\n");
+}
+
+/* ── Trigger Escape Rope field effect directly ── */
+
+void pfr_game_trigger_escape_rope(void)
+{
+    extern bool8 CanUseEscapeRopeOnCurrMap(void);
+    extern void StartEscapeRopeFieldEffect(void);
+
+    int canUse = CanUseEscapeRopeOnCurrMap();
+
+    fprintf(stderr, "[PFR-ESCAPE] canUse=%d\n", canUse);
+
+    if (!canUse) {
+        fprintf(stderr, "[PFR-ESCAPE] ERROR: cannot use Escape Rope on this map\n");
+        return;
+    }
+
+    StartEscapeRopeFieldEffect();
+    fprintf(stderr, "[PFR-ESCAPE] Escape Rope triggered!\n");
+}
+
+/* ── Warp player to map coordinates ── */
+
+void pfr_game_warp_to(int mapGroup, int mapNum, int x, int y)
+{
+    extern void SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
+    extern void WarpIntoMap(void);
+    extern void CB2_LoadMap(void);
+    extern void SetMainCallback2(void (*callback)(void));
+
+    fprintf(stderr, "[PFR-WARP] Before: map=%d.%d pos=(%d,%d)\n",
+            (int)gSaveBlock1Ptr->location.mapGroup,
+            (int)gSaveBlock1Ptr->location.mapNum,
+            (int)gSaveBlock1Ptr->pos.x,
+            (int)gSaveBlock1Ptr->pos.y);
+
+    SetWarpDestination((s8)mapGroup, (s8)mapNum, -1, (s8)x, (s8)y);
+    WarpIntoMap();
+    SetMainCallback2(CB2_LoadMap);
+
+    fprintf(stderr, "[PFR-WARP] After WarpIntoMap+SetCB2: map=%d.%d pos=(%d,%d)\n",
+            (int)gSaveBlock1Ptr->location.mapGroup,
+            (int)gSaveBlock1Ptr->location.mapNum,
+            (int)gSaveBlock1Ptr->pos.x,
+            (int)gSaveBlock1Ptr->pos.y);
+
+    /* Step frames to let CB2_LoadMap chain run */
+    pfr_game_step_frames(0, 5);
+
+    fprintf(stderr, "[PFR-WARP] After stepping: map=%d.%d pos=(%d,%d)\n",
+            (int)gSaveBlock1Ptr->location.mapGroup,
+            (int)gSaveBlock1Ptr->location.mapNum,
+            (int)gSaveBlock1Ptr->pos.x,
+            (int)gSaveBlock1Ptr->pos.y);
+}
+
 /* ── Test item/move/badge injection ── */
 
 void pfr_game_inject_test_items(void)
@@ -1265,7 +1354,31 @@ int pfr_game_get_state_json(char *buf, int bufsize)
 
     /* Callback addresses for mode detection */
     JP("\"cb1\":\"%p\",", (void*)gMain.callback1);
-    JP("\"cb2\":\"%p\"", (void*)gMain.callback2);
+    JP("\"cb2\":\"%p\",", (void*)gMain.callback2);
+
+    /* Surf debug info */
+    {
+        extern bool8 PartyHasMonWithSurf(void);
+        extern bool8 IsPlayerFacingSurfableFishableWater(void);
+        extern u32 MapGridGetMetatileBehaviorAt(s16 x, s16 y);
+        extern void PlayerGetDestCoords(s16 *x, s16 *y);
+        extern void MoveCoords(u8 dir, s16 *x, s16 *y);
+        extern u8 GetPlayerFacingDirection(void);
+
+        int badge5 = FlagGet(0x824);
+        int hasSurf = PartyHasMonWithSurf();
+        s16 px, py;
+        PlayerGetDestCoords(&px, &py);
+        MoveCoords(GetPlayerFacingDirection(), &px, &py);
+        u32 facingBehavior = MapGridGetMetatileBehaviorAt(px, py);
+        int facingWater = IsPlayerFacingSurfableFishableWater();
+
+        JP("\"surf_debug\":{\"badge5\":%d,", badge5);
+        JP("\"party_has_surf\":%d,", hasSurf);
+        JP("\"facing_xy\":[%d,%d],", (int)px, (int)py);
+        JP("\"facing_behavior\":%d,", (int)facingBehavior);
+        JP("\"facing_water\":%d}", facingWater);
+    }
 
     JP("}");
     #undef JP
