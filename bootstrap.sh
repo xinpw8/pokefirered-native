@@ -48,13 +48,23 @@ bash scripts/copy_plain_sources.sh "$POKEDIR" "$GEN"
 
 # ── 4. Generate game_ctx files ──
 echo "[4/7] Generating GameCtx..."
+# Generate game_ctx.h and game_ctx_macros.h headers only (no --transform).
+# The stubs files (game_ctx_stubs.c, upstream_stubs.c) are maintained in
+# build/gen/ by the full dev pipeline and checked into known-good copies
+# via the game_ctx_stubs/ directory.
 python3 tools/gen_game_ctx.py \
     --src-dir "$POKEDIR/src" \
     --host-src-dir "$ROOT/src" \
     --out-dir "$GEN_HDR" \
     --gen-dir "$GEN" \
-    --transform \
     --inventory-out "$ROOT/ewram_inventory.txt" 2>&1 | tail -3
+
+# Copy known-good stubs if the generator didn't create them
+for stub in game_ctx_stubs.c upstream_stubs.c; do
+    if [ ! -s "$GEN/$stub" ] && [ -f "$ROOT/src/known_good_stubs/$stub" ]; then
+        cp "$ROOT/src/known_good_stubs/$stub" "$GEN/$stub"
+    fi
+done
 
 # ── 5. Generate script/data files ──
 echo "[5/7] Generating scripts and data tables..."
