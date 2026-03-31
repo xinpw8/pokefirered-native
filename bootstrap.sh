@@ -59,10 +59,15 @@ python3 tools/gen_game_ctx.py \
     --gen-dir "$GEN" \
     --inventory-out "$ROOT/ewram_inventory.txt" 2>&1 | tail -3
 
-# Copy known-good stubs if the generator didn't create them
+# Copy known-good stubs/headers if the generator didn't create them
 for stub in game_ctx_stubs.c upstream_stubs.c; do
     if [ ! -s "$GEN/$stub" ] && [ -f "$ROOT/src/known_good_stubs/$stub" ]; then
         cp "$ROOT/src/known_good_stubs/$stub" "$GEN/$stub"
+    fi
+done
+for hdr in game_ctx_header_fixups.h; do
+    if [ ! -s "$GEN_HDR/$hdr" ] && [ -f "$ROOT/src/known_good_stubs/$hdr" ]; then
+        cp "$ROOT/src/known_good_stubs/$hdr" "$GEN_HDR/$hdr"
     fi
 done
 
