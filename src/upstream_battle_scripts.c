@@ -13,7 +13,8 @@
 #include <string.h>
 #include "global.h"
 #include "game_ctx.h"
-#include "game_ctx_macros.h"
+extern u8 gNumSafariBalls;
+/* game_ctx_macros.h removed — BSS globals used directly */
 
 /* GCC asm aliases for external C symbols referenced in script .4byte relocations.
  * Using mangled names avoids type-conflict errors when the symbol is a function.

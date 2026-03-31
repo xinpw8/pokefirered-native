@@ -50,6 +50,15 @@
 #include "malloc.h"
 #include "load_save.h"
 #include "pokemon.h"
+#include "pokedex.h"
+#include "money.h"
+#include "menu.h"
+#include "text.h"
+#include "pokemon_storage_system.h"
+#include "safari_zone.h"
+#include "link.h"
+#include "strings.h"
+#include "start_menu.h"
 #include "main_menu.h"
 #include "oak_speech.h"
 #include "save.h"
@@ -185,6 +194,7 @@ struct ScriptedInputRange
 static struct ScriptedInputRange sScriptedInputRanges[MAX_SCRIPTED_INPUT_RANGES];
 static u32 sScriptedInputRangeCount;
 static bool8 sScriptedInputEnabled;
+static u32   sDumpstateScheduledFrame;  /* 0 = not scheduled */
 static bool8 sAutoPlayOakNewGameEnabled;
 static bool8 sAutoPlayContinueEnabled;
 static bool8 sAutoPlayOakLoggedGenderMenu;
@@ -192,6 +202,7 @@ static bool8 sAutoPlayOakLoggedNamingScreen;
 static bool8 sAutoPlayOakLoggedRivalMenu;
 static bool8 sAutoPlayOakLoggedOverworld;
 static bool8 sAutoPlayContinueLoggedOverworld;
+static u32  sAutoPlayTitleScreenEntryFrame;
 static u8 sAutoPlayOakGenderStep;
 static u8 sAutoPlayOakNamingStep;
 static u8 sAutoPlayOakRivalStep;
@@ -888,7 +899,21 @@ static u16 ComputeAutoPlayContinueInput(u32 frame)
     }
 
     if (strcmp(cb2Name, "CB2_TitleScreenRun") == 0)
+    {
+        /* The title screen animation (flash→fadein→run) takes ~300 frames.
+         * Pressing START during the early animation skips to the RUN scene
+         * but the button press is consumed, so the RUN scene never sees it
+         * and the timer eventually restarts the title screen in a loop.
+         * Wait for the animation to finish before pressing START. */
+        if (sAutoPlayTitleScreenEntryFrame == 0)
+            sAutoPlayTitleScreenEntryFrame = frame;
+        if (frame - sAutoPlayTitleScreenEntryFrame < 400)
+            return 0;
         return (frame % 32 == 0) ? START_BUTTON : 0;
+    }
+
+    /* Reset title screen entry frame when we leave the title screen */
+    sAutoPlayTitleScreenEntryFrame = 0;
 
     if (strcmp(cb2Name, "CB2_InitMainMenu") == 0 || strcmp(cb2Name, "CB2_MainMenu") == 0)
         return (frame % 12 == 0) ? A_BUTTON : 0;
@@ -1126,6 +1151,34 @@ static bool8 RestartSelf(void)
     return FALSE;
 }
 
+/* Reconstruct the start menu item order (mirrors SetUpStartMenu_NormalField
+ * in start_menu.c) and return the label at the given cursor position.
+ * Returns a static ASCII string — not Pokemon-encoded. */
+static const char *ResolveStartMenuItem(u8 cursorPos)
+{
+    /* Normal field menu order, gated on flags */
+    static const struct { u16 flag; const char *label; } sItems[] = {
+        { FLAG_SYS_POKEDEX_GET,  "POKEDEX" },
+        { FLAG_SYS_POKEMON_GET,  "POKEMON" },
+        { 0,                     "BAG"     },  /* 0 = always present */
+        { 0,                     "PLAYER"  },
+        { 0,                     "SAVE"    },
+        { 0,                     "OPTION"  },
+        { 0,                     "EXIT"    },
+    };
+    u8 idx = 0;
+    u32 i;
+    for (i = 0; i < ARRAY_COUNT(sItems); i++)
+    {
+        if (sItems[i].flag != 0 && !FlagGet(sItems[i].flag))
+            continue;
+        if (idx == cursorPos)
+            return sItems[i].label;
+        idx++;
+    }
+    return "?";
+}
+
 static void ProcessControlCommand(u32 frame, const char *command)
 {
     char buffer[PATH_MAX + 128];
@@ -1210,6 +1263,329 @@ static void ProcessControlCommand(u32 frame, const char *command)
     {
         HostDisplayTakeScreenshot();
         TraceLog(frame, "control: screenshot taken");
+    }
+    else if (strcmp(line, "dumpstate") == 0)
+    {
+        /* "dumpstate" fires now. "dumpstate <N>" schedules after N emulated frames. */
+        if (arg[0] != '\0')
+        {
+            u32 delay = 0;
+            if (sscanf(arg, "%u", &delay) == 1 && delay > 0)
+            {
+                sDumpstateScheduledFrame = sEmulatedFrameCount + delay;
+                snprintf(buffer, sizeof(buffer), "control: dumpstate scheduled at emulated frame %u (+%u)",
+                         sDumpstateScheduledFrame, delay);
+                TraceLog(frame, buffer);
+            }
+            return;
+        }
+
+        char buf[256];
+        int i;
+
+        if (gSaveBlock1Ptr == NULL || gSaveBlock2Ptr == NULL)
+        {
+            TraceLog(frame, "DUMPSTATE: error=save_blocks_null");
+        }
+        else
+        {
+            /* ── Trainer card / identity ── */
+            snprintf(buf, sizeof(buf), "DUMPSTATE: money=%u", GetMoney(&gSaveBlock1Ptr->money));
+            TraceLog(frame, buf);
+            {
+                u32 tid = (gSaveBlock2Ptr->playerTrainerId[1] << 8) | gSaveBlock2Ptr->playerTrainerId[0];
+                snprintf(buf, sizeof(buf), "DUMPSTATE: trainer_id=%u", tid);
+                TraceLog(frame, buf);
+            }
+
+            /* ── Badges ── */
+            u8 badgeFlags = 0;
+            u8 badgeCount = 0;
+            for (i = 0; i < 8; i++)
+            {
+                if (FlagGet(FLAG_BADGE01_GET + i))
+                {
+                    badgeFlags |= (1u << i);
+                    badgeCount++;
+                }
+            }
+            snprintf(buf, sizeof(buf), "DUMPSTATE: badge_flags=0x%02X", badgeFlags);
+            TraceLog(frame, buf);
+            snprintf(buf, sizeof(buf), "DUMPSTATE: badge_count=%u", badgeCount);
+            TraceLog(frame, buf);
+
+            /* ── Pokedex ── */
+            u16 dexCaught = GetNationalPokedexCount(FLAG_GET_CAUGHT);
+            u16 dexSeen = GetNationalPokedexCount(FLAG_GET_SEEN);
+            snprintf(buf, sizeof(buf), "DUMPSTATE: pokedex_caught=%u", dexCaught);
+            TraceLog(frame, buf);
+            snprintf(buf, sizeof(buf), "DUMPSTATE: pokedex_seen=%u", dexSeen);
+            TraceLog(frame, buf);
+
+            /* ── Playtime ── */
+            snprintf(buf, sizeof(buf), "DUMPSTATE: playtime_hours=%u", gSaveBlock2Ptr->playTimeHours);
+            TraceLog(frame, buf);
+            snprintf(buf, sizeof(buf), "DUMPSTATE: playtime_minutes=%u", gSaveBlock2Ptr->playTimeMinutes);
+            TraceLog(frame, buf);
+
+            /* ── Story progress flags ── */
+            snprintf(buf, sizeof(buf), "DUMPSTATE: flag_game_clear=%u", FlagGet(FLAG_SYS_GAME_CLEAR) ? 1 : 0);
+            TraceLog(frame, buf);
+            snprintf(buf, sizeof(buf), "DUMPSTATE: flag_national_dex=%u", FlagGet(FLAG_SYS_NATIONAL_DEX) ? 1 : 0);
+            TraceLog(frame, buf);
+            snprintf(buf, sizeof(buf), "DUMPSTATE: flag_pokedex_get=%u", FlagGet(FLAG_SYS_POKEDEX_GET) ? 1 : 0);
+            TraceLog(frame, buf);
+            snprintf(buf, sizeof(buf), "DUMPSTATE: flag_ss_ticket=%u", FlagGet(FLAG_GOT_SS_TICKET) ? 1 : 0);
+            TraceLog(frame, buf);
+
+            /* ── Options ── */
+            snprintf(buf, sizeof(buf), "DUMPSTATE: options_text_speed=%u", gSaveBlock2Ptr->optionsTextSpeed);
+            TraceLog(frame, buf);
+            snprintf(buf, sizeof(buf), "DUMPSTATE: options_battle_style=%u", gSaveBlock2Ptr->optionsBattleStyle);
+            TraceLog(frame, buf);
+            snprintf(buf, sizeof(buf), "DUMPSTATE: options_sound=%u", gSaveBlock2Ptr->optionsSound);
+            TraceLog(frame, buf);
+
+            /* ── Battle state ── */
+            {
+                const char *cb2 = CallbackName(gMain.callback2);
+                u8 inBattle = (gBattleTypeFlags != 0
+                    && (strcmp(cb2, "BattleMainCB2") == 0
+                        || strcmp(cb2, "CB2_HandleStartBattle") == 0
+                        || strcmp(cb2, "CB2_InitBattle") == 0)) ? 1 : 0;
+                snprintf(buf, sizeof(buf), "DUMPSTATE: in_battle=%u", inBattle);
+                TraceLog(frame, buf);
+                snprintf(buf, sizeof(buf), "DUMPSTATE: battle_type_flags=0x%08X", gBattleTypeFlags);
+                TraceLog(frame, buf);
+                snprintf(buf, sizeof(buf), "DUMPSTATE: battle_action_cursor=%u", gActionSelectionCursor[gBattlerInMenuId]);
+                TraceLog(frame, buf);
+                snprintf(buf, sizeof(buf), "DUMPSTATE: battle_move_cursor=%u", gMoveSelectionCursor[gBattlerInMenuId]);
+                TraceLog(frame, buf);
+            }
+
+            /* ── Bag summary (items per pocket) ── */
+            {
+                static const char *sPocketNames[] = {"items","keyitems","pokeballs","tmhm","berries"};
+                for (i = 0; i < NUM_BAG_POCKETS; i++)
+                {
+                    struct BagPocket *pocket = &gBagPockets[i];
+                    u16 usedSlots = 0;
+                    if (pocket->itemSlots != NULL)
+                    {
+                        int j;
+                        for (j = 0; j < pocket->capacity; j++)
+                            if (pocket->itemSlots[j].itemId != 0)
+                                usedSlots++;
+                    }
+                    snprintf(buf, sizeof(buf), "DUMPSTATE: bag_%s_count=%u",
+                             (i < 5) ? sPocketNames[i] : "unknown", usedSlots);
+                    TraceLog(frame, buf);
+                }
+            }
+
+            /* ── Enemy party (all 6 slots, with detail + moves) ── */
+            snprintf(buf, sizeof(buf), "DUMPSTATE: enemy_party_count=%u", gEnemyPartyCount);
+            TraceLog(frame, buf);
+            for (i = 0; i < PARTY_SIZE; i++)
+            {
+                u16 species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES, NULL);
+                u16 hp      = GetMonData(&gEnemyParty[i], MON_DATA_HP, NULL);
+                u16 maxHp   = GetMonData(&gEnemyParty[i], MON_DATA_MAX_HP, NULL);
+                u8  level   = GetMonData(&gEnemyParty[i], MON_DATA_LEVEL, NULL);
+                u32 status  = GetMonData(&gEnemyParty[i], MON_DATA_STATUS, NULL);
+                u16 item    = GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, NULL);
+                u16 move1   = GetMonData(&gEnemyParty[i], MON_DATA_MOVE1, NULL);
+                u16 move2   = GetMonData(&gEnemyParty[i], MON_DATA_MOVE2, NULL);
+                u16 move3   = GetMonData(&gEnemyParty[i], MON_DATA_MOVE3, NULL);
+                u16 move4   = GetMonData(&gEnemyParty[i], MON_DATA_MOVE4, NULL);
+                snprintf(buf, sizeof(buf),
+                    "DUMPSTATE: enemy_party[%d].species=%u level=%u hp=%u/%u status=0x%X item=%u moves=%u,%u,%u,%u",
+                    i, species, level, hp, maxHp, status, item, move1, move2, move3, move4);
+                TraceLog(frame, buf);
+            }
+
+            /* ── Player position and map ── */
+            snprintf(buf, sizeof(buf), "DUMPSTATE: player_x=%d", (int)gSaveBlock1Ptr->pos.x);
+            TraceLog(frame, buf);
+            snprintf(buf, sizeof(buf), "DUMPSTATE: player_y=%d", (int)gSaveBlock1Ptr->pos.y);
+            TraceLog(frame, buf);
+            snprintf(buf, sizeof(buf), "DUMPSTATE: map_group=%u", gSaveBlock1Ptr->location.mapGroup);
+            TraceLog(frame, buf);
+            snprintf(buf, sizeof(buf), "DUMPSTATE: map_num=%u", gSaveBlock1Ptr->location.mapNum);
+            TraceLog(frame, buf);
+
+            /* ── Last heal location (pokecenter) ── */
+            snprintf(buf, sizeof(buf), "DUMPSTATE: last_heal_map_group=%d", (int)gSaveBlock1Ptr->lastHealLocation.mapGroup);
+            TraceLog(frame, buf);
+            snprintf(buf, sizeof(buf), "DUMPSTATE: last_heal_map_num=%d", (int)gSaveBlock1Ptr->lastHealLocation.mapNum);
+            TraceLog(frame, buf);
+            snprintf(buf, sizeof(buf), "DUMPSTATE: last_heal_warp_id=%d", (int)gSaveBlock1Ptr->lastHealLocation.warpId);
+            TraceLog(frame, buf);
+            snprintf(buf, sizeof(buf), "DUMPSTATE: last_heal_x=%d", (int)gSaveBlock1Ptr->lastHealLocation.x);
+            TraceLog(frame, buf);
+            snprintf(buf, sizeof(buf), "DUMPSTATE: last_heal_y=%d", (int)gSaveBlock1Ptr->lastHealLocation.y);
+            TraceLog(frame, buf);
+
+            /* ── Player party (with detail) ── */
+            snprintf(buf, sizeof(buf), "DUMPSTATE: player_party_count=%u", gSaveBlock1Ptr->playerPartyCount);
+            TraceLog(frame, buf);
+            for (i = 0; i < PARTY_SIZE; i++)
+            {
+                u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
+                u16 hp      = GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL);
+                u16 maxHp   = GetMonData(&gPlayerParty[i], MON_DATA_MAX_HP, NULL);
+                u8  level   = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL, NULL);
+                u32 status  = GetMonData(&gPlayerParty[i], MON_DATA_STATUS, NULL);
+                u16 item    = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, NULL);
+                u16 move1   = GetMonData(&gPlayerParty[i], MON_DATA_MOVE1, NULL);
+                u16 move2   = GetMonData(&gPlayerParty[i], MON_DATA_MOVE2, NULL);
+                u16 move3   = GetMonData(&gPlayerParty[i], MON_DATA_MOVE3, NULL);
+                u16 move4   = GetMonData(&gPlayerParty[i], MON_DATA_MOVE4, NULL);
+                snprintf(buf, sizeof(buf),
+                    "DUMPSTATE: player_party[%d].species=%u level=%u hp=%u/%u status=0x%X item=%u moves=%u,%u,%u,%u",
+                    i, species, level, hp, maxHp, status, item, move1, move2, move3, move4);
+                TraceLog(frame, buf);
+            }
+
+            /* ── Callbacks (identifies current game mode / menu) ── */
+            {
+                const char *cb1 = CallbackName(gMain.callback1);
+                const char *cb2 = CallbackName(gMain.callback2);
+                snprintf(buf, sizeof(buf), "DUMPSTATE: callback1=%s", cb1);
+                TraceLog(frame, buf);
+                snprintf(buf, sizeof(buf), "DUMPSTATE: callback2=%s", cb2);
+                TraceLog(frame, buf);
+            }
+
+            /* ── Menu cursor + resolved item ── */
+            {
+                u8 cursorPos = Menu_GetCursorPos();
+                snprintf(buf, sizeof(buf), "DUMPSTATE: menu_cursor=%u", cursorPos);
+                TraceLog(frame, buf);
+                /* Resolve what the cursor points to based on active context */
+                if (FuncIsActiveTask(Task_StartMenuHandleInput))
+                {
+                    const char *item = ResolveStartMenuItem(cursorPos);
+                    snprintf(buf, sizeof(buf), "DUMPSTATE: menu_item=%s", item);
+                    TraceLog(frame, buf);
+                }
+                else
+                {
+                    /* Battle menu: 0=Fight,1=Bag,2=Pokemon,3=Run */
+                    static const char *sBattleActions[] = {"FIGHT","BAG","POKEMON","RUN"};
+                    u8 actionCur = gActionSelectionCursor[gBattlerInMenuId];
+                    u8 moveCur   = gMoveSelectionCursor[gBattlerInMenuId];
+                    if (gBattleTypeFlags != 0 && actionCur < 4)
+                    {
+                        snprintf(buf, sizeof(buf), "DUMPSTATE: menu_item=%s", sBattleActions[actionCur]);
+                        TraceLog(frame, buf);
+                        snprintf(buf, sizeof(buf), "DUMPSTATE: battle_move_slot=%u", moveCur);
+                        TraceLog(frame, buf);
+                    }
+                    else
+                    {
+                        snprintf(buf, sizeof(buf), "DUMPSTATE: menu_item=NONE");
+                        TraceLog(frame, buf);
+                    }
+                }
+            }
+
+            /* ── Active tasks (drives menus, dialogs, animations) ── */
+            {
+                u8 activeCount = 0;
+                for (i = 0; i < NUM_TASKS; i++)
+                {
+                    if (!gTasks[i].isActive)
+                        continue;
+                    const char *tname = CallbackName((MainCallback)gTasks[i].func);
+                    snprintf(buf, sizeof(buf),
+                        "DUMPSTATE: task[%d].func=%s data0=%d data1=%d data2=%d",
+                        i, tname,
+                        (int)gTasks[i].data[0], (int)gTasks[i].data[1], (int)gTasks[i].data[2]);
+                    TraceLog(frame, buf);
+                    activeCount++;
+                }
+                snprintf(buf, sizeof(buf), "DUMPSTATE: active_task_count=%u", activeCount);
+                TraceLog(frame, buf);
+            }
+
+            /* ── Active windows ── */
+            {
+                u8 winCount = 0;
+                for (i = 0; i < WINDOWS_MAX; i++)
+                {
+                    if (gWindows[i].tileData == NULL)
+                        continue;
+                    snprintf(buf, sizeof(buf),
+                        "DUMPSTATE: window[%d].bg=%u pos=(%u,%u) size=(%u,%u)",
+                        i,
+                        gWindows[i].window.bg,
+                        gWindows[i].window.tilemapLeft, gWindows[i].window.tilemapTop,
+                        gWindows[i].window.width, gWindows[i].window.height);
+                    TraceLog(frame, buf);
+                    winCount++;
+                }
+                snprintf(buf, sizeof(buf), "DUMPSTATE: active_window_count=%u", winCount);
+                TraceLog(frame, buf);
+            }
+
+            /* ── Text printers (dialog state) ── */
+            {
+                u8 printerCount = 0;
+                for (i = 0; i < NUM_TEXT_PRINTERS; i++)
+                {
+                    if (IsTextPrinterActive(i))
+                        printerCount++;
+                }
+                snprintf(buf, sizeof(buf), "DUMPSTATE: active_text_printers=%u", printerCount);
+                TraceLog(frame, buf);
+                snprintf(buf, sizeof(buf), "DUMPSTATE: in_dialog=%u", printerCount > 0 ? 1 : 0);
+                TraceLog(frame, buf);
+                snprintf(buf, sizeof(buf), "DUMPSTATE: text_flags=0x%02X", *(u8 *)&gTextFlags);
+                TraceLog(frame, buf);
+            }
+            /* ── PC box storage summary ── */
+            if (gPokemonStoragePtr != NULL)
+            {
+                snprintf(buf, sizeof(buf), "DUMPSTATE: pc_current_box=%u", gPokemonStoragePtr->currentBox);
+                TraceLog(frame, buf);
+                for (i = 0; i < TOTAL_BOXES_COUNT; i++)
+                {
+                    int j;
+                    u16 usedSlots = 0;
+                    for (j = 0; j < IN_BOX_COUNT; j++)
+                    {
+                        if (GetBoxMonDataAt(i, j, MON_DATA_SPECIES) != SPECIES_NONE)
+                            usedSlots++;
+                    }
+                    snprintf(buf, sizeof(buf), "DUMPSTATE: pc_box[%d].count=%u", i, usedSlots);
+                    TraceLog(frame, buf);
+                }
+                /* Dump occupied slots in current box with detail */
+                {
+                    u8 box = gPokemonStoragePtr->currentBox;
+                    int j;
+                    for (j = 0; j < IN_BOX_COUNT; j++)
+                    {
+                        u16 species = GetBoxMonDataAt(box, j, MON_DATA_SPECIES);
+                        if (species == SPECIES_NONE)
+                            continue;
+                        struct BoxPokemon *boxMon = GetBoxedMonPtr(box, j);
+                        u8  level = GetLevelFromBoxMonExp(boxMon);
+                        u16 item  = GetBoxMonDataAt(box, j, MON_DATA_HELD_ITEM);
+                        u16 move1 = GetBoxMonDataAt(box, j, MON_DATA_MOVE1);
+                        u16 move2 = GetBoxMonDataAt(box, j, MON_DATA_MOVE2);
+                        u16 move3 = GetBoxMonDataAt(box, j, MON_DATA_MOVE3);
+                        u16 move4 = GetBoxMonDataAt(box, j, MON_DATA_MOVE4);
+                        snprintf(buf, sizeof(buf),
+                            "DUMPSTATE: pc_box[%u][%d].species=%u level=%u item=%u moves=%u,%u,%u,%u",
+                            box, j, species, (unsigned)level, item, move1, move2, move3, move4);
+                        TraceLog(frame, buf);
+                    }
+                }
+            }
+        }
+        TraceLog(frame, "DUMPSTATE: END");
     }
     else if (strcmp(line, "quit") == 0)
     {
@@ -1518,6 +1894,13 @@ static void HandleHostActions(u32 frame)
         HostDisplayTakeScreenshot();
 
     ProcessControlFile(frame);
+
+    /* Fire scheduled dumpstate (uses emulated frame count, not display frames) */
+    if (sDumpstateScheduledFrame != 0 && sEmulatedFrameCount >= sDumpstateScheduledFrame)
+    {
+        sDumpstateScheduledFrame = 0;
+        ProcessControlCommand(frame, "dumpstate");
+    }
 }
 
 static u16 ComputeAutoPlayOakInput(u32 frame)
@@ -1653,7 +2036,16 @@ static u16 ComputeAutoPlayOakInput(u32 frame)
     }
 
     if (strcmp(cb2Name, "CB2_TitleScreenRun") == 0)
+    {
+        if (sAutoPlayTitleScreenEntryFrame == 0)
+            sAutoPlayTitleScreenEntryFrame = frame;
+        if (frame - sAutoPlayTitleScreenEntryFrame < 400)
+            return 0;
         return (frame % 32 == 0) ? START_BUTTON : 0;
+    }
+
+    /* Reset title screen entry frame when we leave the title screen */
+    sAutoPlayTitleScreenEntryFrame = 0;
 
     if (strcmp(cb2Name, "CB2_InitMainMenu") == 0 || strcmp(cb2Name, "CB2_MainMenu") == 0)
         return (frame % 12 == 0) ? A_BUTTON : 0;
@@ -2949,6 +3341,10 @@ int main(int argc, char *argv[])
     HostCrt0Init();
     REG_KEYINPUT = KEYS_MASK; /* all keys released */
 
+    /* g_ctx is NOT allocated for pfr_play — all game globals live in BSS.
+     * The script files no longer include game_ctx_macros.h, so &gVariable
+     * resolves to the BSS global that upstream code reads/writes. */
+
     /* ── AgbMain initialization sequence ── */
 
     InitGpuRegManager();
@@ -2996,6 +3392,7 @@ int main(int argc, char *argv[])
     HostSavestateProtectRegion(&gSaveBlock1Ptr, sizeof(gSaveBlock1Ptr));
     HostSavestateProtectRegion(&gSaveBlock2Ptr, sizeof(gSaveBlock2Ptr));
     HostSavestateProtectRegion(&gPokemonStoragePtr, sizeof(gPokemonStoragePtr));
+    { extern void HostScriptPtrTabProtect(void); HostScriptPtrTabProtect(); }
 
     /* InitMainCallbacks is static in main.c; replicate inline: */
     gMain.vblankCounter1 = 0;
@@ -3103,7 +3500,13 @@ int main(int argc, char *argv[])
     if (sSkipIntro || sRlInstrumentEnabled)
     {
         /* Direct-to-overworld boot: skip copyright, intro, title, and
-         * main menu.  Load save and jump straight to overworld. */
+         * main menu.  Load save and jump straight to overworld.
+         * Must mirror the title_screen.c case-2 init sequence:
+         *   SeedRngAndSetTrainerId → SetSaveBlocksPointers →
+         *   ResetMenuAndMonGlobals → Save_ResetSaveCounters →
+         *   LoadGameSave */
+        SeedRngAndSetTrainerId();
+        SetSaveBlocksPointers();
         ResetMenuAndMonGlobals();
         Save_ResetSaveCounters();
         LoadGameSave(SAVE_NORMAL);
@@ -3208,13 +3611,13 @@ int main(int argc, char *argv[])
         if (!HostDisplayPresent())
             break;
 
+        HandleHostActions(HostDisplayGetFrameCount());
+
         if (sBenchmarkEnabled && sEmulatedFrameCount >= sBenchmarkFrameLimit)
         {
             sBenchmarkCompleted = TRUE;
             break;
         }
-
-        HandleHostActions(HostDisplayGetFrameCount());
         UpdateEggHatchInfo();
         if (sRestartRequested || sShutdownRequested)
             break;

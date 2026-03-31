@@ -152,4 +152,16 @@ void HostNativeSoundInit(void)
         MPlayOpen(mplayInfo, track, 2);
         track->chan = 0;
     }
+
+    /* ---- Phase 8: Seed gMPlay_PokemonCry so it is never NULL ----
+     * On GBA, dereferencing NULL+0x48 reads harmless BIOS ROM and the
+     * ident check in m4aMPlayStop fails gracefully.  On native, it is
+     * SIGSEGV.  StopCryAndClearCrySongs / IsCryPlaying can be called
+     * before any cry is played (e.g. switching Pokemon on the summary
+     * screen), so give the pointer a valid default.  PlayCry() will
+     * overwrite it with the correct player when a cry actually plays. */
+    {
+        extern struct MusicPlayerInfo *gMPlay_PokemonCry;
+        gMPlay_PokemonCry = &gPokemonCryMusicPlayers[0];
+    }
 }

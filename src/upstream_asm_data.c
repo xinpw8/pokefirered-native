@@ -30,7 +30,7 @@
 #include "upstream_field_effect_scripts.h"
 #include "game_ctx.h"
 #include <stdio.h>
-#include "game_ctx_macros.h"
+/* game_ctx_macros.h removed — BSS globals used directly */
 
 #define HOST_PTR_BYTES 8
 #define G_SCRIPT_CMD_TABLE_COUNT 0xD5
