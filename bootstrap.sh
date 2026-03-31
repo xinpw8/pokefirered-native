@@ -53,26 +53,35 @@ python3 tools/gen_game_ctx.py \
     --host-src-dir "$ROOT/src" \
     --out-dir "$GEN_HDR" \
     --gen-dir "$GEN" \
+    --transform \
     --inventory-out "$ROOT/ewram_inventory.txt" 2>&1 | tail -3
 
 # ── 5. Generate script/data files ──
 echo "[5/7] Generating scripts and data tables..."
 
-# Battle scripts
-python3 tools/script_assembler.py \
-    --pokedir "$POKEDIR" \
-    --prefix pfr_bs \
-    --patch-fn HostPatchBattleScriptPointers \
-    --output src/upstream_battle_scripts.c \
-    "$POKEDIR/data/battle_scripts_1.s" "$POKEDIR/data/battle_scripts_2.s" 2>&1 | tail -1
+# Battle scripts (in src/, committed -- only regenerate if missing)
+if [ ! -s "src/upstream_battle_scripts.c" ]; then
+    python3 tools/script_assembler.py \
+        --pokedir "$POKEDIR" \
+        --prefix pfr_bs \
+        --patch-fn HostPatchBattleScriptPointers \
+        --output src/upstream_battle_scripts.c \
+        "$POKEDIR/data/battle_scripts_1.s" "$POKEDIR/data/battle_scripts_2.s" 2>&1 | tail -1
+else
+    echo "  src/upstream_battle_scripts.c exists, skipping"
+fi
 
-# Event scripts
-python3 tools/script_assembler.py \
-    --pokedir "$POKEDIR" \
-    --prefix pfr_es \
-    --patch-fn HostPatchEventScriptPointers \
-    --output src/upstream_event_scripts.c \
-    "$POKEDIR/data/event_scripts.s" 2>&1 | tail -1
+# Event scripts (in src/, committed -- only regenerate if missing)
+if [ ! -s "src/upstream_event_scripts.c" ]; then
+    python3 tools/script_assembler.py \
+        --pokedir "$POKEDIR" \
+        --prefix pfr_es \
+        --patch-fn HostPatchEventScriptPointers \
+        --output src/upstream_event_scripts.c \
+        "$POKEDIR/data/event_scripts.s" 2>&1 | tail -1
+else
+    echo "  src/upstream_event_scripts.c exists, skipping"
+fi
 
 # Field effect scripts
 python3 tools/script_assembler.py \
