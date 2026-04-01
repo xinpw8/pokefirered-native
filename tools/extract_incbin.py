@@ -39,11 +39,14 @@ INCLUDE_DATA_PATTERN = re.compile(
 MANIFEST_HEADER = "# pfr_asset_manifest v1"
 
 
-def extract_incbins(filepath, follow_includes=True, _visited=None):
+def extract_incbins(filepath, follow_includes=True, _visited=None,
+                    extra_include_dirs=None):
     """Extract all INCBIN asset paths from a C source file.
 
     When follow_includes is True, also follows #include "data/..." directives
     to scan headers that contain INCBIN macros (e.g. data/graphics/pokemon.h).
+    extra_include_dirs provides fallback directories for resolving includes
+    (e.g. the upstream src/ directory when scanning gen/ copies).
     """
     if _visited is None:
         _visited = set()
@@ -74,9 +77,17 @@ def extract_incbins(filepath, follow_includes=True, _visited=None):
                 if inc_match:
                     inc_rel = inc_match.group(1)
                     inc_path = os.path.join(src_dir, inc_rel)
+                    if not os.path.exists(inc_path) and extra_include_dirs:
+                        for eid in extra_include_dirs:
+                            candidate = os.path.join(eid, inc_rel)
+                            if os.path.exists(candidate):
+                                inc_path = candidate
+                                break
                     if os.path.exists(inc_path):
                         results.extend(
-                            extract_incbins(inc_path, follow_includes=True, _visited=_visited)
+                            extract_incbins(inc_path, follow_includes=True,
+                                           _visited=_visited,
+                                           extra_include_dirs=extra_include_dirs)
                         )
 
     return results
@@ -197,10 +208,11 @@ def parse_manifest(path):
 
 def emit_manifest(files, upstream_root, output):
     assets = []
+    extra_dirs = [os.path.join(upstream_root, "src")]
     for filepath in files:
         if not os.path.exists(filepath):
             raise FileNotFoundError(filepath)
-        assets.extend(extract_incbins(filepath))
+        assets.extend(extract_incbins(filepath, extra_include_dirs=extra_dirs))
 
     manifest_text = build_manifest_text(files, upstream_root, assets)
     output_dir = os.path.dirname(output)
@@ -224,10 +236,11 @@ def verify_manifest(manifest_path, upstream_root):
         raise ValueError(f"No '# source:' entries found in {manifest_path}")
 
     generated_assets = []
+    extra_dirs = [os.path.join(upstream_root, "src")]
     for path in source_files:
         if not os.path.exists(path):
             raise FileNotFoundError(path)
-        generated_assets.extend(extract_incbins(path))
+        generated_assets.extend(extract_incbins(path, extra_include_dirs=extra_dirs))
 
     expected = []
     for row in canonicalize_assets(generated_assets):

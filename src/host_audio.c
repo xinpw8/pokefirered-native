@@ -189,14 +189,12 @@ void HostAudioMixAndPush(void)
     static u32 sNonZeroFrames;
     static u32 sActiveChannelFrames;
     struct SoundInfo *si = SOUND_INFO_PTR;
-    /* RL mode: skip entire sound engine */
-    if (gHostNoAudio)
-        return;
     if (si == NULL)
         return;
 
-    /* If audio device failed to open, still run the sound engine so that
-     * game-logic queries (IsPokemonCryPlaying, etc.) stay correct. */
+    /* Always run the sound engine so that game-logic queries
+     * (IsSEPlaying, IsPokemonCryPlaying, etc.) stay correct,
+     * even when audio output is disabled. */
     m4aSoundVSync();
     SoundMain();
 
