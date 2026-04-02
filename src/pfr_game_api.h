@@ -124,8 +124,8 @@ void pfr_game_step_frames_fast(uint16_t keys, int n);
 void pfr_game_extract_obs_full(void *buf);
 void pfr_game_get_reward_info_full(PfrRewardInfoFull *info);
 
-/* Warp to a random spawn point for per-episode exploration diversity.
- * Called during episode reset to vary starting position each episode. */
+/* !! NO SPAWN RANDOMIZATION !! All agents start at the same position.
+ * See CLAUDE.md rule #2. Do NOT add pfr_game_randomize_spawn or similar. */
 
 #endif /* PFR_GAME_API_H */
 int pfr_game_get_state_json(char *buf, int bufsize);

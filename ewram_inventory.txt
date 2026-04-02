@@ -591,4 +591,3 @@ wild_encounter.c	35	file	static	sWildEncountersDisabled	sWildEncountersDisabled	
 window.c	10	file	global	gWindows	gWindows	plain	struct Window[WINDOWS_MAX]	EWRAM_DATA struct Window gWindows[WINDOWS_MAX] = {0};
 window_8bpp.c	4	file	static	sWindowPtr	sWindowPtr	plain	struct Window *	EWRAM_DATA static struct Window* sWindowPtr = NULL;
 window_8bpp.c	5	file	static	sWindowSize	sWindowSize	plain	u16	EWRAM_DATA static u16 sWindowSize = 0;
-upstream_stubs.c	26	file	global	gHeap	gHeap	plain	u8[HEAP_SIZE]	EWRAM_DATA u8 gHeap[HEAP_SIZE] = {0};

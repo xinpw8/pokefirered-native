@@ -697,19 +697,14 @@ bool8 HostSavestateLoadFromFile(const char *path)
         return FALSE;
     }
 
-    if (header.version < 1 || header.version > HOST_SAVESTATE_VERSION)
-    {
-        SetError("savestate: %s has unsupported version %u (need %u)",
-                 path, header.version, HOST_SAVESTATE_VERSION);
-        fclose(file);
-        return FALSE;
-    }
-
-    /* v1 savestates lack a build fingerprint — always reject them
-     * since function pointers are almost certainly stale after rebuild. */
+    /* Accept any version >= 2 (v2 added build fingerprint).
+     * The header/segment format is stable across versions -- do NOT
+     * reject higher versions just because HOST_SAVESTATE_VERSION is lower.
+     * Updating the build should never invalidate existing savestates. */
     if (header.version < 2)
     {
-        SetError("savestate: v1 format rejected");
+        SetError("savestate: %s is v%u (too old, need >= 2)", path, header.version);
+        fclose(file);
         return FALSE;
     }
 
