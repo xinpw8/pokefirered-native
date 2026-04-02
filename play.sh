@@ -12,10 +12,10 @@ fi
 
 cmake --build build --target pfr_play -j$(nproc) 2>&1
 
-# Use pokefirered_recovered.sav if it exists, otherwise start fresh
-SAVE_ARG=""
+# Use save file + skip-intro if a save exists, otherwise start fresh from title
+EXTRA_ARGS=""
 if [ -f "./pokefirered_recovered.sav" ]; then
-    SAVE_ARG="--load-save ./pokefirered_recovered.sav"
+    EXTRA_ARGS="--load-save ./pokefirered_recovered.sav --skip-intro"
 fi
 
-exec build/pfr_play $SAVE_ARG --skip-intro "$@"
+exec build/pfr_play $EXTRA_ARGS "$@"
