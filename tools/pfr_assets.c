@@ -784,14 +784,23 @@ static int cmd_preproc(const char *src_path, const char *inc_dir, const char *ou
                         if (strncmp(rel, "graphics/", 9) == 0)
                             rel += 9;
 
-                        /* Build the .inc file path */
+                        /* Build the .inc file path (absolute for existence check) */
                         char inc_path[700];
                         snprintf(inc_path, sizeof(inc_path),
                                  "%s/%s%s", inc_dir, rel, variants[v].inc_suffix);
 
-                        /* Emit #include for this path */
+                        /* Relative path for #include — use ../inc/ prefix
+                         * so the path works relative to build/gen/ (where
+                         * the preprocessed .c files live) or relative to
+                         * build/generated_include/ (where headers live).
+                         * Both are siblings of build/inc/. */
+                        char inc_rel[500];
+                        snprintf(inc_rel, sizeof(inc_rel),
+                                 "../inc/%s%s", rel, variants[v].inc_suffix);
+
+                        /* Emit #include with relative path */
                         if (file_exists(inc_path)) {
-                            fprintf(f, "#include \"%s\"\n,\n", inc_path);
+                            fprintf(f, "#include \"%s\"\n,\n", inc_rel);
                             if (first_path) replacements++;
                         } else {
                             fprintf(f, "0, /* MISSING: %s */\n", inc_path);
