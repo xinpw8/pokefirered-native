@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <string.h>
 
-#include "../../../../pokefirered/include/gba/macro.h"
+#include "../../../third_party/pokefirered/include/gba/macro.h"
 
 #include "host_dma.h"
 

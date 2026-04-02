@@ -20,13 +20,13 @@
  */
 
 /* Include upstream headers — these set the original #defines */
-#include "../../../../pokefirered/include/gba/defines.h"
-#include "../../../../pokefirered/include/gba/io_reg.h"
-#include "../../../../pokefirered/include/gba/types.h"
-#include "../../../../pokefirered/include/gba/multiboot.h"
-#include "../../../../pokefirered/include/gba/syscall.h"
+#include "../../../third_party/pokefirered/include/gba/defines.h"
+#include "../../../third_party/pokefirered/include/gba/io_reg.h"
+#include "../../../third_party/pokefirered/include/gba/types.h"
+#include "../../../third_party/pokefirered/include/gba/multiboot.h"
+#include "../../../third_party/pokefirered/include/gba/syscall.h"
 #include "macro.h"
-#include "../../../../pokefirered/include/gba/isagbprint.h"
+#include "../../../third_party/pokefirered/include/gba/isagbprint.h"
 
 /* ── Override fixed addresses with dynamic globals ── */
 
